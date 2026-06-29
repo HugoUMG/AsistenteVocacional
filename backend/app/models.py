@@ -30,8 +30,11 @@ class Carrera(Base):
     __tablename__ = "carreras"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    nombre: Mapped[str] = mapped_column(String(160), unique=True)
-    descripcion: Mapped[str | None] = mapped_column(Text, default=None)
+    nombre: Mapped[str] = mapped_column(String(160))
+    universidad: Mapped[str] = mapped_column(String(200))
+    nucleo_formacion: Mapped[str | None] = mapped_column(Text, default=None)
+    # materias: lista de las ~10 materias representativas
+    materias: Mapped[list] = mapped_column(JSON, default=list)
 
 
 class RespuestaCuestionario(Base):
