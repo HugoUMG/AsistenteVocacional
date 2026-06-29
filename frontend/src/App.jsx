@@ -161,7 +161,9 @@ function App() {
         </div>
       )}
 
-      {done && <p className="done-note">Pronto verás aquí tus carreras recomendadas.</p>}
+      {done && history.every((m) => m.role !== 'rec') && (
+        <p className="done-note">Analizando tu perfil…</p>
+      )}
     </div>
   )
 }
