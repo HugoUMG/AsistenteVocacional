@@ -31,13 +31,13 @@ app.add_middleware(
 # --- Schemas (validación en la frontera: datos del navegador) ---
 class RegisterIn(BaseModel):
     nombre: str
-    email: EmailStr
+    email: EmailStr | None = None
 
 
 class EstudianteOut(BaseModel):
     id: int
     nombre: str
-    email: EmailStr
+    email: EmailStr | None = None
 
     model_config = {"from_attributes": True}
 

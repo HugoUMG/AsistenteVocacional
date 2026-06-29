@@ -15,7 +15,10 @@ class Estudiante(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     nombre: Mapped[str] = mapped_column(String(120))
-    email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
+    # email opcional: el chatbot solo pide el nombre. Se puede capturar luego.
+    email: Mapped[str | None] = mapped_column(
+        String(255), unique=True, index=True, default=None
+    )
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
     respuestas: Mapped[list["RespuestaCuestionario"]] = relationship(
