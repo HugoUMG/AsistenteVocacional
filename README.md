@@ -35,18 +35,32 @@ npm install
 npm run dev
 ```
 
-## Base de datos (Sprint 2)
+## Base de datos
 
-Docker no está instalado todavía. Una vez instalado Docker Desktop, levanta Postgres:
+Levanta Postgres con Docker:
 ```bash
-docker run --name tfg-db -e POSTGRES_PASSWORD=dev -p 5432:5432 -d postgres:16
+docker run --name tfg-db -e POSTGRES_PASSWORD=dev -e POSTGRES_DB=tfg -p 5432:5432 -d postgres:16
 ```
-Luego copia `backend/.env.example` a `backend/.env` y ajusta `DATABASE_URL`.
+Las tablas se crean solas al arrancar el backend (`create_all`). El backend usa
+`DATABASE_URL` (por defecto apunta al contenedor de arriba); para cambiarla, copia
+`backend/.env.example` a `backend/.env`.
+
+Tablas: `estudiantes`, `carreras`, `respuestas_cuestionario`.
+
+## Endpoints
+
+| Método | Ruta                 | Qué hace                                  |
+|--------|----------------------|-------------------------------------------|
+| GET    | `/health`            | Estado del backend                        |
+| POST   | `/api/register`      | Crea estudiante (`nombre`, `email`)       |
+| POST   | `/api/submit-survey` | Guarda respuestas (`estudiante_id`, `respuestas`) |
+
+Pruébalos en http://localhost:8000/docs
 
 ## Estado
 
-- [x] Sprint 1 — Esqueleto: backend con `/health`, frontend arrancando.
-- [ ] Sprint 1 — Esquema BD (estudiantes, carreras, respuestas) + endpoints registro/encuesta.
+- [x] Sprint 1 — Esqueleto: backend `/health`, frontend arrancando, flujo verificado.
+- [x] Sprint 1 — Esquema BD + endpoints `/api/register` y `/api/submit-survey`.
 - [ ] Sprint 2 — Pipeline ML (RandomForest) + endpoint `/api/recommend`.
 - [ ] Sprint 3 — Cuestionario y resultados en React.
 - [ ] Sprint 4 — Integración, pruebas y despliegue.
