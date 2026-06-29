@@ -92,7 +92,7 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
     if not recomendar.hay_api_key():
         raise HTTPException(
             status_code=503,
-            detail="Falta configurar ANTHROPIC_API_KEY en el backend.",
+            detail="Falta configurar GEMINI_API_KEY en el backend.",
         )
     carreras = db.query(models.Carrera).all()
     if not carreras:

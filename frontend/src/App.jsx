@@ -14,23 +14,37 @@ function resolveNext(q, answer, answers) {
 
 const botText = (q, answers) => (typeof q.bot === 'function' ? q.bot(answers) : q.bot)
 
-// Guarda en el backend (best-effort: si está caído, el chat no se rompe)
-async function persistir(answers) {
+const post = (ruta, body) =>
+  fetch(`${API}${ruta}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+
+// Guarda el perfil y pide las recomendaciones. Devuelve los mensajes a mostrar.
+async function finalizar(answers) {
+  let estudiante_id = 0
   try {
-    const reg = await fetch(`${API}/api/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: answers.nombre || 'Anónimo' }),
-    })
-    if (!reg.ok) return
-    const est = await reg.json()
-    await fetch(`${API}/api/submit-survey`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ estudiante_id: est.id, respuestas: answers }),
-    })
+    const reg = await post('/api/register', { nombre: answers.nombre || 'Anónimo' })
+    if (reg.ok) {
+      estudiante_id = (await reg.json()).id
+      await post('/api/submit-survey', { estudiante_id, respuestas: answers })
+    }
   } catch {
-    /* backend no disponible: seguimos sin persistir */
+    /* backend no disponible para guardar: seguimos igual */
+  }
+
+  try {
+    const r = await post('/api/recommend', { estudiante_id, respuestas: answers })
+    if (r.status === 503) return [{ role: 'bot', text: 'El motor de IA aún no está configurado en el servidor.' }]
+    if (!r.ok) return [{ role: 'bot', text: 'No pude generar recomendaciones ahora mismo.' }]
+    const data = await r.json()
+    return [
+      { role: 'bot', text: 'Según tu perfil, estas son las carreras que más encajan contigo:' },
+      ...data.recomendaciones.map((rec) => ({ role: 'rec', rec })),
+    ]
+  } catch {
+    return [{ role: 'bot', text: 'No pude conectar con el servidor.' }]
   }
 }
 
@@ -89,7 +103,7 @@ function App() {
         ...h,
         { role: 'bot', text: `¡Gracias, ${next.nombre}! 🎉 Estoy analizando tus respuestas para recomendarte carreras.` },
       ])
-      persistir(next)
+      finalizar(next).then((msgs) => setHistory((h) => [...h, ...msgs]))
     }
   }
 
@@ -103,11 +117,19 @@ function App() {
       <Robot thinking={done} />
 
       <div className="log" ref={logRef}>
-        {history.map((m, i) => (
-          <div key={i} className={`bubble ${m.role}`}>
-            {m.text}
-          </div>
-        ))}
+        {history.map((m, i) =>
+          m.role === 'rec' ? (
+            <div key={i} className="rec-card">
+              <div className="rec-titulo">🎓 {m.rec.carrera}</div>
+              <div className="rec-uni">{m.rec.universidad}</div>
+              <div className="rec-just">{m.rec.justificacion}</div>
+            </div>
+          ) : (
+            <div key={i} className={`bubble ${m.role}`}>
+              {m.text}
+            </div>
+          ),
+        )}
       </div>
 
       {current?.type === 'text' && (
