@@ -30,11 +30,12 @@ class Carrera(Base):
     __tablename__ = "carreras"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    nombre: Mapped[str] = mapped_column(String(160))
-    universidad: Mapped[str] = mapped_column(String(200))
-    nucleo_formacion: Mapped[str | None] = mapped_column(Text, default=None)
-    # materias: lista de las ~10 materias representativas
-    materias: Mapped[list] = mapped_column(JSON, default=list)
+    nombre: Mapped[str] = mapped_column(String(200))
+    centro: Mapped[str] = mapped_column(String(60), index=True)  # ej. CUNTOTO
+    universidad: Mapped[str] = mapped_column(String(120))
+    # perfil: el "banco de palabras" vocacional (afinidades, habilidades,
+    # entorno, gustos, estilo cognitivo). La IA lo lee como texto.
+    perfil: Mapped[str] = mapped_column(Text)
 
 
 class RespuestaCuestionario(Base):
