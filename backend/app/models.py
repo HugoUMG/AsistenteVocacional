@@ -1,0 +1,44 @@
+from datetime import datetime, timezone
+
+from sqlalchemy import JSON, DateTime, ForeignKey, String, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.db import Base
+
+
+def _now():
+    return datetime.now(timezone.utc)
+
+
+class Estudiante(Base):
+    __tablename__ = "estudiantes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    nombre: Mapped[str] = mapped_column(String(120))
+    email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+    respuestas: Mapped[list["RespuestaCuestionario"]] = relationship(
+        back_populates="estudiante"
+    )
+
+
+class Carrera(Base):
+    __tablename__ = "carreras"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    nombre: Mapped[str] = mapped_column(String(160), unique=True)
+    descripcion: Mapped[str | None] = mapped_column(Text, default=None)
+
+
+class RespuestaCuestionario(Base):
+    __tablename__ = "respuestas_cuestionario"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    estudiante_id: Mapped[int] = mapped_column(ForeignKey("estudiantes.id"))
+    # ponytail: respuestas como JSON. El cuestionario aún no está fijo; cuando lo esté,
+    # se puede normalizar a columnas/tabla aparte si se necesita consultar por respuesta.
+    respuestas: Mapped[dict] = mapped_column(JSON)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+    estudiante: Mapped["Estudiante"] = relationship(back_populates="respuestas")
