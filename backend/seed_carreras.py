@@ -19,7 +19,7 @@ def cargar():
     try:
         for ruta in glob.glob(os.path.join(DATA_DIR, "*.json")):
             doc = json.load(open(ruta, encoding="utf-8"))
-            centro, uni = doc["centro"], doc["universidad"]
+            depto, centro, uni = doc["departamento"], doc["centro"], doc["universidad"]
             for c in doc["carreras"]:
                 existente = (
                     db.query(models.Carrera)
@@ -29,10 +29,11 @@ def cargar():
                 if existente:
                     existente.perfil = c["perfil"]
                     existente.universidad = uni
+                    existente.departamento = depto
                     actualizadas += 1
                 else:
                     db.add(models.Carrera(
-                        nombre=c["nombre"], centro=centro,
+                        nombre=c["nombre"], departamento=depto, centro=centro,
                         universidad=uni, perfil=c["perfil"],
                     ))
                     nuevas += 1

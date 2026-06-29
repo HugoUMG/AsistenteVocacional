@@ -31,6 +31,7 @@ class Carrera(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     nombre: Mapped[str] = mapped_column(String(200))
+    departamento: Mapped[str] = mapped_column(String(60), index=True)  # ej. Totonicapán
     centro: Mapped[str] = mapped_column(String(60), index=True)  # ej. CUNTOTO
     universidad: Mapped[str] = mapped_column(String(120))
     # perfil: el "banco de palabras" vocacional (afinidades, habilidades,
