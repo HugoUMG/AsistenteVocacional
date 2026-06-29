@@ -61,6 +61,9 @@ Pruébalos en http://localhost:8000/docs
 
 - [x] Sprint 1 — Esqueleto: backend `/health`, frontend arrancando, flujo verificado.
 - [x] Sprint 1 — Esquema BD + endpoints `/api/register` y `/api/submit-survey`.
-- [ ] Sprint 2 — Pipeline ML (RandomForest) + endpoint `/api/recommend`.
+- [x] Chatbot vocacional (frontend): robot animado + 3 tipos de pregunta
+  (abierta / Sí-No / opción múltiple) con ramificación. Guion en
+  `frontend/src/questions.js`.
+- [ ] Sprint 2 — Catálogo de carreras + red neuronal + endpoint `/api/recommend`.
 - [ ] Sprint 3 — Cuestionario y resultados en React.
 - [ ] Sprint 4 — Integración, pruebas y despliegue.
