@@ -24,15 +24,10 @@ def hay_api_key() -> bool:
 
 
 def _catalogo_texto(carreras) -> str:
-    lineas = []
-    for c in carreras:
-        materias = ", ".join(c.materias or [])
-        lineas.append(
-            f"- {c.nombre} ({c.universidad})\n"
-            f"  Núcleo de formación: {c.nucleo_formacion or 'N/D'}\n"
-            f"  Materias representativas: {materias or 'N/D'}"
-        )
-    return "\n".join(lineas)
+    return "\n\n".join(
+        f"### {c.nombre} ({c.universidad} - {c.centro})\n{c.perfil}"
+        for c in carreras
+    )
 
 
 def recomendar(respuestas: dict, carreras) -> list[Recomendacion]:
@@ -49,8 +44,8 @@ def recomendar(respuestas: dict, carreras) -> list[Recomendacion]:
             "Eres un orientador vocacional. A partir del perfil de un estudiante "
             "y un catálogo de carreras, recomienda las 3 carreras más afines, de "
             "mayor a menor. Usa SOLO carreras del catálogo. En cada justificación, "
-            "conecta de forma concreta los intereses del estudiante con el núcleo "
-            "y las materias de la carrera. Escribe en español, cercano y claro."
+            "conecta de forma concreta los intereses y el estilo del estudiante con "
+            "el perfil vocacional de la carrera. Escribe en español, cercano y claro."
         ),
         messages=[
             {
@@ -69,9 +64,9 @@ def recomendar(respuestas: dict, carreras) -> list[Recomendacion]:
 if __name__ == "__main__":
     # ponytail: self-check del parseo del catálogo, sin llamar a la API.
     class _C:
-        def __init__(self, n, u, nuc, mat):
-            self.nombre, self.universidad, self.nucleo_formacion, self.materias = n, u, nuc, mat
+        def __init__(self, n, u, ce, p):
+            self.nombre, self.universidad, self.centro, self.perfil = n, u, ce, p
 
-    txt = _catalogo_texto([_C("Ing. Sistemas", "UMG", "Computación", ["Cálculo", "Programación"])])
-    assert "Ing. Sistemas" in txt and "UMG" in txt and "Programación" in txt
+    txt = _catalogo_texto([_C("Ing. Forestal", "USAC", "CUNTOTO", "ama el bosque")])
+    assert "Ing. Forestal" in txt and "CUNTOTO" in txt and "bosque" in txt
     print("ok")
