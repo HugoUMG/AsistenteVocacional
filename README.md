@@ -54,7 +54,7 @@ Tablas: `estudiantes`, `carreras`, `respuestas_cuestionario`.
 | GET    | `/health`            | Estado del backend                        |
 | POST   | `/api/register`      | Crea estudiante (`nombre`, `email`)       |
 | POST   | `/api/submit-survey` | Guarda respuestas (`estudiante_id`, `respuestas`) |
-| POST   | `/api/recommend`     | Recomienda carreras con IA (Claude) según el perfil |
+| POST   | `/api/recommend`     | Recomienda carreras con IA (Gemini) según el perfil |
 
 Pruébalos en http://localhost:8000/docs
 
@@ -65,8 +65,9 @@ Pruébalos en http://localhost:8000/docs
 - [x] Chatbot vocacional (frontend): robot animado + 3 tipos de pregunta
   (abierta / Sí-No / opción múltiple) con ramificación. Guion en
   `frontend/src/questions.js`.
-- [x] Sprint 2 — Motor de recomendación con IA (Claude Opus 4.8) + `/api/recommend`.
+- [x] Sprint 2 — Motor de recomendación con IA (Gemini) + `/api/recommend`.
   Catálogo en `backend/data/*.json`, cargado con `uv run python seed_carreras.py`.
-- [ ] Conectar el frontend a `/api/recommend` (mostrar carreras al final del chat).
+- [x] Frontend conectado a `/api/recommend`: muestra las carreras al final del chat.
+- [ ] Configurar `GEMINI_API_KEY` para probar recomendaciones reales.
 - [ ] Sprint 3 — Cuestionario y resultados en React.
 - [ ] Sprint 4 — Integración, pruebas y despliegue.

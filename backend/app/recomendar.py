@@ -1,12 +1,22 @@
 """Motor de recomendación: le pasa el perfil del estudiante y el catálogo de
-carreras a Claude, y devuelve carreras recomendadas con justificación."""
+carreras a Gemini, y devuelve carreras recomendadas con justificación."""
 
 import os
 
-from anthropic import Anthropic
+from google import genai
+from google.genai import types
 from pydantic import BaseModel
 
-MODELO = "claude-opus-4-8"
+# Modelo configurable: cámbialo con GEMINI_MODEL en .env si hace falta.
+MODELO = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+SYSTEM = (
+    "Eres un orientador vocacional. A partir del perfil de un estudiante y un "
+    "catálogo de carreras, recomienda las 3 carreras más afines, de mayor a "
+    "menor. Usa SOLO carreras del catálogo. En cada justificación, conecta de "
+    "forma concreta los intereses y el estilo del estudiante con el perfil "
+    "vocacional de la carrera. Escribe en español, cercano y claro."
+)
 
 
 class Recomendacion(BaseModel):
@@ -20,7 +30,7 @@ class Recomendaciones(BaseModel):
 
 
 def hay_api_key() -> bool:
-    return bool(os.getenv("ANTHROPIC_API_KEY"))
+    return bool(os.getenv("GEMINI_API_KEY"))
 
 
 def _catalogo_texto(carreras) -> str:
@@ -36,29 +46,21 @@ def recomendar(respuestas: dict, carreras) -> list[Recomendacion]:
     Devuelve hasta 3 carreras recomendadas, de mayor a menor afinidad."""
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
 
-    client = Anthropic()  # lee ANTHROPIC_API_KEY del entorno
-    resp = client.messages.parse(
+    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+    resp = client.models.generate_content(
         model=MODELO,
-        max_tokens=2000,
-        system=(
-            "Eres un orientador vocacional. A partir del perfil de un estudiante "
-            "y un catálogo de carreras, recomienda las 3 carreras más afines, de "
-            "mayor a menor. Usa SOLO carreras del catálogo. En cada justificación, "
-            "conecta de forma concreta los intereses y el estilo del estudiante con "
-            "el perfil vocacional de la carrera. Escribe en español, cercano y claro."
+        contents=(
+            f"PERFIL DEL ESTUDIANTE:\n{perfil}\n\n"
+            f"CATÁLOGO DE CARRERAS:\n{_catalogo_texto(carreras)}"
         ),
-        messages=[
-            {
-                "role": "user",
-                "content": (
-                    f"PERFIL DEL ESTUDIANTE:\n{perfil}\n\n"
-                    f"CATÁLOGO DE CARRERAS:\n{_catalogo_texto(carreras)}"
-                ),
-            }
-        ],
-        output_format=Recomendaciones,
+        config=types.GenerateContentConfig(
+            system_instruction=SYSTEM,
+            response_mime_type="application/json",
+            response_schema=Recomendaciones,
+            temperature=0.4,
+        ),
     )
-    return resp.parsed_output.recomendaciones
+    return Recomendaciones.model_validate_json(resp.text).recomendaciones
 
 
 if __name__ == "__main__":

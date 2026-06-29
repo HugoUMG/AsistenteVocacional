@@ -148,3 +148,28 @@
   font-size: 14px;
   font-style: italic;
 }
+
+/* --- Tarjetas de recomendación --- */
+.rec-card {
+  width: 100%;
+  background: linear-gradient(135deg, #fff, var(--bot-bubble));
+  border: 1px solid var(--accent);
+  border-left: 5px solid var(--accent);
+  border-radius: 16px;
+  padding: 14px 16px;
+  animation: pop 0.3s ease;
+}
+.rec-titulo {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 15px;
+}
+.rec-uni {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 2px 0 8px;
+}
+.rec-just {
+  font-size: 14px;
+  line-height: 1.45;
+}
