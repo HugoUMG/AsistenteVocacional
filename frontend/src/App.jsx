@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { questions, firstId } from './questions'
+import Dashboard from './Dashboard'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -21,8 +22,8 @@ const post = (ruta, body) =>
     body: JSON.stringify(body),
   })
 
-// Guarda el perfil y pide las recomendaciones. Devuelve los mensajes a mostrar.
-async function finalizar(answers) {
+// Guarda el perfil y pide el análisis de afinidad. Lanza error si falla.
+async function obtenerCarreras(answers) {
   let estudiante_id = 0
   try {
     const reg = await post('/api/register', { nombre: answers.nombre || 'Anónimo' })
@@ -31,21 +32,13 @@ async function finalizar(answers) {
       await post('/api/submit-survey', { estudiante_id, respuestas: answers })
     }
   } catch {
-    /* backend no disponible para guardar: seguimos igual */
+    /* backend caído para guardar: seguimos al análisis igual */
   }
 
-  try {
-    const r = await post('/api/recommend', { estudiante_id, respuestas: answers })
-    if (r.status === 503) return [{ role: 'bot', text: 'El motor de IA aún no está configurado en el servidor.' }]
-    if (!r.ok) return [{ role: 'bot', text: 'No pude generar recomendaciones ahora mismo.' }]
-    const data = await r.json()
-    return [
-      { role: 'bot', text: 'Según tu perfil, estas son las carreras que más encajan contigo:' },
-      ...data.recomendaciones.map((rec) => ({ role: 'rec', rec })),
-    ]
-  } catch {
-    return [{ role: 'bot', text: 'No pude conectar con el servidor.' }]
-  }
+  const r = await post('/api/recommend', { estudiante_id, respuestas: answers })
+  if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
+  if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
+  return (await r.json()).carreras
 }
 
 function Robot({ thinking }) {
@@ -68,13 +61,14 @@ function App() {
   const [currentId, setCurrentId] = useState(firstId)
   const [history, setHistory] = useState([])
   const [text, setText] = useState('')
-  const [done, setDone] = useState(false)
+  const [phase, setPhase] = useState('chat') // chat | loading | dashboard
+  const [carreras, setCarreras] = useState([])
+  const [error, setError] = useState(null)
   const logRef = useRef(null)
   const announced = useRef(new Set())
 
   const current = currentId ? byId(currentId) : null
 
-  // Mensaje del bot al cambiar de pregunta (la guarda evita duplicados en StrictMode)
   useEffect(() => {
     if (current && !announced.current.has(current.id)) {
       announced.current.add(current.id)
@@ -87,6 +81,17 @@ function App() {
     logRef.current?.scrollTo(0, logRef.current.scrollHeight)
   }, [history])
 
+  async function analizar(ans) {
+    setError(null)
+    setPhase('loading')
+    try {
+      setCarreras(await obtenerCarreras(ans))
+      setPhase('dashboard')
+    } catch (e) {
+      setError(e.message)
+    }
+  }
+
   function answer(value, label) {
     const next = { ...answers, [current.id]: value }
     setAnswers(next)
@@ -98,12 +103,7 @@ function App() {
       setCurrentId(nextId)
     } else {
       setCurrentId(null)
-      setDone(true)
-      setHistory((h) => [
-        ...h,
-        { role: 'bot', text: `¡Gracias, ${next.nombre}! 🎉 Estoy analizando tus respuestas para recomendarte carreras.` },
-      ])
-      finalizar(next).then((msgs) => setHistory((h) => [...h, ...msgs]))
+      analizar(next)
     }
   }
 
@@ -112,24 +112,44 @@ function App() {
     if (text.trim()) answer(text.trim())
   }
 
+  if (phase === 'dashboard') {
+    return (
+      <Dashboard
+        nombre={answers.nombre}
+        carreras={carreras}
+        onReiniciar={() => window.location.reload()}
+      />
+    )
+  }
+
+  if (phase === 'loading') {
+    return (
+      <div className="chat loading-screen">
+        <div className={`spinner-ring ${error ? 'err' : ''}`}>
+          <Robot thinking={!error} />
+        </div>
+        {error ? (
+          <>
+            <p className="loading-text">{error}</p>
+            <button className="opt" onClick={() => analizar(answers)}>Reintentar</button>
+          </>
+        ) : (
+          <p className="loading-text">Analizando tus respuestas…</p>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className="chat">
-      <Robot thinking={done} />
+      <Robot thinking={false} />
 
       <div className="log" ref={logRef}>
-        {history.map((m, i) =>
-          m.role === 'rec' ? (
-            <div key={i} className="rec-card">
-              <div className="rec-titulo">🎓 {m.rec.carrera}</div>
-              <div className="rec-uni">{m.rec.universidad}</div>
-              <div className="rec-just">{m.rec.justificacion}</div>
-            </div>
-          ) : (
-            <div key={i} className={`bubble ${m.role}`}>
-              {m.text}
-            </div>
-          ),
-        )}
+        {history.map((m, i) => (
+          <div key={i} className={`bubble ${m.role}`}>
+            {m.text}
+          </div>
+        ))}
       </div>
 
       {current?.type === 'text' && (
@@ -159,10 +179,6 @@ function App() {
             </button>
           ))}
         </div>
-      )}
-
-      {done && history.every((m) => m.role !== 'rec') && (
-        <p className="done-note">Analizando tu perfil…</p>
       )}
     </div>
   )

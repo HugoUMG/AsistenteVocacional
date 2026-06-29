@@ -1,5 +1,6 @@
 """Motor de recomendación: le pasa el perfil del estudiante y el catálogo de
-carreras a Gemini, y devuelve carreras recomendadas con justificación."""
+carreras a Gemini, y devuelve un análisis de afinidad por carrera (agrupando
+las universidades que ofrecen la misma carrera)."""
 
 import os
 
@@ -11,22 +12,40 @@ from pydantic import BaseModel
 MODELO = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 SYSTEM = (
-    "Eres un orientador vocacional. A partir del perfil de un estudiante y un "
-    "catálogo de carreras, recomienda las 3 carreras más afines, de mayor a "
-    "menor. Usa SOLO carreras del catálogo. En cada justificación, conecta de "
-    "forma concreta los intereses y el estilo del estudiante con el perfil "
-    "vocacional de la carrera. Escribe en español, cercano y claro."
+    "Eres un orientador vocacional. Analiza el perfil del estudiante contra TODO "
+    "el catálogo de carreras y produce un análisis de afinidad.\n\n"
+    "Reglas:\n"
+    "- AGRUPA por programa académico: si una misma carrera (p. ej. Derecho) la "
+    "ofrecen varias universidades, es UN solo grupo con varias instituciones. "
+    "Usa un nombre canónico claro y corto para el grupo.\n"
+    "- Asigna a cada carrera un porcentaje de afinidad ENTERO. Los porcentajes de "
+    "TODAS las carreras deben sumar exactamente 100.\n"
+    "- Incluye únicamente las carreras con afinidad mayor a 1. Ordena de mayor a "
+    "menor afinidad.\n"
+    "- 'descripcion': explicación general (2-3 frases) de por qué la carrera encaja "
+    "con el perfil, válida para todas las instituciones que la ofrecen; NO menciones "
+    "una universidad concreta aquí.\n"
+    "- Por cada institución, 'enfoque': qué distingue a ESE centro para esa carrera "
+    "(su sello o énfasis particular), en 1-2 frases.\n"
+    "- Escribe en español, cercano y claro."
 )
 
 
-class Recomendacion(BaseModel):
-    carrera: str
+class Institucion(BaseModel):
     universidad: str
-    justificacion: str
+    centro: str
+    enfoque: str
 
 
-class Recomendaciones(BaseModel):
-    recomendaciones: list[Recomendacion]
+class CarreraRecomendada(BaseModel):
+    carrera: str
+    afinidad: int
+    descripcion: str
+    instituciones: list[Institucion]
+
+
+class Resultado(BaseModel):
+    carreras: list[CarreraRecomendada]
 
 
 def hay_api_key() -> bool:
@@ -40,10 +59,10 @@ def _catalogo_texto(carreras) -> str:
     )
 
 
-def recomendar(respuestas: dict, carreras) -> list[Recomendacion]:
+def recomendar(respuestas: dict, carreras) -> list[CarreraRecomendada]:
     """respuestas: dict con las respuestas del cuestionario.
     carreras: lista de models.Carrera (el catálogo).
-    Devuelve hasta 3 carreras recomendadas, de mayor a menor afinidad."""
+    Devuelve las carreras afines (>1%) con su % y el detalle por institución."""
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
 
     client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -56,11 +75,11 @@ def recomendar(respuestas: dict, carreras) -> list[Recomendacion]:
         config=types.GenerateContentConfig(
             system_instruction=SYSTEM,
             response_mime_type="application/json",
-            response_schema=Recomendaciones,
-            temperature=0.4,
+            response_schema=Resultado,
+            temperature=0.3,
         ),
     )
-    return Recomendaciones.model_validate_json(resp.text).recomendaciones
+    return Resultado.model_validate_json(resp.text).carreras
 
 
 if __name__ == "__main__":

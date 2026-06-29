@@ -98,4 +98,4 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
     if not carreras:
         raise HTTPException(status_code=409, detail="No hay carreras en el catálogo.")
     recs = recomendar.recomendar(data.respuestas, carreras)
-    return {"recomendaciones": [r.model_dump() for r in recs]}
+    return {"carreras": [r.model_dump() for r in recs]}
