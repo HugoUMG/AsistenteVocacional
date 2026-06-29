@@ -7,7 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
-from app import models
+from app import models, recomendar
 
 
 @asynccontextmanager
@@ -85,3 +85,17 @@ def submit_survey(data: SurveyIn, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(resp)
     return resp
+
+
+@app.post("/api/recommend")
+def recommend(data: SurveyIn, db: Session = Depends(get_db)):
+    if not recomendar.hay_api_key():
+        raise HTTPException(
+            status_code=503,
+            detail="Falta configurar ANTHROPIC_API_KEY en el backend.",
+        )
+    carreras = db.query(models.Carrera).all()
+    if not carreras:
+        raise HTTPException(status_code=409, detail="No hay carreras en el catálogo.")
+    recs = recomendar.recomendar(data.respuestas, carreras)
+    return {"recomendaciones": [r.model_dump() for r in recs]}
