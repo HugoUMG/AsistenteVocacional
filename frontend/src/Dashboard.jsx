@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import {
-  ResponsiveContainer,
-  BarChart, Bar, XAxis, YAxis, Cell, Tooltip,
-  PieChart, Pie,
-} from 'recharts'
+import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import './Dashboard.css'
 
-const COLORS = ['#6c5ce7', '#00cec9', '#fd79a8', '#fdcb6e', '#0984e3', '#e17055', '#00b894', '#a29bfe']
+const COLORS = [
+  '#6c5ce7', '#00cec9', '#fd79a8', '#fdcb6e', '#0984e3', '#e17055',
+  '#00b894', '#a29bfe', '#e84393', '#16a085', '#f39c12', '#9b59b6',
+]
 const color = (i) => COLORS[i % COLORS.length]
 
 export default function Dashboard({ nombre, carreras, onReiniciar }) {
@@ -20,6 +19,7 @@ export default function Dashboard({ nombre, carreras, onReiniciar }) {
   }
 
   const data = carreras.map((c, i) => ({ name: c.carrera, value: c.afinidad, i }))
+  const maxAfinidad = Math.max(...carreras.map((c) => c.afinidad))
   const activa = carreras[hover ?? sel] // lo que muestra el centro del pastel
   const seleccionada = carreras[sel]
 
@@ -38,35 +38,38 @@ export default function Dashboard({ nombre, carreras, onReiniciar }) {
       <section className="dash-charts">
         <div className="chart-card">
           <h2>Afinidad por carrera</h2>
-          <ResponsiveContainer width="100%" height={Math.max(180, carreras.length * 46)}>
-            <BarChart data={data} layout="vertical" margin={{ left: 8, right: 30, top: 4, bottom: 4 }}>
-              <XAxis type="number" domain={[0, 'dataMax']} hide />
-              <YAxis
-                type="category"
-                dataKey="name"
-                width={175}
-                tick={{ fontSize: 11, fill: '#2b2740' }}
-                tickFormatter={(t) => (t.length > 28 ? t.slice(0, 26) + '…' : t)}
-              />
-              <Tooltip formatter={(v) => [`${v}%`, 'Afinidad']} cursor={{ fill: 'rgba(108,92,231,0.06)' }} />
-              <Bar dataKey="value" radius={[0, 6, 6, 0]} label={{ position: 'right', formatter: (v) => `${v}%`, fontSize: 11 }}>
-                {data.map((d) => <Cell key={d.i} fill={color(d.i)} />)}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="barras">
+            {carreras.map((c, i) => (
+              <div key={i} className="barra-row">
+                <div className="barra-top">
+                  <span className="barra-nombre">
+                    <span className="punto" style={{ background: color(i) }} />
+                    {c.carrera}
+                  </span>
+                  <span className="barra-pct">{c.afinidad}%</span>
+                </div>
+                <div className="barra-track">
+                  <div
+                    className="barra-fill"
+                    style={{ width: `${(c.afinidad / maxAfinidad) * 100}%`, background: color(i) }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="chart-card">
           <h2>Distribución</h2>
           <div className="pie-wrap">
-            <ResponsiveContainer width="100%" height={260}>
+            <ResponsiveContainer width="100%" height={340}>
               <PieChart>
                 <Pie
                   data={data}
                   dataKey="value"
                   nameKey="name"
-                  innerRadius={74}
-                  outerRadius={108}
+                  innerRadius={98}
+                  outerRadius={150}
                   paddingAngle={2}
                   stroke="none"
                   onMouseEnter={(_, i) => setHover(i)}
@@ -91,6 +94,7 @@ export default function Dashboard({ nombre, carreras, onReiniciar }) {
               key={i}
               className={`carrera-item ${i === sel ? 'activa' : ''}`}
               onClick={() => elegirCarrera(i)}
+              style={i === sel ? { borderColor: color(i) } : undefined}
             >
               <span className="punto" style={{ background: color(i) }} />
               <span className="carrera-nombre">{c.carrera}</span>
@@ -116,8 +120,8 @@ export default function Dashboard({ nombre, carreras, onReiniciar }) {
               </button>
             ))}
           </div>
-          <div className="inst-detalle">
-            <div className="inst-uni">{seleccionada.instituciones[inst].universidad}</div>
+          <div className="inst-detalle" style={{ borderLeftColor: color(sel) }}>
+            <div className="inst-uni" style={{ color: color(sel) }}>{seleccionada.instituciones[inst].universidad}</div>
             <p>{seleccionada.instituciones[inst].enfoque}</p>
           </div>
         </div>
