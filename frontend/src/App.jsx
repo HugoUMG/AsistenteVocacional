@@ -1,19 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { questions, firstId } from './questions'
 import Dashboard from './Dashboard'
 import './App.css'
 
 const API = 'http://localhost:8000'
-
-const byId = (id) => questions.find((q) => q.id === id)
-
-function resolveNext(q, answer, answers) {
-  if (typeof q.next === 'function') return q.next(answer, answers)
-  const idx = questions.findIndex((x) => x.id === q.id)
-  return questions[idx + 1]?.id ?? null
-}
-
-const botText = (q, answers) => (typeof q.bot === 'function' ? q.bot(answers) : q.bot)
+const MAX_PREGUNTAS = 10 // tope de seguridad
 
 const post = (ruta, body) =>
   fetch(`${API}${ruta}`, {
@@ -22,20 +12,27 @@ const post = (ruta, body) =>
     body: JSON.stringify(body),
   })
 
+// Primera pregunta fija (el nombre, para saludar). Lo vocacional lo decide la IA.
+const SALUDO = {
+  texto: '¡Hola! 👋 Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
+  tipo: 'texto',
+  esNombre: true,
+}
+
 // Guarda el perfil y pide el análisis de afinidad. Lanza error si falla.
-async function obtenerCarreras(answers) {
+async function obtenerCarreras(respuestas) {
   let estudiante_id = 0
   try {
-    const reg = await post('/api/register', { nombre: answers.nombre || 'Anónimo' })
+    const reg = await post('/api/register', { nombre: respuestas.nombre || 'Anónimo' })
     if (reg.ok) {
       estudiante_id = (await reg.json()).id
-      await post('/api/submit-survey', { estudiante_id, respuestas: answers })
+      await post('/api/submit-survey', { estudiante_id, respuestas })
     }
   } catch {
     /* backend caído para guardar: seguimos al análisis igual */
   }
 
-  const r = await post('/api/recommend', { estudiante_id, respuestas: answers })
+  const r = await post('/api/recommend', { estudiante_id, respuestas })
   if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
   if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
   return (await r.json()).carreras
@@ -57,54 +54,66 @@ function Robot({ thinking }) {
 }
 
 function App() {
-  const [answers, setAnswers] = useState({})
-  const [currentId, setCurrentId] = useState(firstId)
-  const [history, setHistory] = useState([])
+  const [respuestas, setRespuestas] = useState({})
+  const [history, setHistory] = useState([{ role: 'bot', text: SALUDO.texto }])
+  const [current, setCurrent] = useState(SALUDO)
   const [text, setText] = useState('')
   const [phase, setPhase] = useState('chat') // chat | loading | dashboard
   const [carreras, setCarreras] = useState([])
   const [error, setError] = useState(null)
+  const [cargando, setCargando] = useState(false) // pidiendo la siguiente pregunta
   const logRef = useRef(null)
-  const announced = useRef(new Set())
-
-  const current = currentId ? byId(currentId) : null
-
-  useEffect(() => {
-    if (current && !announced.current.has(current.id)) {
-      announced.current.add(current.id)
-      setHistory((h) => [...h, { role: 'bot', text: botText(current, answers) }])
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentId])
 
   useEffect(() => {
     logRef.current?.scrollTo(0, logRef.current.scrollHeight)
-  }, [history])
+  }, [history, cargando])
 
-  async function analizar(ans) {
-    setError(null)
+  const numVocacionales = Object.keys(respuestas).filter((k) => k !== 'nombre').length
+
+  async function analizar(resp) {
     setPhase('loading')
+    setError(null)
     try {
-      setCarreras(await obtenerCarreras(ans))
+      setCarreras(await obtenerCarreras(resp))
       setPhase('dashboard')
     } catch (e) {
       setError(e.message)
     }
   }
 
+  async function pedirSiguiente(resp) {
+    setError(null)
+    setCargando(true)
+    try {
+      const r = await post('/api/next-question', { respuestas: resp })
+      if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
+      if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
+      const paso = await r.json()
+      const tope = Object.keys(resp).filter((k) => k !== 'nombre').length >= MAX_PREGUNTAS
+      if (paso.terminado || tope) {
+        setCargando(false)
+        await analizar(resp)
+      } else {
+        const q = { texto: paso.pregunta_texto, tipo: paso.pregunta_tipo, opciones: paso.opciones || [] }
+        setCurrent(q)
+        setHistory((h) => [...h, { role: 'bot', text: q.texto }])
+        setCargando(false)
+      }
+    } catch (e) {
+      setError(e.message)
+      setCargando(false)
+    }
+  }
+
   function answer(value, label) {
-    const next = { ...answers, [current.id]: value }
-    setAnswers(next)
+    const next = current.esNombre
+      ? { ...respuestas, nombre: value }
+      : { ...respuestas, [current.texto]: value }
+    setRespuestas(next)
     setHistory((h) => [...h, { role: 'user', text: label ?? value }])
     setText('')
-
-    const nextId = resolveNext(current, value, next)
-    if (nextId) {
-      setCurrentId(nextId)
-    } else {
-      setCurrentId(null)
-      analizar(next)
-    }
+    setCurrent(null)
+    pedirSiguiente(next)
   }
 
   function submitText(e) {
@@ -115,7 +124,7 @@ function App() {
   if (phase === 'dashboard') {
     return (
       <Dashboard
-        nombre={answers.nombre}
+        nombre={respuestas.nombre}
         carreras={carreras}
         onReiniciar={() => window.location.reload()}
       />
@@ -131,7 +140,7 @@ function App() {
         {error ? (
           <>
             <p className="loading-text">{error}</p>
-            <button className="opt" onClick={() => analizar(answers)}>Reintentar</button>
+            <button className="opt" onClick={() => analizar(respuestas)}>Reintentar</button>
           </>
         ) : (
           <p className="loading-text">Analizando tus respuestas…</p>
@@ -142,7 +151,7 @@ function App() {
 
   return (
     <div className="chat">
-      <Robot thinking={false} />
+      <Robot thinking={cargando} />
 
       <div className="log" ref={logRef}>
         {history.map((m, i) => (
@@ -150,35 +159,53 @@ function App() {
             {m.text}
           </div>
         ))}
+        {cargando && (
+          <div className="bubble bot escribiendo">
+            <span></span><span></span><span></span>
+          </div>
+        )}
       </div>
 
-      {current?.type === 'text' && (
+      {!cargando && error && (
+        <div className="options" style={{ flexDirection: 'column', alignItems: 'center' }}>
+          <p className="loading-text">{error}</p>
+          <button className="opt" onClick={() => pedirSiguiente(respuestas)}>Reintentar</button>
+        </div>
+      )}
+
+      {!cargando && current?.tipo === 'texto' && (
         <form className="input-row" onSubmit={submitText}>
           <input
             autoFocus
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder={current.placeholder}
+            placeholder="Escribe tu respuesta…"
           />
           <button type="submit" disabled={!text.trim()}>➤</button>
         </form>
       )}
 
-      {current?.type === 'yesno' && (
+      {!cargando && current?.tipo === 'sino' && (
         <div className="options">
           <button className="opt si" onClick={() => answer('si', 'Sí')}>Sí</button>
           <button className="opt no" onClick={() => answer('no', 'No')}>No</button>
         </div>
       )}
 
-      {current?.type === 'choice' && (
+      {!cargando && current?.tipo === 'opcion' && (
         <div className="options choices">
-          {current.options.map((o) => (
+          {current.opciones.map((o) => (
             <button key={o.value} className="opt" onClick={() => answer(o.value, o.label)}>
               {o.label}
             </button>
           ))}
         </div>
+      )}
+
+      {!cargando && current && !current.esNombre && numVocacionales >= 3 && (
+        <button className="terminar-btn" onClick={() => analizar(respuestas)}>
+          Ya, muéstrame mis resultados →
+        </button>
       )}
     </div>
   )
