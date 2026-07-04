@@ -54,6 +54,7 @@ Tablas: `estudiantes`, `carreras`, `respuestas_cuestionario`.
 | GET    | `/health`            | Estado del backend                        |
 | POST   | `/api/register`      | Crea estudiante (`nombre`, `email`)       |
 | POST   | `/api/submit-survey` | Guarda respuestas (`estudiante_id`, `respuestas`) |
+| POST   | `/api/next-question` | Devuelve la siguiente pregunta adaptativa (Akinator) según lo respondido |
 | POST   | `/api/recommend`     | Recomienda carreras con IA (Gemini) según el perfil |
 
 Pruébalos en http://localhost:8000/docs
@@ -62,9 +63,10 @@ Pruébalos en http://localhost:8000/docs
 
 - [x] Sprint 1 — Esqueleto: backend `/health`, frontend arrancando, flujo verificado.
 - [x] Sprint 1 — Esquema BD + endpoints `/api/register` y `/api/submit-survey`.
-- [x] Chatbot vocacional (frontend): robot animado + 3 tipos de pregunta
-  (abierta / Sí-No / opción múltiple) con ramificación. Guion en
-  `frontend/src/questions.js`.
+- [x] Chatbot vocacional adaptativo (tipo Akinator): la IA decide cada pregunta
+  según lo respondido, descartando/reforzando carreras. Catálogo-agnóstico.
+- [x] Dashboard de resultados: barras + dona por % de afinidad, carreras
+  agrupadas con detalle por institución.
 - [x] Sprint 2 — Motor de recomendación con IA (Gemini) + `/api/recommend`.
   Catálogo en `backend/data/*.json`, cargado con `uv run python seed_carreras.py`.
 - [x] Frontend conectado a `/api/recommend`: muestra las carreras al final del chat.
