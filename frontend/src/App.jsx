@@ -3,7 +3,47 @@ import Dashboard from './Dashboard'
 import './App.css'
 
 const API = 'http://localhost:8000'
-const MAX_PREGUNTAS = 10 // tope de seguridad
+const MAX_ADAPTATIVAS = 3 // preguntas que genera la IA (cada una = 1 llamada)
+
+// Preguntas FIJAS (sin llamar a la IA): nombre + 3 vocacionales genéricas.
+// Son catálogo-agnósticas (no mencionan carreras).
+const FIJAS = [
+  {
+    clave: 'nombre',
+    tipo: 'texto',
+    texto: '¡Hola! 👋 Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
+    placeholder: 'Escribe tu nombre…',
+  },
+  {
+    clave: 'impacto',
+    tipo: 'opcion',
+    texto: '{nombre}, ¿qué tipo de impacto te gustaría tener en el mundo?',
+    opciones: [
+      { label: '🤝 Ayudar, enseñar o cuidar a las personas' },
+      { label: '⚖️ Defender la justicia y resolver conflictos' },
+      { label: '💼 Liderar, organizar negocios o usar tecnología y números' },
+      { label: '🌳 Trabajar con la naturaleza, el campo o el ambiente' },
+      { label: '🎨 Comunicar, crear, diseñar o investigar la realidad' },
+    ],
+  },
+  {
+    clave: 'estilo',
+    tipo: 'opcion',
+    texto: '¿Cómo prefieres trabajar?',
+    opciones: [
+      { label: '👥 Con personas, en trato directo' },
+      { label: '📊 Analizando datos, ideas y lógica' },
+      { label: '🛠️ De forma práctica, con las manos' },
+      { label: '🏃 Al aire libre y en movimiento' },
+    ],
+  },
+  {
+    clave: 'gustos',
+    tipo: 'texto',
+    texto: 'Cuéntame en tus palabras: ¿qué materias o temas te apasionan?',
+    placeholder: 'Ej: matemáticas, biología, historia, arte…',
+  },
+]
 
 const post = (ruta, body) =>
   fetch(`${API}${ruta}`, {
@@ -11,13 +51,6 @@ const post = (ruta, body) =>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   })
-
-// Primera pregunta fija (el nombre, para saludar). Lo vocacional lo decide la IA.
-const SALUDO = {
-  texto: '¡Hola! 👋 Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
-  tipo: 'texto',
-  esNombre: true,
-}
 
 // Guarda el perfil y pide el análisis de afinidad. Lanza error si falla.
 async function obtenerCarreras(respuestas) {
@@ -55,22 +88,21 @@ function Robot({ thinking }) {
 
 function App() {
   const [respuestas, setRespuestas] = useState({})
-  const [history, setHistory] = useState([{ role: 'bot', text: SALUDO.texto }])
-  const [current, setCurrent] = useState(SALUDO)
+  const [history, setHistory] = useState([{ role: 'bot', text: FIJAS[0].texto }])
+  const [paso, setPaso] = useState(FIJAS[0]) // pregunta actual (fija tiene .clave; adaptativa no)
   const [text, setText] = useState('')
   const [phase, setPhase] = useState('chat') // chat | loading | dashboard
   const [carreras, setCarreras] = useState([])
   const [error, setError] = useState(null)
-  const [cargando, setCargando] = useState(false) // pidiendo la siguiente pregunta
+  const [cargando, setCargando] = useState(false)
   const logRef = useRef(null)
 
   useEffect(() => {
     logRef.current?.scrollTo(0, logRef.current.scrollHeight)
   }, [history, cargando])
 
-  const numVocacionales = Object.keys(respuestas).filter((k) => k !== 'nombre').length
-
   async function analizar(resp) {
+    setPaso(null)
     setPhase('loading')
     setError(null)
     try {
@@ -81,39 +113,54 @@ function App() {
     }
   }
 
-  async function pedirSiguiente(resp) {
+  // Pide a la IA la siguiente pregunta adaptativa (1 llamada).
+  async function pedirAdaptativa(resp) {
     setError(null)
     setCargando(true)
     try {
       const r = await post('/api/next-question', { respuestas: resp })
       if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
       if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
-      const paso = await r.json()
-      const tope = Object.keys(resp).filter((k) => k !== 'nombre').length >= MAX_PREGUNTAS
-      if (paso.terminado || tope) {
-        setCargando(false)
+      const q = await r.json()
+      if (q.terminado) {
         await analizar(resp)
       } else {
-        const q = { texto: paso.pregunta_texto, tipo: paso.pregunta_tipo, opciones: paso.opciones || [] }
-        setCurrent(q)
-        setHistory((h) => [...h, { role: 'bot', text: q.texto }])
-        setCargando(false)
+        setPaso({ texto: q.pregunta_texto, tipo: q.pregunta_tipo, opciones: q.opciones || [] })
+        setHistory((h) => [...h, { role: 'bot', text: q.pregunta_texto }])
       }
     } catch (e) {
       setError(e.message)
+    } finally {
       setCargando(false)
     }
   }
 
-  function answer(value, label) {
-    const next = current.esNombre
-      ? { ...respuestas, nombre: value }
-      : { ...respuestas, [current.texto]: value }
+  // Decide qué sigue: fija (sin IA), adaptativa (IA), o análisis final.
+  function avanzar(resp) {
+    const fijasAns = FIJAS.filter((f) => resp[f.clave] !== undefined).length
+    if (fijasAns < FIJAS.length) {
+      const q = { ...FIJAS[fijasAns] }
+      q.texto = q.texto.replace('{nombre}', resp.nombre || '')
+      setPaso(q)
+      setHistory((h) => [...h, { role: 'bot', text: q.texto }])
+      return
+    }
+    const nAdapt = Object.keys(resp).length - FIJAS.length
+    if (nAdapt >= MAX_ADAPTATIVAS) {
+      analizar(resp)
+    } else {
+      pedirAdaptativa(resp)
+    }
+  }
+
+  function answer(respuesta) {
+    const clave = paso.clave ?? paso.texto
+    const next = { ...respuestas, [clave]: respuesta }
     setRespuestas(next)
-    setHistory((h) => [...h, { role: 'user', text: label ?? value }])
+    setHistory((h) => [...h, { role: 'user', text: respuesta }])
     setText('')
-    setCurrent(null)
-    pedirSiguiente(next)
+    setPaso(null)
+    avanzar(next)
   }
 
   function submitText(e) {
@@ -149,6 +196,8 @@ function App() {
     )
   }
 
+  const esAdaptativa = paso && !paso.clave
+
   return (
     <div className="chat">
       <Robot thinking={cargando} />
@@ -169,40 +218,40 @@ function App() {
       {!cargando && error && (
         <div className="options" style={{ flexDirection: 'column', alignItems: 'center' }}>
           <p className="loading-text">{error}</p>
-          <button className="opt" onClick={() => pedirSiguiente(respuestas)}>Reintentar</button>
+          <button className="opt" onClick={() => pedirAdaptativa(respuestas)}>Reintentar</button>
         </div>
       )}
 
-      {!cargando && current?.tipo === 'texto' && (
+      {!cargando && paso?.tipo === 'texto' && (
         <form className="input-row" onSubmit={submitText}>
           <input
             autoFocus
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Escribe tu respuesta…"
+            placeholder={paso.placeholder || 'Escribe tu respuesta…'}
           />
           <button type="submit" disabled={!text.trim()}>➤</button>
         </form>
       )}
 
-      {!cargando && current?.tipo === 'sino' && (
+      {!cargando && paso?.tipo === 'sino' && (
         <div className="options">
-          <button className="opt si" onClick={() => answer('si', 'Sí')}>Sí</button>
-          <button className="opt no" onClick={() => answer('no', 'No')}>No</button>
+          <button className="opt si" onClick={() => answer('Sí')}>Sí</button>
+          <button className="opt no" onClick={() => answer('No')}>No</button>
         </div>
       )}
 
-      {!cargando && current?.tipo === 'opcion' && (
+      {!cargando && paso?.tipo === 'opcion' && (
         <div className="options choices">
-          {current.opciones.map((o) => (
-            <button key={o.value} className="opt" onClick={() => answer(o.value, o.label)}>
+          {paso.opciones.map((o, j) => (
+            <button key={j} className="opt" onClick={() => answer(o.label)}>
               {o.label}
             </button>
           ))}
         </div>
       )}
 
-      {!cargando && current && !current.esNombre && numVocacionales >= 3 && (
+      {!cargando && esAdaptativa && (
         <button className="terminar-btn" onClick={() => analizar(respuestas)}>
           Ya, muéstrame mis resultados →
         </button>
