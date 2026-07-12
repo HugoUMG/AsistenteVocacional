@@ -91,13 +91,34 @@ class NextIn(BaseModel):
     respuestas: dict
 
 
+@app.get("/api/departamentos")
+def departamentos(db: Session = Depends(get_db)):
+    rows = (
+        db.query(models.Carrera.departamento)
+        .distinct()
+        .order_by(models.Carrera.departamento)
+        .all()
+    )
+    return {"departamentos": [r[0] for r in rows]}
+
+
+def _carreras(db, respuestas):
+    """Carreras filtradas por el departamento elegido (si hay)."""
+    q = db.query(models.Carrera)
+    depto = (respuestas or {}).get("departamento")
+    if depto:
+        q = q.filter(models.Carrera.departamento == depto)
+    carreras = q.all()
+    if not carreras:
+        raise HTTPException(status_code=409, detail="No hay carreras para ese filtro.")
+    return carreras
+
+
 @app.post("/api/next-question")
 def next_question(data: NextIn, db: Session = Depends(get_db)):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
-    carreras = db.query(models.Carrera).all()
-    if not carreras:
-        raise HTTPException(status_code=409, detail="No hay carreras en el catálogo.")
+    carreras = _carreras(db, data.respuestas)
     return preguntas.siguiente_pregunta(data.respuestas, carreras).model_dump()
 
 
@@ -108,8 +129,6 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
             status_code=503,
             detail="Falta configurar GEMINI_API_KEY en el backend.",
         )
-    carreras = db.query(models.Carrera).all()
-    if not carreras:
-        raise HTTPException(status_code=409, detail="No hay carreras en el catálogo.")
+    carreras = _carreras(db, data.respuestas)
     recs = recomendar.recomendar(data.respuestas, carreras)
     return {"carreras": [r.model_dump() for r in recs]}
