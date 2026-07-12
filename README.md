@@ -54,6 +54,7 @@ Tablas: `estudiantes`, `carreras`, `respuestas_cuestionario`.
 | GET    | `/health`            | Estado del backend                        |
 | POST   | `/api/register`      | Crea estudiante (`nombre`, `email`)       |
 | POST   | `/api/submit-survey` | Guarda respuestas (`estudiante_id`, `respuestas`) |
+| GET    | `/api/departamentos` | Lista los departamentos disponibles (para el filtro) |
 | POST   | `/api/next-question` | Devuelve la siguiente pregunta adaptativa (Akinator) según lo respondido |
 | POST   | `/api/recommend`     | Recomienda carreras con IA (Gemini) según el perfil |
 
@@ -67,6 +68,9 @@ Pruébalos en http://localhost:8000/docs
   según lo respondido, descartando/reforzando carreras. Catálogo-agnóstico.
 - [x] Dashboard de resultados: barras + dona por % de afinidad, carreras
   agrupadas con detalle por institución.
+- [x] Filtro por departamento: el estudiante elige su departamento y solo esas
+  carreras alimentan las preguntas y la recomendación.
+- [x] Catálogo: Totonicapán (CUNTOTO, URG, UMG) y Quetzaltenango (CUNOC).
 - [x] Sprint 2 — Motor de recomendación con IA (Gemini) + `/api/recommend`.
   Catálogo en `backend/data/*.json`, cargado con `uv run python seed_carreras.py`.
 - [x] Frontend conectado a `/api/recommend`: muestra las carreras al final del chat.

@@ -15,9 +15,15 @@ const FIJAS = [
     placeholder: 'Escribe tu nombre…',
   },
   {
+    clave: 'departamento',
+    tipo: 'opcion',
+    texto: '{nombre}, ¿en qué departamento quieres estudiar?',
+    opciones: [], // se llenan dinámicamente desde el backend
+  },
+  {
     clave: 'impacto',
     tipo: 'opcion',
-    texto: '{nombre}, ¿qué tipo de impacto te gustaría tener en el mundo?',
+    texto: '¿Qué tipo de impacto te gustaría tener en el mundo?',
     opciones: [
       { label: '🤝 Ayudar, enseñar o cuidar a las personas' },
       { label: '⚖️ Defender la justicia y resolver conflictos' },
@@ -95,11 +101,20 @@ function App() {
   const [carreras, setCarreras] = useState([])
   const [error, setError] = useState(null)
   const [cargando, setCargando] = useState(false)
+  const [departamentos, setDepartamentos] = useState([])
   const logRef = useRef(null)
 
   useEffect(() => {
     logRef.current?.scrollTo(0, logRef.current.scrollHeight)
   }, [history, cargando])
+
+  // Trae los departamentos disponibles para la pregunta de filtro.
+  useEffect(() => {
+    fetch(`${API}/api/departamentos`)
+      .then((r) => r.json())
+      .then((d) => setDepartamentos(d.departamentos || []))
+      .catch(() => {})
+  }, [])
 
   async function analizar(resp) {
     setPaso(null)
@@ -141,6 +156,9 @@ function App() {
     if (fijasAns < FIJAS.length) {
       const q = { ...FIJAS[fijasAns] }
       q.texto = q.texto.replace('{nombre}', resp.nombre || '')
+      if (q.clave === 'departamento') {
+        q.opciones = departamentos.map((d) => ({ label: d }))
+      }
       setPaso(q)
       setHistory((h) => [...h, { role: 'bot', text: q.texto }])
       return
