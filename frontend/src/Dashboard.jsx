@@ -1,12 +1,7 @@
 import { useState } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+import { color } from './colors'
 import './Dashboard.css'
-
-const COLORS = [
-  '#6c5ce7', '#00cec9', '#fd79a8', '#fdcb6e', '#0984e3', '#e17055',
-  '#00b894', '#a29bfe', '#e84393', '#16a085', '#f39c12', '#9b59b6',
-]
-const color = (i) => COLORS[i % COLORS.length]
 
 export default function Dashboard({ nombre, carreras, onReiniciar }) {
   const [sel, setSel] = useState(0) // carrera seleccionada en el detalle

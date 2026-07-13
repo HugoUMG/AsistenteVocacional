@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Dashboard from './Dashboard'
+import { color } from './colors'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -11,7 +12,7 @@ const FIJAS = [
   {
     clave: 'nombre',
     tipo: 'texto',
-    texto: '¡Hola! 👋 Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
+    texto: '¡Hola! Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
     placeholder: 'Escribe tu nombre…',
   },
   {
@@ -23,13 +24,14 @@ const FIJAS = [
   {
     clave: 'impacto',
     tipo: 'opcion',
-    texto: '¿Qué tipo de impacto te gustaría tener en el mundo?',
+    multiple: true, // puede elegir varios
+    texto: '¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)',
     opciones: [
-      { label: '🤝 Ayudar, enseñar o cuidar a las personas' },
-      { label: '⚖️ Defender la justicia y resolver conflictos' },
-      { label: '💼 Liderar, organizar negocios o usar tecnología y números' },
-      { label: '🌳 Trabajar con la naturaleza, el campo o el ambiente' },
-      { label: '🎨 Comunicar, crear, diseñar o investigar la realidad' },
+      { label: 'Ayudar, enseñar o cuidar a las personas' },
+      { label: 'Defender la justicia y resolver conflictos' },
+      { label: 'Liderar, organizar negocios o usar tecnología y números' },
+      { label: 'Trabajar con la naturaleza, el campo o el ambiente' },
+      { label: 'Comunicar, crear, diseñar o investigar la realidad' },
     ],
   },
   {
@@ -37,10 +39,10 @@ const FIJAS = [
     tipo: 'opcion',
     texto: '¿Cómo prefieres trabajar?',
     opciones: [
-      { label: '👥 Con personas, en trato directo' },
-      { label: '📊 Analizando datos, ideas y lógica' },
-      { label: '🛠️ De forma práctica, con las manos' },
-      { label: '🏃 Al aire libre y en movimiento' },
+      { label: 'Con personas, en trato directo' },
+      { label: 'Analizando datos, ideas y lógica' },
+      { label: 'De forma práctica, con las manos' },
+      { label: 'Al aire libre y en movimiento' },
     ],
   },
   {
@@ -88,6 +90,97 @@ function Robot({ thinking }) {
         <circle className="eye" cx="62" cy="48" r="6" fill="#fff" />
         <rect x="40" y="62" width="20" height="4" rx="2" fill="#fff" opacity="0.8" />
       </svg>
+    </div>
+  )
+}
+
+// Renderiza las opciones: única o múltiple, con "Otro" y un color por opción.
+function Opciones({ pregunta, onAnswer }) {
+  const multiple = !!pregunta.multiple
+  const permitirOtro = pregunta.clave !== 'departamento'
+  const [sel, setSel] = useState([])
+  const [otroOn, setOtroOn] = useState(false)
+  const [otroText, setOtroText] = useState('')
+
+  function clickOpcion(label, i) {
+    if (multiple) {
+      setSel((s) => (s.includes(i) ? s.filter((x) => x !== i) : [...s, i]))
+    } else {
+      onAnswer(label)
+    }
+  }
+
+  function clickOtro() {
+    if (multiple) setOtroOn((v) => !v)
+    else setOtroOn(true) // única: pasa a modo texto
+  }
+
+  function confirmarMulti() {
+    const partes = sel.map((i) => pregunta.opciones[i].label)
+    if (otroOn && otroText.trim()) partes.push(otroText.trim())
+    if (partes.length) onAnswer(partes.join(', '))
+  }
+
+  function enviarOtroUnica(e) {
+    e.preventDefault()
+    if (otroText.trim()) onAnswer(otroText.trim())
+  }
+
+  // Selección única en modo "Otro": solo el cuadro de texto.
+  if (!multiple && otroOn) {
+    return (
+      <form className="input-row" onSubmit={enviarOtroUnica}>
+        <input
+          autoFocus
+          value={otroText}
+          onChange={(e) => setOtroText(e.target.value)}
+          placeholder="Escribe tu respuesta…"
+        />
+        <button type="submit" disabled={!otroText.trim()}>➤</button>
+      </form>
+    )
+  }
+
+  const puedeContinuar = sel.length > 0 || (otroOn && otroText.trim())
+
+  return (
+    <div className="options choices">
+      {pregunta.opciones.map((o, i) => (
+        <button
+          key={i}
+          className={`opt-color ${sel.includes(i) ? 'sel' : ''}`}
+          style={{ '--c': color(i) }}
+          onClick={() => clickOpcion(o.label, i)}
+        >
+          {o.label}
+        </button>
+      ))}
+
+      {permitirOtro && (
+        <button
+          className={`opt-color otro ${otroOn ? 'sel' : ''}`}
+          style={{ '--c': '#7a7596' }}
+          onClick={clickOtro}
+        >
+          Otro / especificar…
+        </button>
+      )}
+
+      {multiple && otroOn && (
+        <input
+          className="otro-input"
+          autoFocus
+          value={otroText}
+          onChange={(e) => setOtroText(e.target.value)}
+          placeholder="Escribe tu respuesta…"
+        />
+      )}
+
+      {multiple && (
+        <button className="continuar-btn" onClick={confirmarMulti} disabled={!puedeContinuar}>
+          Continuar →
+        </button>
+      )}
     </div>
   )
 }
@@ -140,7 +233,12 @@ function App() {
       if (q.terminado) {
         await analizar(resp)
       } else {
-        setPaso({ texto: q.pregunta_texto, tipo: q.pregunta_tipo, opciones: q.opciones || [] })
+        setPaso({
+          texto: q.pregunta_texto,
+          tipo: q.pregunta_tipo,
+          multiple: !!q.multiple,
+          opciones: q.opciones || [],
+        })
         setHistory((h) => [...h, { role: 'bot', text: q.pregunta_texto }])
       }
     } catch (e) {
@@ -260,13 +358,7 @@ function App() {
       )}
 
       {!cargando && paso?.tipo === 'opcion' && (
-        <div className="options choices">
-          {paso.opciones.map((o, j) => (
-            <button key={j} className="opt" onClick={() => answer(o.label)}>
-              {o.label}
-            </button>
-          ))}
-        </div>
+        <Opciones key={paso.texto} pregunta={paso} onAnswer={answer} />
       )}
 
       {!cargando && esAdaptativa && (
