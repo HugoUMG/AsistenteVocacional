@@ -143,6 +143,60 @@
 .opt.si { border-color: var(--accent-2); color: var(--accent-2); }
 .opt.si:hover { background: var(--accent-2); color: #fff; }
 
+/* --- Opciones con color por celda (única / múltiple / otro) --- */
+.opt-color {
+  width: 100%;
+  text-align: left;
+  border: 1.5px solid var(--bot-bubble);
+  border-left: 6px solid var(--c);
+  background: #fff;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.12s;
+}
+.opt-color:hover {
+  transform: translateY(-1px);
+  background: var(--c);
+  color: #fff;
+  border-color: var(--c);
+}
+.opt-color.sel {
+  background: var(--c);
+  color: #fff;
+  border-color: var(--c);
+}
+.opt-color.otro { font-style: italic; }
+
+.otro-input {
+  width: 100%;
+  border: 2px solid var(--accent);
+  background: var(--bg2);
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.continuar-btn {
+  align-self: stretch;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 2px;
+  transition: opacity 0.2s, transform 0.12s;
+}
+.continuar-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.continuar-btn:disabled { opacity: 0.4; cursor: default; }
+
 /* --- Pantalla de carga --- */
 .loading-screen {
   align-items: center;

@@ -23,7 +23,11 @@ SYSTEM = (
     "- Prefiere 'sino' (Sí/No) u 'opcion' (opción múltiple, 2 a 4 opciones) porque "
     "discriminan mejor. Usa 'texto' (respuesta abierta) solo ocasionalmente para matices.\n"
     "- No repitas una pregunta ya hecha ni preguntes algo que ya se deduce.\n"
-    "- Español, segunda persona, cercano y claro. Puedes usar un emoji.\n"
+    "- Español, segunda persona, cercano y claro. NO uses emojis (ni en la "
+    "pregunta ni en las opciones).\n"
+    "- NO agregues una opción 'Otro'; la interfaz la añade automáticamente.\n"
+    "- Marca 'multiple': true SOLO si la pregunta admite naturalmente varias "
+    "respuestas a la vez (p. ej. varios intereses o metas); si no, false.\n"
     "- El estudiante YA respondió unas preguntas iniciales. Haz solo las preguntas "
     "adicionales necesarias para afinar (normalmente 2 o 3). Marca terminado=true "
     "en cuanto el perfil sea claro; no alargues el test innecesariamente.\n"
@@ -42,6 +46,7 @@ class SiguientePaso(BaseModel):
     terminado: bool
     pregunta_texto: str
     pregunta_tipo: str  # "sino" | "opcion" | "texto"
+    multiple: bool  # en "opcion": permite elegir varias
     opciones: list[Opcion]
 
 
