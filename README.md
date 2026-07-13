@@ -19,7 +19,20 @@ modelo de Machine Learning.
 - Node.js 20+ y npm
 - Docker Desktop (para Postgres, a partir del Sprint 2)
 
-## Arrancar en local
+## Inicio rápido (un comando)
+
+Con Docker Desktop instalado y `backend/.env` configurado, desde la raíz del proyecto:
+
+```powershell
+.\start.ps1
+```
+
+Levanta la base de datos, carga el catálogo y arranca backend y frontend (abre el
+navegador solo). Para detener todo: `.\stop.ps1`.
+
+> Si PowerShell bloquea el script: `powershell -ExecutionPolicy Bypass -File .\start.ps1`
+
+## Arrancar en local (manual)
 
 **Backend** (puerto 8000):
 ```bash
