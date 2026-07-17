@@ -18,7 +18,7 @@ const FIJAS = [
   {
     clave: 'departamento',
     tipo: 'opcion',
-    texto: '{nombre}, ¿en qué departamento quieres estudiar?',
+    texto: '{nombre}, ¿en qué departamento te gustaría estudiar?',
     opciones: [], // se llenan dinámicamente desde el backend
   },
   {
@@ -37,7 +37,8 @@ const FIJAS = [
   {
     clave: 'estilo',
     tipo: 'opcion',
-    texto: '¿Cómo prefieres trabajar?',
+    multiple: true, // puede combinar formas de trabajo
+    texto: '¿Cómo prefieres trabajar? (puedes elegir varias)',
     opciones: [
       { label: 'Con personas, en trato directo' },
       { label: 'Analizando datos, ideas y lógica' },
@@ -76,7 +77,7 @@ async function obtenerCarreras(respuestas) {
   const r = await post('/api/recommend', { estudiante_id, respuestas })
   if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
   if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
-  return (await r.json()).carreras
+  return await r.json()
 }
 
 function Robot({ thinking }) {
@@ -192,9 +193,11 @@ function App() {
   const [text, setText] = useState('')
   const [phase, setPhase] = useState('chat') // chat | loading | dashboard
   const [carreras, setCarreras] = useState([])
+  const [respuestaId, setRespuestaId] = useState(null)
   const [error, setError] = useState(null)
   const [cargando, setCargando] = useState(false)
   const [departamentos, setDepartamentos] = useState([])
+  const [undoStack, setUndoStack] = useState([]) // para "Regresar"
   const logRef = useRef(null)
 
   useEffect(() => {
@@ -214,7 +217,9 @@ function App() {
     setPhase('loading')
     setError(null)
     try {
-      setCarreras(await obtenerCarreras(resp))
+      const { carreras, respuesta_id } = await obtenerCarreras(resp)
+      setCarreras(carreras)
+      setRespuestaId(respuesta_id ?? null)
       setPhase('dashboard')
     } catch (e) {
       setError(e.message)
@@ -255,7 +260,7 @@ function App() {
       const q = { ...FIJAS[fijasAns] }
       q.texto = q.texto.replace('{nombre}', resp.nombre || '')
       if (q.clave === 'departamento') {
-        q.opciones = departamentos.map((d) => ({ label: d }))
+        q.opciones = [...departamentos.map((d) => ({ label: d })), { label: 'Ambos' }]
       }
       setPaso(q)
       setHistory((h) => [...h, { role: 'bot', text: q.texto }])
@@ -270,6 +275,8 @@ function App() {
   }
 
   function answer(respuesta) {
+    // Guarda una foto para poder "Regresar" a esta pregunta.
+    setUndoStack((s) => [...s, { respuestas, history, paso }])
     const clave = paso.clave ?? paso.texto
     const next = { ...respuestas, [clave]: respuesta }
     setRespuestas(next)
@@ -277,6 +284,17 @@ function App() {
     setText('')
     setPaso(null)
     avanzar(next)
+  }
+
+  function regresar() {
+    if (!undoStack.length) return
+    const prev = undoStack[undoStack.length - 1]
+    setRespuestas(prev.respuestas)
+    setHistory(prev.history)
+    setPaso(prev.paso)
+    setText('')
+    setError(null)
+    setUndoStack((s) => s.slice(0, -1))
   }
 
   function submitText(e) {
@@ -289,6 +307,7 @@ function App() {
       <Dashboard
         nombre={respuestas.nombre}
         carreras={carreras}
+        respuestaId={respuestaId}
         onReiniciar={() => window.location.reload()}
       />
     )
@@ -330,6 +349,10 @@ function App() {
           </div>
         )}
       </div>
+
+      {!cargando && undoStack.length > 0 && (
+        <button className="regresar-btn" onClick={regresar}>← Regresar</button>
+      )}
 
       {!cargando && error && (
         <div className="options" style={{ flexDirection: 'column', alignItems: 'center' }}>

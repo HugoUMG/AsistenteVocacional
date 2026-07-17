@@ -48,5 +48,9 @@ class RespuestaCuestionario(Base):
     # se puede normalizar a columnas/tabla aparte si se necesita consultar por respuesta.
     respuestas: Mapped[dict] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+    # resultado de /api/recommend, guardado para poder evaluar precisión luego.
+    recomendacion: Mapped[dict | None] = mapped_column(JSON, default=None)
+    # feedback del alumno: True = le pareció acertada, False = no, None = sin responder.
+    feedback: Mapped[bool | None] = mapped_column(default=None)
 
     estudiante: Mapped["Estudiante"] = relationship(back_populates="respuestas")

@@ -3,10 +3,21 @@ import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { color } from './colors'
 import './Dashboard.css'
 
-export default function Dashboard({ nombre, carreras, onReiniciar }) {
+export default function Dashboard({ nombre, carreras, respuestaId, onReiniciar }) {
   const [sel, setSel] = useState(0) // carrera seleccionada en el detalle
   const [inst, setInst] = useState(0) // institución seleccionada
   const [hover, setHover] = useState(null) // sector del pastel sobre el que está el mouse
+  const [feedback, setFeedback] = useState(null) // null | true | false
+
+  const enviarFeedback = (acertada) => {
+    if (!respuestaId) return
+    setFeedback(acertada)
+    fetch('http://localhost:8000/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ respuesta_id: respuestaId, acertada }),
+    }).catch(() => {})
+  }
 
   const elegirCarrera = (i) => {
     setSel(i)
@@ -117,10 +128,26 @@ export default function Dashboard({ nombre, carreras, onReiniciar }) {
           </div>
           <div className="inst-detalle" style={{ borderLeftColor: color(sel) }}>
             <div className="inst-uni" style={{ color: color(sel) }}>{seleccionada.instituciones[inst].universidad}</div>
+            <div className="inst-lugar">
+              {seleccionada.instituciones[inst].centro} · {seleccionada.instituciones[inst].departamento}
+            </div>
             <p>{seleccionada.instituciones[inst].enfoque}</p>
           </div>
         </div>
       </section>
+
+      {respuestaId && (
+        <section className="dash-feedback">
+          {feedback === null ? (
+            <p>¿Esta recomendación te pareció acertada?
+              <button className="opt si" onClick={() => enviarFeedback(true)}>Sí</button>
+              <button className="opt no" onClick={() => enviarFeedback(false)}>No</button>
+            </p>
+          ) : (
+            <p>¡Gracias por tu respuesta!</p>
+          )}
+        </section>
+      )}
     </div>
   )
 }

@@ -103,10 +103,10 @@ def departamentos(db: Session = Depends(get_db)):
 
 
 def _carreras(db, respuestas):
-    """Carreras filtradas por el departamento elegido (si hay)."""
+    """Carreras filtradas por el departamento elegido. 'Ambos' = sin filtro."""
     q = db.query(models.Carrera)
     depto = (respuestas or {}).get("departamento")
-    if depto:
+    if depto and depto != "Ambos":
         q = q.filter(models.Carrera.departamento == depto)
     carreras = q.all()
     if not carreras:
@@ -131,4 +131,34 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
         )
     carreras = _carreras(db, data.respuestas)
     recs = recomendar.recomendar(data.respuestas, carreras)
-    return {"carreras": [r.model_dump() for r in recs]}
+    carreras_out = [r.model_dump() for r in recs]
+
+    # Guarda la recomendación en el registro más reciente de este alumno,
+    # para poder cruzarla luego con el feedback y medir precisión.
+    respuesta_id = None
+    resp = (
+        db.query(models.RespuestaCuestionario)
+        .filter(models.RespuestaCuestionario.estudiante_id == data.estudiante_id)
+        .order_by(models.RespuestaCuestionario.id.desc())
+        .first()
+    )
+    if resp is not None:
+        resp.recomendacion = carreras_out
+        db.commit()
+        respuesta_id = resp.id
+
+    return {"carreras": carreras_out, "respuesta_id": respuesta_id}
+
+
+class FeedbackIn(BaseModel):
+    respuesta_id: int
+    acertada: bool
+
+
+@app.post("/api/feedback", status_code=204)
+def feedback(data: FeedbackIn, db: Session = Depends(get_db)):
+    resp = db.get(models.RespuestaCuestionario, data.respuesta_id)
+    if resp is None:
+        raise HTTPException(status_code=404, detail="Registro no encontrado")
+    resp.feedback = data.acertada
+    db.commit()

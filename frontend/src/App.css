@@ -247,6 +247,17 @@
 }
 
 /* --- Botón para terminar antes --- */
+.regresar-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.regresar-btn:hover { color: var(--accent); }
+
 .terminar-btn {
   align-self: center;
   background: none;
