@@ -43,6 +43,10 @@ SYSTEM = (
     "- El estudiante YA respondió unas preguntas iniciales. Haz solo las preguntas "
     "adicionales necesarias para afinar (normalmente 2 o 3). Marca terminado=true "
     "en cuanto el perfil sea claro; no alargues el test innecesariamente.\n"
+    "- 'ranking': tu estimación ACTUAL y provisional de afinidad de las 4 a 6 "
+    "carreras más probables según lo respondido hasta ahora, cada una con 'carrera' "
+    "(nombre corto y claro) y 'afinidad' entero 0-100, de mayor a menor. Se irá "
+    "afinando con cada respuesta; inclúyelo siempre.\n"
     "- Si terminado=true, deja pregunta_texto vacío y opciones vacías.\n"
     "- Para 'opcion', llena opciones con value (id corto en minúsculas) y label "
     "(texto visible, sin emojis). Para 'sino' y 'texto', deja opciones vacío."
@@ -54,12 +58,18 @@ class Opcion(BaseModel):
     label: str
 
 
+class Ranking(BaseModel):
+    carrera: str
+    afinidad: int  # estimación provisional 0-100
+
+
 class SiguientePaso(BaseModel):
     terminado: bool
     pregunta_texto: str
     pregunta_tipo: str  # "sino" | "opcion" | "texto"
     multiple: bool  # en "opcion": permite elegir varias
     opciones: list[Opcion]
+    ranking: list[Ranking]  # radar en tiempo real
 
 
 def _historial(respuestas: dict) -> str:

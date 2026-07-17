@@ -95,6 +95,31 @@ function Robot({ thinking }) {
   )
 }
 
+// Radar de afinidad en tiempo real: se actualiza con cada pregunta adaptativa.
+function Radar({ ranking }) {
+  if (!ranking.length) return null
+  const max = Math.max(...ranking.map((r) => r.afinidad), 1)
+  return (
+    <div className="radar">
+      <div className="radar-titulo">Tu afinidad en tiempo real</div>
+      {ranking.map((r, i) => (
+        <div key={r.carrera} className="radar-row">
+          <div className="radar-top">
+            <span className="radar-nombre">{r.carrera}</span>
+            <span className="radar-pct">{r.afinidad}%</span>
+          </div>
+          <div className="radar-track">
+            <div
+              className="radar-fill"
+              style={{ width: `${(r.afinidad / max) * 100}%`, background: color(i) }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 // Renderiza las opciones: única o múltiple, con "Otro" y un color por opción.
 function Opciones({ pregunta, onAnswer }) {
   const multiple = !!pregunta.multiple
@@ -198,6 +223,7 @@ function App() {
   const [cargando, setCargando] = useState(false)
   const [departamentos, setDepartamentos] = useState([])
   const [undoStack, setUndoStack] = useState([]) // para "Regresar"
+  const [ranking, setRanking] = useState([]) // radar en tiempo real
   const logRef = useRef(null)
 
   useEffect(() => {
@@ -235,6 +261,7 @@ function App() {
       if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
       if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
       const q = await r.json()
+      if (q.ranking?.length) setRanking(q.ranking)
       if (q.terminado) {
         await analizar(resp)
       } else {
@@ -336,6 +363,8 @@ function App() {
   return (
     <div className="chat">
       <Robot thinking={cargando} />
+
+      <Radar ranking={ranking} />
 
       <div className="log" ref={logRef}>
         {history.map((m, i) => (
