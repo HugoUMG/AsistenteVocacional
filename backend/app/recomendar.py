@@ -16,8 +16,8 @@ SYSTEM = (
     "el catálogo de carreras y produce un análisis de afinidad.\n\n"
     "Reglas:\n"
     "- AGRUPA por programa académico: si una misma carrera (p. ej. Derecho) la "
-    "ofrecen varias universidades, es UN solo grupo con varias instituciones. "
-    "Usa un nombre canónico claro y corto para el grupo.\n"
+    "ofrecen varios centros o incluso distintos departamentos, es UN solo grupo "
+    "con varias instituciones. Usa un nombre canónico claro y corto para el grupo.\n"
     "- Asigna a cada carrera un porcentaje de afinidad ENTERO. Los porcentajes de "
     "TODAS las carreras deben sumar exactamente 100.\n"
     "- Incluye únicamente las carreras con afinidad mayor a 1. Ordena de mayor a "
@@ -25,8 +25,9 @@ SYSTEM = (
     "- 'descripcion': explicación general (2-3 frases) de por qué la carrera encaja "
     "con el perfil, válida para todas las instituciones que la ofrecen; NO menciones "
     "una universidad concreta aquí.\n"
-    "- Por cada institución, 'enfoque': qué distingue a ESE centro para esa carrera "
-    "(su sello o énfasis particular), en 1-2 frases.\n"
+    "- Por cada institución indica universidad, centro y departamento (tal como "
+    "aparecen en el catálogo) y su 'enfoque': qué distingue a ESE centro para esa "
+    "carrera (su sello o énfasis particular), en 1-2 frases.\n"
     "- Escribe en español, cercano y claro."
 )
 
@@ -34,6 +35,7 @@ SYSTEM = (
 class Institucion(BaseModel):
     universidad: str
     centro: str
+    departamento: str
     enfoque: str
 
 
@@ -54,7 +56,7 @@ def hay_api_key() -> bool:
 
 def _catalogo_texto(carreras) -> str:
     return "\n\n".join(
-        f"### {c.nombre} ({c.universidad} - {c.centro})\n{c.perfil}"
+        f"### {c.nombre} ({c.universidad} - {c.centro} - {c.departamento})\n{c.perfil}"
         for c in carreras
     )
 
