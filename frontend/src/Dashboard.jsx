@@ -36,9 +36,17 @@ export default function Dashboard({ nombre, carreras, respuestaId, onReiniciar }
           <h1>Tu orientación vocacional</h1>
           <p>{nombre ? `${nombre}, estas` : 'Estas'} son las carreras más afines a tu perfil.</p>
         </div>
-        {onReiniciar && (
-          <button className="dash-reiniciar" onClick={onReiniciar}>↺ Hacer otro test</button>
-        )}
+        <div className="dash-acciones">
+          <button
+            className="dash-pdf"
+            onClick={() => import('./reporte').then((m) => m.generarPDF(nombre, carreras))}
+          >
+            ↓ Descargar PDF
+          </button>
+          {onReiniciar && (
+            <button className="dash-reiniciar" onClick={onReiniciar}>↺ Hacer otro test</button>
+          )}
+        </div>
       </header>
 
       <section className="dash-charts">
