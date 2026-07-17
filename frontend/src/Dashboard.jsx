@@ -114,6 +114,34 @@ export default function Dashboard({ nombre, carreras, respuestaId, onReiniciar }
           <h2>{seleccionada.carrera}</h2>
           <p className="panel-desc">{seleccionada.descripcion}</p>
 
+          {seleccionada.razones?.length > 0 && (
+            <>
+              <h3>Por qué encaja contigo</h3>
+              <ul className="razones">
+                {seleccionada.razones.map((r, i) => <li key={i}>{r}</li>)}
+              </ul>
+            </>
+          )}
+
+          {seleccionada.factores?.length > 0 && (
+            <>
+              <h3>Lo que más influyó</h3>
+              <div className="factores">
+                {seleccionada.factores.map((f, i) => (
+                  <div key={i} className="factor-row">
+                    <div className="factor-top">
+                      <span>{f.nombre}</span>
+                      <span>{f.peso}%</span>
+                    </div>
+                    <div className="factor-track">
+                      <div className="factor-fill" style={{ width: `${f.peso}%`, background: color(sel) }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
           <h3>¿Dónde estudiarla?</h3>
           <div className="inst-chips">
             {seleccionada.instituciones.map((x, j) => (
