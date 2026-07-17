@@ -25,6 +25,13 @@ SYSTEM = (
     "- 'descripcion': explicación general (2-3 frases) de por qué la carrera encaja "
     "con el perfil, válida para todas las instituciones que la ofrecen; NO menciones "
     "una universidad concreta aquí.\n"
+    "- 'razones': 3 a 5 frases MUY cortas, tipo checklist, de por qué esta carrera "
+    "encaja con ESTE estudiante, conectando con sus respuestas (p. ej. 'Disfrutas "
+    "resolver problemas', 'Te gustan las matemáticas'). Sin viñetas ni emojis.\n"
+    "- 'factores': 3 a 5 dimensiones del perfil que MÁS influyeron en esta "
+    "recomendación, cada una con 'nombre' corto (p. ej. 'Pensamiento lógico', "
+    "'Trato con personas') y 'peso' entero 0-100 (cuánto pesó para esta carrera). "
+    "No tienen que sumar 100.\n"
     "- Por cada institución indica universidad, centro y departamento (tal como "
     "aparecen en el catálogo) y su 'enfoque': qué distingue a ESE centro para esa "
     "carrera (su sello o énfasis particular), en 1-2 frases.\n"
@@ -39,10 +46,17 @@ class Institucion(BaseModel):
     enfoque: str
 
 
+class Factor(BaseModel):
+    nombre: str
+    peso: int  # 0-100: cuánto influyó esa dimensión
+
+
 class CarreraRecomendada(BaseModel):
     carrera: str
     afinidad: int
     descripcion: str
+    razones: list[str]
+    factores: list[Factor]
     instituciones: list[Institucion]
 
 
