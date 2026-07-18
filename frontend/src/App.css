@@ -18,7 +18,7 @@
 }
 
 .chat {
-  flex: 0 1 480px;
+  flex: 1 1 480px; /* crece a lo ancho de #root; con radar comparte la fila */
   background: var(--card);
   border-radius: 28px;
   padding: 28px 22px 22px;
@@ -118,12 +118,17 @@
 
 .bubble {
   max-width: 85%;
-  padding: 12px 16px;
+  padding: 13px 18px;
   border-radius: 18px;
-  line-height: 1.4;
+  line-height: 1.55;
   font-size: 15px;
   animation: pop 0.25s ease;
 }
+
+/* Resaltado de términos clave dentro de los mensajes */
+.bubble strong { font-weight: 700; }
+.bubble.bot strong { color: var(--accent); }
+.bubble em { font-style: italic; }
 @keyframes pop {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
@@ -196,6 +201,23 @@
 }
 .options.choices {
   flex-direction: column;
+}
+
+/* Banco de palabras: opciones compactas que fluyen en varias filas */
+.options.chips {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.options.chips .opt-color {
+  width: auto;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border-left-width: 4px;
+}
+.options.chips .otro-input,
+.options.chips .continuar-btn {
+  flex: 1 0 100%;
 }
 
 .opt {
