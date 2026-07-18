@@ -27,6 +27,6 @@ body {
 
 #root {
   width: 100%;
-  max-width: 780px; /* chat (480) + radar al lado (260) + gap */
+  max-width: 760px; /* chat ancho en PC; si se reactiva el radar comparten esta fila */
   padding: 24px;
 }
