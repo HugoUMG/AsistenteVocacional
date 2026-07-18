@@ -27,6 +27,6 @@ body {
 
 #root {
   width: 100%;
-  max-width: 480px;
+  max-width: 780px; /* chat (480) + radar al lado (260) + gap */
   padding: 24px;
 }

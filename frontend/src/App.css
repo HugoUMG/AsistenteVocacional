@@ -1,4 +1,24 @@
+/* Chat + radar en dos columnas (el radar se apila debajo en pantallas angostas) */
+.layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.radar-aside {
+  flex: 0 0 240px;
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 720px) {
+  .layout { flex-direction: column; align-items: center; }
+  .radar-aside { flex: none; width: 100%; max-width: 480px; position: static; }
+}
+
 .chat {
+  flex: 0 1 480px;
   background: var(--card);
   border-radius: 28px;
   padding: 28px 22px 22px;
@@ -299,6 +319,41 @@
 @keyframes blink-dot {
   0%, 60%, 100% { opacity: 0.25; }
   30% { opacity: 1; }
+}
+
+/* --- Oferta: ver resultado o seguir chateando --- */
+.oferta {
+  width: 100%;
+  background: var(--bg2);
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: pop 0.3s ease;
+}
+.oferta-msg {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.oferta-msg strong { color: var(--accent); }
+.oferta-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.oferta-btns .opt { flex: 1; }
+.opt.ghost {
+  border-color: var(--bot-bubble);
+  color: var(--muted);
+}
+.opt.ghost:hover {
+  background: var(--muted);
+  border-color: var(--muted);
+  color: #fff;
 }
 
 /* --- Botón para terminar antes --- */
