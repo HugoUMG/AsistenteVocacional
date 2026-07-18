@@ -219,6 +219,7 @@ function App() {
   const [phase, setPhase] = useState('chat') // chat | loading | dashboard
   const [carreras, setCarreras] = useState([])
   const [respuestaId, setRespuestaId] = useState(null)
+  const [confianza, setConfianza] = useState(null)
   const [error, setError] = useState(null)
   const [cargando, setCargando] = useState(false)
   const [departamentos, setDepartamentos] = useState([])
@@ -243,9 +244,10 @@ function App() {
     setPhase('loading')
     setError(null)
     try {
-      const { carreras, respuesta_id } = await obtenerCarreras(resp)
+      const { carreras, respuesta_id, confianza, confianza_nota } = await obtenerCarreras(resp)
       setCarreras(carreras)
       setRespuestaId(respuesta_id ?? null)
+      setConfianza(confianza != null ? { valor: confianza, nota: confianza_nota } : null)
       setPhase('dashboard')
     } catch (e) {
       setError(e.message)
@@ -271,7 +273,10 @@ function App() {
           multiple: !!q.multiple,
           opciones: q.opciones || [],
         })
-        setHistory((h) => [...h, { role: 'bot', text: q.pregunta_texto }])
+        const nuevos = []
+        if (q.alerta_contradiccion) nuevos.push({ role: 'alerta', text: q.alerta_contradiccion })
+        nuevos.push({ role: 'bot', text: q.pregunta_texto })
+        setHistory((h) => [...h, ...nuevos])
       }
     } catch (e) {
       setError(e.message)
@@ -335,6 +340,8 @@ function App() {
         nombre={respuestas.nombre}
         carreras={carreras}
         respuestaId={respuestaId}
+        confianza={confianza}
+        respuestas={respuestas}
         onReiniciar={() => window.location.reload()}
       />
     )

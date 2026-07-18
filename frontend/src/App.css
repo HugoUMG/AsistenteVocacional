@@ -123,6 +123,16 @@
   border-bottom-right-radius: 6px;
 }
 
+.bubble.alerta {
+  background: #fff4dc;
+  color: #8a5a00;
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  border-left: 3px solid #f0a500;
+  font-style: italic;
+  font-size: 13px;
+}
+
 /* --- Input de texto (abiertas) --- */
 .input-row {
   width: 100%;

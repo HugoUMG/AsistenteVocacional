@@ -35,6 +35,13 @@ SYSTEM = (
     "- Por cada institución indica universidad, centro y departamento (tal como "
     "aparecen en el catálogo) y su 'enfoque': qué distingue a ESE centro para esa "
     "carrera (su sello o énfasis particular), en 1-2 frases.\n"
+    "- 'confianza': entero 0-100 que refleja qué tan segura es la recomendación en "
+    "conjunto. Alta (80-100) si el perfil apunta claramente a un área; media "
+    "(50-79) si hay un par de áreas compitiendo; baja (<50) si las respuestas son "
+    "escasas, ambiguas o dispersas entre muchas áreas distintas.\n"
+    "- 'confianza_nota': 1 frase corta explicando esa confianza en términos del "
+    "perfil (p. ej. 'Tus respuestas apuntan de forma consistente a un mismo área' "
+    "o 'Todavía hay algo de ambigüedad entre dos áreas distintas').\n"
     "- Escribe en español, cercano y claro."
 )
 
@@ -62,6 +69,8 @@ class CarreraRecomendada(BaseModel):
 
 class Resultado(BaseModel):
     carreras: list[CarreraRecomendada]
+    confianza: int
+    confianza_nota: str
 
 
 def hay_api_key() -> bool:
@@ -75,10 +84,10 @@ def _catalogo_texto(carreras) -> str:
     )
 
 
-def recomendar(respuestas: dict, carreras) -> list[CarreraRecomendada]:
+def recomendar(respuestas: dict, carreras) -> Resultado:
     """respuestas: dict con las respuestas del cuestionario.
     carreras: lista de models.Carrera (el catálogo).
-    Devuelve las carreras afines (>1%) con su % y el detalle por institución."""
+    Devuelve las carreras afines (>1%) con su % y detalle, más la confianza global."""
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
 
     client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -95,7 +104,7 @@ def recomendar(respuestas: dict, carreras) -> list[CarreraRecomendada]:
             temperature=0.3,
         ),
     )
-    return Resultado.model_validate_json(resp.text).carreras
+    return Resultado.model_validate_json(resp.text)
 
 
 if __name__ == "__main__":
