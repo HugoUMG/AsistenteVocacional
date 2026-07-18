@@ -4,7 +4,9 @@ import { color } from './colors'
 import './App.css'
 
 const API = 'http://localhost:8000'
-const MAX_ADAPTATIVAS = 3 // preguntas que genera la IA (cada una = 1 llamada)
+const MIN_ADAPTATIVAS = 5 // mínimo antes de ofrecer el resultado (se siente conversación)
+const MAX_ADAPTATIVAS = 8 // tope: perfiles ambiguos afinan más, sin agotar cuota
+const MOSTRAR_RADAR = false // ponytail: radar de afinidad en vivo desactivado; poner true para reactivarlo
 
 // Preguntas FIJAS (sin llamar a la IA): nombre + 3 vocacionales genéricas.
 // Son catálogo-agnósticas (no mencionan carreras).
@@ -225,6 +227,8 @@ function App() {
   const [departamentos, setDepartamentos] = useState([])
   const [undoStack, setUndoStack] = useState([]) // para "Regresar"
   const [ranking, setRanking] = useState([]) // radar en tiempo real
+  const [confianzaChat, setConfianzaChat] = useState(0) // % de seguridad, monotónico (nunca baja)
+  const [oferta, setOferta] = useState(null) // { pendiente, puedeSeguir } cuando ya se puede mostrar resultado
   const logRef = useRef(null)
 
   useEffect(() => {
@@ -254,7 +258,8 @@ function App() {
     }
   }
 
-  // Pide a la IA la siguiente pregunta adaptativa (1 llamada).
+  // Pide a la IA la siguiente pregunta adaptativa (1 llamada). Esa misma llamada
+  // trae el ranking actualizado, con el que calculamos la confianza.
   async function pedirAdaptativa(resp) {
     setError(null)
     setCargando(true)
@@ -264,15 +269,31 @@ function App() {
       if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
       const q = await r.json()
       if (q.ranking?.length) setRanking(q.ranking)
-      if (q.terminado) {
-        await analizar(resp)
+      // Confianza = afinidad de la carrera líder, pero monotónica: nunca baja.
+      const top = q.ranking?.[0]?.afinidad ?? 0
+      setConfianzaChat((c) => Math.max(c, top))
+
+      const pregunta = {
+        texto: q.pregunta_texto,
+        tipo: q.pregunta_tipo,
+        multiple: !!q.multiple,
+        opciones: q.opciones || [],
+      }
+      const nAdapt = Object.keys(resp).length - FIJAS.length // adaptativas ya respondidas
+      // Ofrecemos el resultado al llegar al mínimo, o antes si la IA ya se dio por
+      // segura (terminado): en ese caso no genera más preguntas, forzarla daría una vacía.
+      if (nAdapt >= MIN_ADAPTATIVAS || q.terminado) {
+        // En vez de decidir por el usuario, le ofrecemos ver el resultado o seguir.
+        // Si sigue, mostramos la pregunta ya traída (no la hay si la IA terminó).
+        const puedeSeguir = nAdapt < MAX_ADAPTATIVAS && !q.terminado
+        if (q.alerta_contradiccion) {
+          setHistory((h) => [...h, { role: 'alerta', text: q.alerta_contradiccion }])
+        }
+        setPaso(null)
+        setOferta({ pendiente: puedeSeguir ? pregunta : null, puedeSeguir })
       } else {
-        setPaso({
-          texto: q.pregunta_texto,
-          tipo: q.pregunta_tipo,
-          multiple: !!q.multiple,
-          opciones: q.opciones || [],
-        })
+        // Debajo del mínimo: seguimos preguntando automáticamente.
+        setPaso(pregunta)
         const nuevos = []
         if (q.alerta_contradiccion) nuevos.push({ role: 'alerta', text: q.alerta_contradiccion })
         nuevos.push({ role: 'bot', text: q.pregunta_texto })
@@ -283,6 +304,21 @@ function App() {
     } finally {
       setCargando(false)
     }
+  }
+
+  // El usuario decide seguir chateando: mostramos la pregunta ya traída.
+  function continuarChat() {
+    const q = oferta?.pendiente
+    setOferta(null)
+    if (!q) return
+    setPaso(q)
+    setHistory((h) => [...h, { role: 'bot', text: q.texto }])
+  }
+
+  // El usuario decide ver su recomendación.
+  function verResultados() {
+    setOferta(null)
+    analizar(respuestas)
   }
 
   // Decide qué sigue: fija (sin IA), adaptativa (IA), o análisis final.
@@ -298,12 +334,9 @@ function App() {
       setHistory((h) => [...h, { role: 'bot', text: q.texto }])
       return
     }
-    const nAdapt = Object.keys(resp).length - FIJAS.length
-    if (nAdapt >= MAX_ADAPTATIVAS) {
-      analizar(resp)
-    } else {
-      pedirAdaptativa(resp)
-    }
+    // El análisis final ya no se dispara solo: pedirAdaptativa ofrece la decisión
+    // al usuario una vez alcanzado el mínimo de preguntas.
+    pedirAdaptativa(resp)
   }
 
   function answer(respuesta) {
@@ -326,6 +359,7 @@ function App() {
     setPaso(prev.paso)
     setText('')
     setError(null)
+    setOferta(null) // la confianza no baja (monotónica), pero cerramos la oferta
     setUndoStack((s) => s.slice(0, -1))
   }
 
@@ -349,6 +383,7 @@ function App() {
 
   if (phase === 'loading') {
     return (
+      <div className="layout">
       <div className="chat loading-screen">
         <div className={`spinner-ring ${error ? 'err' : ''}`}>
           <Robot thinking={!error} />
@@ -362,16 +397,16 @@ function App() {
           <p className="loading-text">Analizando tus respuestas…</p>
         )}
       </div>
+      </div>
     )
   }
 
   const esAdaptativa = paso && !paso.clave
 
   return (
-    <div className="chat">
+    <div className="layout">
+      <div className="chat">
       <Robot thinking={cargando} />
-
-      <Radar ranking={ranking} />
 
       <div className="log" ref={logRef}>
         {history.map((m, i) => (
@@ -385,6 +420,21 @@ function App() {
           </div>
         )}
       </div>
+
+      {!cargando && oferta && (
+        <div className="oferta">
+          <p className="oferta-msg">
+            Ya tengo tu perfil con un <strong>{confianzaChat}%</strong> de seguridad.
+            ¿Quieres ver tu recomendación de carreras o continuar con el chat?
+          </p>
+          <div className="oferta-btns">
+            <button className="opt" onClick={verResultados}>Ver mi recomendación →</button>
+            {oferta.puedeSeguir && (
+              <button className="opt ghost" onClick={continuarChat}>Seguir chateando</button>
+            )}
+          </div>
+        </div>
+      )}
 
       {!cargando && undoStack.length > 0 && (
         <button className="regresar-btn" onClick={regresar}>← Regresar</button>
@@ -424,6 +474,13 @@ function App() {
         <button className="terminar-btn" onClick={() => analizar(respuestas)}>
           Ya, muéstrame mis resultados →
         </button>
+      )}
+      </div>
+
+      {MOSTRAR_RADAR && ranking.length > 0 && (
+        <aside className="radar-aside">
+          <Radar ranking={ranking} />
+        </aside>
       )}
     </div>
   )
