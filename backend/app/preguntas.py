@@ -47,6 +47,13 @@ SYSTEM = (
     "carreras más probables según lo respondido hasta ahora, cada una con 'carrera' "
     "(nombre corto y claro) y 'afinidad' entero 0-100, de mayor a menor. Se irá "
     "afinando con cada respuesta; inclúyelo siempre.\n"
+    "- CONTRADICCIONES: si detectas que dos respuestas previas del estudiante son "
+    "inconsistentes entre sí (p. ej. dijo que disfruta trabajar en equipo pero "
+    "también que prefiere estar completamente solo), pon en 'alerta_contradiccion' "
+    "una frase breve, amable y sin juzgar que se lo señale (p. ej. 'Noto que tus "
+    "respuestas muestran intereses un poco distintos, quiero entenderlo mejor.') y "
+    "haz que la siguiente pregunta ayude a aclarar esa tensión. Si no hay ninguna "
+    "contradicción, deja 'alerta_contradiccion' como cadena vacía.\n"
     "- Si terminado=true, deja pregunta_texto vacío y opciones vacías.\n"
     "- Para 'opcion', llena opciones con value (id corto en minúsculas) y label "
     "(texto visible, sin emojis). Para 'sino' y 'texto', deja opciones vacío."
@@ -70,6 +77,7 @@ class SiguientePaso(BaseModel):
     multiple: bool  # en "opcion": permite elegir varias
     opciones: list[Opcion]
     ranking: list[Ranking]  # radar en tiempo real
+    alerta_contradiccion: str  # "" si no hay contradicción detectada
 
 
 def _historial(respuestas: dict) -> str:

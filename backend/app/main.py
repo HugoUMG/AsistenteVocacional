@@ -7,7 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
-from app import models, recomendar, preguntas
+from app import models, recomendar, preguntas, extras
 
 
 @asynccontextmanager
@@ -130,8 +130,8 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
             detail="Falta configurar GEMINI_API_KEY en el backend.",
         )
     carreras = _carreras(db, data.respuestas)
-    recs = recomendar.recomendar(data.respuestas, carreras)
-    carreras_out = [r.model_dump() for r in recs]
+    resultado = recomendar.recomendar(data.respuestas, carreras)
+    carreras_out = [r.model_dump() for r in resultado.carreras]
 
     # Guarda la recomendación en el registro más reciente de este alumno,
     # para poder cruzarla luego con el feedback y medir precisión.
@@ -147,7 +147,44 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
         db.commit()
         respuesta_id = resp.id
 
-    return {"carreras": carreras_out, "respuesta_id": respuesta_id}
+    return {
+        "carreras": carreras_out,
+        "respuesta_id": respuesta_id,
+        "confianza": resultado.confianza,
+        "confianza_nota": resultado.confianza_nota,
+    }
+
+
+class SimularIn(BaseModel):
+    carrera: str
+    descripcion: str
+    respuestas: dict
+
+
+@app.post("/api/simular-dia")
+def simular_dia(data: SimularIn):
+    if not recomendar.hay_api_key():
+        raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
+    return extras.simular_dia(data.carrera, data.descripcion, data.respuestas).model_dump()
+
+
+class CompararIn(BaseModel):
+    carrera_a: str
+    descripcion_a: str
+    carrera_b: str
+    descripcion_b: str
+    respuestas: dict
+
+
+@app.post("/api/comparar")
+def comparar(data: CompararIn):
+    if not recomendar.hay_api_key():
+        raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
+    return extras.comparar_carreras(
+        data.carrera_a, data.descripcion_a,
+        data.carrera_b, data.descripcion_b,
+        data.respuestas,
+    ).model_dump()
 
 
 class FeedbackIn(BaseModel):
