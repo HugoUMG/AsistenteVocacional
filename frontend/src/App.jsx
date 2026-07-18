@@ -4,7 +4,7 @@ import { color } from './colors'
 import './App.css'
 
 const API = 'http://localhost:8000'
-const MIN_ADAPTATIVAS = 5 // mínimo antes de ofrecer el resultado (se siente conversación)
+const MIN_ADAPTATIVAS = 4 // mínimo antes de ofrecer el resultado (se siente conversación)
 const MAX_ADAPTATIVAS = 8 // tope: perfiles ambiguos afinan más, sin agotar cuota
 const MOSTRAR_RADAR = false // ponytail: radar de afinidad en vivo desactivado; poner true para reactivarlo
 
@@ -34,6 +34,7 @@ const FIJAS = [
       { label: 'Liderar, organizar negocios o usar tecnología y números' },
       { label: 'Trabajar con la naturaleza, el campo o el ambiente' },
       { label: 'Comunicar, crear, diseñar o investigar la realidad' },
+      { label: 'Construir, diseñar o hacer que las cosas funcionen' },
     ],
   },
   {
@@ -49,10 +50,46 @@ const FIJAS = [
     ],
   },
   {
+    clave: 'entorno',
+    tipo: 'opcion',
+    multiple: true,
+    texto: '¿Dónde te imaginas trabajando? (puedes elegir varios)',
+    opciones: [
+      { label: 'En una oficina o empresa' },
+      { label: 'En un hospital, clínica o consultorio' },
+      { label: 'Al aire libre, en el campo o la naturaleza' },
+      { label: 'En un laboratorio o taller técnico' },
+      { label: 'En un aula o centro educativo' },
+      { label: 'En una obra, con máquinas o herramientas' },
+      { label: 'En medios, un estudio creativo o diseñando' },
+      { label: 'Con la comunidad, ayudando a personas' },
+    ],
+  },
+  {
+    // Banco de palabras: temas de interés alineados a las áreas del catálogo
+    // (sin nombrar carreras). El alumno elige varios y puede agregar el suyo.
     clave: 'gustos',
-    tipo: 'texto',
-    texto: 'Cuéntame en tus palabras: ¿qué materias o temas te apasionan?',
-    placeholder: 'Ej: matemáticas, biología, historia, arte…',
+    tipo: 'opcion',
+    multiple: true,
+    chips: true,
+    texto: '¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).',
+    opciones: [
+      { label: 'Matemáticas y números' },
+      { label: 'Tecnología y computación' },
+      { label: 'Salud y cuidar personas' },
+      { label: 'Biología y naturaleza' },
+      { label: 'Química y laboratorio' },
+      { label: 'Leyes, justicia y debate' },
+      { label: 'Negocios, dinero y emprender' },
+      { label: 'Arte, diseño y creatividad' },
+      { label: 'Comunicación, escritura y medios' },
+      { label: 'Enseñar y educar' },
+      { label: 'Psicología y comportamiento' },
+      { label: 'Medio ambiente y agricultura' },
+      { label: 'Construcción, máquinas y cómo funcionan las cosas' },
+      { label: 'Gastronomía, turismo y hotelería' },
+      { label: 'Historia, sociedad y cultura' },
+    ],
   },
 ]
 
@@ -62,6 +99,26 @@ const post = (ruta, body) =>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   })
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
+// Divide un mensaje largo en varias burbujas por oraciones (o ':'), agrupando
+// hasta ~150 caracteres. Los mensajes cortos quedan en una sola burbuja.
+function enPartes(texto, max = 150) {
+  const frases = (texto || '').match(/[^.!?:]+[.!?:]*\s*/g) || [texto]
+  const partes = []
+  let actual = ''
+  for (const f of frases) {
+    if (actual && (actual + f).length > max) {
+      partes.push(actual.trim())
+      actual = f
+    } else {
+      actual += f
+    }
+  }
+  if (actual.trim()) partes.push(actual.trim())
+  return partes
+}
 
 // Guarda el perfil y pide el análisis de afinidad. Lanza error si falla.
 async function obtenerCarreras(respuestas) {
@@ -80,6 +137,22 @@ async function obtenerCarreras(respuestas) {
   if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
   if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
   return await r.json()
+}
+
+// Convierte **negrita** y *cursiva* (Markdown) en elementos React, sin inyectar
+// HTML (seguro): solo parte el texto y envuelve. Ignora marcadores sin cerrar.
+function Formato({ texto }) {
+  const nodos = (texto || '').split(/(\*\*[^*]+\*\*)/g).map((p, i) => {
+    if (p.startsWith('**') && p.endsWith('**') && p.length > 4) {
+      return <strong key={i}>{p.slice(2, -2)}</strong>
+    }
+    return p.split(/(\*[^*]+\*)/g).map((s, j) =>
+      s.startsWith('*') && s.endsWith('*') && s.length > 2
+        ? <em key={`${i}-${j}`}>{s.slice(1, -1)}</em>
+        : s
+    )
+  })
+  return <>{nodos}</>
 }
 
 function Robot({ thinking }) {
@@ -172,7 +245,7 @@ function Opciones({ pregunta, onAnswer }) {
   const puedeContinuar = sel.length > 0 || (otroOn && otroText.trim())
 
   return (
-    <div className="options choices">
+    <div className={`options choices ${pregunta.chips ? 'chips' : ''}`}>
       {pregunta.opciones.map((o, i) => (
         <button
           key={i}
@@ -258,6 +331,20 @@ function App() {
     }
   }
 
+  // Muestra un mensaje del bot en varias burbujas, con una pausa de "escribiendo"
+  // entre cada una, para que se sienta un orientador y no un muro de texto.
+  async function botDice(texto) {
+    const partes = enPartes(texto)
+    for (let i = 0; i < partes.length; i++) {
+      if (i > 0) {
+        setCargando(true)
+        await sleep(650)
+        setCargando(false)
+      }
+      setHistory((h) => [...h, { role: 'bot', text: partes[i] }])
+    }
+  }
+
   // Pide a la IA la siguiente pregunta adaptativa (1 llamada). Esa misma llamada
   // trae el ranking actualizado, con el que calculamos la confianza.
   async function pedirAdaptativa(resp) {
@@ -293,11 +380,12 @@ function App() {
         setOferta({ pendiente: puedeSeguir ? pregunta : null, puedeSeguir })
       } else {
         // Debajo del mínimo: seguimos preguntando automáticamente.
+        setCargando(false) // apaga los puntos del fetch; botDice maneja los suyos
+        if (q.alerta_contradiccion) {
+          setHistory((h) => [...h, { role: 'alerta', text: q.alerta_contradiccion }])
+        }
+        await botDice(q.pregunta_texto)
         setPaso(pregunta)
-        const nuevos = []
-        if (q.alerta_contradiccion) nuevos.push({ role: 'alerta', text: q.alerta_contradiccion })
-        nuevos.push({ role: 'bot', text: q.pregunta_texto })
-        setHistory((h) => [...h, ...nuevos])
       }
     } catch (e) {
       setError(e.message)
@@ -307,12 +395,12 @@ function App() {
   }
 
   // El usuario decide seguir chateando: mostramos la pregunta ya traída.
-  function continuarChat() {
+  async function continuarChat() {
     const q = oferta?.pendiente
     setOferta(null)
     if (!q) return
+    await botDice(q.texto)
     setPaso(q)
-    setHistory((h) => [...h, { role: 'bot', text: q.texto }])
   }
 
   // El usuario decide ver su recomendación.
@@ -411,7 +499,7 @@ function App() {
       <div className="log" ref={logRef}>
         {history.map((m, i) => (
           <div key={i} className={`bubble ${m.role}`}>
-            {m.text}
+            <Formato texto={m.text} />
           </div>
         ))}
         {cargando && (
@@ -425,7 +513,9 @@ function App() {
         <div className="oferta">
           <p className="oferta-msg">
             Ya tengo tu perfil con un <strong>{confianzaChat}%</strong> de seguridad.
-            ¿Quieres ver tu recomendación de carreras o continuar con el chat?
+            {oferta.puedeSeguir
+              ? ' ¿Quieres ver tu recomendación de carreras o seguir afinándolo en el chat?'
+              : ' Cuando quieras, mira tu recomendación de carreras.'}
           </p>
           <div className="oferta-btns">
             <button className="opt" onClick={verResultados}>Ver mi recomendación →</button>
