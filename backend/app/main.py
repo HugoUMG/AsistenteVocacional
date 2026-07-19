@@ -251,6 +251,7 @@ def resumen_uso_tokens(db: Session = Depends(get_db)):
             func.sum(models.UsoTokens.prompt_tokens),
             func.sum(models.UsoTokens.output_tokens),
             func.sum(models.UsoTokens.total_tokens),
+            func.sum(models.UsoTokens.cached_tokens),
         )
         .group_by(models.UsoTokens.session_id)
         .all()
@@ -262,8 +263,9 @@ def resumen_uso_tokens(db: Session = Depends(get_db)):
             "prompt_tokens": int(pt or 0),
             "output_tokens": int(ot or 0),
             "total_tokens": int(tt or 0),
+            "cached_tokens": int(ct or 0),
         }
-        for sid, llamadas, pt, ot, tt in por_sesion
+        for sid, llamadas, pt, ot, tt, ct in por_sesion
     ]
     por_endpoint = (
         db.query(
@@ -275,11 +277,16 @@ def resumen_uso_tokens(db: Session = Depends(get_db)):
         .all()
     )
     total = sum(s["total_tokens"] for s in sesiones)
+    total_prompt = sum(s["prompt_tokens"] for s in sesiones)
+    total_cached = sum(s["cached_tokens"] for s in sesiones)
     n = len(sesiones)
     return {
         "num_sesiones": n,
         "total_tokens": total,
         "promedio_tokens_por_sesion": round(total / n) if n else 0,
+        # % del prompt que vino del Context Caching (precio ~10% del normal).
+        # En 0 si el caché no está activo (tier gratis: ver _get_cache en recomendar.py).
+        "pct_prompt_cacheado": round(total_cached / total_prompt * 100, 1) if total_prompt else 0,
         "por_endpoint": [
             {"endpoint": ep, "llamadas": ll, "total_tokens": int(tt or 0)}
             for ep, ll, tt in por_endpoint
