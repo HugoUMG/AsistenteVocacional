@@ -10,7 +10,7 @@ from google import genai
 from google.genai import types
 from pydantic import BaseModel
 
-from app.recomendar import MODELO
+from app.recomendar import MODELO_FINAL, TONO, uso_tokens
 
 
 # --- Simulador "Un día siendo..." ---
@@ -36,18 +36,19 @@ SYSTEM_SIMULADOR = (
     "exigencia real, no lo idealices.\n"
     "- 'cierre': 1 frase final que invite a la reflexión sobre si esa rutina "
     "encaja con el estudiante.\n"
-    "Español, cercano, sin emojis, sin viñetas."
+    "Español, cercano, sin emojis, sin viñetas.\n\n"
+    + TONO
 )
 
 
-def simular_dia(carrera: str, descripcion: str, respuestas: dict) -> SimulacionDia:
+def simular_dia(carrera: str, descripcion: str, respuestas: dict) -> tuple[SimulacionDia, dict]:
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
     # ponytail: el cliente debe quedar en una variable con nombre (no encadenado
     # inline) — si no, el GC lo cierra a mitad de la llamada ("client has been
     # closed"). Mismo patrón que recomendar.py/preguntas.py.
     client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
     resp = client.models.generate_content(
-        model=MODELO,
+        model=MODELO_FINAL,
         contents=(
             f"CARRERA: {carrera}\nPor qué le fue recomendada: {descripcion}\n\n"
             f"PERFIL DEL ESTUDIANTE:\n{perfil}"
@@ -59,7 +60,7 @@ def simular_dia(carrera: str, descripcion: str, respuestas: dict) -> SimulacionD
             temperature=0.6,
         ),
     )
-    return SimulacionDia.model_validate_json(resp.text)
+    return SimulacionDia.model_validate_json(resp.text), uso_tokens(resp, MODELO_FINAL)
 
 
 # --- Comparador de carreras ---
@@ -81,7 +82,8 @@ SYSTEM_COMPARADOR = (
     "sin decir cuál es 'mejor'.\n"
     "- 'recomendacion': 1 a 2 frases conectando con el perfil del estudiante "
     "para ayudarlo a decidir, sin ser tajante (ambas siguen siendo válidas).\n"
-    "Español, cercano, sin emojis, sin viñetas."
+    "Español, cercano, sin emojis, sin viñetas.\n\n"
+    + TONO
 )
 
 
@@ -89,11 +91,11 @@ def comparar_carreras(
     carrera_a: str, descripcion_a: str,
     carrera_b: str, descripcion_b: str,
     respuestas: dict,
-) -> Comparacion:
+) -> tuple[Comparacion, dict]:
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
     client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
     resp = client.models.generate_content(
-        model=MODELO,
+        model=MODELO_FINAL,
         contents=(
             f"CARRERA A: {carrera_a}\n{descripcion_a}\n\n"
             f"CARRERA B: {carrera_b}\n{descripcion_b}\n\n"
@@ -106,4 +108,4 @@ def comparar_carreras(
             temperature=0.4,
         ),
     )
-    return Comparacion.model_validate_json(resp.text)
+    return Comparacion.model_validate_json(resp.text), uso_tokens(resp, MODELO_FINAL)

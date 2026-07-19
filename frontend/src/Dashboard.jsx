@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { color } from './colors'
+import { SESSION_ID } from './session'
 import './Dashboard.css'
 
 const API = 'http://localhost:8000'
@@ -59,6 +60,7 @@ function SimuladorDia({ carrera, respuestas }) {
         carrera: carrera.carrera,
         descripcion: carrera.descripcion,
         respuestas,
+        session_id: SESSION_ID,
       })
       setDatos(d)
     } catch (e) {
@@ -87,6 +89,61 @@ function SimuladorDia({ carrera, respuestas }) {
                 ))}
               </div>
               <p className="timeline-cierre">{datos.cierre}</p>
+            </>
+          )}
+        </Modal>
+      )}
+    </>
+  )
+}
+
+// Botón "Ver catálogo" — lista todas las carreras del catálogo, agrupadas por
+// nombre con sus sedes. Útil para ver qué existe más allá de lo recomendado.
+function CatalogoCarreras() {
+  const [abierto, setAbierto] = useState(false)
+  const [grupos, setGrupos] = useState(null)
+  const [error, setError] = useState(null)
+
+  async function abrir() {
+    setAbierto(true)
+    if (grupos) return
+    try {
+      const r = await fetch(`${API}/api/carreras`)
+      if (!r.ok) throw new Error('No pude cargar el catálogo.')
+      const { carreras } = await r.json()
+      const mapa = new Map()
+      for (const c of carreras) {
+        if (!mapa.has(c.nombre)) mapa.set(c.nombre, [])
+        mapa.get(c.nombre).push(c)
+      }
+      setGrupos([...mapa.entries()].map(([nombre, sedes]) => ({ nombre, sedes })))
+    } catch (e) {
+      setError(e.message)
+    }
+  }
+
+  return (
+    <>
+      <button className="dash-catalogo" onClick={abrir}>📚 Ver catálogo</button>
+      {abierto && (
+        <Modal titulo="Catálogo de carreras" onClose={() => setAbierto(false)}>
+          {error && <p className="loading-text">{error}</p>}
+          {!grupos && !error && <p className="loading-text">Cargando…</p>}
+          {grupos && (
+            <>
+              <p className="catalogo-intro">
+                {grupos.length} carreras disponibles. Una misma carrera puede ofrecerse en varias sedes.
+              </p>
+              <ul className="catalogo-lista">
+                {grupos.map((g) => (
+                  <li key={g.nombre} className="catalogo-item">
+                    <span className="catalogo-nombre">{g.nombre}</span>
+                    <span className="catalogo-sedes">
+                      {g.sedes.map((s) => `${s.universidad} · ${s.centro} (${s.departamento})`).join('  ·  ')}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </>
           )}
         </Modal>
@@ -136,6 +193,7 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
         carrera_a: a.carrera, descripcion_a: a.descripcion,
         carrera_b: b.carrera, descripcion_b: b.descripcion,
         respuestas: respuestas || {},
+        session_id: SESSION_ID,
       })
       setCmpDatos(d)
     } catch (e) {
@@ -160,6 +218,7 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
           <ConfianzaBadge confianza={confianza} />
         </div>
         <div className="dash-acciones">
+          <CatalogoCarreras />
           <button
             className="dash-pdf"
             onClick={() => import('./reporte').then((m) => m.generarPDF(nombre, carreras))}
