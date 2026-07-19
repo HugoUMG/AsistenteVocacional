@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
+from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -45,6 +46,7 @@ class EstudianteOut(BaseModel):
 class SurveyIn(BaseModel):
     estudiante_id: int
     respuestas: dict
+    session_id: str | None = None  # para atribuir el uso de tokens a la sesión
 
 
 class SurveyOut(BaseModel):
@@ -89,6 +91,7 @@ def submit_survey(data: SurveyIn, db: Session = Depends(get_db)):
 
 class NextIn(BaseModel):
     respuestas: dict
+    session_id: str | None = None
 
 
 @app.get("/api/departamentos")
@@ -100,6 +103,24 @@ def departamentos(db: Session = Depends(get_db)):
         .all()
     )
     return {"departamentos": [r[0] for r in rows]}
+
+
+@app.get("/api/carreras")
+def carreras(db: Session = Depends(get_db)):
+    """Catálogo completo para el botón 'Ver catálogo'. El frontend agrupa por
+    nombre las sedes que ofrecen la misma carrera."""
+    rows = db.query(models.Carrera).order_by(models.Carrera.nombre).all()
+    return {
+        "carreras": [
+            {
+                "nombre": c.nombre,
+                "universidad": c.universidad,
+                "centro": c.centro,
+                "departamento": c.departamento,
+            }
+            for c in rows
+        ]
+    }
 
 
 def _carreras(db, respuestas):
@@ -114,12 +135,23 @@ def _carreras(db, respuestas):
     return carreras
 
 
+def _registrar_uso(db, session_id, endpoint, uso):
+    """Guarda el consumo de tokens de una llamada a Gemini. Sin session_id no se
+    atribuye (p. ej. llamadas de prueba)."""
+    if not session_id:
+        return
+    db.add(models.UsoTokens(session_id=session_id, endpoint=endpoint, **uso))
+    db.commit()
+
+
 @app.post("/api/next-question")
 def next_question(data: NextIn, db: Session = Depends(get_db)):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
     carreras = _carreras(db, data.respuestas)
-    return preguntas.siguiente_pregunta(data.respuestas, carreras).model_dump()
+    paso, uso = preguntas.siguiente_pregunta(data.respuestas, carreras)
+    _registrar_uso(db, data.session_id, "next-question", uso)
+    return paso.model_dump()
 
 
 @app.post("/api/recommend")
@@ -130,7 +162,8 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
             detail="Falta configurar GEMINI_API_KEY en el backend.",
         )
     carreras = _carreras(db, data.respuestas)
-    resultado = recomendar.recomendar(data.respuestas, carreras)
+    resultado, uso = recomendar.recomendar(data.respuestas, carreras)
+    _registrar_uso(db, data.session_id, "recommend", uso)
     carreras_out = [r.model_dump() for r in resultado.carreras]
 
     # Guarda la recomendación en el registro más reciente de este alumno,
@@ -159,13 +192,16 @@ class SimularIn(BaseModel):
     carrera: str
     descripcion: str
     respuestas: dict
+    session_id: str | None = None
 
 
 @app.post("/api/simular-dia")
-def simular_dia(data: SimularIn):
+def simular_dia(data: SimularIn, db: Session = Depends(get_db)):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
-    return extras.simular_dia(data.carrera, data.descripcion, data.respuestas).model_dump()
+    sim, uso = extras.simular_dia(data.carrera, data.descripcion, data.respuestas)
+    _registrar_uso(db, data.session_id, "simular-dia", uso)
+    return sim.model_dump()
 
 
 class CompararIn(BaseModel):
@@ -174,17 +210,20 @@ class CompararIn(BaseModel):
     carrera_b: str
     descripcion_b: str
     respuestas: dict
+    session_id: str | None = None
 
 
 @app.post("/api/comparar")
-def comparar(data: CompararIn):
+def comparar(data: CompararIn, db: Session = Depends(get_db)):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
-    return extras.comparar_carreras(
+    cmp, uso = extras.comparar_carreras(
         data.carrera_a, data.descripcion_a,
         data.carrera_b, data.descripcion_b,
         data.respuestas,
-    ).model_dump()
+    )
+    _registrar_uso(db, data.session_id, "comparar", uso)
+    return cmp.model_dump()
 
 
 class FeedbackIn(BaseModel):
@@ -199,3 +238,51 @@ def feedback(data: FeedbackIn, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Registro no encontrado")
     resp.feedback = data.acertada
     db.commit()
+
+
+@app.get("/api/uso-tokens")
+def resumen_uso_tokens(db: Session = Depends(get_db)):
+    """Resumen para estimar costo/presupuesto: tokens por sesión, total, promedio
+    por sesión y desglose por endpoint."""
+    por_sesion = (
+        db.query(
+            models.UsoTokens.session_id,
+            func.count(models.UsoTokens.id),
+            func.sum(models.UsoTokens.prompt_tokens),
+            func.sum(models.UsoTokens.output_tokens),
+            func.sum(models.UsoTokens.total_tokens),
+        )
+        .group_by(models.UsoTokens.session_id)
+        .all()
+    )
+    sesiones = [
+        {
+            "session_id": sid,
+            "llamadas": llamadas,
+            "prompt_tokens": int(pt or 0),
+            "output_tokens": int(ot or 0),
+            "total_tokens": int(tt or 0),
+        }
+        for sid, llamadas, pt, ot, tt in por_sesion
+    ]
+    por_endpoint = (
+        db.query(
+            models.UsoTokens.endpoint,
+            func.count(models.UsoTokens.id),
+            func.sum(models.UsoTokens.total_tokens),
+        )
+        .group_by(models.UsoTokens.endpoint)
+        .all()
+    )
+    total = sum(s["total_tokens"] for s in sesiones)
+    n = len(sesiones)
+    return {
+        "num_sesiones": n,
+        "total_tokens": total,
+        "promedio_tokens_por_sesion": round(total / n) if n else 0,
+        "por_endpoint": [
+            {"endpoint": ep, "llamadas": ll, "total_tokens": int(tt or 0)}
+            for ep, ll, tt in por_endpoint
+        ],
+        "sesiones": sesiones,
+    }

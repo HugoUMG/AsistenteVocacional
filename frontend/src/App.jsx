@@ -1,12 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
 import Dashboard from './Dashboard'
 import { color } from './colors'
+import { SESSION_ID } from './session'
 import './App.css'
 
 const API = 'http://localhost:8000'
 const MIN_ADAPTATIVAS = 4 // mínimo antes de ofrecer el resultado (se siente conversación)
 const MAX_ADAPTATIVAS = 8 // tope: perfiles ambiguos afinan más, sin agotar cuota
 const MOSTRAR_RADAR = false // ponytail: radar de afinidad en vivo desactivado; poner true para reactivarlo
+
+// Mensajes que rotan bajo la barra de progreso del análisis final.
+const MENSAJES_CARGA = [
+  'Registrando tus respuestas…',
+  'Analizando tu perfil…',
+  'Recorriendo el catálogo de carreras…',
+  'Alineando las carreras contigo…',
+  'Construyendo tu perfil vocacional…',
+  'Calculando afinidades…',
+  'Puliendo los detalles…',
+  'Casi listo…',
+]
 
 // Preguntas FIJAS (sin llamar a la IA): nombre + 3 vocacionales genéricas.
 // Son catálogo-agnósticas (no mencionan carreras).
@@ -133,7 +146,7 @@ async function obtenerCarreras(respuestas) {
     /* backend caído para guardar: seguimos al análisis igual */
   }
 
-  const r = await post('/api/recommend', { estudiante_id, respuestas })
+  const r = await post('/api/recommend', { estudiante_id, respuestas, session_id: SESSION_ID })
   if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
   if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
   return await r.json()
@@ -166,6 +179,37 @@ function Robot({ thinking }) {
         <circle className="eye" cx="62" cy="48" r="6" fill="#fff" />
         <rect x="40" y="62" width="20" height="4" rx="2" fill="#fff" opacity="0.8" />
       </svg>
+    </div>
+  )
+}
+
+// Barra de progreso del análisis final. El reporte híbrido tarda (~15-20s), así
+// que simula avance: arranca en 10%, sube a saltos y se desacelera cerca del
+// final (se queda ~96%) para no completar antes de que llegue la respuesta real.
+// Al desmontarse (cuando aparece el dashboard) se entiende como "terminado".
+function BarraProgreso() {
+  const [pct, setPct] = useState(10)
+  const [msg, setMsg] = useState(0)
+  useEffect(() => {
+    const avance = setInterval(() => {
+      setPct((p) => {
+        const salto = p < 55 ? 12 : p < 80 ? 7 : p < 92 ? 3 : 1
+        return Math.min(96, p + salto)
+      })
+    }, 2000) // ~20s en llegar a ~92% (el análisis híbrido/2.5-flash tarda)
+    const rota = setInterval(() => setMsg((m) => (m + 1) % MENSAJES_CARGA.length), 2800)
+    return () => {
+      clearInterval(avance)
+      clearInterval(rota)
+    }
+  }, [])
+  return (
+    <div className="progreso">
+      <div className="progreso-pct">{pct}%</div>
+      <div className="progreso-track">
+        <div className="progreso-fill" style={{ width: `${pct}%` }} />
+      </div>
+      <p className="loading-text">{MENSAJES_CARGA[msg]}</p>
     </div>
   )
 }
@@ -351,7 +395,7 @@ function App() {
     setError(null)
     setCargando(true)
     try {
-      const r = await post('/api/next-question', { respuestas: resp })
+      const r = await post('/api/next-question', { respuestas: resp, session_id: SESSION_ID })
       if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
       if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
       const q = await r.json()
@@ -473,16 +517,16 @@ function App() {
     return (
       <div className="layout">
       <div className="chat loading-screen">
-        <div className={`spinner-ring ${error ? 'err' : ''}`}>
-          <Robot thinking={!error} />
-        </div>
         {error ? (
           <>
+            <div className="spinner-ring err">
+              <Robot thinking={false} />
+            </div>
             <p className="loading-text">{error}</p>
             <button className="opt" onClick={() => analizar(respuestas)}>Reintentar</button>
           </>
         ) : (
-          <p className="loading-text">Analizando tus respuestas…</p>
+          <BarraProgreso />
         )}
       </div>
       </div>

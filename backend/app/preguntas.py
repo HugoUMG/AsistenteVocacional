@@ -6,14 +6,16 @@ haya cargadas."""
 import os
 
 from google import genai
-from google.genai import types
 from pydantic import BaseModel
 
-from app.recomendar import MODELO, _catalogo_texto
+from app.recomendar import MODELO, TONO, _catalogo_texto, generar, uso_tokens
 
 SYSTEM = (
     "Eres un orientador vocacional que conduce un test tipo 'Akinator' para "
-    "descubrir qué carrera del catálogo encaja mejor con el estudiante.\n\n"
+    "descubrir qué carrera del catálogo encaja mejor con el estudiante.\n"
+    "LE HABLAS A UN ADOLESCENTE de 13 a 17 años: escribe MUY sencillo y cercano, "
+    "como un amigo mayor que lo aconseja, sin palabras de adulto ni tono formal "
+    "(los detalles de tono van más abajo, respétalos).\n\n"
     "Con base en el catálogo y las respuestas dadas hasta ahora, decide la "
     "SIGUIENTE pregunta más útil: la que mejor permita DESCARTAR unas carreras y "
     "REFORZAR otras (máxima discriminación entre las que aún son plausibles).\n\n"
@@ -21,9 +23,9 @@ SYSTEM = (
     "- Cada pregunta debe SONAR como un orientador humano que escucha, no como una "
     "encuesta. En 'pregunta_texto', abre con una frase breve y cálida que RETOME o "
     "REFLEJE algo que el estudiante ya dijo (usa sus propias palabras o menciona una "
-    "respuesta anterior), y LUEGO formula la pregunta. Ej.: 'Me queda claro que "
-    "disfrutas ayudar a los demás y te atrae la biología. Ahora quiero entender algo "
-    "más: ...'.\n"
+    "respuesta anterior), y LUEGO formula la pregunta. Ej. (fíjate en lo simple del "
+    "lenguaje): 'Se nota que te gusta ayudar a los demás y que la biología te llama "
+    "la atención. Ahora cuéntame una cosa: ...'.\n"
     "- Demuestra MEMORIA: conecta la nueva pregunta con lo que respondió antes.\n"
     "- Varía las aperturas (no empieces siempre igual, evita repetir 'Entiendo' o "
     "'Interesante').\n"
@@ -62,7 +64,8 @@ SYSTEM = (
     "contradicción, deja 'alerta_contradiccion' como cadena vacía.\n"
     "- Si terminado=true, deja pregunta_texto vacío y opciones vacías.\n"
     "- Para 'opcion', llena opciones con value (id corto en minúsculas) y label "
-    "(texto visible, sin emojis). Para 'sino' y 'texto', deja opciones vacío."
+    "(texto visible, sin emojis). Para 'sino' y 'texto', deja opciones vacío.\n\n"
+    + TONO
 )
 
 
@@ -98,23 +101,21 @@ def _historial(respuestas: dict) -> str:
     return "\n".join(lineas)
 
 
-def siguiente_pregunta(respuestas: dict, carreras) -> SiguientePaso:
+def siguiente_pregunta(respuestas: dict, carreras) -> tuple[SiguientePaso, dict]:
     client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-    resp = client.models.generate_content(
+    resp = generar(
+        client,
         model=MODELO,
-        contents=(
+        system=SYSTEM,
+        catalogo=(
             "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
-            f"{_catalogo_texto(carreras)}\n\n"
-            f"RESPUESTAS DEL ESTUDIANTE HASTA AHORA:\n{_historial(respuestas)}"
+            f"{_catalogo_texto(carreras)}"
         ),
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM,
-            response_mime_type="application/json",
-            response_schema=SiguientePaso,
-            temperature=0.5,
-        ),
+        variable=f"RESPUESTAS DEL ESTUDIANTE HASTA AHORA:\n{_historial(respuestas)}",
+        schema=SiguientePaso,
+        temperature=0.5,
     )
-    return SiguientePaso.model_validate_json(resp.text)
+    return SiguientePaso.model_validate_json(resp.text), uso_tokens(resp, MODELO)
 
 
 if __name__ == "__main__":
