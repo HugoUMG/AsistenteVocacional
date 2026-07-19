@@ -76,4 +76,9 @@ class UsoTokens(Base):
     prompt_tokens: Mapped[int] = mapped_column(Integer, default=0)
     output_tokens: Mapped[int] = mapped_column(Integer, default=0)
     total_tokens: Mapped[int] = mapped_column(Integer, default=0)
+    # De prompt_tokens, cuántos vinieron del Context Caching (facturados a ~10%
+    # del precio normal) en vez de mandados de nuevo en cada llamada. Requiere
+    # billing habilitado (el tier gratis no permite almacenamiento de caché);
+    # mientras tanto queda en 0 y todo el prompt se factura a precio normal.
+    cached_tokens: Mapped[int] = mapped_column(Integer, default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)

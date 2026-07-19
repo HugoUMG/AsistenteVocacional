@@ -81,6 +81,70 @@ en Totonicapán y CUNOC en Quetzaltenango), cada una con su sello.
 
 ---
 
+## Costo, cuota y Context Caching
+
+**Modelo:** `gemini-3.1-flash-lite` para ambas variables (`GEMINI_MODEL` y
+`GEMINI_MODEL_FINAL`, ver `.env.example`). Se eligió porque, comparado con
+`gemini-2.5-flash` (el original) y `gemini-3.5-flash`, es el más barato
+($0.25/$1.50 por 1M tokens input/output) **y** el de mejor cuota gratis
+(500 RPD vs 20 RPD de los otros dos). Con un solo modelo para todo, ya no se
+comparte el pool de 20 RPD entre `next-question`/`recommend` y el análisis
+final — motivo del 500 que se veía antes al agotar cuota.
+
+**RPM = 15 requests/minuto** es un techo duro y real del tier gratis
+(confirmado por el propio error de Google: `Quota exceeded... limit: 15`).
+Con tráfico concurrente (p. ej. una clase completa arrancando el test a la
+vez) se puede superar; `recomendar.py` reintenta con backoff (ver abajo) pero
+eso amortigua picos, no sustituye tener billing si el tráfico real lo exige.
+
+**Reintento con backoff** (`_con_reintento` en `recomendar.py`): ante
+429/500/503 de Gemini, reintenta hasta 4 veces. Si el 429 trae el
+`retryDelay` real que manda Google (RPM agotado), espera exactamente eso
+(tope 30s); si no, usa backoff exponencial + jitter (1s, 2s, 4s...). Otros
+códigos (400, etc.) se propagan de inmediato, sin reintentar.
+
+**Medición de tokens** (tabla `uso_tokens`, endpoint `GET /api/uso-tokens`):
+cada llamada a Gemini registra `prompt_tokens`, `output_tokens`,
+`total_tokens` y `cached_tokens` (de `usage_metadata.cached_content_token_count`)
+por `session_id` (uno por carga de página, ver `frontend/src/session.js`).
+Medido en pruebas reales: un flujo completo (3 adaptativas + 1 recomendación)
+gasta **~76,000 tokens**, de los cuales **~97% es el catálogo de carreras**
+repetido en cada llamada (el resto es el perfil del estudiante).
+
+**Context Caching ya está implementado** (`_get_cache`/`generar` en
+`recomendar.py`), usando el SDK oficial nuevo (`google-genai`, **no**
+`google-generativeai`, que está deprecado): sube el catálogo una vez con
+`client.caches.create(...)` y las llamadas siguientes lo referencian con
+`cached_content=name` en vez de reenviarlo. La clave del caché es un hash de
+`(modelo, system, catálogo)`, así que:
+- Si cambia el catálogo (reseed) o el filtro de departamento, se crea un
+  caché nuevo automáticamente — no hay que borrar ni apuntar a mano el viejo.
+- `next-question` y `recommend` usan *system prompts* distintos → dos cachés
+  separados, no comparten uno solo.
+- TTL de 1h; si expira (404), el código lo recrea solo, sin intervención.
+
+**Por qué no se ve el ahorro todavía:** el tier gratis de Google tiene el
+almacenamiento de caché en 0 (`TotalCachedContentStorageTokensPerModelFreeTier
+limit=0`), así que `caches.create` siempre falla ahí y todo cae a inline
+(la app no se rompe, pero no ahorra). Se activa solo con **billing
+habilitado** en el proyecto de Google Cloud. Con billing activo, `cached_tokens`
+en `/api/uso-tokens` deja de ser 0 y se puede confirmar el ahorro con datos
+reales en vez de estimados.
+
+**Estimado de ahorro con caching activo** (calculado con los ~76k
+tokens/sesión medidos arriba, ~97% catálogo cacheable, precio de caché =
+10% del precio normal de input, ambos con `gemini-3.1-flash-lite`):
+
+| Sesiones | Sin caché | Con caché | Ahorro |
+|---|---|---|---|
+| 150 | $3.29 | $0.88 | 73% |
+| 200 | $4.38 | $1.17 | 73% |
+
+Más ~$1.00/1M tokens/hora de almacenamiento (con ~18k tokens de catálogo ×
+2 cachés ≈ $0.036/hora — insignificante).
+
+---
+
 ## ¿Qué información recopila?
 
 Se guarda en PostgreSQL (`backend/app/models.py`):

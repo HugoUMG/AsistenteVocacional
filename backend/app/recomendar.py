@@ -115,13 +115,17 @@ def hay_api_key() -> bool:
 
 def uso_tokens(resp, modelo: str) -> dict:
     """Extrae el consumo de tokens de una respuesta de Gemini (usage_metadata).
-    Devuelve un dict listo para registrar en la tabla uso_tokens."""
+    Devuelve un dict listo para registrar en la tabla uso_tokens.
+    cached_tokens: cuántos de prompt_tokens vinieron del Context Caching
+    (facturados a ~10% del precio normal). En 0 si el caché no se pudo usar
+    (p. ej. tier gratis, ver _get_cache) o si Gemini no lo reporta."""
     u = getattr(resp, "usage_metadata", None)
     return {
         "modelo": modelo,
         "prompt_tokens": getattr(u, "prompt_token_count", 0) or 0,
         "output_tokens": getattr(u, "candidates_token_count", 0) or 0,
         "total_tokens": getattr(u, "total_token_count", 0) or 0,
+        "cached_tokens": getattr(u, "cached_content_token_count", 0) or 0,
     }
 
 
@@ -202,19 +206,38 @@ def _get_cache(client, model: str, system: str, catalogo: str) -> str | None:
 # Códigos que ameritan reintentar (límite de cuota / servicio saturado). Todo lo
 # demás (400 mal pedido, 404, etc.) es un error real: se propaga de inmediato.
 _CODIGOS_REINTENTABLES = {429, 500, 503}
+_ESPERA_MAXIMA = 30  # tope de segundos por reintento, aunque Google pida más
+
+
+def _retry_delay(e: errors.APIError) -> float | None:
+    """Extrae el 'retryDelay' (p. ej. '24s') que Gemini manda en el 429 de RPM
+    agotado. None si el error no trae esa info (se usa backoff exponencial)."""
+    try:
+        for d in e.details["error"]["details"]:
+            if d.get("@type", "").endswith("RetryInfo"):
+                return float(d["retryDelay"].rstrip("s"))
+    except (KeyError, TypeError, ValueError, AttributeError):
+        pass
+    return None
 
 
 def _con_reintento(fn, intentos=4):
-    """Llama fn() con backoff exponencial + jitter si Gemini responde 429/503
-    (cuota/RPM excedido o servicio saturado). Reintenta hasta `intentos` veces;
-    al agotarlos, deja que el último error se propague tal cual."""
+    """Llama fn() y reintenta si Gemini responde 429/503 (cuota/RPM excedido o
+    servicio saturado). Si el error trae 'retryDelay' (RPM agotado: Google dice
+    cuánto esperar), espera exactamente eso; si no, usa backoff exponencial +
+    jitter. Reintenta hasta `intentos` veces; al agotarlos, deja que el último
+    error se propague tal cual."""
     for intento in range(intentos):
         try:
             return fn()
         except errors.APIError as e:
             if e.code not in _CODIGOS_REINTENTABLES or intento == intentos - 1:
                 raise
-            espera = (2**intento) + random.uniform(0, 1)
+            espera = _retry_delay(e)
+            if espera is None:
+                espera = (2**intento) + random.uniform(0, 1)
+            else:
+                espera = min(espera, _ESPERA_MAXIMA) + random.uniform(0, 1)
             time.sleep(espera)
 
 
@@ -327,5 +350,45 @@ if __name__ == "__main__":
         assert False, "debía propagar el 400 sin reintentar"
     except errors.ClientError as e:
         assert e.code == 400
+
+    # self-check del retryDelay: si el 429 trae el formato real de Gemini
+    # (error.details[].retryDelay), se extrae y se usa en vez del backoff fijo.
+    error_con_delay = errors.ClientError(429, {
+        "error": {
+            "code": 429,
+            "status": "RESOURCE_EXHAUSTED",
+            "details": [{"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "24s"}],
+        }
+    })
+    assert _retry_delay(error_con_delay) == 24.0
+    assert _retry_delay(errors.ClientError(429, {"message": "sin detalles"})) is None
+
+    llamadas2 = {"n": 0}
+
+    def _falla_con_retry_delay():
+        llamadas2["n"] += 1
+        if llamadas2["n"] < 2:
+            raise errors.ClientError(429, {
+                "error": {"details": [{"@type": "...RetryInfo", "retryDelay": "0s"}]}
+            })
+        return "ok"
+
+    assert _con_reintento(_falla_con_retry_delay) == "ok"
+
+    # self-check de uso_tokens: lee cached_content_token_count si Gemini lo manda
+    # (caché activo), y cae a 0 si no viene (tier gratis, sin caché).
+    class _Usage:
+        def __init__(self, cached=None):
+            self.prompt_token_count = 100
+            self.candidates_token_count = 20
+            self.total_token_count = 120
+            self.cached_content_token_count = cached
+
+    class _Resp:
+        def __init__(self, cached=None):
+            self.usage_metadata = _Usage(cached)
+
+    assert uso_tokens(_Resp(cached=90), "m")["cached_tokens"] == 90
+    assert uso_tokens(_Resp(cached=None), "m")["cached_tokens"] == 0
 
     print("ok")
