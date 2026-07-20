@@ -124,11 +124,13 @@ def carreras(db: Session = Depends(get_db)):
 
 
 def _carreras(db, respuestas):
-    """Carreras filtradas por el departamento elegido. 'Ambos' = sin filtro."""
+    """Carreras filtradas por el departamento (o región, varios separados por
+    coma) elegido. 'Ambos' = sin filtro."""
     q = db.query(models.Carrera)
     depto = (respuestas or {}).get("departamento")
     if depto and depto != "Ambos":
-        q = q.filter(models.Carrera.departamento == depto)
+        deptos = [d.strip() for d in depto.split(",")]
+        q = q.filter(models.Carrera.departamento.in_(deptos))
     carreras = q.all()
     if not carreras:
         raise HTTPException(status_code=409, detail="No hay carreras para ese filtro.")
