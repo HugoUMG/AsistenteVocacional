@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import { color } from './colors'
 import { SESSION_ID } from './session'
@@ -29,12 +30,6 @@ const FIJAS = [
     tipo: 'texto',
     texto: '¡Hola! Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
     placeholder: 'Escribe tu nombre…',
-  },
-  {
-    clave: 'departamento',
-    tipo: 'opcion',
-    texto: '{nombre}, ¿en qué departamento te gustaría estudiar?',
-    opciones: [], // se llenan dinámicamente desde el backend
   },
   {
     clave: 'impacto',
@@ -242,7 +237,6 @@ function Radar({ ranking }) {
 // Renderiza las opciones: única o múltiple, con "Otro" y un color por opción.
 function Opciones({ pregunta, onAnswer }) {
   const multiple = !!pregunta.multiple
-  const permitirOtro = pregunta.clave !== 'departamento'
   const [sel, setSel] = useState([])
   const [otroOn, setOtroOn] = useState(false)
   const [otroText, setOtroText] = useState('')
@@ -301,15 +295,13 @@ function Opciones({ pregunta, onAnswer }) {
         </button>
       ))}
 
-      {permitirOtro && (
-        <button
-          className={`opt-color otro ${otroOn ? 'sel' : ''}`}
-          style={{ '--c': '#7a7596' }}
-          onClick={clickOtro}
-        >
-          Otro / especificar…
-        </button>
-      )}
+      <button
+        className={`opt-color otro ${otroOn ? 'sel' : ''}`}
+        style={{ '--c': '#7a7596' }}
+        onClick={clickOtro}
+      >
+        Otro / especificar…
+      </button>
 
       {multiple && otroOn && (
         <input
@@ -330,8 +322,12 @@ function Opciones({ pregunta, onAnswer }) {
   )
 }
 
-function App() {
-  const [respuestas, setRespuestas] = useState({})
+function Chat() {
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const depto = searchParams.get('depto')
+
+  const [respuestas, setRespuestas] = useState({ departamento: depto })
   const [history, setHistory] = useState([{ role: 'bot', text: FIJAS[0].texto }])
   const [paso, setPaso] = useState(FIJAS[0]) // pregunta actual (fija tiene .clave; adaptativa no)
   const [text, setText] = useState('')
@@ -341,7 +337,6 @@ function App() {
   const [confianza, setConfianza] = useState(null)
   const [error, setError] = useState(null)
   const [cargando, setCargando] = useState(false)
-  const [departamentos, setDepartamentos] = useState([])
   const [undoStack, setUndoStack] = useState([]) // para "Regresar"
   const [ranking, setRanking] = useState([]) // radar en tiempo real
   const [confianzaChat, setConfianzaChat] = useState(0) // % de seguridad, monotónico (nunca baja)
@@ -352,13 +347,10 @@ function App() {
     logRef.current?.scrollTo(0, logRef.current.scrollHeight)
   }, [history, cargando])
 
-  // Trae los departamentos disponibles para la pregunta de filtro.
+  // Sin departamento en la URL (se llegó sin pasar por /mapa): regresa al mapa.
   useEffect(() => {
-    fetch(`${API}/api/departamentos`)
-      .then((r) => r.json())
-      .then((d) => setDepartamentos(d.departamentos || []))
-      .catch(() => {})
-  }, [])
+    if (!depto) navigate('/mapa', { replace: true })
+  }, [depto, navigate])
 
   async function analizar(resp) {
     setPaso(null)
@@ -459,9 +451,6 @@ function App() {
     if (fijasAns < FIJAS.length) {
       const q = { ...FIJAS[fijasAns] }
       q.texto = q.texto.replace('{nombre}', resp.nombre || '')
-      if (q.clave === 'departamento') {
-        q.opciones = [...departamentos.map((d) => ({ label: d })), { label: 'Ambos' }]
-      }
       setPaso(q)
       setHistory((h) => [...h, { role: 'bot', text: q.texto }])
       return
@@ -508,7 +497,7 @@ function App() {
         respuestaId={respuestaId}
         confianza={confianza}
         respuestas={respuestas}
-        onReiniciar={() => window.location.reload()}
+        onReiniciar={() => navigate('/')}
       />
     )
   }
@@ -620,4 +609,4 @@ function App() {
   )
 }
 
-export default App
+export default Chat
