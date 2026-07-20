@@ -1,0 +1,28 @@
+{
+  "departamento": "Quetzaltenango",
+  "centro": "Sede Quetzaltenango (UdeO)",
+  "universidad": "Universidad de Occidente",
+  "carreras": [
+    { "nombre": "Arquitectura", "perfil_id": "arquitectura", "sello": "Sede central de la universidad, con enfoque práctico y accesible en Occidente." },
+    { "nombre": "Diseño Gráfico", "perfil_id": "diseno_grafico", "sello": "Formación práctica orientada a la demanda local de Occidente." },
+    { "nombre": "PEM en Pedagogía y Técnico en Administración Educativa", "perfil_id": "pedagogia_pem_admin_educativa", "sello": "Formación docente con salida técnica en gestión de centros educativos." },
+    { "nombre": "PEM en Pedagogía y Psicología", "perfil_id": "pedagogia_psicologia", "sello": "Combina formación docente con fundamentos de psicología del aprendizaje." },
+    { "nombre": "PEM en Pedagogía y Ciencias de la Educación", "perfil_id": "pedagogia", "sello": "Formación docente general con base en ciencias de la educación." },
+    { "nombre": "PEM en Matemática y Física", "perfil_id": "pedagogia_matematica_fisica", "sello": "Formación docente especializada en ciencias exactas." },
+    { "nombre": "PEM en Lenguaje e Historia", "perfil_id": "pedagogia_lenguaje_historia", "sello": "Formación docente especializada en humanidades." },
+    { "nombre": "Psicología Educativa", "perfil_id": "psicologia_educativa", "sello": "Psicología aplicada al ámbito escolar y de aprendizaje, accesible en Occidente." },
+    { "nombre": "Pedagogía y Administración Educativa", "perfil_id": "pedagogia_admin_educativa", "sello": "Formación en gestión y dirección de instituciones educativas." },
+    { "nombre": "Psicología Clínica", "perfil_id": "psicologia_clinica", "sello": "Formación clínica accesible en la sede central de Occidente." },
+    { "nombre": "Ingeniería en Electrónica", "perfil_id": "ingenieria_electronica", "sello": "Una de las pocas ofertas de esta especialidad en Occidente." },
+    { "nombre": "Ingeniería en Sistemas", "perfil_id": "ingenieria_sistemas", "sello": "Formación en software orientada a la demanda local." },
+    { "nombre": "Ingeniería Industrial", "perfil_id": "ingenieria_industrial", "sello": "Optimización de procesos para la industria de Occidente." },
+    { "nombre": "Ingeniería Civil", "perfil_id": "ingenieria_civil", "sello": "Formación técnica orientada a la infraestructura regional." },
+    { "nombre": "Ciencias Jurídicas y Sociales (Abogado y Notario)", "perfil_id": "ciencias_juridicas", "sello": "Formación jurídica accesible, con fuerte presencia en Occidente." },
+    { "nombre": "Administración de Empresas", "perfil_id": "administracion_empresas", "sello": "Orientación pragmática a la pequeña y mediana empresa de la región." },
+    { "nombre": "Contaduría Pública y Auditoría", "perfil_id": "contaduria", "sello": "Formación contable orientada a la práctica empresarial local." },
+    { "nombre": "Mercadotecnia", "perfil_id": "mercadotecnia", "sello": "Mercadeo aplicado al comercio de Occidente." },
+    { "nombre": "Enfermería", "perfil_id": "enfermeria", "sello": "Formación con proyección comunitaria en la región de Occidente." },
+    { "nombre": "Fisioterapia", "perfil_id": "terapia_fisica", "sello": "Formación técnica en rehabilitación física." },
+    { "nombre": "Odontología", "perfil_id": "cirujano_dentista", "sello": "Una de las pocas ofertas de esta carrera fuera de la capital." }
+  ]
+}

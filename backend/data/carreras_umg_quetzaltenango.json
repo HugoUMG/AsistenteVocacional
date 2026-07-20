@@ -46,7 +46,8 @@
     },
     {
       "nombre": "Psicología Educativa",
-      "perfil": "Arquetipo: El Experto en Procesos de Aprendizaje, Desarrollo y Orientación Escolar. AFINIDAD (ser): vocación por la educación y el desarrollo integral de niños y adolescentes; interés profundo por los procesos de aprendizaje y cómo potenciarlos; empatía para trabajar con estudiantes, padres y docentes; compromiso con la inclusión educativa y la atención a la diversidad; mentalidad científica para evaluar, diagnosticar e intervenir. HABILIDADES (saber hacer): evaluación y diagnóstico psicoeducativo (problemas de aprendizaje, TDAH, altas capacidades); intervención en trastornos del neurodesarrollo y dificultades de aprendizaje; orientación vocacional y profesional; orientación a padres y asesoría a docentes; diseño de planes terapéuticos y adaptaciones curriculares; detección temprana de problemas de salud mental en la escuela. ENTORNO: colegios, escuelas e institutos de todos los niveles; gabinetes psicopedagógicos y centros de atención infantil y juvenil; consulta privada de dificultades de aprendizaje; trabajo con maestros, directivos y familias. GUSTOS TEMÁTICOS: el proceso de enseñanza-aprendizaje y sus dificultades; el desarrollo cognitivo, emocional y social del niño y adolescente; la evaluación psicométrica escolar; la inclusión educativa y la neurodiversidad; la orientación vocacional. ESTILO COGNITIVO: clínico-pedagógico; sistémico; orientado a la intervención y la solución; comunicación empática con niños, adolescentes y adultos."
+      "perfil_id": "psicologia_educativa",
+      "sello": "Fuerte componente de neurodesarrollo y adaptaciones curriculares, con proyección a colegios e institutos de toda la región."
     },
     {
       "nombre": "Teología Sistemática",
