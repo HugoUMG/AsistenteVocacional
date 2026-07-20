@@ -13,7 +13,8 @@
     },
     {
       "nombre": "Profesorado Especializado en Educación Primaria",
-      "perfil": "Arquetipo: El Maestro Formador de la Niñez en sus Años Fundamentales. AFINIDAD (ser): amor profundo por la niñez y vocación de servicio en la etapa más formativa; paciencia, empatía, ternura y capacidad de asombro; creatividad para transformar cualquier tema en aprendizaje significativo; fe en la educación como motor de cambio; interés por el desarrollo integral del niño (mente, cuerpo, espíritu y corazón). HABILIDADES (saber hacer): enseñanza de lectoescritura y pensamiento lógico-matemático inicial; estrategias didácticas lúdicas e inclusivas en todas las áreas; manejo de grupo y clima afectivo y seguro; detección temprana de necesidades educativas especiales y adaptación curricular; evaluación formativa y diferenciada; autogestión del aprendizaje. ENTORNO: el aula de preprimaria y primaria, colorida, dinámica y llena de afecto; relación cercana con niños, familias y comunidad educativa; trabajo en equipo con docentes y personal de apoyo. GUSTOS TEMÁTICOS: el desarrollo infantil en todas sus dimensiones; la pedagogía activa e innovadora; la educación inclusiva y la atención a la diversidad; la literatura infantil, el juego y el arte. ESTILO COGNITIVO: creativo y lúdico; observación y diagnóstico pedagógico; paciente, secuencial y estructurado; holístico."
+      "perfil_id": "pedagogia_primaria",
+      "sello": "Enfoque lúdico e inclusivo, con fuerte atención a necesidades educativas especiales desde el aula regular."
     },
     {
       "nombre": "Profesorado en Tecnología Educativa",
