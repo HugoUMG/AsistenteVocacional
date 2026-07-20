@@ -9,7 +9,8 @@
     },
     {
       "nombre": "Profesorado en Ciencias Sociales y Formación Ciudadana",
-      "perfil": "Arquetipo: El Docente que Despierta la Conciencia Histórica y Cívica. AFINIDAD (ser): pasión por la historia, la política, la sociología y la realidad social; vocación de enseñanza y deseo de formar ciudadanos críticos; compromiso con la democracia, los derechos humanos y la justicia social; interés por el trabajo con adolescentes fomentando su pensamiento autónomo; actitud positiva hacia la transformación social por la educación. HABILIDADES (saber hacer): análisis crítico de la realidad social e histórica; metodologías activas para enseñar ciencias sociales; diseño de actividades de formación ciudadana (debates, investigación, simulaciones); tecnología educativa en el aula; facilitación de discusiones sobre temas complejos y controversiales. ENTORNO: el aula de secundaria o diversificado con adolescentes en formación de su pensamiento crítico; instituciones públicas y privadas, ONGs educativas; rol de mediador entre el conocimiento académico y los valores ciudadanos. GUSTOS TEMÁTICOS: la historia de Guatemala y el mundo; sociología, ciencia política y economía como lentes de análisis; derechos humanos, cultura de paz y participación ciudadana; la didáctica de las ciencias sociales. ESTILO COGNITIVO: crítico y contextual; creativo y abstracto; dialéctico; orientado a la formación integral y ética."
+      "perfil_id": "pedagogia_ciencias_sociales",
+      "sello": "Fuerte énfasis en pensamiento crítico, democracia y derechos humanos, con uso de tecnología educativa en el aula."
     },
     {
       "nombre": "Profesorado Especializado en Educación Primaria",
@@ -26,7 +27,8 @@
     },
     {
       "nombre": "Diseño Gráfico",
-      "perfil": "Arquetipo: El Comunicador Visual Estratégico y Creador de Marcas. AFINIDAD (ser): sensibilidad artística y estética con mentalidad estratégica y comunicativa; creatividad para resolver problemas de comunicación con imágenes; interés por la cultura visual, el arte, la publicidad y el marketing; perfeccionismo y atención al detalle en composición, color y tipografía; autocrítica y apertura a la retroalimentación. HABILIDADES (saber hacer): diseño de identidad visual y branding; manejo avanzado de software de diseño (Suite Adobe, herramientas web); diseño editorial, multimedia y desarrollo web básico; conocimiento de mercadotecnia y publicidad; gestión de proyectos de diseño (presupuestos, cronogramas, clientes); nociones de finanzas y marco legal profesional. ENTORNO: agencias de publicidad, estudios de diseño, comunicación corporativa; trabajo freelance o emprendimiento; entorno creativo y colaborativo con fechas de entrega; trabajo frente a la computadora, tableta y bocetaje. GUSTOS TEMÁTICOS: la comunicación visual, la semiótica y la teoría del color; tipografía, composición y jerarquía visual; branding; diseño UX/UI y experiencia digital; publicidad y marketing digital. ESTILO COGNITIVO: visual y creativo-estratégico; síntesis conceptual; iterativo y perfeccionista; empático con el usuario/consumidor."
+      "perfil_id": "diseno_grafico",
+      "sello": "Enfoque estratégico de marca (branding) y diseño UX/UI, con nociones de finanzas y marco legal profesional."
     },
     {
       "nombre": "Criminalística y Ciencias Forenses",
@@ -43,7 +45,8 @@
     },
     {
       "nombre": "Mercadotecnia",
-      "perfil": "Arquetipo: El Estratega del Mercado y la Conexión con el Consumidor. AFINIDAD (ser): pasión por entender al consumidor (deseos, necesidades, motivaciones); creatividad para diseñar campañas y estrategias que conecten emocionalmente; mentalidad analítica para interpretar datos y medir resultados; visión estratégica para posicionar productos en mercados competitivos; interés por las tendencias sociales, culturales y tecnológicas. HABILIDADES (saber hacer): investigación de mercados cualitativa y cuantitativa; estrategias de marketing mix (producto, precio, plaza, promoción); campañas publicitarias y comunicación integrada; marketing digital, redes sociales y e-commerce; gestión de marca y relaciones públicas; análisis de métricas y ROI. ENTORNO: departamentos de marketing de empresas de consumo, tecnología y servicios; agencias de publicidad, medios, consultoras; emprendimientos y startups; entorno dinámico, creativo y orientado a resultados medibles. GUSTOS TEMÁTICOS: el consumidor y sus hábitos y aspiraciones; las marcas y su conexión emocional; la publicidad, la creatividad y el storytelling; el análisis de datos y el marketing digital; las tendencias del mercado. ESTILO COGNITIVO: estratégico y creativo a la vez; orientado al consumidor (customer-centric); analítico y orientado a métricas; alta adaptación a las tendencias."
+      "perfil_id": "mercadotecnia",
+      "sello": "Fuerte enfoque en marketing digital, e-commerce y análisis de métricas (ROI)."
     },
     {
       "nombre": "Psicología Educativa",
@@ -125,7 +128,8 @@
     },
     {
       "nombre": "Profesorado en Comunicación y Lenguaje",
-      "perfil": "Arquetipo: El Docente que Despierta el Poder de la Palabra y el Pensamiento Crítico. AFINIDAD (ser): amor por la lengua, la literatura y el poder transformador de la palabra; vocación de enseñanza y deseo de formar jóvenes con pensamiento crítico y creativo; interés por la lectura, la escritura y la expresión oral como habilidades para la vida; sensibilidad para comprender lo emocional y conductual de los adolescentes; compromiso con el desarrollo personal y social de sus comunidades. HABILIDADES (saber hacer): desarrollo de competencias lingüísticas y comunicativas; didáctica de la lengua y la literatura con metodologías innovadoras; diseño de material didáctico para lectura, escritura y oralidad; integración de competencias tecnológicas en la enseñanza; investigación educativa; evaluación del aprendizaje físico y virtual. ENTORNO: el aula de secundaria y diversificado con adolescentes en desarrollo del pensamiento abstracto; centros educativos públicos y privados; talleres de lectura, escritura creativa y debate; rol de facilitador de la expresión y el análisis. GUSTOS TEMÁTICOS: la gramática, ortografía y sintaxis como herramientas de claridad mental; la literatura guatemalteca e hispanoamericana; la comunicación oral y escrita como competencia transversal; la tecnología educativa aplicada a la lengua; el pensamiento crítico y la argumentación. ESTILO COGNITIVO: lingüístico y metalingüístico; crítico y creativo; didáctico y mediador; alta sensibilidad estética y literaria."
+      "perfil_id": "pedagogia_comunicacion_lenguaje",
+      "sello": "Integra competencias tecnológicas y evaluación del aprendizaje virtual a la didáctica de la lengua."
     },
     {
       "nombre": "Profesorado en Física y Matemática",

@@ -169,6 +169,14 @@ def _agrupar(carreras) -> dict[str, list]:
             sueltas.append(c)
     por_nombre = {c.nombre: [c] for c in sueltas}
     for sedes in grupos.values():
+        if sedes[0].nombre in por_nombre and por_nombre[sedes[0].nombre] != sedes:
+            # ponytail: colisión de nombre entre una carrera suelta y un grupo
+            # (o dos grupos) distintos -> sin este aviso, una de las dos
+            # desaparece en silencio del catálogo que ve la IA. Solución real:
+            # dale a la carrera perdedora el perfil_id correcto (ver el bug de
+            # 2026-07 con Diseño Gráfico/Mercadotecnia/CC.SS. de UMG).
+            print(f"[recomendar] AVISO: '{sedes[0].nombre}' choca con otra carrera de nombre "
+                  f"idéntico; una de las dos queda oculta para la IA. Revisa perfil_id en los data/*.json.")
         por_nombre[sedes[0].nombre] = sedes
     return por_nombre
 
