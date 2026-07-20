@@ -300,6 +300,7 @@ def generar(model, system, catalogo, variable, schema, temperature):
         key_respaldo = os.getenv("GEMINI_API_KEY_RESPALDO")
         if e.code != 429 or not key_respaldo:
             raise
+        print(f"[gemini] key primaria agoto cuota (429), reintentando con GEMINI_API_KEY_RESPALDO — model={model}")
         client_respaldo = genai.Client(api_key=key_respaldo)
         return _generar_con_cliente(client_respaldo, "respaldo", model, system, catalogo, variable, schema, temperature)
 
