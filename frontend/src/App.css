@@ -53,6 +53,19 @@
 }
 .mapa-page h1 { color: var(--accent); margin: 0; text-align: center; }
 .mapa-page > p { color: var(--muted); margin: 0 0 12px; }
+.mapa-modos { display: flex; gap: 8px; margin-bottom: 10px; }
+.mapa-modos button {
+  border: 2px solid var(--accent);
+  background: #fff;
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.mapa-modos button.sel { background: var(--accent); color: #fff; }
 .mapa-svg {
   width: 100%;
   max-width: 420px;
