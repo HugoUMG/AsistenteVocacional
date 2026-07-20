@@ -136,13 +136,36 @@ Con 3 llamadas `next-question` por sesión, ahorra **~7,900 tokens/sesión**
   separados, no comparten uno solo.
 - TTL de 1h; si expira (404), el código lo recrea solo, sin intervención.
 
-**Por qué no se ve el ahorro todavía:** el tier gratis de Google tiene el
-almacenamiento de caché en 0 (`TotalCachedContentStorageTokensPerModelFreeTier
-limit=0`), así que `caches.create` siempre falla ahí y todo cae a inline
-(la app no se rompe, pero no ahorra). Se activa solo con **billing
-habilitado** en el proyecto de Google Cloud. Con billing activo, `cached_tokens`
-en `/api/uso-tokens` deja de ser 0 y se puede confirmar el ahorro con datos
-reales en vez de estimados.
+**Por qué el caching EXPLÍCITO no se ve todavía:** el tier gratis de Google
+tiene el almacenamiento de caché en 0
+(`TotalCachedContentStorageTokensPerModelFreeTier limit=0`), así que
+`caches.create` siempre falla ahí y todo cae a inline (la app no se rompe,
+pero no ahorra por esta vía). Se activa solo con **billing habilitado** en el
+proyecto de Google Cloud.
+
+**Pero SÍ hay ahorro real hoy, vía *implicit caching*** (confirmado en
+`/api/uso-tokens` con `cached_tokens > 0` sin billing activo). Es un mecanismo
+DISTINTO al de `_get_cache`, automático en toda la familia Gemini 2.5+
+(incluye `3.1-flash-lite`), activo también en tier gratis:
+- Se activa cuando dos llamadas comparten el mismo **prefijo exacto** al
+  inicio del prompt. Por eso `generar()` ya construye el prompt inline como
+  `f"{catalogo}\n\n{variable}"` — catálogo (fijo) primero, respuesta del
+  alumno (variable) al final; es la práctica recomendada por Google para
+  maximizar cache hits, y no hubo que tocar nada para cumplirla.
+- Umbral mínimo ~1,024 tokens de prompt (Gemini 2.5 Flash) — el catálogo
+  (~15,800-18,100 tokens según endpoint) lo supera de sobra.
+- Es oportunista y de corta duración (infraestructura de servido de Google,
+  no un `CachedContent` con TTL propio): si dos llamadas con el mismo
+  prefijo se hacen seguidas, la segunda cachea; si pasa mucho tiempo sin
+  tráfico repetido, se pierde.
+- Mismo descuento que el explícito: 90% menos en los tokens que cachean.
+
+Medido real (sesión completa, sin billing): de las 3 llamadas `next-question`,
+la #2 y #3 cachearon **11,930 tokens cada una** (comparten prefijo con la #1);
+la #1 (nada previo) y `recommend` (system prompt distinto → prefijo distinto,
+primera vez en la corrida) no cachearon. Con billing y el caching EXPLÍCITO
+completo se cubrirían las 4 llamadas (no solo 2 de 4) con una ventana
+garantizada de 1h en vez de depender de que el tráfico sea seguido.
 
 **Estimado de ahorro con caching activo** (recalculado con los ~68k
 tokens/sesión post-optimización, ~97% catálogo cacheable, precio de caché =
