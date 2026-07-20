@@ -133,19 +133,35 @@ Rural, DaVinci pendientes) va a seguir subiendo esto proporcionalmente; vale
 la pena volver a medir cuando estén cargadas y evaluar si conviene activar
 billing (ver "Estimado de ahorro con caching activo" más abajo).
 
-**Optimización: `next-question` no recibe datos de institución.**
-`_catalogo_texto(carreras, incluir_instituciones=False)` en `recomendar.py`
-omite universidad/centro/departamento/sello de cada sede — usado solo por
-`preguntas.py`, cuyo propio prompt ya pide "no menciones nombres [de
-universidades]" y nunca necesitó esa info (solo el banco de palabras de cada
-carrera para decidir la siguiente pregunta). `recomendar.py` (endpoint
-`/recommend`) sigue mandando el catálogo completo, porque sí arma el detalle
-por institución. El ahorro absoluto ahora depende del filtro (más carreras =
-más se ahorra al omitir instituciones): con el catálogo de Quetzaltenango
-(2026-07-19), `next-question` manda 15,218 tokens vs 19,005 de `recommend`
-(-3,787/llamada); con 4 llamadas `next-question` por sesión, ahorra
-**~15,150 tokens/sesión** (~17% del total), sin tocar la calidad de la
-pregunta generada.
+**Optimización: la IA nunca recibe (ni reescribe) datos de institución.**
+`_catalogo_texto` en `recomendar.py` manda solo nombre + banco de palabras de
+cada carrera; universidad/centro/departamento/sello los adjunta Python desde
+la BD DESPUÉS de la respuesta (`_agrupar`/`_buscar_grupo`), en vez de pedirle
+a Gemini que los repita o redacte un 'enfoque' (que era el `sello` ya
+guardado, reescrito con tokens). Medido: -23% input y -44% output en
+`/recommend`. Se probó blindar el nombre de carrera con un `Literal`/enum en
+el schema, pero con ~94 nombres el enum costaba casi lo mismo que se
+ahorraba: quedó texto libre + fallback de matching insensible a mayúsculas.
+
+**Optimización: pre-filtro heurístico del catálogo (`app/filtro.py`),
+`TOP_DEFAULT = 35`.** Antes de cada llamada a `next-question`, un filtro SIN
+IA (solapamiento de palabras entre las respuestas acumuladas del estudiante y
+el perfil de cada carrera; stdlib puro, sin librerías) recorta el catálogo a
+las 35 carreras más afines. Se recalcula en CADA llamada con TODAS las
+respuestas (fijas + adaptativas), así que si el perfil cambia de rumbo a
+mitad de test, el recorte se ajusta solo. `/recommend` NO se filtra: se llama
+una sola vez y ahí prima no excluir una carrera válida del análisis final.
+
+Medido real (6 perfiles de prueba × flujo completo, catálogo Quetzaltenango
+de 105 carreras, comparando con/sin filtro en 30, 35 y 40):
+- top=30: ahorro ~53%, pero el #1 recomendado divergió en 1 de 6 perfiles.
+- **top=35: ahorro ~53% (~45k vs ~96k tokens/sesión), #1 coincidió en 6/6** ←
+  elegido.
+- top=40: ahorro ~48% y PEOR precisión (4/6) — ampliar no compra calidad,
+  la variación restante es ruido propio de la conversación adaptativa
+  (temperatura 0.5, preguntas distintas por corrida).
+En los 18 pares probados el filtro nunca sacó la recomendación de su área
+temática correcta.
 
 **Context Caching ya está implementado** (`_get_cache`/`generar` en
 `recomendar.py`), usando el SDK oficial nuevo (`google-genai`, **no**

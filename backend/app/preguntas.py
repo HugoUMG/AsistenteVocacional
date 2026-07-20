@@ -5,6 +5,7 @@ haya cargadas."""
 
 from pydantic import BaseModel
 
+from app.filtro import preseleccionar
 from app.recomendar import MODELO, TONO, _catalogo_texto, generar, uso_tokens
 
 SYSTEM = (
@@ -99,12 +100,19 @@ def _historial(respuestas: dict) -> str:
 
 
 def siguiente_pregunta(respuestas: dict, carreras) -> tuple[SiguientePaso, dict]:
+    # Pre-filtro sin IA: recalculado en cada llamada con TODAS las respuestas
+    # acumuladas hasta ahora (ver app/filtro.py). Si el catálogo ya es chico
+    # (p. ej. un solo departamento pequeño), no recorta nada.
+    candidatas = preseleccionar(respuestas, carreras)
+    if len(candidatas) < len(carreras):
+        print(f"[filtro] next-question: {len(carreras)} -> {len(candidatas)} carreras candidatas")
+
     resp = generar(
         model=MODELO,
         system=SYSTEM,
         catalogo=(
             "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
-            f"{_catalogo_texto(carreras)}"
+            f"{_catalogo_texto(candidatas)}"
         ),
         variable=f"RESPUESTAS DEL ESTUDIANTE HASTA AHORA:\n{_historial(respuestas)}",
         schema=SiguientePaso,
