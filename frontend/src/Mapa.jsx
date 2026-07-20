@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Nav from './Nav'
 import { VIEWBOX, DEPARTAMENTOS_SVG } from './data/guatemalaDeptos'
 import { REGIONES } from './data/regiones'
 import { color } from './colors'
@@ -25,7 +26,9 @@ export default function Mapa() {
   }
 
   return (
-    <div className="mapa-page">
+    <div className="pagina">
+      <Nav />
+      <div className="mapa-page">
       <h1>¿Dónde te gustaría estudiar?</h1>
       <p>{modo === 'depto' ? 'Toca un departamento para ver sus carreras.' : 'Toca una región para ver sus carreras.'}</p>
 
@@ -73,6 +76,7 @@ export default function Mapa() {
       <button className="mapa-ambos-btn" onClick={() => navigate('/chat?depto=Ambos')}>
         Ver todas las carreras (Ambos) →
       </button>
+      </div>
     </div>
   )
 }

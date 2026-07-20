@@ -297,7 +297,7 @@ function Opciones({ pregunta, onAnswer }) {
 
       <button
         className={`opt-color otro ${otroOn ? 'sel' : ''}`}
-        style={{ '--c': '#7a7596' }}
+        style={{ '--c': '#5c6b80' }}
         onClick={clickOtro}
       >
         Otro / especificar…
