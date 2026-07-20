@@ -143,6 +143,29 @@ tokens/sesión medidos arriba, ~97% catálogo cacheable, precio de caché =
 Más ~$1.00/1M tokens/hora de almacenamiento (con ~18k tokens de catálogo ×
 2 cachés ≈ $0.036/hora — insignificante).
 
+**Respaldo con un segundo proyecto (opcional, `GEMINI_API_KEY_RESPALDO`):**
+si el proyecto gratis agota su RPD/RPM (429 tras agotar los reintentos de
+`_con_reintento`), `generar()` reintenta UNA vez con la key de
+`GEMINI_API_KEY_RESPALDO` (backend/.env), si está configurada. **Debe ser un
+proyecto de Google Cloud DISTINTO** (con billing habilitado) — la cuota
+gratis de Gemini es *por proyecto*, no por API key (confirmado en el propio
+error de Google: `GenerateRequestsPerMinutePerProjectPerModel-FreeTier`), así
+que una segunda key del MISMO proyecto no ayuda en nada.
+
+El caché de contexto (`_get_cache`) trata cada proyecto por separado (clave
+incluye `"primaria"`/`"respaldo"`): un `CachedContent` creado en un proyecto
+no existe en el otro, así que nunca se intenta reusar uno en el proyecto
+equivocado. Sin `GEMINI_API_KEY_RESPALDO` configurada (o vacía), el
+comportamiento es idéntico a antes: un 429 agotado se propaga tal cual.
+
+⚠️ **No crear muchos proyectos gratis "extra"** para multiplicar cuota: los
+Términos de Servicio de la API de Gemini prohíben circunvenir límites de
+cuota, y Google puede detectar el patrón (varios proyectos gratis nuevos
+pegándole a la misma API desde el mismo backend) y suspender la cuenta
+completa. Un proyecto gratis + uno de respaldo con billing (que cuesta
+centavos, ver tabla arriba) es la combinación razonable — no una carrera de
+keys.
+
 ---
 
 ## ¿Qué información recopila?

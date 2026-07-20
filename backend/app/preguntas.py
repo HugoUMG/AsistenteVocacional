@@ -3,9 +3,6 @@ pregunta según el catálogo y las respuestas dadas, para ir descartando unas
 carreras y reforzando otras. Catálogo-agnóstico: no depende de qué carreras
 haya cargadas."""
 
-import os
-
-from google import genai
 from pydantic import BaseModel
 
 from app.recomendar import MODELO, TONO, _catalogo_texto, generar, uso_tokens
@@ -102,9 +99,7 @@ def _historial(respuestas: dict) -> str:
 
 
 def siguiente_pregunta(respuestas: dict, carreras) -> tuple[SiguientePaso, dict]:
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
     resp = generar(
-        client,
         model=MODELO,
         system=SYSTEM,
         catalogo=(

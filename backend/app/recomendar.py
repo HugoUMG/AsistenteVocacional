@@ -173,19 +173,22 @@ def _catalogo_texto(carreras) -> str:
 # caches.create SIEMPRE falla y todo cae a inline (la app no se rompe, pero no ahorra).
 # Se activa solo con billing habilitado (plan de pago). En DeepSeek el ahorro es
 # automático por prefijo y no necesita esto.
-_caches: dict[tuple[str, str], str | None] = {}  # clave -> cache.name (None = no cacheable)
+_caches: dict[tuple[str, str, str], str | None] = {}  # clave -> cache.name (None = no cacheable)
 
 
-def _clave_cache(model: str, system: str, catalogo: str) -> tuple[str, str]:
+def _clave_cache(model: str, system: str, catalogo: str, key_label: str) -> tuple[str, str, str]:
+    # key_label distingue proyecto (primaria/respaldo): un CachedContent creado
+    # en un proyecto de Google Cloud no existe en el otro, así que NUNCA deben
+    # compartir entrada aunque model/system/catálogo sean idénticos.
     h = hashlib.sha256(f"{system}\x00{catalogo}".encode()).hexdigest()
-    return (model, h)
+    return (model, h, key_label)
 
 
-def _get_cache(client, model: str, system: str, catalogo: str) -> str | None:
-    """name de un CachedContent para (model, system, catalogo), creado la 1ª vez y
-    reusado. None si Gemini no lo puede cachear (p. ej. catálogo bajo el mínimo de
-    tokens) → el llamador manda todo inline."""
-    clave = _clave_cache(model, system, catalogo)
+def _get_cache(client, model: str, system: str, catalogo: str, key_label: str) -> str | None:
+    """name de un CachedContent para (model, system, catalogo) EN ESE proyecto
+    (key_label), creado la 1ª vez y reusado. None si Gemini no lo puede cachear
+    (p. ej. catálogo bajo el mínimo de tokens) → el llamador manda todo inline."""
+    clave = _clave_cache(model, system, catalogo, key_label)
     if clave in _caches:
         return _caches[clave]
     try:
@@ -241,13 +244,13 @@ def _con_reintento(fn, intentos=4):
             time.sleep(espera)
 
 
-def generar(client, model, system, catalogo, variable, schema, temperature):
-    """Genera con el catálogo como contexto cacheado. Si el caché no está
-    disponible (o expiró y falla dos veces), cae a mandar todo inline. Devuelve la
-    respuesta cruda de Gemini (el llamador parsea .text y extrae uso_tokens).
-    Los 429/503 (cuota agotada o servicio saturado) se reintentan con backoff."""
+def _generar_con_cliente(client, key_label, model, system, catalogo, variable, schema, temperature):
+    """Genera con el catálogo como contexto cacheado (usando `client`, del
+    proyecto identificado por `key_label`). Si el caché no está disponible (o
+    expiró y falla dos veces), cae a mandar todo inline. Devuelve la respuesta
+    cruda de Gemini (el llamador parsea .text y extrae uso_tokens)."""
     for _ in range(2):
-        name = _get_cache(client, model, system, catalogo)
+        name = _get_cache(client, model, system, catalogo, key_label)
         if name is None:
             break  # no cacheable → inline
         try:
@@ -266,7 +269,7 @@ def generar(client, model, system, catalogo, variable, schema, temperature):
         except errors.ClientError as e:
             if e.code == 404:
                 # el caché pudo expirar por TTL → olvídalo y recréalo una vez
-                _caches.pop(_clave_cache(model, system, catalogo), None)
+                _caches.pop(_clave_cache(model, system, catalogo, key_label), None)
                 continue
             raise
     # inline: system + catálogo + variable en una sola llamada (como antes del caché)
@@ -284,6 +287,23 @@ def generar(client, model, system, catalogo, variable, schema, temperature):
     )
 
 
+def generar(model, system, catalogo, variable, schema, temperature):
+    """Punto de entrada usado por recomendar()/siguiente_pregunta(). Usa
+    GEMINI_API_KEY (proyecto gratis); si se agotan los reintentos con un 429
+    (RPM/RPD realmente agotado) y hay GEMINI_API_KEY_RESPALDO configurada
+    (proyecto con billing), reintenta UNA vez ahí antes de rendirse. Si no hay
+    key de respaldo, o el error no es 429, se propaga tal cual."""
+    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+    try:
+        return _generar_con_cliente(client, "primaria", model, system, catalogo, variable, schema, temperature)
+    except errors.ClientError as e:
+        key_respaldo = os.getenv("GEMINI_API_KEY_RESPALDO")
+        if e.code != 429 or not key_respaldo:
+            raise
+        client_respaldo = genai.Client(api_key=key_respaldo)
+        return _generar_con_cliente(client_respaldo, "respaldo", model, system, catalogo, variable, schema, temperature)
+
+
 def recomendar(respuestas: dict, carreras) -> tuple[Resultado, dict]:
     """respuestas: dict con las respuestas del cuestionario.
     carreras: lista de models.Carrera (el catálogo).
@@ -291,9 +311,7 @@ def recomendar(respuestas: dict, carreras) -> tuple[Resultado, dict]:
     más la confianza global, y el consumo de tokens de esta llamada."""
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
 
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
     resp = generar(
-        client,
         model=MODELO_FINAL,
         system=SYSTEM,
         catalogo=f"CATÁLOGO DE CARRERAS:\n{_catalogo_texto(carreras)}",
@@ -324,10 +342,13 @@ if __name__ == "__main__":
     assert txt2.count("banco de palabras derecho") == 1  # el perfil NO se repite
     assert "sello A" in txt2 and "sello B" in txt2 and "CUNOC" in txt2 and "UMG Toto" in txt2
 
-    # self-check del caché: mismo (model, system, catálogo) → misma clave; distinto → distinta.
-    k1 = _clave_cache("m", "sys", "cat")
-    assert k1 == _clave_cache("m", "sys", "cat")
-    assert k1 != _clave_cache("m", "sys", "cat2") != _clave_cache("m2", "sys", "cat")
+    # self-check del caché: mismo (model, system, catálogo, key_label) → misma
+    # clave; distinto → distinta. key_label separa primaria/respaldo: un mismo
+    # catálogo NUNCA debe compartir cache.name entre los dos proyectos.
+    k1 = _clave_cache("m", "sys", "cat", "primaria")
+    assert k1 == _clave_cache("m", "sys", "cat", "primaria")
+    assert k1 != _clave_cache("m", "sys", "cat2", "primaria") != _clave_cache("m2", "sys", "cat", "primaria")
+    assert k1 != _clave_cache("m", "sys", "cat", "respaldo")
 
     # self-check del backoff: 429/503 se reintentan hasta lograrlo o agotar intentos;
     # otros códigos (p. ej. 400) se propagan de inmediato, sin reintentar.
@@ -390,5 +411,40 @@ if __name__ == "__main__":
 
     assert uso_tokens(_Resp(cached=90), "m")["cached_tokens"] == 90
     assert uso_tokens(_Resp(cached=None), "m")["cached_tokens"] == 0
+
+    # self-check del fallback a GEMINI_API_KEY_RESPALDO: si la key primaria agota
+    # reintentos con 429 y hay respaldo configurada, reintenta ahí UNA vez; sin
+    # respaldo, o con un error que no sea 429, se propaga sin fallback.
+    import sys
+
+    _mod = sys.modules[__name__]  # NO "import app.recomendar": al correr como
+    # __main__ ese import crea un módulo aparte y el patch no afectaría a las
+    # funciones que en verdad se están ejecutando.
+    llamados = []
+
+    def _fake_generar_con_cliente(client, key_label, model, system, catalogo, variable, schema, temperature):
+        llamados.append(key_label)
+        if key_label == "primaria":
+            raise errors.ClientError(429, {"message": "cuota agotada"})
+        return "respuesta-respaldo"
+
+    _orig = _mod._generar_con_cliente
+    _mod._generar_con_cliente = _fake_generar_con_cliente
+    os.environ.setdefault("GEMINI_API_KEY", "fake-key-primaria")  # genai.Client exige un valor, no lo valida aquí
+    try:
+        os.environ["GEMINI_API_KEY_RESPALDO"] = "fake-key-respaldo"
+        assert generar("m", "s", "c", "v", None, 0.3) == "respuesta-respaldo"
+        assert llamados == ["primaria", "respaldo"]
+
+        llamados.clear()
+        del os.environ["GEMINI_API_KEY_RESPALDO"]
+        try:
+            generar("m", "s", "c", "v", None, 0.3)
+            assert False, "sin respaldo configurada, el 429 debía propagarse"
+        except errors.ClientError as e:
+            assert e.code == 429
+        assert llamados == ["primaria"]
+    finally:
+        _mod._generar_con_cliente = _orig
 
     print("ok")
