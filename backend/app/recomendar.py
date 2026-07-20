@@ -129,12 +129,18 @@ def uso_tokens(resp, modelo: str) -> dict:
     }
 
 
-def _catalogo_texto(carreras) -> str:
+def _catalogo_texto(carreras, incluir_instituciones: bool = True) -> str:
     """Carreras de una sola sede: un bloque con su perfil completo (igual que
     antes). Carreras que varias sedes ofrecen (mismo perfil_grupo, p. ej. las 5
     sedes de Ciencias Jurídicas) comparten el MISMO perfil base -> se manda UNA
     sola vez, seguido de la lista de sedes con su 'sello' (lo que sí las
-    distingue). Evita repetir el mismo banco de palabras N veces en el prompt."""
+    distingue). Evita repetir el mismo banco de palabras N veces en el prompt.
+
+    incluir_instituciones=False omite universidad/centro/departamento/sello de
+    cada sede (~2.6k tokens del catálogo actual): usado por preguntas.py, que
+    solo necesita el perfil/banco de palabras de cada carrera para decidir la
+    siguiente pregunta, nunca dónde se estudia (recomendar.py sí lo necesita
+    para armar el detalle por institución, así que sigue con el default)."""
     grupos: dict[str, list] = {}
     sueltas = []
     for c in carreras:
@@ -142,6 +148,12 @@ def _catalogo_texto(carreras) -> str:
             grupos.setdefault(c.perfil_grupo, []).append(c)
         else:
             sueltas.append(c)
+
+    if not incluir_instituciones:
+        partes = [f"### {c.nombre}\n{c.perfil}" for c in sueltas]
+        for sedes in grupos.values():
+            partes.append(f"### {sedes[0].nombre}\n{sedes[0].perfil}")
+        return "\n\n".join(partes)
 
     partes = [
         f"### {c.nombre} ({c.universidad} - {c.centro} - {c.departamento})\n{c.perfil}"
@@ -342,6 +354,19 @@ if __name__ == "__main__":
     txt2 = _catalogo_texto(agrupadas)
     assert txt2.count("banco de palabras derecho") == 1  # el perfil NO se repite
     assert "sello A" in txt2 and "sello B" in txt2 and "CUNOC" in txt2 and "UMG Toto" in txt2
+
+    # self-check de incluir_instituciones=False (usado por preguntas.py): el
+    # perfil se mantiene intacto, pero universidad/centro/sello desaparecen.
+    txt3 = _catalogo_texto(agrupadas, incluir_instituciones=False)
+    assert "banco de palabras derecho" in txt3
+    assert "sello A" not in txt3 and "sello B" not in txt3
+    assert "CUNOC" not in txt3 and "UMG Toto" not in txt3
+
+    txt_suelta = _catalogo_texto(
+        [_C("Ing. Forestal", "USAC", "CUNTOTO", "Totonicapán", "ama el bosque")],
+        incluir_instituciones=False,
+    )
+    assert "ama el bosque" in txt_suelta and "CUNTOTO" not in txt_suelta
 
     # self-check del caché: mismo (model, system, catálogo, key_label) → misma
     # clave; distinto → distinta. key_label separa primaria/respaldo: un mismo
