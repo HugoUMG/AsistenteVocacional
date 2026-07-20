@@ -108,8 +108,21 @@ cada llamada a Gemini registra `prompt_tokens`, `output_tokens`,
 `total_tokens` y `cached_tokens` (de `usage_metadata.cached_content_token_count`)
 por `session_id` (uno por carga de página, ver `frontend/src/session.js`).
 Medido en pruebas reales: un flujo completo (3 adaptativas + 1 recomendación)
-gasta **~76,000 tokens**, de los cuales **~97% es el catálogo de carreras**
-repetido en cada llamada (el resto es el perfil del estudiante).
+gasta **~68,100 tokens** (bajó de ~76,000 tras la optimización de catálogo de
+abajo), de los cuales el catálogo de carreras repetido en cada llamada sigue
+siendo la parte dominante (el resto es el perfil del estudiante).
+
+**Optimización: `next-question` no recibe datos de institución.**
+`_catalogo_texto(carreras, incluir_instituciones=False)` en `recomendar.py`
+omite universidad/centro/departamento/sello de cada sede — usado solo por
+`preguntas.py`, cuyo propio prompt ya pide "no menciones nombres [de
+universidades]" y nunca necesitó esa info (solo el banco de palabras de cada
+carrera para decidir la siguiente pregunta). `recomendar.py` (endpoint
+`/recommend`) sigue mandando el catálogo completo, porque sí arma el detalle
+por institución. Medido real: el prompt de `next-question` bajó de ~18,450 a
+**~15,820 tokens/llamada** (-2,630, calca el estimado calculado del catálogo).
+Con 3 llamadas `next-question` por sesión, ahorra **~7,900 tokens/sesión**
+(~10% del total), sin tocar la calidad de la pregunta generada.
 
 **Context Caching ya está implementado** (`_get_cache`/`generar` en
 `recomendar.py`), usando el SDK oficial nuevo (`google-genai`, **no**
@@ -131,32 +144,47 @@ habilitado** en el proyecto de Google Cloud. Con billing activo, `cached_tokens`
 en `/api/uso-tokens` deja de ser 0 y se puede confirmar el ahorro con datos
 reales en vez de estimados.
 
-**Estimado de ahorro con caching activo** (calculado con los ~76k
-tokens/sesión medidos arriba, ~97% catálogo cacheable, precio de caché =
+**Estimado de ahorro con caching activo** (recalculado con los ~68k
+tokens/sesión post-optimización, ~97% catálogo cacheable, precio de caché =
 10% del precio normal de input, ambos con `gemini-3.1-flash-lite`):
 
 | Sesiones | Sin caché | Con caché | Ahorro |
 |---|---|---|---|
-| 150 | $3.29 | $0.88 | 73% |
-| 200 | $4.38 | $1.17 | 73% |
+| 150 | $2.99 | $0.84 | 72% |
+| 200 | $3.98 | $1.12 | 72% |
 
 Más ~$1.00/1M tokens/hora de almacenamiento (con ~18k tokens de catálogo ×
 2 cachés ≈ $0.036/hora — insignificante).
 
-**Respaldo con un segundo proyecto (opcional, `GEMINI_API_KEY_RESPALDO`):**
-si el proyecto gratis agota su RPD/RPM (429 tras agotar los reintentos de
-`_con_reintento`), `generar()` reintenta UNA vez con la key de
-`GEMINI_API_KEY_RESPALDO` (backend/.env), si está configurada. **Debe ser un
-proyecto de Google Cloud DISTINTO** (con billing habilitado) — la cuota
-gratis de Gemini es *por proyecto*, no por API key (confirmado en el propio
-error de Google: `GenerateRequestsPerMinutePerProjectPerModel-FreeTier`), así
-que una segunda key del MISMO proyecto no ayuda en nada.
+**Respaldo con un segundo proyecto (`GEMINI_API_KEY_RESPALDO`, activo hoy con
+dos proyectos GRATIS para pruebas/demo):** si el proyecto primario agota su
+RPD/RPM (429 tras agotar los reintentos de `_con_reintento`), `generar()`
+reintenta UNA vez con la key de `GEMINI_API_KEY_RESPALDO` (backend/.env), si
+está configurada. **Debe ser un proyecto de Google Cloud DISTINTO** — la
+cuota gratis de Gemini es *por proyecto*, no por API key (confirmado en el
+propio error de Google: `GenerateRequestsPerMinutePerProjectPerModel-FreeTier`),
+así que una segunda key del MISMO proyecto no ayuda en nada. Cuando se activa
+el fallback, se imprime `[gemini] key primaria agoto cuota (429),
+reintentando con GEMINI_API_KEY_RESPALDO` en el log del backend — sirve para
+confirmarlo en pruebas.
 
 El caché de contexto (`_get_cache`) trata cada proyecto por separado (clave
 incluye `"primaria"`/`"respaldo"`): un `CachedContent` creado en un proyecto
 no existe en el otro, así que nunca se intenta reusar uno en el proyecto
 equivocado. Sin `GEMINI_API_KEY_RESPALDO` configurada (o vacía), el
 comportamiento es idéntico a antes: un 429 agotado se propaga tal cual.
+
+**Verificado con pruebas de carga reales** (15 flujos completos en paralelo,
+register→3 adaptativas→recommend = 60 llamadas reales a Gemini):
+- **Sincronizado** (los 15 arrancan en el mismo segundo, peor caso): 59/60
+  llamadas exitosas, el respaldo se activó 12 veces.
+- **Escalonado** (arranques repartidos en ~90s, más parecido a un salón
+  real): **60/60 llamadas exitosas**, el respaldo se activó solo 2 veces.
+
+Con tráfico realista (estudiantes no hacen clic en el mismo milisegundo), la
+combinación backoff+respaldo prácticamente elimina los errores de cuota que
+el estudiante podría ver — a costa de que, en los picos, esa sesión puntual
+tarde más en responder (Google puede pedir esperar ~24s en vez de fallar).
 
 ⚠️ **No crear muchos proyectos gratis "extra"** para multiplicar cuota: los
 Términos de Servicio de la API de Gemini prohíben circunvenir límites de
