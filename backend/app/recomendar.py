@@ -37,22 +37,14 @@ TONO = (
 )
 
 SYSTEM = (
-    "Eres un orientador vocacional. Analiza el perfil del estudiante contra TODO "
-    "el catálogo de carreras y produce un análisis de afinidad.\n\n"
+    "Eres un orientador vocacional. Analiza el perfil del estudiante contra el "
+    "catálogo de carreras (cada carrera ya viene identificada con un encabezado "
+    "'### nombre'; una misma carrera ofrecida por varios centros ya aparece como "
+    "UNA sola entrada) y produce un análisis de afinidad.\n\n"
     "Reglas:\n"
-    "- AGRUPA SOLO carreras que son EL MISMO programa (mismo nombre esencial y "
-    "mismo nivel) ofrecido por varios centros: p. ej. 'Derecho / Ciencias "
-    "Jurídicas' en varias universidades = UN grupo con varias instituciones.\n"
-    "- NO fusiones programas DISTINTOS aunque el tema sea parecido. Ejemplos que "
-    "van SEPARADOS: una 'Ingeniería en Ciencias y Sistemas' y una 'Licenciatura en "
-    "Administración de Sistemas Informáticos' (distinto nivel y enfoque); "
-    "especialidades distintas (Psicología Clínica ≠ Industrial ≠ Educativa); "
-    "niveles distintos (Ingeniería ≠ Licenciatura ≠ Profesorado ≠ PEM). Ante la "
-    "duda, SEPÁRALAS.\n"
-    "- El nombre de cada grupo debe reflejar FIELMENTE lo que ofrecen ESAS sedes; "
-    "NO inventes un nombre que renombre o disfrace el programa real de una sede. "
-    "Cada institución que listes bajo un grupo debe ofrecer DE VERDAD esa carrera "
-    "con ese nombre en el catálogo.\n"
+    "- 'carrera' debe ser EXACTAMENTE uno de los nombres de carrera del catálogo "
+    "(el texto tras cada '### '), sin cambiarlo ni parafrasearlo, y sin repetir el "
+    "mismo nombre en dos entradas distintas.\n"
     "- Asigna a cada carrera un porcentaje de afinidad ENTERO. Los porcentajes de "
     "TODAS las carreras deben sumar exactamente 100.\n"
     "- Incluye únicamente las carreras con afinidad mayor a 1. Ordena de mayor a "
@@ -67,9 +59,6 @@ SYSTEM = (
     "recomendación, cada una con 'nombre' corto (p. ej. 'Pensamiento lógico', "
     "'Trato con personas') y 'peso' entero 0-100 (cuánto pesó para esta carrera). "
     "No tienen que sumar 100.\n"
-    "- Por cada institución indica universidad, centro y departamento (tal como "
-    "aparecen en el catálogo) y su 'enfoque': qué distingue a ESE centro para esa "
-    "carrera (su sello o énfasis particular), en 1-2 frases.\n"
     "- 'confianza': entero 0-100 que refleja qué tan segura es la recomendación en "
     "conjunto. Alta (80-100) si el perfil apunta claramente a un área; media "
     "(50-79) si hay un par de áreas compitiendo; baja (<50) si las respuestas son "
@@ -109,6 +98,41 @@ class Resultado(BaseModel):
     confianza_nota: str
 
 
+# --- Lo que la IA realmente genera (sin instituciones) ---
+# universidad/centro/departamento/sello ya están en la BD (Carrera.sello): no
+# hace falta gastar tokens en que Gemini los repita o los reescriba como
+# 'enfoque'. Python los adjunta después con _agrupar() (ver recomendar()).
+class CarreraRecomendadaLLM(BaseModel):
+    carrera: str
+    afinidad: int
+    descripcion: str
+    razones: list[str]
+    factores: list[Factor]
+
+
+class ResultadoLLM(BaseModel):
+    carreras: list[CarreraRecomendadaLLM]
+    confianza: int
+    confianza_nota: str
+
+
+def _buscar_grupo(nombre: str, por_nombre: dict[str, list]) -> list:
+    """Encuentra las sedes de la carrera que devolvió la IA. El prompt le pide
+    explícitamente repetir el nombre EXACTO del catálogo (ver SYSTEM), así que
+    debería ser un match directo; este fallback (insensible a mayúsculas y
+    espacios) cubre el caso raro de que lo reformule un poco, sin tener que
+    forzar un enum gigante en el schema (probamos esa ruta: el enum con los ~94
+    nombres de carrera en el JSON Schema cuesta casi lo mismo en tokens que lo
+    que ahorra quitar las instituciones del catálogo, así que no vale la pena)."""
+    if nombre in por_nombre:
+        return por_nombre[nombre]
+    clave = nombre.strip().lower()
+    for k, v in por_nombre.items():
+        if k.strip().lower() == clave:
+            return v
+    return []
+
+
 def hay_api_key() -> bool:
     return bool(os.getenv("GEMINI_API_KEY"))
 
@@ -129,18 +153,13 @@ def uso_tokens(resp, modelo: str) -> dict:
     }
 
 
-def _catalogo_texto(carreras, incluir_instituciones: bool = True) -> str:
-    """Carreras de una sola sede: un bloque con su perfil completo (igual que
-    antes). Carreras que varias sedes ofrecen (mismo perfil_grupo, p. ej. las 5
-    sedes de Ciencias Jurídicas) comparten el MISMO perfil base -> se manda UNA
-    sola vez, seguido de la lista de sedes con su 'sello' (lo que sí las
-    distingue). Evita repetir el mismo banco de palabras N veces en el prompt.
-
-    incluir_instituciones=False omite universidad/centro/departamento/sello de
-    cada sede (~2.6k tokens del catálogo actual): usado por preguntas.py, que
-    solo necesita el perfil/banco de palabras de cada carrera para decidir la
-    siguiente pregunta, nunca dónde se estudia (recomendar.py sí lo necesita
-    para armar el detalle por institución, así que sigue con el default)."""
+def _agrupar(carreras) -> dict[str, list]:
+    """Agrupa por perfil_grupo (misma carrera en varias sedes) o las deja
+    sueltas (una sola sede). Clave = nombre visible del grupo: el de la propia
+    carrera si es suelta, o el de la primera sede si es un grupo — el MISMO
+    nombre que ve la IA en _catalogo_texto(). Se usa tanto para construir el
+    catálogo como para adjuntar universidad/centro/sello DESPUÉS de la
+    respuesta de la IA, sin pedirle que los repita (ver recomendar())."""
     grupos: dict[str, list] = {}
     sueltas = []
     for c in carreras:
@@ -148,25 +167,21 @@ def _catalogo_texto(carreras, incluir_instituciones: bool = True) -> str:
             grupos.setdefault(c.perfil_grupo, []).append(c)
         else:
             sueltas.append(c)
-
-    if not incluir_instituciones:
-        partes = [f"### {c.nombre}\n{c.perfil}" for c in sueltas]
-        for sedes in grupos.values():
-            partes.append(f"### {sedes[0].nombre}\n{sedes[0].perfil}")
-        return "\n\n".join(partes)
-
-    partes = [
-        f"### {c.nombre} ({c.universidad} - {c.centro} - {c.departamento})\n{c.perfil}"
-        for c in sueltas
-    ]
+    por_nombre = {c.nombre: [c] for c in sueltas}
     for sedes in grupos.values():
-        sedes_txt = "\n".join(
-            f"  - {c.nombre} ({c.universidad} - {c.centro} - {c.departamento})"
-            + (f": {c.sello}" if c.sello else "")
-            for c in sedes
-        )
-        partes.append(f"### {sedes[0].nombre}\n{sedes[0].perfil}\nSEDES QUE LA OFRECEN:\n{sedes_txt}")
-    return "\n\n".join(partes)
+        por_nombre[sedes[0].nombre] = sedes
+    return por_nombre
+
+
+def _catalogo_texto(carreras) -> str:
+    """Un bloque por carrera real (su banco de palabras/perfil), sin
+    universidad, centro ni sello: ninguna llamada a Gemini necesita ese detalle
+    (recomendar() lo adjunta después desde la BD, ver _agrupar()). Carreras que
+    varias sedes ofrecen (mismo perfil_grupo, p. ej. las 5 sedes de Ciencias
+    Jurídicas) comparten el MISMO perfil -> se manda UNA sola vez sin importar
+    cuántas sedes la ofrezcan."""
+    por_nombre = _agrupar(carreras)
+    return "\n\n".join(f"### {nombre}\n{sedes[0].perfil}" for nombre, sedes in por_nombre.items())
 
 
 # --- Context caching de Gemini ---
@@ -321,18 +336,47 @@ def recomendar(respuestas: dict, carreras) -> tuple[Resultado, dict]:
     """respuestas: dict con las respuestas del cuestionario.
     carreras: lista de models.Carrera (el catálogo).
     Devuelve (resultado, uso_tokens): las carreras afines (>1%) con su % y detalle
-    más la confianza global, y el consumo de tokens de esta llamada."""
+    más la confianza global, y el consumo de tokens de esta llamada.
+
+    La IA solo genera afinidad/descripción/razones/factores por carrera (schema
+    ResultadoLLM, 'carrera' en texto libre pero se le pide EXACTO en SYSTEM).
+    universidad/centro/departamento/sello los adjunta Python desde la BD
+    (_agrupar + _buscar_grupo), sin gastar tokens en que Gemini los repita o
+    los reescriba como 'enfoque'."""
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
+    por_nombre = _agrupar(carreras)
 
     resp = generar(
         model=MODELO_FINAL,
         system=SYSTEM,
         catalogo=f"CATÁLOGO DE CARRERAS:\n{_catalogo_texto(carreras)}",
         variable=f"PERFIL DEL ESTUDIANTE:\n{perfil}",
-        schema=Resultado,
+        schema=ResultadoLLM,
         temperature=0.3,
     )
-    return Resultado.model_validate_json(resp.text), uso_tokens(resp, MODELO_FINAL)
+    llm = ResultadoLLM.model_validate_json(resp.text)
+
+    carreras_out = [
+        CarreraRecomendada(
+            carrera=c.carrera,
+            afinidad=c.afinidad,
+            descripcion=c.descripcion,
+            razones=c.razones,
+            factores=c.factores,
+            instituciones=[
+                Institucion(
+                    universidad=s.universidad,
+                    centro=s.centro,
+                    departamento=s.departamento,
+                    enfoque=s.sello or "Sin datos adicionales de esta sede.",
+                )
+                for s in _buscar_grupo(c.carrera, por_nombre)
+            ],
+        )
+        for c in llm.carreras
+    ]
+    resultado = Resultado(carreras=carreras_out, confianza=llm.confianza, confianza_nota=llm.confianza_nota)
+    return resultado, uso_tokens(resp, MODELO_FINAL)
 
 
 if __name__ == "__main__":
@@ -342,31 +386,29 @@ if __name__ == "__main__":
             self.nombre, self.universidad, self.centro, self.departamento = n, u, ce, d
             self.perfil, self.perfil_grupo, self.sello = p, grupo, sello
 
+    # _catalogo_texto ya NO manda universidad/centro/sello a la IA (ver
+    # _agrupar): solo el nombre y el banco de palabras de cada carrera.
     txt = _catalogo_texto([_C("Ing. Forestal", "USAC", "CUNTOTO", "Totonicapán", "ama el bosque")])
-    assert "Ing. Forestal" in txt and "CUNTOTO" in txt and "bosque" in txt
+    assert "Ing. Forestal" in txt and "bosque" in txt and "CUNTOTO" not in txt
 
     # self-check del agrupado: 2 sedes con el mismo perfil_grupo comparten el
-    # perfil base UNA sola vez (no se duplica), y cada sede aporta su sello.
+    # perfil base UNA sola vez en el catálogo (no se duplica).
     agrupadas = [
         _C("Derecho A", "USAC", "CUNOC", "Quetzaltenango", "banco de palabras derecho", "derecho", "sello A"),
         _C("Derecho B", "UMG", "UMG Toto", "Totonicapán", "banco de palabras derecho", "derecho", "sello B"),
     ]
     txt2 = _catalogo_texto(agrupadas)
     assert txt2.count("banco de palabras derecho") == 1  # el perfil NO se repite
-    assert "sello A" in txt2 and "sello B" in txt2 and "CUNOC" in txt2 and "UMG Toto" in txt2
+    assert "sello A" not in txt2 and "CUNOC" not in txt2  # nada de institución llega a la IA
 
-    # self-check de incluir_instituciones=False (usado por preguntas.py): el
-    # perfil se mantiene intacto, pero universidad/centro/sello desaparecen.
-    txt3 = _catalogo_texto(agrupadas, incluir_instituciones=False)
-    assert "banco de palabras derecho" in txt3
-    assert "sello A" not in txt3 and "sello B" not in txt3
-    assert "CUNOC" not in txt3 and "UMG Toto" not in txt3
+    # self-check de _agrupar: es lo que SÍ conserva universidad/centro/sello,
+    # para adjuntarlos en Python después de la respuesta de la IA (recomendar()).
+    grupo = _agrupar(agrupadas)
+    assert list(grupo.keys()) == ["Derecho A"]  # nombre visible = el de la 1a sede
+    assert [s.sello for s in grupo["Derecho A"]] == ["sello A", "sello B"]
 
-    txt_suelta = _catalogo_texto(
-        [_C("Ing. Forestal", "USAC", "CUNTOTO", "Totonicapán", "ama el bosque")],
-        incluir_instituciones=False,
-    )
-    assert "ama el bosque" in txt_suelta and "CUNTOTO" not in txt_suelta
+    suelta = _agrupar([_C("Ing. Forestal", "USAC", "CUNTOTO", "Totonicapán", "ama el bosque")])
+    assert suelta["Ing. Forestal"][0].centro == "CUNTOTO"
 
     # self-check del caché: mismo (model, system, catálogo, key_label) → misma
     # clave; distinto → distinta. key_label separa primaria/respaldo: un mismo

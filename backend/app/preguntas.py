@@ -104,7 +104,7 @@ def siguiente_pregunta(respuestas: dict, carreras) -> tuple[SiguientePaso, dict]
         system=SYSTEM,
         catalogo=(
             "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
-            f"{_catalogo_texto(carreras, incluir_instituciones=False)}"
+            f"{_catalogo_texto(carreras)}"
         ),
         variable=f"RESPUESTAS DEL ESTUDIANTE HASTA AHORA:\n{_historial(respuestas)}",
         schema=SiguientePaso,

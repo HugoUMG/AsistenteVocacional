@@ -107,10 +107,31 @@ códigos (400, etc.) se propagan de inmediato, sin reintentar.
 cada llamada a Gemini registra `prompt_tokens`, `output_tokens`,
 `total_tokens` y `cached_tokens` (de `usage_metadata.cached_content_token_count`)
 por `session_id` (uno por carga de página, ver `frontend/src/session.js`).
-Medido en pruebas reales: un flujo completo (3 adaptativas + 1 recomendación)
-gasta **~68,100 tokens** (bajó de ~76,000 tras la optimización de catálogo de
-abajo), de los cuales el catálogo de carreras repetido en cada llamada sigue
-siendo la parte dominante (el resto es el perfil del estudiante).
+
+⚠️ **Actualizado 2026-07-19, tras cargar Rafael Landívar y Universidad de
+Occidente en Quetzaltenango** (94 carreras en ese departamento, 111 en total
+— antes eran ~69 en todo el catálogo): un flujo completo real (4 adaptativas,
+el mínimo de `MIN_ADAPTATIVAS` en `App.jsx`, + 1 recomendación), medido con
+`count_tokens` contra el backend local filtrando por Quetzaltenango, gasta
+**~89,150 tokens** (86,247 prompt + 2,900 output), de los cuales 35,834
+fueron cacheados por *implicit caching* (ver abajo). Esto es un salto de
+~31% frente a los ~68,100 tokens/sesión documentados antes de esta carga —
+casi todo el aumento es el catálogo de carreras (97% del prompt), que ahora
+es dept-dependiente:
+
+| Filtro | catálogo `next-question` | catálogo `recommend` |
+|---|---|---|
+| Solo Totonicapán (17 carreras) | 4,752 tok | 5,645 tok |
+| Solo Quetzaltenango (94 carreras) | 15,218 tok | 19,005 tok |
+| Ambos / región que las una (111 carreras) | 17,016 tok | 21,615 tok |
+
+Con "Ambos" o una región que incluya Quetzaltenango (ej. Suroccidente), un
+flujo completo rondaría los **~96,000-100,000 tokens** — más que el doble de
+lo que costaba antes de tener universidades cargadas en Quetzaltenango. Cada
+universidad nueva que se agregue ahí (Mesoamericana, Panamericana, Galileo,
+Rural, DaVinci pendientes) va a seguir subiendo esto proporcionalmente; vale
+la pena volver a medir cuando estén cargadas y evaluar si conviene activar
+billing (ver "Estimado de ahorro con caching activo" más abajo).
 
 **Optimización: `next-question` no recibe datos de institución.**
 `_catalogo_texto(carreras, incluir_instituciones=False)` en `recomendar.py`
@@ -119,10 +140,12 @@ omite universidad/centro/departamento/sello de cada sede — usado solo por
 universidades]" y nunca necesitó esa info (solo el banco de palabras de cada
 carrera para decidir la siguiente pregunta). `recomendar.py` (endpoint
 `/recommend`) sigue mandando el catálogo completo, porque sí arma el detalle
-por institución. Medido real: el prompt de `next-question` bajó de ~18,450 a
-**~15,820 tokens/llamada** (-2,630, calca el estimado calculado del catálogo).
-Con 3 llamadas `next-question` por sesión, ahorra **~7,900 tokens/sesión**
-(~10% del total), sin tocar la calidad de la pregunta generada.
+por institución. El ahorro absoluto ahora depende del filtro (más carreras =
+más se ahorra al omitir instituciones): con el catálogo de Quetzaltenango
+(2026-07-19), `next-question` manda 15,218 tokens vs 19,005 de `recommend`
+(-3,787/llamada); con 4 llamadas `next-question` por sesión, ahorra
+**~15,150 tokens/sesión** (~17% del total), sin tocar la calidad de la
+pregunta generada.
 
 **Context Caching ya está implementado** (`_get_cache`/`generar` en
 `recomendar.py`), usando el SDK oficial nuevo (`google-genai`, **no**
@@ -160,24 +183,28 @@ DISTINTO al de `_get_cache`, automático en toda la familia Gemini 2.5+
   tráfico repetido, se pierde.
 - Mismo descuento que el explícito: 90% menos en los tokens que cachean.
 
-Medido real (sesión completa, sin billing): de las 3 llamadas `next-question`,
-la #2 y #3 cachearon **11,930 tokens cada una** (comparten prefijo con la #1);
-la #1 (nada previo) y `recommend` (system prompt distinto → prefijo distinto,
-primera vez en la corrida) no cachearon. Con billing y el caching EXPLÍCITO
-completo se cubrirían las 4 llamadas (no solo 2 de 4) con una ventana
-garantizada de 1h en vez de depender de que el tráfico sea seguido.
+Medido real (sesión completa, sin billing, filtro Quetzaltenango, 2026-07-19):
+de las 5 llamadas (4 `next-question` + 1 `recommend`), 35,834 tokens en total
+cachearon (las llamadas `next-question` repetidas comparten prefijo con la
+primera); la #1 de cada tipo (nada previo, o system prompt distinto para
+`recommend`) no cachea. Con billing y el caching EXPLÍCITO completo se
+cubrirían las 5 llamadas (no solo las repetidas) con una ventana garantizada
+de 1h en vez de depender de que el tráfico sea seguido.
 
-**Estimado de ahorro con caching activo** (recalculado con los ~68k
-tokens/sesión post-optimización, ~97% catálogo cacheable, precio de caché =
-10% del precio normal de input, ambos con `gemini-3.1-flash-lite`):
+**Estimado de ahorro con caching activo** (recalculado con los ~89k
+tokens/sesión medidos hoy para Quetzaltenango, ~97% catálogo cacheable,
+precio de caché = 10% del precio normal de input, ambos con
+`gemini-3.1-flash-lite`):
 
 | Sesiones | Sin caché | Con caché | Ahorro |
 |---|---|---|---|
-| 150 | $2.99 | $0.84 | 72% |
-| 200 | $3.98 | $1.12 | 72% |
+| 150 | $3.89 | $1.06 | 73% |
+| 200 | $5.18 | $1.42 | 73% |
 
-Más ~$1.00/1M tokens/hora de almacenamiento (con ~18k tokens de catálogo ×
-2 cachés ≈ $0.036/hora — insignificante).
+Más ~$1.00/1M tokens/hora de almacenamiento (con ~19k tokens de catálogo ×
+2 cachés ≈ $0.038/hora — insignificante). Con "Ambos"/región o al agregar las
+5 universidades pendientes, esta tabla solo va a subir — recalcular cuando
+esté completo el catálogo de Quetzaltenango.
 
 **Respaldo con un segundo proyecto (`GEMINI_API_KEY_RESPALDO`, activo hoy con
 dos proyectos GRATIS para pruebas/demo):** si el proyecto primario agota su
