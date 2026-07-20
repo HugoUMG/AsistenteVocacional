@@ -1,3 +1,4 @@
+import re
 from contextlib import asynccontextmanager
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -110,6 +111,12 @@ def carreras(db: Session = Depends(get_db)):
     """Catálogo completo para el botón 'Ver catálogo'. El frontend agrupa por
     nombre las sedes que ofrecen la misma carrera."""
     rows = db.query(models.Carrera).order_by(models.Carrera.nombre).all()
+
+    def _arquetipo(perfil: str) -> str | None:
+        # ponytail: el perfil empieza "Arquetipo: X. AFINIDAD..."; tomamos la 1a frase.
+        m = re.match(r"Arquetipo:\s*(.+?)\.\s", perfil or "")
+        return m.group(1) if m else None
+
     return {
         "carreras": [
             {
@@ -117,6 +124,8 @@ def carreras(db: Session = Depends(get_db)):
                 "universidad": c.universidad,
                 "centro": c.centro,
                 "departamento": c.departamento,
+                "arquetipo": _arquetipo(c.perfil),
+                "sello": c.sello,
             }
             for c in rows
         ]

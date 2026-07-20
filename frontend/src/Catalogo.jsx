@@ -7,6 +7,8 @@ const API = 'http://localhost:8000'
 export default function Catalogo() {
   const [carreras, setCarreras] = useState(null) // null = cargando
   const [filtro, setFiltro] = useState('')
+  const [depto, setDepto] = useState('') // '' = todos
+  const [uni, setUni] = useState('') // '' = todas
 
   useEffect(() => {
     fetch(`${API}/api/carreras`)
@@ -15,11 +17,22 @@ export default function Catalogo() {
       .catch(() => setCarreras([]))
   }, [])
 
+  const deptos = useMemo(
+    () => [...new Set((carreras || []).map((c) => c.departamento))].sort(),
+    [carreras]
+  )
+  const unis = useMemo(
+    () => [...new Set((carreras || []).map((c) => c.universidad))].sort(),
+    [carreras]
+  )
+
   // Agrupa por nombre de carrera: una tarjeta por carrera, con sus sedes.
   const grupos = useMemo(() => {
     if (!carreras) return []
     const map = new Map()
     for (const c of carreras) {
+      if (depto && c.departamento !== depto) continue
+      if (uni && c.universidad !== uni) continue
       if (!map.has(c.nombre)) map.set(c.nombre, [])
       map.get(c.nombre).push(c)
     }
@@ -31,7 +44,7 @@ export default function Catalogo() {
         sedes.some((s) => `${s.universidad} ${s.centro} ${s.departamento}`.toLowerCase().includes(q))
       )
       .sort((a, b) => a[0].localeCompare(b[0]))
-  }, [carreras, filtro])
+  }, [carreras, filtro, depto, uni])
 
   return (
     <div className="pagina">
@@ -45,12 +58,33 @@ export default function Catalogo() {
           donde puedes estudiarla.
         </p>
 
-        <input
-          className="cat-buscar"
-          placeholder="Buscar carrera, universidad o departamento…"
-          value={filtro}
-          onChange={(e) => setFiltro(e.target.value)}
-        />
+        <div className="cat-filtros">
+          <input
+            className="cat-buscar"
+            placeholder="Buscar carrera, universidad o departamento…"
+            value={filtro}
+            onChange={(e) => setFiltro(e.target.value)}
+          />
+          <select className="cat-select" value={uni} onChange={(e) => setUni(e.target.value)}>
+            <option value="">Todas las universidades</option>
+            {unis.map((u) => (
+              <option key={u} value={u}>{u}</option>
+            ))}
+          </select>
+        </div>
+
+        {deptos.length > 1 && (
+          <div className="cat-deptos">
+            <button className={depto === '' ? 'sel' : ''} onClick={() => setDepto('')}>
+              Todos
+            </button>
+            {deptos.map((d) => (
+              <button key={d} className={depto === d ? 'sel' : ''} onClick={() => setDepto(d)}>
+                {d}
+              </button>
+            ))}
+          </div>
+        )}
 
         {carreras === null && <p className="intro">Cargando catálogo…</p>}
         {carreras !== null && grupos.length === 0 && (
@@ -61,13 +95,22 @@ export default function Catalogo() {
           {grupos.map(([nombre, sedes]) => (
             <article key={nombre} className="cat-card">
               <h3>{nombre}</h3>
-              <ul>
-                {sedes.map((s, i) => (
-                  <li key={i}>
-                    <strong>{s.universidad}</strong> · {s.centro} · {s.departamento}
-                  </li>
-                ))}
-              </ul>
+              {sedes[0].arquetipo && <p className="cat-arquetipo">{sedes[0].arquetipo}</p>}
+              {!sedes[0].arquetipo && sedes[0].sello && (
+                <p className="cat-arquetipo">{sedes[0].sello}</p>
+              )}
+              <details className="cat-sedes">
+                <summary>
+                  {sedes.length === 1 ? '1 sede donde estudiarla' : `${sedes.length} sedes donde estudiarla`}
+                </summary>
+                <ul>
+                  {sedes.map((s, i) => (
+                    <li key={i}>
+                      <strong>{s.universidad}</strong> · {s.centro} · {s.departamento}
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </article>
           ))}
         </div>
