@@ -163,10 +163,11 @@ function Formato({ texto }) {
   return <>{nodos}</>
 }
 
-function Robot({ thinking }) {
+function Robot({ thinking, small }) {
+  const s = small ? 34 : 96
   return (
-    <div className={`robot ${thinking ? 'thinking' : ''}`}>
-      <svg viewBox="0 0 100 100" width="96" height="96" aria-hidden="true">
+    <div className={`robot ${thinking ? 'thinking' : ''} ${small ? 'robot-sm' : ''}`}>
+      <svg viewBox="0 0 100 100" width={s} height={s} aria-hidden="true">
         <line x1="50" y1="14" x2="50" y2="26" stroke="currentColor" strokeWidth="3" />
         <circle cx="50" cy="11" r="5" fill="currentColor" />
         <rect x="22" y="26" width="56" height="48" rx="14" fill="currentColor" />
@@ -175,6 +176,35 @@ function Robot({ thinking }) {
         <rect x="40" y="62" width="20" height="4" rx="2" fill="#fff" opacity="0.8" />
       </svg>
     </div>
+  )
+}
+
+// Cabecera tipo app de mensajería: avatar + nombre + estado + medidor de perfil.
+function ChatHeader({ thinking, confianza }) {
+  return (
+    <header className="chat-header">
+      <div className="chat-avatar">
+        <Robot thinking={thinking} small />
+        <span className="chat-dot" aria-hidden="true" />
+      </div>
+      <div className="chat-id">
+        <span className="chat-name">Orienta</span>
+        <span className={`chat-status ${thinking ? 'esc' : ''}`}>
+          {thinking ? 'escribiendo…' : 'En línea · guía vocacional'}
+        </span>
+      </div>
+      {confianza > 0 && (
+        <div className="chat-conf" title="Qué tan definido va quedando tu perfil">
+          <div className="chat-conf-head">
+            <span className="chat-conf-label">Perfil</span>
+            <span className="chat-conf-pct">{confianza}%</span>
+          </div>
+          <div className="chat-conf-track">
+            <div className="chat-conf-fill" style={{ width: `${confianza}%` }} />
+          </div>
+        </div>
+      )}
+    </header>
   )
 }
 
@@ -523,11 +553,13 @@ function Chat() {
   }
 
   const esAdaptativa = paso && !paso.clave
+  const hayControles = !cargando && (oferta || undoStack.length > 0 || error ||
+    paso?.tipo === 'texto' || paso?.tipo === 'sino' || paso?.tipo === 'opcion' || esAdaptativa)
 
   return (
     <div className="layout">
       <div className="chat">
-      <Robot thinking={cargando} />
+      <ChatHeader thinking={cargando} confianza={confianzaChat} />
 
       <div className="log" ref={logRef}>
         {history.map((m, i) => (
@@ -542,7 +574,9 @@ function Chat() {
         )}
       </div>
 
-      {!cargando && oferta && (
+      {hayControles && (
+      <div className="chat-footer">
+      {oferta && (
         <div className="oferta">
           <p className="oferta-msg">
             Ya tengo tu perfil con un <strong>{confianzaChat}%</strong> de seguridad.
@@ -559,18 +593,18 @@ function Chat() {
         </div>
       )}
 
-      {!cargando && undoStack.length > 0 && (
+      {undoStack.length > 0 && (
         <button className="regresar-btn" onClick={regresar}>← Regresar</button>
       )}
 
-      {!cargando && error && (
+      {error && (
         <div className="options" style={{ flexDirection: 'column', alignItems: 'center' }}>
           <p className="loading-text">{error}</p>
           <button className="opt" onClick={() => pedirAdaptativa(respuestas)}>Reintentar</button>
         </div>
       )}
 
-      {!cargando && paso?.tipo === 'texto' && (
+      {paso?.tipo === 'texto' && (
         <form className="input-row" onSubmit={submitText}>
           <input
             autoFocus
@@ -578,25 +612,27 @@ function Chat() {
             onChange={(e) => setText(e.target.value)}
             placeholder={paso.placeholder || 'Escribe tu respuesta…'}
           />
-          <button type="submit" disabled={!text.trim()}>➤</button>
+          <button type="submit" disabled={!text.trim()} aria-label="Enviar">➤</button>
         </form>
       )}
 
-      {!cargando && paso?.tipo === 'sino' && (
+      {paso?.tipo === 'sino' && (
         <div className="options">
           <button className="opt si" onClick={() => answer('Sí')}>Sí</button>
           <button className="opt no" onClick={() => answer('No')}>No</button>
         </div>
       )}
 
-      {!cargando && paso?.tipo === 'opcion' && (
+      {paso?.tipo === 'opcion' && (
         <Opciones key={paso.texto} pregunta={paso} onAnswer={answer} />
       )}
 
-      {!cargando && esAdaptativa && (
+      {esAdaptativa && (
         <button className="terminar-btn" onClick={() => analizar(respuestas)}>
           Ya, muéstrame mis resultados →
         </button>
+      )}
+      </div>
       )}
       </div>
 

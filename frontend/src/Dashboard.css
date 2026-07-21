@@ -12,16 +12,27 @@
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+}
+.dash-kicker {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 .dash-head h1 {
   margin: 0;
-  font-size: clamp(22px, 3vw, 30px);
-  color: var(--text);
+  font-size: clamp(24px, 3.2vw, 34px);
+  color: var(--navy);
+  line-height: 1.1;
 }
 .dash-head p {
-  margin: 4px 0 0;
+  margin: 6px 0 0;
   color: var(--muted);
+  font-size: 15.5px;
 }
 
 .confianza-badge {
@@ -40,29 +51,22 @@
 .confianza-badge.baja { background: #ffe9e5; color: #c0392b; }
 .confianza-valor { font-size: 14px; }
 .confianza-txt { font-weight: 500; opacity: 0.85; }
-.dash-acciones { display: flex; gap: 10px; flex-wrap: wrap; }
-.dash-reiniciar {
-  border: 2px solid var(--accent);
-  background: #fff;
-  color: var(--accent);
-  border-radius: 999px;
-  padding: 10px 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-.dash-reiniciar:hover { background: var(--accent); color: #fff; }
+.dash-acciones { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.dash-reiniciar,
 .dash-catalogo {
-  border: 2px solid var(--accent);
+  border: 1.5px solid var(--bot-bubble);
   background: #fff;
   color: var(--accent);
   border-radius: 999px;
   padding: 10px 18px;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 13.5px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 6px 16px -10px rgba(18, 41, 77, 0.4);
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.12s;
 }
-.dash-catalogo:hover { background: var(--accent); color: #fff; }
+.dash-reiniciar:hover,
+.dash-catalogo:hover { border-color: var(--accent); background: var(--bg2); transform: translateY(-1px); }
 
 /* Lista del catálogo dentro del modal */
 .catalogo-intro { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
@@ -80,15 +84,17 @@
 .catalogo-sedes { font-size: 12px; color: var(--muted); }
 .dash-pdf {
   border: none;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #fff;
   border-radius: 999px;
-  padding: 10px 18px;
-  font-weight: 600;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 13.5px;
   cursor: pointer;
-  transition: transform 0.12s, opacity 0.2s;
+  box-shadow: 0 10px 24px -10px rgba(29, 78, 216, 0.65);
+  transition: transform 0.12s, box-shadow 0.2s;
 }
-.dash-pdf:hover { transform: translateY(-1px); opacity: 0.92; }
+.dash-pdf:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -10px rgba(29, 78, 216, 0.8); }
 
 /* --- Gráficas --- */
 .dash-charts {
@@ -102,15 +108,28 @@
 }
 
 .chart-card {
+  position: relative;
   background: var(--card);
-  border-radius: 20px;
-  padding: 18px 16px;
-  box-shadow: 0 12px 36px -16px rgba(18, 41, 77, 0.35);
+  border-radius: 22px;
+  padding: 22px 20px;
+  box-shadow: 0 16px 44px -24px rgba(18, 41, 77, 0.4);
+  border: 1px solid rgba(18, 41, 77, 0.06);
+  overflow: hidden;
+}
+.chart-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
 }
 .chart-card h2 {
-  margin: 0 0 12px;
-  font-size: 15px;
-  color: var(--text);
+  margin: 0 0 16px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 /* --- Barras (CSS, nombres completos) --- */
@@ -206,26 +225,43 @@
   width: 100%;
   text-align: left;
   background: var(--card);
-  border: 2px solid transparent;
+  border: 1.5px solid rgba(18, 41, 77, 0.07);
   border-radius: 14px;
-  padding: 12px 14px;
+  padding: 13px 15px;
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.12s;
+  box-shadow: 0 6px 18px -14px rgba(18, 41, 77, 0.4);
+  transition: border-color 0.2s, transform 0.12s, box-shadow 0.2s, background 0.2s;
 }
-.carrera-item:hover { transform: translateY(-1px); }
-.carrera-item.activa { border-color: var(--accent); }
+.carrera-item:hover { transform: translateY(-1px); box-shadow: 0 10px 22px -14px rgba(18, 41, 77, 0.5); }
+.carrera-item.activa { border-width: 2px; background: var(--bg2); }
 .punto { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-.carrera-nombre { flex: 1; font-size: 14px; color: var(--text); }
-.carrera-pct { font-weight: 700; color: var(--muted); }
+.carrera-nombre { flex: 1; font-size: 14px; color: var(--text); font-weight: 500; }
+.carrera-item.activa .carrera-nombre { font-weight: 700; color: var(--navy); }
+.carrera-pct { font-weight: 800; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 .carrera-panel {
+  position: relative;
   background: var(--card);
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 12px 36px -16px rgba(18, 41, 77, 0.35);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 16px 44px -24px rgba(18, 41, 77, 0.4);
+  border: 1px solid rgba(18, 41, 77, 0.06);
+  overflow: hidden;
 }
-.panel-pct { font-weight: 700; font-size: 14px; }
-.carrera-panel h2 { margin: 4px 0 12px; font-size: 22px; color: var(--text); }
+.carrera-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.panel-pct {
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.carrera-panel h2 { margin: 6px 0 12px; font-size: 24px; color: var(--navy); line-height: 1.15; }
 .panel-desc { font-size: 15px; line-height: 1.55; color: var(--text); }
 .carrera-panel h3 {
   margin: 22px 0 10px;
@@ -288,29 +324,53 @@
 
 .inst-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .inst-chip {
-  border: 2px solid var(--bot-bubble);
-  background: var(--bg2);
+  border: 1.5px solid var(--bot-bubble);
+  background: #fff;
   color: var(--text);
   border-radius: 999px;
   padding: 8px 16px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
 }
-.inst-chip:hover { border-color: var(--accent); }
-.inst-chip.activa { background: var(--accent); color: #fff; border-color: var(--accent); }
+.inst-chip:hover { border-color: var(--accent); color: var(--accent); }
+.inst-chip.activa {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 18px -8px rgba(29, 78, 216, 0.6);
+}
 
 .inst-detalle {
   margin-top: 14px;
-  background: var(--bot-bubble);
-  border-radius: 14px;
-  padding: 16px;
-  border-left: 4px solid var(--accent);
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  border: 1px solid rgba(18, 41, 77, 0.08);
+  border-left: 5px solid var(--accent);
+  box-shadow: 0 12px 30px -20px rgba(18, 41, 77, 0.45);
 }
-.inst-uni { font-weight: 700; color: var(--accent); margin-bottom: 2px; }
-.inst-lugar { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
-.inst-detalle p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text); }
+.inst-uni { font-weight: 800; font-size: 15.5px; color: var(--accent); margin-bottom: 3px; }
+.inst-lugar {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.inst-lugar::before {
+  content: '📍';
+  font-size: 11px;
+}
+.inst-detalle p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--text);
+  font-style: italic;
+}
 
 /* --- Acciones "wow": simulador + comparador --- */
 .wow-acciones {
@@ -322,17 +382,22 @@
   gap: 10px;
 }
 .wow-btn {
-  border: 2px solid var(--accent);
+  border: 1.5px solid var(--accent);
   background: #fff;
   color: var(--accent);
   border-radius: 999px;
-  padding: 10px 16px;
+  padding: 11px 18px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, transform 0.12s, box-shadow 0.2s;
 }
-.wow-btn:hover:not(:disabled) { background: var(--accent); color: #fff; }
+.wow-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px -12px rgba(29, 78, 216, 0.7);
+}
 .wow-btn:disabled { opacity: 0.4; cursor: default; }
 
 .comparador { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }

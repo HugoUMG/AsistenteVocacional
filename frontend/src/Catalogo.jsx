@@ -4,6 +4,17 @@ import './App.css'
 
 const API = 'http://localhost:8000'
 
+// Birrete: acento visual de cada tarjeta de carrera.
+function IconoBirrete() {
+  return (
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none">
+      <path d="M12 3 L22 8 L12 13 L2 8 Z" fill="currentColor" />
+      <path d="M6 10.5 V15 c0 1.5 2.7 3 6 3 s6-1.5 6-3 v-4.5" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+      <line x1="22" y1="8" x2="22" y2="13.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export default function Catalogo() {
   const [carreras, setCarreras] = useState(null) // null = cargando
   const [filtro, setFiltro] = useState('')
@@ -94,19 +105,23 @@ export default function Catalogo() {
         <div className="cat-grid">
           {grupos.map(([nombre, sedes]) => (
             <article key={nombre} className="cat-card">
+              <span className="cat-icono"><IconoBirrete /></span>
               <h3>{nombre}</h3>
-              {sedes[0].arquetipo && <p className="cat-arquetipo">{sedes[0].arquetipo}</p>}
-              {!sedes[0].arquetipo && sedes[0].sello && (
-                <p className="cat-arquetipo">{sedes[0].sello}</p>
+              {(sedes[0].arquetipo || sedes[0].sello) && (
+                <p className="cat-arquetipo">{sedes[0].arquetipo || sedes[0].sello}</p>
               )}
               <details className="cat-sedes">
                 <summary>
-                  {sedes.length === 1 ? '1 sede donde estudiarla' : `${sedes.length} sedes donde estudiarla`}
+                  <span className="cat-sedes-pill">
+                    {sedes.length === 1 ? '1 sede' : `${sedes.length} sedes`}
+                    <span className="cat-sedes-chevron" aria-hidden="true">›</span>
+                  </span>
                 </summary>
                 <ul>
                   {sedes.map((s, i) => (
                     <li key={i}>
-                      <strong>{s.universidad}</strong> · {s.centro} · {s.departamento}
+                      <strong>{s.universidad}</strong>
+                      <span className="cat-sede-meta">{s.centro} · {s.departamento}</span>
                     </li>
                   ))}
                 </ul>

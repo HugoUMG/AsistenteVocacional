@@ -29,6 +29,7 @@ export default function Mapa() {
     <div className="pagina">
       <Nav />
       <div className="mapa-page">
+      <span className="pasos-kicker">Explora el mapa</span>
       <h1>¿Dónde te gustaría estudiar?</h1>
       <p>{modo === 'depto' ? 'Toca un departamento para ver sus carreras.' : 'Toca una región para ver sus carreras.'}</p>
 
@@ -37,6 +38,7 @@ export default function Mapa() {
         <button className={modo === 'region' ? 'sel' : ''} onClick={() => setModo('region')}>Por región</button>
       </div>
 
+      <div className="mapa-panel">
       <svg className="mapa-svg" viewBox={VIEWBOX}>
         {DEPARTAMENTOS_SVG.map(({ nombre, d }) => {
           if (modo === 'depto') {
@@ -72,6 +74,16 @@ export default function Mapa() {
           )
         })}
       </svg>
+
+      <div className="mapa-legend">
+        <span className="mapa-legend-item">
+          <i className="mapa-legend-dot activo" /> Disponible
+        </span>
+        <span className="mapa-legend-item">
+          <i className="mapa-legend-dot inactivo" /> Próximamente
+        </span>
+      </div>
+      </div>
 
       <button className="mapa-ambos-btn" onClick={() => navigate('/chat?depto=Ambos')}>
         Ver todas las carreras (Ambos) →
