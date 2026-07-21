@@ -5,6 +5,7 @@ las universidades que ofrecen la misma carrera)."""
 import hashlib
 import os
 import random
+import re
 import time
 
 from google import genai
@@ -114,6 +115,22 @@ class ResultadoLLM(BaseModel):
     carreras: list[CarreraRecomendadaLLM]
     confianza: int
     confianza_nota: str
+
+
+def _enfoque_de_perfil(perfil: str) -> str | None:
+    """Identidad breve de la carrera (arquetipo + primer rasgo de afinidad) para
+    mostrar en 'dónde estudiarla' cuando la sede no tiene un sello propio. Se
+    extrae del perfil que YA está en la BD -> cero tokens, sin llamar a la IA."""
+    if not perfil:
+        return None
+    arq = re.search(r"Arquetipo:\s*(.+?)\.\s", perfil)
+    afin = re.search(r"AFINIDAD[^:]*:\s*([^;.]+)", perfil)
+    if arq and afin:
+        return f"{arq.group(1).strip()} — {afin.group(1).strip().rstrip('.')}."
+    if arq:
+        return f"{arq.group(1).strip()}."
+    primera = perfil.strip().split(". ")[0]
+    return f"{primera}." if primera else None
 
 
 def _buscar_grupo(nombre: str, por_nombre: dict[str, list]) -> list:
@@ -376,7 +393,7 @@ def recomendar(respuestas: dict, carreras) -> tuple[Resultado, dict]:
                     universidad=s.universidad,
                     centro=s.centro,
                     departamento=s.departamento,
-                    enfoque=s.sello or "Sin datos adicionales de esta sede.",
+                    enfoque=s.sello or _enfoque_de_perfil(s.perfil) or "Sin datos adicionales de esta sede.",
                 )
                 for s in _buscar_grupo(c.carrera, por_nombre)
             ],

@@ -213,6 +213,7 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
     <div className="dash">
       <header className="dash-head">
         <div>
+          <span className="dash-kicker">Tu resultado</span>
           <h1>Tu orientación vocacional</h1>
           <p>{nombre ? `${nombre}, estas` : 'Estas'} son las carreras más afines a tu perfil.</p>
           <ConfianzaBadge confianza={confianza} />

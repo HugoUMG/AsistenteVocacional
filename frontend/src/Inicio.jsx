@@ -87,9 +87,10 @@ export default function Inicio() {
         <span className="pasos-kicker">¿Cómo funciona?</span>
         <h2>Tu orientación vocacional, paso a paso</h2>
         <div className="pasos-grid">
-          {PASOS.map((p) => (
+          {PASOS.map((p, i) => (
             <article key={p.titulo} className="paso-card">
-              {p.icono}
+              <span className="card-icono">{p.icono}</span>
+              <span className="card-paso-num">Paso {i + 1}</span>
               <h3>{p.titulo}</h3>
               <p>{p.texto}</p>
             </article>
