@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, field_validator
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -22,6 +22,20 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Recomendador Vocacional API", version="0.1.0", lifespan=lifespan)
 
+
+@app.exception_handler(recomendar.ContenidoRechazado)
+async def _contenido_rechazado(request, exc):
+    # Gemini bloqueó la petición/respuesta por sus filtros de seguridad (p. ej. el
+    # estudiante escribió algo ofensivo). 422 con mensaje amable en vez de un 500.
+    from fastapi.responses import JSONResponse
+    print(f"[seguridad] Gemini rechazó contenido: {exc}")
+    return JSONResponse(
+        status_code=422,
+        content={"detail": "No pudimos procesar esa respuesta. Por favor evita "
+                 "lenguaje ofensivo o fuera de tema e inténtalo de nuevo."},
+    )
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
@@ -30,10 +44,30 @@ app.add_middleware(
 )
 
 
+# El nombre lo teclea el estudiante y luego se muestra en el dashboard/PDF y se
+# inyecta en los prompts, así que se valida en la frontera: sin control de
+# largo/caracteres, un troll podría meter un nombre kilométrico o basura.
+# ponytail: valida forma (largo + caracteres de nombre), NO groserías — un
+# filtro de palabrotas es multilingüe, evadible ("gr0sería") y de mantenimiento
+# infinito; no vale la pena para un TFG. El blindaje real contra abuso vive en
+# el prompt (ANTI_INYECCION) y en los filtros propios de Gemini.
+_NOMBRE_OK = re.compile(r"^[\wáéíóúüñÁÉÍÓÚÜÑ'’\-\. ]+$")
+
+
 # --- Schemas (validación en la frontera: datos del navegador) ---
 class RegisterIn(BaseModel):
     nombre: str
     email: EmailStr | None = None
+
+    @field_validator("nombre")
+    @classmethod
+    def _nombre_valido(cls, v: str) -> str:
+        v = " ".join(v.split())  # recorta y colapsa espacios
+        if not (2 <= len(v) <= 40):
+            raise ValueError("El nombre debe tener entre 2 y 40 caracteres.")
+        if not _NOMBRE_OK.match(v):
+            raise ValueError("El nombre solo puede llevar letras, espacios, guiones y apóstrofos.")
+        return v
 
 
 class EstudianteOut(BaseModel):

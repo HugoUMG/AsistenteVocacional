@@ -10,7 +10,7 @@ from google import genai
 from google.genai import types
 from pydantic import BaseModel
 
-from app.recomendar import MODELO_FINAL, TONO, uso_tokens
+from app.recomendar import ANTI_INYECCION, MODELO_FINAL, TONO, _texto_seguro, uso_tokens
 
 
 # --- Simulador "Un día siendo..." ---
@@ -38,6 +38,7 @@ SYSTEM_SIMULADOR = (
     "encaja con el estudiante.\n"
     "Español, cercano, sin emojis, sin viñetas.\n\n"
     + TONO
+    + ANTI_INYECCION
 )
 
 
@@ -60,7 +61,7 @@ def simular_dia(carrera: str, descripcion: str, respuestas: dict) -> tuple[Simul
             temperature=0.6,
         ),
     )
-    return SimulacionDia.model_validate_json(resp.text), uso_tokens(resp, MODELO_FINAL)
+    return SimulacionDia.model_validate_json(_texto_seguro(resp)), uso_tokens(resp, MODELO_FINAL)
 
 
 # --- Comparador de carreras ---
@@ -84,6 +85,7 @@ SYSTEM_COMPARADOR = (
     "para ayudarlo a decidir, sin ser tajante (ambas siguen siendo válidas).\n"
     "Español, cercano, sin emojis, sin viñetas.\n\n"
     + TONO
+    + ANTI_INYECCION
 )
 
 
@@ -108,4 +110,4 @@ def comparar_carreras(
             temperature=0.4,
         ),
     )
-    return Comparacion.model_validate_json(resp.text), uso_tokens(resp, MODELO_FINAL)
+    return Comparacion.model_validate_json(_texto_seguro(resp)), uso_tokens(resp, MODELO_FINAL)

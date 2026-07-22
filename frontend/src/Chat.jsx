@@ -514,9 +514,25 @@ function Chat() {
     setUndoStack((s) => s.slice(0, -1))
   }
 
+  // Valida el nombre en la frontera de entrada (misma regla que el backend en
+  // main.py): el nombre se muestra en el dashboard/PDF y entra al prompt, así que
+  // se corta aquí un nombre vacío/kilométrico/con basura. No filtra groserías.
+  function nombreInvalido(v) {
+    if (v.length < 2 || v.length > 40) return 'Escribe tu nombre (entre 2 y 40 letras).'
+    if (!/^[\p{L}'’\-. ]+$/u.test(v)) return 'Usa solo letras, espacios, guiones y apóstrofos.'
+    return null
+  }
+
   function submitText(e) {
     e.preventDefault()
-    if (text.trim()) answer(text.trim())
+    const val = text.trim().replace(/\s+/g, ' ')
+    if (!val) return
+    if (paso?.clave === 'nombre') {
+      const err = nombreInvalido(val)
+      if (err) { setError(err); return }
+    }
+    setError(null)
+    answer(val)
   }
 
   if (phase === 'dashboard') {
