@@ -38,12 +38,13 @@ El test es **híbrido** (preguntas fijas + adaptativas) para gastar poca cuota d
    **Ambos**. Esto **filtra** el catálogo: solo esas carreras alimentan el resto.
 3. **3 preguntas vocacionales fijas** (sin IA): impacto que quiere tener (multi),
    cómo prefiere trabajar (multi) y qué temas le apasionan (texto libre).
-4. **Hasta 3 preguntas adaptativas** (IA, tipo "Akinator"): Gemini genera cada
-   pregunta según lo respondido, para descartar unas carreras y reforzar otras.
-   Puede terminar antes si el perfil ya es claro.
+4. **Preguntas adaptativas** (IA, tipo "Akinator"): Gemini genera cada pregunta
+   según lo respondido, para descartar unas carreras y reforzar otras. **Mínimo
+   4, máximo 8**, dirigidas por el vector de cobertura de dimensiones (ver abajo);
+   termina cuando cubrió las 4 dimensiones prioritarias Y el ranking es claro.
 5. **Análisis final** (IA): genera la recomendación y muestra el dashboard.
 
-Costo aprox.: **~4 llamadas a Gemini por test** (hasta 3 adaptativas + 1 final).
+Costo aprox.: **~5 llamadas a Gemini por test** (mínimo 4 adaptativas + 1 final).
 Las preguntas de opción múltiple permiten elegir varias, una opción "Otro" con
 texto libre, y hay botón "← Regresar" para corregir respuestas.
 
@@ -67,6 +68,61 @@ Las preguntas adaptativas usan la misma idea en `backend/app/preguntas.py`.
 
 ---
 
+## Cobertura garantizada de las 7 dimensiones vocacionales (2026-07-22)
+
+Un perfil vocacional se explora sobre 7 dimensiones: **personalidad, intereses,
+habilidades, estilo cognitivo, valores, entorno, motivaciones**. Las preguntas
+fijas ya cubren intereses/entorno/motivaciones; las 4 restantes
+(personalidad, habilidades, valores, estilo cognitivo) dependían antes de que
+Gemini decidiera preguntarlas — lo que no siempre pasaba (inconsistencia entre
+alumnos y cortes por debajo del mínimo de preguntas).
+
+**Solución** (en `backend/app/preguntas.py`, + `session_id` pasado desde
+`main.py`):
+- **Vector de cobertura por sesión** (`_COBERTURA_POR_SESION`, `{dimensión: 0|1}`,
+  en memoria del proceso por `session_id`): arranca con las 3 dimensiones de las
+  fijas en 1; el backend se lo pasa a Gemini como **estado explícito** en cada
+  llamada (no lo infiere del historial).
+- **Campo `dimension_objetivo`** en el schema: la IA declara a qué dimensión
+  apunta cada pregunta (verificable en logs `[dimension] ...`).
+- **Guard de código**: fuerza `terminado=false` mientras queden dimensiones
+  prioritarias sin cubrir. Mínimo 4 adaptativas, máximo 8.
+- Límite conocido: el vector vive en memoria; se pierde si el backend reinicia a
+  mitad de un test (OK para un solo proceso; marcado con comentario `ponytail:`).
+- Self-check sin API: `uv run python -m app.preguntas`.
+
+**Evidencia A/B** (detalle completo en
+`docs/cobertura-dimensiones-experimento.md`): con 15 perfiles "primer botón", el
+cumplimiento del mínimo de 4 preguntas pasó de **40% → 100%**. Con 10 perfiles
+**coherentes** (Gemini responde en el papel de una personalidad fija), el top-1
+cayó en el área vocacional esperada en **10/10 (nuevo) vs 7/10 (viejo)**, con
+mejor calibración de confianza (afinidad promedio del top-1 ~59%→~48%).
+⚠️ Evidencia **preliminar**: una corrida por config, y el "estudiante" simulado
+es el mismo modelo — falta validación con orientadores humanos a ciegas.
+
+---
+
+## Catálogo cargado (ciclo Quetzaltenango + Totonicapán cerrado, 2026-07-21)
+
+Todas las universidades con sede física en estos dos departamentos ya están
+en `backend/data/*.json`. No falta ninguna por agregar — confirmado por
+búsqueda: Galileo, Panamericana, Da Vinci y Rural de Guatemala no tienen
+sede en Totonicapán (se concentran en Ciudad de Guatemala y Quetzaltenango).
+
+**Quetzaltenango** (9 centros, ~185 carreras): USAC (CUNOC), Universidad
+Rafael Landívar (URL Xela), Universidad de Occidente (UdeO), Universidad
+Mariano Gálvez (UMG), Universidad Mesoamericana, Universidad Panamericana
+(UPANA), Universidad Galileo, Universidad Rural de Guatemala (URURAL),
+Universidad Da Vinci de Guatemala.
+
+**Totonicapán** (3 centros, 17 carreras): USAC (CUNTOTO), Universidad
+Mariano Gálvez (UMG), Universidad Regional de Guatemala (URG).
+
+Siguiente paso natural: extender el catálogo a otro departamento (fuera del
+alcance actual del proyecto, que es Quetzaltenango/Totonicapán/Suroccidente).
+
+---
+
 ## ¿Qué recibe el usuario al final?
 
 Un **dashboard a pantalla completa** con:
@@ -78,6 +134,28 @@ Un **dashboard a pantalla completa** con:
 
 Ejemplo: si sale "Derecho" con "Ambos", ve las 4 sedes juntas (CUNTOTO, URG, UMG
 en Totonicapán y CUNOC en Quetzaltenango), cada una con su sello.
+
+---
+
+## Identidad visual
+
+Paleta de marca de Orienta: **azul, azul marino, gris y negro** — sin
+violetas, rosas ni verdes decorativos (los únicos verdes/rojos/naranjas que
+quedan son semánticos: el badge de confianza alta/media/baja en
+`Dashboard.css`, que usa el código de color de semáforo a propósito).
+
+- Variables base en `frontend/src/index.css` (`--navy`, `--navy-2`,
+  `--accent`, `--accent-2`, `--text`, `--muted`, `--bg`).
+- `frontend/src/colors.js` (`COLORS`) es la paleta compartida para las
+  gráficas del dashboard (barras, dona, colores de carrera) y para el PDF —
+  12 tonos de azul/navy/gris/negro, sin repetir el mismo color en carreras
+  consecutivas.
+- `frontend/src/reporte.js` (generación del PDF con `jsPDF`) usa los mismos
+  tonos: `ACCENT` = azul (`--accent`), `VERDE` (nombre heredado, ya no es
+  verde) = azul marino para los bullets de "por qué encaja", `TEXT`/`MUTED`/
+  `LIGHT` = casi negro/gris/gris muy claro. Si se agrega una gráfica o
+  elemento nuevo, tomar el color de `COLORS` o de las variables CSS — nunca
+  un color fuera de esta familia.
 
 ---
 
@@ -206,6 +284,28 @@ primera); la #1 de cada tipo (nada previo, o system prompt distinto para
 `recommend`) no cachea. Con billing y el caching EXPLÍCITO completo se
 cubrirían las 5 llamadas (no solo las repetidas) con una ventana garantizada
 de 1h en vez de depender de que el tráfico sea seguido.
+
+⚠️ **Actualizado 2026-07-21 — el caching implícito NO se reprodujo en dos
+pruebas nuevas, tras cargar UPANA/Galileo/URURAL/Da Vinci** (catálogo
+"Ambos" ya con el ciclo Quetzaltenango+Totonicapán cerrado):
+- **Flujo secuencial** (3 llamadas reales del chat, `next-question` ×2 +
+  `recommend`, mismo prefijo de catálogo): 37,870 tokens, **0 cacheados
+  (0%)**.
+- **5 llamadas verdaderamente simultáneas** a `/next-question` (lanzadas en
+  paralelo con `curl ... & / wait`, mismas respuestas → mismo prefijo
+  exacto): 25,680 tokens de prompt (5,136 c/u), **0 cacheados (0%)**, ni
+  siquiera entre sí.
+
+Con el filtro de `app/filtro.py` (`TOP_DEFAULT=35`) ya recortando el
+catálogo antes de estas llamadas, el prompt quedó en ~5,100 tokens —sigue
+por encima del umbral mínimo (~1,024) pero bastante más chico que los
+~15,800-18,100 documentados arriba, lo que puede reducir la probabilidad de
+que Google decida cachear. **Conclusión: no asumir el ahorro de caching
+implícito al presupuestar costos** — es oportunista y, en estas pruebas,
+no se activó ni con llamadas simultáneas de prefijo idéntico. Las mediciones
+anteriores con `cached_tokens > 0` (sim15-*, 2026-07-19) siguen siendo
+válidas como evidencia de que el mecanismo SÍ existe y funciona en tier
+gratis, pero no como garantía repetible.
 
 **Estimado de ahorro con caching activo** (recalculado con los ~89k
 tokens/sesión medidos hoy para Quetzaltenango, ~97% catálogo cacheable,
