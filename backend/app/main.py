@@ -160,7 +160,7 @@ def next_question(data: NextIn, db: Session = Depends(get_db)):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
     carreras = _carreras(db, data.respuestas)
-    paso, uso = preguntas.siguiente_pregunta(data.respuestas, carreras)
+    paso, uso = preguntas.siguiente_pregunta(data.respuestas, carreras, data.session_id)
     _registrar_uso(db, data.session_id, "next-question", uso)
     return paso.model_dump()
 
