@@ -6,7 +6,15 @@ haya cargadas."""
 from pydantic import BaseModel
 
 from app.filtro import preseleccionar
-from app.recomendar import MODELO, TONO, _catalogo_texto, generar, uso_tokens
+from app.recomendar import (
+    ANTI_INYECCION,
+    MODELO,
+    TONO,
+    _catalogo_texto,
+    _texto_seguro,
+    generar,
+    uso_tokens,
+)
 
 SYSTEM = (
     "Eres un orientador vocacional que conduce un test tipo 'Akinator' para "
@@ -75,6 +83,7 @@ SYSTEM = (
     "- Para 'opcion', llena opciones con value (id corto en minúsculas) y label "
     "(texto visible, sin emojis). Para 'sino' y 'texto', deja opciones vacío.\n\n"
     + TONO
+    + ANTI_INYECCION
 )
 
 
@@ -184,7 +193,7 @@ def siguiente_pregunta(
             schema=SiguientePaso,
             temperature=0.5,
         )
-        paso = SiguientePaso.model_validate_json(resp.text)
+        paso = SiguientePaso.model_validate_json(_texto_seguro(resp))
         uso_total = uso_tokens(resp, MODELO)
         corta_antes_de_tiempo = paso.terminado and pendientes and hechas < MAX_ADAPTATIVAS
         if not corta_antes_de_tiempo:
