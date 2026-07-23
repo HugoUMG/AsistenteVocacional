@@ -1,0 +1,19 @@
+{
+  "departamento": "Quetzaltenango",
+  "centro": "Sede Quetzaltenango (URURAL)",
+  "universidad": "Universidad Rural de Guatemala",
+  "carreras": [
+    { "nombre": "Licenciatura en Ciencias Jurídicas y Sociales", "perfil_id": "ciencias_juridicas", "sello": "Formación jurídica con proyección rural y regional." },
+    { "nombre": "Licenciatura en Administración", "perfil_id": "administracion_empresas", "sello": "Título intermedio de Técnico Universitario Gerente." },
+    { "nombre": "Licenciatura en Contaduría Pública y Auditoría", "perfil_id": "contaduria", "sello": "Título intermedio de Técnico Universitario Contador." },
+    { "nombre": "Ingeniería Civil", "perfil_id": "ingenieria_civil", "sello": "Título intermedio de Técnico Universitario Constructor Rural." },
+    { "nombre": "Ingeniería Ambiental", "perfil_id": "ingenieria_ambiental", "sello": "Título intermedio de Técnico Universitario Agroecólogo." },
+    { "nombre": "Ingeniería Agronómica", "perfil_id": "ingenieria_agricola", "sello": "Con énfasis en recursos naturales renovables." },
+    { "nombre": "Ingeniería Agroindustrial", "perfil_id": "ingenieria_industrial", "sello": "Título intermedio de Técnico Universitario Agroindustrial." },
+    { "nombre": "Arquitectura", "perfil_id": "arquitectura", "sello": "Título intermedio de Diseñador Arquitectónico." },
+    { "nombre": "Licenciatura en Psicología General", "perfil_id": "psicologia_clinica", "sello": "Formación psicológica general con proyección rural." },
+    { "nombre": "Licenciatura en Psicología Industrial", "perfil_id": "psicologia_industrial", "sello": "Gestión de talento humano en organizaciones de la región." },
+    { "nombre": "Licenciatura en Trabajo Social", "perfil_id": "trabajo_social", "sello": "Formación con fuerte enfoque en desarrollo rural y comunitario." },
+    { "nombre": "Licenciatura en Ciencias de la Educación", "perfil_id": "pedagogia", "sello": "Formación docente y de gestión educativa rural." }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "departamento": "Quetzaltenango",
+  "centro": "Sede Xela (Universidad Galileo)",
+  "universidad": "Universidad Galileo",
+  "carreras": [
+    { "nombre": "Técnico Universitario en Enfermería", "perfil_id": "enfermeria", "sello": "Entrada técnica rápida al área de enfermería." },
+    { "nombre": "Técnico Universitario en Laboratorio Clínico", "perfil_id": "laboratorio_clinico", "sello": "Formación técnica en análisis clínico de muestras." },
+    { "nombre": "Técnico Universitario en Radiología e Imágenes Diagnósticas", "perfil_id": "tecnico_radiologia", "sello": "Formación técnica operativa en equipos de diagnóstico por imagen." },
+    { "nombre": "Técnico Universitario en Optometría", "perfil_id": "optometria", "sello": "Entrada técnica rápida a la salud visual." },
+    { "nombre": "Técnico Universitario en Hemodiálisis", "perfil_id": "hemodialisis", "sello": "Una de las pocas ofertas de esta especialidad en Occidente." },
+    { "nombre": "Técnico Universitario en Visita Médica y Mercadeo", "perfil_id": "visita_medica_mercadeo", "sello": "Formación comercial orientada al sector salud." },
+    { "nombre": "Técnico Universitario en Enfermería Veterinaria", "perfil_id": "enfermeria_veterinaria", "sello": "Formación técnica en cuidado y asistencia veterinaria." },
+    { "nombre": "Licenciatura en Enfermería", "perfil_id": "enfermeria", "sello": "Formación profesional de enfermería con proyección regional." },
+    { "nombre": "Licenciatura en Química Biológica", "perfil_id": "quimica_biologica", "sello": "Una de las pocas ofertas de esta carrera fuera de la capital." },
+    { "nombre": "Licenciatura en Optometría", "perfil_id": "optometria", "sello": "Formación profesional en salud visual." },
+    { "nombre": "Licenciatura en Producción de Imágenes Diagnósticas", "perfil_id": "bioimagenes", "sello": "Formación profesional en imagenología médica." },
+    { "nombre": "Licenciatura en Administración de Empresas", "perfil_id": "administracion_empresas", "sello": "Modalidad con flexibilidad horaria en Occidente." },
+    { "nombre": "Licenciatura en Administración de Empresas Turísticas y Hoteleras", "perfil_id": "hoteleria_turismo", "sello": "Gestión turística y hotelera con flexibilidad horaria." },
+    { "nombre": "Licenciatura en Administración de Telecomunicaciones", "perfil_id": "telecomunicaciones", "sello": "Enfoque administrativo del sector telecomunicaciones." },
+    { "nombre": "Licenciatura en Administración en Desarrollo de Recursos Humanos", "perfil_id": "psicologia_industrial", "sello": "Gestión de talento humano con flexibilidad horaria." },
+    { "nombre": "Licenciatura en Mercadotecnia", "perfil_id": "mercadotecnia", "sello": "Mercadeo aplicado con modalidad flexible." },
+    { "nombre": "Licenciatura en Comunicación y Diseño", "perfil_id": "comunicacion_diseno", "sello": "Perfil híbrido entre comunicación de marca y diseño visual." }
+  ]
+}

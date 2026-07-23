@@ -1,0 +1,14 @@
+{
+  "departamento": "Quetzaltenango",
+  "centro": "Sede Quetzaltenango (UPANA)",
+  "universidad": "Universidad Panamericana",
+  "carreras": [
+    { "nombre": "Licenciatura en Administración de Empresas", "perfil_id": "administracion_empresas", "sello": "Formación gerencial con proyección a la empresa de Occidente." },
+    { "nombre": "Licenciatura en Contaduría Pública y Auditoría", "perfil_id": "contaduria", "sello": "Formación contable y de auditoría accesible en Occidente." },
+    { "nombre": "Licenciatura en Marketing", "perfil_id": "mercadotecnia", "sello": "Mercadeo aplicado al comercio regional de Quetzaltenango." },
+    { "nombre": "Licenciatura en Pedagogía y Administración Educativa", "perfil_id": "pedagogia_admin_educativa", "sello": "Formación docente con enfoque en gestión de centros educativos." },
+    { "nombre": "Profesorados en áreas de Ciencias Sociales y Especialidades", "perfil_id": "pedagogia_ciencias_sociales", "sello": "Formación docente de nivel medio en ciencias sociales." },
+    { "nombre": "Licenciatura en Ciencias Jurídicas y Justicia", "perfil_id": "ciencias_juridicas", "sello": "Formación jurídica con proyección a la justicia en Occidente." },
+    { "nombre": "Licenciatura en Enfermería y Gestión de la Salud", "perfil_id": "enfermeria", "sello": "Enfermería con componente de gestión de servicios de salud." }
+  ]
+}
