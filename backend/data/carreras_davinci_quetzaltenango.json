@@ -1,0 +1,18 @@
+{
+  "departamento": "Quetzaltenango",
+  "centro": "Sede Quetzaltenango (Universidad Da Vinci)",
+  "universidad": "Universidad Da Vinci de Guatemala",
+  "carreras": [
+    { "nombre": "Licenciatura en Administración de Empresas", "perfil_id": "administracion_empresas", "sello": "Formación gerencial accesible en Occidente." },
+    { "nombre": "Técnico Universitario en Gerencia de Ventas", "perfil_id": "mercadotecnia", "sello": "Entrada técnica rápida al área comercial." },
+    { "nombre": "Licenciatura en Ciencias Jurídicas y Sociales", "perfil_id": "ciencias_juridicas", "sello": "Formación jurídica con títulos de Abogado y Notario." },
+    { "nombre": "Técnico Universitario en Criminología y Criminalística", "perfil_id": "criminalistica", "sello": "Entrada técnica al área de investigación criminal." },
+    { "nombre": "Ingeniería en Sistemas de Información", "perfil_id": "ingenieria_sistemas", "sello": "Formación en software orientada a la demanda local." },
+    { "nombre": "Técnico Universitario en Desarrollo de Software", "perfil_id": "tecnico_desarrollo_software", "sello": "Entrada rápida y práctica al desarrollo de software." },
+    { "nombre": "Licenciatura en Enfermería", "perfil_id": "enfermeria", "sello": "Programa de actualización y cierre profesional." },
+    { "nombre": "Técnico Universitario en Enfermería", "perfil_id": "enfermeria", "sello": "Entrada técnica rápida al área de enfermería." },
+    { "nombre": "Licenciatura en Ciencias de la Educación", "perfil_id": "pedagogia", "sello": "Formación docente y de gestión educativa." },
+    { "nombre": "Profesorados de Enseñanza Media", "perfil_id": "pedagogia", "sello": "Formación docente en diversas especialidades académicas." },
+    { "nombre": "Técnico en Ejecución Musical Popular y Contemporánea", "perfil_id": "musica_ejecucion", "sello": "Formación técnica en interpretación musical." }
+  ]
+}
