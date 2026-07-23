@@ -110,6 +110,27 @@ const post = (ruta, body) =>
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
+// Filtro básico de groserías para el nombre (misma lista que backend/app/main.py).
+// El nombre se muestra en el saludo del dashboard y el PDF, así que se corta aquí
+// antes de que avance. ponytail: lista curada, NO exhaustiva; no atrapa evasiones
+// ("3stupido"). Se compara por palabra tras normalizar (minúsculas + sin acentos).
+const PALABRAS_OFENSIVAS = new Set([
+  'estupido', 'estupida', 'idiota', 'imbecil', 'tonto', 'tonta', 'tarado',
+  'pendejo', 'pendeja', 'mierda', 'puta', 'puto', 'cabron', 'cabrona', 'verga',
+  'culero', 'culo', 'pene', 'pito', 'cono', 'chinga', 'chingar', 'mamon',
+  'mamada', 'joder', 'jodete', 'marica', 'maricon', 'zorra', 'perra', 'polla',
+  'follar', 'gilipollas', 'cojones', 'baboso', 'babosa', 'estupidos', 'putos',
+  'putas', 'wey', 'guey', 'coger', 'verguero',
+])
+
+function tieneGroseria(nombre) {
+  const norm = [...nombre.normalize('NFKD')]
+    .filter((c) => { const n = c.charCodeAt(0); return n < 0x300 || n > 0x36f })
+    .join('')
+    .toLowerCase()
+  return norm.split(/[ \-.']+/).some((t) => PALABRAS_OFENSIVAS.has(t))
+}
+
 // Divide un mensaje largo en varias burbujas por oraciones (o ':'), agrupando
 // hasta ~150 caracteres. Los mensajes cortos quedan en una sola burbuja.
 function enPartes(texto, max = 150) {
@@ -516,10 +537,11 @@ function Chat() {
 
   // Valida el nombre en la frontera de entrada (misma regla que el backend en
   // main.py): el nombre se muestra en el dashboard/PDF y entra al prompt, así que
-  // se corta aquí un nombre vacío/kilométrico/con basura. No filtra groserías.
+  // se corta aquí un nombre vacío/kilométrico/con basura o con groserías comunes.
   function nombreInvalido(v) {
     if (v.length < 2 || v.length > 40) return 'Escribe tu nombre (entre 2 y 40 letras).'
     if (!/^[\p{L}'’\-. ]+$/u.test(v)) return 'Usa solo letras, espacios, guiones y apóstrofos.'
+    if (tieneGroseria(v)) return 'Por favor escribe tu nombre real, sin palabras ofensivas.'
     return null
   }
 
