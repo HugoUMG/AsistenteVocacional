@@ -1,4 +1,5 @@
 import re
+import unicodedata
 from contextlib import asynccontextmanager
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -47,11 +48,34 @@ app.add_middleware(
 # El nombre lo teclea el estudiante y luego se muestra en el dashboard/PDF y se
 # inyecta en los prompts, así que se valida en la frontera: sin control de
 # largo/caracteres, un troll podría meter un nombre kilométrico o basura.
-# ponytail: valida forma (largo + caracteres de nombre), NO groserías — un
-# filtro de palabrotas es multilingüe, evadible ("gr0sería") y de mantenimiento
-# infinito; no vale la pena para un TFG. El blindaje real contra abuso vive en
-# el prompt (ANTI_INYECCION) y en los filtros propios de Gemini.
 _NOMBRE_OK = re.compile(r"^[\wáéíóúüñÁÉÍÓÚÜÑ'’\-\. ]+$")
+
+# ponytail: lista curada de groserías comunes en español, NO exhaustiva — no
+# atrapa evasiones ("3stupido", "est-upido") ni todo el vocabulario ofensivo; es
+# un filtro básico para el nombre (que se muestra en el dashboard/PDF), no una
+# moderación completa. Se compara por palabra tras normalizar (minúsculas + sin
+# acentos), así "Estúpido" y "ESTUPIDO" caen igual. La MISMA lista vive en el
+# frontend (Chat.jsx) para cortar antes de que el nombre llegue al saludo.
+_PALABRAS_OFENSIVAS = {
+    "estupido", "estupida", "idiota", "imbecil", "tonto", "tonta", "tarado",
+    "pendejo", "pendeja", "mierda", "puta", "puto", "cabron", "cabrona", "verga",
+    "culero", "culo", "pene", "pito", "cono", "chinga", "chingar", "mamon",
+    "mamada", "joder", "jodete", "marica", "maricon", "zorra", "perra", "polla",
+    "follar", "gilipollas", "cojones", "baboso", "babosa", "estupidos", "putos",
+    "putas", "wey", "guey", "coger", "verguero",
+}
+
+
+def _normaliza(texto: str) -> str:
+    sin_acentos = "".join(
+        c for c in unicodedata.normalize("NFKD", texto) if not unicodedata.combining(c)
+    )
+    return sin_acentos.lower()
+
+
+def _tiene_groseria(nombre: str) -> bool:
+    tokens = re.split(r"[ \-.']+", _normaliza(nombre))
+    return any(t in _PALABRAS_OFENSIVAS for t in tokens)
 
 
 # --- Schemas (validación en la frontera: datos del navegador) ---
@@ -67,6 +91,8 @@ class RegisterIn(BaseModel):
             raise ValueError("El nombre debe tener entre 2 y 40 caracteres.")
         if not _NOMBRE_OK.match(v):
             raise ValueError("El nombre solo puede llevar letras, espacios, guiones y apóstrofos.")
+        if _tiene_groseria(v):
+            raise ValueError("Por favor escribe tu nombre real, sin palabras ofensivas.")
         return v
 
 
