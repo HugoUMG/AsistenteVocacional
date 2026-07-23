@@ -386,7 +386,8 @@ function Chat() {
   const [carreras, setCarreras] = useState([])
   const [respuestaId, setRespuestaId] = useState(null)
   const [confianza, setConfianza] = useState(null)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null) // fallo de API (muestra "Reintentar")
+  const [avisoInput, setAvisoInput] = useState(null) // validación del input (nombre)
   const [cargando, setCargando] = useState(false)
   const [undoStack, setUndoStack] = useState([]) // para "Regresar"
   const [ranking, setRanking] = useState([]) // radar en tiempo real
@@ -531,6 +532,7 @@ function Chat() {
     setPaso(prev.paso)
     setText('')
     setError(null)
+    setAvisoInput(null)
     setOferta(null) // la confianza no baja (monotónica), pero cerramos la oferta
     setUndoStack((s) => s.slice(0, -1))
   }
@@ -551,9 +553,9 @@ function Chat() {
     if (!val) return
     if (paso?.clave === 'nombre') {
       const err = nombreInvalido(val)
-      if (err) { setError(err); return }
+      if (err) { setAvisoInput(err); return }
     }
-    setError(null)
+    setAvisoInput(null)
     answer(val)
   }
 
@@ -643,15 +645,18 @@ function Chat() {
       )}
 
       {paso?.tipo === 'texto' && (
-        <form className="input-row" onSubmit={submitText}>
-          <input
-            autoFocus
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder={paso.placeholder || 'Escribe tu respuesta…'}
-          />
-          <button type="submit" disabled={!text.trim()} aria-label="Enviar">➤</button>
-        </form>
+        <>
+          {avisoInput && <p className="aviso-input">{avisoInput}</p>}
+          <form className="input-row" onSubmit={submitText}>
+            <input
+              autoFocus
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder={paso.placeholder || 'Escribe tu respuesta…'}
+            />
+            <button type="submit" disabled={!text.trim()} aria-label="Enviar">➤</button>
+          </form>
+        </>
       )}
 
       {paso?.tipo === 'sino' && (
