@@ -124,7 +124,7 @@ function CatalogoCarreras() {
 
   return (
     <>
-      <button className="dash-catalogo" onClick={abrir}>📚 Ver catálogo</button>
+      <button className="dash-catalogo" onClick={abrir}>Ver catálogo</button>
       {abierto && (
         <Modal titulo="Catálogo de carreras" onClose={() => setAbierto(false)}>
           {error && <p className="loading-text">{error}</p>}
@@ -138,9 +138,17 @@ function CatalogoCarreras() {
                 {grupos.map((g) => (
                   <li key={g.nombre} className="catalogo-item">
                     <span className="catalogo-nombre">{g.nombre}</span>
-                    <span className="catalogo-sedes">
-                      {g.sedes.map((s) => `${s.universidad} · ${s.centro} (${s.departamento})`).join('  ·  ')}
+                    <span className="catalogo-sede-count">
+                      {g.sedes.length} {g.sedes.length === 1 ? 'sede' : 'sedes'}
                     </span>
+                    <ul className="catalogo-sedes">
+                      {g.sedes.map((s, i) => (
+                        <li key={i} className="catalogo-sede">
+                          <span className="catalogo-sede-uni">{s.universidad}</span>
+                          <span className="catalogo-sede-detalle">{s.centro} · {s.departamento}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </li>
                 ))}
               </ul>
