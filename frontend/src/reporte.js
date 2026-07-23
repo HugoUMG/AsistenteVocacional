@@ -1,11 +1,11 @@
 import { jsPDF } from 'jspdf'
 import { COLORS } from './colors'
 
-const ACCENT = [108, 92, 231] // morado
-const VERDE = [0, 184, 148]
-const TEXT = [43, 39, 64]
-const MUTED = [122, 117, 150]
-const LIGHT = [240, 238, 254]
+const ACCENT = [29, 78, 216] // azul (--accent)
+const VERDE = [18, 41, 77] // azul marino (--navy), usado para los bullets de "por qué encaja"
+const TEXT = [15, 27, 45] // casi negro (--text)
+const MUTED = [92, 107, 128] // gris (--muted)
+const LIGHT = [238, 242, 249] // gris muy claro (--bg)
 
 const hexToRgb = (hex) => {
   const n = parseInt(hex.slice(1), 16)
