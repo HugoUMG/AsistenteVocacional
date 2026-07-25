@@ -102,6 +102,42 @@ es el mismo modelo — falta validación con orientadores humanos a ciegas.
 
 ---
 
+## Intento DESCARTADO: preguntas por microexperiencias (2026-07-25)
+
+Se probó y se **revirtió**. Vale leerlo antes de volver a intentarlo, porque la
+idea suena bien y falla por una razón que no es obvia.
+
+El cambio (solo prompt, en `SYSTEM` de `preguntas.py`) hacía que las preguntas
+adaptativas describieran **experiencias de la jornada laboral** ("¿cómo te
+sentirías si tu trabajo fuera resolver problemas con números todos los días?")
+en vez de materias, con ~1 de cada 3 en forma de rechazo y opciones graduadas;
+más un desempate que le devolvía a la IA su ranking anterior para que preguntara
+lo que separara al top.
+
+**Midió peor: 6/10 aciertos vs. 10/10 de la versión actual** (mismos 10 perfiles
+coherentes del experimento anterior). Causa: el formato "una experiencia + qué
+tanto te gustaría" es **unipolar**, así que invita a la respuesta socialmente
+deseable ("¿te gustaría enseñar a otros a cuidar su entorno?" — nadie dice que
+no), y en este catálogo ese "sí" empático siempre empuja hacia Trabajo Social y
+Pedagogía: 3 de los 4 fallos aterrizaron ahí. El desempate agravó el problema
+encerrando las preguntas siguientes en el par ya equivocado.
+
+Detalle completo, transcripciones y el diagnóstico que separa la culpa de cada
+parte: `docs/microexperiencias-experimento.md`.
+
+Si se retoma: **ítems de elección forzada** entre dos experiencias rivales
+("¿prefieres A o B?"), nunca "¿qué tanto te gustaría A?". En las mismas
+transcripciones, las preguntas que ya tenían esa forma mantuvieron el perfil
+correcto.
+
+⚠️ Aparte, quedó detectado: `preseleccionar()` (`app/filtro.py`) cuenta
+solapamiento de palabras **sin entender la negación**, así que una respuesta
+como "me desagradaría ver sangre" *sube* el puntaje de las carreras de salud.
+Hoy es benigno (el filtro solo recorta a 35 de ~111 y nunca sacó el área
+correcta en las pruebas), pero cualquier función de rechazo lo vuelve relevante.
+
+---
+
 ## Catálogo cargado (ciclo Quetzaltenango + Totonicapán cerrado, 2026-07-21)
 
 Todas las universidades con sede física en estos dos departamentos ya están

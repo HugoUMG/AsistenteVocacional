@@ -149,6 +149,113 @@ function enPartes(texto, max = 150) {
   return partes
 }
 
+// TTS: voz neuronal de Edge (edge-tts) vía el backend (/api/tts), que suena
+// natural en vez de la robótica de speechSynthesis. Si el backend/edge-tts
+// falla (API no oficial, puede romperse), cae a la voz nativa del navegador.
+let vozHabilitada = true
+let audioActual = null
+let velocidad = 1 // 1, 1.25 o 1.5 — el flujo se siente lento a velocidad normal
+const VELOCIDADES = [1, 1.25, 1.5]
+
+// Cachea el audio por texto exacto: las preguntas fijas siempre son el mismo
+// texto, así que se piden una sola vez (precargadas en cargarFijas()) y de ahí
+// en adelante salen del caché sin ida y vuelta al backend.
+const cacheAudio = new Map() // texto -> URL del blob
+
+// Quita lo que no debe LEERSE en voz alta pero sí debe VERSE en pantalla:
+// negrita markdown y acotaciones entre paréntesis ("(puedes elegir varios)").
+function limpiarParaVoz(texto) {
+  return (texto || '')
+    .replace(/\*\*/g, '')
+    .replace(/\([^)]*\)/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function hablarNativo(texto) {
+  if (!('speechSynthesis' in window)) return Promise.resolve()
+  return new Promise((resolve) => {
+    const u = new SpeechSynthesisUtterance(texto)
+    u.lang = 'es-MX'
+    u.rate = velocidad
+    u.onend = resolve
+    u.onerror = resolve
+    window.speechSynthesis.speak(u)
+  })
+}
+
+// Pide (o reutiliza del caché) el audio de un texto, SIN reproducirlo todavía.
+// Devuelve null si la voz está apagada/oculta o si falló (así el llamador cae
+// a hablarNativo en vez de intentar reproducir un blob vacío).
+async function cargarAudio(texto) {
+  const limpio = limpiarParaVoz(texto)
+  if (!vozHabilitada || document.hidden || !limpio) return null
+  if (cacheAudio.has(limpio)) return cacheAudio.get(limpio)
+  try {
+    const r = await fetch(`${API}/api/tts`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ texto: limpio }),
+    })
+    if (!r.ok) throw new Error('tts backend error')
+    const blob = await r.blob()
+    const url = URL.createObjectURL(blob)
+    cacheAudio.set(limpio, url)
+    return url
+  } catch {
+    return null
+  }
+}
+
+function reproducirUrl(url) {
+  return new Promise((resolve) => {
+    audioActual = new Audio(url)
+    audioActual.playbackRate = velocidad
+    audioActual.onended = resolve
+    audioActual.onerror = resolve
+    audioActual.play().catch(resolve)
+  })
+}
+
+// Habla y espera a que termine (evita que dos burbujas se lean encimadas);
+// resuelve de una vez si la voz está apagada o el texto viene vacío.
+async function hablar(texto) {
+  const limpio = limpiarParaVoz(texto)
+  if (!vozHabilitada || document.hidden || !limpio) return
+  const url = await cargarAudio(limpio)
+  if (url) await reproducirUrl(url)
+  else await hablarNativo(limpio)
+}
+
+// Sonido de "escribiendo" mientras la IA piensa: clics cortos sintetizados con
+// WebAudio, así no hay que servir ni cargar un archivo de audio.
+// ponytail: intervalo fijo; si se quiere ritmo humano, variar el delay por clic.
+let ctxTecleo = null
+let tecleoTimer = null
+function tecleo(encendido) {
+  if (!encendido) {
+    clearInterval(tecleoTimer)
+    tecleoTimer = null
+    return
+  }
+  if (tecleoTimer) return
+  ctxTecleo ||= new (window.AudioContext || window.webkitAudioContext)()
+  const clic = () => {
+    const t = ctxTecleo.currentTime
+    const osc = ctxTecleo.createOscillator()
+    const vol = ctxTecleo.createGain()
+    osc.type = 'square'
+    osc.frequency.value = 1400 + Math.random() * 700
+    vol.gain.setValueAtTime(0.025, t)
+    vol.gain.exponentialRampToValueAtTime(0.0001, t + 0.03)
+    osc.connect(vol).connect(ctxTecleo.destination)
+    osc.start(t)
+    osc.stop(t + 0.04)
+  }
+  clic()
+  tecleoTimer = setInterval(clic, 130)
+}
+
 // Guarda el perfil y pide el análisis de afinidad. Lanza error si falla.
 async function obtenerCarreras(respuestas) {
   let estudiante_id = 0
@@ -184,10 +291,10 @@ function Formato({ texto }) {
   return <>{nodos}</>
 }
 
-function Robot({ thinking, small }) {
+function Robot({ thinking, cargando, small }) {
   const s = small ? 34 : 96
   return (
-    <div className={`robot ${thinking ? 'thinking' : ''} ${small ? 'robot-sm' : ''}`}>
+    <div className={`robot ${thinking ? 'thinking' : ''} ${cargando ? 'cargando' : ''} ${small ? 'robot-sm' : ''}`}>
       <svg viewBox="0 0 100 100" width={s} height={s} aria-hidden="true">
         <line x1="50" y1="14" x2="50" y2="26" stroke="currentColor" strokeWidth="3" />
         <circle cx="50" cy="11" r="5" fill="currentColor" />
@@ -197,35 +304,6 @@ function Robot({ thinking, small }) {
         <rect x="40" y="62" width="20" height="4" rx="2" fill="#fff" opacity="0.8" />
       </svg>
     </div>
-  )
-}
-
-// Cabecera tipo app de mensajería: avatar + nombre + estado + medidor de perfil.
-function ChatHeader({ thinking, confianza }) {
-  return (
-    <header className="chat-header">
-      <div className="chat-avatar">
-        <Robot thinking={thinking} small />
-        <span className="chat-dot" aria-hidden="true" />
-      </div>
-      <div className="chat-id">
-        <span className="chat-name">Orienta</span>
-        <span className={`chat-status ${thinking ? 'esc' : ''}`}>
-          {thinking ? 'escribiendo…' : 'En línea · guía vocacional'}
-        </span>
-      </div>
-      {confianza > 0 && (
-        <div className="chat-conf" title="Qué tan definido va quedando tu perfil">
-          <div className="chat-conf-head">
-            <span className="chat-conf-label">Perfil</span>
-            <span className="chat-conf-pct">{confianza}%</span>
-          </div>
-          <div className="chat-conf-track">
-            <div className="chat-conf-fill" style={{ width: `${confianza}%` }} />
-          </div>
-        </div>
-      )}
-    </header>
   )
 }
 
@@ -291,12 +369,20 @@ function Opciones({ pregunta, onAnswer }) {
   const [sel, setSel] = useState([])
   const [otroOn, setOtroOn] = useState(false)
   const [otroText, setOtroText] = useState('')
+  const [saliendo, setSaliendo] = useState(null) // labels elegidos mientras se anima la salida
+
+  // Al responder: las no elegidas se desvanecen y la elegida se despide; recién
+  // entonces se avisa al chat (que muestra la elegida bajo la pregunta).
+  function responder(valor, elegidos) {
+    setSaliendo(elegidos)
+    setTimeout(() => onAnswer(valor), 300)
+  }
 
   function clickOpcion(label, i) {
     if (multiple) {
       setSel((s) => (s.includes(i) ? s.filter((x) => x !== i) : [...s, i]))
     } else {
-      onAnswer(label)
+      responder(label, [label])
     }
   }
 
@@ -308,7 +394,7 @@ function Opciones({ pregunta, onAnswer }) {
   function confirmarMulti() {
     const partes = sel.map((i) => pregunta.opciones[i].label)
     if (otroOn && otroText.trim()) partes.push(otroText.trim())
-    if (partes.length) onAnswer(partes.join(', '))
+    if (partes.length) responder(partes.join(', '), partes)
   }
 
   function enviarOtroUnica(e) {
@@ -332,13 +418,15 @@ function Opciones({ pregunta, onAnswer }) {
   }
 
   const puedeContinuar = sel.length > 0 || (otroOn && otroText.trim())
+  // Mientras se anima la salida: la elegida se despide, el resto se desvanece.
+  const salida = (label) => (saliendo ? (saliendo.includes(label) ? 'elegido' : 'saliendo') : '')
 
   return (
     <div className={`options choices ${pregunta.chips ? 'chips' : ''}`}>
       {pregunta.opciones.map((o, i) => (
         <button
           key={i}
-          className={`opt-color ${sel.includes(i) ? 'sel' : ''}`}
+          className={`opt-color ${sel.includes(i) ? 'sel' : ''} ${salida(o.label)}`}
           style={{ '--c': color(i) }}
           onClick={() => clickOpcion(o.label, i)}
         >
@@ -346,26 +434,43 @@ function Opciones({ pregunta, onAnswer }) {
         </button>
       ))}
 
-      <button
-        className={`opt-color otro ${otroOn ? 'sel' : ''}`}
-        style={{ '--c': '#5c6b80' }}
-        onClick={clickOtro}
-      >
-        Otro / especificar…
-      </button>
-
-      {multiple && otroOn && (
-        <input
-          className="otro-input"
-          autoFocus
-          value={otroText}
-          onChange={(e) => setOtroText(e.target.value)}
-          placeholder="Escribe tu respuesta…"
-        />
+      {multiple && otroOn ? (
+        // Ya elegida "Otro": la misma celda se convierte en el cuadro de texto
+        // (mismo tamaño/posición que el resto de opciones, no una fila aparte).
+        <div className="opt-color otro otro-activo sel" style={{ '--c': '#5c6b80' }}>
+          <input
+            className="otro-input-inline"
+            autoFocus
+            value={otroText}
+            onChange={(e) => setOtroText(e.target.value)}
+            placeholder="Escribe tu respuesta…"
+          />
+          <button
+            type="button"
+            className="otro-quitar"
+            aria-label="Quitar Otro"
+            title="Quitar Otro"
+            onClick={() => { setOtroOn(false); setOtroText('') }}
+          >
+            ×
+          </button>
+        </div>
+      ) : (
+        <button
+          className={`opt-color otro ${otroOn ? 'sel' : ''} ${salida('')}`}
+          style={{ '--c': '#5c6b80' }}
+          onClick={clickOtro}
+        >
+          Otro / especificar…
+        </button>
       )}
 
       {multiple && (
-        <button className="continuar-btn" onClick={confirmarMulti} disabled={!puedeContinuar}>
+        <button
+          className={`continuar-btn ${salida('')}`}
+          onClick={confirmarMulti}
+          disabled={!puedeContinuar}
+        >
           Continuar →
         </button>
       )}
@@ -393,16 +498,51 @@ function Chat() {
   const [ranking, setRanking] = useState([]) // radar en tiempo real
   const [confianzaChat, setConfianzaChat] = useState(0) // % de seguridad, monotónico (nunca baja)
   const [oferta, setOferta] = useState(null) // { pendiente, puedeSeguir } cuando ya se puede mostrar resultado
+  const [voz, setVoz] = useState(vozHabilitada)
+  const [vel, setVel] = useState(velocidad)
+  const [iniciado, setIniciado] = useState(false) // false = solo la burbuja flotante (pantalla tipo Siri)
+  const [hablando, setHablando] = useState(false) // true mientras suena el audio de la pregunta actual
+  const [elegida, setElegida] = useState(null) // respuesta recién elegida, visible bajo la pregunta mientras carga la siguiente
   const logRef = useRef(null)
 
   useEffect(() => {
     logRef.current?.scrollTo(0, logRef.current.scrollHeight)
   }, [history, cargando])
 
+  // Tecleo mientras la IA piensa (avisa que no se congeló). Sigue al botón de
+  // silencio: si la voz está apagada, tampoco suena.
+  useEffect(() => {
+    tecleo(cargando && voz)
+    return () => tecleo(false)
+  }, [cargando, voz])
+
+  // Envuelve hablar() para poder animar la burbuja mientras suena el audio.
+  async function decir(texto) {
+    setHablando(true)
+    await hablar(texto)
+    setHablando(false)
+  }
+
+  function iniciar() {
+    setIniciado(true)
+    decir(FIJAS[0].texto) // el saludo no se leyó al montar (falta el gesto del usuario para el audio)
+  }
+
+  // Último mensaje del bot/alerta (lo único que se muestra en pantalla; el
+  // historial completo sigue guardándose para que "Regresar" funcione igual).
+  const mensajeActual = [...history].reverse().find((m) => m.role !== 'user')
+
   // Sin departamento en la URL (se llegó sin pasar por /mapa): regresa al mapa.
   useEffect(() => {
     if (!depto) navigate('/mapa', { replace: true })
   }, [depto, navigate])
+
+  // Las 5 preguntas fijas son siempre el mismo texto: se precargan al entrar a
+  // la página (antes de tocar la burbuja) para que al mostrarlas ya salgan del
+  // caché y suenen sin el retraso de pedirle el audio a edge-tts.
+  useEffect(() => {
+    FIJAS.forEach((f) => cargarAudio(f.texto))
+  }, [])
 
   async function analizar(resp) {
     setPaso(null)
@@ -419,17 +559,29 @@ function Chat() {
     }
   }
 
-  // Muestra un mensaje del bot en varias burbujas, con una pausa de "escribiendo"
-  // entre cada una, para que se sienta un orientador y no un muro de texto.
+  // Muestra un mensaje del bot en varias burbujas. El texto de una pregunta
+  // adaptativa lo genera la IA al vuelo, así que su audio no puede estar en
+  // caché de antemano: se piden TODAS las partes en paralelo de una vez y solo
+  // se espera la primera. Mientras suena la parte 1, las demás ya están
+  // llegando, así que solo la primera burbuja tiene retraso perceptible.
   async function botDice(texto) {
     const partes = enPartes(texto)
+    const limpios = partes.map(limpiarParaVoz)
+    const audios = vozHabilitada ? limpios.map(cargarAudio) : []
     for (let i = 0; i < partes.length; i++) {
-      if (i > 0) {
-        setCargando(true)
-        await sleep(650)
-        setCargando(false)
-      }
+      setCargando(true)
+      const url = vozHabilitada ? await audios[i] : null
+      setCargando(false)
+      setElegida(null) // ya llegó la siguiente pregunta: se retira la respuesta anterior
       setHistory((h) => [...h, { role: 'bot', text: partes[i] }])
+      if (vozHabilitada) {
+        setHablando(true)
+        if (url) await reproducirUrl(url)
+        else await hablarNativo(limpios[i])
+        setHablando(false)
+      } else {
+        await sleep(650) // sin voz: mantiene el ritmo de conversación
+      }
     }
   }
 
@@ -465,6 +617,7 @@ function Chat() {
           setHistory((h) => [...h, { role: 'alerta', text: q.alerta_contradiccion }])
         }
         setPaso(null)
+        setElegida(null)
         setOferta({ pendiente: puedeSeguir ? pregunta : null, puedeSeguir })
       } else {
         // Debajo del mínimo: seguimos preguntando automáticamente.
@@ -503,8 +656,10 @@ function Chat() {
     if (fijasAns < FIJAS.length) {
       const q = { ...FIJAS[fijasAns] }
       q.texto = q.texto.replace('{nombre}', resp.nombre || '')
+      setElegida(null) // las fijas no esperan a la IA: no hace falta mostrar la elegida
       setPaso(q)
       setHistory((h) => [...h, { role: 'bot', text: q.texto }])
+      decir(q.texto)
       return
     }
     // El análisis final ya no se dispara solo: pedirAdaptativa ofrece la decisión
@@ -521,6 +676,7 @@ function Chat() {
     setHistory((h) => [...h, { role: 'user', text: respuesta }])
     setText('')
     setPaso(null)
+    setElegida(respuesta)
     avanzar(next)
   }
 
@@ -533,6 +689,7 @@ function Chat() {
     setText('')
     setError(null)
     setAvisoInput(null)
+    setElegida(null)
     setOferta(null) // la confianza no baja (monotónica), pero cerramos la oferta
     setUndoStack((s) => s.slice(0, -1))
   }
@@ -596,22 +753,60 @@ function Chat() {
   const hayControles = !cargando && (oferta || undoStack.length > 0 || error ||
     paso?.tipo === 'texto' || paso?.tipo === 'sino' || paso?.tipo === 'opcion' || esAdaptativa)
 
+  // Pantalla inicial: solo la burbuja flotante. Se toca para empezar (el click
+  // también sirve de gesto del usuario para que el navegador permita el audio).
+  if (!iniciado) {
+    return (
+      <div className="layout">
+        <div className="siri-idle" onClick={iniciar} role="button" tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && iniciar()}>
+          <Robot thinking />
+          <p className="siri-idle-hint">Toca para hablar con Orienta</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="layout">
-      <div className="chat">
-      <ChatHeader thinking={cargando} confianza={confianzaChat} />
+      <div className="chat siri">
+      <button
+        className="voz-toggle"
+        title={voz ? 'Silenciar voz' : 'Activar voz'}
+        onClick={() => {
+          vozHabilitada = !vozHabilitada
+          setVoz(vozHabilitada)
+          if (!vozHabilitada) { window.speechSynthesis?.cancel(); audioActual?.pause() }
+        }}
+      >
+        {voz ? '🔊' : '🔇'}
+      </button>
+      <button
+        className="vel-toggle"
+        title="Velocidad de la voz"
+        onClick={() => {
+          const next = VELOCIDADES[(VELOCIDADES.indexOf(velocidad) + 1) % VELOCIDADES.length]
+          velocidad = next
+          setVel(next)
+          if (audioActual) audioActual.playbackRate = next // aplica ya al audio que esté sonando
+        }}
+      >
+        {vel}×
+      </button>
+      {confianzaChat > 0 && (
+        <div className="siri-conf" title="Qué tan definido va quedando tu perfil">
+          Perfil <strong>{confianzaChat}%</strong>
+        </div>
+      )}
 
-      <div className="log" ref={logRef}>
-        {history.map((m, i) => (
-          <div key={i} className={`bubble ${m.role}`}>
-            <Formato texto={m.text} />
-          </div>
-        ))}
-        {cargando && (
-          <div className="bubble bot escribiendo">
-            <span></span><span></span><span></span>
-          </div>
+      <div className="siri-stage" ref={logRef}>
+        <Robot thinking={hablando} cargando={cargando} />
+        {mensajeActual && (
+          <p key={history.indexOf(mensajeActual)} className={`siri-texto ${mensajeActual.role}`}>
+            <Formato texto={mensajeActual.text} />
+          </p>
         )}
+        {elegida && <div className="elegida-chip">{elegida}</div>}
       </div>
 
       {hayControles && (
