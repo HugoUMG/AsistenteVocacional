@@ -2,8 +2,10 @@ import re
 import unicodedata
 from contextlib import asynccontextmanager
 
+import edge_tts
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, EmailStr, field_validator
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
@@ -148,6 +150,35 @@ def submit_survey(data: SurveyIn, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(resp)
     return resp
+
+
+class TtsIn(BaseModel):
+    texto: str
+
+
+# ponytail: edge-tts es una API no oficial (reversa el servicio "Read Aloud" de
+# Microsoft) — gratis y con voz neuronal, pero puede romperse si Microsoft
+# cambia el endpoint. Si eso pasa, cae aquí con un 502 y el frontend sigue
+# funcionando con la voz nativa del navegador (ver hablar() en Chat.jsx).
+_VOZ_TTS = "es-MX-DaliaNeural"
+
+
+@app.post("/api/tts")
+async def tts(data: TtsIn):
+    texto = data.texto.strip().replace("**", "")
+    if not texto:
+        raise HTTPException(status_code=400, detail="Texto vacío")
+
+    async def generar():
+        try:
+            comunicador = edge_tts.Communicate(texto, _VOZ_TTS)
+            async for chunk in comunicador.stream():
+                if chunk["type"] == "audio":
+                    yield chunk["data"]
+        except Exception as e:
+            print(f"[tts] edge-tts falló: {e}")
+
+    return StreamingResponse(generar(), media_type="audio/mpeg")
 
 
 class NextIn(BaseModel):
