@@ -6,6 +6,7 @@ import Inicio from './Inicio.jsx'
 import Acerca from './Acerca.jsx'
 import Catalogo from './Catalogo.jsx'
 import Parametros from './Parametros.jsx'
+import Psicometrico from './Psicometrico.jsx'
 import Mapa from './Mapa.jsx'
 import Chat from './Chat.jsx'
 
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/acerca" element={<Acerca />} />
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/parametros" element={<Parametros />} />
+        <Route path="/psicometrico" element={<Psicometrico />} />
         <Route path="/mapa" element={<Mapa />} />
         <Route path="/chat" element={<Chat />} />
       </Routes>

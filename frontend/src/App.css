@@ -1405,3 +1405,227 @@
   transition: color 0.15s;
 }
 .terminar-btn:hover { color: var(--accent); }
+
+/* --- Examen psicométrico (pestaña independiente del chat) --- */
+.psi-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0 18px;
+}
+.psi-tab {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.psi-tab.sel { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.psi-progreso { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.psi-progreso-txt { color: var(--muted); font-size: 13px; white-space: nowrap; }
+
+.psi-barra {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+.psi-barra > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--navy), var(--accent));
+  transition: width 0.3s ease;
+}
+
+.psi-instruccion {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background: var(--bot-bubble);
+  border-radius: 0 10px 10px 0;
+  color: var(--navy);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.psi-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.psi-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+}
+.psi-enunciado {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.55;
+  display: flex;
+  gap: 10px;
+}
+.psi-num {
+  flex: 0 0 auto;
+  min-width: 26px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--bot-bubble);
+  color: var(--navy);
+  font-size: 12.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grid, no flex: con flex-wrap la escala se partía en 2+2+1 y el último botón
+   ("Totalmente de acuerdo") quedaba del doble de ancho que los demás — en una
+   escala ordinal eso sesga la elección hacia el botón grande. */
+/* minmax(0, 1fr) y no 1fr: con 1fr la columna de la etiqueta más larga
+   ("Totalmente") crece por su min-content y queda unos píxeles más ancha que
+   las demás — el mismo sesgo de tamaño que se buscaba eliminar. */
+.psi-escala { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.psi-opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+}
+/* Opciones de texto (secciones de razonamiento) */
+.psi-opciones button {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line-2);
+  background: #fff;
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.psi-opciones button:hover { border-color: var(--accent); color: var(--accent); }
+.psi-opciones button.sel {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* Escala de caritas (personalidad). --carita lo pone el JSX por botón: rojo el
+   1, verde el 5. El color NO rellena el botón: va en el trazo de la carita, el
+   borde y un tinte suave, para no depender de texto blanco sobre amarillo o
+   lima, que no contrasta. */
+.psi-escala button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 4px;
+  border-radius: 12px;
+  border: 1px solid var(--line-2);
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.psi-escala button svg { transition: transform 0.12s; }
+.psi-escala button:hover { color: var(--carita); border-color: var(--carita); }
+.psi-escala button:hover svg { transform: scale(1.08); }
+.psi-escala button.sel {
+  color: var(--carita);
+  border-color: var(--carita);
+  background: color-mix(in srgb, var(--carita) 12%, #fff);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--carita) 20%, transparent);
+}
+.psi-escala button.sel svg { transform: scale(1.12); }
+
+.psi-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0 10px;
+}
+.psi-nav .hero-btn { margin-left: auto; }
+.psi-nav .hero-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.psi-btn-sec {
+  background: none;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+.psi-btn-sec:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.psi-btn-sec:disabled { opacity: 0.4; cursor: not-allowed; }
+.psi-faltan { color: var(--muted); font-size: 13px; }
+
+.psi-error {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fde8e8;
+  color: #8a1c1c;
+  font-size: 14.5px;
+}
+
+/* Resultados */
+.psi-bloque {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.psi-bloque h2 { margin: 0 0 16px; color: var(--navy); font-size: 19px; }
+.psi-bloque h3 { margin: 0 0 8px; color: var(--navy); font-size: 15px; }
+
+.psi-rasgo { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.psi-rasgo-nombre { flex: 0 0 190px; color: var(--muted); font-size: 13.5px; }
+.psi-rasgo-valor { flex: 0 0 34px; text-align: right; color: var(--navy); font-weight: 700; font-size: 14px; }
+
+.psi-flags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.psi-flags span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+/* Verde/ámbar semánticos (validez del protocolo), igual que el badge de
+   confianza del dashboard: no son color de marca. */
+.psi-flags .ok { background: #e6f6ec; color: #1b6b3a; }
+.psi-flags .alerta { background: #fdf0dc; color: #8a5a12; }
+
+.psi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.psi-grid .psi-bloque { margin-bottom: 0; }
+
+.psi-dato-grande { margin: 0 0 12px; color: var(--navy); font-size: 40px; font-weight: 800; line-height: 1; }
+.psi-dato-grande span { color: var(--muted); font-size: 20px; font-weight: 600; }
+
+.psi-metricas { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.psi-metricas li { color: var(--muted); font-size: 13.5px; }
+.psi-metricas strong { color: var(--navy); }
+
+.psi-texto { margin: 14px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+.psi-listas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.psi-listas ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; line-height: 1.7; }
+.psi-nota { color: var(--muted); font-size: 12.5px; text-align: center; margin: 8px 0 30px; }
+
+@media (max-width: 620px) {
+  /* Las caritas SÍ caben en una fila de 5 en móvil (a diferencia de las
+     etiquetas de texto, que se partían en 2+2+1): se mantiene el continuo
+     ordenado y solo se achica la carita y su etiqueta. */
+  .psi-escala { gap: 5px; }
+  .psi-escala button { padding: 8px 2px; font-size: 10.5px; gap: 3px; }
+  .psi-escala button svg { width: 28px; height: 28px; }
+  .psi-opciones { grid-template-columns: 1fr; }
+  .psi-rasgo-nombre { flex: 0 0 130px; font-size: 12.5px; }
+}
