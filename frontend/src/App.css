@@ -27,6 +27,16 @@
   text-decoration: none;
   margin-right: auto;
 }
+.nav-logo svg {
+  padding: 5px;
+  border-radius: 50%;
+  color: var(--accent);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.6), rgba(219, 234, 254, 0.3));
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 4px 10px -6px rgba(18, 41, 77, 0.35);
+}
 .nav-links {
   display: flex;
   gap: 22px;
@@ -393,12 +403,17 @@
   border-radius: 15px;
   margin-bottom: 16px;
   color: var(--accent);
-  background: linear-gradient(150deg, var(--bot-bubble), #f2f6fe);
-  box-shadow: inset 0 0 0 1px rgba(29, 78, 216, 0.1);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.6), rgba(219, 234, 254, 0.3));
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 6px 16px -10px rgba(18, 41, 77, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.2s;
 }
 .cat-card:hover .cat-icono {
-  color: #fff;
-  background: linear-gradient(150deg, var(--accent), var(--accent-2));
+  color: var(--accent);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 10px 22px -10px rgba(14, 165, 233, 0.5);
 }
 .cat-card h3 {
   margin: 0 0 12px;
@@ -673,95 +688,119 @@
   .chat { height: min(94vh, 820px); border-radius: 22px; }
 }
 
-/* --- Cabecera del chat --- */
-.chat-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 18px 24px;
-  background: linear-gradient(120deg, var(--navy-2) 0%, var(--navy) 58%, #17376b 100%);
-  color: #fff;
-}
-/* filo de luz que separa el header del historial */
-.chat-header::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
-}
-.chat-avatar {
-  position: relative;
-  flex-shrink: 0;
-}
-.chat-dot {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #22c55e;
-  border: 2.5px solid var(--navy);
-  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
-  animation: pulso 2s ease-out infinite;
-}
-@keyframes pulso {
-  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
-  70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-}
-.chat-id {
+/* --- Pantalla inicial: solo la burbuja flotante (toca para empezar) --- */
+.siri-idle {
+  flex: 1;
+  width: 100%;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  margin-right: auto;
-  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  cursor: pointer;
 }
-.chat-name { font-size: 17px; font-weight: 800; letter-spacing: 0.2px; }
-.chat-status { font-size: 12.5px; color: #b9cbe8; }
-.chat-status.esc { color: var(--accent-2); font-style: italic; }
-.chat-conf {
-  flex-shrink: 0;
-  width: 134px;
-  background: rgba(255, 255, 255, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-  padding: 9px 13px;
-  backdrop-filter: blur(6px);
+.siri-idle-hint {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--muted);
 }
-.chat-conf-head {
+
+/* --- Chat estilo Siri: solo el mensaje actual + orbe, sin historial visible --- */
+.chat.siri {
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.08), transparent 55%), var(--card);
+}
+/* --- Botones flotantes: vidrio esmerilado (ice glass) --- */
+.voz-toggle,
+.vel-toggle {
+  position: absolute;
+  top: 14px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.55), rgba(219, 234, 254, 0.25));
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 6px 16px -8px rgba(18, 41, 77, 0.3);
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+  z-index: 2;
+}
+.voz-toggle:hover,
+.vel-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-2);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 8px 20px -8px rgba(14, 165, 233, 0.45);
+}
+.voz-toggle {
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.vel-toggle {
+  right: 62px;
+  padding: 8px 13px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.siri-conf {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.siri-conf strong { color: var(--accent); }
+
+.siri-stage {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 6px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  text-align: center;
 }
-.chat-conf-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: #b9cbe8; font-weight: 700; }
-.chat-conf-pct { font-size: 14px; font-weight: 800; color: #fff; font-variant-numeric: tabular-nums; }
-.chat-conf-track {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.16);
-  border-radius: 999px;
-  overflow: hidden;
+.siri-stage .robot {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
 }
-.chat-conf-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent-2), #7dd3fc);
-  box-shadow: 0 0 12px rgba(14, 165, 233, 0.6);
-  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+.siri-stage .robot svg { width: 56px; height: 56px; }
+.siri-texto {
+  max-width: 560px;
+  font-size: 19px;
+  line-height: 1.42;
+  font-weight: 600;
+  color: var(--text);
+  animation: pop 0.35s ease;
+}
+.siri-texto.alerta {
+  color: #8a5a00;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 500;
 }
 
 /* --- Footer tipo dock (controles de respuesta) --- */
 .chat-footer {
   flex-shrink: 0;
-  max-height: 60%;
+  max-height: 82%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px 24px 22px;
+  gap: 6px;
+  padding: 12px 20px 14px;
   border-top: 1px solid var(--line);
   background: linear-gradient(180deg, var(--card), var(--bg2));
   scrollbar-width: thin;
@@ -770,7 +809,7 @@
 .chat-footer::-webkit-scrollbar { width: 8px; }
 .chat-footer::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 999px; }
 
-/* --- Robot --- */
+/* --- Robot: burbuja de vidrio esmerilado (ice glass) --- */
 .robot {
   width: 120px;
   height: 120px;
@@ -778,18 +817,26 @@
   display: grid;
   place-items: center;
   color: var(--accent);
-  background: radial-gradient(circle at 50% 35%, #fff, var(--bot-bubble));
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.55), rgba(219, 234, 254, 0.28));
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow:
-    0 0 0 8px rgba(18, 41, 77, 0.08),
-    0 12px 30px -8px rgba(18, 41, 77, 0.5);
+    0 0 0 8px rgba(14, 165, 233, 0.07),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -6px 14px rgba(14, 165, 233, 0.12),
+    0 12px 30px -10px rgba(18, 41, 77, 0.45);
   animation: bob 3s ease-in-out infinite;
 }
 .robot.robot-sm {
   width: 46px;
   height: 46px;
-  color: #fff;
-  background: linear-gradient(150deg, var(--accent), var(--accent-2));
-  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.4);
+  color: var(--accent);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.55), rgba(219, 234, 254, 0.28));
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 4px 14px -4px rgba(18, 41, 77, 0.35);
   animation: none;
 }
 
@@ -808,6 +855,27 @@
 }
 
 .robot.thinking { animation: bob 1s ease-in-out infinite; }
+
+/* Cargando (la IA está pensando): reemplaza los "..." — el robot rebota y le
+   da vueltas un anillo, para que se vea que sigue trabajando. */
+.robot.cargando {
+  position: relative;
+  animation: bob 0.75s ease-in-out infinite;
+}
+.robot.cargando::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  border-right-color: var(--accent-2, var(--accent));
+  opacity: 0.75;
+  animation: girar 0.9s linear infinite;
+}
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
 .robot.robot-sm.thinking { animation: nod 0.9s ease-in-out infinite; }
 @keyframes nod {
   0%, 100% { transform: rotate(-5deg); }
@@ -859,26 +927,6 @@
   transition: width 0.6s ease;
 }
 
-/* --- Historial de mensajes --- */
-.log {
-  flex: 1;
-  width: 100%;
-  min-height: 0;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 28px 26px;
-  scroll-behavior: smooth;
-  background:
-    radial-gradient(circle at 15% 6%, rgba(14, 165, 233, 0.07), transparent 40%),
-    radial-gradient(circle at 85% 96%, rgba(29, 78, 216, 0.06), transparent 42%),
-    var(--bg2);
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-2) transparent;
-}
-.log::-webkit-scrollbar { width: 8px; }
-.log::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 999px; }
 
 .bubble {
   max-width: 76%;
@@ -982,8 +1030,23 @@
   justify-content: center;
 }
 .options.choices {
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+}
+/* "Otro / especificar…" y "Continuar" ocupan las dos columnas */
+.options.choices .opt-color.otro,
+.options.choices .continuar-btn {
+  grid-column: 1 / -1;
+}
+/* El banco de palabras son 15 opciones cortas: caben en 3 columnas */
+.options.choices.chips { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 860px) {
+  .options.choices.chips { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .options.choices,
+  .options.choices.chips { grid-template-columns: 1fr; }
 }
 
 /* Banco de palabras: chips que fluyen en varias filas */
@@ -1030,16 +1093,17 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 13px;
-  text-align: left;
+  justify-content: center;
+  gap: 11px;
+  text-align: center;
   border: 1.5px solid var(--line);
   background: var(--card);
   color: var(--text);
-  border-radius: 15px;
-  padding: 15px 18px;
-  font-size: 15px;
+  border-radius: 11px;
+  padding: 7px 40px 7px 14px; /* espacio a la derecha para el círculo, que ya no está en el flujo */
+  font-size: 13.5px;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.3;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: transform 0.14s, border-color 0.16s, background 0.16s, box-shadow 0.18s;
@@ -1048,25 +1112,28 @@
 .opt-color::before {
   content: '';
   flex-shrink: 0;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--c);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 16%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 16%, transparent);
   transition: box-shadow 0.16s, transform 0.16s;
 }
-/* círculo de selección (radio/checkbox) a la derecha */
+/* círculo de selección (radio/checkbox): fuera del flujo, pegado a la derecha
+   de la celda; el texto queda centrado sin que el círculo lo empuje. */
 .opt-color::after {
   content: '';
-  flex-shrink: 0;
-  margin-left: auto;
-  width: 22px;
-  height: 22px;
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border: 2px solid var(--line-2);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 13px;
+  background-size: 11px;
   transition: border-color 0.16s, background-color 0.16s;
 }
 .opt-color:hover {
@@ -1077,17 +1144,62 @@
 }
 .opt-color:hover::before { transform: scale(1.12); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); }
 .opt-color:hover::after { border-color: var(--c); }
+/* Seleccionada: SIEMPRE el azul de marca, no el color propio de la opción —
+   los tonos negro/gris de la paleta casi no se notaban como "elegida". */
 .opt-color.sel {
-  border-color: var(--c);
-  background: color-mix(in srgb, var(--c) 11%, #fff);
-  box-shadow: 0 12px 28px -18px var(--c);
+  border-color: var(--accent);
+  border-width: 2px;
+  background: color-mix(in srgb, var(--accent) 14%, #fff);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent),
+    0 12px 28px -18px var(--accent);
+}
+.opt-color.sel::before {
+  background: var(--accent);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
 }
 .opt-color.sel::after {
-  border-color: var(--c);
-  background-color: var(--c);
+  border-color: var(--accent);
+  background-color: var(--accent);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
 }
 .opt-color.otro { font-style: italic; color: var(--muted); }
+
+/* Salida al responder: las no elegidas se desvanecen, la elegida se despide.
+   Dura lo mismo que el setTimeout de responder() en Chat.jsx (300ms). */
+.opt-color.saliendo,
+.continuar-btn.saliendo {
+  animation: opt-salir 0.3s ease forwards;
+  pointer-events: none;
+}
+.opt-color.elegido {
+  animation: opt-elegido 0.3s ease forwards;
+  pointer-events: none;
+}
+@keyframes opt-salir {
+  to { opacity: 0; transform: scale(0.95); }
+}
+@keyframes opt-elegido {
+  to { transform: translateY(-10px) scale(1.04); opacity: 0.85; }
+}
+
+/* La respuesta elegida queda bajo la pregunta mientras carga la siguiente. */
+.elegida-chip {
+  max-width: 520px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, #fff);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  animation: chip-entra 0.35s ease;
+}
+@keyframes chip-entra {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+}
 
 /* chips: pastillas compactas, sin el círculo de la derecha */
 .options.chips .opt-color {
@@ -1103,22 +1215,49 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 16%, transparent);
 }
 .options.chips .opt-color::after { display: none; }
-.options.chips .otro-input,
+.options.chips .opt-color.otro-activo,
 .options.chips .continuar-btn {
   flex: 1 0 100%;
 }
 
-.otro-input {
-  width: 100%;
-  border: 1.5px solid var(--accent);
-  background: var(--bg2);
-  border-radius: 13px;
-  padding: 13px 16px;
-  font-size: 15px;
+/* Input "Otro" inline: la misma celda de opción se convierte en cuadro de
+   texto (mismo tamaño/posición), en vez de una fila aparte debajo. */
+.otro-input-inline {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
   outline: none;
-  transition: box-shadow 0.2s;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  padding: 0;
 }
-.otro-input:focus { box-shadow: 0 0 0 4px var(--ring); }
+.otro-input-inline::placeholder { color: var(--muted); font-style: italic; }
+
+/* El check decorativo no sirve aquí (no es una opción "clic para elegir"):
+   se reemplaza por un botón real para poder deseleccionar "Otro". */
+.opt-color.otro-activo::after { display: none; }
+.otro-quitar {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--line-2);
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s;
+}
+.otro-quitar:hover { background: #c0392b; }
 
 .continuar-btn {
   align-self: stretch;
@@ -1126,12 +1265,12 @@
   background: linear-gradient(135deg, var(--accent), #2563eb);
   color: #fff;
   border-radius: 999px;
-  padding: 15px;
-  font-size: 15.5px;
+  padding: 9px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.2px;
   cursor: pointer;
-  margin-top: 4px;
+  margin-top: 2px;
   box-shadow: 0 14px 30px -14px rgba(29, 78, 216, 0.75);
   transition: transform 0.14s, box-shadow 0.2s, filter 0.2s;
 }
@@ -1211,27 +1350,6 @@
   min-height: 20px; /* evita saltos al cambiar de mensaje */
 }
 
-/* --- Indicador "escribiendo" entre preguntas --- */
-.bubble.escribiendo {
-  align-self: flex-start;
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
-}
-.bubble.escribiendo span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--muted);
-  animation: blink-dot 1.2s infinite;
-}
-.bubble.escribiendo span:nth-child(2) { animation-delay: 0.2s; }
-.bubble.escribiendo span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes blink-dot {
-  0%, 60%, 100% { opacity: 0.25; }
-  30% { opacity: 1; }
-}
-
 /* --- Oferta: ver resultado o seguir chateando --- */
 .oferta {
   width: 100%;
@@ -1287,3 +1405,227 @@
   transition: color 0.15s;
 }
 .terminar-btn:hover { color: var(--accent); }
+
+/* --- Examen psicométrico (pestaña independiente del chat) --- */
+.psi-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0 18px;
+}
+.psi-tab {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.psi-tab.sel { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.psi-progreso { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.psi-progreso-txt { color: var(--muted); font-size: 13px; white-space: nowrap; }
+
+.psi-barra {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+.psi-barra > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--navy), var(--accent));
+  transition: width 0.3s ease;
+}
+
+.psi-instruccion {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background: var(--bot-bubble);
+  border-radius: 0 10px 10px 0;
+  color: var(--navy);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.psi-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.psi-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+}
+.psi-enunciado {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.55;
+  display: flex;
+  gap: 10px;
+}
+.psi-num {
+  flex: 0 0 auto;
+  min-width: 26px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--bot-bubble);
+  color: var(--navy);
+  font-size: 12.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grid, no flex: con flex-wrap la escala se partía en 2+2+1 y el último botón
+   ("Totalmente de acuerdo") quedaba del doble de ancho que los demás — en una
+   escala ordinal eso sesga la elección hacia el botón grande. */
+/* minmax(0, 1fr) y no 1fr: con 1fr la columna de la etiqueta más larga
+   ("Totalmente") crece por su min-content y queda unos píxeles más ancha que
+   las demás — el mismo sesgo de tamaño que se buscaba eliminar. */
+.psi-escala { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.psi-opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+}
+/* Opciones de texto (secciones de razonamiento) */
+.psi-opciones button {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line-2);
+  background: #fff;
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.psi-opciones button:hover { border-color: var(--accent); color: var(--accent); }
+.psi-opciones button.sel {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* Escala de caritas (personalidad). --carita lo pone el JSX por botón: rojo el
+   1, verde el 5. El color NO rellena el botón: va en el trazo de la carita, el
+   borde y un tinte suave, para no depender de texto blanco sobre amarillo o
+   lima, que no contrasta. */
+.psi-escala button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 4px;
+  border-radius: 12px;
+  border: 1px solid var(--line-2);
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.psi-escala button svg { transition: transform 0.12s; }
+.psi-escala button:hover { color: var(--carita); border-color: var(--carita); }
+.psi-escala button:hover svg { transform: scale(1.08); }
+.psi-escala button.sel {
+  color: var(--carita);
+  border-color: var(--carita);
+  background: color-mix(in srgb, var(--carita) 12%, #fff);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--carita) 20%, transparent);
+}
+.psi-escala button.sel svg { transform: scale(1.12); }
+
+.psi-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0 10px;
+}
+.psi-nav .hero-btn { margin-left: auto; }
+.psi-nav .hero-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.psi-btn-sec {
+  background: none;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+.psi-btn-sec:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.psi-btn-sec:disabled { opacity: 0.4; cursor: not-allowed; }
+.psi-faltan { color: var(--muted); font-size: 13px; }
+
+.psi-error {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fde8e8;
+  color: #8a1c1c;
+  font-size: 14.5px;
+}
+
+/* Resultados */
+.psi-bloque {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.psi-bloque h2 { margin: 0 0 16px; color: var(--navy); font-size: 19px; }
+.psi-bloque h3 { margin: 0 0 8px; color: var(--navy); font-size: 15px; }
+
+.psi-rasgo { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.psi-rasgo-nombre { flex: 0 0 190px; color: var(--muted); font-size: 13.5px; }
+.psi-rasgo-valor { flex: 0 0 34px; text-align: right; color: var(--navy); font-weight: 700; font-size: 14px; }
+
+.psi-flags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.psi-flags span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+/* Verde/ámbar semánticos (validez del protocolo), igual que el badge de
+   confianza del dashboard: no son color de marca. */
+.psi-flags .ok { background: #e6f6ec; color: #1b6b3a; }
+.psi-flags .alerta { background: #fdf0dc; color: #8a5a12; }
+
+.psi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.psi-grid .psi-bloque { margin-bottom: 0; }
+
+.psi-dato-grande { margin: 0 0 12px; color: var(--navy); font-size: 40px; font-weight: 800; line-height: 1; }
+.psi-dato-grande span { color: var(--muted); font-size: 20px; font-weight: 600; }
+
+.psi-metricas { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.psi-metricas li { color: var(--muted); font-size: 13.5px; }
+.psi-metricas strong { color: var(--navy); }
+
+.psi-texto { margin: 14px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+.psi-listas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.psi-listas ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; line-height: 1.7; }
+.psi-nota { color: var(--muted); font-size: 12.5px; text-align: center; margin: 8px 0 30px; }
+
+@media (max-width: 620px) {
+  /* Las caritas SÍ caben en una fila de 5 en móvil (a diferencia de las
+     etiquetas de texto, que se partían en 2+2+1): se mantiene el continuo
+     ordenado y solo se achica la carita y su etiqueta. */
+  .psi-escala { gap: 5px; }
+  .psi-escala button { padding: 8px 2px; font-size: 10.5px; gap: 3px; }
+  .psi-escala button svg { width: 28px; height: 28px; }
+  .psi-opciones { grid-template-columns: 1fr; }
+  .psi-rasgo-nombre { flex: 0 0 130px; font-size: 12.5px; }
+}

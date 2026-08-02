@@ -62,6 +62,21 @@ class RespuestaCuestionario(Base):
     estudiante: Mapped["Estudiante"] = relationship(back_populates="respuestas")
 
 
+class ResultadoPsicometrico(Base):
+    """Examen psicométrico de 100 ítems (pestaña aparte del chat vocacional).
+    Guarda las respuestas crudas, los puntajes calculados y el resumen de la IA."""
+
+    __tablename__ = "resultados_psicometricos"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    session_id: Mapped[str] = mapped_column(String(64), index=True)
+    # {id_item: valor}. Personalidad = 1..5 (escala Likert); resto = índice de opción.
+    respuestas: Mapped[dict] = mapped_column(JSON)
+    puntajes: Mapped[dict] = mapped_column(JSON)
+    resumen: Mapped[dict | None] = mapped_column(JSON, default=None)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
 class UsoTokens(Base):
     """Log de consumo de tokens por CADA llamada a Gemini, para estimar costo y
     presupuesto. El total por sesión = SUMA de total_tokens agrupando por

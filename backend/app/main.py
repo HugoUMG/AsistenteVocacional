@@ -1,16 +1,19 @@
 import re
 import unicodedata
 from contextlib import asynccontextmanager
+from typing import Annotated
 
+import edge_tts
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, EmailStr, field_validator
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
-from app import models, recomendar, preguntas, extras
+from app import models, recomendar, preguntas, extras, psicometrico
 
 
 @asynccontextmanager
@@ -79,6 +82,12 @@ def _tiene_groseria(nombre: str) -> bool:
 
 
 # --- Schemas (validación en la frontera: datos del navegador) ---
+# El session_id lo manda el navegador (un UUID, 36 chars) y se guarda en columnas
+# VARCHAR(64) de uso_tokens y resultados_psicometricos. Sin el tope, uno más largo
+# reventaba el INSERT y salía como 500 sin manejar (psycopg StringDataRightTruncation).
+SessionId = Annotated[str | None, Field(default=None, max_length=64)]
+
+
 class RegisterIn(BaseModel):
     nombre: str
     email: EmailStr | None = None
@@ -107,7 +116,7 @@ class EstudianteOut(BaseModel):
 class SurveyIn(BaseModel):
     estudiante_id: int
     respuestas: dict
-    session_id: str | None = None  # para atribuir el uso de tokens a la sesión
+    session_id: SessionId = None  # para atribuir el uso de tokens a la sesión
 
 
 class SurveyOut(BaseModel):
@@ -150,9 +159,38 @@ def submit_survey(data: SurveyIn, db: Session = Depends(get_db)):
     return resp
 
 
+class TtsIn(BaseModel):
+    texto: str
+
+
+# ponytail: edge-tts es una API no oficial (reversa el servicio "Read Aloud" de
+# Microsoft) — gratis y con voz neuronal, pero puede romperse si Microsoft
+# cambia el endpoint. Si eso pasa, cae aquí con un 502 y el frontend sigue
+# funcionando con la voz nativa del navegador (ver hablar() en Chat.jsx).
+_VOZ_TTS = "es-MX-DaliaNeural"
+
+
+@app.post("/api/tts")
+async def tts(data: TtsIn):
+    texto = data.texto.strip().replace("**", "")
+    if not texto:
+        raise HTTPException(status_code=400, detail="Texto vacío")
+
+    async def generar():
+        try:
+            comunicador = edge_tts.Communicate(texto, _VOZ_TTS)
+            async for chunk in comunicador.stream():
+                if chunk["type"] == "audio":
+                    yield chunk["data"]
+        except Exception as e:
+            print(f"[tts] edge-tts falló: {e}")
+
+    return StreamingResponse(generar(), media_type="audio/mpeg")
+
+
 class NextIn(BaseModel):
     respuestas: dict
-    session_id: str | None = None
+    session_id: SessionId = None
 
 
 @app.get("/api/departamentos")
@@ -263,7 +301,7 @@ class SimularIn(BaseModel):
     carrera: str
     descripcion: str
     respuestas: dict
-    session_id: str | None = None
+    session_id: SessionId = None
 
 
 @app.post("/api/simular-dia")
@@ -281,7 +319,7 @@ class CompararIn(BaseModel):
     carrera_b: str
     descripcion_b: str
     respuestas: dict
-    session_id: str | None = None
+    session_id: SessionId = None
 
 
 @app.post("/api/comparar")
@@ -295,6 +333,74 @@ def comparar(data: CompararIn, db: Session = Depends(get_db)):
     )
     _registrar_uso(db, data.session_id, "comparar", uso)
     return cmp.model_dump()
+
+
+class PsicometricoIn(BaseModel):
+    # {"1": 5, "41": 2, ...} — el JSON del navegador manda las claves como texto.
+    respuestas: dict[int, int]
+    tiempos: dict[str, int] = {}  # segundos por categoría
+    session_id: SessionId = None
+
+    @field_validator("respuestas")
+    @classmethod
+    def _rango_valido(cls, v: dict[int, int]) -> dict[int, int]:
+        for item, valor in v.items():
+            if not 1 <= item <= 100:
+                raise ValueError(f"Ítem fuera de rango: {item}")
+            # Ítems 1-40: escala Likert 1..5. Ítems 41-100: índice de opción 0..3.
+            ok = 1 <= valor <= 5 if item <= 40 else 0 <= valor <= 3
+            if not ok:
+                raise ValueError(f"Valor fuera de rango en el ítem {item}: {valor}")
+        # Los 40 de personalidad son obligatorios: con menos, la consistencia y la
+        # deseabilidad social salían en 0% y la interfaz las pintaba como alerta
+        # roja sobre CERO datos, que es indistinguible de haberse contradicho.
+        # Las de razonamiento sí pueden ir en blanco (eso es lo que mide 'intentadas').
+        if sum(1 for i in v if i <= 40) != 40:
+            raise ValueError("Faltan respuestas de la sección de personalidad (son las 40).")
+        return v
+
+    @field_validator("tiempos")
+    @classmethod
+    def _tiempos_sanos(cls, v: dict[str, int]) -> dict[str, int]:
+        # El navegador reporta estos segundos y terminan dentro del prompt de la
+        # IA: se acotan a [0, 2h] para que un valor absurdo o negativo no genere
+        # una lectura sin sentido. ponytail: se recorta, no se rechaza — que un
+        # cronómetro raro no le tire el examen encima al estudiante.
+        return {k: max(0, min(7200, seg)) for k, seg in v.items()}
+
+
+@app.get("/api/psicometrico/preguntas")
+def psicometrico_preguntas():
+    """Banco de 100 ítems SIN la clave de respuestas (vive solo en el backend)."""
+    return psicometrico.preguntas()
+
+
+@app.post("/api/psicometrico")
+def psicometrico_calificar(data: PsicometricoIn, db: Session = Depends(get_db)):
+    puntajes = psicometrico.calificar(data.respuestas, data.tiempos)
+    fila = models.ResultadoPsicometrico(
+        session_id=data.session_id or "sin-sesion",
+        respuestas={str(k): v for k, v in data.respuestas.items()},
+        puntajes=puntajes,
+    )
+    db.add(fila)
+    db.commit()
+    db.refresh(fila)
+
+    # El resumen es un extra: si Gemini no está disponible, el estudiante se
+    # queda igual con sus puntajes ya guardados en vez de perder el examen.
+    resumen = None
+    if recomendar.hay_api_key():
+        try:
+            res, uso = psicometrico.resumen(puntajes)
+            resumen = res.model_dump()
+            fila.resumen = resumen
+            db.commit()
+            _registrar_uso(db, data.session_id, "psicometrico", uso)
+        except Exception as e:
+            print(f"[psicometrico] no se pudo generar el resumen con IA: {e}")
+
+    return {"id": fila.id, "puntajes": puntajes, "resumen": resumen}
 
 
 class FeedbackIn(BaseModel):
