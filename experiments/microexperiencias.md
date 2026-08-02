@@ -167,4 +167,4 @@ y el uso correcto de los perfiles por encima de la riqueza conversacional.
   no se versionan, igual que en el experimento anterior; la metodología queda
   descrita para reconstruirlos.
 - La versión medida como "con pasos 1+2" no está en el repo: fue revertida. Su
-  contenido se describe en la sección 1 y en `CLAUDE.md`.
+  contenido se describe en la sección 1 y en `docs/motor-ia.md`.
