@@ -20,6 +20,7 @@ export default function Nav() {
       <nav className="nav-links">
         <NavLink to="/acerca">Acerca de</NavLink>
         <NavLink to="/catalogo">Catálogo de carreras</NavLink>
+        <NavLink to="/psicometrico">Exámenes psicométricos</NavLink>
         <NavLink to="/parametros">Parámetros</NavLink>
       </nav>
       <button className="nav-cta" onClick={() => navigate('/mapa')}>Empezar el chat</button>
