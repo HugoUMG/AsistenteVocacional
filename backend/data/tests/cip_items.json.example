@@ -1,0 +1,113 @@
+{
+ "_plantilla": "PLANTILLA. El banco de ítems real NO está en el repositorio: reproduce un instrumento psicométrico con derechos de autor y su autorización de uso sigue pendiente. Este archivo documenta la estructura que espera el código. Para correr el sistema, coloca junto a él el archivo real con el mismo nombre sin '.example' (está ignorado por git).",
+ "_fuente": "CIP — Cuestionario de Intereses Profesionales. Manual de normas de aplicación, corrección e interpretación.",
+ "_autorizacion": "PENDIENTE. El manual lo facilitó una estudiante de psicología, no la profesional colegiada. Al 2026-08-11 no existe autorización de uso ni supervisión profesional formalizada. NO desplegar en producción ni aplicar a estudiantes hasta obtenerla por escrito.",
+ "_escala": {
+  "5": "Mucho",
+  "4": "Bastante",
+  "3": "Regular",
+  "2": "Poco",
+  "1": "Nada"
+ },
+ "_orden": "Los 216 ítems recorren los 18 campos en ciclo: campo = ((n - 1) % 18) + 1. Verificado contra el cuadernillo en 30+ ítems repartidos por todo el test.",
+ "_sin_tiempo": true,
+ "_campos": "18 campos, cada uno con n, nombre y lista de profesiones.",
+ "campos": [
+  {
+   "n": 1,
+   "nombre": "Investigación científica",
+   "profesiones": []
+  },
+  {
+   "n": 2,
+   "nombre": "Investigación técnica",
+   "profesiones": []
+  },
+  {
+   "n": 3,
+   "nombre": "Técnica aplicada",
+   "profesiones": []
+  },
+  {
+   "n": 4,
+   "nombre": "Sanidad",
+   "profesiones": []
+  },
+  {
+   "n": 5,
+   "nombre": "Economía y empresa",
+   "profesiones": []
+  },
+  {
+   "n": 6,
+   "nombre": "Actividades administrativas",
+   "profesiones": []
+  },
+  {
+   "n": 7,
+   "nombre": "Derecho y asesoramiento",
+   "profesiones": []
+  },
+  {
+   "n": 8,
+   "nombre": "Protección y seguridad",
+   "profesiones": []
+  },
+  {
+   "n": 9,
+   "nombre": "Investigación humana",
+   "profesiones": []
+  },
+  {
+   "n": 10,
+   "nombre": "Comunicación",
+   "profesiones": []
+  },
+  {
+   "n": 11,
+   "nombre": "Enseñanza y orientación",
+   "profesiones": []
+  },
+  {
+   "n": 12,
+   "nombre": "Relación personal",
+   "profesiones": []
+  },
+  {
+   "n": 13,
+   "nombre": "Idiomas",
+   "profesiones": []
+  },
+  {
+   "n": 14,
+   "nombre": "Cine y teatro",
+   "profesiones": []
+  },
+  {
+   "n": 15,
+   "nombre": "Música",
+   "profesiones": []
+  },
+  {
+   "n": 16,
+   "nombre": "Artes plásticas",
+   "profesiones": []
+  },
+  {
+   "n": 17,
+   "nombre": "Estética",
+   "profesiones": []
+  },
+  {
+   "n": 18,
+   "nombre": "Actividad agrario-forestal",
+   "profesiones": []
+  }
+ ],
+ "_items": "216 enunciados en el archivo real. Los de aquí son INVENTADOS, solo para mostrar la forma: el texto real de los ítems no se publica.",
+ "items": [
+  "(ejemplo inventado) Reparar el motor de una lancha.",
+  "(ejemplo inventado) Dirigir un taller de teatro escolar.",
+  "(ejemplo inventado) Llevar el inventario de una bodega."
+ ]
+}

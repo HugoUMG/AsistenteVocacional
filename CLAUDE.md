@@ -121,5 +121,8 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   A/B del vector de cobertura: 40%→100% de cumplimiento, 7/10→10/10 de acierto.
 - [experiments/microexperiencias.md](experiments/microexperiencias.md) — intento
   revertido: 6/10, transcripciones y diagnóstico.
+- [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
+  CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
+  probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
 - [docs/prompt-next-question-ejemplo.md](docs/prompt-next-question-ejemplo.md) —
   ejemplo real del prompt que recibe Gemini.

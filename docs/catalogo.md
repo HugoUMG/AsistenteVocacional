@@ -58,3 +58,87 @@ alcance actual del proyecto, que es Quetzaltenango/Totonicapán/Suroccidente).
 ⚠️ El tamaño del catálogo domina el costo de cada llamada a Gemini (97% del
 prompt): cada centro nuevo sube el gasto proporcionalmente. Ver
 [decisions/gemini-costos-y-caching.md](../decisions/gemini-costos-y-caching.md).
+
+---
+
+## Codificación CIP del catálogo
+
+Cada carrera tiene, además de su perfil en texto, **la escala del CIP a la que
+pertenece**. Vive en `backend/data/cip_catalogo.json`, aparte de los archivos del
+catálogo.
+
+**Para qué.** El perfil en texto lo interpreta Gemini y el emparejamiento sale de
+su criterio: funciona, pero no es auditable ni estable entre corridas. Con la
+escala, la parte central del emparejamiento pasa a ser una consulta —un alumno con
+percentil 92 en Biosanitaria (VII) tiene como candidatas las carreras VII del
+catálogo, por aritmética— y Gemini queda redactando el porqué y desempatando. Eso
+es lo que permite responder "¿por qué salió esta carrera?" con un número en lugar
+de "el modelo lo decidió".
+
+**Formato.** Una entrada por perfil distinto, no por registro carrera-sede:
+
+```json
+"medico_cirujano": {
+  "nombre": "Médico y Cirujano",
+  "principal": "VII",
+  "secundaria": "II",
+  "revisado": false
+}
+```
+
+La clave es el `perfil_id` cuando la carrera comparte perfil entre sedes, y
+`"centro::nombre"` cuando lo trae inline. Codificar por perfil (90) y no por
+registro (202) garantiza por construcción que la misma carrera tenga el mismo
+código en todas sus sedes.
+
+**Cómo se genera.** `backend/codificar_cip.py`, una sola vez y offline:
+
+```
+uv run python codificar_cip.py --self-check   # sin red, valida el armado
+uv run python codificar_cip.py --limite 5     # prueba de humo, 1 llamada
+uv run python codificar_cip.py                # el resto
+uv run python codificar_cip.py --revisar      # informe, sin llamar a Gemini
+```
+
+Es idempotente y resumible: solo pide lo que falta y guarda tras cada lote, así que
+una corrida interrumpida no vuelve a gastar cuota. En tiempo de ejecución el
+sistema solo lee el JSON: **cero llamadas y cero costo por alumno**.
+
+**Estado de la corrida (2026-08-11):** 90/90 perfiles, 202/202 registros, en 4
+llamadas.
+
+| Escala | Registros | | Escala | Registros |
+|---|---|---|---|---|
+| VIII. Asistencial-Educacional | 57 | | XIII. Artístico-Plástica | 8 |
+| X. Económica-Administrativa | 44 | | II. Físico-Química | 7 |
+| VII. Biosanitaria | 28 | | IV. Tecnológica | 7 |
+| IX. Jurídico-Política | 13 | | VI. Bioagropecuaria | 6 |
+| III. Construcción | 12 | | XI. Comunicación Social | 5 |
+| I. Cálculo | 9 | | XII, XV, V, XIV | 2, 2, 1, 1 |
+
+El sesgo hacia Asistencial-Educacional y Económica-Administrativa no es un error de
+la codificación: refleja la oferta real de Quetzaltenango y Totonicapán, donde las
+pedagogías y las administrativas dominan el catálogo.
+
+⚠️ **La codificación automática NO es el producto final.** Todas las entradas
+salen con `"revisado": false`. La revisión de un profesional de orientación es
+parte del trabajo, y es lo que permite escribir en el documento "codificación
+asistida por IA, validada por profesional colegiada". Al revisar una entrada, se
+le pone `"revisado": true`.
+
+**Control de calidad ya hecho.** Se contrastó contra 28 asignaciones que un
+orientador daría sin discusión (Médico→VII, Contaduría→X, Arquitectura→III,
+Periodismo→XI…): **26 coincidieron**. Las 2 diferencias no son errores sino
+ordenamientos discutibles, y en ambas la escala esperada quedó como secundaria:
+
+- *Criminología* → principal II (Físico-Química), secundaria IX. Defendible: el
+  trabajo forense de laboratorio es químico-analítico.
+- *Producción Audiovisual* → principal XIII (Artístico-Plástica), secundaria XI.
+  Defendible: es producción creativa antes que periodística.
+
+Son justo el tipo de caso que la revisión humana debe resolver.
+
+**Escalas con poca o ninguna oferta.** Geoastronómica y Artístico-Musical tienen
+una sola carrera cada una. No es un defecto del catálogo: es información real y
+útil. Un alumno con percentil alto ahí necesita que el sistema se lo diga en vez de
+empujarlo a la carrera menos mala disponible.
