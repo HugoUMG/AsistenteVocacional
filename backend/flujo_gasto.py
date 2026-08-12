@@ -1,7 +1,7 @@
 """Corre N conversaciones completas contra el backend local y reporta el gasto
 real (tokens y $) leyendo /api/uso-tokens, comparando con-caché vs sin-caché.
 
-Uso: python flujo25.py [N] [departamento]
+Uso: python flujo_gasto.py [N] [departamento] [paralelas]
 """
 import json, random, sys, time, uuid
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -10,6 +10,7 @@ import httpx
 API = "http://localhost:8000"
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 25
 DEPTO = sys.argv[2] if len(sys.argv) > 2 else "Quetzaltenango"
+PARALELAS = int(sys.argv[3]) if len(sys.argv) > 3 else 4
 
 # Precios gemini-3.1-flash-lite ($/1M tokens), ver decisions/gemini-costos-y-caching.md
 P_IN, P_OUT = 0.25, 1.50
@@ -85,9 +86,9 @@ def costo(prompt, cached, output):
 
 def main():
     mios, t0 = [], time.time()
-    # 4 en paralelo: 25 sesiones secuenciales tardarían ~1h. Se parece más a un
+    # En paralelo: secuencial tardaría ~2.5 min por sesión. Se parece más a un
     # salón real que a un usuario solo.
-    with ThreadPoolExecutor(max_workers=4) as pool:
+    with ThreadPoolExecutor(max_workers=PARALELAS) as pool:
         futs = {pool.submit(una_sesion, i): i for i in range(N)}
         for f in as_completed(futs):
             i = futs[f]
@@ -113,7 +114,11 @@ def main():
     print(f"  cacheados   {tot['cached_tokens']:>10,}  ({pct:.1f}% del prompt)")
     print(f"  salida      {tot['output_tokens']:>10,}")
     print(f"  total       {tot['total_tokens']:>10,}   ({tot['total_tokens']/n:,.0f} por sesión)")
-    print(f"  costo real            ${con:.4f}   (${con/n:.4f}/sesión)")
+    # ponytail: no distingue qué key atendió cada llamada (uso_tokens no lo guarda).
+    # Si la primaria es gratis, el gasto REAL es $0 salvo lo que cayó al respaldo:
+    # este número es "lo que costaría si todo fuera de pago". Cotejar con el
+    # crédito de la consola de Google, que tarda horas en actualizarse.
+    print(f"  costo si TODO es key de pago  ${con:.4f}   (${con/n:.4f}/sesión)")
     print(f"  costo si no cacheara  ${sin:.4f}   (ahorro {(1-con/sin)*100:.1f}%)")
     for esc in (100, 200):
         c2, s2 = costo(tot["prompt_tokens"]/n*esc, tot["cached_tokens"]/n*esc, tot["output_tokens"]/n*esc)

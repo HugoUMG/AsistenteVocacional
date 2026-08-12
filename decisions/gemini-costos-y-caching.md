@@ -51,6 +51,34 @@ fallo anterior y no lo reintenta.
 Reproducir: `backend/flujo_gasto.py` (N conversaciones completas contra el backend
 local, lee `/api/uso-tokens` y calcula ambos costos).
 
+## Prueba de carga con la key GRATIS de primaria (2026-08-12)
+
+Configuración recomendada para desarrollo (gratis primaria, de pago en
+`GEMINI_API_KEY_RESPALDO`), **10 sesiones completas lanzadas en paralelo en el
+mismo segundo** (peor caso), 60 llamadas a Gemini:
+
+| | Resultado |
+|---|---|
+| Llamadas exitosas | **60/60** |
+| Saltos a `GEMINI_API_KEY_RESPALDO` | **0** (ningún 429 agotó los reintentos) |
+| Prompt cacheado | 33.4% (caching **implícito**, la key gratis no crea `CachedContent`) |
+| Costo real | **$0.00** |
+| Latencia por sesión | 135s la más rápida · **267s la más lenta** |
+
+**El techo del tier gratis se paga en tiempo, no en dinero.** Ninguna sesión bajó
+de 135s; con la key de pago de primaria la más rápida fue de 19s. Los 15 RPM se
+saturan, `_con_reintento` espera lo que Google pide y todos hacen fila — pero
+nadie falla. Por eso: gratis para desarrollo, de pago para la demo.
+
+El **caching implícito volvió a aparecer** (33.4%) después de las dos pruebas del
+2026-07-21 que dieron 0%. Confirma que el mecanismo existe en tier gratis y que se
+activa con llamadas simultáneas de prefijo idéntico, pero sigue siendo oportunista:
+no presupuestar con él.
+
+⚠️ `flujo_gasto.py` imprime el costo asumiendo que **todas** las llamadas fueron
+con key de pago (`uso_tokens` no guarda qué key atendió cada una). Con la gratis de
+primaria ese número es una cota superior, no el gasto real.
+
 ---
 
 ## Medición vigente (2026-08-02)

@@ -33,6 +33,22 @@ Documentación completa: [CLAUDE.md](CLAUDE.md) es el índice.
 - Docker Desktop (para Postgres)
 - Una `GEMINI_API_KEY` (de aistudio.google.com) en `backend/.env`
 
+### Qué key va de primaria (gratis vs. de pago)
+
+El repo trae la key **gratis** como `GEMINI_API_KEY` y la de **pago** como
+`GEMINI_API_KEY_RESPALDO`: el desarrollo diario no cuesta nada y la de pago solo
+entra si la gratis agota su cuota (429).
+
+**Para una demo o defensa con un salón entero, invertilas.** El tier gratis
+tiene un techo duro de 15 requests/minuto: con varios alumnos a la vez, cada uno
+espera los reintentos con backoff (~24s que pide Google) antes de que entre la de
+respaldo. Con la de pago de primaria eso no pasa y además se activa el Context
+Caching (95% del prompt cacheado). Costo medido: **$0.006 por conversación**, o
+sea ~$0.18 para 30 alumnos. Reiniciá el backend después de cambiarla —
+`_caches` guarda el estado en memoria.
+
+Detalle y mediciones: [decisions/gemini-costos-y-caching.md](decisions/gemini-costos-y-caching.md).
+
 ## Inicio rápido (un comando)
 
 Con Docker Desktop instalado y `backend/.env` configurado, desde la raíz:
