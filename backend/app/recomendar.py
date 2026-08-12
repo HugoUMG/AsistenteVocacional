@@ -8,9 +8,12 @@ import random
 import re
 import time
 
+import httpx
 from google import genai
 from google.genai import errors, types
 from pydantic import BaseModel
+
+from app import cip_filtro
 
 # Dos modelos (híbrido):
 # - MODELO: preguntas del chat (alto volumen, hasta 8 por test) → prioriza cuota.
@@ -293,6 +296,11 @@ def _get_cache(client, model: str, system: str, catalogo: str, key_label: str) -
 # Códigos que ameritan reintentar (límite de cuota / servicio saturado). Todo lo
 # demás (400 mal pedido, 404, etc.) es un error real: se propaga de inmediato.
 _CODIGOS_REINTENTABLES = {429, 500, 503}
+# Fallos de transporte: la petición se cortó antes de que hubiera respuesta HTTP.
+# httpx no hereda de errors.APIError, así que hay que nombrarlos aparte.
+_TRANSPORTE = (httpx.RemoteProtocolError, httpx.ReadError, httpx.WriteError,
+               httpx.ConnectError, httpx.ReadTimeout, httpx.WriteTimeout,
+               httpx.ConnectTimeout, httpx.PoolTimeout)
 _ESPERA_MAXIMA = 30  # tope de segundos por reintento, aunque Google pida más
 
 
@@ -317,6 +325,15 @@ def _con_reintento(fn, intentos=4):
     for intento in range(intentos):
         try:
             return fn()
+        except _TRANSPORTE as e:
+            # El servidor cortó la conexión sin responder. No llega a ser un
+            # APIError (no hubo respuesta HTTP que interpretar), así que sin este
+            # caso una desconexión pasajera dejaba al alumno sin recomendación.
+            # Visto de verdad al mandar el catálogo completo inline.
+            if intento == intentos - 1:
+                raise
+            print(f"[gemini] {type(e).__name__} al enviar, reintentando ({intento + 1}/{intentos})")
+            time.sleep((2**intento) + random.uniform(0, 1))
         except errors.APIError as e:
             if e.code not in _CODIGOS_REINTENTABLES or intento == intentos - 1:
                 raise
@@ -389,9 +406,12 @@ def generar(model, system, catalogo, variable, schema, temperature):
         return _generar_con_cliente(client_respaldo, "respaldo", model, system, catalogo, variable, schema, temperature)
 
 
-def recomendar(respuestas: dict, carreras) -> tuple[Resultado, dict]:
+def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None) -> tuple[Resultado, dict]:
     """respuestas: dict con las respuestas del cuestionario.
     carreras: lista de models.Carrera (el catálogo).
+    perfil_cip: EXPERIMENTAL, el `perfil` que devuelve `cip_fogliatto.calificar()`.
+    Solo surte efecto con `CIP_EN_RECOMENDACION=1`; sin el flag se ignora y la
+    función se comporta igual que antes. Ver `experiments/cip-en-recomendacion.md`.
     Devuelve (resultado, uso_tokens): las carreras afines (>1%) con su % y detalle
     más la confianza global, y el consumo de tokens de esta llamada.
 
@@ -401,13 +421,23 @@ def recomendar(respuestas: dict, carreras) -> tuple[Resultado, dict]:
     (_agrupar + _buscar_grupo), sin gastar tokens en que Gemini los repita o
     los reescriba como 'enfoque'."""
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
+    variable = f"PERFIL DEL ESTUDIANTE:\n{perfil}"
+
+    # El agrupado se hace SIEMPRE sobre el catálogo completo: es lo que adjunta
+    # universidad/centro/sede a la respuesta. Si se hiciera sobre el catálogo ya
+    # recortado, una carrera recomendada perdería las sedes que quedaron fuera
+    # del recorte.
     por_nombre = _agrupar(carreras)
+
+    if perfil_cip and cip_filtro.activo():
+        carreras = cip_filtro.priorizar(carreras, {e["romano"]: e["percentil"] for e in perfil_cip})
+        variable = f"{cip_filtro.texto_perfil(perfil_cip)}\n\n{variable}"
 
     resp = generar(
         model=MODELO_FINAL,
         system=SYSTEM,
         catalogo=f"CATÁLOGO DE CARRERAS:\n{_catalogo_texto(carreras)}",
-        variable=f"PERFIL DEL ESTUDIANTE:\n{perfil}",
+        variable=variable,
         schema=ResultadoLLM,
         temperature=0.3,
     )

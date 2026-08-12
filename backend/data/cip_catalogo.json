@@ -1,0 +1,542 @@
+{
+ "CUNOC::Ingeniería Mecánica": {
+  "nombre": "Ingeniería Mecánica",
+  "principal": "IV",
+  "secundaria": "II",
+  "revisado": false
+ },
+ "CUNOC::Ingeniería Mecánica Industrial": {
+  "nombre": "Ingeniería Mecánica Industrial",
+  "principal": "IV",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "CUNOC::Ingeniería en Administración de Tierras": {
+  "nombre": "Ingeniería en Administración de Tierras",
+  "principal": "V",
+  "secundaria": "IX",
+  "revisado": false
+ },
+ "CUNOC::Ingeniería en Gestión Ambiental Local": {
+  "nombre": "Ingeniería en Gestión Ambiental Local",
+  "principal": "VI",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "CUNOC::Licenciatura en Economía": {
+  "nombre": "Licenciatura en Economía",
+  "principal": "X",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "CUNOC::Licenciatura en la Enseñanza de la Matemática y la Física": {
+  "nombre": "Licenciatura en la Enseñanza de la Matemática y la Física",
+  "principal": "VIII",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "CUNOC::Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)": {
+  "nombre": "Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)",
+  "principal": "VIII",
+  "secundaria": "XI",
+  "revisado": false
+ },
+ "CUNOC::Psicología (PEM y Licenciatura)": {
+  "nombre": "Psicología (PEM y Licenciatura)",
+  "principal": "VIII",
+  "secundaria": "VII",
+  "revisado": false
+ },
+ "CUNTOTO::Ingeniería Forestal": {
+  "nombre": "Ingeniería Forestal",
+  "principal": "VI",
+  "secundaria": "V",
+  "revisado": false
+ },
+ "CUNTOTO::PEM en Pedagogía y Educación Intercultural": {
+  "nombre": "PEM en Pedagogía y Educación Intercultural",
+  "principal": "VIII",
+  "secundaria": "XII",
+  "revisado": false
+ },
+ "CUNTOTO::PEM en Pedagogía y Técnico en Administración Educativa con Orientación en Medio Ambiente": {
+  "nombre": "PEM en Pedagogía y Técnico en Administración Educativa con Orientación en Medio Ambiente",
+  "principal": "VIII",
+  "secundaria": "VI",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Administración de Hotelería, Turismo y Gastronomía": {
+  "nombre": "Administración de Hotelería, Turismo y Gastronomía",
+  "principal": "X",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Chef Profesional e Internacional (Técnico Universitario)": {
+  "nombre": "Chef Profesional e Internacional (Técnico Universitario)",
+  "principal": "XIII",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Criminología y Política Criminal": {
+  "nombre": "Criminología y Política Criminal",
+  "principal": "IX",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Ingeniería Química": {
+  "nombre": "Ingeniería Química",
+  "principal": "II",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Ingeniería en Agronomía": {
+  "nombre": "Ingeniería en Agronomía",
+  "principal": "VI",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Licenciatura en Administración Educativa": {
+  "nombre": "Licenciatura en Administración Educativa",
+  "principal": "VIII",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural": {
+  "nombre": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+  "principal": "VIII",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Licenciatura en Educación de la Comunicación y Lenguaje": {
+  "nombre": "Licenciatura en Educación de la Comunicación y Lenguaje",
+  "principal": "VIII",
+  "secundaria": "XII",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Licenciatura en Educación de la Física y Matemática": {
+  "nombre": "Licenciatura en Educación de la Física y Matemática",
+  "principal": "VIII",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Profesorado en Física y Matemática": {
+  "nombre": "Profesorado en Física y Matemática",
+  "principal": "VIII",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Profesorado en Pedagogía con Especialización": {
+  "nombre": "Profesorado en Pedagogía con Especialización",
+  "principal": "VIII",
+  "secundaria": null,
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Profesorado en Tecnología Educativa": {
+  "nombre": "Profesorado en Tecnología Educativa",
+  "principal": "VIII",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "UMG Quetzaltenango::Teología Sistemática": {
+  "nombre": "Teología Sistemática",
+  "principal": "XII",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "URG Totonicapán::Licenciatura en Administración de Sistemas Informáticos": {
+  "nombre": "Licenciatura en Administración de Sistemas Informáticos",
+  "principal": "IV",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "URG Totonicapán::Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)": {
+  "nombre": "Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)",
+  "principal": "XI",
+  "secundaria": "XIII",
+  "revisado": false
+ },
+ "administracion_empresas": {
+  "nombre": "Administración de Empresas",
+  "principal": "X",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "arquitectura": {
+  "nombre": "Arquitectura",
+  "principal": "III",
+  "secundaria": "XIII",
+  "revisado": false
+ },
+ "bioimagenes": {
+  "nombre": "Licenciatura en Producción de Imágenes Diagnósticas",
+  "principal": "VII",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "ciencias_juridicas": {
+  "nombre": "Licenciatura en Ciencias Jurídicas y Sociales",
+  "principal": "IX",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "cirujano_dentista": {
+  "nombre": "Cirujano Dentista",
+  "principal": "VII",
+  "secundaria": "XIII",
+  "revisado": false
+ },
+ "comercio_internacional": {
+  "nombre": "Licenciatura en Comercio Internacional",
+  "principal": "X",
+  "secundaria": "IX",
+  "revisado": false
+ },
+ "comunicacion_diseno": {
+  "nombre": "Licenciatura en Comunicación y Diseño",
+  "principal": "XI",
+  "secundaria": "XIII",
+  "revisado": false
+ },
+ "contaduria": {
+  "nombre": "Contaduría Pública y Auditoría",
+  "principal": "X",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "criminalistica": {
+  "nombre": "Técnico Universitario en Criminología y Criminalística",
+  "principal": "II",
+  "secundaria": "IX",
+  "revisado": false
+ },
+ "diseno_grafico": {
+  "nombre": "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
+  "principal": "XIII",
+  "secundaria": "XI",
+  "revisado": false
+ },
+ "economia": {
+  "nombre": "Economía Empresarial",
+  "principal": "X",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "enfermeria": {
+  "nombre": "Licenciatura en Enfermería",
+  "principal": "VII",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "enfermeria_veterinaria": {
+  "nombre": "Técnico Universitario en Enfermería Veterinaria",
+  "principal": "VI",
+  "secundaria": "VII",
+  "revisado": false
+ },
+ "gastronomia": {
+  "nombre": "Artes Culinarias y Negocios Gastronómicos",
+  "principal": "XIII",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "hemodialisis": {
+  "nombre": "Técnico Universitario en Hemodiálisis",
+  "principal": "VII",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "hoteleria_turismo": {
+  "nombre": "Licenciatura en Administración de Empresas Turísticas y Hoteleras",
+  "principal": "X",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "informatica_administracion": {
+  "nombre": "Licenciatura en Informática y Administración de Empresas",
+  "principal": "X",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "informatica_inteligencia_negocios": {
+  "nombre": "Licenciatura en Informática e Inteligencia de Negocios",
+  "principal": "I",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "ingenieria_agricola": {
+  "nombre": "Ingeniería Agrícola con Énfasis en Gerencia",
+  "principal": "VI",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "ingenieria_ambiental": {
+  "nombre": "Ingeniería Ambiental",
+  "principal": "II",
+  "secundaria": "VI",
+  "revisado": false
+ },
+ "ingenieria_civil": {
+  "nombre": "Ingeniería Civil",
+  "principal": "III",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "ingenieria_electronica": {
+  "nombre": "Ingeniería en Electrónica",
+  "principal": "IV",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "ingenieria_industrial": {
+  "nombre": "Ingeniería Industrial",
+  "principal": "X",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "ingenieria_sistemas": {
+  "nombre": "Ingeniería en Ciencias y Sistemas",
+  "principal": "I",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "laboratorio_clinico": {
+  "nombre": "Técnico Universitario en Laboratorio Clínico",
+  "principal": "VII",
+  "secundaria": "II",
+  "revisado": false
+ },
+ "laboratorio_dental": {
+  "nombre": "Técnico en Laboratorio Dental",
+  "principal": "XIII",
+  "secundaria": "VII",
+  "revisado": false
+ },
+ "marketing_business_analytics": {
+  "nombre": "Licenciatura en Marketing and Business Analytics",
+  "principal": "X",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "medico_cirujano": {
+  "nombre": "Médico y Cirujano",
+  "principal": "VII",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "mercadotecnia": {
+  "nombre": "Técnico Universitario en Gerencia de Ventas",
+  "principal": "X",
+  "secundaria": "XI",
+  "revisado": false
+ },
+ "musica_ejecucion": {
+  "nombre": "Técnico en Ejecución Musical Popular y Contemporánea",
+  "principal": "XIV",
+  "secundaria": null,
+  "revisado": false
+ },
+ "nutricion": {
+  "nombre": "Licenciatura en Nutrición",
+  "principal": "VII",
+  "secundaria": "II",
+  "revisado": false
+ },
+ "optometria": {
+  "nombre": "Técnico Universitario en Optometría",
+  "principal": "VII",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "pedagogia": {
+  "nombre": "Licenciatura en Ciencias de la Educación",
+  "principal": "VIII",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "pedagogia_admin_educativa": {
+  "nombre": "Administración Educativa",
+  "principal": "X",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "pedagogia_artistica": {
+  "nombre": "Profesorado en Educación Artística (Música y Danza)",
+  "principal": "VIII",
+  "secundaria": "XIV",
+  "revisado": false
+ },
+ "pedagogia_ciencias_naturales": {
+  "nombre": "Profesorado en Ciencias Naturales, Química y Biología",
+  "principal": "VIII",
+  "secundaria": "II",
+  "revisado": false
+ },
+ "pedagogia_ciencias_sociales": {
+  "nombre": "PEM en Historia y Ciencias Sociales",
+  "principal": "VIII",
+  "secundaria": "XII",
+  "revisado": false
+ },
+ "pedagogia_comunicacion_lenguaje": {
+  "nombre": "PEM en Comunicación y Lenguaje",
+  "principal": "VIII",
+  "secundaria": "XII",
+  "revisado": false
+ },
+ "pedagogia_emprendimiento": {
+  "nombre": "Profesorado en Emprendimiento para la Productividad",
+  "principal": "VIII",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "pedagogia_infantil": {
+  "nombre": "Profesorado en Educación Inicial y Preprimaria",
+  "principal": "VIII",
+  "secundaria": "VII",
+  "revisado": false
+ },
+ "pedagogia_ingles": {
+  "nombre": "Profesorado de Enseñanza Media en Inglés",
+  "principal": "XV",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "pedagogia_intercultural": {
+  "nombre": "Profesorado en Idioma Maya, Ciencias Sociales e Interculturalidad",
+  "principal": "VIII",
+  "secundaria": "XII",
+  "revisado": false
+ },
+ "pedagogia_lenguaje_historia": {
+  "nombre": "PEM en Lenguaje e Historia",
+  "principal": "VIII",
+  "secundaria": "XII",
+  "revisado": false
+ },
+ "pedagogia_matematica_fisica": {
+  "nombre": "PEM en Matemática y Física",
+  "principal": "VIII",
+  "secundaria": "I",
+  "revisado": false
+ },
+ "pedagogia_pem_admin_educativa": {
+  "nombre": "PEM en Pedagogía y Técnico en Administración Educativa",
+  "principal": "VIII",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "pedagogia_primaria": {
+  "nombre": "Profesorado en Educación Primaria",
+  "principal": "VIII",
+  "secundaria": null,
+  "revisado": false
+ },
+ "pedagogia_psicologia": {
+  "nombre": "PEM en Pedagogía y Psicología",
+  "principal": "VIII",
+  "secundaria": null,
+  "revisado": false
+ },
+ "pedagogia_tic": {
+  "nombre": "Profesorado en Tecnologías de la Información y la Comunicación",
+  "principal": "VIII",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "pem_maya_intercultural": {
+  "nombre": "Profesorado en Enseñanza Media en Cultura e Idioma Maya",
+  "principal": "VIII",
+  "secundaria": "XII",
+  "revisado": false
+ },
+ "periodismo": {
+  "nombre": "Ciencias de la Comunicación Social",
+  "principal": "XI",
+  "secundaria": "XII",
+  "revisado": false
+ },
+ "produccion_audiovisual": {
+  "nombre": "Licenciatura en Producción Audiovisual y Artes Cinematográficas",
+  "principal": "XIII",
+  "secundaria": "XI",
+  "revisado": false
+ },
+ "psicologia_clinica": {
+  "nombre": "Psicología Clínica",
+  "principal": "VIII",
+  "secundaria": "VII",
+  "revisado": false
+ },
+ "psicologia_educativa": {
+  "nombre": "Psicología Educativa",
+  "principal": "VIII",
+  "secundaria": null,
+  "revisado": false
+ },
+ "psicologia_industrial": {
+  "nombre": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+  "principal": "VIII",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "psicopedagogia": {
+  "nombre": "Profesorado en Psicopedagogía",
+  "principal": "VIII",
+  "secundaria": null,
+  "revisado": false
+ },
+ "quimica_biologica": {
+  "nombre": "Licenciatura en Química Biológica",
+  "principal": "II",
+  "secundaria": "VI",
+  "revisado": false
+ },
+ "relaciones_internacionales": {
+  "nombre": "Relaciones Internacionales",
+  "principal": "IX",
+  "secundaria": "XV",
+  "revisado": false
+ },
+ "tecnico_desarrollo_software": {
+  "nombre": "Técnico Universitario en Desarrollo de Software",
+  "principal": "I",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "tecnico_radiologia": {
+  "nombre": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+  "principal": "VII",
+  "secundaria": "IV",
+  "revisado": false
+ },
+ "telecomunicaciones": {
+  "nombre": "Licenciatura en Administración de Telecomunicaciones",
+  "principal": "IV",
+  "secundaria": "X",
+  "revisado": false
+ },
+ "teologia": {
+  "nombre": "Teología",
+  "principal": "XII",
+  "secundaria": "VIII",
+  "revisado": false
+ },
+ "terapia_fisica": {
+  "nombre": "Fisioterapia",
+  "principal": "VII",
+  "secundaria": null,
+  "revisado": false
+ },
+ "trabajo_social": {
+  "nombre": "Trabajo Social",
+  "principal": "VIII",
+  "secundaria": "IX",
+  "revisado": false
+ },
+ "visita_medica_mercadeo": {
+  "nombre": "Técnico Universitario en Visita Médica y Mercadeo",
+  "principal": "X",
+  "secundaria": "VII",
+  "revisado": false
+ }
+}

@@ -1,0 +1,152 @@
+[
+ {
+  "persona": "Ana",
+  "area": "salud/psicología",
+  "cip_top3": [
+   "Biosanitaria",
+   "Asistencial-Educacional",
+   "Artístico-Musical"
+  ],
+  "viejo": "Médico y Cirujano",
+  "viejo_af": 35,
+  "viejo_ok": true,
+  "nuevo": "Médico y Cirujano",
+  "nuevo_af": 35,
+  "nuevo_ok": true
+ },
+ {
+  "persona": "Luis",
+  "area": "informática",
+  "cip_top3": [
+   "Físico-Química",
+   "Construcción",
+   "Tecnológica"
+  ],
+  "viejo": "Ingeniería en Ciencias y Sistemas",
+  "viejo_af": 45,
+  "viejo_ok": true,
+  "nuevo": "Ingeniería en Ciencias y Sistemas",
+  "nuevo_af": 35,
+  "nuevo_ok": true
+ },
+ {
+  "persona": "Mario",
+  "area": "administración",
+  "cip_top3": [
+   "Jurídico-Política",
+   "Económica-Administrativa",
+   "Construcción"
+  ],
+  "viejo": "Administración de Empresas",
+  "viejo_af": 35,
+  "viejo_ok": true,
+  "nuevo": "Administración de Empresas",
+  "nuevo_af": 40,
+  "nuevo_ok": true
+ },
+ {
+  "persona": "Sofía",
+  "area": "educación",
+  "cip_top3": [
+   "Asistencial-Educacional",
+   "Humanístico-Cultural",
+   "Jurídico-Política"
+  ],
+  "viejo": "Profesorado en Educación Primaria",
+  "viejo_af": 45,
+  "viejo_ok": true,
+  "nuevo": "PEM en Comunicación y Lenguaje",
+  "nuevo_af": 25,
+  "nuevo_ok": false
+ },
+ {
+  "persona": "Diego",
+  "area": "forestal/ambiental",
+  "cip_top3": [
+   "Bioagropecuaria",
+   "Construcción",
+   "Geoastronómica"
+  ],
+  "viejo": "Ingeniería Forestal",
+  "viejo_af": 45,
+  "viejo_ok": true,
+  "nuevo": "Ingeniería Forestal",
+  "nuevo_af": 60,
+  "nuevo_ok": true
+ },
+ {
+  "persona": "Carmen",
+  "area": "derecho",
+  "cip_top3": [
+   "Jurídico-Política",
+   "Humanístico-Cultural",
+   "Económica-Administrativa"
+  ],
+  "viejo": "Licenciatura en Ciencias Jurídicas y Sociales",
+  "viejo_af": 85,
+  "viejo_ok": true,
+  "nuevo": "Licenciatura en Ciencias Jurídicas y Sociales",
+  "nuevo_af": 55,
+  "nuevo_ok": true
+ },
+ {
+  "persona": "Pablo",
+  "area": "criminalística",
+  "cip_top3": [
+   "Físico-Química",
+   "Tecnológica",
+   "Biosanitaria"
+  ],
+  "viejo": "Técnico Universitario en Criminología y Criminalística",
+  "viejo_af": 60,
+  "viejo_ok": true,
+  "nuevo": "Técnico Universitario en Criminología y Criminalística",
+  "nuevo_af": 45,
+  "nuevo_ok": true
+ },
+ {
+  "persona": "Lucía",
+  "area": "comunicación",
+  "cip_top3": [
+   "Artístico-Plástica",
+   "Humanístico-Cultural",
+   "Artístico-Musical"
+  ],
+  "viejo": "Ciencias de la Comunicación Social",
+  "viejo_af": 45,
+  "viejo_ok": true,
+  "nuevo": "Ciencias de la Comunicación Social",
+  "nuevo_af": 35,
+  "nuevo_ok": true
+ },
+ {
+  "persona": "Roberto",
+  "area": "contaduría",
+  "cip_top3": [
+   "Cálculo",
+   "Físico-Química",
+   "Construcción"
+  ],
+  "viejo": "Contaduría Pública y Auditoría",
+  "viejo_af": 60,
+  "viejo_ok": true,
+  "nuevo": "Contaduría Pública y Auditoría",
+  "nuevo_af": 40,
+  "nuevo_ok": true
+ },
+ {
+  "persona": "Elena",
+  "area": "trabajo social",
+  "cip_top3": [
+   "Asistencial-Educacional",
+   "Jurídico-Política",
+   "Cálculo"
+  ],
+  "viejo": "Trabajo Social",
+  "viejo_af": 45,
+  "viejo_ok": true,
+  "nuevo": "Trabajo Social",
+  "nuevo_af": 60,
+  "nuevo_ok": true
+ }
+]
