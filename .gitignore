@@ -3,3 +3,11 @@
 __pycache__/
 node_modules/
 dist/
+
+# Bancos de ítems de instrumentos psicométricos: reproducen un instrumento con
+# derechos de autor y su autorización de uso está pendiente. Viven en disco, no
+# en el repo. La estructura que espera el código está en los .json.example de al
+# lado. Los baremos SÍ se versionan: son tablas de normas, y por sí solas no
+# permiten administrar el test.
+backend/data/tests/cip_items.json
+backend/data/tests/cip_fogliatto_items.json
