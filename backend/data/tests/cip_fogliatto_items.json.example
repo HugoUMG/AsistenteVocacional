@@ -1,0 +1,126 @@
+{
+ "_plantilla": "PLANTILLA. El banco de ítems real NO está en el repositorio: reproduce un instrumento psicométrico con derechos de autor y su autorización de uso sigue pendiente. Este archivo documenta la estructura que espera el código. Para correr el sistema, coloca junto a él el archivo real con el mismo nombre sin '.example' (está ignorado por git).",
+ "_fuente": "CIP — Cuestionario de Intereses Profesionales, H. Fogliatto (Editorial Guadalupe, Buenos Aires, 1991). Ítems, clave de escalas y baremos tomados del protocolo CIPCUALI de Graciela Perotti de Carrera (1995).",
+ "_autorizacion": "PENDIENTE. Prototipo para revisión y aval del asesor y de la profesional colegiada. NO aplicar a estudiantes ni desplegar en producción sin autorización escrita del titular de los derechos y sin supervisión profesional formalizada.",
+ "_escala": {
+  "A": "Agrado (3)",
+  "I": "Indiferencia (2)",
+  "D": "Desagrado (1)"
+ },
+ "_correccion": "Suma simple de los ítems de cada escala (D=1, I=2, A=3). El rango posible va de n a 3n, donde n es la cantidad de ítems de la escala. Verificado contra los tres protocolos resueltos del manual.",
+ "_sin_limite_tiempo": true,
+ "_escalas": "15 escalas. Cada una lleva n, romano, nombre, definicion y la lista de números de ítem que la componen (la clave de calificación, que tampoco se publica).",
+ "escalas": [
+  {
+   "n": 1,
+   "romano": "I",
+   "nombre": "Cálculo",
+   "definicion": "Actividades de cálculo numérico, resolución de problemas matemáticos y trabajo con sistemas de cómputo.",
+   "items": []
+  },
+  {
+   "n": 2,
+   "romano": "II",
+   "nombre": "Físico-Química",
+   "definicion": "Investigación y análisis de la composición de la materia, procesos industriales químicos y física aplicada.",
+   "items": []
+  },
+  {
+   "n": 3,
+   "romano": "III",
+   "nombre": "Construcción",
+   "definicion": "Proyecto, dirección y control de obras de arquitectura e ingeniería civil.",
+   "items": []
+  },
+  {
+   "n": 4,
+   "romano": "IV",
+   "nombre": "Tecnológica",
+   "definicion": "Diseño, armado, prueba y reparación de equipos eléctricos, electrónicos y mecánicos.",
+   "items": []
+  },
+  {
+   "n": 5,
+   "romano": "V",
+   "nombre": "Geoastronómica",
+   "definicion": "Estudio de la Tierra, la atmósfera y el universo: geología, meteorología, astronomía y arqueología.",
+   "items": []
+  },
+  {
+   "n": 6,
+   "romano": "VI",
+   "nombre": "Bioagropecuaria",
+   "definicion": "Producción agrícola y ganadera, y estudio y protección de la flora y la fauna.",
+   "items": []
+  },
+  {
+   "n": 7,
+   "romano": "VII",
+   "nombre": "Biosanitaria",
+   "definicion": "Diagnóstico, prevención y tratamiento de enfermedades, y trabajo en instituciones sanitarias.",
+   "items": []
+  },
+  {
+   "n": 8,
+   "romano": "VIII",
+   "nombre": "Asistencial-Educacional",
+   "definicion": "Conocimiento del comportamiento humano, las relaciones interpersonales, la problemática educativa y el trabajo en servicios de salud, educación y servicio social.",
+   "items": []
+  },
+  {
+   "n": 9,
+   "romano": "IX",
+   "nombre": "Jurídico-Política",
+   "definicion": "Interpretación y aplicación de normas jurídicas, defensa de derechos y actividad política y diplomática.",
+   "items": []
+  },
+  {
+   "n": 10,
+   "romano": "X",
+   "nombre": "Económica-Administrativa",
+   "definicion": "Producción, distribución e intercambio de bienes y servicios; organización y dirección de empresas; contabilidad y asesoramiento económico-financiero.",
+   "items": []
+  },
+  {
+   "n": 11,
+   "romano": "XI",
+   "nombre": "Comunicación Social",
+   "definicion": "Recolección, tratamiento y distribución de información sobre sucesos del medio social, con fines de educar, entretener e informar.",
+   "items": []
+  },
+  {
+   "n": 12,
+   "romano": "XII",
+   "nombre": "Humanístico-Cultural",
+   "definicion": "Investigación en fuentes documentales y bibliográficas, crítica y asesoramiento literario, preservación de bienes culturales e investigación histórica.",
+   "items": []
+  },
+  {
+   "n": 13,
+   "romano": "XIII",
+   "nombre": "Artístico-Plástica",
+   "definicion": "Investigación estética, ilustración gráfica y científica, y creación y educación artística.",
+   "items": []
+  },
+  {
+   "n": 14,
+   "romano": "XIV",
+   "nombre": "Artístico-Musical",
+   "definicion": "Composición, interpretación y arreglo de obras musicales, docencia musical e investigación musicológica.",
+   "items": []
+  },
+  {
+   "n": 15,
+   "romano": "XV",
+   "nombre": "Lenguas Extranjeras",
+   "definicion": "Docencia, traducción e interpretación de idiomas extranjeros en áreas científicas, legales, comerciales y literarias.",
+   "items": []
+  }
+ ],
+ "_items": "150 enunciados en el archivo real. Los de aquí son INVENTADOS, solo para mostrar la forma: el texto real de los ítems no se publica.",
+ "items": [
+  "(ejemplo inventado) Reparar el motor de una lancha.",
+  "(ejemplo inventado) Dirigir un taller de teatro escolar.",
+  "(ejemplo inventado) Llevar el inventario de una bodega."
+ ]
+}

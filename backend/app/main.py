@@ -13,7 +13,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
-from app import models, recomendar, preguntas, extras, psicometrico
+from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto
 
 
 @asynccontextmanager
@@ -401,6 +401,44 @@ def psicometrico_calificar(data: PsicometricoIn, db: Session = Depends(get_db)):
             print(f"[psicometrico] no se pudo generar el resumen con IA: {e}")
 
     return {"id": fila.id, "puntajes": puntajes, "resumen": resumen}
+
+
+class CipIn(BaseModel):
+    # {"1": "A", "2": "D", ...} — Desagrado, Indiferencia o Agrado por cada ítem.
+    respuestas: dict[int, str]
+    sexo: str  # el baremo del CIP solo existe separado por sexo, no combinado
+    muestra: str = cip_fogliatto.MUESTRA_DEFAULT
+
+    @field_validator("respuestas")
+    @classmethod
+    def _rango_valido(cls, v: dict[int, str]) -> dict[int, str]:
+        for item, valor in v.items():
+            if not 1 <= item <= cip_fogliatto.N_ITEMS:
+                raise ValueError(f"Ítem fuera de rango: {item}")
+            if valor not in cip_fogliatto.VALOR:
+                raise ValueError(f"Respuesta no válida en el ítem {item}: {valor}")
+        return v
+
+
+@app.get("/api/cip/preguntas")
+def cip_preguntas():
+    """Los 150 ítems del CIP y la definición de las 15 escalas."""
+    return cip_fogliatto.preguntas()
+
+
+@app.post("/api/cip")
+def cip_calificar(data: CipIn):
+    """Califica el CIP y devuelve el perfil por escala.
+
+    ponytail: NO guarda nada en la base de datos. Es un prototipo de un instrumento
+    cuya autorización de uso sigue pendiente, así que no corresponde persistir
+    respuestas de estudiantes todavía. Cuando haya permiso escrito y supervisión
+    profesional, se agrega la tabla y se guarda igual que `psicometrico`.
+    """
+    return {
+        "resultado": cip_fogliatto.calificar(data.respuestas, data.sexo, data.muestra),
+        "sinceridad": cip_fogliatto.sinceridad(data.respuestas),
+    }
 
 
 class FeedbackIn(BaseModel):
