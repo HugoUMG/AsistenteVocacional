@@ -51,6 +51,36 @@ fallo anterior y no lo reintenta.
 Reproducir: `backend/flujo_gasto.py` (N conversaciones completas contra el backend
 local, lee `/api/uso-tokens` y calcula ambos costos).
 
+## Los experimentos no quedaban en `uso_tokens` (2026-08-12)
+
+`uso_tokens` solo se llena desde los endpoints (`_registrar_uso` en `main.py`).
+Los scripts `experimento_*.py` llaman a `recomendar.generar()` **directo, sin pasar
+por FastAPI**, así que su consumo era invisible: se gastaron **$0.86 de crédito**
+(de $9.85 a $8.99) sin una sola fila en la tabla.
+
+Agrava el problema tener la key de pago como respaldo: cuando la gratis agota su
+RPD, `generar()` salta sola a la de pago y **todo lo que sigue se factura en
+silencio**, sin que nadie lo pida explícitamente.
+
+**Solución (`_GASTO` / `resumen_gasto()` en `recomendar.py`):** contador en memoria
+del proceso, por proyecto (primaria/respaldo), que acumula en `generar()` — el único
+punto por donde pasan todas las llamadas. Los experimentos lo imprimen al terminar:
+
+```
+Gasto en Gemini de este proceso:
+  key primaria [gratis: $0 real]: 55 llamadas | 2,750,000 prompt (0 cacheados) | ...  ->  $0.7000
+  key respaldo [billing: SE FACTURA]: 12 llamadas | ...  ->  $0.1500
+  TOTAL si todo fuera de pago: $0.8500
+```
+
+La marca `[billing]` no se configura: sale de `_caches`, porque `caches.create` solo
+funciona con plan de pago. La fila de la key gratis es "lo que habría costado".
+
+No reemplaza a `uso_tokens` (que persiste y es por sesión de alumno): es para los
+scripts, que mueren al terminar.
+
+---
+
 ## Prueba de carga con la key GRATIS de primaria (2026-08-12)
 
 Configuración recomendada para desarrollo (gratis primaria, de pago en

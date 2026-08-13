@@ -277,7 +277,8 @@ if __name__ == "__main__":
     a = p.parse_args()
     if a.self_check:
         _self_check()
-    elif a.responder:
-        responder_cip()
     else:
-        correr()
+        responder_cip() if a.responder else correr()
+        # Llama a recomendar.generar() directo (sin FastAPI), así que su consumo no
+        # cae en uso_tokens: este contador es el único registro del gasto.
+        print(recomendar.resumen_gasto())
