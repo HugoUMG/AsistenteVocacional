@@ -205,6 +205,58 @@ def uso_tokens(resp, modelo: str) -> dict:
     }
 
 
+# Contador de gasto en memoria del proceso, por proyecto (primaria/respaldo).
+# Existe porque los experimentos (experimento_*.py) llaman a generar() DIRECTO,
+# sin pasar por los endpoints, así que su consumo no cae en la tabla uso_tokens y
+# se volvía invisible: el 2026-08-12 se gastaron $0.86 de crédito sin ningún
+# registro. Los endpoints siguen usando uso_tokens/_registrar_uso (persistente);
+# esto es para los scripts, que mueren al terminar.
+PRECIO_USD_POR_1M = {"input": 0.25, "output": 1.50, "cache": 0.025}  # gemini-3.1-flash-lite
+_GASTO: dict[str, dict[str, int]] = {}
+
+
+def _acumular(key_label: str, resp, modelo: str):
+    u = uso_tokens(resp, modelo)
+    g = _GASTO.setdefault(key_label, dict.fromkeys(
+        ("llamadas", "prompt_tokens", "output_tokens", "cached_tokens"), 0))
+    g["llamadas"] += 1
+    for k in ("prompt_tokens", "output_tokens", "cached_tokens"):
+        g[k] += u[k]
+    return resp
+
+
+def costo_usd(g: dict) -> float:
+    """Costo de un acumulado si esas llamadas se facturan (key con billing).
+    Los tokens cacheados valen ~10% del input normal."""
+    frescos = g["prompt_tokens"] - g["cached_tokens"]
+    return (frescos * PRECIO_USD_POR_1M["input"]
+            + g["cached_tokens"] * PRECIO_USD_POR_1M["cache"]
+            + g["output_tokens"] * PRECIO_USD_POR_1M["output"]) / 1e6
+
+
+def resumen_gasto() -> str:
+    """Texto para imprimir al final de un experimento. La key GRATIS no factura:
+    su fila es 'lo que habría costado'. Se marca con [billing] el proyecto donde
+    caches.create funcionó, que solo pasa con plan de pago."""
+    if not _GASTO:
+        return "Sin llamadas a Gemini en este proceso."
+    lineas = ["", "Gasto en Gemini de este proceso:"]
+    con_billing = {clave[2] for clave, name in _caches.items() if name is not None}
+    for lbl, g in sorted(_GASTO.items()):
+        marca = " [billing: SE FACTURA]" if lbl in con_billing else " [gratis: $0 real]"
+        lineas.append(
+            # sin acentos ni simbolos raros: la consola de Windows es cp1252 y los
+            # convierte en '?' (mismo motivo que el print de "agoto cuota" de abajo)
+            f"  key {lbl}{marca}: {g['llamadas']} llamadas | "
+            f"{g['prompt_tokens']:,} prompt ({g['cached_tokens']:,} cacheados) | "
+            f"{g['output_tokens']:,} salida  ->  ${costo_usd(g):.4f}"
+        )
+    total = {k: sum(g[k] for g in _GASTO.values()) for k in
+             ("llamadas", "prompt_tokens", "output_tokens", "cached_tokens")}
+    lineas.append(f"  TOTAL si todo fuera de pago: ${costo_usd(total):.4f}")
+    return "\n".join(lineas)
+
+
 def _agrupar(carreras) -> dict[str, list]:
     """Agrupa por perfil_grupo (misma carrera en varias sedes) o las deja
     sueltas (una sola sede). Clave = nombre visible del grupo: el de la propia
@@ -396,14 +448,16 @@ def generar(model, system, catalogo, variable, schema, temperature):
     key de respaldo, o el error no es 429, se propaga tal cual."""
     client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
     try:
-        return _generar_con_cliente(client, "primaria", model, system, catalogo, variable, schema, temperature)
+        resp = _generar_con_cliente(client, "primaria", model, system, catalogo, variable, schema, temperature)
+        return _acumular("primaria", resp, model)
     except errors.ClientError as e:
         key_respaldo = os.getenv("GEMINI_API_KEY_RESPALDO")
         if e.code != 429 or not key_respaldo:
             raise
         print(f"[gemini] key primaria agoto cuota (429), reintentando con GEMINI_API_KEY_RESPALDO — model={model}")
         client_respaldo = genai.Client(api_key=key_respaldo)
-        return _generar_con_cliente(client_respaldo, "respaldo", model, system, catalogo, variable, schema, temperature)
+        resp = _generar_con_cliente(client_respaldo, "respaldo", model, system, catalogo, variable, schema, temperature)
+        return _acumular("respaldo", resp, model)
 
 
 def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None) -> tuple[Resultado, dict]:
@@ -566,6 +620,21 @@ if __name__ == "__main__":
 
     assert uso_tokens(_Resp(cached=90), "m")["cached_tokens"] == 90
     assert uso_tokens(_Resp(cached=None), "m")["cached_tokens"] == 0
+
+    # self-check del contador de gasto: acumula por key y cobra los cacheados al
+    # 10%. 1M frescos = $0.25; 1M cacheados = $0.025; 1M de salida = $1.50.
+    _GASTO.clear()
+    _acumular("primaria", _Resp(cached=90), "m")
+    _acumular("primaria", _Resp(cached=None), "m")
+    assert _GASTO["primaria"] == {"llamadas": 2, "prompt_tokens": 200,
+                                  "output_tokens": 40, "cached_tokens": 90}
+    assert abs(costo_usd({"prompt_tokens": 1_000_000, "cached_tokens": 0,
+                          "output_tokens": 0}) - 0.25) < 1e-9
+    assert abs(costo_usd({"prompt_tokens": 1_000_000, "cached_tokens": 1_000_000,
+                          "output_tokens": 1_000_000}) - (0.025 + 1.50)) < 1e-9
+    assert "primaria" in resumen_gasto()
+    _GASTO.clear()
+    assert "Sin llamadas" in resumen_gasto()
 
     # self-check del fallback a GEMINI_API_KEY_RESPALDO: si la key primaria agota
     # reintentos con 429 y hay respaldo configurada, reintenta ahí UNA vez; sin
