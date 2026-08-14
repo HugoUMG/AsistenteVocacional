@@ -67,7 +67,7 @@
 
 @media (max-width: 720px) {
   .nav { flex-wrap: wrap; gap: 12px; }
-  .nav-links { order: 3; width: 100%; justify-content: center; gap: 16px; }
+  .nav-links { order: 3; width: 100%; flex-wrap: wrap; justify-content: center; gap: 10px 16px; }
 }
 
 /* Hero azul marino con ondas */
@@ -685,7 +685,7 @@
 }
 
 @media (max-width: 720px) {
-  .chat { height: min(94vh, 820px); border-radius: 22px; }
+  .chat { height: min(94svh, 820px); border-radius: 22px; }
 }
 
 /* --- Pantalla inicial: solo la burbuja flotante (toca para empezar) --- */
@@ -808,6 +808,16 @@
 }
 .chat-footer::-webkit-scrollbar { width: 8px; }
 .chat-footer::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 999px; }
+
+/* Con muchas opciones (chips, listas largas) el footer podía comerse hasta el
+   82% y dejar tan poco alto al header que el robot quedaba recortado por el
+   overflow:hidden de .chat. Se le reserva un piso fijo. */
+@media (max-width: 720px) {
+  .chat-footer { max-height: calc(100% - 150px); }
+  .siri-stage { padding: 10px 20px; gap: 8px; }
+  .siri-stage .robot, .siri-stage .robot svg { width: 46px; height: 46px; }
+  .siri-texto { font-size: 17px; }
+}
 
 /* --- Robot: burbuja de vidrio esmerilado (ice glass) --- */
 .robot {
@@ -1628,102 +1638,4 @@
   .psi-escala button svg { width: 28px; height: 28px; }
   .psi-opciones { grid-template-columns: 1fr; }
   .psi-rasgo-nombre { flex: 0 0 130px; font-size: 12.5px; }
-}
-
-/* --- CIP: cuestionario de intereses profesionales (150 ítems, 15 escalas) --- */
-
-.cip-aviso {
-  margin: 0 0 20px;
-  padding: 12px 16px;
-  border-left: 3px solid var(--accent);
-  background: #eef2f9;
-  color: var(--navy);
-  font-size: 14px;
-  line-height: 1.6;
-  border-radius: 0 8px 8px 0;
-}
-
-.cip-alerta {
-  margin: 0 0 20px;
-  padding: 12px 16px;
-  border-left: 3px solid #b8860b;
-  background: #fdf0dc;
-  color: #8a5a12;
-  font-size: 14px;
-  line-height: 1.6;
-  border-radius: 0 8px 8px 0;
-}
-
-.cip-sexo { display: flex; gap: 12px; margin-top: 20px; }
-.cip-sexo button {
-  flex: 1;
-  padding: 14px 18px;
-  border: 1.5px solid var(--linea);
-  border-radius: 10px;
-  background: #fff;
-  color: var(--navy);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color 0.12s, color 0.12s;
-}
-.cip-sexo button:hover { border-color: var(--accent); color: var(--accent); }
-.cip-sexo button[aria-checked='true'] {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #fff;
-}
-
-/* Tres opciones (D/I/A) en fila; en móvil se apilan. */
-.cip-opciones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.cip-opciones button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 8px;
-  border: 1.5px solid var(--linea);
-  border-radius: 10px;
-  background: #fff;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color 0.12s, color 0.12s, background 0.12s;
-}
-.cip-letra {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
-  border-radius: 50%;
-  border: 1.5px solid currentColor;
-  font-size: 12px;
-  font-weight: 800;
-}
-.cip-opciones button:hover { border-color: var(--tono); color: var(--tono); }
-.cip-opciones button.sel {
-  border-color: var(--tono);
-  color: var(--tono);
-  background: color-mix(in srgb, var(--tono) 9%, #fff);
-}
-
-.cip-fila { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-.cip-nombre { flex: 0 0 200px; color: var(--muted); font-size: 13.5px; cursor: help; }
-.cip-nombre.top { color: var(--navy); font-weight: 700; }
-.cip-pc {
-  flex: 0 0 84px;
-  text-align: right;
-  color: var(--navy);
-  font-weight: 700;
-  font-size: 14px;
-}
-.cip-pc small { display: block; color: var(--muted); font-weight: 500; font-size: 11.5px; }
-
-@media (max-width: 640px) {
-  .cip-opciones { grid-template-columns: 1fr; }
-  .cip-nombre { flex: 0 0 120px; font-size: 12.5px; }
-  .cip-pc { flex: 0 0 70px; }
 }
