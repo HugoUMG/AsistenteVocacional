@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Nav from './Nav'
 import { VIEWBOX, DEPARTAMENTOS_SVG } from './data/guatemalaDeptos'
 import { REGIONES } from './data/regiones'
-import { color } from './colors'
 import './App.css'
 
 // Únicos departamentos con carreras cargadas hoy (ver backend/data/*.json).
@@ -57,13 +56,16 @@ export default function Mapa() {
 
           const region = REGION_DE.get(nombre)
           const activa = region.deptos.some((dep) => ACTIVOS.has(dep))
-          const idx = REGIONES.findIndex((r) => r.id === region.id)
+          // ponytail: mismo azul de marca que en modo departamento, sin color
+          // por región. Los dos deptos con catálogo (Totonicapán y
+          // Quetzaltenango) caen en la MISMA región (VI, Suroccidente), así que
+          // nunca hay dos activas que distinguir. Si algún día se carga otra
+          // región, volver a un color por índice de la paleta.
           return (
             <path
               key={nombre}
               d={d}
-              className={`depto ${activa ? '' : 'inactivo'}`}
-              style={activa ? { fill: color(idx) } : undefined}
+              className={`depto ${activa ? 'activo' : 'inactivo'}`}
               onClick={activa ? () => irARegion(region) : undefined}
             >
               <title>
