@@ -82,6 +82,7 @@ export default function Holland() {
   const [respuestas, setRespuestas] = useState(() => leerBorrador()?.respuestas || {})
   const [enviando, setEnviando] = useState(false)
   const [resultado, setResultado] = useState(null)
+  const [letrasCustom, setLetrasCustom] = useState('')
 
   useEffect(() => {
     fetch(`${API}/api/holland/preguntas`)
@@ -200,6 +201,23 @@ export default function Holland() {
                   {p.nombre}
                 </button>
               ))}
+            </div>
+            <div style={{ display: 'flex', gap: 8, marginTop: 10, alignItems: 'center' }}>
+              <input
+                type="text"
+                placeholder="Combinación libre, ej. RSC"
+                value={letrasCustom}
+                onChange={(e) => setLetrasCustom(e.target.value.toUpperCase())}
+                style={{ maxWidth: 220 }}
+              />
+              <button
+                type="button"
+                className="hero-btn"
+                disabled={enviando || !/^[RIASEC]+$/.test(letrasCustom)}
+                onClick={() => terminar(cadenaPreset(banco.preguntas, letrasCustom))}
+              >
+                Probar combinación
+              </button>
             </div>
           </section>
         )}
