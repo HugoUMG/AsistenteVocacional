@@ -90,6 +90,10 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 7. **Español** en UI, comentarios, mensajes y documentación.
 8. Los comentarios `ponytail:` en el código marcan simplificaciones deliberadas
    con techo conocido — leer el comentario antes de "arreglarlas".
+9. **Holland es el instrumento de intereses.** No reimplementar sus ítems ni su
+   calificación: los sirve la API de O*NET. El **CIP salió del menú** (2026-08-16)
+   por falta de autorización de uso — no reponerlo ni invertirle trabajo hasta
+   que exista permiso escrito. Ver [docs/holland.md](docs/holland.md).
 
 ---
 
@@ -108,7 +112,9 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 - [docs/psicometrico.md](docs/psicometrico.md) — examen de 100 ítems: secciones,
   calificación, coherencia, deseabilidad social, baremo y sus límites.
 - [docs/holland.md](docs/holland.md) — test RIASEC servido por la API oficial de
-  O*NET (proxy con credenciales, no reimplementación).
+  O*NET (proxy con API key, no reimplementación). **Es el instrumento de
+  intereses del proyecto**; incluye la tabla de qué mide cada test y las
+  decisiones abiertas (¿alimenta la recomendación?, persistencia).
 - [docs/catalogo.md](docs/catalogo.md) — universidades cargadas y cómo agregar más.
 
 **Decisiones técnicas** (fecha · motivo · alternativas descartadas · consecuencias)
