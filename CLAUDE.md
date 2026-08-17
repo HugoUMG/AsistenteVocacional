@@ -123,6 +123,10 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   A/B del vector de cobertura: 40%→100% de cumplimiento, 7/10→10/10 de acierto.
 - [experiments/microexperiencias.md](experiments/microexperiencias.md) — intento
   revertido: 6/10, transcripciones y diagnóstico.
+- [experiments/psicometrico-en-chat.md](experiments/psicometrico-en-chat.md) —
+  psicométrico primero y chat sin preguntas fijas: NO se integra. Las fijas y el
+  test miden cosas distintas (intereses declarados vs. aptitud real) y quitarlas
+  costó el canal de revelación de los chips y la alerta de contradicción.
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
