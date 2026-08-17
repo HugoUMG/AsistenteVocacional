@@ -89,7 +89,7 @@ desactualizada.
 
 ## ¿Qué información recopila? (base de datos)
 
-Se guarda en PostgreSQL (`backend/app/models.py`), 5 tablas:
+Se guarda en PostgreSQL (`backend/app/models.py`), 6 tablas:
 - **`estudiantes`**: nombre (el email es opcional, hoy no se pide).
 - **`respuestas_cuestionario`**: todas las respuestas del test como JSON, ligadas
   al estudiante, más la `recomendacion` que devolvió la IA y el `feedback`
@@ -104,6 +104,16 @@ Se guarda en PostgreSQL (`backend/app/models.py`), 5 tablas:
   [decisions/gemini-costos-y-caching.md](../decisions/gemini-costos-y-caching.md)).
 - **`resultados_psicometricos`**: respuestas crudas + puntajes + resumen del
   examen psicométrico (ver [psicometrico.md](psicometrico.md)).
+- **`resultados_holland`**: hoja de 60 dígitos, código RIASEC y puntajes por área
+  del test de Holland (ver [holland.md](holland.md)).
+
+El **`session_id`** es lo que une todo: identifica un *recorrido* del alumno
+(Holland + chat + dashboard), no una carga de página. Vive en `sessionStorage`
+(`frontend/src/session.js`), así que sobrevive a recargar la página — antes se
+generaba con `crypto.randomUUID()` en cada carga y una recarga a media prueba
+partía los datos en dos sesiones que ya no se podían cruzar en la investigación.
+Empezar otra prueba llama a `nuevaSesion()` explícitamente, porque "Hacer otro
+test" navega sin recargar y reusaba la sesión anterior.
 
 No se recopilan datos sensibles ni credenciales. La `GEMINI_API_KEY` vive solo en
 `backend/.env` (ignorado por git, nunca se sube al repo).

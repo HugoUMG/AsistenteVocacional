@@ -186,6 +186,37 @@
 .paso-card h3 { margin: 4px 0 10px; color: var(--navy); font-size: 18.5px; }
 .paso-card p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
 
+/* Selector de los 3 modos del inicio (solo chat / solo Holland / los dos).
+   Reusa .paso-card; lo único propio es el botón abajo y el sello del
+   recomendado. El texto crece distinto en cada tarjeta, así que el botón se
+   empuja al fondo con margin-top:auto para que los tres queden alineados. */
+.modo-card { justify-content: flex-start; }
+.modo-card .hero-btn { margin-top: auto; padding-top: 12px; padding-bottom: 12px; }
+.modo-card p { margin-bottom: 22px; }
+.modo-minutos {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.modo-destacado { border-color: rgba(29, 78, 216, 0.35); }
+.modo-destacado::before { opacity: 1; }
+.modo-sello {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
 /* Badge de ícono compartido (pasos, acerca) */
 .card-icono {
   display: grid;
@@ -758,6 +789,9 @@
   font-weight: 600;
 }
 .siri-conf strong { color: var(--accent); }
+/* Modo 3: avisa que el chat está usando el perfil del test de Holland. Va
+   debajo del chip de confianza, que ocupa la esquina. */
+.siri-holland { top: 38px; }
 
 .siri-stage {
   flex: 1;

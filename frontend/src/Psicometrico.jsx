@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Nav from './Nav'
-import { SESSION_ID } from './session'
+import { sessionId } from './session'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -154,7 +154,7 @@ export default function Psicometrico() {
         body: JSON.stringify({
           respuestas,
           tiempos: tiempos.current,
-          session_id: SESSION_ID,
+          session_id: sessionId(),
         }),
       })
       if (!r.ok) {

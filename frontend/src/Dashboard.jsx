@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { color } from './colors'
-import { SESSION_ID } from './session'
+import { sessionId } from './session'
 import './Dashboard.css'
 
 const API = 'http://localhost:8000'
@@ -60,7 +60,7 @@ function SimuladorDia({ carrera, respuestas }) {
         carrera: carrera.carrera,
         descripcion: carrera.descripcion,
         respuestas,
-        session_id: SESSION_ID,
+        session_id: sessionId(),
       })
       setDatos(d)
     } catch (e) {
@@ -201,7 +201,7 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
         carrera_a: a.carrera, descripcion_a: a.descripcion,
         carrera_b: b.carrera, descripcion_b: b.descripcion,
         respuestas: respuestas || {},
-        session_id: SESSION_ID,
+        session_id: sessionId(),
       })
       setCmpDatos(d)
     } catch (e) {

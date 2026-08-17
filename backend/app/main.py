@@ -114,10 +114,40 @@ class EstudianteOut(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class AreaHolland(BaseModel):
+    letra: str = Field(pattern="^[RIASEC]$")
+    title: str = Field(max_length=60)
+    score: int = Field(ge=0, le=holland.MAX_AREA)
+
+
+class HollandRef(BaseModel):
+    """El perfil de Holland que el chat arrastra cuando el alumno hizo el test
+    antes (modo 3). Llega desde localStorage, o sea que es dato NO confiable que
+    termina dentro del prompt: por eso se valida forma y tamaño acá y el texto
+    lo arma el backend (`holland.bloque`), no el navegador."""
+
+    codigo: str = Field(pattern="^[RIASEC]{3}$")
+    areas: list[AreaHolland] = Field(min_length=6, max_length=6)
+    ocupaciones: list[str] = Field(default_factory=list, max_length=12)
+
+    @field_validator("ocupaciones")
+    @classmethod
+    def _titulos_ok(cls, v: list[str]) -> list[str]:
+        if any(len(t) > 120 for t in v):
+            raise ValueError("Título de ocupación demasiado largo")
+        return v
+
+    def bloque(self) -> str:
+        return holland.bloque(self.codigo,
+                              [a.model_dump() for a in self.areas],
+                              self.ocupaciones)
+
+
 class SurveyIn(BaseModel):
     estudiante_id: int
     respuestas: dict
     session_id: SessionId = None  # para atribuir el uso de tokens a la sesión
+    holland: HollandRef | None = None  # modo 3: hizo el test antes del chat
 
 
 class SurveyOut(BaseModel):
@@ -192,6 +222,7 @@ async def tts(data: TtsIn):
 class NextIn(BaseModel):
     respuestas: dict
     session_id: SessionId = None
+    holland: HollandRef | None = None  # modo 3: hizo el test antes del chat
 
 
 @app.get("/api/departamentos")
@@ -259,7 +290,10 @@ def next_question(data: NextIn, db: Session = Depends(get_db)):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
     carreras = _carreras(db, data.respuestas)
-    paso, uso = preguntas.siguiente_pregunta(data.respuestas, carreras, data.session_id)
+    paso, uso = preguntas.siguiente_pregunta(
+        data.respuestas, carreras, data.session_id,
+        holland=data.holland.bloque() if data.holland else None,
+    )
     _registrar_uso(db, data.session_id, "next-question", uso)
     return paso.model_dump()
 
@@ -272,7 +306,10 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
             detail="Falta configurar GEMINI_API_KEY en el backend.",
         )
     carreras = _carreras(db, data.respuestas)
-    resultado, uso = recomendar.recomendar(data.respuestas, carreras)
+    resultado, uso = recomendar.recomendar(
+        data.respuestas, carreras,
+        holland=data.holland.bloque() if data.holland else None,
+    )
     _registrar_uso(db, data.session_id, "recommend", uso)
     carreras_out = [r.model_dump() for r in resultado.carreras]
 
@@ -445,6 +482,7 @@ def cip_calificar(data: CipIn):
 class HollandIn(BaseModel):
     respuestas: str  # 60 dígitos 1-5, en el orden de las preguntas
     zona: int | None = Field(default=4, ge=1, le=5)  # Job Zone; 4 ≈ carrera universitaria
+    session_id: SessionId = None  # para guardar el resultado
 
     @field_validator("respuestas")
     @classmethod
@@ -477,13 +515,21 @@ def holland_preguntas():
 
 
 @app.post("/api/holland")
-def holland_perfil(data: HollandIn):
+def holland_perfil(data: HollandIn, db: Session = Depends(get_db)):
     """Puntajes RIASEC y carreras afines. El cálculo lo hace la API oficial.
 
-    ponytail: no guarda nada en la base de datos, igual que el CIP. Si el test se
-    va a usar en la investigación, se agrega una tabla como `resultados_psicometricos`.
-    """
-    return _onet(holland.perfil, data.respuestas, data.zona)
+    Se guarda el resultado (es el instrumento avalado del proyecto y entra en la
+    investigación). Sin session_id no se guarda: son llamadas de prueba."""
+    perfil = _onet(holland.perfil, data.respuestas, data.zona)
+    if data.session_id:
+        db.add(models.ResultadoHolland(
+            session_id=data.session_id,
+            respuestas=data.respuestas,
+            codigo=perfil["codigo"],
+            areas={a["letra"]: a["score"] for a in perfil["areas"]},
+        ))
+        db.commit()
+    return perfil
 
 
 class FeedbackIn(BaseModel):

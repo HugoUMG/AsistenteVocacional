@@ -74,9 +74,9 @@ viejo de la v1.9.
 
 - Las ocupaciones son del mercado laboral de EE. UU. Sirven para ver *tipo* de
   trabajo, no como catálogo de carreras en Guatemala — eso lo da el chat.
-- **No alimenta la recomendación** ni se guarda en la base de datos (igual que el
-  CIP). Si se va a usar en la investigación, se agrega una tabla como
-  `resultados_psicometricos`.
+- **No alimenta la recomendación.** En el modo 3 su perfil viaja al prompt del
+  chat, pero medido no mueve el ranking (ver abajo). Sí se guarda desde el
+  2026-08-16 en la tabla `resultados_holland`.
 - El banco de preguntas se cachea en memoria (`functools.cache`); un reinicio del
   backend lo vuelve a pedir.
 
@@ -95,18 +95,54 @@ Holland **no reemplaza** al psicométrico: uno mide intereses y el otro
 aptitud/personalidad. Sí reemplaza al CIP, que es el mismo constructo con peor
 respaldo legal.
 
+## Los tres modos (implementado el 2026-08-16)
+
+Desde el inicio el alumno elige entre **solo chat**, **solo Holland**, o
+**Holland y luego el chat** (modo 3). Cómo viaja el resultado en el modo 3:
+
+```
+/holland  → POST /api/holland → O*NET califica
+              ├─ se guarda en `resultados_holland` (session_id, hoja, código, áreas)
+              └─ frontend/src/holland-perfil.js → localStorage
+/chat     → lee localStorage y manda `holland` en /api/next-question y /api/recommend
+              └─ el backend valida (HollandRef) y arma el bloque con holland.bloque()
+```
+
+- El texto del prompt lo arma **el backend**, no el navegador: lo que llega de
+  `localStorage` es dato no confiable. Ver [api.md](api.md).
+- Las **4 preguntas fijas se quedan** también en el modo 3.
+- El bloque **no entra al pre-filtro** del catálogo.
+- "Responderlo de nuevo" borra el perfil guardado, para que el chat no use uno
+  viejo mientras el alumno repite el test.
+- El chat muestra un chip `Holland ASC` cuando está usando un perfil.
+
+Antes de construirlo se midió el modo 3 en
+[experiments/holland-en-chat.md](../experiments/holland-en-chat.md). Lo que quedó
+decidido por evidencia:
+
+- **Las 4 preguntas fijas se quedan** también en el modo 3: con ellas el chat usa
+  4 preguntas adaptativas en vez de 6, cuesta ~38% menos tokens y mantiene la
+  opción "escondida" del alumno en el top-3 (3/3 corridas contra 1/3).
+- **El bloque corto de Holland no pesa en la recomendación.** Con el área más
+  alta del perfil (39/40) en el prompt, en 5 de 6 corridas el top-1 fue de otra
+  área. Un bloque de texto es contexto, no peso: personaliza la conversación,
+  pero **no convierte a Holland en motor** — no afirmarlo en la tesis.
+- **El recorte del catálogo al sector queda apagado.** Construido con
+  solapamiento de palabras contra los títulos de ocupaciones de EE. UU., borra
+  las carreras correctas (un perfil A+S devuelve ocupaciones de docencia y
+  arrastra el catálogo hacia pedagogía).
+
 ## Decisiones abiertas (para retomar)
 
-1. **¿Holland alimenta la recomendación?** Hoy no: es una pestaña aparte, como el
-   psicométrico. Conectarlo es lo que lo vuelve motor y no anexo. Si se hace,
-   aplica la regla 4 (se mide antes de aceptarse) y la lección de
+1. **Si Holland tiene que ser motor, entra como estructura, no como prosa.**
+   Codificar el catálogo con los códigos RIASEC que O*NET publica por ocupación y
+   ordenar por distancia al código del alumno. Es la ventaja que el CIP no tenía:
+   la codificación se ancla a una fuente real en vez de que la invente el modelo.
+   Aplica la regla 4 y la lección de
    [cip-en-recomendacion.md](../experiments/cip-en-recomendacion.md): un A/B con
-   hojas respondidas por Gemini **no prueba la hipótesis**. Ventaja que el CIP no
-   tenía: O*NET publica el código RIASEC de cada ocupación, así que la
-   codificación del catálogo puede anclarse a una fuente real en vez de que la
-   invente el modelo.
-2. **Persistencia.** No se guarda nada. Si el test entra en la investigación hace
-   falta una tabla como `resultados_psicometricos`.
+   hojas respondidas por Gemini no prueba la hipótesis (por eso las hojas del
+   experimento de Holland se construyen aritméticamente y las califica O*NET).
+2. **Persistencia.** Hoy no se guarda nada. Para el modo 3 hace falta que el
+   resultado sobreviva al cambio de pestaña (localStorage) y, si entra en la
+   investigación, una tabla como `resultados_psicometricos`.
 3. **Revisar el psicométrico propio** (pendiente del usuario, 2026-08-16).
-4. **Integración por chat** del o de los tests (pendiente del usuario,
-   2026-08-16): la idea todavía no está definida.
