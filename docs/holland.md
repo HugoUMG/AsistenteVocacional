@@ -62,12 +62,13 @@ orden alfabético que no orientan a nadie. El total sin recortar viaja en
 
 El frontend arma una cadena de 60 dígitos (1-5, en el orden del índice de cada
 pregunta) y la manda como `respuestas`. Se valida en la frontera: 60 caracteres,
-todos entre 1 y 5. El código Holland (p. ej. `ASE`) se calcula ordenando los seis
-puntajes; la letra sale de la **posición** del área, no de su nombre, porque el
-endpoint en español las devuelve traducidas.
+todos entre 1 y 5. El código Holland (p. ej. `RSA`) sale de ordenar los seis
+puntajes; los empates se rompen con el orden canónico RIASEC, para que el código
+no dependa de en qué orden vino la lista.
 
-`job_zone` (2-5) filtra las ocupaciones por nivel de preparación; el frontend
-manda 4 ≈ carrera universitaria.
+La pestaña manda `zona: 4` (Job Zone 4 ≈ carrera universitaria). El campo del
+endpoint propio se llama `zona` justamente para no confundirlo con el `job_zone`
+viejo de la v1.9.
 
 ## Límites conocidos
 
@@ -80,3 +81,32 @@ manda 4 ≈ carrera universitaria.
   backend lo vuelve a pedir.
 
 Self-check: `uv run python -m app.holland` (hace llamadas reales si hay credenciales).
+
+## Qué instrumento mide qué (estado al 2026-08-16)
+
+| Instrumento | Mide | Estado |
+|---|---|---|
+| **Holland / O*NET** (`/holland`) | Intereses (RIASEC) | **En uso.** Oficial, en español, con licencia propia. Es *el* instrumento de intereses del proyecto. |
+| **Psicométrico 100 ítems** (`/psicometrico`) | Personalidad + razonamiento lógico/verbal/numérico | En uso, banco propio. Su percentil usa un **baremo ilustrativo**, no una muestra normativa: es la limitación que queda declarada en la tesis. |
+| **CIP** (`/cip`) | Intereses | **Retirado del menú** el 2026-08-16. Mide lo mismo que Holland pero sin autorización de uso (lo facilitó una estudiante, no la licenciada) y con baremos españoles de otra época. La ruta y el código siguen vivos para poder mostrarlo; no se le invierte más trabajo. |
+| **4 preguntas fijas del chat** | Intereses declarados en conversación | Se quedan. Quitarlas se midió y salió peor: ver [experiments/psicometrico-en-chat.md](../experiments/psicometrico-en-chat.md). |
+
+Holland **no reemplaza** al psicométrico: uno mide intereses y el otro
+aptitud/personalidad. Sí reemplaza al CIP, que es el mismo constructo con peor
+respaldo legal.
+
+## Decisiones abiertas (para retomar)
+
+1. **¿Holland alimenta la recomendación?** Hoy no: es una pestaña aparte, como el
+   psicométrico. Conectarlo es lo que lo vuelve motor y no anexo. Si se hace,
+   aplica la regla 4 (se mide antes de aceptarse) y la lección de
+   [cip-en-recomendacion.md](../experiments/cip-en-recomendacion.md): un A/B con
+   hojas respondidas por Gemini **no prueba la hipótesis**. Ventaja que el CIP no
+   tenía: O*NET publica el código RIASEC de cada ocupación, así que la
+   codificación del catálogo puede anclarse a una fuente real en vez de que la
+   invente el modelo.
+2. **Persistencia.** No se guarda nada. Si el test entra en la investigación hace
+   falta una tabla como `resultados_psicometricos`.
+3. **Revisar el psicométrico propio** (pendiente del usuario, 2026-08-16).
+4. **Integración por chat** del o de los tests (pendiente del usuario,
+   2026-08-16): la idea todavía no está definida.

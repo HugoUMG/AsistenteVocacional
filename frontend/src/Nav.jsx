@@ -21,7 +21,9 @@ export default function Nav() {
         <NavLink to="/acerca">Acerca de</NavLink>
         <NavLink to="/catalogo">Catálogo de carreras</NavLink>
         <NavLink to="/psicometrico">Exámenes psicométricos</NavLink>
-        <NavLink to="/cip">Intereses profesionales</NavLink>
+        {/* /cip sale del menú: mide lo mismo que Holland (intereses) pero sin
+            autorización de uso y con baremos españoles de otra época. La ruta
+            sigue viva para poder mostrárselo a quien lo pida. Ver docs/holland.md. */}
         <NavLink to="/holland">Test de Holland</NavLink>
         <NavLink to="/parametros">Parámetros</NavLink>
       </nav>
