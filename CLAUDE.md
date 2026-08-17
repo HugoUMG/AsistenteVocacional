@@ -133,6 +133,9 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   O*NET (proxy con API key, no reimplementación). **Es el instrumento de
   intereses del proyecto**; incluye la tabla de qué mide cada test y las
   decisiones abiertas (¿alimenta la recomendación?, persistencia).
+- [docs/personalidad.md](docs/personalidad.md) — test corto (48 ítems, sin IA)
+  de personalidad/valores/estilo cognitivo, pre-chat, mismo patrón que
+  Holland. Pendiente de medir si mueve el ranking.
 - [docs/catalogo.md](docs/catalogo.md) — universidades cargadas y cómo agregar más.
 
 **Decisiones técnicas** (fecha · motivo · alternativas descartadas · consecuencias)

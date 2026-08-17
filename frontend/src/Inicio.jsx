@@ -61,7 +61,7 @@ const PASOS = [
   },
 ]
 
-// Los tres caminos que puede tomar el alumno. El tercero es el modo completo:
+// Los caminos que puede tomar el alumno. El tercero es el modo completo:
 // el test avalado mide sus intereses y el chat se dedica a la carrera concreta.
 // Las 4 preguntas fijas del chat se quedan también en ese modo: quitarlas se
 // midió y salió peor (experiments/holland-en-chat.md).
@@ -87,6 +87,13 @@ const MODOS = [
     boton: 'Empezar por el test',
     ruta: '/holland',
     destacado: true,
+  },
+  {
+    titulo: 'Perfil corto y luego el chat',
+    minutos: '15 min',
+    texto: '48 frases sobre tu personalidad, tus valores y cómo pensás. Orienta arranca el chat ya sabiendo eso, así que necesita menos preguntas.',
+    boton: 'Empezar por el perfil',
+    ruta: '/personalidad',
   },
 ]
 
@@ -129,7 +136,7 @@ export default function Inicio() {
 
       <section className="pasos">
         <span className="pasos-kicker">Elige cómo empezar</span>
-        <h2>Tres formas de hacerlo</h2>
+        <h2>Cuatro formas de hacerlo</h2>
         <div className="pasos-grid">
           {MODOS.map((m) => (
             <article

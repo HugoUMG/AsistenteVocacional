@@ -1,0 +1,2416 @@
+{
+ "CUNOC::Ingeniería Mecánica": {
+  "nombre": "Ingeniería Mecánica",
+  "vector": {
+   "R": 69.7,
+   "I": 67.3,
+   "A": 20.0,
+   "S": 16.3,
+   "E": 32.0,
+   "C": 62.3
+  },
+  "codigo": "RIC",
+  "ocupaciones": [
+   {
+    "code": "17-3027.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Mecánica"
+   },
+   {
+    "code": "17-3023.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Eléctrica y Electrónica"
+   },
+   {
+    "code": "11-9041.00",
+    "title": "Directores de Arquitectura e Ingeniería"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNOC::Ingeniería Mecánica Industrial": {
+  "nombre": "Ingeniería Mecánica Industrial",
+  "vector": {
+   "R": 74.7,
+   "I": 71.7,
+   "A": 20.0,
+   "S": 30.0,
+   "E": 13.3,
+   "C": 58.0
+  },
+  "codigo": "RIC",
+  "ocupaciones": [
+   {
+    "code": "17-3027.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Mecánica"
+   },
+   {
+    "code": "25-1032.00",
+    "title": "Profesores de Ingeniería de Nivel Postsecundario"
+   },
+   {
+    "code": "17-3026.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Industrial"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNOC::Ingeniería en Administración de Tierras": {
+  "nombre": "Ingeniería en Administración de Tierras",
+  "vector": {
+   "R": 69.7,
+   "I": 67.3,
+   "A": 20.0,
+   "S": 16.3,
+   "E": 32.0,
+   "C": 62.3
+  },
+  "codigo": "RIC",
+  "ocupaciones": [
+   {
+    "code": "11-9041.00",
+    "title": "Directores de Arquitectura e Ingeniería"
+   },
+   {
+    "code": "17-3023.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Eléctrica y Electrónica"
+   },
+   {
+    "code": "17-3027.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Mecánica"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNOC::Ingeniería en Gestión Ambiental Local": {
+  "nombre": "Ingeniería en Gestión Ambiental Local",
+  "vector": {
+   "R": 63.7,
+   "I": 75.3,
+   "A": 18.3,
+   "S": 20.3,
+   "E": 43.7,
+   "C": 60.0
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "17-3025.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Ambiental"
+   },
+   {
+    "code": "17-2081.00",
+    "title": "Ingenieros Ambientales"
+   },
+   {
+    "code": "11-9041.00",
+    "title": "Directores de Arquitectura e Ingeniería"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNOC::Licenciatura en Economía": {
+  "nombre": "Licenciatura en Economía",
+  "vector": {
+   "R": 21.3,
+   "I": 92.0,
+   "A": 28.0,
+   "S": 43.7,
+   "E": 46.7,
+   "C": 52.7
+  },
+  "codigo": "ICE",
+  "ocupaciones": [
+   {
+    "code": "25-1063.00",
+    "title": "Profesores de Economía de Nivel Postsecundario"
+   },
+   {
+    "code": "19-3011.00",
+    "title": "Economistas"
+   },
+   {
+    "code": "19-3011.01",
+    "title": "Economistas Ambientales"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNOC::Licenciatura en la Enseñanza de la Matemática y la Física": {
+  "nombre": "Licenciatura en la Enseñanza de la Matemática y la Física",
+  "vector": {
+   "R": 46.7,
+   "I": 79.0,
+   "A": 37.0,
+   "S": 83.7,
+   "E": 18.7,
+   "C": 47.0
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1022.00",
+    "title": "Profesores de Ciencias Matemáticas de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1054.00",
+    "title": "Profesores de Física de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1032.00",
+    "title": "Profesores de Ingeniería de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNOC::Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)": {
+  "nombre": "Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)",
+  "vector": {
+   "R": 34.0,
+   "I": 52.0,
+   "A": 79.0,
+   "S": 100.0,
+   "E": 19.0,
+   "C": 27.0
+  },
+  "codigo": "SAI",
+  "ocupaciones": [
+   {
+    "code": "25-1121.00",
+    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNOC::Psicología (PEM y Licenciatura)": {
+  "nombre": "Psicología (PEM y Licenciatura)",
+  "vector": {
+   "R": 6.7,
+   "I": 73.3,
+   "A": 40.3,
+   "S": 96.3,
+   "E": 26.7,
+   "C": 43.3
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1066.00",
+    "title": "Profesores de Psicología de Nivel Postsecundario"
+   },
+   {
+    "code": "19-3033.00",
+    "title": "Psicólogos Clínicos y de Consejería"
+   },
+   {
+    "code": "19-3034.00",
+    "title": "Psicólogos Escolares"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNTOTO::Ingeniería Forestal": {
+  "nombre": "Ingeniería Forestal",
+  "vector": {
+   "R": 88.0,
+   "I": 51.0,
+   "A": 1.3,
+   "S": 27.0,
+   "E": 35.0,
+   "C": 56.7
+  },
+  "codigo": "RCI",
+  "ocupaciones": [
+   {
+    "code": "45-4011.00",
+    "title": "Trabajadores Forestales y de Conservación"
+   },
+   {
+    "code": "19-4071.00",
+    "title": "Técnicos Forestales y de Conservación"
+   },
+   {
+    "code": "19-1032.00",
+    "title": "Silvicultores"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNTOTO::PEM en Pedagogía y Educación Intercultural": {
+  "nombre": "PEM en Pedagogía y Educación Intercultural",
+  "vector": {
+   "R": 28.3,
+   "I": 54.0,
+   "A": 55.3,
+   "S": 100.0,
+   "E": 21.0,
+   "C": 37.7
+  },
+  "codigo": "SAI",
+  "ocupaciones": [
+   {
+    "code": "25-1121.00",
+    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2058.00",
+    "title": "Maestros de Educación Especial de Escuela Secundaria"
+   }
+  ],
+  "revisado": true
+ },
+ "CUNTOTO::PEM en Pedagogía y Técnico en Administración Educativa con Orientación en Medio Ambiente": {
+  "nombre": "PEM en Pedagogía y Técnico en Administración Educativa con Orientación en Medio Ambiente",
+  "vector": {
+   "R": 32.7,
+   "I": 37.7,
+   "A": 49.7,
+   "S": 97.3,
+   "E": 24.3,
+   "C": 42.7
+  },
+  "codigo": "SAC",
+  "ocupaciones": [
+   {
+    "code": "25-1121.00",
+    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2023.00",
+    "title": "Maestros de Educación Profesional/Técnica de Escuela de Nivel Medio"
+   },
+   {
+    "code": "25-9042.00",
+    "title": "Auxiliares Docentes de Educación Preescolar, Primaria, Nivel Medio, Secundaria"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Administración de Hotelería, Turismo y Gastronomía": {
+  "nombre": "Administración de Hotelería, Turismo y Gastronomía",
+  "vector": {
+   "R": 28.7,
+   "I": 8.3,
+   "A": 17.7,
+   "S": 61.7,
+   "E": 60.7,
+   "C": 59.0
+  },
+  "codigo": "SEC",
+  "ocupaciones": [
+   {
+    "code": "39-7011.00",
+    "title": "Guías y Escoltas de Excursiones"
+   },
+   {
+    "code": "11-9081.00",
+    "title": "Gerentes de Hospedaje"
+   },
+   {
+    "code": "43-4181.00",
+    "title": "Agentes de Reservación y Venta de Boletos de Transporte y Empleados de Oficina de Viajes"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Chef Profesional e Internacional (Técnico Universitario)": {
+  "nombre": "Chef Profesional e Internacional (Técnico Universitario)",
+  "vector": {
+   "R": 59.3,
+   "I": 47.7,
+   "A": 29.7,
+   "S": 48.7,
+   "E": 38.0,
+   "C": 47.7
+  },
+  "codigo": "RSI",
+  "ocupaciones": [
+   {
+    "code": "25-1194.00",
+    "title": "Profesores de Educación Profesional/Técnica de Nivel Postsecundario"
+   },
+   {
+    "code": "35-1011.00",
+    "title": "Chefs y Primeros Chefs"
+   },
+   {
+    "code": "19-1012.00",
+    "title": "Científicos y Tecnólogos Especializados en Alimentos"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Criminología y Política Criminal": {
+  "nombre": "Criminología y Política Criminal",
+  "vector": {
+   "R": 48.7,
+   "I": 70.7,
+   "A": 18.3,
+   "S": 45.0,
+   "E": 33.7,
+   "C": 57.7
+  },
+  "codigo": "ICR",
+  "ocupaciones": [
+   {
+    "code": "25-1111.00",
+    "title": "Profesores de Justicia Criminal y Aplicación y Cumplimiento de la Ley de Nivel Postsecundario"
+   },
+   {
+    "code": "33-3021.00",
+    "title": "Detectives e Investigadores Criminales"
+   },
+   {
+    "code": "19-4092.00",
+    "title": "Técnicos en Ciencias Forenses"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Ingeniería Química": {
+  "nombre": "Ingeniería Química",
+  "vector": {
+   "R": 75.3,
+   "I": 82.7,
+   "A": 22.7,
+   "S": 34.7,
+   "E": 15.0,
+   "C": 52.7
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "25-1032.00",
+    "title": "Profesores de Ingeniería de Nivel Postsecundario"
+   },
+   {
+    "code": "17-2041.00",
+    "title": "Ingenieros Químicos"
+   },
+   {
+    "code": "17-2031.00",
+    "title": "Ingenieros Biogenéticos y Biomédicos"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Ingeniería en Agronomía": {
+  "nombre": "Ingeniería en Agronomía",
+  "vector": {
+   "R": 77.3,
+   "I": 80.3,
+   "A": 18.3,
+   "S": 35.0,
+   "E": 19.3,
+   "C": 49.3
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "25-1041.00",
+    "title": "Profesores de Ciencias Agrarias de Nivel Postsecundario"
+   },
+   {
+    "code": "19-1013.00",
+    "title": "Científicos Especializados en Suelos y Botánica"
+   },
+   {
+    "code": "19-4012.01",
+    "title": "Técnicos de Precisión en Agricultura"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Licenciatura en Administración Educativa": {
+  "nombre": "Licenciatura en Administración Educativa",
+  "vector": {
+   "R": 19.7,
+   "I": 47.0,
+   "A": 39.3,
+   "S": 100.0,
+   "E": 34.0,
+   "C": 48.3
+  },
+  "codigo": "SCI",
+  "ocupaciones": [
+   {
+    "code": "21-1012.00",
+    "title": "Consejeros y Orientadores Educativos, Académicos, y Ocupacionales"
+   },
+   {
+    "code": "25-2032.00",
+    "title": "Maestros de Educación Profesional/Técnica de Escuela Secundaria"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural": {
+  "nombre": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+  "vector": {
+   "R": 25.0,
+   "I": 44.7,
+   "A": 38.3,
+   "S": 97.3,
+   "E": 24.7,
+   "C": 46.3
+  },
+  "codigo": "SCI",
+  "ocupaciones": [
+   {
+    "code": "25-2056.00",
+    "title": "Maestros de Educación Especial de Escuela Primaria"
+   },
+   {
+    "code": "25-9042.00",
+    "title": "Auxiliares Docentes de Educación Preescolar, Primaria, Nivel Medio, Secundaria"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Licenciatura en Educación de la Comunicación y Lenguaje": {
+  "nombre": "Licenciatura en Educación de la Comunicación y Lenguaje",
+  "vector": {
+   "R": 20.7,
+   "I": 52.7,
+   "A": 51.0,
+   "S": 100.0,
+   "E": 26.7,
+   "C": 41.3
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1124.00",
+    "title": "Profesores de Lengua y Literatura Extranjeras de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1123.00",
+    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+   },
+   {
+    "code": "25-3011.00",
+    "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Licenciatura en Educación de la Física y Matemática": {
+  "nombre": "Licenciatura en Educación de la Física y Matemática",
+  "vector": {
+   "R": 36.3,
+   "I": 54.7,
+   "A": 37.7,
+   "S": 95.7,
+   "E": 19.7,
+   "C": 50.7
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-2059.01",
+    "title": "Especialistas en Educación Física Adaptada"
+   },
+   {
+    "code": "25-1022.00",
+    "title": "Profesores de Ciencias Matemáticas de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2022.00",
+    "title": "Maestros de Escuela de Nivel Medio"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Profesorado en Física y Matemática": {
+  "nombre": "Profesorado en Física y Matemática",
+  "vector": {
+   "R": 41.0,
+   "I": 63.7,
+   "A": 39.7,
+   "S": 89.0,
+   "E": 21.7,
+   "C": 47.0
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1022.00",
+    "title": "Profesores de Ciencias Matemáticas de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2031.00",
+    "title": "Maestros de Escuela Secundaria"
+   },
+   {
+    "code": "25-1032.00",
+    "title": "Profesores de Ingeniería de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Profesorado en Pedagogía con Especialización": {
+  "nombre": "Profesorado en Pedagogía con Especialización",
+  "vector": {
+   "R": 33.3,
+   "I": 63.0,
+   "A": 51.0,
+   "S": 100.0,
+   "E": 21.3,
+   "C": 37.7
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1121.00",
+    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1071.00",
+    "title": "Profesores de Especialidades de Salud de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Profesorado en Tecnología Educativa": {
+  "nombre": "Profesorado en Tecnología Educativa",
+  "vector": {
+   "R": 28.0,
+   "I": 55.7,
+   "A": 40.0,
+   "S": 93.3,
+   "E": 33.7,
+   "C": 44.0
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   },
+   {
+    "code": "25-9031.00",
+    "title": "Coordinadores Educativos"
+   },
+   {
+    "code": "25-1194.00",
+    "title": "Profesores de Educación Profesional/Técnica de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "UMG Quetzaltenango::Teología Sistemática": {
+  "nombre": "Teología Sistemática",
+  "vector": {
+   "R": 33.7,
+   "I": 68.3,
+   "A": 50.7,
+   "S": 81.7,
+   "E": 23.0,
+   "C": 40.3
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1126.00",
+    "title": "Profesores de Filosofía y Religión de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2022.00",
+    "title": "Maestros de Escuela de Nivel Medio"
+   },
+   {
+    "code": "19-3091.00",
+    "title": "Antropólogos y Arqueólogos"
+   }
+  ],
+  "revisado": true
+ },
+ "URG Totonicapán::Licenciatura en Administración de Sistemas Informáticos": {
+  "nombre": "Licenciatura en Administración de Sistemas Informáticos",
+  "vector": {
+   "R": 39.7,
+   "I": 66.3,
+   "A": 8.0,
+   "S": 19.3,
+   "E": 43.3,
+   "C": 83.3
+  },
+  "codigo": "CIE",
+  "ocupaciones": [
+   {
+    "code": "15-1211.00",
+    "title": "Analistas de Sistemas de Computadoras"
+   },
+   {
+    "code": "15-1244.00",
+    "title": "Administradores de Redes Informáticas y Sistemas de Computación"
+   },
+   {
+    "code": "11-3021.00",
+    "title": "Gerentes de Sistemas de Computación e Información"
+   }
+  ],
+  "revisado": true
+ },
+ "URG Totonicapán::Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)": {
+  "nombre": "Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)",
+  "vector": {
+   "R": 1.0,
+   "I": 14.3,
+   "A": 45.7,
+   "S": 40.7,
+   "E": 98.0,
+   "C": 56.7
+  },
+  "codigo": "ECA",
+  "ocupaciones": [
+   {
+    "code": "11-2011.00",
+    "title": "Gerentes de Publicidad y Promociones"
+   },
+   {
+    "code": "41-3011.00",
+    "title": "Agentes de Venta de Publicidad"
+   },
+   {
+    "code": "11-2032.00",
+    "title": "Gerentes de Relaciones Públicas"
+   }
+  ],
+  "revisado": true
+ },
+ "administracion_empresas": {
+  "nombre": "Administración de Empresas",
+  "vector": {
+   "R": 19.0,
+   "I": 29.0,
+   "A": 10.7,
+   "S": 54.3,
+   "E": 75.3,
+   "C": 71.0
+  },
+  "codigo": "ECS",
+  "ocupaciones": [
+   {
+    "code": "53-1042.01",
+    "title": "Coordinadores de Reciclaje"
+   },
+   {
+    "code": "11-3012.00",
+    "title": "Gerentes de Servicios Administrativos"
+   },
+   {
+    "code": "11-9033.00",
+    "title": "Administradores Educativos de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "arquitectura": {
+  "nombre": "Arquitectura",
+  "vector": {
+   "R": 34.0,
+   "I": 62.0,
+   "A": 31.0,
+   "S": 50.7,
+   "E": 60.7,
+   "C": 58.7
+  },
+  "codigo": "IEC",
+  "ocupaciones": [
+   {
+    "code": "25-1031.00",
+    "title": "Profesores de Arquitectura de Nivel Postsecundario"
+   },
+   {
+    "code": "11-9041.00",
+    "title": "Directores de Arquitectura e Ingeniería"
+   },
+   {
+    "code": "11-3021.00",
+    "title": "Gerentes de Sistemas de Computación e Información"
+   }
+  ],
+  "revisado": true
+ },
+ "bioimagenes": {
+  "nombre": "Licenciatura en Producción de Imágenes Diagnósticas",
+  "vector": {
+   "R": 73.7,
+   "I": 74.0,
+   "A": 2.0,
+   "S": 43.3,
+   "E": 8.3,
+   "C": 64.0
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "29-2035.00",
+    "title": "Tecnólogos Especializados en Imágenes de Resonancia Magnética"
+   },
+   {
+    "code": "29-1224.00",
+    "title": "Radiólogos"
+   },
+   {
+    "code": "29-2034.00",
+    "title": "Tecnólogos y Técnicos de Radiología"
+   }
+  ],
+  "revisado": true
+ },
+ "ciencias_juridicas": {
+  "nombre": "Licenciatura en Ciencias Jurídicas y Sociales",
+  "vector": {
+   "R": 13.7,
+   "I": 36.3,
+   "A": 9.7,
+   "S": 32.7,
+   "E": 52.3,
+   "C": 86.3
+  },
+  "codigo": "CEI",
+  "ocupaciones": [
+   {
+    "code": "23-1012.00",
+    "title": "Oficiales Jurídicos"
+   },
+   {
+    "code": "23-2093.00",
+    "title": "Examinadores, Analistas de Títulos y Gestores de Búsqueda de Títulos"
+   },
+   {
+    "code": "43-6012.00",
+    "title": "Secretarios Legales y Asistentes Administrativos"
+   }
+  ],
+  "revisado": true
+ },
+ "cirujano_dentista": {
+  "nombre": "Cirujano Dentista",
+  "vector": {
+   "R": 69.3,
+   "I": 66.3,
+   "A": 2.0,
+   "S": 57.0,
+   "E": 14.3,
+   "C": 54.0
+  },
+  "codigo": "RIS",
+  "ocupaciones": [
+   {
+    "code": "29-1022.00",
+    "title": "Cirujanos Bucales y Maxilofaciales"
+   },
+   {
+    "code": "31-9091.00",
+    "title": "Asistentes Dentales"
+   },
+   {
+    "code": "29-1021.00",
+    "title": "Dentistas Generales"
+   }
+  ],
+  "revisado": true
+ },
+ "comercio_internacional": {
+  "nombre": "Licenciatura en Comercio Internacional",
+  "vector": {
+   "R": 16.7,
+   "I": 23.3,
+   "A": 10.0,
+   "S": 28.0,
+   "E": 83.0,
+   "C": 71.7
+  },
+  "codigo": "ECS",
+  "ocupaciones": [
+   {
+    "code": "43-5011.01",
+    "title": "Agentes de Cargas"
+   },
+   {
+    "code": "11-2021.00",
+    "title": "Gerentes de Mercadeo"
+   },
+   {
+    "code": "11-2022.00",
+    "title": "Gerentes de Ventas"
+   }
+  ],
+  "revisado": true
+ },
+ "comunicacion_diseno": {
+  "nombre": "Licenciatura en Comunicación y Diseño",
+  "vector": {
+   "R": 33.3,
+   "I": 41.3,
+   "A": 86.0,
+   "S": 23.3,
+   "E": 49.3,
+   "C": 49.7
+  },
+  "codigo": "ACE",
+  "ocupaciones": [
+   {
+    "code": "27-1024.00",
+    "title": "Diseñadores Gráficos"
+   },
+   {
+    "code": "27-1011.00",
+    "title": "Directores de Arte"
+   },
+   {
+    "code": "15-1255.00",
+    "title": "Diseñadores de Página Web y de Interfaz Digital"
+   }
+  ],
+  "revisado": true
+ },
+ "contaduria": {
+  "nombre": "Contaduría Pública y Auditoría",
+  "vector": {
+   "R": 6.0,
+   "I": 24.3,
+   "A": 3.7,
+   "S": 36.3,
+   "E": 82.0,
+   "C": 84.7
+  },
+  "codigo": "CES",
+  "ocupaciones": [
+   {
+    "code": "13-2011.00",
+    "title": "Contadores y Auditores"
+   },
+   {
+    "code": "43-1011.00",
+    "title": "Supervisores Directos de Empleados de Oficina y de Apoyo Administrativo"
+   },
+   {
+    "code": "11-3031.00",
+    "title": "Gerentes Financieros"
+   }
+  ],
+  "revisado": true
+ },
+ "criminalistica": {
+  "nombre": "Técnico Universitario en Criminología y Criminalística",
+  "vector": {
+   "R": 38.7,
+   "I": 68.3,
+   "A": 17.3,
+   "S": 37.7,
+   "E": 20.7,
+   "C": 69.7
+  },
+  "codigo": "CIR",
+  "ocupaciones": [
+   {
+    "code": "19-4092.00",
+    "title": "Técnicos en Ciencias Forenses"
+   },
+   {
+    "code": "25-1111.00",
+    "title": "Profesores de Justicia Criminal y Aplicación y Cumplimiento de la Ley de Nivel Postsecundario"
+   },
+   {
+    "code": "43-9111.00",
+    "title": "Asistentes de Estadísticas"
+   }
+  ],
+  "revisado": true
+ },
+ "diseno_grafico": {
+  "nombre": "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
+  "vector": {
+   "R": 33.3,
+   "I": 41.3,
+   "A": 86.0,
+   "S": 23.3,
+   "E": 49.3,
+   "C": 49.7
+  },
+  "codigo": "ACE",
+  "ocupaciones": [
+   {
+    "code": "27-1024.00",
+    "title": "Diseñadores Gráficos"
+   },
+   {
+    "code": "27-1011.00",
+    "title": "Directores de Arte"
+   },
+   {
+    "code": "15-1255.00",
+    "title": "Diseñadores de Página Web y de Interfaz Digital"
+   }
+  ],
+  "revisado": true
+ },
+ "economia": {
+  "nombre": "Economía Empresarial",
+  "vector": {
+   "R": 16.7,
+   "I": 71.3,
+   "A": 29.0,
+   "S": 64.0,
+   "E": 47.7,
+   "C": 58.0
+  },
+  "codigo": "ISC",
+  "ocupaciones": [
+   {
+    "code": "25-1063.00",
+    "title": "Profesores de Economía de Nivel Postsecundario"
+   },
+   {
+    "code": "15-2051.01",
+    "title": "Analistas de Inteligencia Empresarial"
+   },
+   {
+    "code": "25-1011.00",
+    "title": "Profesores de Estudios Comerciales de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "enfermeria": {
+  "nombre": "Licenciatura en Enfermería",
+  "vector": {
+   "R": 43.7,
+   "I": 53.3,
+   "A": 8.7,
+   "S": 80.3,
+   "E": 26.0,
+   "C": 53.0
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "29-1141.04",
+    "title": "Especialistas en Enfermería Clínica"
+   },
+   {
+    "code": "29-1141.03",
+    "title": "Enfermeros de Cuidado Crítico"
+   },
+   {
+    "code": "31-1131.00",
+    "title": "Asistentes de Enfermería"
+   }
+  ],
+  "revisado": true
+ },
+ "enfermeria_veterinaria": {
+  "nombre": "Técnico Universitario en Enfermería Veterinaria",
+  "vector": {
+   "R": 74.0,
+   "I": 66.3,
+   "A": 11.0,
+   "S": 58.7,
+   "E": 5.7,
+   "C": 50.0
+  },
+  "codigo": "RIS",
+  "ocupaciones": [
+   {
+    "code": "29-2056.00",
+    "title": "Tecnólogos y Técnicos de Veterinaria"
+   },
+   {
+    "code": "25-1071.00",
+    "title": "Profesores de Especialidades de Salud de Nivel Postsecundario"
+   },
+   {
+    "code": "31-9096.00",
+    "title": "Asistentes de Veterinarios y Cuidadores de Animales de Laboratorio"
+   }
+  ],
+  "revisado": true
+ },
+ "gastronomia": {
+  "nombre": "Artes Culinarias y Negocios Gastronómicos",
+  "vector": {
+   "R": 67.7,
+   "I": 24.0,
+   "A": 22.0,
+   "S": 42.0,
+   "E": 44.0,
+   "C": 48.3
+  },
+  "codigo": "RCE",
+  "ocupaciones": [
+   {
+    "code": "35-1011.00",
+    "title": "Chefs y Primeros Chefs"
+   },
+   {
+    "code": "35-2021.00",
+    "title": "Trabajadores de Preparación de Comidas"
+   },
+   {
+    "code": "25-9021.00",
+    "title": "Educadores en Gerencia de Granjas y Hogares"
+   }
+  ],
+  "revisado": true
+ },
+ "hemodialisis": {
+  "nombre": "Técnico Universitario en Hemodiálisis",
+  "vector": {
+   "R": 67.5,
+   "I": 64.5,
+   "A": 0.0,
+   "S": 47.0,
+   "E": 8.0,
+   "C": 71.5
+  },
+  "codigo": "CRI",
+  "ocupaciones": [
+   {
+    "code": "29-2012.00",
+    "title": "Técnicos de Laboratorio Médico y Clínico"
+   },
+   {
+    "code": "31-9092.00",
+    "title": "Ayudantes de Médicos"
+   }
+  ],
+  "revisado": true
+ },
+ "hoteleria_turismo": {
+  "nombre": "Licenciatura en Administración de Empresas Turísticas y Hoteleras",
+  "vector": {
+   "R": 23.3,
+   "I": 7.3,
+   "A": 11.7,
+   "S": 59.7,
+   "E": 52.7,
+   "C": 70.0
+  },
+  "codigo": "CSE",
+  "ocupaciones": [
+   {
+    "code": "39-7012.00",
+    "title": "Guías de Viajes"
+   },
+   {
+    "code": "43-4181.00",
+    "title": "Agentes de Reservación y Venta de Boletos de Transporte y Empleados de Oficina de Viajes"
+   },
+   {
+    "code": "43-4081.00",
+    "title": "Empleados de Recepción de Hotel, Motel, y Centro Turístico"
+   }
+  ],
+  "revisado": true
+ },
+ "informatica_administracion": {
+  "nombre": "Licenciatura en Informática y Administración de Empresas",
+  "vector": {
+   "R": 36.7,
+   "I": 48.7,
+   "A": 18.0,
+   "S": 47.7,
+   "E": 47.0,
+   "C": 70.7
+  },
+  "codigo": "CIS",
+  "ocupaciones": [
+   {
+    "code": "25-2031.00",
+    "title": "Maestros de Escuela Secundaria"
+   },
+   {
+    "code": "15-1244.00",
+    "title": "Administradores de Redes Informáticas y Sistemas de Computación"
+   },
+   {
+    "code": "11-3021.00",
+    "title": "Gerentes de Sistemas de Computación e Información"
+   }
+  ],
+  "revisado": true
+ },
+ "informatica_inteligencia_negocios": {
+  "nombre": "Licenciatura en Informática e Inteligencia de Negocios",
+  "vector": {
+   "R": 27.0,
+   "I": 76.7,
+   "A": 13.7,
+   "S": 14.3,
+   "E": 44.0,
+   "C": 79.0
+  },
+  "codigo": "CIE",
+  "ocupaciones": [
+   {
+    "code": "15-2051.01",
+    "title": "Analistas de Inteligencia Empresarial"
+   },
+   {
+    "code": "33-3021.06",
+    "title": "Analistas de Inteligencia"
+   },
+   {
+    "code": "15-1299.05",
+    "title": "Ingenieros de Seguridad de la Información"
+   }
+  ],
+  "revisado": true
+ },
+ "ingenieria_agricola": {
+  "nombre": "Ingeniería Agrícola con Énfasis en Gerencia",
+  "vector": {
+   "R": 88.0,
+   "I": 22.7,
+   "A": 0.0,
+   "S": 14.0,
+   "E": 24.7,
+   "C": 52.3
+  },
+  "codigo": "RCE",
+  "ocupaciones": [
+   {
+    "code": "45-2091.00",
+    "title": "Operadores de Equipo Agrícola"
+   },
+   {
+    "code": "49-3041.00",
+    "title": "Mecánicos y Técnicos de Servicio de Equipo Agrícola"
+   },
+   {
+    "code": "13-1074.00",
+    "title": "Contratistas de Mano de Obra Agrícola"
+   }
+  ],
+  "revisado": true
+ },
+ "ingenieria_ambiental": {
+  "nombre": "Ingeniería Ambiental",
+  "vector": {
+   "R": 63.7,
+   "I": 75.3,
+   "A": 18.3,
+   "S": 20.3,
+   "E": 43.7,
+   "C": 60.0
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "17-3025.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Ambiental"
+   },
+   {
+    "code": "11-9041.00",
+    "title": "Directores de Arquitectura e Ingeniería"
+   },
+   {
+    "code": "17-2081.00",
+    "title": "Ingenieros Ambientales"
+   }
+  ],
+  "revisado": true
+ },
+ "ingenieria_civil": {
+  "nombre": "Ingeniería Civil",
+  "vector": {
+   "R": 82.0,
+   "I": 65.3,
+   "A": 36.3,
+   "S": 10.0,
+   "E": 18.0,
+   "C": 65.3
+  },
+  "codigo": "RIC",
+  "ocupaciones": [
+   {
+    "code": "17-3022.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Civil"
+   },
+   {
+    "code": "17-3011.00",
+    "title": "Delineantes de Planos Arquitectónicos y Civiles"
+   },
+   {
+    "code": "17-2051.00",
+    "title": "Ingenieros Civiles"
+   }
+  ],
+  "revisado": true
+ },
+ "ingenieria_electronica": {
+  "nombre": "Ingeniería en Electrónica",
+  "vector": {
+   "R": 69.3,
+   "I": 69.7,
+   "A": 19.0,
+   "S": 18.7,
+   "E": 35.0,
+   "C": 61.7
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "17-3023.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Eléctrica y Electrónica"
+   },
+   {
+    "code": "17-2072.00",
+    "title": "Ingenieros Electrónicos"
+   },
+   {
+    "code": "11-9041.00",
+    "title": "Directores de Arquitectura e Ingeniería"
+   }
+  ],
+  "revisado": true
+ },
+ "ingenieria_industrial": {
+  "nombre": "Ingeniería Industrial",
+  "vector": {
+   "R": 78.7,
+   "I": 58.7,
+   "A": 13.3,
+   "S": 29.0,
+   "E": 14.0,
+   "C": 55.7
+  },
+  "codigo": "RIC",
+  "ocupaciones": [
+   {
+    "code": "17-3026.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Industrial"
+   },
+   {
+    "code": "25-1032.00",
+    "title": "Profesores de Ingeniería de Nivel Postsecundario"
+   },
+   {
+    "code": "49-9041.00",
+    "title": "Mecánicos de Maquinaria Industrial"
+   }
+  ],
+  "revisado": true
+ },
+ "ingenieria_sistemas": {
+  "nombre": "Ingeniería en Ciencias y Sistemas",
+  "vector": {
+   "R": 68.3,
+   "I": 74.7,
+   "A": 19.0,
+   "S": 17.0,
+   "E": 27.7,
+   "C": 61.3
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "17-3023.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Eléctrica y Electrónica"
+   },
+   {
+    "code": "17-3027.00",
+    "title": "Tecnólogos y Técnicos en Ingeniería Mecánica"
+   },
+   {
+    "code": "11-9121.00",
+    "title": "Directores de Ciencias Naturales"
+   }
+  ],
+  "revisado": true
+ },
+ "laboratorio_clinico": {
+  "nombre": "Técnico Universitario en Laboratorio Clínico",
+  "vector": {
+   "R": 81.0,
+   "I": 87.0,
+   "A": 2.3,
+   "S": 31.0,
+   "E": 3.3,
+   "C": 66.7
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "29-2011.00",
+    "title": "Tecnólogos de Laboratorio Médico y Clínico"
+   },
+   {
+    "code": "29-2012.00",
+    "title": "Técnicos de Laboratorio Médico y Clínico"
+   },
+   {
+    "code": "29-2011.04",
+    "title": "Histotecnólogos"
+   }
+  ],
+  "revisado": true
+ },
+ "laboratorio_dental": {
+  "nombre": "Técnico en Laboratorio Dental",
+  "vector": {
+   "R": 74.3,
+   "I": 53.3,
+   "A": 3.7,
+   "S": 52.3,
+   "E": 6.0,
+   "C": 60.3
+  },
+  "codigo": "RCI",
+  "ocupaciones": [
+   {
+    "code": "51-9081.00",
+    "title": "Técnicos de Laboratorio Dental"
+   },
+   {
+    "code": "29-1292.00",
+    "title": "Higienistas Dentales"
+   },
+   {
+    "code": "31-9091.00",
+    "title": "Asistentes Dentales"
+   }
+  ],
+  "revisado": true
+ },
+ "marketing_business_analytics": {
+  "nombre": "Licenciatura en Marketing and Business Analytics",
+  "vector": {
+   "R": 17.3,
+   "I": 84.0,
+   "A": 28.0,
+   "S": 39.7,
+   "E": 31.7,
+   "C": 66.0
+  },
+  "codigo": "ICS",
+  "ocupaciones": [
+   {
+    "code": "25-1011.00",
+    "title": "Profesores de Estudios Comerciales de Nivel Postsecundario"
+   },
+   {
+    "code": "15-2031.00",
+    "title": "Analistas de Investigación de Operaciones"
+   },
+   {
+    "code": "15-2051.00",
+    "title": "Científico de Datos"
+   }
+  ],
+  "revisado": true
+ },
+ "medico_cirujano": {
+  "nombre": "Médico y Cirujano",
+  "vector": {
+   "R": 63.7,
+   "I": 93.7,
+   "A": 8.0,
+   "S": 72.0,
+   "E": 21.7,
+   "C": 47.3
+  },
+  "codigo": "ISR",
+  "ocupaciones": [
+   {
+    "code": "29-1243.00",
+    "title": "Cirujanos Pediátricos"
+   },
+   {
+    "code": "29-1242.00",
+    "title": "Cirujanos Ortopédicos"
+   },
+   {
+    "code": "29-1216.00",
+    "title": "Médicos de Medicina Interna General"
+   }
+  ],
+  "revisado": true
+ },
+ "mercadotecnia": {
+  "nombre": "Técnico Universitario en Gerencia de Ventas",
+  "vector": {
+   "R": 10.3,
+   "I": 42.7,
+   "A": 19.0,
+   "S": 30.0,
+   "E": 82.0,
+   "C": 63.7
+  },
+  "codigo": "ECI",
+  "ocupaciones": [
+   {
+    "code": "11-2021.00",
+    "title": "Gerentes de Mercadeo"
+   },
+   {
+    "code": "13-1161.00",
+    "title": "Analistas de Investigación de Mercado y Especialistas en Mercadeo"
+   },
+   {
+    "code": "41-4011.00",
+    "title": "Representantes de Ventas Mayoristas y de Productos Manufacturados Técnicos y Científicos"
+   }
+  ],
+  "revisado": true
+ },
+ "musica_ejecucion": {
+  "nombre": "Técnico en Ejecución Musical Popular y Contemporánea",
+  "vector": {
+   "R": 23.3,
+   "I": 31.0,
+   "A": 82.3,
+   "S": 58.0,
+   "E": 42.7,
+   "C": 29.7
+  },
+  "codigo": "ASE",
+  "ocupaciones": [
+   {
+    "code": "25-1123.00",
+    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+   },
+   {
+    "code": "27-2041.00",
+    "title": "Directores y Compositores de Música"
+   },
+   {
+    "code": "27-2042.00",
+    "title": "Músicos y Cantantes"
+   }
+  ],
+  "revisado": true
+ },
+ "nutricion": {
+  "nombre": "Licenciatura en Nutrición",
+  "vector": {
+   "R": 37.7,
+   "I": 56.0,
+   "A": 30.0,
+   "S": 81.0,
+   "E": 32.0,
+   "C": 42.0
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "29-1031.00",
+    "title": "Dietistas y Nutricionistas"
+   },
+   {
+    "code": "29-2051.00",
+    "title": "Técnicos en Dietética"
+   },
+   {
+    "code": "25-1192.00",
+    "title": "Profesores de Ciencias de la Familia y de los Consumidores de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "optometria": {
+  "nombre": "Técnico Universitario en Optometría",
+  "vector": {
+   "R": 52.3,
+   "I": 58.3,
+   "A": 16.7,
+   "S": 67.0,
+   "E": 25.7,
+   "C": 55.0
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "29-1041.00",
+    "title": "Optómetras"
+   },
+   {
+    "code": "29-2081.00",
+    "title": "Ópticos, Despacho"
+   },
+   {
+    "code": "25-1071.00",
+    "title": "Profesores de Especialidades de Salud de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia": {
+  "nombre": "Licenciatura en Ciencias de la Educación",
+  "vector": {
+   "R": 13.0,
+   "I": 60.7,
+   "A": 32.3,
+   "S": 87.7,
+   "E": 45.7,
+   "C": 52.7
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "11-9033.00",
+    "title": "Administradores Educativos de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   },
+   {
+    "code": "21-1091.00",
+    "title": "Especialistas en Educación de la Salud"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_admin_educativa": {
+  "nombre": "Administración Educativa",
+  "vector": {
+   "R": 19.7,
+   "I": 47.0,
+   "A": 39.3,
+   "S": 100.0,
+   "E": 34.0,
+   "C": 48.3
+  },
+  "codigo": "SCI",
+  "ocupaciones": [
+   {
+    "code": "21-1012.00",
+    "title": "Consejeros y Orientadores Educativos, Académicos, y Ocupacionales"
+   },
+   {
+    "code": "25-2032.00",
+    "title": "Maestros de Educación Profesional/Técnica de Escuela Secundaria"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_artistica": {
+  "nombre": "Profesorado en Educación Artística (Música y Danza)",
+  "vector": {
+   "R": 28.3,
+   "I": 62.7,
+   "A": 34.3,
+   "S": 93.3,
+   "E": 28.0,
+   "C": 43.7
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1194.00",
+    "title": "Profesores de Educación Profesional/Técnica de Nivel Postsecundario"
+   },
+   {
+    "code": "21-1091.00",
+    "title": "Especialistas en Educación de la Salud"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_ciencias_naturales": {
+  "nombre": "Profesorado en Ciencias Naturales, Química y Biología",
+  "vector": {
+   "R": 42.7,
+   "I": 81.3,
+   "A": 32.7,
+   "S": 71.3,
+   "E": 39.3,
+   "C": 45.7
+  },
+  "codigo": "ISC",
+  "ocupaciones": [
+   {
+    "code": "11-9121.00",
+    "title": "Directores de Ciencias Naturales"
+   },
+   {
+    "code": "25-1042.00",
+    "title": "Profesores de Ciencias Biológicas de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1043.00",
+    "title": "Profesores de Silvicultura y Ciencias de la Conservación de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_ciencias_sociales": {
+  "nombre": "PEM en Historia y Ciencias Sociales",
+  "vector": {
+   "R": 26.7,
+   "I": 66.0,
+   "A": 38.7,
+   "S": 75.7,
+   "E": 25.3,
+   "C": 55.3
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1125.00",
+    "title": "Profesores de Historia de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2022.00",
+    "title": "Maestros de Escuela de Nivel Medio"
+   },
+   {
+    "code": "19-4061.00",
+    "title": "Asistentes de Investigación en Ciencias Sociales"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_comunicacion_lenguaje": {
+  "nombre": "PEM en Comunicación y Lenguaje",
+  "vector": {
+   "R": 20.7,
+   "I": 52.7,
+   "A": 51.0,
+   "S": 100.0,
+   "E": 26.7,
+   "C": 41.3
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1124.00",
+    "title": "Profesores de Lengua y Literatura Extranjeras de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1123.00",
+    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+   },
+   {
+    "code": "25-3011.00",
+    "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_emprendimiento": {
+  "nombre": "Profesorado en Emprendimiento para la Productividad",
+  "vector": {
+   "R": 61.7,
+   "I": 11.7,
+   "A": 20.0,
+   "S": 42.7,
+   "E": 66.3,
+   "C": 50.7
+  },
+  "codigo": "ERC",
+  "ocupaciones": [
+   {
+    "code": "11-9141.00",
+    "title": "Gerentes de Propiedad, Inmuebles, y Asociaciones de Vivienda Comunitaria"
+   },
+   {
+    "code": "27-2021.00",
+    "title": "Atletas y Competidores Deportivos"
+   },
+   {
+    "code": "35-2014.00",
+    "title": "Cocineros de Restaurante"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_infantil": {
+  "nombre": "Profesorado en Educación Inicial y Preprimaria",
+  "vector": {
+   "R": 28.7,
+   "I": 31.0,
+   "A": 43.3,
+   "S": 97.3,
+   "E": 23.3,
+   "C": 44.7
+  },
+  "codigo": "SCA",
+  "ocupaciones": [
+   {
+    "code": "25-2051.00",
+    "title": "Maestros de Educación Especial de Nivel Preescolar"
+   },
+   {
+    "code": "25-9042.00",
+    "title": "Auxiliares Docentes de Educación Preescolar, Primaria, Nivel Medio, Secundaria"
+   },
+   {
+    "code": "25-2011.00",
+    "title": "Maestros de Nivel Preescolar"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_ingles": {
+  "nombre": "Profesorado de Enseñanza Media en Inglés",
+  "vector": {
+   "R": 21.7,
+   "I": 49.3,
+   "A": 50.3,
+   "S": 100.0,
+   "E": 22.7,
+   "C": 40.0
+  },
+  "codigo": "SAI",
+  "ocupaciones": [
+   {
+    "code": "25-3011.00",
+    "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
+   },
+   {
+    "code": "25-1123.00",
+    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2057.00",
+    "title": "Maestros de Educación Especial de Escuela de Nivel Medio"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_intercultural": {
+  "nombre": "Profesorado en Idioma Maya, Ciencias Sociales e Interculturalidad",
+  "vector": {
+   "R": 21.7,
+   "I": 45.7,
+   "A": 51.3,
+   "S": 80.3,
+   "E": 23.7,
+   "C": 49.7
+  },
+  "codigo": "SAC",
+  "ocupaciones": [
+   {
+    "code": "25-1123.00",
+    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+   },
+   {
+    "code": "27-3091.00",
+    "title": "Intérpretes y Traductores"
+   },
+   {
+    "code": "25-2031.00",
+    "title": "Maestros de Escuela Secundaria"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_lenguaje_historia": {
+  "nombre": "PEM en Lenguaje e Historia",
+  "vector": {
+   "R": 20.7,
+   "I": 52.7,
+   "A": 51.0,
+   "S": 100.0,
+   "E": 26.7,
+   "C": 41.3
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1124.00",
+    "title": "Profesores de Lengua y Literatura Extranjeras de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1123.00",
+    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+   },
+   {
+    "code": "25-3011.00",
+    "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_matematica_fisica": {
+  "nombre": "PEM en Matemática y Física",
+  "vector": {
+   "R": 28.3,
+   "I": 61.0,
+   "A": 43.3,
+   "S": 95.7,
+   "E": 24.0,
+   "C": 47.7
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1022.00",
+    "title": "Profesores de Ciencias Matemáticas de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2022.00",
+    "title": "Maestros de Escuela de Nivel Medio"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_pem_admin_educativa": {
+  "nombre": "PEM en Pedagogía y Técnico en Administración Educativa",
+  "vector": {
+   "R": 33.3,
+   "I": 51.3,
+   "A": 53.3,
+   "S": 100.0,
+   "E": 22.7,
+   "C": 39.3
+  },
+  "codigo": "SAI",
+  "ocupaciones": [
+   {
+    "code": "25-1121.00",
+    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2023.00",
+    "title": "Maestros de Educación Profesional/Técnica de Escuela de Nivel Medio"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_primaria": {
+  "nombre": "Profesorado en Educación Primaria",
+  "vector": {
+   "R": 25.0,
+   "I": 44.7,
+   "A": 38.3,
+   "S": 97.3,
+   "E": 24.7,
+   "C": 46.3
+  },
+  "codigo": "SCI",
+  "ocupaciones": [
+   {
+    "code": "25-2056.00",
+    "title": "Maestros de Educación Especial de Escuela Primaria"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   },
+   {
+    "code": "25-9042.00",
+    "title": "Auxiliares Docentes de Educación Preescolar, Primaria, Nivel Medio, Secundaria"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_psicologia": {
+  "nombre": "PEM en Pedagogía y Psicología",
+  "vector": {
+   "R": 26.3,
+   "I": 69.3,
+   "A": 56.7,
+   "S": 98.3,
+   "E": 22.3,
+   "C": 34.3
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1121.00",
+    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1066.00",
+    "title": "Profesores de Psicología de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1067.00",
+    "title": "Profesores de Sociología de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "pedagogia_tic": {
+  "nombre": "Profesorado en Tecnologías de la Información y la Comunicación",
+  "vector": {
+   "R": 32.0,
+   "I": 62.3,
+   "A": 10.0,
+   "S": 35.7,
+   "E": 47.0,
+   "C": 73.3
+  },
+  "codigo": "CIE",
+  "ocupaciones": [
+   {
+    "code": "15-1211.01",
+    "title": "Especialistas en Informática Médica"
+   },
+   {
+    "code": "15-1299.09",
+    "title": "Gerentes de Proyectos de Informática"
+   },
+   {
+    "code": "15-1244.00",
+    "title": "Administradores de Redes Informáticas y Sistemas de Computación"
+   }
+  ],
+  "revisado": true
+ },
+ "pem_maya_intercultural": {
+  "nombre": "Profesorado en Enseñanza Media en Cultura e Idioma Maya",
+  "vector": {
+   "R": 18.3,
+   "I": 53.0,
+   "A": 53.0,
+   "S": 80.3,
+   "E": 21.3,
+   "C": 49.0
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1123.00",
+    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+   },
+   {
+    "code": "27-3091.00",
+    "title": "Intérpretes y Traductores"
+   },
+   {
+    "code": "25-1124.00",
+    "title": "Profesores de Lengua y Literatura Extranjeras de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "periodismo": {
+  "nombre": "Ciencias de la Comunicación Social",
+  "vector": {
+   "R": 16.3,
+   "I": 58.7,
+   "A": 56.0,
+   "S": 76.3,
+   "E": 36.3,
+   "C": 43.0
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1122.00",
+    "title": "Profesores de Comunicaciones de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1123.00",
+    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+   },
+   {
+    "code": "27-3023.00",
+    "title": "Analistas de Noticias, Reporteros y Periodistas"
+   }
+  ],
+  "revisado": true
+ },
+ "produccion_audiovisual": {
+  "nombre": "Licenciatura en Producción Audiovisual y Artes Cinematográficas",
+  "vector": {
+   "R": 50.7,
+   "I": 20.0,
+   "A": 81.3,
+   "S": 16.7,
+   "E": 26.3,
+   "C": 37.3
+  },
+  "codigo": "ARC",
+  "ocupaciones": [
+   {
+    "code": "27-4032.00",
+    "title": "Editores de Películas Cinematográficas y Video"
+   },
+   {
+    "code": "27-1013.00",
+    "title": "Artistas de Bellas Artes, Incluye Pintores, Escultores e Ilustradores"
+   },
+   {
+    "code": "27-4031.00",
+    "title": "Operadores de Cámara de Televisión, Video, y Película Cinematográfica"
+   }
+  ],
+  "revisado": true
+ },
+ "psicologia_clinica": {
+  "nombre": "Psicología Clínica",
+  "vector": {
+   "R": 6.7,
+   "I": 73.3,
+   "A": 40.3,
+   "S": 96.3,
+   "E": 26.7,
+   "C": 43.3
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1066.00",
+    "title": "Profesores de Psicología de Nivel Postsecundario"
+   },
+   {
+    "code": "19-3033.00",
+    "title": "Psicólogos Clínicos y de Consejería"
+   },
+   {
+    "code": "19-3034.00",
+    "title": "Psicólogos Escolares"
+   }
+  ],
+  "revisado": true
+ },
+ "psicologia_educativa": {
+  "nombre": "Psicología Educativa",
+  "vector": {
+   "R": 6.7,
+   "I": 73.3,
+   "A": 40.3,
+   "S": 96.3,
+   "E": 26.7,
+   "C": 43.3
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1066.00",
+    "title": "Profesores de Psicología de Nivel Postsecundario"
+   },
+   {
+    "code": "19-3033.00",
+    "title": "Psicólogos Clínicos y de Consejería"
+   },
+   {
+    "code": "19-3034.00",
+    "title": "Psicólogos Escolares"
+   }
+  ],
+  "revisado": true
+ },
+ "psicologia_industrial": {
+  "nombre": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+  "vector": {
+   "R": 2.0,
+   "I": 39.7,
+   "A": 16.7,
+   "S": 48.0,
+   "E": 80.0,
+   "C": 68.7
+  },
+  "codigo": "ECS",
+  "ocupaciones": [
+   {
+    "code": "13-1071.00",
+    "title": "Especialistas en Recursos Humanos"
+   },
+   {
+    "code": "11-3121.00",
+    "title": "Gerentes de Recursos Humanos"
+   },
+   {
+    "code": "19-3032.00",
+    "title": "Psicólogos Industriales-Organizacionales"
+   }
+  ],
+  "revisado": true
+ },
+ "psicopedagogia": {
+  "nombre": "Profesorado en Psicopedagogía",
+  "vector": {
+   "R": 9.7,
+   "I": 68.7,
+   "A": 38.0,
+   "S": 96.3,
+   "E": 28.7,
+   "C": 45.3
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "19-3034.00",
+    "title": "Psicólogos Escolares"
+   },
+   {
+    "code": "19-3033.00",
+    "title": "Psicólogos Clínicos y de Consejería"
+   },
+   {
+    "code": "25-1081.00",
+    "title": "Profesores de Educación de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "quimica_biologica": {
+  "nombre": "Licenciatura en Química Biológica",
+  "vector": {
+   "R": 72.3,
+   "I": 83.0,
+   "A": 20.0,
+   "S": 38.3,
+   "E": 11.3,
+   "C": 53.7
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "19-4021.00",
+    "title": "Técnicos en Biología"
+   },
+   {
+    "code": "19-1013.00",
+    "title": "Científicos Especializados en Suelos y Botánica"
+   },
+   {
+    "code": "25-1042.00",
+    "title": "Profesores de Ciencias Biológicas de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "relaciones_internacionales": {
+  "nombre": "Relaciones Internacionales",
+  "vector": {
+   "R": 16.3,
+   "I": 57.3,
+   "A": 29.3,
+   "S": 72.3,
+   "E": 59.3,
+   "C": 52.7
+  },
+  "codigo": "SEI",
+  "ocupaciones": [
+   {
+    "code": "25-1065.00",
+    "title": "Profesores de Ciencias Políticas de Nivel Postsecundario"
+   },
+   {
+    "code": "11-9199.01",
+    "title": "Gerentes de Asuntos Normativos"
+   },
+   {
+    "code": "25-1011.00",
+    "title": "Profesores de Estudios Comerciales de Nivel Postsecundario"
+   }
+  ],
+  "revisado": true
+ },
+ "tecnico_desarrollo_software": {
+  "nombre": "Técnico Universitario en Desarrollo de Software",
+  "vector": {
+   "R": 43.0,
+   "I": 84.3,
+   "A": 17.0,
+   "S": 12.7,
+   "E": 15.3,
+   "C": 79.0
+  },
+  "codigo": "ICR",
+  "ocupaciones": [
+   {
+    "code": "15-1253.00",
+    "title": "Analistas y Probadores de Control de Calidad de Software"
+   },
+   {
+    "code": "15-1252.00",
+    "title": "Diseñadores de Programas Software"
+   },
+   {
+    "code": "15-1211.00",
+    "title": "Analistas de Sistemas de Computadoras"
+   }
+  ],
+  "revisado": true
+ },
+ "tecnico_radiologia": {
+  "nombre": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+  "vector": {
+   "R": 73.7,
+   "I": 74.0,
+   "A": 2.0,
+   "S": 43.3,
+   "E": 8.3,
+   "C": 64.0
+  },
+  "codigo": "IRC",
+  "ocupaciones": [
+   {
+    "code": "29-2034.00",
+    "title": "Tecnólogos y Técnicos de Radiología"
+   },
+   {
+    "code": "29-1224.00",
+    "title": "Radiólogos"
+   },
+   {
+    "code": "29-2035.00",
+    "title": "Tecnólogos Especializados en Imágenes de Resonancia Magnética"
+   }
+  ],
+  "revisado": true
+ },
+ "telecomunicaciones": {
+  "nombre": "Licenciatura en Administración de Telecomunicaciones",
+  "vector": {
+   "R": 80.3,
+   "I": 34.7,
+   "A": 5.0,
+   "S": 15.3,
+   "E": 20.7,
+   "C": 61.0
+  },
+  "codigo": "RCI",
+  "ocupaciones": [
+   {
+    "code": "15-1241.01",
+    "title": "Especialistas en Ingeniería de Telecomunicaciones"
+   },
+   {
+    "code": "49-9052.00",
+    "title": "Instaladores y Reparadores de Tendido de Líneas de Telecomunicaciones"
+   },
+   {
+    "code": "49-2022.00",
+    "title": "Instaladores y Reparadores de Equipo de Telecomunicaciones"
+   }
+  ],
+  "revisado": true
+ },
+ "teologia": {
+  "nombre": "Teología",
+  "vector": {
+   "R": 25.5,
+   "I": 54.0,
+   "A": 49.0,
+   "S": 100.0,
+   "E": 29.0,
+   "C": 42.0
+  },
+  "codigo": "SIA",
+  "ocupaciones": [
+   {
+    "code": "25-1126.00",
+    "title": "Profesores de Filosofía y Religión de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2022.00",
+    "title": "Maestros de Escuela de Nivel Medio"
+   }
+  ],
+  "revisado": true
+ },
+ "terapia_fisica": {
+  "nombre": "Fisioterapia",
+  "vector": {
+   "R": 45.3,
+   "I": 45.7,
+   "A": 9.7,
+   "S": 74.0,
+   "E": 42.0,
+   "C": 51.3
+  },
+  "codigo": "SCI",
+  "ocupaciones": [
+   {
+    "code": "31-2022.00",
+    "title": "Auxiliares de Fisioterapeutas"
+   },
+   {
+    "code": "29-1123.00",
+    "title": "Fisioterapeutas"
+   },
+   {
+    "code": "11-9111.00",
+    "title": "Directores de Servicios Médicos y de Salud"
+   }
+  ],
+  "revisado": true
+ },
+ "trabajo_social": {
+  "nombre": "Trabajo Social",
+  "vector": {
+   "R": 16.0,
+   "I": 57.3,
+   "A": 33.3,
+   "S": 99.7,
+   "E": 27.0,
+   "C": 34.7
+  },
+  "codigo": "SIC",
+  "ocupaciones": [
+   {
+    "code": "25-1113.00",
+    "title": "Profesores de Trabajo Social de Nivel Postsecundario"
+   },
+   {
+    "code": "21-1022.00",
+    "title": "Trabajadores Sociales de Cuidado de la Salud"
+   },
+   {
+    "code": "21-1023.00",
+    "title": "Trabajadores Sociales Especializados en Salud Mental y Abuso de Sustancias"
+   }
+  ],
+  "revisado": true
+ },
+ "visita_medica_mercadeo": {
+  "nombre": "Técnico Universitario en Visita Médica y Mercadeo",
+  "vector": {
+   "R": 1.7,
+   "I": 55.3,
+   "A": 22.0,
+   "S": 23.0,
+   "E": 77.3,
+   "C": 67.3
+  },
+  "codigo": "ECI",
+  "ocupaciones": [
+   {
+    "code": "13-1161.00",
+    "title": "Analistas de Investigación de Mercado y Especialistas en Mercadeo"
+   },
+   {
+    "code": "11-2021.00",
+    "title": "Gerentes de Mercadeo"
+   },
+   {
+    "code": "15-2051.01",
+    "title": "Analistas de Inteligencia Empresarial"
+   }
+  ],
+  "revisado": true
+ }
+}

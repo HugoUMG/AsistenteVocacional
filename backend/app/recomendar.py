@@ -13,7 +13,7 @@ from google import genai
 from google.genai import errors, types
 from pydantic import BaseModel
 
-from app import cip_filtro
+from app import cip_filtro, holland_filtro
 
 # Dos modelos (híbrido):
 # - MODELO: preguntas del chat (alto volumen, hasta 8 por test) → prioriza cuota.
@@ -461,15 +461,25 @@ def generar(model, system, catalogo, variable, schema, temperature):
 
 
 def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None,
-               holland: str | None = None) -> tuple[Resultado, dict]:
+               holland: str | None = None,
+               holland_puntajes: dict[str, int] | None = None,
+               personalidad: str | None = None) -> tuple[Resultado, dict]:
     """respuestas: dict con las respuestas del cuestionario.
     carreras: lista de models.Carrera (el catálogo).
     holland: bloque con el perfil RIASEC medido, si el alumno hizo el test antes
     del chat. Entra como contexto; MEDIDO, no mueve el ranking (5 de 6 corridas
     ignoraron el área más alta) — ver experiments/holland-en-chat.md.
+    holland_puntajes: EXPERIMENTAL, los seis puntajes RIASEC ({letra: 0-40}) para
+    que Holland pese como ESTRUCTURA y no como prosa: ordena el catálogo por
+    afinidad con el vector RIASEC de cada carrera. Solo surte efecto con
+    `HOLLAND_EN_RECOMENDACION=1`. Ver `experiments/holland-estructura.md`.
     perfil_cip: EXPERIMENTAL, el `perfil` que devuelve `cip_fogliatto.calificar()`.
     Solo surte efecto con `CIP_EN_RECOMENDACION=1`; sin el flag se ignora y la
     función se comporta igual que antes. Ver `experiments/cip-en-recomendacion.md`.
+    personalidad: bloque con el perfil de personalidad/valores/estilo cognitivo
+    del test corto, si el alumno lo hizo antes del chat. Entra como contexto,
+    igual que `holland`: no filtra el catálogo (pendiente de medir si mueve el
+    ranking, ver experiments/personalidad-en-chat.md).
     Devuelve (resultado, uso_tokens): las carreras afines (>1%) con su % y detalle
     más la confianza global, y el consumo de tokens de esta llamada.
 
@@ -482,6 +492,8 @@ def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None,
     variable = f"PERFIL DEL ESTUDIANTE:\n{perfil}"
     if holland:
         variable = f"{holland}\n\n{variable}"
+    if personalidad:
+        variable = f"{personalidad}\n\n{variable}"
 
     # El agrupado se hace SIEMPRE sobre el catálogo completo: es lo que adjunta
     # universidad/centro/sede a la respuesta. Si se hiciera sobre el catálogo ya
@@ -492,6 +504,9 @@ def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None,
     if perfil_cip and cip_filtro.activo():
         carreras = cip_filtro.priorizar(carreras, {e["romano"]: e["percentil"] for e in perfil_cip})
         variable = f"{cip_filtro.texto_perfil(perfil_cip)}\n\n{variable}"
+
+    if holland_puntajes and holland_filtro.activo():
+        carreras = holland_filtro.priorizar(carreras, holland_puntajes)
 
     resp = generar(
         model=MODELO_FINAL,

@@ -14,7 +14,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
-from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland
+from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland, personalidad, auth
 
 
 @asynccontextmanager
@@ -142,12 +142,42 @@ class HollandRef(BaseModel):
                               [a.model_dump() for a in self.areas],
                               self.ocupaciones)
 
+    def puntajes(self) -> dict[str, int]:
+        """{letra: 0-40}, para que Holland pueda pesar como estructura sobre el
+        catálogo (experimental, `HOLLAND_EN_RECOMENDACION`)."""
+        return {a.letra: a.score for a in self.areas}
+
+
+class RasgoScore(BaseModel):
+    clave: str = Field(max_length=40)
+    puntaje: int = Field(ge=0, le=100)
+
+
+class PersonalidadRef(BaseModel):
+    """El perfil del test corto de personalidad/valores/estilo cognitivo,
+    igual de NO confiable que HollandRef (viene de localStorage): se valida
+    forma y tamaño acá, y el texto del prompt lo arma el backend."""
+
+    personalidad: list[RasgoScore] = Field(min_length=6, max_length=6)
+    valores: list[RasgoScore] = Field(min_length=4, max_length=4)
+    estilo_cognitivo: list[RasgoScore] = Field(min_length=4, max_length=4)
+    estilo_dominante: str = Field(max_length=40)
+
+    def bloque(self) -> str:
+        return personalidad.bloque({
+            "personalidad": {r.clave: r.puntaje for r in self.personalidad},
+            "valores": {r.clave: r.puntaje for r in self.valores},
+            "estilo_cognitivo": {r.clave: r.puntaje for r in self.estilo_cognitivo},
+            "estilo_dominante": self.estilo_dominante,
+        })
+
 
 class SurveyIn(BaseModel):
     estudiante_id: int
     respuestas: dict
     session_id: SessionId = None  # para atribuir el uso de tokens a la sesión
     holland: HollandRef | None = None  # modo 3: hizo el test antes del chat
+    personalidad: PersonalidadRef | None = None  # test corto de personalidad antes del chat
 
 
 class SurveyOut(BaseModel):
@@ -165,7 +195,14 @@ def health():
 
 
 @app.post("/api/register", response_model=EstudianteOut, status_code=201)
-def register(data: RegisterIn, db: Session = Depends(get_db)):
+def register(
+    data: RegisterIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante | None = Depends(auth.estudiante_actual),
+):
+    # Si viene logueado con Google, se reusa SU cuenta en vez de crear una
+    # anónima nueva cada vez que entra al chat (ver docs/historial.md).
+    if estudiante is not None:
+        return estudiante
     est = models.Estudiante(nombre=data.nombre, email=data.email)
     db.add(est)
     try:
@@ -182,7 +219,7 @@ def submit_survey(data: SurveyIn, db: Session = Depends(get_db)):
     if db.get(models.Estudiante, data.estudiante_id) is None:
         raise HTTPException(status_code=404, detail="Estudiante no encontrado")
     resp = models.RespuestaCuestionario(
-        estudiante_id=data.estudiante_id, respuestas=data.respuestas
+        estudiante_id=data.estudiante_id, session_id=data.session_id, respuestas=data.respuestas
     )
     db.add(resp)
     db.commit()
@@ -223,6 +260,7 @@ class NextIn(BaseModel):
     respuestas: dict
     session_id: SessionId = None
     holland: HollandRef | None = None  # modo 3: hizo el test antes del chat
+    personalidad: PersonalidadRef | None = None  # test corto de personalidad antes del chat
 
 
 @app.get("/api/departamentos")
@@ -293,6 +331,8 @@ def next_question(data: NextIn, db: Session = Depends(get_db)):
     paso, uso = preguntas.siguiente_pregunta(
         data.respuestas, carreras, data.session_id,
         holland=data.holland.bloque() if data.holland else None,
+        holland_puntajes=data.holland.puntajes() if data.holland else None,
+        personalidad=data.personalidad.bloque() if data.personalidad else None,
     )
     _registrar_uso(db, data.session_id, "next-question", uso)
     return paso.model_dump()
@@ -309,6 +349,8 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
     resultado, uso = recomendar.recomendar(
         data.respuestas, carreras,
         holland=data.holland.bloque() if data.holland else None,
+        holland_puntajes=data.holland.puntajes() if data.holland else None,
+        personalidad=data.personalidad.bloque() if data.personalidad else None,
     )
     _registrar_uso(db, data.session_id, "recommend", uso)
     carreras_out = [r.model_dump() for r in resultado.carreras]
@@ -414,10 +456,14 @@ def psicometrico_preguntas():
 
 
 @app.post("/api/psicometrico")
-def psicometrico_calificar(data: PsicometricoIn, db: Session = Depends(get_db)):
+def psicometrico_calificar(
+    data: PsicometricoIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante | None = Depends(auth.estudiante_actual),
+):
     puntajes = psicometrico.calificar(data.respuestas, data.tiempos)
     fila = models.ResultadoPsicometrico(
         session_id=data.session_id or "sin-sesion",
+        estudiante_id=estudiante.id if estudiante else None,
         respuestas={str(k): v for k, v in data.respuestas.items()},
         puntajes=puntajes,
     )
@@ -515,7 +561,10 @@ def holland_preguntas():
 
 
 @app.post("/api/holland")
-def holland_perfil(data: HollandIn, db: Session = Depends(get_db)):
+def holland_perfil(
+    data: HollandIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante | None = Depends(auth.estudiante_actual),
+):
     """Puntajes RIASEC y carreras afines. El cálculo lo hace la API oficial.
 
     Se guarda el resultado (es el instrumento avalado del proyecto y entra en la
@@ -524,12 +573,168 @@ def holland_perfil(data: HollandIn, db: Session = Depends(get_db)):
     if data.session_id:
         db.add(models.ResultadoHolland(
             session_id=data.session_id,
+            estudiante_id=estudiante.id if estudiante else None,
             respuestas=data.respuestas,
             codigo=perfil["codigo"],
             areas={a["letra"]: a["score"] for a in perfil["areas"]},
         ))
         db.commit()
     return perfil
+
+
+class PersonalidadIn(BaseModel):
+    # {id_item: 1..5}, los 48 ítems del test corto (personalidad/valores/estilo).
+    respuestas: dict[int, int]
+    session_id: SessionId = None  # para guardar el resultado
+
+    @field_validator("respuestas")
+    @classmethod
+    def _respuestas_ok(cls, v: dict[int, int]) -> dict[int, int]:
+        if not personalidad.valida(v):
+            raise ValueError("Faltan ítems o hay valores fuera de rango (1 a 5).")
+        return v
+
+
+@app.get("/api/personalidad/preguntas")
+def personalidad_preguntas():
+    """Los 48 ítems del test corto (personalidad/valores/estilo cognitivo)."""
+    return personalidad.preguntas()
+
+
+@app.post("/api/personalidad")
+def personalidad_calificar(
+    data: PersonalidadIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante | None = Depends(auth.estudiante_actual),
+):
+    """Puntajes por rasgo, calculados por reglas (sin llamar a Gemini).
+
+    Se guarda si hay session_id, igual que Holland."""
+    puntajes = personalidad.calificar(data.respuestas)
+    if data.session_id:
+        db.add(models.ResultadoPersonalidad(
+            session_id=data.session_id,
+            estudiante_id=estudiante.id if estudiante else None,
+            respuestas={str(k): v for k, v in data.respuestas.items()},
+            puntajes=puntajes,
+        ))
+        db.commit()
+    return puntajes
+
+
+class GoogleAuthIn(BaseModel):
+    credential: str  # ID token de Google Identity Services
+
+
+class EstudianteAuthOut(BaseModel):
+    token: str
+    estudiante: EstudianteOut
+
+
+@app.post("/api/auth/google", response_model=EstudianteAuthOut)
+def auth_google(data: GoogleAuthIn, db: Session = Depends(get_db)):
+    """Login opcional con Google: verifica el ID token, crea o reusa la cuenta
+    por su `sub` (estable, a diferencia del email) y devuelve un JWT propio.
+    Ver app/auth.py."""
+    try:
+        datos = auth.verificar_google(data.credential)
+    except auth.SinCredencialesGoogle as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except ValueError:
+        raise HTTPException(status_code=401, detail="Token de Google inválido o vencido.")
+
+    est = db.query(models.Estudiante).filter(models.Estudiante.google_sub == datos["sub"]).first()
+    if est is None:
+        # Alguien que ya se había registrado anónimo con el mismo correo: se
+        # adopta esa cuenta en vez de crear una duplicada.
+        est = db.query(models.Estudiante).filter(models.Estudiante.email == datos["email"]).first() \
+            if datos["email"] else None
+    if est is None:
+        est = models.Estudiante(nombre=datos["name"] or "Sin nombre", email=datos["email"],
+                                 google_sub=datos["sub"])
+        db.add(est)
+    else:
+        est.google_sub = datos["sub"]
+        if datos["email"]:
+            est.email = datos["email"]
+    db.commit()
+    db.refresh(est)
+    return {"token": auth.emitir_jwt(est.id), "estudiante": est}
+
+
+class ReclamarIn(BaseModel):
+    session_id: SessionId = None
+
+
+@app.post("/api/historial/reclamar", status_code=204)
+def historial_reclamar(
+    data: ReclamarIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(auth.requiere_login),
+):
+    """Le pega el estudiante_id de la sesión logueada a los resultados
+    anónimos (sin estudiante_id) de este session_id — el "¿quieres guardar
+    tus resultados?" de después del test. El WHERE estudiante_id IS NULL
+    evita reclamar un resultado que ya es de otra cuenta."""
+    if not data.session_id:
+        return
+    for modelo in (models.RespuestaCuestionario, models.ResultadoHolland,
+                   models.ResultadoPersonalidad, models.ResultadoPsicometrico):
+        (
+            db.query(modelo)
+            .filter(modelo.session_id == data.session_id, modelo.estudiante_id.is_(None))
+            .update({"estudiante_id": estudiante.id})
+        )
+    db.commit()
+
+
+@app.get("/api/historial")
+def historial(
+    db: Session = Depends(get_db), estudiante: models.Estudiante = Depends(auth.requiere_login),
+):
+    """Todo lo que este alumno ha guardado, de los 4 instrumentos, más reciente
+    primero. Cada fila trae su `tipo` para que el frontend sepa cómo pintarla."""
+    chat = (
+        db.query(models.RespuestaCuestionario)
+        .filter(models.RespuestaCuestionario.estudiante_id == estudiante.id)
+        .order_by(models.RespuestaCuestionario.created_at.desc())
+        .all()
+    )
+    holland_filas = (
+        db.query(models.ResultadoHolland)
+        .filter(models.ResultadoHolland.estudiante_id == estudiante.id)
+        .order_by(models.ResultadoHolland.created_at.desc())
+        .all()
+    )
+    personalidad_filas = (
+        db.query(models.ResultadoPersonalidad)
+        .filter(models.ResultadoPersonalidad.estudiante_id == estudiante.id)
+        .order_by(models.ResultadoPersonalidad.created_at.desc())
+        .all()
+    )
+    psicometrico_filas = (
+        db.query(models.ResultadoPsicometrico)
+        .filter(models.ResultadoPsicometrico.estudiante_id == estudiante.id)
+        .order_by(models.ResultadoPsicometrico.created_at.desc())
+        .all()
+    )
+    return {
+        "chat": [
+            {"id": r.id, "fecha": r.created_at, "respuestas": r.respuestas,
+             "recomendacion": r.recomendacion}
+            for r in chat
+        ],
+        "holland": [
+            {"id": r.id, "fecha": r.created_at, "codigo": r.codigo, "areas": r.areas}
+            for r in holland_filas
+        ],
+        "personalidad": [
+            {"id": r.id, "fecha": r.created_at, "puntajes": r.puntajes}
+            for r in personalidad_filas
+        ],
+        "psicometrico": [
+            {"id": r.id, "fecha": r.created_at, "puntajes": r.puntajes, "resumen": r.resumen}
+            for r in psicometrico_filas
+        ],
+    }
 
 
 class FeedbackIn(BaseModel):

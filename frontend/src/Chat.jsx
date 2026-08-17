@@ -4,6 +4,8 @@ import Dashboard from './Dashboard'
 import { color } from './colors'
 import { nuevaSesion, sessionId } from './session'
 import { leerPerfilHolland } from './holland-perfil'
+import { leerPerfilPersonalidad } from './personalidad-perfil'
+import { authHeader, sesionActual } from './auth'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -105,7 +107,7 @@ const FIJAS = [
 const post = (ruta, body) =>
   fetch(`${API}${ruta}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeader() },
     body: JSON.stringify(body),
   })
 
@@ -155,8 +157,8 @@ function enPartes(texto, max = 150) {
 // falla (API no oficial, puede romperse), cae a la voz nativa del navegador.
 let vozHabilitada = true
 let audioActual = null
-let velocidad = 1 // 1, 1.25 o 1.5; el flujo se siente lento a velocidad normal
-const VELOCIDADES = [1, 1.25, 1.5]
+let velocidad = 1 // 1, 1.1, 1.2, 1.25, 1.3, 1.4 o 1.5; la normal se siente lenta
+const VELOCIDADES = [1, 1.1, 1.2, 1.25, 1.3, 1.4, 1.5]
 
 // Cachea el audio por texto exacto: las preguntas fijas siempre son el mismo
 // texto, así que se piden una sola vez (precargadas en cargarFijas()) y de ahí
@@ -275,6 +277,7 @@ async function obtenerCarreras(respuestas) {
     respuestas,
     session_id: sessionId(),
     holland: leerPerfilHolland(),
+    personalidad: leerPerfilPersonalidad(),
   })
   if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
   if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
@@ -505,9 +508,12 @@ function Chat() {
   const [confianzaChat, setConfianzaChat] = useState(0) // % de seguridad, monotónico (nunca baja)
   // Modo 3: el alumno hizo el test de Holland antes. Se lee una vez al montar.
   const [perfilHolland] = useState(leerPerfilHolland)
+  // Modo "perfil": el alumno hizo el test corto de personalidad antes.
+  const [perfilPersonalidad] = useState(leerPerfilPersonalidad)
   const [oferta, setOferta] = useState(null) // { pendiente, puedeSeguir } cuando ya se puede mostrar resultado
   const [voz, setVoz] = useState(vozHabilitada)
   const [vel, setVel] = useState(velocidad)
+  const [menuVel, setMenuVel] = useState(false) // menú de velocidades abierto
   const [iniciado, setIniciado] = useState(false) // false = solo la burbuja flotante (pantalla tipo Siri)
   const [hablando, setHablando] = useState(false) // true mientras suena el audio de la pregunta actual
   const [elegida, setElegida] = useState(null) // respuesta recién elegida, visible bajo la pregunta mientras carga la siguiente
@@ -603,6 +609,7 @@ function Chat() {
         respuestas: resp,
         session_id: sessionId(),
         holland: leerPerfilHolland(),
+        personalidad: leerPerfilPersonalidad(),
       })
       if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
       if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
@@ -799,18 +806,37 @@ function Chat() {
       >
         {voz ? '🔊' : '🔇'}
       </button>
-      <button
-        className="vel-toggle"
-        title="Velocidad de la voz"
-        onClick={() => {
-          const next = VELOCIDADES[(VELOCIDADES.indexOf(velocidad) + 1) % VELOCIDADES.length]
-          velocidad = next
-          setVel(next)
-          if (audioActual) audioActual.playbackRate = next // aplica ya al audio que esté sonando
-        }}
-      >
-        {vel}×
-      </button>
+      {menuVel && <div className="vel-backdrop" onClick={() => setMenuVel(false)} />}
+      <div className="vel-wrap">
+        <button
+          className={`vel-toggle${menuVel ? ' abierto' : ''}`}
+          title="Velocidad de la voz"
+          aria-expanded={menuVel}
+          aria-haspopup="menu"
+          onClick={() => setMenuVel((m) => !m)}
+        >
+          {vel}×
+        </button>
+        {menuVel && (
+          <div className="vel-menu" role="menu">
+            {VELOCIDADES.map((v) => (
+              <button
+                key={v}
+                role="menuitem"
+                className={v === velocidad ? 'activo' : ''}
+                onClick={() => {
+                  velocidad = v
+                  setVel(v)
+                  if (audioActual) audioActual.playbackRate = v // aplica ya al audio que esté sonando
+                  setMenuVel(false)
+                }}
+              >
+                {v}×
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       {confianzaChat > 0 && (
         <div className="siri-conf" title="Qué tan definido va quedando tu perfil">
           Perfil <strong>{confianzaChat}%</strong>
@@ -822,6 +848,14 @@ function Chat() {
           title="Orienta está usando el resultado de tu test de Holland"
         >
           Holland <strong>{perfilHolland.codigo}</strong>
+        </div>
+      )}
+      {perfilPersonalidad && (
+        <div
+          className="siri-conf siri-personalidad"
+          title="Orienta está usando tu perfil de personalidad, valores y estilo cognitivo"
+        >
+          Perfil <strong>✓</strong>
         </div>
       )}
 

@@ -165,21 +165,57 @@ def bloque(codigo: str, areas: list[dict], ocupaciones: list[str]) -> str:
     return "\n".join(lineas)
 
 
+# Diferencia máxima entre las dos áreas más altas para considerarlas "empate
+# técnico" y pedir que la primera pregunta ayude a desempatarlas. Ver
+# experiments/holland-apertura.md.
+UMBRAL_EMPATE = 5
+
+NOMBRE_AREA = {"R": "Realista", "I": "Investigador", "A": "Artístico",
+               "S": "Social", "E": "Emprendedor", "C": "Convencional"}
+
+
+def _empate(puntajes: dict[str, int]) -> tuple[str, str] | None:
+    orden = sorted(puntajes, key=lambda l: -puntajes[l])
+    return (orden[0], orden[1]) if puntajes[orden[0]] - puntajes[orden[1]] <= UMBRAL_EMPATE else None
+
+
 # Adenda al SYSTEM del chat cuando hay perfil de Holland. Las 4 preguntas fijas
 # se quedan: quitarlas se midió y salió peor (más cara, más larga y saca del
 # top-3 la opción que el alumno esconde). Ver experiments/holland-en-chat.md.
-ADENDA_CHAT = (
-    "\n\nCONTEXTO ADICIONAL: el estudiante YA respondió el test de Holland "
-    "(O*NET Interest Profiler) y su perfil de INTERESES MEDIDO viene en el "
-    "mensaje del usuario. Sus intereses ya están medidos por un instrumento "
-    "oficial, así que NO gastes un turno preguntándole en general 'qué te "
-    "gusta'. Tu trabajo es OTRO: averiguar cuál carrera CONCRETA del catálogo, "
-    "dentro del sector que sus intereses ya marcan, encaja mejor con él. Usa el "
-    "perfil medido para dos cosas: (1) personalizar la apertura de la pregunta, "
-    "con tacto, SIN dar cifras y sin sonar a diagnóstico; y (2) CONTRASTAR: si "
-    "lo que el estudiante dice contradice lo medido, haz una pregunta que aclare "
-    "esa tensión y anótalo en 'alerta_contradiccion'."
-)
+#
+# MEDIDO (experiments/holland-apertura.md): obligar a que la primera pregunta
+# nombre el resultado se cumple siempre (6/6 corridas) pero NO cambia qué
+# carrera gana (4/5 corridas coinciden con la apertura pasiva de antes). Se
+# adopta porque hace la conversación sentirse personalizada de forma
+# consistente, no porque mejore el ranking: eso Holland no lo tiene, medido
+# dos veces (aquí y en holland-en-chat.md).
+def adenda_chat(puntajes: dict[str, int]) -> str:
+    """`puntajes`: {letra: 0-40}, las seis áreas del alumno (HollandRef.puntajes())."""
+    base = (
+        "\n\nCONTEXTO ADICIONAL: el estudiante YA respondió el test de Holland "
+        "(O*NET Interest Profiler) y su perfil de INTERESES MEDIDO viene en el "
+        "mensaje del usuario. Tu trabajo es averiguar cuál carrera CONCRETA del "
+        "catálogo, dentro del sector que sus intereses ya marcan, encaja mejor "
+        "con él.\n\n"
+        "REGLA DE APERTURA (obligatoria, solo en tu PRIMERA pregunta adaptativa): "
+        "la primera frase DEBE nombrar explícitamente el área de mayor puntaje de "
+        "su perfil de Holland tal cual salió en el test, por ejemplo 'Vi que tu "
+        "test de Holland salió fuerte en Artístico...', para que note que ya "
+        "leíste su resultado antes de preguntar. En las preguntas siguientes no "
+        "hace falta repetirlo.\n"
+        "Después de esa apertura, contrasta: si lo que dice contradice lo medido, "
+        "pregunta para aclarar esa tensión y anótalo en 'alerta_contradiccion'."
+    )
+    empate = _empate(puntajes)
+    if not empate:
+        return base
+    nombres = f"{NOMBRE_AREA[empate[0]]} y {NOMBRE_AREA[empate[1]]}"
+    return base + (
+        f"\n\nEMPATE TÉCNICO EN EL PERFIL: las áreas {nombres} quedaron a "
+        f"{UMBRAL_EMPATE} puntos o menos de diferencia, no hay una claramente "
+        "dominante. Tu PRIMERA pregunta adaptativa debe apuntar a desempatarlas "
+        "(qué de cada una le atrae más en concreto), no a una dimensión genérica."
+    )
 
 
 if __name__ == "__main__":
@@ -201,6 +237,16 @@ if __name__ == "__main__":
     assert b.count("\n- ") == 6 and "ASC" in b and "Diseñadores" in b
     assert b.index("(Área A)") < b.index("(Área R)")  # ordenado por puntaje
     assert bloque("ASC", areas_demo, []).count("O*NET") == 1  # sin ocupaciones no truena
+
+    # adenda_chat: empate detectado (Δ=1, A vs S) contra sin empate (Δ=19, C claro).
+    assert _empate({"R": 12, "I": 10, "A": 39, "S": 38, "E": 10, "C": 19}) == ("A", "S")
+    assert _empate({"R": 9, "I": 16, "A": 3, "S": 9, "E": 29, "C": 36}) is None
+    con_empate = adenda_chat({"R": 12, "I": 10, "A": 39, "S": 38, "E": 10, "C": 19})
+    sin_empate = adenda_chat({"R": 9, "I": 16, "A": 3, "S": 9, "E": 29, "C": 36})
+    assert "REGLA DE APERTURA" in con_empate and "REGLA DE APERTURA" in sin_empate
+    assert "EMPATE TÉCNICO" in con_empate and "Artístico y Social" in con_empate
+    assert "EMPATE TÉCNICO" not in sin_empate
+    print("adenda_chat OK")
     print("bloque OK")
 
     try:

@@ -140,9 +140,18 @@ MAX_ADAPTATIVAS = 8
 _COBERTURA_POR_SESION: dict[str, dict[str, int]] = {}
 
 
-def _cobertura(session_id: str | None) -> dict[str, int]:
+def _cobertura(session_id: str | None, extra: dict[str, int] | None = None) -> dict[str, int]:
+    """`extra`: dimensiones que ya llegan cubiertas desde afuera (el test corto
+    de personalidad, ver app/personalidad.py). Solo se aplica al CREAR la
+    entrada de la sesión, igual que COBERTURA_INICIAL; llamadas siguientes
+    reusan lo que ya había, sin pisar el progreso hecho en el chat."""
     clave = session_id or "_sin_sesion"
-    return _COBERTURA_POR_SESION.setdefault(clave, dict(COBERTURA_INICIAL))
+    if clave not in _COBERTURA_POR_SESION:
+        inicial = dict(COBERTURA_INICIAL)
+        if extra:
+            inicial.update(extra)
+        _COBERTURA_POR_SESION[clave] = inicial
+    return _COBERTURA_POR_SESION[clave]
 
 
 def _texto_cobertura(cobertura: dict[str, int]) -> str:
@@ -152,14 +161,26 @@ def _texto_cobertura(cobertura: dict[str, int]) -> str:
 
 def siguiente_pregunta(
     respuestas: dict, carreras, session_id: str | None = None,
-    holland: str | None = None,
+    holland: str | None = None, holland_puntajes: dict[str, int] | None = None,
+    personalidad: str | None = None, personalidad_cobertura: dict[str, int] | None = None,
 ) -> tuple[SiguientePaso, dict]:
     """`holland`: bloque de texto con el perfil RIASEC medido, si el alumno hizo
     el test antes del chat (modo 3, ver docs/holland.md). Va como sección aparte
     del prompt y NO entra al pre-filtro del catálogo: recortar el catálogo al
     sector de Holland se midió y borra las carreras correctas
     (experiments/holland-en-chat.md §3). La cobertura de dimensiones no cambia:
-    las 4 preguntas fijas se quedan y ya cubren intereses."""
+    las 4 preguntas fijas se quedan y ya cubren intereses.
+
+    `holland_puntajes`: {letra: 0-40}, los seis puntajes del alumno; obligatorio
+    junto con `holland` para armar la adenda (`holland_mod.adenda_chat` nombra el
+    área más alta en la apertura y detecta empates, ver
+    experiments/holland-apertura.md).
+
+    `personalidad`: bloque de texto del test corto de personalidad/valores/estilo
+    cognitivo, si el alumno lo hizo antes del chat (ver app/personalidad.py).
+    `personalidad_cobertura`: {dimensión: 1}, las que ese test ya cubrió (siempre
+    personalidad/valores/estilo_cognitivo); se usa para SEMBRAR la cobertura de
+    la sesión y así el chat no vuelve a preguntarlas."""
     # Pre-filtro sin IA: recalculado en cada llamada con TODAS las respuestas
     # acumuladas hasta ahora (ver app/filtro.py). Si el catálogo ya es chico
     # (p. ej. un solo departamento pequeño), no recorta nada.
@@ -167,12 +188,13 @@ def siguiente_pregunta(
     if len(candidatas) < len(carreras):
         print(f"[filtro] next-question: {len(carreras)} -> {len(candidatas)} carreras candidatas")
 
-    cobertura = _cobertura(session_id)
+    cobertura = _cobertura(session_id, personalidad_cobertura)
     hechas = sum(cobertura.values()) - sum(COBERTURA_INICIAL.values())
     pendientes = [d for d in PRIORITARIAS if not cobertura[d]]
 
     variable = (
-        (f"{holland}\n\n" if holland else "")
+        (f"{personalidad}\n\n" if personalidad else "")
+        + (f"{holland}\n\n" if holland else "")
         + f"RESPUESTAS DEL ESTUDIANTE HASTA AHORA:\n{_historial(respuestas)}\n\n"
         f"COBERTURA DE DIMENSIONES (estado real, no lo infieras del historial): "
         f"{_texto_cobertura(cobertura)}.\n"
@@ -193,7 +215,7 @@ def siguiente_pregunta(
     for _ in range(2):  # 1 intento normal + 1 reintento si ignora la cobertura pendiente
         resp = generar(
             model=MODELO,
-            system=SYSTEM + (holland_mod.ADENDA_CHAT if holland else ""),
+            system=SYSTEM + (holland_mod.adenda_chat(holland_puntajes) if holland else ""),
             catalogo=(
                 "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
                 f"{_catalogo_texto(candidatas)}"
