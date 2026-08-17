@@ -265,7 +265,7 @@ function Resultados({ datos, onReiniciar }) {
             )}{' '}
             para ocupaciones que piden preparación universitaria (job zone 4). Son
             ocupaciones del mercado de EE. UU.: sirven para ver el tipo de trabajo,
-            no como catálogo de carreras en Guatemala — para eso está el chat.
+            no como catálogo de carreras en Guatemala; para eso está el chat.
           </p>
           <ul className="psi-metricas">
             {carreras.map((c) => (

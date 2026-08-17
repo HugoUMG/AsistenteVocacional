@@ -6,7 +6,7 @@ import { REGIONES } from './data/regiones'
 import './App.css'
 
 // Únicos departamentos con carreras cargadas hoy (ver backend/data/*.json).
-// Agregar un depto aquí en cuanto tenga catálogo — no requiere tocar el SVG.
+// Agregar un depto aquí en cuanto tenga catálogo (no requiere tocar el SVG).
 const ACTIVOS = new Set(['Totonicapán', 'Quetzaltenango'])
 
 // Departamento -> región a la que pertenece.

@@ -63,7 +63,7 @@ const PASOS = [
 
 // Los tres caminos que puede tomar el alumno. El tercero es el modo completo:
 // el test avalado mide sus intereses y el chat se dedica a la carrera concreta.
-// Las 4 preguntas fijas del chat se quedan también en ese modo — quitarlas se
+// Las 4 preguntas fijas del chat se quedan también en ese modo: quitarlas se
 // midió y salió peor (experiments/holland-en-chat.md).
 const MODOS = [
   {

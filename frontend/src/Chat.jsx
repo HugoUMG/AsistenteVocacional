@@ -155,7 +155,7 @@ function enPartes(texto, max = 150) {
 // falla (API no oficial, puede romperse), cae a la voz nativa del navegador.
 let vozHabilitada = true
 let audioActual = null
-let velocidad = 1 // 1, 1.25 o 1.5 — el flujo se siente lento a velocidad normal
+let velocidad = 1 // 1, 1.25 o 1.5; el flujo se siente lento a velocidad normal
 const VELOCIDADES = [1, 1.25, 1.5]
 
 // Cachea el audio por texto exacto: las preguntas fijas siempre son el mismo

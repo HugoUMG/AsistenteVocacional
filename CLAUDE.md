@@ -100,6 +100,18 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
    calificación: los sirve la API de O*NET. El **CIP salió del menú** (2026-08-16)
    por falta de autorización de uso — no reponerlo ni invertirle trabajo hasta
    que exista permiso escrito. Ver [docs/holland.md](docs/holland.md).
+10. **Holland NO alimenta la recomendación**, ni como texto en el prompt ni con
+    el catálogo codificado en RIASEC: las dos cosas se midieron y el ranking no
+    se movió. No afirmarlo en la tesis. Si se quiere reintentar, el paso que
+    falta es revisar a mano `backend/data/holland_catalogo.json`, no escribir
+    código nuevo.
+11. **NUNCA uses la raya o guion largo (—) ni dobles guiones (--) en tus
+    respuestas, descripciones de documentos, textos web, comentarios de código
+    o código fuente.** En su lugar, utiliza comas para aclaraciones breves,
+    puntos para separar ideas en frases cortas, o guiones cortos estándar (-)
+    únicamente si la sintaxis del código o lenguaje lo requiere. Los "—" que ya
+    existen en este repo son históricos: no es necesario purgarlos, solo no
+    agregar más.
 
 ---
 
@@ -142,6 +154,14 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 - [experiments/holland-en-chat.md](experiments/holland-en-chat.md) — modo
   "Holland → chat": las 4 fijas se quedan (más baratas y más cortas), y el bloque
   de Holland en el prompt **no pesa** en la recomendación (5/6 corridas).
+- [experiments/holland-apertura.md](experiments/holland-apertura.md) — obligar
+  al chat a nombrar el resultado de Holland en su primera pregunta se cumple
+  siempre (6/6) y no cambia el ranking (4/5 corridas iguales): cambia la
+  experiencia de apertura, no el motor. Se adopta.
+- [experiments/holland-estructura.md](experiments/holland-estructura.md) —
+  catálogo codificado con los RIASEC de O*NET y ordenado por afinidad: el top-1
+  no cambió (0/2). Flag `HOLLAND_EN_RECOMENDACION`, apagado. La codificación
+  queda hecha y sin revisar a mano.
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
