@@ -18,6 +18,8 @@ http://localhost:8000/docs mientras corre el backend.
 | POST | `/api/tts` | no | Audio de un texto con `edge-tts` (voz `es-MX-DaliaNeural`), en streaming |
 | GET | `/api/psicometrico/preguntas` | no | Banco de 100 ítems, sin la clave de respuestas |
 | POST | `/api/psicometrico` | **sí** | Califica, guarda y devuelve el resumen con IA |
+| GET | `/api/holland/preguntas` | no | Los 60 ítems del Interest Profiler, servidos por O*NET |
+| POST | `/api/holland` | no | Puntajes RIASEC + ocupaciones (los calcula O*NET) y guarda el resultado |
 | GET | `/api/uso-tokens` | no | Consumo de tokens de Gemini por sesión |
 
 `/api/simular-dia` y `/api/comparar` (`backend/app/extras.py`) reciben del
@@ -41,6 +43,16 @@ a Gemini cada una, solo si el estudiante las pide.
   (`PALABRAS_OFENSIVAS`), **duplicada a propósito** en `frontend/src/Chat.jsx`
   para cortar antes de la llamada; el backend es el que manda. Si cambia una,
   hay que cambiar la otra.
+- `/api/next-question` y `/api/recommend` aceptan un campo opcional **`holland`**
+  (modo 3: el alumno hizo el test antes del chat). Llega desde `localStorage`, o
+  sea que es **dato no confiable que termina dentro del prompt**: se valida forma
+  y tamaño con el schema `HollandRef` (código de 3 letras RIASEC, exactamente 6
+  áreas con puntaje 0-40, hasta 12 títulos de ≤120 chars) y **el texto lo arma el
+  backend** con `holland.bloque()`, nunca el navegador. Sin el campo, los dos
+  endpoints se comportan exactamente igual que antes.
+- El bloque de Holland **no entra al pre-filtro** del catálogo. Recortar el
+  catálogo al sector se midió y borra las carreras correctas:
+  [experiments/holland-en-chat.md](../experiments/holland-en-chat.md) §3.
 - ⚠️ `edge-tts` es una **API no oficial** (reversa el "Read Aloud" de Edge):
   puede romperse sin aviso. El frontend cae a `speechSynthesis` si `/api/tts`
   falla — marcado con `ponytail:` en `main.py`.

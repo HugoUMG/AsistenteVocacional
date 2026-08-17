@@ -5,6 +5,7 @@ haya cargadas."""
 
 from pydantic import BaseModel
 
+from app import holland as holland_mod
 from app.filtro import preseleccionar
 from app.recomendar import (
     ANTI_INYECCION,
@@ -150,8 +151,15 @@ def _texto_cobertura(cobertura: dict[str, int]) -> str:
 
 
 def siguiente_pregunta(
-    respuestas: dict, carreras, session_id: str | None = None
+    respuestas: dict, carreras, session_id: str | None = None,
+    holland: str | None = None,
 ) -> tuple[SiguientePaso, dict]:
+    """`holland`: bloque de texto con el perfil RIASEC medido, si el alumno hizo
+    el test antes del chat (modo 3, ver docs/holland.md). Va como sección aparte
+    del prompt y NO entra al pre-filtro del catálogo: recortar el catálogo al
+    sector de Holland se midió y borra las carreras correctas
+    (experiments/holland-en-chat.md §3). La cobertura de dimensiones no cambia:
+    las 4 preguntas fijas se quedan y ya cubren intereses."""
     # Pre-filtro sin IA: recalculado en cada llamada con TODAS las respuestas
     # acumuladas hasta ahora (ver app/filtro.py). Si el catálogo ya es chico
     # (p. ej. un solo departamento pequeño), no recorta nada.
@@ -164,7 +172,8 @@ def siguiente_pregunta(
     pendientes = [d for d in PRIORITARIAS if not cobertura[d]]
 
     variable = (
-        f"RESPUESTAS DEL ESTUDIANTE HASTA AHORA:\n{_historial(respuestas)}\n\n"
+        (f"{holland}\n\n" if holland else "")
+        + f"RESPUESTAS DEL ESTUDIANTE HASTA AHORA:\n{_historial(respuestas)}\n\n"
         f"COBERTURA DE DIMENSIONES (estado real, no lo infieras del historial): "
         f"{_texto_cobertura(cobertura)}.\n"
         f"Llevas {hechas} pregunta(s) adaptativa(s) de mínimo {MIN_ADAPTATIVAS} y "
@@ -184,7 +193,7 @@ def siguiente_pregunta(
     for _ in range(2):  # 1 intento normal + 1 reintento si ignora la cobertura pendiente
         resp = generar(
             model=MODELO,
-            system=SYSTEM,
+            system=SYSTEM + (holland_mod.ADENDA_CHAT if holland else ""),
             catalogo=(
                 "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
                 f"{_catalogo_texto(candidatas)}"

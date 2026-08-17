@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import { color } from './colors'
-import { SESSION_ID } from './session'
+import { nuevaSesion, sessionId } from './session'
+import { leerPerfilHolland } from './holland-perfil'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -269,7 +270,12 @@ async function obtenerCarreras(respuestas) {
     /* backend caído para guardar: seguimos al análisis igual */
   }
 
-  const r = await post('/api/recommend', { estudiante_id, respuestas, session_id: SESSION_ID })
+  const r = await post('/api/recommend', {
+    estudiante_id,
+    respuestas,
+    session_id: sessionId(),
+    holland: leerPerfilHolland(),
+  })
   if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
   if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
   return await r.json()
@@ -497,6 +503,8 @@ function Chat() {
   const [undoStack, setUndoStack] = useState([]) // para "Regresar"
   const [ranking, setRanking] = useState([]) // radar en tiempo real
   const [confianzaChat, setConfianzaChat] = useState(0) // % de seguridad, monotónico (nunca baja)
+  // Modo 3: el alumno hizo el test de Holland antes. Se lee una vez al montar.
+  const [perfilHolland] = useState(leerPerfilHolland)
   const [oferta, setOferta] = useState(null) // { pendiente, puedeSeguir } cuando ya se puede mostrar resultado
   const [voz, setVoz] = useState(vozHabilitada)
   const [vel, setVel] = useState(velocidad)
@@ -591,7 +599,11 @@ function Chat() {
     setError(null)
     setCargando(true)
     try {
-      const r = await post('/api/next-question', { respuestas: resp, session_id: SESSION_ID })
+      const r = await post('/api/next-question', {
+        respuestas: resp,
+        session_id: sessionId(),
+        holland: leerPerfilHolland(),
+      })
       if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
       if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
       const q = await r.json()
@@ -724,7 +736,13 @@ function Chat() {
         respuestaId={respuestaId}
         confianza={confianza}
         respuestas={respuestas}
-        onReiniciar={() => navigate('/')}
+        onReiniciar={() => {
+          // Otra prueba = otra sesión. Se pide explícitamente porque navegar a
+          // '/' NO recarga la página: sin esto, las dos pruebas quedaban en la
+          // base bajo el mismo session_id.
+          nuevaSesion()
+          navigate('/')
+        }}
       />
     )
   }
@@ -796,6 +814,14 @@ function Chat() {
       {confianzaChat > 0 && (
         <div className="siri-conf" title="Qué tan definido va quedando tu perfil">
           Perfil <strong>{confianzaChat}%</strong>
+        </div>
+      )}
+      {perfilHolland && (
+        <div
+          className="siri-conf siri-holland"
+          title="Orienta está usando el resultado de tu test de Holland"
+        >
+          Holland <strong>{perfilHolland.codigo}</strong>
         </div>
       )}
 

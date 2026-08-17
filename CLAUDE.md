@@ -30,6 +30,12 @@ Modelo por defecto: `gemini-3.1-flash-lite` (configurable con `GEMINI_MODEL` en
 
 ## Arquitectura resumida
 
+El alumno elige uno de **tres modos** en el inicio: solo chat, solo el test de
+Holland, o **Holland y luego el chat** (modo 3: el chat parte del perfil RIASEC
+medido). El diagrama de abajo es el chat; en el modo 3 llega con el perfil de
+Holland encima, y **las 4 preguntas fijas se quedan igual** — quitarlas se midió
+y salió peor ([experiments/holland-en-chat.md](experiments/holland-en-chat.md)).
+
 ```
 Alumno
   ↓  elige departamento o región en el mapa (Mapa.jsx) → /chat?depto=
@@ -133,6 +139,9 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   psicométrico primero y chat sin preguntas fijas: NO se integra. Las fijas y el
   test miden cosas distintas (intereses declarados vs. aptitud real) y quitarlas
   costó el canal de revelación de los chips y la alerta de contradicción.
+- [experiments/holland-en-chat.md](experiments/holland-en-chat.md) — modo
+  "Holland → chat": las 4 fijas se quedan (más baratas y más cortas), y el bloque
+  de Holland en el prompt **no pesa** en la recomendación (5/6 corridas).
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.

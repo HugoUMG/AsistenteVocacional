@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Nav from './Nav'
+import { nuevaSesion, sessionId } from './session'
+import { guardarPerfilHolland, olvidarPerfilHolland } from './holland-perfil'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -68,6 +71,8 @@ export default function Holland() {
 
   function reiniciar() {
     localStorage.removeItem(BORRADOR)
+    olvidarPerfilHolland() // si lo va a responder de nuevo, el chat no debe usar el viejo
+    nuevaSesion() // otra prueba, otra sesión: no mezclar los dos resultados en la base
     setRespuestas({})
     setPagina(0)
     setResultado(null)
@@ -85,13 +90,15 @@ export default function Holland() {
       const r = await fetch(`${API}/api/holland`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ respuestas: cadena, zona: 4 }),
+        body: JSON.stringify({ respuestas: cadena, zona: 4, session_id: sessionId() }),
       })
       if (!r.ok) {
         const d = await r.json()
         throw new Error(d.detail?.[0]?.msg || d.detail || 'Error al calificar')
       }
-      setResultado(await r.json())
+      const datos = await r.json()
+      setResultado(datos)
+      guardarPerfilHolland(datos) // para que el chat lo pueda usar (modo 3)
       localStorage.removeItem(BORRADOR)
       window.scrollTo({ top: 0 })
     } catch (e) {
@@ -206,6 +213,7 @@ export default function Holland() {
 function Resultados({ datos, onReiniciar }) {
   const { areas, codigo, carreras, carreras_total } = datos
   const orden = [...areas].sort((a, b) => b.score - a.score)
+  const navigate = useNavigate()
 
   return (
     <div className="pagina">
@@ -277,6 +285,21 @@ function Resultados({ datos, onReiniciar }) {
           </a>
           , del Departamento de Trabajo de EE. UU.
         </p>
+
+        {/* Modo 3: seguir al chat con este perfil. El chat lo lee de
+            localStorage; las 4 preguntas fijas se quedan igual (medido en
+            experiments/holland-en-chat.md). */}
+        <section className="psi-bloque">
+          <h2>¿Y qué estudio en Guatemala?</h2>
+          <p className="psi-texto">
+            Las ocupaciones de arriba son de EE. UU. Si seguís al chat, Orienta
+            usa este perfil como punto de partida y busca la carrera concreta que
+            te encaja en las universidades de tu departamento.
+          </p>
+          <button className="hero-btn" onClick={() => navigate('/mapa')}>
+            Continuar al chat con este perfil →
+          </button>
+        </section>
 
         <div className="psi-nav">
           <button className="psi-btn-sec" onClick={onReiniciar}>

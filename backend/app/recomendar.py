@@ -460,9 +460,13 @@ def generar(model, system, catalogo, variable, schema, temperature):
         return _acumular("respaldo", resp, model)
 
 
-def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None) -> tuple[Resultado, dict]:
+def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None,
+               holland: str | None = None) -> tuple[Resultado, dict]:
     """respuestas: dict con las respuestas del cuestionario.
     carreras: lista de models.Carrera (el catálogo).
+    holland: bloque con el perfil RIASEC medido, si el alumno hizo el test antes
+    del chat. Entra como contexto; MEDIDO, no mueve el ranking (5 de 6 corridas
+    ignoraron el área más alta) — ver experiments/holland-en-chat.md.
     perfil_cip: EXPERIMENTAL, el `perfil` que devuelve `cip_fogliatto.calificar()`.
     Solo surte efecto con `CIP_EN_RECOMENDACION=1`; sin el flag se ignora y la
     función se comporta igual que antes. Ver `experiments/cip-en-recomendacion.md`.
@@ -476,6 +480,8 @@ def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None)
     los reescriba como 'enfoque'."""
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
     variable = f"PERFIL DEL ESTUDIANTE:\n{perfil}"
+    if holland:
+        variable = f"{holland}\n\n{variable}"
 
     # El agrupado se hace SIEMPRE sobre el catálogo completo: es lo que adjunta
     # universidad/centro/sede a la respuesta. Si se hiciera sobre el catálogo ya

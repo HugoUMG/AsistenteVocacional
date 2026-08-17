@@ -132,6 +132,56 @@ def valida(respuestas: str) -> bool:
     return len(respuestas) == N_PREGUNTAS and all(c in "12345" for c in respuestas)
 
 
+# Puntaje máximo por área: 10 ítems, hasta 4 puntos cada uno (escala 1-5, base 0).
+MAX_AREA = 40
+# Cuántas ocupaciones entran al bloque. Corto a propósito: viaja en CADA llamada
+# de next-question.
+OCUPACIONES_EN_BLOQUE = 8
+
+
+def bloque(codigo: str, areas: list[dict], ocupaciones: list[str]) -> str:
+    """El texto que ve Gemini cuando el alumno hizo Holland antes del chat.
+
+    MEDIDO: este bloque personaliza la conversación pero NO mueve la
+    recomendación — en 5 de 6 corridas el top-1 ignoró el área más alta del
+    perfil. No presentarlo como que "Holland alimenta la recomendación"; para
+    eso haría falta que entre como estructura (códigos RIASEC sobre el catálogo)
+    y no como prosa. Ver experiments/holland-en-chat.md."""
+    orden = sorted(areas, key=lambda a: -a["score"])
+    lineas = [
+        "PERFIL DE INTERESES MEDIDO CON EL TEST DE HOLLAND "
+        "(O*NET Interest Profiler, 60 ítems, ya calificado):",
+        f"Código Holland: {codigo} — sus tres áreas de mayor interés, de mayor a menor.",
+        f"Puntaje por área (0 a {MAX_AREA}; lo que orienta es el contraste entre las seis):",
+    ]
+    lineas += [f"- {a['letra']} ({a['title']}): {a['score']}" for a in orden]
+    if ocupaciones:
+        lineas.append(
+            "Ocupaciones de mejor ajuste según O*NET: "
+            + ", ".join(ocupaciones[:OCUPACIONES_EN_BLOQUE])
+            + ". Son del mercado de EE. UU.: sirven para ver el TIPO de trabajo que le "
+            "encaja, NO como catálogo (el catálogo real va aparte)."
+        )
+    return "\n".join(lineas)
+
+
+# Adenda al SYSTEM del chat cuando hay perfil de Holland. Las 4 preguntas fijas
+# se quedan: quitarlas se midió y salió peor (más cara, más larga y saca del
+# top-3 la opción que el alumno esconde). Ver experiments/holland-en-chat.md.
+ADENDA_CHAT = (
+    "\n\nCONTEXTO ADICIONAL: el estudiante YA respondió el test de Holland "
+    "(O*NET Interest Profiler) y su perfil de INTERESES MEDIDO viene en el "
+    "mensaje del usuario. Sus intereses ya están medidos por un instrumento "
+    "oficial, así que NO gastes un turno preguntándole en general 'qué te "
+    "gusta'. Tu trabajo es OTRO: averiguar cuál carrera CONCRETA del catálogo, "
+    "dentro del sector que sus intereses ya marcan, encaja mejor con él. Usa el "
+    "perfil medido para dos cosas: (1) personalizar la apertura de la pregunta, "
+    "con tacto, SIN dar cifras y sin sonar a diagnóstico; y (2) CONTRASTAR: si "
+    "lo que el estudiante dice contradice lo medido, haz una pregunta que aclare "
+    "esa tensión y anótalo en 'alerta_contradiccion'."
+)
+
+
 if __name__ == "__main__":
     from dotenv import load_dotenv
 
@@ -142,6 +192,16 @@ if __name__ == "__main__":
     assert not valida("6" + "3" * 59)
     assert not valida("3" * 30 + "0" + "3" * 29)
     print("validación OK")
+
+    # El bloque del chat: los 6 puntajes ordenados de mayor a menor y las
+    # ocupaciones, pero NUNCA la hoja cruda (viaja en cada llamada).
+    areas_demo = [{"letra": l, "title": f"Área {l}", "score": s}
+                  for l, s in zip("RIASEC", [12, 10, 39, 38, 10, 19])]
+    b = bloque("ASC", areas_demo, ["Diseñadores Gráficos", "Editores"])
+    assert b.count("\n- ") == 6 and "ASC" in b and "Diseñadores" in b
+    assert b.index("(Área A)") < b.index("(Área R)")  # ordenado por puntaje
+    assert bloque("ASC", areas_demo, []).count("O*NET") == 1  # sin ocupaciones no truena
+    print("bloque OK")
 
     try:
         banco = preguntas()

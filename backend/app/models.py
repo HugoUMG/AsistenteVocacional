@@ -77,6 +77,24 @@ class ResultadoPsicometrico(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
 
+class ResultadoHolland(Base):
+    """Test de intereses de Holland (O*NET Interest Profiler).
+
+    Se guarda al calificar, aunque el alumno no siga al chat: es el instrumento
+    avalado del proyecto y sus resultados entran en la investigación. Los
+    puntajes los calcula O*NET, no este backend (ver docs/holland.md)."""
+
+    __tablename__ = "resultados_holland"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    session_id: Mapped[str] = mapped_column(String(64), index=True)
+    # Los 60 dígitos 1-5 tal como se mandaron a O*NET, por si hay que recalificar.
+    respuestas: Mapped[str] = mapped_column(String(60))
+    codigo: Mapped[str] = mapped_column(String(3))  # p. ej. "ASC"
+    areas: Mapped[dict] = mapped_column(JSON)  # {"R": 12, "I": 10, ...}
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
 class UsoTokens(Base):
     """Log de consumo de tokens por CADA llamada a Gemini, para estimar costo y
     presupuesto. El total por sesión = SUMA de total_tokens agrupando por
