@@ -297,18 +297,22 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
 
       <section className="dash-detail">
         <div className="carrera-lista">
-          {carreras.map((c, i) => (
-            <button
-              key={i}
-              className={`carrera-item ${i === sel ? 'activa' : ''}`}
-              onClick={() => elegirCarrera(i)}
-              style={i === sel ? { borderColor: color(i) } : undefined}
-            >
-              <span className="punto" style={{ background: color(i) }} />
-              <span className="carrera-nombre">{c.carrera}</span>
-              <span className="carrera-pct">{c.afinidad}%</span>
-            </button>
-          ))}
+          {carreras.map((c, i) => {
+            const enUMG = c.instituciones?.some((x) => x.universidad === 'Universidad Mariano Gálvez')
+            return (
+              <button
+                key={i}
+                className={`carrera-item ${i === sel ? 'activa' : ''} ${enUMG ? 'carrera-item-umg' : ''}`}
+                onClick={() => elegirCarrera(i)}
+                style={i === sel ? { borderColor: color(i) } : undefined}
+              >
+                <span className="punto" style={{ background: color(i) }} />
+                <span className="carrera-nombre">{c.carrera}</span>
+                {enUMG && <span className="sello-umg">UMG</span>}
+                <span className="carrera-pct">{c.afinidad}%</span>
+              </button>
+            )
+          })}
         </div>
 
         <div className="carrera-panel">

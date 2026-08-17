@@ -1,6 +1,6 @@
 {
   "departamento": "Quetzaltenango",
-  "centro": "Sede Quetzaltenango (UdeO)",
+  "centro": "Universidad de Occidente (Quetzaltenango)",
   "universidad": "Universidad de Occidente",
   "carreras": [
     { "nombre": "Arquitectura", "perfil_id": "arquitectura", "sello": "Sede central de la universidad, con enfoque práctico y accesible en Occidente." },
