@@ -1,0 +1,597 @@
+[
+ {
+  "perfil": "Kevin",
+  "area_esperada": "informática",
+  "mismo_top1": true,
+  "brazos": {
+   "actual": {
+    "modelo": "gemini-3.1-flash-lite",
+    "top1": "Ingeniería en Ciencias y Sistemas",
+    "afinidad": 25,
+    "confianza": 90,
+    "alertas_contradiccion": 0,
+    "acierta_area": true,
+    "prompt_tokens": 62120,
+    "output_tokens": 3390,
+    "costo_usd": 0.0206,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "Liderar, organizar negocios o usar tecnología y números. Me cuadra un montón armar equipos y ponerme a programar algo propio, aparte los números se me dan re bien y pues, así uno sobresale."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Más que todo analizando datos y lógica, y también me gusta un montón trabajar con las manos, tipo armar cosas así tranquilo. Con la gente prefiero no mucho, soy más de estar metido en lo mío."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "Yo fijo me veo en un laboratorio o taller técnico, así tranquilo armando mis cosas y metido en lo mío, y tal vez también en una empresa grande donde pueda estar liderando proyectos de tecnología, que al final es lo que me gusta."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "Fijo me voy por Tecnología y computación, Matemáticas y números, y también Construcción, máquinas y cómo funcionan las cosas. Es que me encanta desarmar cosas y armarlas, aparte que los números se me dan facilito."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Kevin, me queda clarísimo que te gusta estar metido en lo tuyo, ya sea programando o armando cosas en el taller. Ahora, cuéntame un poco sobre tu forma de ser: cuando estás trabajando en un proyecto difícil, ¿prefieres **seguir reglas y pasos** muy exactos para que todo salga perfecto, o te gusta más **experimentar y probar** formas nuevas aunque no sepas bien qué va a pasar?",
+      "respuesta": "Prefiero seguir pasos y reglas para asegurar que todo salga bien, así no meto la pata y me sale todo cabal como quiero."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Kevin, me alegra ver que te gusta ir a lo seguro siguiendo tus pasos, eso ayuda mucho a que las cosas salgan bien. Ahora, pensando en lo que sabes hacer con tus manos o con la compu, ¿qué te da más **satisfacción personal** al terminar un trabajo: ver que todo funciona con una **precisión perfecta** y sin errores, o sentir que lograste **resolver un problema** bien difícil que nadie más podía descifrar?",
+      "respuesta": "Me quedo con resolver un problema muy difícil, porque ahí es cuando uno siente que realmente aprendió algo nuevo y se siente bien pilas."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Kevin, me encanta esa actitud de querer superar retos difíciles, se nota que te gusta poner a prueba tu capacidad. Ahora, pensando en tus habilidades técnicas, ¿en cuál de estas situaciones te sientes más en tu elemento: cuando te toca **diseñar y calcular** la estructura o el funcionamiento de algo desde cero, o cuando te toca **diagnosticar y arreglar** un sistema que ya existe pero que está fallando?",
+      "respuesta": "Fijo me quedo con diagnosticar y reparar, me gusta más ver qué es lo que falla y dejarlo nítido, aparte que con los cálculos de las piezas nuevas me va bien."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Kevin, se nota que eres un experto encontrando fallas y dejando todo nítido, eso es genial. Ahora, para entender mejor cómo piensas cuando te enfrentas a un reto, cuéntame: cuando tienes que resolver algo nuevo, ¿te gusta más **descomponer el problema** en partes pequeñas y lógicas para ir paso a paso, o prefieres **mirar el panorama completo** y entender cómo todo se conecta antes de empezar a mover una sola pieza?",
+      "respuesta": "Ir paso a paso, desarmando el problema en pedacitos. Es que así me aseguro que todo me salga nítido y no me pierdo, aparte que con los números me va re bien y me ayuda a calcular todo rápido."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   },
+   "3.5-flash-lite": {
+    "modelo": "gemini-3.5-flash-lite",
+    "top1": "Ingeniería en Ciencias y Sistemas",
+    "afinidad": 32,
+    "confianza": 90,
+    "alertas_contradiccion": 0,
+    "acierta_area": true,
+    "prompt_tokens": 62102,
+    "output_tokens": 2909,
+    "costo_usd": 0.0259,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "Liderar, organizar negocios o usar tecnología y números, y también construir o hacer que las cosas funcionen. Me gusta armar compus y siento que en eso de los números y liderar proyectos me va bastante bien."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Me gusta más de forma práctica, usando las manos para armar compus, y también analizando datos y lógica porque se me da re bien. Me siento cómodo trabajando solo con mis audífonos."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "En un laboratorio o taller técnico, porque ahí estoy en lo mío armando compus. Tal vez también en una empresa grande para liderar algún proyecto, ya ve que eso me sale chilero."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "Tecnología y computación, matemáticas y números, y construcción y cómo funcionan las cosas. Es que me encanta desarmar compus y la verdad los números se me dan re bien, así que por ahí va la cosa."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Kevin, me contaste que te gusta armar computadoras y resolver problemas con números. Ahora dime una cosa sobre tu **forma de ser**: cuando estás trabajando en un reto difícil, ¿eres más de los que **buscan la lógica** paso a paso solos o de los que prefieren **probar ideas rápido** aunque fallen?",
+      "respuesta": "Prefiero pensar cada paso con calma y lógica hasta que encaje perfecto, porque así no la riego y me aseguro que todo funcione bien a la primera."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Me dijiste que te gusta pensar cada paso con calma y lógica. Ahora dime una cosa sobre tus **habilidades**: cuando te enfrentas a un problema nuevo, ¿qué se te da mejor para **resolverlo**?",
+      "respuesta": "Armar, conectar y configurar piezas físicas o circuitos, ahí es donde me luzco más porque me gusta ver cómo todo cobra vida."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Se nota que te gusta armar cosas y pensar bien cada paso con calma. Cuéntame algo sobre tus **valores**: cuando buscas un trabajo para el futuro, ¿qué te importa más, **ayudar a mejorar la vida** de otras personas o **crear sistemas y proyectos eficientes** que funcionen solos?",
+      "respuesta": "Crear sistemas y proyectos eficientes que funcionen solos, me gusta que las cosas anden bien y rápido sin tanta vuelta."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Me llama la atención que prefieras crear sistemas eficientes y pensar todo con calma. Ahora cuéntame de tu **forma de pensar**: cuando aprendes algo nuevo, ¿te sirve más **imaginar las cosas en 3D** en tu cabeza o prefieres seguir un **proceso paso a paso** con reglas claras?",
+      "respuesta": "Seguir un proceso paso a paso con reglas claras, porque así me aseguro de no fallar en nada y que todo quede bien hecho."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   }
+  }
+ },
+ {
+  "perfil": "Brandon",
+  "area_esperada": "indefinido",
+  "mismo_top1": true,
+  "brazos": {
+   "actual": {
+    "modelo": "gemini-3.1-flash-lite",
+    "top1": "Técnico Universitario en Desarrollo de Software",
+    "afinidad": 40,
+    "confianza": 65,
+    "alertas_contradiccion": 0,
+    "acierta_area": null,
+    "prompt_tokens": 54890,
+    "output_tokens": 2628,
+    "costo_usd": 0.0177,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "La verdad ni me importa eso, ponga ahí cualquiera, de repente liderar o algo así da igual."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Al aire libre y en movimiento, la verdad me da igual, solo quiero terminar esto ya."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "La verdad me da igual, ponga cualquiera, tal vez en una oficina o en un taller, me da lo mismo con tal de terminar ya."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "La verdad ninguna de esas, solo me gusta jugar fútbol y los videojuegos, ponga lo que quiera."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Brandon, entiendo que quieres ir directo al punto. Como te gusta mucho el fútbol y los videojuegos, imagínate que tienes que **resolver un problema difícil** en equipo: ¿prefieres ser quien **crea la estrategia** y da las instrucciones, o eres más de los que **se ponen manos a la obra** y ejecutan la tarea técnica para que todo funcione?",
+      "respuesta": "La verdad prefiero hacer el trabajo técnico, es más fácil no complicarse tanto con estar mandando a otros."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Brandon, ya me quedó claro que prefieres enfocarte en lo técnico y dejar de lado el mando. Ahora, pensando en cómo resuelves las cosas cuando algo no sale como esperabas en un videojuego o en un partido, ¿qué te describe mejor: eres de los que **analiza los detalles** y busca el error lógico para arreglarlo, o prefieres **probar diferentes formas** hasta que alguna funcione por pura práctica?",
+      "respuesta": "Pruebo varias veces hasta que algo funciona, así es como le hago siempre en el FIFA."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Brandon, me queda claro que eres de los que aprende haciendo y probando, como en el FIFA. Ahora, cuéntame algo sobre lo que te hace sentir bien: cuando terminas una tarea, ¿qué te da más **satisfacción personal**: ver que hiciste un trabajo **bien hecho y preciso**, aunque te haya tomado tiempo, o sentir que fuiste **rápido y eficiente** para terminarlo pronto y pasar a otra cosa?",
+      "respuesta": "Que sea rápido y eficiente, así salgo de esto de una vez."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Brandon, entiendo que para ti lo más importante es avanzar rápido y sin vueltas. Ya que prefieres la rapidez, cuéntame: cuando te toca hacer algo nuevo, ¿qué se te da mejor: usar **herramientas o máquinas** para armar o arreglar cosas, o prefieres trabajar con **información en una computadora** para organizar o procesar datos?",
+      "respuesta": "La verdad me da igual, póngale cualquier cosa, si acaso la compu, total, es lo mismo."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   },
+   "3.5-flash-lite": {
+    "modelo": "gemini-3.5-flash-lite",
+    "top1": "Técnico Universitario en Desarrollo de Software",
+    "afinidad": 35,
+    "confianza": 55,
+    "alertas_contradiccion": 0,
+    "acierta_area": null,
+    "prompt_tokens": 52533,
+    "output_tokens": 2709,
+    "costo_usd": 0.0225,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "La verdad ni idea, cualquier cosa me da igual, lo que sea está bien."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Cualquiera, de plano da igual, al aire libre o con las manos, la verdad no sé ni qué prefiero."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "La verdad ni idea, tal vez en una oficina o donde sea, igual me da lo mismo."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "La verdad ni una de esas, me da igual. Solo me cuadra jugar fútbol y echarme sus partidas de videojuegos, lo demás no sé."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Veo que te la pasas chido **jugando fútbol** y con los videojuegos, pero cuéntame algo de cómo eres tú cuando estás con tus cuates: ¿te gusta más **mandar y organizar** al grupo o prefieres ir a tu ritmo y apoyar sin tanto rollo?",
+      "respuesta": "Prefiero ir a mi ritmo y ayudar en lo que haga falta, la neta no me gusta andar ahí metido en clavos de mandar a nadie."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Me late que eres de los que prefiere apoyar sin hacer show, qué buena onda. Oye, pensando en **aprender cosas nuevas** o resolver algún reto, ¿te llama más la atención *imaginar cómo funciona un aparato* o prefieres *entender cómo se organiza un grupo* para que todo salga bien?",
+      "respuesta": "Ver cómo funcionan las cosas y armarlas, igual me da lo mismo pero eso suena más tranqui."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Se nota que te gusta ir a tu ritmo y entender cómo funcionan las cosas por ti mismo. Ahora dime: cuando te toca hacer un trabajo en grupo, ¿qué te importa más, que todos **salgan parejos** o que se cumplan las reglas a la *perfección*?",
+      "respuesta": "Que todos se ayuden, así no hay tanto clavo y terminamos rápido."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Veo que te gusta ir tranqui y ayudar a tus cuates sin tanto rollo. Oye, cuando tienes que resolver un problema difícil, ¿eres de los que va probando **paso a paso** hasta atinarle o te gusta más pensar en **una sola idea ganadora** de golpe?",
+      "respuesta": "Voy probando paso a paso hasta que sale, es mejor así para no andar pensando tanto."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   }
+  }
+ },
+ {
+  "perfil": "Melany",
+  "area_esperada": "administración/contaduría",
+  "mismo_top1": true,
+  "brazos": {
+   "actual": {
+    "modelo": "gemini-3.1-flash-lite",
+    "top1": "Contaduría Pública y Auditoría",
+    "afinidad": 45,
+    "confianza": 90,
+    "alertas_contradiccion": 2,
+    "acierta_area": true,
+    "prompt_tokens": 54575,
+    "output_tokens": 2868,
+    "costo_usd": 0.0179,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "Definitivamente liderar, organizar negocios o usar tecnología y números, eso es lo mío. También me llama la atención defender la justicia y resolver conflictos, porque quiero estudiar leyes y así me va a ir súper bien de plata."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Analizando datos, ideas y lógica, porque me encanta cuando todo cuadra y el orden es lo primero. La verdad odio improvisar, prefiero mil veces estar en mi oficina con mis cosas organizadas."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "En una oficina o empresa, fijo. Ahí es donde puedo tener todo bajo control con mis números y bien organizado, como a mí me gusta."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "Matemáticas y números, Negocios, dinero y emprender, y también Leyes, justicia y debate. Me encanta ver que los números cuadren en el negocio y siento que estudiar leyes me va a dar el estatus y el dinero que quiero."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Melany, me encanta ver que tienes tan clara tu meta de tener éxito y manejar negocios con orden. Ahora, pensando en cómo te gusta trabajar con los demás, ¿qué te suena mejor: prefieres **liderar un equipo** donde tú das las instrucciones y guías a todos, o te sientes más cómoda siendo la **experta que analiza** todo a detalle para que los demás tomen las decisiones correctas?",
+      "respuesta": "Prefiero ser la experta que analiza y da los datos clave, porque así me aseguro que todo cuadre perfecto y no haya errores de nadie más."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Me queda clarísimo que prefieres ser la mente maestra que asegura que todo esté perfecto con los datos. Ya que te gusta tanto que las cosas salgan bien, cuéntame: cuando tienes un problema difícil enfrente, ¿qué te ayuda más a resolverlo: **seguir reglas** y normas muy claras para no fallar, o **buscar soluciones creativas** que rompan un poco el molde para obtener mejores resultados?",
+      "respuesta": "Seguir reglas y normas claras, fijo. A mí me estresa un montón improvisar y prefiero mil veces irme por lo seguro para que los números cuadren al cien."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Melany, me encanta lo clara que eres con tu gusto por el orden y las reglas, eso te hace alguien muy confiable. Ahora, pensando en lo que sabes hacer o te gustaría aprender, ¿qué te atrae más: **manejar leyes** y documentos legales para defender derechos o contratos, o **manejar sistemas de datos** para encontrar información oculta que ayude a que una empresa gane más dinero?",
+      "respuesta": "Manejar leyes y documentos, porque al final es lo que me va a dar el estatus y el pisto que quiero, aunque igual después puedo aprender a ver los datos."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Melany, me queda claro que buscas ese éxito y estatus que te dan las leyes. Ahora, pensando en lo que más valoras de tu futuro trabajo, ¿qué te hace sentir más realizada: **tener un impacto directo** en la vida de las personas ayudándoles a resolver sus problemas legales, o **ser reconocida por tu impecable ética** y transparencia al manejar los negocios y el dinero de otros?",
+      "respuesta": "Ser reconocida por mi ética y transparencia, porque siendo así de ordenada con el dinero es más seguro que me vaya bien y gane buen billete."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   },
+   "3.5-flash-lite": {
+    "modelo": "gemini-3.5-flash-lite",
+    "top1": "Contaduría Pública y Auditoría",
+    "afinidad": 38,
+    "confianza": 88,
+    "alertas_contradiccion": 0,
+    "acierta_area": true,
+    "prompt_tokens": 53089,
+    "output_tokens": 2664,
+    "costo_usd": 0.0226,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "Definitivamente liderar, organizar negocios o usar tecnología y números, eso es lo mío. También me llama la atención defender la justicia y resolver conflictos porque quiero estudiar leyes, aunque la verdad me encanta pasarme el día cuadrando inventarios en la tienda."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Analizando datos, ideas y lógica. La verdad me encanta que todo cuadre en la compu y no andar perdiendo el tiempo, prefiero mil veces estar ahí tranquila en mi oficina con mis números."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "En una oficina o empresa, fijo. Me veo ahí bien tranquila, con mi compu bien ordenada y mis números al día, sin que nadie me moleste."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "Matemáticas y números, Negocios, dinero y emprender, y Leyes, justicia y debate. Me encanta que las cuentas cuadren y ver crecer el negocio, aunque igual quiero ser abogada para ganar bien."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Melany, ya me contaste que te encantan los números y estar tranquila en la compu con tus cuentas, pero me da curiosidad saber más de ti. Cuando te toca trabajar en grupo en el colegio, ¿eres más de **tomar el mando** y organizar a todos, o prefieres **enfriarte y hacer tu parte** por tu cuenta?",
+      "respuesta": "Fijo prefiero trabajar sola y hacer lo mío, es que me estresa un montón tener que estar viendo qué hacen los demás. Así me aseguro que todo cuadre y que nadie se pase de listo con el trabajo."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Se nota que prefieres trabajar a tu propio ritmo y asegurarte de que todo quede impecable por tu cuenta. Ahora dime, cuando te enfrentas a un problema difícil con tus cuentas o tus tareas, ¿qué te da más **tranquilidad** al final del día?",
+      "respuesta": "Saber que seguí cada regla al pie de la letra sin errores. Me da paz que todo cuadre perfecto y que nadie me pueda venir a decir que hice algo mal."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Me queda claro que te da muchísima paz seguir las reglas al pie de la letra y que todo salga sin un solo error. Ahora cuéntame algo sobre lo que sabes hacer: cuando tienes que aprender a usar un programa nuevo en la compu o entender un tema enredado, ¿te gusta más **descubrir cómo funciona** tú sola probando cosas, o prefieres **seguir un manual** paso a paso?",
+      "respuesta": "Seguir un manual o instrucciones paso a paso. Me pone nerviosa andar adivinando, prefiero que me digan qué hacer para que todo salga perfecto a la primera."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Se nota que te da mucha confianza tener un plan claro y seguir los pasos al pie de la letra. Ahora cuéntame esto: cuando tienes que resolver un misterio o un problema de lógica, ¿te gusta más **agarrar todos los datos** para ver qué patrón se repite, o prefieres **aplicar una fórmula** exacta que ya sabes que funciona?",
+      "respuesta": "Aplicar una fórmula exacta conocida. Me siento mucho más segura así porque sé que no voy a fallar y el resultado va a ser el correcto."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   }
+  }
+ },
+ {
+  "perfil": "Josué",
+  "area_esperada": "agronomía/forestal",
+  "mismo_top1": false,
+  "brazos": {
+   "actual": {
+    "modelo": "gemini-3.1-flash-lite",
+    "top1": "Ingeniería en Agronomía",
+    "afinidad": 45,
+    "confianza": 90,
+    "alertas_contradiccion": 0,
+    "acierta_area": true,
+    "prompt_tokens": 68399,
+    "output_tokens": 2787,
+    "costo_usd": 0.0213,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "La mera verdad quiero irme por el lado de la ingeniería y hacer que las máquinas funcionen, pura tecnología y números para sobresalir. Pero si me pone a elegir, también me cuadra un montón lo de trabajar con la naturaleza, porque ahí en la milpa uno siente la tierra y sabe bien cómo crecen los maíces cuando llueve rico."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Definitivo me voy por lo práctico con las manos y al aire libre, porque encerrado me ahogo. Eso de estar en el campo viendo cómo nace la milpa con la lluvia es lo mejor, ahí sí me siento yo."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "Fijo en una obra con máquinas o herramientas para que se vea la tecnología, pero sobre todo en el campo, al aire libre. Es que ahí es donde más me hallo, viendo cómo preparar bien el suelo y cuándo es el mero punto para que el maíz crezca de a toque cuando caen los primeros aguaceros."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "Me gusta la tecnología y las máquinas para que todo funcione bien, pero me apasiona de verdad todo lo de agricultura y el medio ambiente. Es que ver cómo preparar el suelo y sembrar es otro nivel, ahí sí me siento yo."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Josué, me queda clarísimo que el campo y las máquinas son lo tuyo. Ahora, cuéntame algo sobre tu forma de ser: cuando tienes que resolver un problema difícil, ¿prefieres **analizar los datos** y planear todo con calma antes de actuar, o te gusta más **lanzarte a probar** con tus manos hasta que la pieza o el proceso funcione?",
+      "respuesta": "Prefiero lanzarme a probar y experimentar con mis manos de una vez. Es que para qué tanto rollo, mejor le meto mano de una vez a la máquina o a la tierra y ahí voy viendo cómo sale la cosa."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Josué, me encanta esa chispa que tienes para meterle mano a las cosas y aprender haciendo. Ahora, pensando en el futuro, ¿qué te hace sentir más orgulloso: **liderar a un equipo** de personas para lograr una meta, o **ser el experto** que domina a la perfección la técnica y el funcionamiento de sus máquinas o cultivos?",
+      "respuesta": "Ser el experto técnico que domina el proceso. Me cuadra más ser el que sabe cómo va la cosa, especialmente con la siembra, para que el maíz salga macizo."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Josué, me queda claro que prefieres ser el experto que domina el proceso con sus propias manos. Ahora, cuéntame sobre lo que te mueve: cuando trabajas en un proyecto, ¿qué te hace sentir que hiciste un buen trabajo: **ver que la producción aumentó** y todo es más eficiente, o saber que **cuidaste el entorno** y los recursos naturales para que duren por mucho tiempo?",
+      "respuesta": "Que el trabajo sea sostenible y cuide la naturaleza. Es que de nada sirve sacar un montón si uno se echa el suelo, mejor cuidar la tierra para que el maíz siempre dé buen fruto."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Josué, me gusta mucho esa visión de cuidar la tierra para el futuro. Ahora, para entender mejor qué herramientas te llaman más, cuéntame: cuando te enfrentas a un reto técnico, ¿qué se te da mejor o te divierte más: **hacer cálculos** y medir datos para entender cómo va todo, o **armar y reparar** piezas, motores o sistemas de riego con tus propias manos?",
+      "respuesta": "Fijo armar y reparar cosas con las manos. Es que me cuadra más meterle mano al sistema de riego o arreglar algo que falle, ahí sí siento que estoy haciendo algo real con mis manos."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   },
+   "3.5-flash-lite": {
+    "modelo": "gemini-3.5-flash-lite",
+    "top1": "Ingeniería Mecánica",
+    "afinidad": 32,
+    "confianza": 88,
+    "alertas_contradiccion": 0,
+    "acierta_area": false,
+    "prompt_tokens": 69009,
+    "output_tokens": 3091,
+    "costo_usd": 0.0284,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "La verdad me late mucho lo de liderar, organizar negocios y usar tecnología, porque quiero ser ingeniero y mover máquinas. Aunque siendo honesto, también me encanta trabajar con la naturaleza y el campo, porque con el maíz y la tierra es donde sí veo lo que mis manos hacen, ahí sí le entiendo bien a cómo crece todo."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "De forma práctica con las manos y al aire libre, porque encerrado me ahogo. Cuando me toca ver el suelo y el tiempo para sembrar el maíz, ahí sí me siento yo y me sale todo bien."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "Fijo me veo en el campo o en una obra grande con maquinaria pesada. Me gusta estar donde vea el progreso de lo que hago, ya sea sembrando mi milpa o manejando tractores."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "Fijo me quedo con Construcción, máquinas y cómo funcionan las cosas, pero también Medio ambiente y agricultura. Me cuadra un montón ver cómo preparar el suelo para que el maíz salga bien fuerte cuando vienen las lluvias."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Josué, se nota que lo tuyo es estar con las manos en la tierra y con la maquinaria viendo cosas reales. Ahora dime una cosa: cuando tienes que resolver un problema difícil, **¿te gusta más seguir pasos seguros y exactos** o prefieres *probar y arriesgarte* hasta dar con una solución nueva?",
+      "respuesta": "Prefiero probar, inventar y arriesgarme hasta hallar una forma distinta de hacerlo. En la milpa a veces toca ver cómo salvar la cosecha cuando el clima se pone loco y hay que inventarse algo rápido para que el maíz no se pierda."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Josué, me alegra ver que te gusta inventar y buscar soluciones cuando se pone difícil la cosa en la siembra. Cuéntame esto: cuando estás trabajando en algo, **¿qué te importa más al final?** ¿Que lo que hagas le ayude a tu comunidad o *ganar buen dinero y salir adelante*?",
+      "respuesta": "Fijo prefiero ganar buen dinero y salir adelante. Uno quiere ver frutos de tanto esfuerzo y poder ayudar a la familia para que no nos falte nada."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Josué, ya veo que le tiras a ganar buen dinero y sacar adelante a los tuyos con el esfuerzo. Cuéntame una cosa sobre ti: cuando estás en un grupo grande, **¿eres el que toma la batuta** y organiza a todos o *prefieres concentrarte en tu tarea* por tu cuenta?",
+      "respuesta": "Prefiero hacer lo mío concentrado y que me dejen trabajar solo. La verdad me estresa estar mandando a otros, mejor me pongo a trabajar en lo mío y así saco la tarea más rápido."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Josué, me queda claro que te gusta concentrarte en lo tuyo y sacar el trabajo adelante sin andar mandando a otros. Ahora cuéntame de tus **habilidades**: cuando te toca usar la tecnología o aprender a manejar **herramientas o máquinas nuevas**, ¿qué tan fácil te resulta agarrarle el truco?",
+      "respuesta": "Se me hace re fácil, en cuanto las toco ya sé cómo usarlas. Con el tractor y las herramientas de la milpa me pasa igual, solo les veo la maña y ya estoy dándole a todo ritmo."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   }
+  }
+ },
+ {
+  "perfil": "Dulce",
+  "area_esperada": "salud",
+  "mismo_top1": false,
+  "brazos": {
+   "actual": {
+    "modelo": "gemini-3.1-flash-lite",
+    "top1": "Trabajo Social",
+    "afinidad": 45,
+    "confianza": 85,
+    "alertas_contradiccion": 1,
+    "acierta_area": false,
+    "prompt_tokens": 59860,
+    "output_tokens": 2810,
+    "costo_usd": 0.0192,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "Ayudar, enseñar o cuidar a las personas. La verdad es que me gusta mucho apoyar a los demás, como hace mi mamá, porque siento que es una labor súper importante para nuestra gente."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Con personas, en trato directo y de forma práctica. Me gusta estar ahí ayudando a los demás, aunque si le soy sincera, cuando tengo un sábado libre prefiero estar tranquila en mi cuarto dibujando o editando algún video para el cel, eso sí me llena bastante."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "En un hospital o clínica, porque ahí puedo ayudar a la gente como mi mamá, aunque a veces me imagino en un estudio creativo editando videos porque eso me pone súper feliz."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "Salud y cuidar personas, eso es lo que me toca seguir. También me gusta el arte, diseño y creatividad, aunque la verdad eso solo es un pasatiempo para cuando tengo chance."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Dulce, me encanta que tengas ese lado tan humano por ayudar a los demás y, a la vez, esa parte creativa que te hace feliz editando videos. Pensando en cómo te gusta trabajar, cuéntame: cuando tienes que **resolver un problema difícil**, prefieres seguir paso a paso un método que ya sabes que funciona o te gusta más buscar una forma nueva y diferente de hacerlo aunque sea un poco arriesgado.",
+      "respuesta": "La verdad prefiero buscar una forma nueva y creativa. Aunque sea arriesgado, me gusta ver cómo puedo resolver las cosas diferente, como cuando edito mis videos y pruebo efectos que nadie más usa."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Dulce, me encanta que te lances a probar cosas nuevas con tus videos. Ahora, pensando en cómo te sientes cuando estás con otras personas, dime una cosa: ¿te sientes más cómoda **escuchando y acompañando** a alguien que está pasando por un momento difícil, o prefieres **enseñarle algo nuevo** o darle una solución práctica para que mejore su situación?",
+      "respuesta": "Prefiero escuchar y acompañar. Siento que a veces la gente solo necesita que alguien esté ahí para ellos, como mi mamá hace con las señoras que atiende."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Dulce, me conmueve mucho lo que dices sobre estar ahí para los demás; se nota que tienes un corazón muy grande. Ahora, pensando en lo que sabes hacer o te gustaría aprender a hacer en el futuro, ¿qué te atrae más: **analizar datos y síntomas** para encontrar la causa de un problema de salud, o prefieres **organizar actividades y proyectos** para que un grupo de personas pueda salir adelante?",
+      "respuesta": "Prefiero organizar proyectos para ayudar a grupos. Me gusta más ver cómo se mueve la gente para salir adelante que estar ahí metida viendo datos y síntomas, eso de los números me aburre un montón."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Dulce, me queda súper claro que prefieres organizar a la gente para que salgan adelante antes que encerrarte con datos. Ahora, cuéntame algo importante para ti: cuando piensas en tu futuro trabajo, ¿qué te hace sentir más realizada: **luchar por la justicia** y defender los derechos de quienes menos tienen, o **mejorar la calidad de vida** de las personas a través de un servicio directo y cercano?",
+      "respuesta": "Mejorar la calidad de vida con servicio directo, eso es lo que siempre he visto en mi casa y siento que es lo mío para ayudar a mi gente."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   },
+   "3.5-flash-lite": {
+    "modelo": "gemini-3.5-flash-lite",
+    "top1": "Licenciatura en Enfermería",
+    "afinidad": 32,
+    "confianza": 82,
+    "alertas_contradiccion": 0,
+    "acierta_area": true,
+    "prompt_tokens": 61609,
+    "output_tokens": 3030,
+    "costo_usd": 0.0261,
+    "log": [
+     {
+      "fija": "impacto",
+      "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+      "respuesta": "Ayudar, enseñar o cuidar a las personas, porque mi mamá me ha enseñado que es lo mejor para servir a la comunidad y pues, a mí me gusta eso de la salud."
+     },
+     {
+      "fija": "estilo",
+      "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+      "respuesta": "Con personas y de forma práctica, porque me gusta andar haciendo cosas con las manos para ayudar, pero la neta no me gustan para nada los números ni estar analizando datos aburridos."
+     },
+     {
+      "fija": "entorno",
+      "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+      "respuesta": "En un hospital o clínica, fijo, porque ahí es donde uno ayuda de verdad. Aunque si tuviera un sábado libre, me encerraría feliz en un estudio creativo editando videos y dibujando porque eso me llena un montón."
+     },
+     {
+      "fija": "gustos",
+      "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+      "respuesta": "Salud y cuidar personas, eso fijo porque es lo que toca. Aunque la verdad es que me fascina el arte, el diseño y todo lo que sea creatividad, ahí sí me siento yo."
+     },
+     {
+      "dimension": "valores",
+      "pregunta": "Se nota que te mueve mucho el deseo de ayudar y que por el lado artístico te la pasas genial creando. Ahora dime una cosa: cuando tienes que tomar una decisión importante en tu vida, ¿qué **te guía más**?",
+      "respuesta": "El bienestar de los demás y hacer el bien, porque al final es lo que mi mamá espera de mí y no quiero quedar mal con ella."
+     },
+     {
+      "dimension": "personalidad",
+      "pregunta": "Se nota que te importa muchísimo hacer el bien y seguir los consejos de tu mamá, y eso es bien bonito. Ahora cuéntame una cosa: cuando estás trabajando en equipo, ¿cómo te sientes más **cómoda colaborando**?",
+      "respuesta": "Estando cerca de los demás, apoyando en lo que haga falta sin buscar ser la estrella. Me gusta sentir que ayudo al grupo y que todo sale bien, así como cuando ayudo a mi mamá con sus cosas."
+     },
+     {
+      "dimension": "habilidades",
+      "pregunta": "Se nota que te encanta apoyar a los demás en equipo y que la parte artística y de salud te mueven un montón. Ahora dime: cuando se trata de **aprender algo nuevo** en tus clases, ¿cómo prefieres **hacer las cosas**?",
+      "respuesta": "Prefiero la práctica directa, tocando materiales, dibujando o usando mis manos. Me aburro rápido si solo me hablan, prefiero estar ahí haciendo algo, aunque sea un cartel o algo creativo para que se entienda mejor el tema."
+     },
+     {
+      "dimension": "estilo_cognitivo",
+      "pregunta": "Se nota que te aburres con la pura teoría y que prefieres mil veces aprender **haciendo cosas con las manos**. Imagina que estás en una clase y tienes un problema difícil que resolver, ¿cómo prefieres **entenderlo**?",
+      "respuesta": "Definitivamente prefiero imaginar la solución o dibujarla rápido, es como mejor me cae el veinte cuando algo no me cuadra."
+     },
+     {
+      "terminado": true
+     }
+    ]
+   }
+  }
+ }
+]

@@ -168,5 +168,9 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
+- [experiments/comparacion-modelos.md](experiments/comparacion-modelos.md) —
+  `gemini-3.5-flash-lite` contra el actual: 2/5 top-1 cambiaron y leyeron peor
+  la señal indirecta, cuesta 25-40% más. Se mantiene `gemini-3.1-flash-lite`.
+  `gemini-3.7-flash` no se pudo medir (503 persistente de Google, 2026-08-17).
 - [docs/prompt-next-question-ejemplo.md](docs/prompt-next-question-ejemplo.md) —
   ejemplo real del prompt que recibe Gemini.
