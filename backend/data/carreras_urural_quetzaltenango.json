@@ -1,6 +1,6 @@
 {
   "departamento": "Quetzaltenango",
-  "centro": "Sede Quetzaltenango (URURAL)",
+  "centro": "Universidad Rural de Guatemala (Quetzaltenango)",
   "universidad": "Universidad Rural de Guatemala",
   "carreras": [
     { "nombre": "Licenciatura en Ciencias Jurídicas y Sociales", "perfil_id": "ciencias_juridicas", "sello": "Formación jurídica con proyección rural y regional." },

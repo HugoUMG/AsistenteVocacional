@@ -29,9 +29,7 @@ def cargar():
     db = SessionLocal()
     nuevas = actualizadas = 0
     try:
-        for ruta in glob.glob(os.path.join(DATA_DIR, "*.json")):
-            if ruta == PERFILES_COMPARTIDOS:
-                continue
+        for ruta in glob.glob(os.path.join(DATA_DIR, "carreras_*.json")):
             doc = json.load(open(ruta, encoding="utf-8"))
             depto, centro, uni = doc["departamento"], doc["centro"], doc["universidad"]
             for c in doc["carreras"]:
