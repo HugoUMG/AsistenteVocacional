@@ -7,8 +7,8 @@
 // Vive en sessionStorage: sobrevive a recargar la página y muere al cerrar la
 // pestaña. Antes era `crypto.randomUUID()` por carga de página, y eso tenía dos
 // fallas opuestas: recargar a media prueba partía los datos en dos sesiones que
-// ya no se podían cruzar, y en cambio "Hacer otro test" —que navega sin
-// recargar— reusaba la misma sesión para dos pruebas distintas. Empezar otra
+// ya no se podían cruzar, y en cambio "Hacer otro test", que navega sin
+// recargar, reusaba la misma sesión para dos pruebas distintas. Empezar otra
 // prueba ya no depende de que el navegador recargue: se llama `nuevaSesion()`.
 const CLAVE = 'session-id'
 

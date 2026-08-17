@@ -43,7 +43,7 @@ function Modal({ titulo, onClose, children }) {
   )
 }
 
-// Botón "Un día siendo..." — genera y muestra una narrativa de la carrera.
+// Botón "Un día siendo...": genera y muestra una narrativa de la carrera.
 function SimuladorDia({ carrera, respuestas }) {
   const [abierto, setAbierto] = useState(false)
   const [cargando, setCargando] = useState(false)
@@ -97,7 +97,7 @@ function SimuladorDia({ carrera, respuestas }) {
   )
 }
 
-// Botón "Ver catálogo" — lista todas las carreras del catálogo, agrupadas por
+// Botón "Ver catálogo": lista todas las carreras del catálogo, agrupadas por
 // nombre con sus sedes. Útil para ver qué existe más allá de lo recomendado.
 function CatalogoCarreras() {
   const [abierto, setAbierto] = useState(false)

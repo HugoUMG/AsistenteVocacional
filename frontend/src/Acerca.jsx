@@ -43,7 +43,7 @@ export default function Acerca() {
               Un chat gratuito que conversa contigo como un orientador humano. La IA
               analiza lo que te gusta, cómo piensas y dónde te imaginas trabajando, y
               lo compara con un catálogo real de carreras de universidades de
-              Quetzaltenango y Totonicapán — con planes de crecer a más departamentos.
+              Quetzaltenango y Totonicapán, con planes de crecer a más departamentos.
             </p>
           </article>
           <article>

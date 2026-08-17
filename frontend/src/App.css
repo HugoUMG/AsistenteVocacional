@@ -900,7 +900,7 @@
 
 .robot.thinking { animation: bob 1s ease-in-out infinite; }
 
-/* Cargando (la IA está pensando): reemplaza los "..." — el robot rebota y le
+/* Cargando (la IA está pensando): reemplaza los "..." (el robot rebota y le
    da vueltas un anillo, para que se vea que sigue trabajando. */
 .robot.cargando {
   position: relative;
@@ -1188,7 +1188,7 @@
 }
 .opt-color:hover::before { transform: scale(1.12); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); }
 .opt-color:hover::after { border-color: var(--c); }
-/* Seleccionada: SIEMPRE el azul de marca, no el color propio de la opción —
+/* Seleccionada: SIEMPRE el azul de marca, no el color propio de la opción:
    los tonos negro/gris de la paleta casi no se notaban como "elegida". */
 .opt-color.sel {
   border-color: var(--accent);
@@ -1528,11 +1528,11 @@
 }
 
 /* Grid, no flex: con flex-wrap la escala se partía en 2+2+1 y el último botón
-   ("Totalmente de acuerdo") quedaba del doble de ancho que los demás — en una
+   ("Totalmente de acuerdo") quedaba del doble de ancho que los demás; en una
    escala ordinal eso sesga la elección hacia el botón grande. */
 /* minmax(0, 1fr) y no 1fr: con 1fr la columna de la etiqueta más larga
    ("Totalmente") crece por su min-content y queda unos píxeles más ancha que
-   las demás — el mismo sesgo de tamaño que se buscaba eliminar. */
+   las demás; el mismo sesgo de tamaño que se buscaba eliminar. */
 .psi-escala { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
 .psi-opciones {
   display: grid;

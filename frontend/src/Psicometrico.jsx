@@ -11,7 +11,7 @@ const BORRADOR = 'psicometrico-borrador'
 
 // Formatea segundos como "4 min 12 s".
 function tiempo(seg) {
-  if (!seg && seg !== 0) return '—'
+  if (!seg && seg !== 0) return '-'
   const m = Math.floor(seg / 60)
   return m ? `${m} min ${seg % 60} s` : `${seg} s`
 }
@@ -386,7 +386,7 @@ function Resultados({ datos, banco }) {
                   <li>
                     {/* precision viene null si no intentó ninguna: un "0%" ahí
                         se leería como "falló todas". */}
-                    Precisión <strong>{c.precision === null ? '—' : `${c.precision}%`}</strong>
+                    Precisión <strong>{c.precision === null ? '-' : `${c.precision}%`}</strong>
                     {' '}({c.intentadas} intentadas)
                   </li>
                   <li>Puntaje <strong>{c.puntaje}</strong>
