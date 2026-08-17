@@ -98,6 +98,20 @@ def priorizar(carreras: list, puntajes: dict[str, int], top: int | None = None) 
     return ordenadas[:top] if top else ordenadas
 
 
+def carreras_afines(puntajes: dict[str, int], top: int = 8) -> list[dict]:
+    """Top del catálogo por correlación RIASEC, para mostrar en /holland.
+
+    A diferencia de `priorizar()` (recomendación, apagada por medición), esto es
+    solo informativo: no decide qué carrera se recomienda, solo qué mostrar como
+    "carreras con código Holland parecido al tuyo". Usa el JSON directo, sin
+    pasar por la base de datos ni por `Carrera`.
+    """
+    ordenadas = sorted(
+        VECTORES.items(), key=lambda kv: _correlacion(puntajes, kv[1]["vector"]), reverse=True
+    )
+    return [{"nombre": v["nombre"], "codigo": v["codigo"]} for _, v in ordenadas[:top]]
+
+
 def _self_check():
     class _C:
         def __init__(self, nombre, grupo=None, centro="X"):

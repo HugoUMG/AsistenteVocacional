@@ -35,6 +35,30 @@ function Carita({ boca }) {
   )
 }
 
+// ponytail: SOLO PRUEBAS. Cada ítem de O*NET trae su área en `p.area`
+// ("realistic", ...); no hay que adivinar el orden. El preset marca "me gusta
+// mucho" (5) en los ítems de esas áreas y "no me gusta" (1) en el resto, para
+// simular un perfil sin pasar por las 60 preguntas.
+const LETRA_DE_AREA = {
+  realistic: 'R', investigative: 'I', artistic: 'A',
+  social: 'S', enterprising: 'E', conventional: 'C',
+}
+function cadenaPreset(preguntas, letrasAltas) {
+  return preguntas
+    .map((p) => (letrasAltas.includes(LETRA_DE_AREA[p.area]) ? '5' : '1'))
+    .join('')
+}
+const PERFILES_PRUEBA = [
+  { nombre: 'Realista (R)', letras: 'R' },
+  { nombre: 'Investigador (I)', letras: 'I' },
+  { nombre: 'Artístico (A)', letras: 'A' },
+  { nombre: 'Social (S)', letras: 'S' },
+  { nombre: 'Emprendedor (E)', letras: 'E' },
+  { nombre: 'Convencional (C)', letras: 'C' },
+  { nombre: 'Social+Investigador+Convencional (SIC)', letras: 'SIC' },
+  { nombre: 'Artístico+Social (AS)', letras: 'AS' },
+]
+
 function leerBorrador() {
   try {
     return JSON.parse(localStorage.getItem(BORRADOR) || 'null')
@@ -103,14 +127,14 @@ export default function Holland() {
     setError('')
   }
 
-  async function terminar() {
+  async function terminar(cadenaForzada) {
     if (enviando) return
     setEnviando(true)
     setError('')
     try {
       // La API oficial espera una cadena continua: un dígito por pregunta, en
       // el orden de su índice. Sin ese orden el puntaje sale de otra persona.
-      const cadena = banco.preguntas.map((p) => respuestas[p.index]).join('')
+      const cadena = cadenaForzada || banco.preguntas.map((p) => respuestas[p.index]).join('')
       const r = await fetch(`${API}/api/holland`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...authHeader() },
@@ -155,6 +179,30 @@ export default function Holland() {
           </a>
           ; esta plataforma no los modifica.
         </p>
+
+        {import.meta.env.DEV && banco && (
+          <section className="psi-bloque" style={{ border: '2px dashed #e5484d' }}>
+            <h2>Solo pruebas: perfiles predeterminados</h2>
+            <p className="psi-texto">
+              Salta las 60 preguntas y califica un perfil simulado, para revisar
+              rápido resultados, carreras y recomendaciones. No aparece fuera de
+              modo desarrollo.
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {PERFILES_PRUEBA.map((p) => (
+                <button
+                  key={p.letras}
+                  type="button"
+                  className="psi-btn-sec"
+                  disabled={enviando}
+                  onClick={() => terminar(cadenaPreset(banco.preguntas, p.letras))}
+                >
+                  {p.nombre}
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
 
         {error && <p className="psi-error">{error}</p>}
         {!banco && !error && <p className="intro">Cargando cuestionario…</p>}
@@ -252,7 +300,7 @@ export default function Holland() {
 }
 
 function Resultados({ datos, onReiniciar }) {
-  const { areas, codigo, carreras, carreras_total } = datos
+  const { areas, codigo, carreras, carreras_total, carreras_catalogo } = datos
   const orden = [...areas].sort((a, b) => b.score - a.score)
   const navigate = useNavigate()
 
@@ -294,7 +342,7 @@ function Resultados({ datos, onReiniciar }) {
         </section>
 
         <section className="psi-bloque">
-          <h2>Ocupaciones afines</h2>
+          <h2>Carreras recomendadas por el Departamento de Trabajo de EE. UU.</h2>
           <p className="psi-texto">
             {carreras.length < carreras_total ? (
               <>
@@ -318,6 +366,25 @@ function Resultados({ datos, onReiniciar }) {
             ))}
           </ul>
         </section>
+
+        {carreras_catalogo?.length > 0 && (
+          <section className="psi-bloque">
+            <h2>Basado en la escala Holland, estas son afines a tu perfil</h2>
+            <p className="psi-texto">
+              Carreras de nuestro catálogo con código Holland parecido al tuyo, un
+              acercamiento por parámetros del test, no el resultado final del
+              chat: la recomendación real usa la conversación completa, no solo
+              este perfil.
+            </p>
+            <ul className="psi-metricas">
+              {carreras_catalogo.map((c) => (
+                <li key={c.nombre}>
+                  {c.nombre} · {c.codigo}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <p className="intro">
           Este resultado describe intereses, no capacidades ni rendimiento. No
