@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import Nav from './Nav'
 import { nuevaSesion, sessionId } from './session'
 import { guardarPerfilHolland, olvidarPerfilHolland } from './holland-perfil'
+import { authHeader } from './auth'
+import GuardarResultados from './GuardarResultados'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -10,6 +12,28 @@ const POR_PAGINA = 12 // el mismo tamaño de página que usa O*NET
 const BORRADOR = 'holland-borrador'
 // Puntaje máximo por área: 10 ítems, hasta 4 puntos cada uno (escala 1-5, base 0).
 const MAX_AREA = 40
+
+// Misma escala de caritas que Psicometrico.jsx, de rojo (1) a verde (5). Acá
+// las 5 etiquetas las trae O*NET (banco.opciones), no un array propio: solo
+// se reusa el color y el dibujo por posición.
+const CARITAS = [
+  { color: '#e5484d', boca: 'M12 29 Q20 21 28 29' },
+  { color: '#f76b15', boca: 'M12 28 Q20 23 28 28' },
+  { color: '#eab308', boca: 'M12.5 26.5 L27.5 26.5' },
+  { color: '#84cc16', boca: 'M12 24 Q20 29 28 24' },
+  { color: '#16a34a', boca: 'M12 23 Q20 31 28 23' },
+]
+
+function Carita({ boca }) {
+  return (
+    <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
+      <circle cx="20" cy="20" r="16.5" fill="none" stroke="currentColor" strokeWidth="2.2" />
+      <circle cx="14.5" cy="16" r="2.1" fill="currentColor" />
+      <circle cx="25.5" cy="16" r="2.1" fill="currentColor" />
+      <path d={boca} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    </svg>
+  )
+}
 
 function leerBorrador() {
   try {
@@ -89,7 +113,7 @@ export default function Holland() {
       const cadena = banco.preguntas.map((p) => respuestas[p.index]).join('')
       const r = await fetch(`${API}/api/holland`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({ respuestas: cadena, zona: 4, session_id: sessionId() }),
       })
       if (!r.ok) {
@@ -147,22 +171,39 @@ export default function Holland() {
             <ul className="psi-lista">
               {actual.map((p) => (
                 <li key={p.index} className="psi-item">
-                  <p className="psi-enunciado">
+                  <p className="psi-enunciado" id={`holland-p${p.index}`}>
                     <span className="psi-num">{p.index}</span>
                     {p.text}
                   </p>
-                  <div className="psi-opciones">
-                    {banco.opciones.map((o) => (
-                      <button
-                        key={o.value}
-                        className={respuestas[p.index] === o.value ? 'sel' : ''}
-                        onClick={() =>
-                          setRespuestas((r) => ({ ...r, [p.index]: o.value }))
-                        }
-                      >
-                        {o.name}
-                      </button>
-                    ))}
+                  {/* role=radiogroup: igual razón que en Psicometrico.jsx, un
+                      lector de pantalla no debe anunciar 5 botones sueltos. */}
+                  <div
+                    className="psi-escala"
+                    role="radiogroup"
+                    aria-labelledby={`holland-p${p.index}`}
+                  >
+                    {banco.opciones.map((o, i) => {
+                      const c = CARITAS[i]
+                      const elegida = respuestas[p.index] === o.value
+                      return (
+                        <button
+                          key={o.value}
+                          type="button"
+                          role="radio"
+                          aria-checked={elegida}
+                          aria-label={o.name}
+                          title={o.name}
+                          className={elegida ? 'sel' : ''}
+                          style={{ '--carita': c.color }}
+                          onClick={() =>
+                            setRespuestas((r) => ({ ...r, [p.index]: o.value }))
+                          }
+                        >
+                          <Carita boca={c.boca} />
+                          <span>{o.name}</span>
+                        </button>
+                      )
+                    })}
                   </div>
                 </li>
               ))}
@@ -226,6 +267,8 @@ function Resultados({ datos, onReiniciar }) {
           alta a la más baja. Lo que orienta no es un área sola, sino el contraste
           entre las seis.
         </p>
+
+        <GuardarResultados />
 
         <section className="psi-bloque">
           <h2>Perfil por área</h2>

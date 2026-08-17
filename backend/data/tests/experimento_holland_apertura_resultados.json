@@ -1,0 +1,2090 @@
+[
+ {
+  "perfil": "Melany",
+  "contexto": "17 años, perito contador, ayuda en la tienda de sus papás y lleva las cuentas desde los 14. Es muy ordenada y competitiva. Está convencida de que quiere 'algo de leyes' porque una prima abogada le va bien económicamente, aunque cuando habla de su día a día todo lo que disfruta es de números, inventario y orden.",
+  "guion": "Es articulada y responde con seguridad. Cuando le preguntan por su meta menciona 'derecho' o 'leyes' porque es lo que decidió que suena mejor y da dinero. Pero es HONESTA en todo lo demás: dice que le gusta que las cuentas cuadren, que odia improvisar, que le aburre discutir y leer textos largos, que prefiere una oficina ordenada. No se da cuenta de la contradicción; si se la señalan, la justifica ('puedo aprender').",
+  "riasec_real": {
+   "R": 2,
+   "I": 3,
+   "A": 1,
+   "S": 2,
+   "E": 4,
+   "C": 5
+  },
+  "holland": {
+   "codigo": "CEI",
+   "areas": {
+    "R": 9,
+    "I": 16,
+    "A": 3,
+    "S": 9,
+    "E": 29,
+    "C": 36
+   },
+   "hoja": "212212114445222421123445213212325555332311134354213311323445",
+   "empate": null
+  },
+  "b_produccion": {
+   "log": [
+    {
+     "fija": "impacto",
+     "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+     "respuesta": "Definitivamente quiero liderar, organizar negocios o usar tecnología y números, eso es lo que más me cuadra. También voy a estudiar leyes para defender la justicia, porque mi prima dice que así me va a ir súper bien en la vida."
+    },
+    {
+     "fija": "estilo",
+     "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+     "respuesta": "Analizando datos, ideas y lógica. Me encanta que todo esté en orden, que las cuentas cuadren y detesto improvisar, así que prefiero mil veces estar en una oficina organizando números."
+    },
+    {
+     "fija": "entorno",
+     "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+     "respuesta": "Definitivamente en una oficina o empresa, ahí es donde mejor me muevo. Me gusta que todo esté controlado y bien organizado, así que un escritorio con mis números es lo mío."
+    },
+    {
+     "fija": "gustos",
+     "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+     "respuesta": "Matemáticas y números, Negocios, dinero y emprender, y también Leyes, justicia y debate, porque es lo que me toca para salir adelante y ganar bien."
+    },
+    {
+     "dimension": "estilo_cognitivo",
+     "tipo": "opcion",
+     "pregunta": "Melany, me encanta que tengas tan claro que los números y el orden son lo tuyo, y que disfrutas analizando datos en la oficina. Ahora, cuéntame sobre tu **forma de trabajar**: cuando tienes un problema difícil enfrente, ¿qué prefieres hacer: **seguir reglas** muy estrictas para que todo salga perfecto o **buscar formas nuevas** de resolverlo aunque eso signifique romper un poco el protocolo?",
+     "opciones": [
+      "Seguir las reglas y procesos establecidos",
+      "Buscar formas nuevas y creativas de resolverlo"
+     ],
+     "respuesta": "Seguir las reglas y procesos establecidos, es que para mí el orden es lo primero y no me gusta nada improvisar.",
+     "alerta_contradiccion": "Mencionaste que te gusta la lógica y el orden, pero también te interesa el Derecho, que a veces es más interpretativo que exacto. Quiero entender mejor cómo te sientes con esa diferencia.",
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+       "afinidad": 80
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+       "afinidad": 60
+      },
+      {
+       "carrera": "Ingeniería Civil",
+       "afinidad": 40
+      }
+     ]
+    },
+    {
+     "dimension": "personalidad",
+     "tipo": "opcion",
+     "pregunta": "Melany, me queda clarísimo que el orden y seguir las reglas es tu zona de confort, y eso es genial para trabajos donde la precisión es clave. Ahora, pensando en tu **personalidad**, si tuvieras que elegir una situación para trabajar, ¿qué te sentirías más cómoda haciendo: **supervisar y controlar** que todo se haga correctamente según lo planeado, o **argumentar y defender** una postura frente a otros para convencerlos de que tienes la razón?",
+     "opciones": [
+      "Supervisar y controlar procesos",
+      "Argumentar y defender posturas"
+     ],
+     "respuesta": "Supervisar y controlar procesos, es que me da mucha paz que todo salga bien y sin fallos.",
+     "alerta_contradiccion": "Mencionaste antes que te interesa el debate y la justicia, pero también que prefieres el orden estricto de las cuentas. Quiero ver hacia qué lado se inclina más tu forma de ser.",
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+       "afinidad": 60
+      }
+     ]
+    },
+    {
+     "dimension": "habilidades",
+     "tipo": "opcion",
+     "pregunta": "Melany, me queda muy claro que tu tranquilidad viene de tener todo bajo control y supervisar que los procesos funcionen como relojito. Ahora, pensando en tus **habilidades**, cuando te toca aprender algo nuevo, ¿qué se te da mejor: **manejar herramientas digitales** y programas para organizar información, o **redactar documentos** y analizar textos legales para entender las normas al detalle?",
+     "opciones": [
+      "Manejar programas y herramientas digitales",
+      "Redactar documentos y analizar leyes"
+     ],
+     "respuesta": "Definitivamente manejar programas y herramientas digitales, es que eso de redactar y leer leyes se me hace súper aburrido y prefiero mil veces organizar la info con tecnología.",
+     "alerta_contradiccion": "Mencionaste antes que te interesaba estudiar leyes por consejo de tu prima, pero tus respuestas sobre el gusto por el orden estricto y el control de procesos se alinean mucho más con un perfil de auditoría o análisis de datos. Quiero entender qué te motiva más en el fondo.",
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Informática e Inteligencia de Negocios",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+       "afinidad": 65
+      }
+     ]
+    },
+    {
+     "dimension": "valores",
+     "tipo": "opcion",
+     "pregunta": "Melany, me encanta ver cómo te apasiona el mundo digital y el orden de los datos, eso es una habilidad increíble. Ahora, cuéntame sobre tus **valores**: al elegir tu futuro profesional, ¿qué te hace sentir más realizada: **garantizar la transparencia** y la exactitud en el manejo de los recursos de una empresa, o **impulsar el crecimiento** y la competitividad del negocio para que sea el mejor del mercado?",
+     "opciones": [
+      "Garantizar la transparencia y exactitud",
+      "Impulsar el crecimiento y competitividad"
+     ],
+     "respuesta": "Impulsar el crecimiento y competitividad, porque me encanta la competencia y que el negocio sea el que más venda y destaque siempre.",
+     "alerta_contradiccion": "Noto que aunque al principio mencionaste interés por las leyes, tus respuestas recientes muestran que prefieres evitar la parte legal y enfocarte totalmente en tecnología y números. ¿Es así?",
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 90
+      },
+      {
+       "carrera": "Informática e Inteligencia de Negocios",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Informática y Administración de Empresas",
+       "afinidad": 80
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 70
+      }
+     ]
+    },
+    {
+     "terminado": true,
+     "ranking": [
+      {
+       "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Licenciatura en Informática y Administración de Empresas",
+       "afinidad": 88
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 65
+      }
+     ]
+    }
+   ],
+   "respuestas": {
+    "nombre": "Melany",
+    "departamento": "Quetzaltenango",
+    "impacto": "Definitivamente quiero liderar, organizar negocios o usar tecnología y números, eso es lo que más me cuadra. También voy a estudiar leyes para defender la justicia, porque mi prima dice que así me va a ir súper bien en la vida.",
+    "estilo": "Analizando datos, ideas y lógica. Me encanta que todo esté en orden, que las cuentas cuadren y detesto improvisar, así que prefiero mil veces estar en una oficina organizando números.",
+    "entorno": "Definitivamente en una oficina o empresa, ahí es donde mejor me muevo. Me gusta que todo esté controlado y bien organizado, así que un escritorio con mis números es lo mío.",
+    "gustos": "Matemáticas y números, Negocios, dinero y emprender, y también Leyes, justicia y debate, porque es lo que me toca para salir adelante y ganar bien.",
+    "Melany, me encanta que tengas tan claro que los números y el orden son lo tuyo, y que disfrutas analizando datos en la oficina. Ahora, cuéntame sobre tu **forma de trabajar**: cuando tienes un problema difícil enfrente, ¿qué prefieres hacer: **seguir reglas** muy estrictas para que todo salga perfecto o **buscar formas nuevas** de resolverlo aunque eso signifique romper un poco el protocolo?": "Seguir las reglas y procesos establecidos, es que para mí el orden es lo primero y no me gusta nada improvisar.",
+    "Melany, me queda clarísimo que el orden y seguir las reglas es tu zona de confort, y eso es genial para trabajos donde la precisión es clave. Ahora, pensando en tu **personalidad**, si tuvieras que elegir una situación para trabajar, ¿qué te sentirías más cómoda haciendo: **supervisar y controlar** que todo se haga correctamente según lo planeado, o **argumentar y defender** una postura frente a otros para convencerlos de que tienes la razón?": "Supervisar y controlar procesos, es que me da mucha paz que todo salga bien y sin fallos.",
+    "Melany, me queda muy claro que tu tranquilidad viene de tener todo bajo control y supervisar que los procesos funcionen como relojito. Ahora, pensando en tus **habilidades**, cuando te toca aprender algo nuevo, ¿qué se te da mejor: **manejar herramientas digitales** y programas para organizar información, o **redactar documentos** y analizar textos legales para entender las normas al detalle?": "Definitivamente manejar programas y herramientas digitales, es que eso de redactar y leer leyes se me hace súper aburrido y prefiero mil veces organizar la info con tecnología.",
+    "Melany, me encanta ver cómo te apasiona el mundo digital y el orden de los datos, eso es una habilidad increíble. Ahora, cuéntame sobre tus **valores**: al elegir tu futuro profesional, ¿qué te hace sentir más realizada: **garantizar la transparencia** y la exactitud en el manejo de los recursos de una empresa, o **impulsar el crecimiento** y la competitividad del negocio para que sea el mejor del mercado?": "Impulsar el crecimiento y competitividad, porque me encanta la competencia y que el negocio sea el que más venda y destaque siempre."
+   },
+   "tokens": 52029,
+   "confianza": 90,
+   "confianza_nota": "Tus respuestas son muy consistentes: el orden, los números y la tecnología son claramente tu camino, mientras que las leyes no te convencen.",
+   "top": [
+    {
+     "carrera": "Contaduría Pública y Auditoría",
+     "afinidad": 35,
+     "descripcion": "Esta carrera es el corazón del orden financiero. Te permite supervisar que cada número cuadre, garantizando la transparencia y la exactitud que tanto te gusta mantener en una oficina.",
+     "razones": [
+      "Te apasiona que las cuentas cuadren",
+      "Disfrutas seguir procesos estrictos",
+      "Tu perfil Holland destaca en lo convencional",
+      "Te da paz tener todo bajo control"
+     ],
+     "factores": [
+      {
+       "nombre": "Orden y precisión",
+       "peso": 95
+      },
+      {
+       "nombre": "Gusto por los números",
+       "peso": 90
+      },
+      {
+       "nombre": "Perfil convencional",
+       "peso": 85
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "USAC",
+       "centro": "CUNOC",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Enfoque en auditoría científica orientada a detectar fraudes, con fuerte anclaje en la economía política de Centroamérica."
+      },
+      {
+       "universidad": "Universidad Mesoamericana",
+       "centro": "Sede Occidente (Universidad Mesoamericana)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Incluye salida técnica en Asesoría Tributaria y Contable."
+      },
+      {
+       "universidad": "Universidad de Occidente",
+       "centro": "Sede Quetzaltenango (UdeO)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación contable orientada a la práctica empresarial local."
+      },
+      {
+       "universidad": "Universidad Mariano Gálvez",
+       "centro": "UMG Quetzaltenango",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Enfoque de asesoría financiera estratégica de alto nivel: gobierno corporativo, NIIF/NIA y tecnología aplicada a la auditoría."
+      },
+      {
+       "universidad": "Universidad Panamericana",
+       "centro": "Sede Quetzaltenango (UPANA)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación contable y de auditoría accesible en Occidente."
+      },
+      {
+       "universidad": "Universidad Regional de Guatemala",
+       "centro": "URG Totonicapán",
+       "departamento": "Totonicapán",
+       "enfoque": "Se concibe como garante de la fe pública financiera ante la sociedad y el Estado, con énfasis en estabilidad y Derecho Mercantil."
+      },
+      {
+       "universidad": "Universidad Rafael Landívar",
+       "centro": "Campus San Alberto Hurtado, S.J. (URL Xela)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación contable con fuerte componente ético y de transparencia institucional."
+      },
+      {
+       "universidad": "Universidad Rural de Guatemala",
+       "centro": "Sede Quetzaltenango (URURAL)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Título intermedio de Técnico Universitario Contador."
+      }
+     ]
+    },
+    {
+     "carrera": "Licenciatura en Administración de Sistemas Informáticos",
+     "afinidad": 30,
+     "descripcion": "Combina tu amor por la tecnología con la gestión de negocios. Es perfecta para organizar información mediante herramientas digitales y asegurar que una empresa funcione como un reloj.",
+     "razones": [
+      "Prefieres herramientas digitales sobre leyes",
+      "Te gusta organizar información",
+      "Buscas eficiencia y competitividad",
+      "Tu perfil Holland es muy fuerte en tecnología"
+     ],
+     "factores": [
+      {
+       "nombre": "Uso de tecnología",
+       "peso": 90
+      },
+      {
+       "nombre": "Gestión de procesos",
+       "peso": 80
+      },
+      {
+       "nombre": "Perfil empresarial",
+       "peso": 75
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Regional de Guatemala",
+       "centro": "URG Totonicapán",
+       "departamento": "Totonicapán",
+       "enfoque": "El Traductor Estratégico entre la Tecnología y el Negocio — pasión por la tecnología para resolver problemas reales de negocio."
+      }
+     ]
+    },
+    {
+     "carrera": "Administración de Empresas",
+     "afinidad": 20,
+     "descripcion": "Te prepara para liderar y hacer crecer negocios. Aquí puedes aplicar tu mentalidad analítica para supervisar procesos y asegurar que la empresa destaque frente a la competencia.",
+     "razones": [
+      "Quieres impulsar el crecimiento del negocio",
+      "Te gusta supervisar y controlar",
+      "Disfrutas el ambiente de oficina",
+      "Tienes espíritu competitivo"
+     ],
+     "factores": [
+      {
+       "nombre": "Liderazgo y control",
+       "peso": 85
+      },
+      {
+       "nombre": "Competitividad",
+       "peso": 80
+      },
+      {
+       "nombre": "Visión de negocios",
+       "peso": 70
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "USAC",
+       "centro": "CUNOC",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Visión socioeconómica pragmática: la empresa entendida como motor de desarrollo dentro de su entorno social."
+      },
+      {
+       "universidad": "Universidad Da Vinci de Guatemala",
+       "centro": "Sede Quetzaltenango (Universidad Da Vinci)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación gerencial accesible en Occidente."
+      },
+      {
+       "universidad": "Universidad Galileo",
+       "centro": "Sede Xela (Universidad Galileo)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Modalidad con flexibilidad horaria en Occidente."
+      },
+      {
+       "universidad": "Universidad Mesoamericana",
+       "centro": "Sede Occidente (Universidad Mesoamericana)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Incluye especialidad en Negocios Digitales, con orientación práctica a la empresa regional."
+      },
+      {
+       "universidad": "Universidad de Occidente",
+       "centro": "Sede Quetzaltenango (UdeO)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Orientación pragmática a la pequeña y mediana empresa de la región."
+      },
+      {
+       "universidad": "Universidad Mariano Gálvez",
+       "centro": "UMG Quetzaltenango",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Enfoque en liderazgo directivo y sostenibilidad, con énfasis en negocios globales, ética corporativa y coaching de equipos."
+      },
+      {
+       "universidad": "Universidad Mariano Gálvez",
+       "centro": "UMG Totonicapán",
+       "departamento": "Totonicapán",
+       "enfoque": "Enfoque en liderazgo y construcción de equipos de alto rendimiento, con uso de herramientas tecnológicas e investigación de operaciones para optimizar decisiones."
+      },
+      {
+       "universidad": "Universidad Panamericana",
+       "centro": "Sede Quetzaltenango (UPANA)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación gerencial con proyección a la empresa de Occidente."
+      },
+      {
+       "universidad": "Universidad Regional de Guatemala",
+       "centro": "URG Totonicapán",
+       "departamento": "Totonicapán",
+       "enfoque": "Enfoque emprendedor: las organizaciones como sistemas humanos y financieros, con foco en el riesgo calculado y la creación de valor."
+      },
+      {
+       "universidad": "Universidad Rafael Landívar",
+       "centro": "Campus San Alberto Hurtado, S.J. (URL Xela)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Liderazgo empresarial con enfoque en responsabilidad social, propio de la tradición jesuita."
+      },
+      {
+       "universidad": "Universidad Rural de Guatemala",
+       "centro": "Sede Quetzaltenango (URURAL)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Título intermedio de Técnico Universitario Gerente."
+      }
+     ]
+    }
+   ],
+   "alertas": [
+    "Mencionaste que te gusta la lógica y el orden, pero también te interesa el Derecho, que a veces es más interpretativo que exacto. Quiero entender mejor cómo te sientes con esa diferencia.",
+    "Mencionaste antes que te interesa el debate y la justicia, pero también que prefieres el orden estricto de las cuentas. Quiero ver hacia qué lado se inclina más tu forma de ser.",
+    "Mencionaste antes que te interesaba estudiar leyes por consejo de tu prima, pero tus respuestas sobre el gusto por el orden estricto y el control de procesos se alinean mucho más con un perfil de auditoría o análisis de datos. Quiero entender qué te motiva más en el fondo.",
+    "Noto que aunque al principio mencionaste interés por las leyes, tus respuestas recientes muestran que prefieres evitar la parte legal y enfocarte totalmente en tecnología y números. ¿Es así?"
+   ],
+   "adaptativas": 4,
+   "nombra_holland_en_apertura": false,
+   "top1_area_suya": true,
+   "top1_area_casa": false
+  },
+  "c_apertura_explicita": {
+   "log": [
+    {
+     "fija": "impacto",
+     "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+     "respuesta": "Definitivamente liderar, organizar negocios o usar tecnología y números, porque me fascina que todo cuadre en la tienda. También quiero defender la justicia y resolver conflictos porque quiero estudiar leyes para que me vaya bien como a mi prima."
+    },
+    {
+     "fija": "estilo",
+     "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+     "respuesta": "Analizando datos, ideas y lógica. La verdad me encanta sentarme a ver que todo cuadre en la contabilidad y que nada se pierda, odio andar improvisando cosas con la gente."
+    },
+    {
+     "fija": "entorno",
+     "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+     "respuesta": "Definitivamente en una oficina o empresa, ahí es donde yo me hallo porque todo está bajo control y ordenado. Nada de andar ahí afuera al sol o inventando cosas, a mí me gusta que los números cuadren desde mi escritorio."
+    },
+    {
+     "fija": "gustos",
+     "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+     "respuesta": "Matemáticas y números, Negocios, dinero y emprender, y también Leyes, justicia y debate. Me encanta que los números cuadren en la tienda y siento que leyes me va a dar el estatus que busco."
+    },
+    {
+     "dimension": "estilo_cognitivo",
+     "tipo": "opcion",
+     "pregunta": "Vi que tu test de Holland salió fuerte en Convencional, lo que explica muy bien por qué te gusta tanto que todo cuadre en la tienda. Melany, cuéntame algo: cuando tienes que **resolver un problema difícil** en tus estudios o en la tienda, ¿prefieres seguir un manual o una regla fija que ya sabes que funciona, o te sientes cómoda buscando una forma nueva y diferente de arreglarlo aunque no haya una guía?",
+     "opciones": [
+      "Prefiero seguir reglas y pasos claros",
+      "Prefiero buscar una forma nueva de resolverlo"
+     ],
+     "respuesta": "Prefiero seguir reglas y pasos claros, porque para qué me voy a complicar si ya sé cómo funcionan las cosas en la tienda. Me da paz que todo esté bajo control y no andar inventando nada.",
+     "alerta_contradiccion": "Mencionaste que te gusta la justicia y el debate, pero también que prefieres evitar improvisar con la gente; quiero entender si prefieres el orden estricto de los números o la argumentación de las leyes.",
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Ingeniería en Administración de Tierras",
+       "afinidad": 40
+      }
+     ]
+    },
+    {
+     "dimension": "valores",
+     "tipo": "opcion",
+     "pregunta": "Me queda súper claro que te da mucha paz seguir pasos claros y tener todo bajo control, Melany. Es genial que seas tan organizada. Ahora, pensando en tu futuro trabajo, ¿qué te hace sentir más **orgullosa**: saber que ayudaste a alguien a resolver un problema legal complejo o sentir que lograste que una empresa sea **más eficiente** y rentable gracias a tu orden con los números?",
+     "opciones": [
+      "Resolver problemas legales y ayudar a otros",
+      "Hacer que una empresa sea más eficiente y gane dinero"
+     ],
+     "respuesta": "Hacer que una empresa sea más eficiente y gane dinero, porque la verdad me da una satisfacción increíble que los números cuadren perfecto y que todo crezca.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+       "afinidad": 65
+      },
+      {
+       "carrera": "Licenciatura en la Enseñanza de la Matemática y la Física",
+       "afinidad": 30
+      }
+     ]
+    },
+    {
+     "dimension": "personalidad",
+     "tipo": "opcion",
+     "pregunta": "Me encanta ver lo clara que tienes tu meta de hacer crecer los negocios con orden. Melany, cuéntame algo sobre tu personalidad: cuando trabajas en un proyecto, ¿eres de las que prefiere **tomar el mando** y dirigir cómo se hacen las cosas, o te sientes más cómoda siendo la persona que **revisa cada detalle** para que todo esté perfecto y sin errores?",
+     "opciones": [
+      "Prefiero tomar el mando y dirigir a los demás",
+      "Prefiero revisar cada detalle para que no haya errores"
+     ],
+     "respuesta": "Prefiero revisar cada detalle para que no haya errores, me da mucha más tranquilidad saber que todo está impecable y que los números no fallan.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+       "afinidad": 60
+      },
+      {
+       "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+       "afinidad": 30
+      },
+      {
+       "carrera": "Ciencias de la Comunicación Social",
+       "afinidad": 20
+      }
+     ]
+    },
+    {
+     "dimension": "habilidades",
+     "tipo": "opcion",
+     "pregunta": "Ya me quedó clarísimo que te da mucha tranquilidad revisar cada detalle y que todo esté impecable. Como te gusta tanto que los números no fallen, cuéntame: ¿qué te resulta más natural hacer cuando tienes que trabajar con información? ¿Prefieres **analizar estados financieros** y documentos para encontrar errores, o te ves más manejando **estrategias de mercadeo** y planes para que el negocio venda más?",
+     "opciones": [
+      "Analizar estados financieros y documentos",
+      "Manejar estrategias de mercadeo y ventas"
+     ],
+     "respuesta": "Analizar estados financieros y documentos, mil veces. Me encanta estar ahí revisando todo para que no se me escape ni un centavo, eso de andar inventando planes de ventas me aburre un montón.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 80
+      },
+      {
+       "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+       "afinidad": 50
+      },
+      {
+       "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+       "afinidad": 20
+      },
+      {
+       "carrera": "Ciencias de la Comunicación Social",
+       "afinidad": 15
+      }
+     ]
+    },
+    {
+     "terminado": true,
+     "ranking": [
+      {
+       "carrera": "Contaduría Pública y Auditoría",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Administración de Empresas",
+       "afinidad": 65
+      },
+      {
+       "carrera": "Ciencias Jurídicas y Sociales",
+       "afinidad": 40
+      },
+      {
+       "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+       "afinidad": 20
+      },
+      {
+       "carrera": "Ciencias de la Comunicación Social",
+       "afinidad": 15
+      }
+     ]
+    }
+   ],
+   "respuestas": {
+    "nombre": "Melany",
+    "departamento": "Quetzaltenango",
+    "impacto": "Definitivamente liderar, organizar negocios o usar tecnología y números, porque me fascina que todo cuadre en la tienda. También quiero defender la justicia y resolver conflictos porque quiero estudiar leyes para que me vaya bien como a mi prima.",
+    "estilo": "Analizando datos, ideas y lógica. La verdad me encanta sentarme a ver que todo cuadre en la contabilidad y que nada se pierda, odio andar improvisando cosas con la gente.",
+    "entorno": "Definitivamente en una oficina o empresa, ahí es donde yo me hallo porque todo está bajo control y ordenado. Nada de andar ahí afuera al sol o inventando cosas, a mí me gusta que los números cuadren desde mi escritorio.",
+    "gustos": "Matemáticas y números, Negocios, dinero y emprender, y también Leyes, justicia y debate. Me encanta que los números cuadren en la tienda y siento que leyes me va a dar el estatus que busco.",
+    "Vi que tu test de Holland salió fuerte en Convencional, lo que explica muy bien por qué te gusta tanto que todo cuadre en la tienda. Melany, cuéntame algo: cuando tienes que **resolver un problema difícil** en tus estudios o en la tienda, ¿prefieres seguir un manual o una regla fija que ya sabes que funciona, o te sientes cómoda buscando una forma nueva y diferente de arreglarlo aunque no haya una guía?": "Prefiero seguir reglas y pasos claros, porque para qué me voy a complicar si ya sé cómo funcionan las cosas en la tienda. Me da paz que todo esté bajo control y no andar inventando nada.",
+    "Me queda súper claro que te da mucha paz seguir pasos claros y tener todo bajo control, Melany. Es genial que seas tan organizada. Ahora, pensando en tu futuro trabajo, ¿qué te hace sentir más **orgullosa**: saber que ayudaste a alguien a resolver un problema legal complejo o sentir que lograste que una empresa sea **más eficiente** y rentable gracias a tu orden con los números?": "Hacer que una empresa sea más eficiente y gane dinero, porque la verdad me da una satisfacción increíble que los números cuadren perfecto y que todo crezca.",
+    "Me encanta ver lo clara que tienes tu meta de hacer crecer los negocios con orden. Melany, cuéntame algo sobre tu personalidad: cuando trabajas en un proyecto, ¿eres de las que prefiere **tomar el mando** y dirigir cómo se hacen las cosas, o te sientes más cómoda siendo la persona que **revisa cada detalle** para que todo esté perfecto y sin errores?": "Prefiero revisar cada detalle para que no haya errores, me da mucha más tranquilidad saber que todo está impecable y que los números no fallan.",
+    "Ya me quedó clarísimo que te da mucha tranquilidad revisar cada detalle y que todo esté impecable. Como te gusta tanto que los números no fallen, cuéntame: ¿qué te resulta más natural hacer cuando tienes que trabajar con información? ¿Prefieres **analizar estados financieros** y documentos para encontrar errores, o te ves más manejando **estrategias de mercadeo** y planes para que el negocio venda más?": "Analizar estados financieros y documentos, mil veces. Me encanta estar ahí revisando todo para que no se me escape ni un centavo, eso de andar inventando planes de ventas me aburre un montón."
+   },
+   "tokens": 51313,
+   "confianza": 90,
+   "confianza_nota": "Tus respuestas son muy consistentes y apuntan claramente a un perfil analítico, ordenado y orientado a resultados financieros.",
+   "top": [
+    {
+     "carrera": "Contaduría Pública y Auditoría",
+     "afinidad": 45,
+     "descripcion": "Esta carrera es el corazón de tu interés por el orden y la exactitud. Te prepara para ser la guardiana de la verdad financiera, asegurando que cada centavo esté en su lugar y que las empresas operen bajo normas claras y transparentes.",
+     "razones": [
+      "Te apasiona que los números cuadren perfectamente",
+      "Prefieres revisar detalles para evitar errores",
+      "Te da tranquilidad seguir reglas y procesos claros",
+      "Disfrutas analizar estados financieros sobre otras tareas"
+     ],
+     "factores": [
+      {
+       "nombre": "Perfil Convencional",
+       "peso": 95
+      },
+      {
+       "nombre": "Atención al detalle",
+       "peso": 90
+      },
+      {
+       "nombre": "Gusto por los números",
+       "peso": 85
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "USAC",
+       "centro": "CUNOC",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Enfoque en auditoría científica orientada a detectar fraudes, con fuerte anclaje en la economía política de Centroamérica."
+      },
+      {
+       "universidad": "Universidad Mesoamericana",
+       "centro": "Sede Occidente (Universidad Mesoamericana)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Incluye salida técnica en Asesoría Tributaria y Contable."
+      },
+      {
+       "universidad": "Universidad de Occidente",
+       "centro": "Sede Quetzaltenango (UdeO)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación contable orientada a la práctica empresarial local."
+      },
+      {
+       "universidad": "Universidad Mariano Gálvez",
+       "centro": "UMG Quetzaltenango",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Enfoque de asesoría financiera estratégica de alto nivel: gobierno corporativo, NIIF/NIA y tecnología aplicada a la auditoría."
+      },
+      {
+       "universidad": "Universidad Panamericana",
+       "centro": "Sede Quetzaltenango (UPANA)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación contable y de auditoría accesible en Occidente."
+      },
+      {
+       "universidad": "Universidad Regional de Guatemala",
+       "centro": "URG Totonicapán",
+       "departamento": "Totonicapán",
+       "enfoque": "Se concibe como garante de la fe pública financiera ante la sociedad y el Estado, con énfasis en estabilidad y Derecho Mercantil."
+      },
+      {
+       "universidad": "Universidad Rafael Landívar",
+       "centro": "Campus San Alberto Hurtado, S.J. (URL Xela)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación contable con fuerte componente ético y de transparencia institucional."
+      },
+      {
+       "universidad": "Universidad Rural de Guatemala",
+       "centro": "Sede Quetzaltenango (URURAL)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Título intermedio de Técnico Universitario Contador."
+      }
+     ]
+    },
+    {
+     "carrera": "Licenciatura en Administración de Sistemas Informáticos",
+     "afinidad": 25,
+     "descripcion": "Combina tu amor por los negocios con el uso de tecnología para optimizar procesos. Es ideal si buscas un entorno de oficina donde la lógica y el control de datos sean la clave para que una empresa sea más eficiente.",
+     "razones": [
+      "Te gusta usar tecnología para resolver problemas",
+      "Prefieres trabajar en oficina con procesos ordenados",
+      "Te motiva que la empresa sea más eficiente",
+      "Tu estilo lógico encaja con el manejo de sistemas"
+     ],
+     "factores": [
+      {
+       "nombre": "Pensamiento lógico",
+       "peso": 80
+      },
+      {
+       "nombre": "Interés empresarial",
+       "peso": 75
+      },
+      {
+       "nombre": "Uso de tecnología",
+       "peso": 70
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Regional de Guatemala",
+       "centro": "URG Totonicapán",
+       "departamento": "Totonicapán",
+       "enfoque": "El Traductor Estratégico entre la Tecnología y el Negocio — pasión por la tecnología para resolver problemas reales de negocio."
+      }
+     ]
+    },
+    {
+     "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+     "afinidad": 20,
+     "descripcion": "Esta carrera te permite convertir grandes volúmenes de datos en decisiones estratégicas. Es perfecta para ti porque te permite analizar información desde tu escritorio para asegurar que el negocio crezca con base en datos reales.",
+     "razones": [
+      "Te fascina analizar datos para encontrar patrones",
+      "Prefieres la lógica de los datos sobre la improvisación",
+      "Te motiva hacer crecer el negocio con información precisa",
+      "Tu perfil encaja con el análisis de resultados"
+     ],
+     "factores": [
+      {
+       "nombre": "Análisis de datos",
+       "peso": 85
+      },
+      {
+       "nombre": "Orientación a resultados",
+       "peso": 80
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Mesoamericana",
+       "centro": "Sede Occidente (Universidad Mesoamericana)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación en análisis de datos aplicada a la toma de decisiones empresariales."
+      }
+     ]
+    }
+   ],
+   "alertas": [
+    "Mencionaste que te gusta la justicia y el debate, pero también que prefieres evitar improvisar con la gente; quiero entender si prefieres el orden estricto de los números o la argumentación de las leyes."
+   ],
+   "adaptativas": 4,
+   "nombra_holland_en_apertura": true,
+   "top1_area_suya": true,
+   "top1_area_casa": false
+  }
+ },
+ {
+  "perfil": "Dulce",
+  "contexto": "16 años, de una aldea cerca de Cantel. Su mamá es comadrona y en la casa se da por hecho que ella será enfermera; a ella le gusta cuidar gente, eso es verdad. Pero lo que de verdad la engancha es dibujar y editar videos para el TikTok del colegio, y nunca lo dice en voz alta porque en su casa 'eso no es carrera'.",
+  "guion": "Repite el discurso de la casa: cuando le preguntan qué quiere, dice 'ayudar a la gente, algo de salud'. Es honesta en que le importa la gente y en que no le gustan los números. SE DELATA sin querer: si una pregunta la deja hablar de un sábado libre, de un proyecto que disfrutó o de qué haría sin que nadie opine, ahí SÍ dice que dibuja, edita videos y hace los carteles del colegio, y se le nota el entusiasmo. Si le preguntan directo '¿te gusta el arte?' lo minimiza ('es solo un pasatiempo').",
+  "riasec_real": {
+   "R": 2,
+   "I": 2,
+   "A": 5,
+   "S": 5,
+   "E": 2,
+   "C": 3
+  },
+  "holland": {
+   "codigo": "ASC",
+   "areas": {
+    "R": 12,
+    "I": 10,
+    "A": 39,
+    "S": 38,
+    "E": 10,
+    "C": 19
+   },
+   "hoja": "222355543133232255553233232255552142123155551133232154453323",
+   "empate": [
+    "Artísticos",
+    "Social"
+   ]
+  },
+  "b_produccion": {
+   "log": [
+    {
+     "fija": "impacto",
+     "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+     "respuesta": "Ayudar, enseñar o cuidar a las personas. La verdad es que siempre me han dicho que tengo vocación para enfermería, igual que mi mamá, y me gusta mucho la idea de cuidar a la gente porque no soy nada buena para los números."
+    },
+    {
+     "fija": "estilo",
+     "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+     "respuesta": "Con personas y de forma práctica, porque me gusta hacer cosas con las manos, como cuando paso todo el sábado editando videos o haciendo los carteles del cole, eso sí me divierte."
+    },
+    {
+     "fija": "entorno",
+     "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+     "respuesta": "En un hospital o clínica porque es lo que todos esperan de mí, pero a veces me imagino trabajando en un estudio creativo editando videos, aunque eso es solo un pasatiempo."
+    },
+    {
+     "fija": "gustos",
+     "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+     "respuesta": "Salud y cuidar personas, porque eso es lo que me toca, pero la verdad me encanta Arte, diseño y creatividad y Comunicación, escritura y medios cuando nadie me ve."
+    },
+    {
+     "dimension": "personalidad",
+     "tipo": "sino",
+     "pregunta": "Dulce, me encanta que seas tan sincera sobre lo que te gusta hacer en secreto, como editar videos o diseñar carteles, a pesar de que otros esperen que sigas el camino de la salud. Cuéntame, cuando estás metida en esos proyectos creativos, ¿prefieres **trabajar sola** a tu propio ritmo para que todo quede perfecto, o te sientes más cómoda **colaborando con alguien más** para rebotar ideas y que el resultado final sea un trabajo de equipo?",
+     "opciones": [
+      "Prefiero trabajar sola a mi ritmo",
+      "Prefiero trabajar en equipo"
+     ],
+     "respuesta": "La verdad prefiero trabajar sola, así me concentro mejor en los colores y los efectos sin que nadie me esté diciendo qué hacer.",
+     "alerta_contradiccion": "Noto que tienes un deseo muy fuerte de ayudar a los demás, pero también una pasión creativa que se aleja de las carreras de salud; quiero ayudarte a ver cómo equilibrar ambos mundos.",
+     "ranking": [
+      {
+       "carrera": "Licenciatura en Comunicación y Diseño",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
+       "afinidad": 82
+      },
+      {
+       "carrera": "PEM en Comunicación y Lenguaje",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Licenciatura en Nutrición",
+       "afinidad": 65
+      },
+      {
+       "carrera": "PEM en Pedagogía y Psicología",
+       "afinidad": 60
+      }
+     ]
+    },
+    {
+     "dimension": "habilidades",
+     "tipo": "opcion",
+     "pregunta": "Dulce, me queda clarísimo que cuando te pones creativa prefieres tu propio espacio para que todo salga tal cual lo imaginas. Ahora, pensando en esas cosas que se te dan bien, ¿qué sientes que te resulta más natural hacer: **resolver problemas** usando lógica y pasos ordenados, o **expresar ideas** mediante formas, colores y mensajes que conecten con los sentimientos de los demás?",
+     "opciones": [
+      "Resolver problemas con pasos ordenados",
+      "Expresar ideas mediante formas y colores"
+     ],
+     "respuesta": "Expresar ideas mediante formas y colores, eso es lo que más me llena porque me gusta que la gente sienta algo al ver mis videos, los números y tanta lógica me aburren un montón.",
+     "alerta_contradiccion": "Noto que aunque sientes presión por seguir el camino de la salud, tus habilidades y gustos reales parecen inclinarse más hacia el lado creativo y artístico.",
+     "ranking": [
+      {
+       "carrera": "Profesorado en Educación Artística (Música y Danza)",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Arquitectura",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Licenciatura en Nutrición",
+       "afinidad": 60
+      },
+      {
+       "carrera": "PEM en Comunicación y Lenguaje",
+       "afinidad": 55
+      },
+      {
+       "carrera": "Psicología Clínica",
+       "afinidad": 45
+      }
+     ]
+    },
+    {
+     "dimension": "valores",
+     "tipo": "opcion",
+     "pregunta": "Dulce, me encanta esa pasión que tienes por transmitir emociones a través de lo visual; se nota que pones el corazón en cada detalle. Ahora, pensando en el futuro, cuando te imaginas trabajando, ¿qué es lo que más te hace sentir **realizada**: saber que tu trabajo ayudó a alguien a **sentirse mejor** o más cuidado, o sentir que lograste crear algo **único y original** que dejó una huella en quienes lo vieron?",
+     "opciones": [
+      "Ayudar a que otros se sientan mejor o más cuidados",
+      "Crear algo único que impacte a través de lo visual"
+     ],
+     "respuesta": "La verdad, crear algo único me hace sentir más viva, aunque en mi casa esperen que me dedique a cuidar gente porque eso es lo que toca.",
+     "alerta_contradiccion": "Noto que aunque te gusta el área de salud por influencia familiar, tus respuestas muestran una inclinación muy fuerte hacia la creación visual y artística. Quiero entender qué pesa más para ti al elegir.",
+     "ranking": [
+      {
+       "carrera": "Arquitectura",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Profesorado en Psicopedagogía",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Psicología Clínica",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Ciencias de la Comunicación Social",
+       "afinidad": 65
+      }
+     ]
+    },
+    {
+     "dimension": "estilo_cognitivo",
+     "tipo": "opcion",
+     "pregunta": "Dulce, me encanta esa chispa que tienes para crear cosas únicas, se nota que te mueve mucho más lo artístico que seguir un camino solo por obligación. Ahora, para entender mejor cómo funciona tu cabecita al resolver retos, imagina que tienes que diseñar una campaña visual: ¿prefieres **planear todo desde cero** paso a paso antes de empezar, o te gusta más **lanzarte a experimentar** con lo que se te ocurra en el momento y ver qué sale?",
+     "opciones": [
+      "Planear todo con orden antes de empezar",
+      "Lanzarme a experimentar e improvisar"
+     ],
+     "respuesta": "Me gusta lanzarme a experimentar, así van saliendo ideas locas mientras edito. Planear todo me da sueño y siento que le quita lo divertido a lo que estoy haciendo.",
+     "alerta_contradiccion": "Noto que tus intereses creativos personales chocan un poco con las expectativas de tu familia sobre el área de salud, así que quiero encontrar algo que realmente te apasione a ti.",
+     "ranking": [
+      {
+       "carrera": "Ciencias de la Comunicación Social",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Arquitectura",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Técnico Universitario en Gerencia de Ventas",
+       "afinidad": 60
+      },
+      {
+       "carrera": "Licenciatura en Nutrición",
+       "afinidad": 30
+      },
+      {
+       "carrera": "Profesorado en Psicopedagogía",
+       "afinidad": 25
+      }
+     ]
+    },
+    {
+     "terminado": true,
+     "ranking": [
+      {
+       "carrera": "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Ciencias de la Comunicación Social",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Arquitectura",
+       "afinidad": 60
+      },
+      {
+       "carrera": "Técnico Universitario en Gerencia de Ventas",
+       "afinidad": 45
+      }
+     ]
+    }
+   ],
+   "respuestas": {
+    "nombre": "Dulce",
+    "departamento": "Quetzaltenango",
+    "impacto": "Ayudar, enseñar o cuidar a las personas. La verdad es que siempre me han dicho que tengo vocación para enfermería, igual que mi mamá, y me gusta mucho la idea de cuidar a la gente porque no soy nada buena para los números.",
+    "estilo": "Con personas y de forma práctica, porque me gusta hacer cosas con las manos, como cuando paso todo el sábado editando videos o haciendo los carteles del cole, eso sí me divierte.",
+    "entorno": "En un hospital o clínica porque es lo que todos esperan de mí, pero a veces me imagino trabajando en un estudio creativo editando videos, aunque eso es solo un pasatiempo.",
+    "gustos": "Salud y cuidar personas, porque eso es lo que me toca, pero la verdad me encanta Arte, diseño y creatividad y Comunicación, escritura y medios cuando nadie me ve.",
+    "Dulce, me encanta que seas tan sincera sobre lo que te gusta hacer en secreto, como editar videos o diseñar carteles, a pesar de que otros esperen que sigas el camino de la salud. Cuéntame, cuando estás metida en esos proyectos creativos, ¿prefieres **trabajar sola** a tu propio ritmo para que todo quede perfecto, o te sientes más cómoda **colaborando con alguien más** para rebotar ideas y que el resultado final sea un trabajo de equipo?": "La verdad prefiero trabajar sola, así me concentro mejor en los colores y los efectos sin que nadie me esté diciendo qué hacer.",
+    "Dulce, me queda clarísimo que cuando te pones creativa prefieres tu propio espacio para que todo salga tal cual lo imaginas. Ahora, pensando en esas cosas que se te dan bien, ¿qué sientes que te resulta más natural hacer: **resolver problemas** usando lógica y pasos ordenados, o **expresar ideas** mediante formas, colores y mensajes que conecten con los sentimientos de los demás?": "Expresar ideas mediante formas y colores, eso es lo que más me llena porque me gusta que la gente sienta algo al ver mis videos, los números y tanta lógica me aburren un montón.",
+    "Dulce, me encanta esa pasión que tienes por transmitir emociones a través de lo visual; se nota que pones el corazón en cada detalle. Ahora, pensando en el futuro, cuando te imaginas trabajando, ¿qué es lo que más te hace sentir **realizada**: saber que tu trabajo ayudó a alguien a **sentirse mejor** o más cuidado, o sentir que lograste crear algo **único y original** que dejó una huella en quienes lo vieron?": "La verdad, crear algo único me hace sentir más viva, aunque en mi casa esperen que me dedique a cuidar gente porque eso es lo que toca.",
+    "Dulce, me encanta esa chispa que tienes para crear cosas únicas, se nota que te mueve mucho más lo artístico que seguir un camino solo por obligación. Ahora, para entender mejor cómo funciona tu cabecita al resolver retos, imagina que tienes que diseñar una campaña visual: ¿prefieres **planear todo desde cero** paso a paso antes de empezar, o te gusta más **lanzarte a experimentar** con lo que se te ocurra en el momento y ver qué sale?": "Me gusta lanzarme a experimentar, así van saliendo ideas locas mientras edito. Planear todo me da sueño y siento que le quita lo divertido a lo que estoy haciendo."
+   },
+   "tokens": 58495,
+   "confianza": 85,
+   "confianza_nota": "Tus respuestas son muy claras sobre tu preferencia por lo creativo y artístico frente a lo técnico o numérico.",
+   "top": [
+    {
+     "carrera": "Licenciatura en Comunicación y Diseño",
+     "afinidad": 45,
+     "descripcion": "Esta carrera es el lugar perfecto para unir tu pasión por crear cosas únicas con tu talento para la edición y el diseño. Aprenderás a contar historias potentes usando imágenes, colores y mensajes que conectan con las emociones de la gente.",
+     "razones": [
+      "Te encanta editar videos y diseñar carteles",
+      "Prefieres expresar ideas visuales que usar lógica",
+      "Te motiva crear algo original y único",
+      "Disfrutas experimentar mientras trabajas"
+     ],
+     "factores": [
+      {
+       "nombre": "Creatividad visual",
+       "peso": 95
+      },
+      {
+       "nombre": "Expresión artística",
+       "peso": 90
+      },
+      {
+       "nombre": "Trabajo autónomo",
+       "peso": 80
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Galileo",
+       "centro": "Sede Xela (Universidad Galileo)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Perfil híbrido entre comunicación de marca y diseño visual."
+      }
+     ]
+    },
+    {
+     "carrera": "Licenciatura en Producción Audiovisual y Artes Cinematográficas",
+     "afinidad": 35,
+     "descripcion": "Si te apasiona el mundo del video y quieres llevar tus habilidades de edición a un nivel profesional, esta es tu carrera. Aquí aprenderás a manejar el lenguaje de la imagen y el sonido para crear piezas que dejen huella.",
+     "razones": [
+      "Tu pasatiempo favorito es editar videos",
+      "Te gusta experimentar y dejar fluir tus ideas",
+      "Tienes una gran sensibilidad estética",
+      "Prefieres el trabajo creativo sobre el técnico"
+     ],
+     "factores": [
+      {
+       "nombre": "Edición y narrativa",
+       "peso": 90
+      },
+      {
+       "nombre": "Experimentación creativa",
+       "peso": 85
+      },
+      {
+       "nombre": "Talento artístico",
+       "peso": 75
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Mesoamericana",
+       "centro": "Sede Occidente (Universidad Mesoamericana)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Una de las pocas ofertas de esta carrera fuera de la capital."
+      }
+     ]
+    },
+    {
+     "carrera": "Licenciatura en Enfermería",
+     "afinidad": 20,
+     "descripcion": "Esta carrera te permite cumplir con tu vocación de ayudar y cuidar a las personas de forma directa. Aunque no te gustan los números, el enfoque aquí es humano, práctico y de servicio, lo cual encaja con esa parte de ti que quiere apoyar a los demás.",
+     "razones": [
+      "Tienes vocación natural para cuidar gente",
+      "Te gusta el trabajo práctico y manual",
+      "Quieres ayudar a otros a sentirse mejor",
+      "Es un área donde tu empatía es clave"
+     ],
+     "factores": [
+      {
+       "nombre": "Vocación de servicio",
+       "peso": 85
+      },
+      {
+       "nombre": "Cuidado de personas",
+       "peso": 80
+      },
+      {
+       "nombre": "Trabajo práctico",
+       "peso": 60
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Da Vinci de Guatemala",
+       "centro": "Sede Quetzaltenango (Universidad Da Vinci)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Programa de actualización y cierre profesional."
+      },
+      {
+       "universidad": "Universidad Da Vinci de Guatemala",
+       "centro": "Sede Quetzaltenango (Universidad Da Vinci)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Entrada técnica rápida al área de enfermería."
+      },
+      {
+       "universidad": "Universidad Galileo",
+       "centro": "Sede Xela (Universidad Galileo)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Entrada técnica rápida al área de enfermería."
+      },
+      {
+       "universidad": "Universidad Galileo",
+       "centro": "Sede Xela (Universidad Galileo)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación profesional de enfermería con proyección regional."
+      },
+      {
+       "universidad": "Universidad de Occidente",
+       "centro": "Sede Quetzaltenango (UdeO)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación con proyección comunitaria en la región de Occidente."
+      },
+      {
+       "universidad": "Universidad Mariano Gálvez",
+       "centro": "UMG Quetzaltenango",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación con fuerte gerencia de servicios de salud y uso de tecnología y equipos médicos."
+      },
+      {
+       "universidad": "Universidad Mariano Gálvez",
+       "centro": "UMG Totonicapán",
+       "departamento": "Totonicapán",
+       "enfoque": "Perfil muy práctico (13 ciclos, fuerte carga de prácticas supervisadas), con énfasis en intervención en crisis y manejo de urgencias."
+      },
+      {
+       "universidad": "Universidad Panamericana",
+       "centro": "Sede Quetzaltenango (UPANA)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Enfermería con componente de gestión de servicios de salud."
+      },
+      {
+       "universidad": "Universidad Rafael Landívar",
+       "centro": "Campus San Alberto Hurtado, S.J. (URL Xela)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación con vocación de servicio jesuita y proyección comunitaria."
+      }
+     ]
+    }
+   ],
+   "alertas": [
+    "Noto que tienes un deseo muy fuerte de ayudar a los demás, pero también una pasión creativa que se aleja de las carreras de salud; quiero ayudarte a ver cómo equilibrar ambos mundos.",
+    "Noto que aunque sientes presión por seguir el camino de la salud, tus habilidades y gustos reales parecen inclinarse más hacia el lado creativo y artístico.",
+    "Noto que aunque te gusta el área de salud por influencia familiar, tus respuestas muestran una inclinación muy fuerte hacia la creación visual y artística. Quiero entender qué pesa más para ti al elegir.",
+    "Noto que tus intereses creativos personales chocan un poco con las expectativas de tu familia sobre el área de salud, así que quiero encontrar algo que realmente te apasione a ti."
+   ],
+   "adaptativas": 4,
+   "nombra_holland_en_apertura": false,
+   "top1_area_suya": true,
+   "top1_area_casa": false
+  },
+  "c_apertura_explicita": {
+   "log": [
+    {
+     "fija": "impacto",
+     "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+     "respuesta": "Ayudar, enseñar o cuidar a las personas. La verdad es que me gusta mucho ver cómo mi mamá ayuda a los demás y yo quiero seguir con eso, siento que es lo correcto."
+    },
+    {
+     "fija": "estilo",
+     "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+     "respuesta": "Con personas y de forma práctica, porque me gusta andar haciendo cosas y viendo cómo la gente se siente mejor."
+    },
+    {
+     "fija": "entorno",
+     "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+     "respuesta": "En un hospital, clínica o consultorio, porque es lo que mi mamá espera de mí. Aunque, siendo sincera, los sábados a veces me encierro a editar videos y hacer diseños para el cole y ahí sí me siento bien feliz."
+    },
+    {
+     "fija": "gustos",
+     "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+     "respuesta": "Salud y cuidar personas, eso es fijo por lo que hago en mi casa. Pero también Arte, diseño y creatividad, aunque eso solo es un pasatiempo que me distrae cuando tengo chance."
+    },
+    {
+     "dimension": "estilo_cognitivo",
+     "tipo": "opcion",
+     "pregunta": "Vi que tu test de Holland salió fuerte en Artístico y Social, y me encanta que mencionaras cómo te gusta ayudar a otros, tal como hace tu mamá, pero también que disfrutas mucho editar videos y diseñar. Para entender mejor cómo te sientes al trabajar, cuéntame: cuando tienes que **resolver un problema nuevo**, prefieres analizarlo con cuidado y buscar una explicación lógica o te dejas llevar más por tu **intuición y creatividad** para encontrar una solución diferente?",
+     "opciones": [
+      "Prefiero analizarlo con calma y buscar una explicación lógica",
+      "Me gusta más usar mi intuición y creatividad"
+     ],
+     "respuesta": "Me gusta más usar mi intuición y creatividad. Siento que probando cosas distintas o haciendo algún diseño que se me ocurra en el momento es como mejor me salen las ideas.",
+     "alerta_contradiccion": "Noto que tienes un interés muy marcado por la salud y el cuidado, pero también una pasión fuerte por el diseño; quiero ayudarte a ver cómo estas dos partes tuyas pueden convivir.",
+     "ranking": [
+      {
+       "carrera": "Psicología",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Psicología Clínica",
+       "afinidad": 80
+      },
+      {
+       "carrera": "Licenciatura en Nutrición",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Licenciatura en Comunicación y Diseño",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Licenciatura en Ciencias de la Educación",
+       "afinidad": 65
+      }
+     ]
+    },
+    {
+     "dimension": "valores",
+     "tipo": "opcion",
+     "pregunta": "Me encanta que te dejes llevar por tu intuición, se nota que eres muy creativa. Ahora, pensando en lo que te hace sentir bien, ¿qué crees que es **más importante** para ti en el futuro: tener un trabajo que te permita **expresar tu lado artístico** todos los días, o uno donde tu mayor recompensa sea sentir que **hiciste una diferencia real** en la vida de alguien?",
+     "opciones": [
+      "Expresar mi lado artístico",
+      "Hacer una diferencia real en otros"
+     ],
+     "respuesta": "Hacer una diferencia real en otros, porque al final es lo que mi mamá espera de mí y es lo que siento que debo hacer por la gente.",
+     "alerta_contradiccion": "Noto que te apasiona ayudar a los demás como tu mamá, pero también que tu lado creativo te hace muy feliz. Quiero entender qué pesa más para ti al elegir tu camino.",
+     "ranking": [
+      {
+       "carrera": "Licenciatura en Comunicación y Diseño",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
+       "afinidad": 80
+      },
+      {
+       "carrera": "Psicología Clínica",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Licenciatura en Nutrición",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Licenciatura en Ciencias de la Educación",
+       "afinidad": 65
+      }
+     ]
+    },
+    {
+     "dimension": "personalidad",
+     "tipo": "opcion",
+     "pregunta": "Me queda súper claro que tu prioridad es ayudar a los demás, como hace tu mamá, y que eso te hace sentir muy bien. Ahora, pensando en cómo te gusta trabajar cuando tienes que hacer algo importante, cuéntame: prefieres **planificar todo con mucha calma** y detalle antes de empezar, o te sientes más cómoda **lanzándote a la acción** y ajustando las cosas sobre la marcha mientras vas viendo cómo queda?",
+     "opciones": [
+      "Planificar todo con calma y detalle",
+      "Lanzarme a la acción y ajustar sobre la marcha"
+     ],
+     "respuesta": "Lanzarme a la acción y ajustar sobre la marcha. Así le hago cuando estoy editando los videos o haciendo los carteles, prefiero ir viendo cómo queda para que se mire bien de una vez.",
+     "alerta_contradiccion": "Noto que aunque valoras mucho el impacto social, también disfrutas mucho la parte creativa y artística; quiero entender cómo combinas estas dos facetas en tu forma de trabajar.",
+     "ranking": [
+      {
+       "carrera": "Licenciatura en Nutrición",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Profesorado en Psicopedagogía",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Psicología Clínica",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Licenciatura en Ciencias de la Educación",
+       "afinidad": 65
+      }
+     ]
+    },
+    {
+     "dimension": "habilidades",
+     "tipo": "opcion",
+     "pregunta": "Qué bueno que te guste lanzarte a la acción, Dulce, se nota que eres de las que prefiere aprender haciendo. Ya que tienes esa chispa para crear y ayudar, cuéntame: cuando se trata de tus habilidades, ¿qué te sale más natural: **explicar conceptos** a otros para que los entiendan mejor, o **manejar herramientas digitales** y programas para crear cosas visuales?",
+     "opciones": [
+      "Explicar y enseñar cosas a los demás",
+      "Usar herramientas digitales y de diseño"
+     ],
+     "respuesta": "Fijese que me sale más natural usar herramientas digitales y de diseño. La verdad es que me encanta pasarme horas editando y probando efectos nuevos, eso es lo que más disfruto hacer.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Licenciatura en Nutrición",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Profesorado en Psicopedagogía",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Licenciatura en Comunicación y Diseño",
+       "afinidad": 65
+      },
+      {
+       "carrera": "Licenciatura en Ciencias de la Educación",
+       "afinidad": 60
+      },
+      {
+       "carrera": "Profesorado en Ciencias Naturales, Química y Biología",
+       "afinidad": 55
+      }
+     ]
+    },
+    {
+     "terminado": true,
+     "ranking": [
+      {
+       "carrera": "Licenciatura en Comunicación y Diseño",
+       "afinidad": 92
+      },
+      {
+       "carrera": "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
+       "afinidad": 88
+      },
+      {
+       "carrera": "Licenciatura en Nutrición",
+       "afinidad": 65
+      },
+      {
+       "carrera": "Profesorado en Psicopedagogía",
+       "afinidad": 62
+      }
+     ]
+    }
+   ],
+   "respuestas": {
+    "nombre": "Dulce",
+    "departamento": "Quetzaltenango",
+    "impacto": "Ayudar, enseñar o cuidar a las personas. La verdad es que me gusta mucho ver cómo mi mamá ayuda a los demás y yo quiero seguir con eso, siento que es lo correcto.",
+    "estilo": "Con personas y de forma práctica, porque me gusta andar haciendo cosas y viendo cómo la gente se siente mejor.",
+    "entorno": "En un hospital, clínica o consultorio, porque es lo que mi mamá espera de mí. Aunque, siendo sincera, los sábados a veces me encierro a editar videos y hacer diseños para el cole y ahí sí me siento bien feliz.",
+    "gustos": "Salud y cuidar personas, eso es fijo por lo que hago en mi casa. Pero también Arte, diseño y creatividad, aunque eso solo es un pasatiempo que me distrae cuando tengo chance.",
+    "Vi que tu test de Holland salió fuerte en Artístico y Social, y me encanta que mencionaras cómo te gusta ayudar a otros, tal como hace tu mamá, pero también que disfrutas mucho editar videos y diseñar. Para entender mejor cómo te sientes al trabajar, cuéntame: cuando tienes que **resolver un problema nuevo**, prefieres analizarlo con cuidado y buscar una explicación lógica o te dejas llevar más por tu **intuición y creatividad** para encontrar una solución diferente?": "Me gusta más usar mi intuición y creatividad. Siento que probando cosas distintas o haciendo algún diseño que se me ocurra en el momento es como mejor me salen las ideas.",
+    "Me encanta que te dejes llevar por tu intuición, se nota que eres muy creativa. Ahora, pensando en lo que te hace sentir bien, ¿qué crees que es **más importante** para ti en el futuro: tener un trabajo que te permita **expresar tu lado artístico** todos los días, o uno donde tu mayor recompensa sea sentir que **hiciste una diferencia real** en la vida de alguien?": "Hacer una diferencia real en otros, porque al final es lo que mi mamá espera de mí y es lo que siento que debo hacer por la gente.",
+    "Me queda súper claro que tu prioridad es ayudar a los demás, como hace tu mamá, y que eso te hace sentir muy bien. Ahora, pensando en cómo te gusta trabajar cuando tienes que hacer algo importante, cuéntame: prefieres **planificar todo con mucha calma** y detalle antes de empezar, o te sientes más cómoda **lanzándote a la acción** y ajustando las cosas sobre la marcha mientras vas viendo cómo queda?": "Lanzarme a la acción y ajustar sobre la marcha. Así le hago cuando estoy editando los videos o haciendo los carteles, prefiero ir viendo cómo queda para que se mire bien de una vez.",
+    "Qué bueno que te guste lanzarte a la acción, Dulce, se nota que eres de las que prefiere aprender haciendo. Ya que tienes esa chispa para crear y ayudar, cuéntame: cuando se trata de tus habilidades, ¿qué te sale más natural: **explicar conceptos** a otros para que los entiendan mejor, o **manejar herramientas digitales** y programas para crear cosas visuales?": "Fijese que me sale más natural usar herramientas digitales y de diseño. La verdad es que me encanta pasarme horas editando y probando efectos nuevos, eso es lo que más disfruto hacer."
+   },
+   "tokens": 60539,
+   "confianza": 85,
+   "confianza_nota": "Tus respuestas son muy claras sobre tu deseo de ayudar y tu talento creativo, lo que permite una recomendación sólida.",
+   "top": [
+    {
+     "carrera": "Licenciatura en Enfermería",
+     "afinidad": 35,
+     "descripcion": "Esta carrera combina el cuidado directo y humano que tanto te motiva con el rigor científico necesario para trabajar en hospitales. Es la forma perfecta de seguir el ejemplo de tu mamá mientras aplicas tu capacidad de acción y respuesta rápida.",
+     "razones": [
+      "Te permite ayudar a los demás directamente",
+      "Encaja con tu deseo de trabajar en hospitales",
+      "Requiere actuar y ajustar sobre la marcha",
+      "Valora tu vocación de servicio y cuidado"
+     ],
+     "factores": [
+      {
+       "nombre": "Vocación de servicio",
+       "peso": 95
+      },
+      {
+       "nombre": "Acción práctica",
+       "peso": 80
+      },
+      {
+       "nombre": "Entorno hospitalario",
+       "peso": 90
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Da Vinci de Guatemala",
+       "centro": "Sede Quetzaltenango (Universidad Da Vinci)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Programa de actualización y cierre profesional."
+      },
+      {
+       "universidad": "Universidad Da Vinci de Guatemala",
+       "centro": "Sede Quetzaltenango (Universidad Da Vinci)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Entrada técnica rápida al área de enfermería."
+      },
+      {
+       "universidad": "Universidad Galileo",
+       "centro": "Sede Xela (Universidad Galileo)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Entrada técnica rápida al área de enfermería."
+      },
+      {
+       "universidad": "Universidad Galileo",
+       "centro": "Sede Xela (Universidad Galileo)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación profesional de enfermería con proyección regional."
+      },
+      {
+       "universidad": "Universidad de Occidente",
+       "centro": "Sede Quetzaltenango (UdeO)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación con proyección comunitaria en la región de Occidente."
+      },
+      {
+       "universidad": "Universidad Mariano Gálvez",
+       "centro": "UMG Quetzaltenango",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación con fuerte gerencia de servicios de salud y uso de tecnología y equipos médicos."
+      },
+      {
+       "universidad": "Universidad Mariano Gálvez",
+       "centro": "UMG Totonicapán",
+       "departamento": "Totonicapán",
+       "enfoque": "Perfil muy práctico (13 ciclos, fuerte carga de prácticas supervisadas), con énfasis en intervención en crisis y manejo de urgencias."
+      },
+      {
+       "universidad": "Universidad Panamericana",
+       "centro": "Sede Quetzaltenango (UPANA)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Enfermería con componente de gestión de servicios de salud."
+      },
+      {
+       "universidad": "Universidad Rafael Landívar",
+       "centro": "Campus San Alberto Hurtado, S.J. (URL Xela)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Formación con vocación de servicio jesuita y proyección comunitaria."
+      }
+     ]
+    },
+    {
+     "carrera": "Licenciatura en Comunicación y Diseño",
+     "afinidad": 30,
+     "descripcion": "Esta opción une tu pasión por el diseño y la edición de videos con una base estratégica. Te permite usar tus herramientas digitales favoritas para crear mensajes que impacten y ayuden a las personas a través de la comunicación visual.",
+     "razones": [
+      "Aprovecha tu talento natural para el diseño",
+      "Te permite usar herramientas digitales",
+      "Es un trabajo creativo y dinámico",
+      "Satisface tu lado artístico y visual"
+     ],
+     "factores": [
+      {
+       "nombre": "Creatividad artística",
+       "peso": 95
+      },
+      {
+       "nombre": "Habilidades digitales",
+       "peso": 90
+      },
+      {
+       "nombre": "Intuición visual",
+       "peso": 85
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Galileo",
+       "centro": "Sede Xela (Universidad Galileo)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Perfil híbrido entre comunicación de marca y diseño visual."
+      }
+     ]
+    },
+    {
+     "carrera": "Psicología (PEM y Licenciatura)",
+     "afinidad": 20,
+     "descripcion": "Esta carrera te permite conectar con las personas a un nivel profundo para ayudarlas a sentirse mejor. Es una forma de cuidar a los demás desde la escucha y el acompañamiento, algo que encaja con tu perfil social y tu deseo de marcar una diferencia.",
+     "razones": [
+      "Te permite ayudar a otros a sentirse mejor",
+      "Valora tu interés por las personas",
+      "Requiere empatía y creatividad",
+      "Es un trabajo muy humano y cercano"
+     ],
+     "factores": [
+      {
+       "nombre": "Interés social",
+       "peso": 85
+      },
+      {
+       "nombre": "Empatía",
+       "peso": 80
+      },
+      {
+       "nombre": "Trato con personas",
+       "peso": 75
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "USAC",
+       "centro": "CUNOC",
+       "departamento": "Quetzaltenango",
+       "enfoque": "El Científico del Comportamiento y la Salud Mental — curiosidad por el ser humano (mente, conducta, motivaciones, sufrimiento)."
+      }
+     ]
+    }
+   ],
+   "alertas": [
+    "Noto que tienes un interés muy marcado por la salud y el cuidado, pero también una pasión fuerte por el diseño; quiero ayudarte a ver cómo estas dos partes tuyas pueden convivir.",
+    "Noto que te apasiona ayudar a los demás como tu mamá, pero también que tu lado creativo te hace muy feliz. Quiero entender qué pesa más para ti al elegir tu camino.",
+    "Noto que aunque valoras mucho el impacto social, también disfrutas mucho la parte creativa y artística; quiero entender cómo combinas estas dos facetas en tu forma de trabajar."
+   ],
+   "adaptativas": 4,
+   "nombra_holland_en_apertura": true,
+   "top1_area_suya": false,
+   "top1_area_casa": true
+  }
+ },
+ {
+  "perfil": "Byron",
+  "contexto": "18 años, perito en mecánica automotriz en Quetzaltenango. Trabaja en el taller de su tío los fines de semana. Le gusta arreglar motores con las manos, pero también se queda leyendo manuales técnicos para entender POR QUÉ falla una pieza, no solo cambiarla. No tiene un plan claro: unos le dicen que estudie Ingeniería Mecánica, otros que se quede de técnico.",
+  "guion": "Es honesto y directo. Si le preguntan qué prefiere entre reparar con las manos o investigar por qué algo falla, responde con matices reales: 'depende del día, a veces solo quiero resolverlo con las manos, a veces quiero entender la causa antes de tocar nada'. No inventa un plan que no tiene si se lo preguntan directamente.",
+  "riasec_real": {
+   "R": 4,
+   "I": 4,
+   "A": 1,
+   "S": 1,
+   "E": 2,
+   "C": 2
+  },
+  "holland": {
+   "codigo": "IRE",
+   "areas": {
+    "R": 26,
+    "I": 29,
+    "A": 3,
+    "S": 3,
+    "E": 11,
+    "C": 8
+   },
+   "hoja": "353311122222434312122321343412111212444521212322335511112222",
+   "empate": [
+    "de Investigación",
+    "Realistas"
+   ]
+  },
+  "b_produccion": {
+   "log": [
+    {
+     "fija": "impacto",
+     "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+     "respuesta": "Construir, diseñar o hacer que las cosas funcionen, porque me cuadra ver cómo todo queda bien arreglado y funcional."
+    },
+    {
+     "fija": "estilo",
+     "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+     "respuesta": "De forma práctica, con las manos y analizando datos, ideas y lógica. Depende del día, a veces solo quiero resolverlo directo, pero otras veces quiero entender bien la causa antes de tocar nada."
+    },
+    {
+     "fija": "entorno",
+     "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+     "respuesta": "En un laboratorio o taller técnico y en una obra, con máquinas o herramientas, ahí es donde me siento en mi onda."
+    },
+    {
+     "fija": "gustos",
+     "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+     "respuesta": "Construcción, máquinas y cómo funcionan las cosas es lo mío fijo, también me cuadra un poco la tecnología y computación porque ahora todo es electrónico en los motores."
+    },
+    {
+     "dimension": "personalidad",
+     "tipo": "opcion",
+     "pregunta": "Byron, me queda clarísimo que te gusta meter mano en las máquinas y ver cómo todo funciona perfecto. Ahora, cuéntame sobre tu forma de ser: cuando estás trabajando en un proyecto difícil, ¿te sientes más cómodo **tomando tú el control** y decidiendo cómo se hacen las cosas, o prefieres **seguir instrucciones** muy precisas y detalladas para que todo salga impecable?",
+     "opciones": [
+      "Prefiero tomar el control y decidir cómo hacer las cosas",
+      "Prefiero seguir instrucciones precisas para que todo quede perfecto"
+     ],
+     "respuesta": "Prefiero tomar el control y decidir cómo hacer las cosas, porque me gusta ver qué onda y buscar mi propia solución aunque me cueste más.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 90
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Ingeniería Civil",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Técnico Universitario en Desarrollo de Software",
+       "afinidad": 50
+      }
+     ]
+    },
+    {
+     "dimension": "estilo_cognitivo",
+     "tipo": "opcion",
+     "pregunta": "Byron, me encanta esa chispa que tienes para tomar el mando y buscar tus propias soluciones. Ya que te gusta tanto meterte a fondo con los problemas, cuéntame: cuando tienes que aprender algo nuevo y complejo, ¿qué te resulta mejor: **ponerte a probar** y experimentar con la herramienta hasta entenderla, o prefieres **estudiar la teoría** y los planos antes de tocar cualquier pieza?",
+     "opciones": [
+      "Probar y experimentar directamente",
+      "Estudiar la teoría y planos primero"
+     ],
+     "respuesta": "Probar y experimentar directamente, aunque a veces sí me toca revisar los manuales para no cagarla si el motor está muy complicado.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 90
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Ingeniería Civil",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Técnico Universitario en Desarrollo de Software",
+       "afinidad": 60
+      }
+     ]
+    },
+    {
+     "dimension": "habilidades",
+     "tipo": "opcion",
+     "pregunta": "Byron, me gusta mucho esa actitud de lanzarte a probar las cosas para entenderlas mejor. Ahora, pensando en lo que sabes hacer o lo que te gustaría aprender a manejar, ¿qué te llama más la atención: **diseñar y calcular** cómo debe ser una estructura o máquina desde cero, o te ves más **operando y reparando** equipos de alta tecnología que ya están funcionando?",
+     "opciones": [
+      "Disenar y calcular estructuras o maquinas",
+      "Operar y reparar equipos de alta tecnologia"
+     ],
+     "respuesta": "Me llama más la atención operar y reparar equipos de alta tecnología, porque ahí es donde siento que aplico lo que sé y me gusta ver cómo reviven las máquinas.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 92
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 88
+      },
+      {
+       "carrera": "Ingeniería Civil",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 82
+      },
+      {
+       "carrera": "Técnico Universitario en Desarrollo de Software",
+       "afinidad": 65
+      }
+     ]
+    },
+    {
+     "dimension": "valores",
+     "tipo": "opcion",
+     "pregunta": "Byron, se nota que te gusta la acción de reparar y ver cómo las máquinas vuelven a la vida. Ahora, pensando en el impacto de tu trabajo a largo plazo, ¿qué te hace sentir más orgulloso al final del día: **resolver un problema técnico** muy específico que nadie más pudo arreglar, o saber que tu trabajo ayuda a que **todo un sistema o equipo** funcione sin fallos para los demás?",
+     "opciones": [
+      "Resolver el problema técnico difícil yo solo",
+      "Que todo el sistema funcione bien para el equipo"
+     ],
+     "respuesta": "Resolver el problema técnico difícil yo solo, porque me gusta sentir que yo pude con lo que los demás no pudieron.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 92
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 78
+      },
+      {
+       "carrera": "Ingeniería Civil",
+       "afinidad": 65
+      },
+      {
+       "carrera": "Técnico Universitario en Desarrollo de Software",
+       "afinidad": 55
+      }
+     ]
+    },
+    {
+     "terminado": true,
+     "ranking": [
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 92
+      },
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 65
+      },
+      {
+       "carrera": "Técnico Universitario en Desarrollo de Software",
+       "afinidad": 45
+      }
+     ]
+    }
+   ],
+   "respuestas": {
+    "nombre": "Byron",
+    "departamento": "Quetzaltenango",
+    "impacto": "Construir, diseñar o hacer que las cosas funcionen, porque me cuadra ver cómo todo queda bien arreglado y funcional.",
+    "estilo": "De forma práctica, con las manos y analizando datos, ideas y lógica. Depende del día, a veces solo quiero resolverlo directo, pero otras veces quiero entender bien la causa antes de tocar nada.",
+    "entorno": "En un laboratorio o taller técnico y en una obra, con máquinas o herramientas, ahí es donde me siento en mi onda.",
+    "gustos": "Construcción, máquinas y cómo funcionan las cosas es lo mío fijo, también me cuadra un poco la tecnología y computación porque ahora todo es electrónico en los motores.",
+    "Byron, me queda clarísimo que te gusta meter mano en las máquinas y ver cómo todo funciona perfecto. Ahora, cuéntame sobre tu forma de ser: cuando estás trabajando en un proyecto difícil, ¿te sientes más cómodo **tomando tú el control** y decidiendo cómo se hacen las cosas, o prefieres **seguir instrucciones** muy precisas y detalladas para que todo salga impecable?": "Prefiero tomar el control y decidir cómo hacer las cosas, porque me gusta ver qué onda y buscar mi propia solución aunque me cueste más.",
+    "Byron, me encanta esa chispa que tienes para tomar el mando y buscar tus propias soluciones. Ya que te gusta tanto meterte a fondo con los problemas, cuéntame: cuando tienes que aprender algo nuevo y complejo, ¿qué te resulta mejor: **ponerte a probar** y experimentar con la herramienta hasta entenderla, o prefieres **estudiar la teoría** y los planos antes de tocar cualquier pieza?": "Probar y experimentar directamente, aunque a veces sí me toca revisar los manuales para no cagarla si el motor está muy complicado.",
+    "Byron, me gusta mucho esa actitud de lanzarte a probar las cosas para entenderlas mejor. Ahora, pensando en lo que sabes hacer o lo que te gustaría aprender a manejar, ¿qué te llama más la atención: **diseñar y calcular** cómo debe ser una estructura o máquina desde cero, o te ves más **operando y reparando** equipos de alta tecnología que ya están funcionando?": "Me llama más la atención operar y reparar equipos de alta tecnología, porque ahí es donde siento que aplico lo que sé y me gusta ver cómo reviven las máquinas.",
+    "Byron, se nota que te gusta la acción de reparar y ver cómo las máquinas vuelven a la vida. Ahora, pensando en el impacto de tu trabajo a largo plazo, ¿qué te hace sentir más orgulloso al final del día: **resolver un problema técnico** muy específico que nadie más pudo arreglar, o saber que tu trabajo ayuda a que **todo un sistema o equipo** funcione sin fallos para los demás?": "Resolver el problema técnico difícil yo solo, porque me gusta sentir que yo pude con lo que los demás no pudieron."
+   },
+   "tokens": 66823,
+   "confianza": 85,
+   "confianza_nota": "Tus respuestas son muy consistentes al mostrar una clara preferencia por el trabajo técnico, práctico y de resolución de problemas mecánicos.",
+   "top": [
+    {
+     "carrera": "Ingeniería Mecánica Industrial",
+     "afinidad": 35,
+     "descripcion": "Esta carrera combina el diseño mecánico con la gestión de procesos industriales. Es ideal para quien disfruta tanto de la parte técnica de las máquinas como de la eficiencia de toda una fábrica.",
+     "razones": [
+      "Te apasiona reparar y hacer funcionar máquinas",
+      "Prefieres tomar el control y buscar tus soluciones",
+      "Te gusta el trabajo práctico en talleres",
+      "Te interesa la tecnología aplicada a los motores"
+     ],
+     "factores": [
+      {
+       "nombre": "Resolución de problemas",
+       "peso": 95
+      },
+      {
+       "nombre": "Trabajo práctico",
+       "peso": 90
+      },
+      {
+       "nombre": "Liderazgo técnico",
+       "peso": 80
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "USAC",
+       "centro": "CUNOC",
+       "departamento": "Quetzaltenango",
+       "enfoque": "El Ingeniero Híbrido de la Máquina y la Fábrica — pasión por las máquinas (diseñar, construir, mantener) dentro de un contexto industrial y de gestión."
+      }
+     ]
+    },
+    {
+     "carrera": "Ingeniería en Electrónica",
+     "afinidad": 30,
+     "descripcion": "Se enfoca en el diseño y reparación de sistemas electrónicos, robótica y automatización. Es perfecta si te gusta entender cómo funciona la tecnología detrás de los motores y los equipos modernos.",
+     "razones": [
+      "Te atrae la electrónica en los motores",
+      "Disfrutas experimentar directamente con herramientas",
+      "Te gusta resolver fallos técnicos complejos",
+      "Prefieres el trabajo de laboratorio y taller"
+     ],
+     "factores": [
+      {
+       "nombre": "Curiosidad técnica",
+       "peso": 85
+      },
+      {
+       "nombre": "Experimentación directa",
+       "peso": 90
+      },
+      {
+       "nombre": "Análisis lógico",
+       "peso": 75
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Mesoamericana",
+       "centro": "Sede Occidente (Universidad Mesoamericana)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Una de las pocas ofertas de esta especialidad en Occidente."
+      },
+      {
+       "universidad": "Universidad de Occidente",
+       "centro": "Sede Quetzaltenango (UdeO)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Una de las pocas ofertas de esta especialidad en Occidente."
+      }
+     ]
+    },
+    {
+     "carrera": "Ingeniería Mecánica",
+     "afinidad": 20,
+     "descripcion": "Es la base para diseñar, construir y optimizar máquinas y sistemas físicos. Encaja con tu gusto por la construcción y el funcionamiento de artefactos tangibles.",
+     "razones": [
+      "Te fascina cómo funcionan las máquinas",
+      "Te gusta el trabajo en obras y talleres",
+      "Prefieres buscar soluciones propias a problemas",
+      "Tienes un perfil orientado a lo realista y técnico"
+     ],
+     "factores": [
+      {
+       "nombre": "Pensamiento mecánico",
+       "peso": 80
+      },
+      {
+       "nombre": "Trabajo de campo",
+       "peso": 70
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "USAC",
+       "centro": "CUNOC",
+       "departamento": "Quetzaltenango",
+       "enfoque": "El Creador de Máquinas, Energía y Soluciones Físicas — fascinación por cómo funcionan motores, máquinas, estructuras y sistemas térmicos."
+      }
+     ]
+    }
+   ],
+   "alertas": [],
+   "adaptativas": 4,
+   "nombra_holland_en_apertura": false,
+   "top1_area_r": true,
+   "top1_area_i": false
+  },
+  "c_apertura_explicita": {
+   "log": [
+    {
+     "fija": "impacto",
+     "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+     "respuesta": "Construir, diseñar o hacer que las cosas funcionen, porque me gusta ver cómo todo queda de a toque cuando uno sabe lo que hace."
+    },
+    {
+     "fija": "estilo",
+     "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+     "respuesta": "De forma práctica con las manos y analizando ideas y lógica. Depende del día, a veces solo quiero resolverlo de una vez pero otras veces sí me da curiosidad entender bien la causa antes de tocar nada."
+    },
+    {
+     "fija": "entorno",
+     "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+     "respuesta": "En un taller técnico y en una obra con máquinas. Ahí es donde siento que puedo aplicar lo que aprendo con los motores y mancharme las manos de grasa."
+    },
+    {
+     "fija": "gustos",
+     "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+     "respuesta": "Construcción, máquinas y cómo funcionan las cosas, porque eso es lo mío, ahí es donde me hallo. También me llama un poco la tecnología y computación, porque los motores de ahora ya traen mucha electrónica y hay que saberle a eso."
+    },
+    {
+     "dimension": "personalidad",
+     "tipo": "opcion",
+     "pregunta": "Vi que tu test de Holland salió fuerte en Investigación y Realistas, lo cual tiene todo el sentido con lo que me cuentas de querer entender cómo funcionan los motores antes de meterles mano. Ahora, cuéntame: cuando tienes un **problema técnico difícil** frente a ti, ¿prefieres **resolverlo tú solo** concentrado al máximo para que quede perfecto, o te gusta más **trabajar en equipo** donde todos aportan ideas para sacar el proyecto adelante?",
+     "opciones": [
+      "Prefiero hacerlo solo, me concentro mejor",
+      "Prefiero en equipo, para compartir ideas"
+     ],
+     "respuesta": "Prefiero hacerlo solo, me concentro mejor. Es que cuando me clavo con un motor prefiero estar yo solo para no distraerme y que todo quede nítido, sin que nadie me ande cuestionando.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 90
+      },
+      {
+       "carrera": "Ingeniería Civil",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 80
+      }
+     ]
+    },
+    {
+     "dimension": "habilidades",
+     "tipo": "opcion",
+     "pregunta": "Me queda claro que te gusta trabajar solo para que todo quede nítido y sin interrupciones, eso habla mucho de tu enfoque. Ahora, pensando en lo que sabes hacer o te gustaría aprender a dominar, ¿qué te atrae más: **hacer cálculos complejos** y planos para diseñar cómo se construye algo desde cero, o prefieres **meterte de lleno a reparar** y ajustar máquinas que ya están funcionando para que no fallen?",
+     "opciones": [
+      "Diseñar y calcular estructuras o sistemas desde cero",
+      "Reparar, ajustar y mantener máquinas en funcionamiento"
+     ],
+     "respuesta": "Reparar, ajustar y mantener máquinas en funcionamiento. La verdad es que me gana más la emoción de ver la máquina dando guerra otra vez que ponerme a rayar papel con cálculos que ni sé si van a salir bien.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 88
+      },
+      {
+       "carrera": "Ingeniería Civil",
+       "afinidad": 82
+      },
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 75
+      }
+     ]
+    },
+    {
+     "dimension": "estilo_cognitivo",
+     "tipo": "opcion",
+     "pregunta": "Ya veo que lo tuyo es la acción directa y que prefieres ver la máquina funcionando a estar con los planos. Pensando en cómo te gusta aprender cosas nuevas, ¿te sientes más cómodo **siguiendo pasos claros** y reglas que ya funcionan para asegurar que todo quede bien, o te gusta más **probar caminos diferentes** y experimentar por tu cuenta aunque a veces eso signifique equivocarte para aprender?",
+     "opciones": [
+      "Prefiero seguir pasos y métodos que ya están probados",
+      "Me gusta experimentar y buscar mi propio camino"
+     ],
+     "respuesta": "Me gusta experimentar y buscar mi propio camino, porque a veces los manuales no dicen qué hacer cuando uno ya probó de todo y la máquina sigue dando clavos.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 90
+      },
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 85
+      },
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Técnico Universitario en Desarrollo de Software",
+       "afinidad": 60
+      }
+     ]
+    },
+    {
+     "dimension": "valores",
+     "tipo": "opcion",
+     "pregunta": "Me gusta mucho esa actitud de probar cosas nuevas cuando el manual no ayuda, se nota que eres de los que no se rinden. Ahora, pensando en lo que te motiva a largo plazo, ¿qué te hace sentir más **orgulloso** de tu trabajo: saber que lograste que una máquina sea **extremadamente eficiente** y no desperdicie nada, o sentir que tu labor ayuda a que la **seguridad de las personas** que operan esas máquinas esté siempre protegida?",
+     "opciones": [
+      "Lograr la máxima eficiencia y rendimiento",
+      "Asegurar que nadie salga herido al usarla"
+     ],
+     "respuesta": "Asegurar que nadie salga herido al usarla. Al final del día, si la máquina queda potente pero no es segura, uno ni duerme tranquilo pensando en que alguien se puede pasar llevando un susto.",
+     "alerta_contradiccion": "",
+     "ranking": [
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 90
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 75
+      },
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 60
+      }
+     ]
+    },
+    {
+     "terminado": true,
+     "ranking": [
+      {
+       "carrera": "Ingeniería Mecánica",
+       "afinidad": 95
+      },
+      {
+       "carrera": "Ingeniería Mecánica Industrial",
+       "afinidad": 70
+      },
+      {
+       "carrera": "Ingeniería en Electrónica",
+       "afinidad": 65
+      },
+      {
+       "carrera": "Arquitectura",
+       "afinidad": 40
+      }
+     ]
+    }
+   ],
+   "respuestas": {
+    "nombre": "Byron",
+    "departamento": "Quetzaltenango",
+    "impacto": "Construir, diseñar o hacer que las cosas funcionen, porque me gusta ver cómo todo queda de a toque cuando uno sabe lo que hace.",
+    "estilo": "De forma práctica con las manos y analizando ideas y lógica. Depende del día, a veces solo quiero resolverlo de una vez pero otras veces sí me da curiosidad entender bien la causa antes de tocar nada.",
+    "entorno": "En un taller técnico y en una obra con máquinas. Ahí es donde siento que puedo aplicar lo que aprendo con los motores y mancharme las manos de grasa.",
+    "gustos": "Construcción, máquinas y cómo funcionan las cosas, porque eso es lo mío, ahí es donde me hallo. También me llama un poco la tecnología y computación, porque los motores de ahora ya traen mucha electrónica y hay que saberle a eso.",
+    "Vi que tu test de Holland salió fuerte en Investigación y Realistas, lo cual tiene todo el sentido con lo que me cuentas de querer entender cómo funcionan los motores antes de meterles mano. Ahora, cuéntame: cuando tienes un **problema técnico difícil** frente a ti, ¿prefieres **resolverlo tú solo** concentrado al máximo para que quede perfecto, o te gusta más **trabajar en equipo** donde todos aportan ideas para sacar el proyecto adelante?": "Prefiero hacerlo solo, me concentro mejor. Es que cuando me clavo con un motor prefiero estar yo solo para no distraerme y que todo quede nítido, sin que nadie me ande cuestionando.",
+    "Me queda claro que te gusta trabajar solo para que todo quede nítido y sin interrupciones, eso habla mucho de tu enfoque. Ahora, pensando en lo que sabes hacer o te gustaría aprender a dominar, ¿qué te atrae más: **hacer cálculos complejos** y planos para diseñar cómo se construye algo desde cero, o prefieres **meterte de lleno a reparar** y ajustar máquinas que ya están funcionando para que no fallen?": "Reparar, ajustar y mantener máquinas en funcionamiento. La verdad es que me gana más la emoción de ver la máquina dando guerra otra vez que ponerme a rayar papel con cálculos que ni sé si van a salir bien.",
+    "Ya veo que lo tuyo es la acción directa y que prefieres ver la máquina funcionando a estar con los planos. Pensando en cómo te gusta aprender cosas nuevas, ¿te sientes más cómodo **siguiendo pasos claros** y reglas que ya funcionan para asegurar que todo quede bien, o te gusta más **probar caminos diferentes** y experimentar por tu cuenta aunque a veces eso signifique equivocarte para aprender?": "Me gusta experimentar y buscar mi propio camino, porque a veces los manuales no dicen qué hacer cuando uno ya probó de todo y la máquina sigue dando clavos.",
+    "Me gusta mucho esa actitud de probar cosas nuevas cuando el manual no ayuda, se nota que eres de los que no se rinden. Ahora, pensando en lo que te motiva a largo plazo, ¿qué te hace sentir más **orgulloso** de tu trabajo: saber que lograste que una máquina sea **extremadamente eficiente** y no desperdicie nada, o sentir que tu labor ayuda a que la **seguridad de las personas** que operan esas máquinas esté siempre protegida?": "Asegurar que nadie salga herido al usarla. Al final del día, si la máquina queda potente pero no es segura, uno ni duerme tranquilo pensando en que alguien se puede pasar llevando un susto."
+   },
+   "tokens": 62841,
+   "confianza": 85,
+   "confianza_nota": "Tus respuestas son muy consistentes y apuntan claramente a un perfil técnico, práctico y orientado a la resolución de problemas mecánicos.",
+   "top": [
+    {
+     "carrera": "Ingeniería Mecánica Industrial",
+     "afinidad": 45,
+     "descripcion": "Esta carrera es el punto de encuentro perfecto entre tu pasión por las máquinas y la necesidad de que funcionen de forma segura y eficiente. Te permite entender cómo operan los sistemas complejos y cómo mantenerlos funcionando sin riesgos para quienes los usan.",
+     "razones": [
+      "Te apasiona reparar y ajustar máquinas",
+      "Priorizas la seguridad de las personas al trabajar",
+      "Disfrutas experimentar para resolver problemas técnicos",
+      "Prefieres el trabajo práctico y directo en talleres"
+     ],
+     "factores": [
+      {
+       "nombre": "Resolución de problemas",
+       "peso": 90
+      },
+      {
+       "nombre": "Trabajo práctico",
+       "peso": 85
+      },
+      {
+       "nombre": "Seguridad industrial",
+       "peso": 80
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "USAC",
+       "centro": "CUNOC",
+       "departamento": "Quetzaltenango",
+       "enfoque": "El Ingeniero Híbrido de la Máquina y la Fábrica — pasión por las máquinas (diseñar, construir, mantener) dentro de un contexto industrial y de gestión."
+      }
+     ]
+    },
+    {
+     "carrera": "Ingeniería Mecánica",
+     "afinidad": 35,
+     "descripcion": "Aquí te sumerges en el corazón de los motores y los sistemas físicos. Es ideal para quien, como tú, quiere entender a fondo la causa de los fallos y tiene la curiosidad de experimentar hasta que la máquina queda nítida.",
+     "razones": [
+      "Te gusta entender la lógica detrás de los motores",
+      "Prefieres la acción directa sobre el diseño teórico",
+      "Te sientes cómodo trabajando solo y concentrado",
+      "Tienes un perfil orientado a la investigación técnica"
+     ],
+     "factores": [
+      {
+       "nombre": "Curiosidad técnica",
+       "peso": 85
+      },
+      {
+       "nombre": "Enfoque autónomo",
+       "peso": 75
+      },
+      {
+       "nombre": "Interés en máquinas",
+       "peso": 95
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "USAC",
+       "centro": "CUNOC",
+       "departamento": "Quetzaltenango",
+       "enfoque": "El Creador de Máquinas, Energía y Soluciones Físicas — fascinación por cómo funcionan motores, máquinas, estructuras y sistemas térmicos."
+      }
+     ]
+    },
+    {
+     "carrera": "Ingeniería en Electrónica",
+     "afinidad": 20,
+     "descripcion": "Como los motores modernos ya traen mucha electrónica, esta carrera te da el conocimiento extra para dominar esos sistemas. Es el complemento ideal para que tus reparaciones sean completas y estés al tanto de la tecnología actual.",
+     "razones": [
+      "Te interesa la electrónica en los motores modernos",
+      "Te gusta experimentar para encontrar soluciones",
+      "Tienes una mentalidad analítica y lógica",
+      "Buscas entender cómo funcionan las cosas a fondo"
+     ],
+     "factores": [
+      {
+       "nombre": "Interés tecnológico",
+       "peso": 70
+      },
+      {
+       "nombre": "Pensamiento lógico",
+       "peso": 65
+      },
+      {
+       "nombre": "Experimentación",
+       "peso": 60
+      }
+     ],
+     "instituciones": [
+      {
+       "universidad": "Universidad Mesoamericana",
+       "centro": "Sede Occidente (Universidad Mesoamericana)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Una de las pocas ofertas de esta especialidad en Occidente."
+      },
+      {
+       "universidad": "Universidad de Occidente",
+       "centro": "Sede Quetzaltenango (UdeO)",
+       "departamento": "Quetzaltenango",
+       "enfoque": "Una de las pocas ofertas de esta especialidad en Occidente."
+      }
+     ]
+    }
+   ],
+   "alertas": [],
+   "adaptativas": 4,
+   "nombra_holland_en_apertura": true,
+   "top1_area_r": true,
+   "top1_area_i": false
+  }
+ }
+]

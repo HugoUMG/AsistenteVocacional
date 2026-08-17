@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Nav from './Nav'
 import { sessionId } from './session'
+import { authHeader } from './auth'
+import GuardarResultados from './GuardarResultados'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -150,7 +152,7 @@ export default function Psicometrico() {
     try {
       const r = await fetch(`${API}/api/psicometrico`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({
           respuestas,
           tiempos: tiempos.current,
@@ -339,6 +341,8 @@ function Resultados({ datos, banco }) {
           Este examen mide estilo de trabajo y aptitudes; no mide inteligencia ni
           valor personal, y no diagnostica nada.
         </p>
+
+        <GuardarResultados />
 
         <section className="psi-bloque">
           <h2>Perfil de personalidad</h2>

@@ -75,7 +75,8 @@ viejo de la v1.9.
 - Las ocupaciones son del mercado laboral de EE. UU. Sirven para ver *tipo* de
   trabajo, no como catálogo de carreras en Guatemala — eso lo da el chat.
 - **No alimenta la recomendación.** En el modo 3 su perfil viaja al prompt del
-  chat, pero medido no mueve el ranking (ver abajo). Sí se guarda desde el
+  chat, pero medido no mueve el ranking — ni como prosa ni como estructura
+  (catálogo codificado con los RIASEC de O*NET, ver abajo). Sí se guarda desde el
   2026-08-16 en la tabla `resultados_holland`.
 - El banco de preguntas se cachea en memoria (`functools.cache`); un reinicio del
   backend lo vuelve a pedir.
@@ -132,17 +133,51 @@ decidido por evidencia:
   las carreras correctas (un perfil A+S devuelve ocupaciones de docencia y
   arrastra el catálogo hacia pedagogía).
 
+## El catálogo codificado con RIASEC (2026-08-16)
+
+La decisión abierta #1 —"si Holland tiene que ser motor, entra como estructura"—
+ya se construyó y se midió: **no lo convierte en motor**. Ver
+[experiments/holland-estructura.md](../experiments/holland-estructura.md).
+
+| Pieza | Qué es |
+|---|---|
+| `backend/codificar_holland.py` | Codifica los 90 perfiles del catálogo: busca la carrera en el O*NET en español, promedia el perfil de intereses oficial de las 3 primeras ocupaciones. Offline, gratis, resumible. |
+| `backend/data/holland_catalogo.json` | El resultado: vector RIASEC + código + **con qué ocupaciones se armó** + `revisado: false`. |
+| `backend/app/holland_filtro.py` | Ordena el catálogo por correlación entre los seis puntajes del alumno y el vector de cada carrera. Detrás de `HOLLAND_EN_RECOMENDACION` (apagado). |
+
+Lo medido, en corto:
+
+- **El top-1 no cambió en ninguno de los 2 perfiles.** Con la conversación
+  presente, el orden estructural no aporta poder discriminante — el mismo
+  resultado que dio el CIP.
+- **El corte del catálogo queda en 0 (sin cortar).** Un corte en 30 tira al
+  puesto 59 la carrera correcta del perfil artístico: el vector de Diseño Gráfico
+  es A+E+C y la alumna es A+S.
+- **La codificación no está revisada a mano** (0/90) y 19 perfiles salieron
+  `SIC` porque el buscador los manda a "Profesores de … de Nivel Postsecundario".
+  Ahí está el reintento honesto, si alguien quiere hacerlo.
+
+## Apertura explícita del chat (2026-08-17)
+
+Medido en [experiments/holland-apertura.md](../experiments/holland-apertura.md):
+obligar a que la primera pregunta adaptativa del modo 3 nombre el código o el
+área más alta de Holland de forma literal ("vi que tu test salió fuerte en
+Artístico...") se cumple siempre (6/6 corridas) y **no cambia qué carrera
+gana** (4/5 corridas coinciden con la apertura pasiva de hoy). Es un cambio de
+experiencia conversacional, no de motor, coherente con que Holland no pesa en
+el ranking (§ arriba). **Integrado en producción el 2026-08-17**:
+`app/holland.py` (`adenda_chat`, con detección de empate técnico entre las dos
+áreas más altas) y `app/preguntas.py` (`siguiente_pregunta` recibe
+`holland_puntajes` además del bloque de texto).
+
 ## Decisiones abiertas (para retomar)
 
-1. **Si Holland tiene que ser motor, entra como estructura, no como prosa.**
-   Codificar el catálogo con los códigos RIASEC que O*NET publica por ocupación y
-   ordenar por distancia al código del alumno. Es la ventaja que el CIP no tenía:
-   la codificación se ancla a una fuente real en vez de que la invente el modelo.
-   Aplica la regla 4 y la lección de
-   [cip-en-recomendacion.md](../experiments/cip-en-recomendacion.md): un A/B con
-   hojas respondidas por Gemini no prueba la hipótesis (por eso las hojas del
-   experimento de Holland se construyen aritméticamente y las califica O*NET).
+1. ~~Revisar a mano la codificación RIASEC del catálogo~~ — hecho el
+   2026-08-17, las 90 entradas quedaron `revisado: true` en
+   `holland_catalogo.json` (13 recodificadas por búsquedas erróneas).
 2. **Persistencia.** Hoy no se guarda nada. Para el modo 3 hace falta que el
    resultado sobreviva al cambio de pestaña (localStorage) y, si entra en la
    investigación, una tabla como `resultados_psicometricos`.
 3. **Revisar el psicométrico propio** (pendiente del usuario, 2026-08-16).
+4. ~~Integrar la apertura explícita a producción~~ — hecho el 2026-08-17,
+   ver la sección de arriba.

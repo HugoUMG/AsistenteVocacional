@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { color } from './colors'
 import { sessionId } from './session'
+import GuardarResultados from './GuardarResultados'
 import './Dashboard.css'
 
 const API = 'http://localhost:8000'
@@ -239,6 +240,8 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
           )}
         </div>
       </header>
+
+      <GuardarResultados />
 
       <section className="dash-charts">
         <div className="chart-card">
