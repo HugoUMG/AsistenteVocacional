@@ -14,7 +14,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
-from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland, personalidad, auth
+from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland, holland_filtro, personalidad, auth
 
 
 @asynccontextmanager
@@ -570,6 +570,9 @@ def holland_perfil(
     Se guarda el resultado (es el instrumento avalado del proyecto y entra en la
     investigación). Sin session_id no se guarda: son llamadas de prueba."""
     perfil = _onet(holland.perfil, data.respuestas, data.zona)
+    perfil["carreras_catalogo"] = holland_filtro.carreras_afines(
+        {a["letra"]: a["score"] for a in perfil["areas"]}
+    )
     if data.session_id:
         db.add(models.ResultadoHolland(
             session_id=data.session_id,
