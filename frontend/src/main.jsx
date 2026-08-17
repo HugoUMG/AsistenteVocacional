@@ -10,6 +10,7 @@ import Psicometrico from './Psicometrico.jsx'
 import Mapa from './Mapa.jsx'
 import Chat from './Chat.jsx'
 import Cip from './Cip.jsx'
+import Holland from './Holland.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/mapa" element={<Mapa />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/cip" element={<Cip />} />
+        <Route path="/holland" element={<Holland />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

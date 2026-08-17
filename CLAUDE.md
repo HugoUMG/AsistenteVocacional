@@ -107,6 +107,8 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   de las 7 dimensiones vocacionales, intento descartado de microexperiencias.
 - [docs/psicometrico.md](docs/psicometrico.md) — examen de 100 ítems: secciones,
   calificación, coherencia, deseabilidad social, baremo y sus límites.
+- [docs/holland.md](docs/holland.md) — test RIASEC servido por la API oficial de
+  O*NET (proxy con credenciales, no reimplementación).
 - [docs/catalogo.md](docs/catalogo.md) — universidades cargadas y cómo agregar más.
 
 **Decisiones técnicas** (fecha · motivo · alternativas descartadas · consecuencias)

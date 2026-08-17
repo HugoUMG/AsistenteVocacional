@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from typing import Annotated
 
 import edge_tts
+import httpx
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -13,7 +14,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
-from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto
+from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland
 
 
 @asynccontextmanager
@@ -439,6 +440,50 @@ def cip_calificar(data: CipIn):
         "resultado": cip_fogliatto.calificar(data.respuestas, data.sexo, data.muestra),
         "sinceridad": cip_fogliatto.sinceridad(data.respuestas),
     }
+
+
+class HollandIn(BaseModel):
+    respuestas: str  # 60 dígitos 1-5, en el orden de las preguntas
+    zona: int | None = Field(default=4, ge=1, le=5)  # Job Zone; 4 ≈ carrera universitaria
+
+    @field_validator("respuestas")
+    @classmethod
+    def _cadena_ok(cls, v: str) -> str:
+        if not holland.valida(v):
+            raise ValueError(
+                f"Se esperan {holland.N_PREGUNTAS} respuestas con valores del 1 al 5"
+            )
+        return v
+
+
+def _onet(fn, *args, **kwargs):
+    """Traduce fallas del servicio de O*NET a errores que el alumno entienda."""
+    try:
+        return fn(*args, **kwargs)
+    except holland.SinCredenciales as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except httpx.HTTPError as e:
+        print(f"[holland] O*NET falló: {e}")
+        raise HTTPException(
+            status_code=502,
+            detail="El servicio de O*NET no respondió. Intentá de nuevo en un momento.",
+        )
+
+
+@app.get("/api/holland/preguntas")
+def holland_preguntas():
+    """Los 60 ítems del Interest Profiler en español, servidos por O*NET."""
+    return _onet(holland.preguntas)
+
+
+@app.post("/api/holland")
+def holland_perfil(data: HollandIn):
+    """Puntajes RIASEC y carreras afines. El cálculo lo hace la API oficial.
+
+    ponytail: no guarda nada en la base de datos, igual que el CIP. Si el test se
+    va a usar en la investigación, se agrega una tabla como `resultados_psicometricos`.
+    """
+    return _onet(holland.perfil, data.respuestas, data.zona)
 
 
 class FeedbackIn(BaseModel):
