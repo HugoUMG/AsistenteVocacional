@@ -426,26 +426,26 @@
  "UMG Quetzaltenango::Licenciatura en Administración Educativa": {
   "nombre": "Licenciatura en Administración Educativa",
   "vector": {
-   "R": 19.7,
-   "I": 47.0,
-   "A": 39.3,
-   "S": 100.0,
-   "E": 34.0,
-   "C": 48.3
+   "R": 5.3,
+   "I": 45.0,
+   "A": 32.3,
+   "S": 88.3,
+   "E": 65.0,
+   "C": 48.7
   },
-  "codigo": "SCI",
+  "codigo": "SEC",
   "ocupaciones": [
    {
-    "code": "21-1012.00",
-    "title": "Consejeros y Orientadores Educativos, Académicos, y Ocupacionales"
+    "code": "21-2021.00",
+    "title": "Directores de Educación y Actividades Religiosas"
    },
    {
-    "code": "25-2032.00",
-    "title": "Maestros de Educación Profesional/Técnica de Escuela Secundaria"
+    "code": "21-1091.00",
+    "title": "Especialistas en Educación de la Salud"
    },
    {
-    "code": "25-1081.00",
-    "title": "Profesores de Educación de Nivel Postsecundario"
+    "code": "11-9032.00",
+    "title": "Administradores Educativos de Nivel Primario hasta Secundario"
    }
   ],
   "revisado": true
@@ -966,26 +966,26 @@
  "economia": {
   "nombre": "Economía Empresarial",
   "vector": {
-   "R": 16.7,
-   "I": 71.3,
-   "A": 29.0,
-   "S": 64.0,
-   "E": 47.7,
-   "C": 58.0
+   "R": 5.7,
+   "I": 87.7,
+   "A": 17.0,
+   "S": 18.0,
+   "E": 52.7,
+   "C": 71.7
   },
-  "codigo": "ISC",
+  "codigo": "ICE",
   "ocupaciones": [
    {
-    "code": "25-1063.00",
-    "title": "Profesores de Economía de Nivel Postsecundario"
+    "code": "13-2051.00",
+    "title": "Analistas Financieros y de Inversiones"
    },
    {
-    "code": "15-2051.01",
-    "title": "Analistas de Inteligencia Empresarial"
+    "code": "19-3011.00",
+    "title": "Economistas"
    },
    {
-    "code": "25-1011.00",
-    "title": "Profesores de Estudios Comerciales de Nivel Postsecundario"
+    "code": "13-2099.01",
+    "title": "Analistas Cuantitativos Financieros"
    }
   ],
   "revisado": true
@@ -1583,26 +1583,26 @@
  "pedagogia_admin_educativa": {
   "nombre": "Administración Educativa",
   "vector": {
-   "R": 19.7,
-   "I": 47.0,
-   "A": 39.3,
-   "S": 100.0,
-   "E": 34.0,
-   "C": 48.3
+   "R": 5.3,
+   "I": 45.0,
+   "A": 32.3,
+   "S": 88.3,
+   "E": 65.0,
+   "C": 48.7
   },
-  "codigo": "SCI",
+  "codigo": "SEC",
   "ocupaciones": [
    {
-    "code": "21-1012.00",
-    "title": "Consejeros y Orientadores Educativos, Académicos, y Ocupacionales"
+    "code": "21-2021.00",
+    "title": "Directores de Educación y Actividades Religiosas"
    },
    {
-    "code": "25-2032.00",
-    "title": "Maestros de Educación Profesional/Técnica de Escuela Secundaria"
+    "code": "21-1091.00",
+    "title": "Especialistas en Educación de la Salud"
    },
    {
-    "code": "25-1081.00",
-    "title": "Profesores de Educación de Nivel Postsecundario"
+    "code": "11-9032.00",
+    "title": "Administradores Educativos de Nivel Primario hasta Secundario"
    }
   ],
   "revisado": true
@@ -2204,26 +2204,26 @@
  "relaciones_internacionales": {
   "nombre": "Relaciones Internacionales",
   "vector": {
-   "R": 16.3,
-   "I": 57.3,
-   "A": 29.3,
-   "S": 72.3,
-   "E": 59.3,
-   "C": 52.7
+   "R": 12.0,
+   "I": 47.3,
+   "A": 23.3,
+   "S": 56.0,
+   "E": 76.7,
+   "C": 59.3
   },
-  "codigo": "SEI",
+  "codigo": "ECS",
   "ocupaciones": [
-   {
-    "code": "25-1065.00",
-    "title": "Profesores de Ciencias Políticas de Nivel Postsecundario"
-   },
    {
     "code": "11-9199.01",
     "title": "Gerentes de Asuntos Normativos"
    },
    {
-    "code": "25-1011.00",
-    "title": "Profesores de Estudios Comerciales de Nivel Postsecundario"
+    "code": "25-1065.00",
+    "title": "Profesores de Ciencias Políticas de Nivel Postsecundario"
+   },
+   {
+    "code": "11-1011.00",
+    "title": "Directores Ejecutivos"
    }
   ],
   "revisado": true
