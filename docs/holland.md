@@ -75,9 +75,10 @@ viejo de la v1.9.
 - Las ocupaciones son del mercado laboral de EE. UU. Sirven para ver *tipo* de
   trabajo, no como catálogo de carreras en Guatemala — eso lo da el chat.
 - **No alimenta la recomendación.** En el modo 3 su perfil viaja al prompt del
-  chat, pero medido no mueve el ranking — ni como prosa ni como estructura
-  (catálogo codificado con los RIASEC de O*NET, ver abajo). Sí se guarda desde el
-  2026-08-16 en la tabla `resultados_holland`.
+  chat, pero medido no mueve el ranking. Se probó de tres formas y las tres
+  dieron lo mismo: como prosa, como estructura (catálogo codificado con los
+  RIASEC de O*NET) y como estructura con el catálogo **revisado a mano**. Ver
+  abajo. Sí se guarda desde el 2026-08-16 en la tabla `resultados_holland`.
 - El banco de preguntas se cachea en memoria (`functools.cache`); un reinicio del
   backend lo vuelve a pedir.
 
@@ -142,7 +143,8 @@ ya se construyó y se midió: **no lo convierte en motor**. Ver
 | Pieza | Qué es |
 |---|---|
 | `backend/codificar_holland.py` | Codifica los 90 perfiles del catálogo: busca la carrera en el O*NET en español, promedia el perfil de intereses oficial de las 3 primeras ocupaciones. Offline, gratis, resumible. |
-| `backend/data/holland_catalogo.json` | El resultado: vector RIASEC + código + **con qué ocupaciones se armó** + `revisado: false`. |
+| `backend/data/holland_catalogo.json` | El resultado: vector RIASEC + código + **con qué ocupaciones se armó** + `revisado`. |
+| `TERMINOS_REVISADOS` / `SIN_MEJOR_TERMINO` (en `codificar_holland.py`) | Los términos corregidos a mano y los que se probaron y midieron peor, cada uno con su motivo. `--recodificar` los reaplica: los arreglos son reproducibles, no ediciones sueltas del JSON. |
 | `backend/app/holland_filtro.py` | Ordena el catálogo por correlación entre los seis puntajes del alumno y el vector de cada carrera. Detrás de `HOLLAND_EN_RECOMENDACION` (apagado). |
 
 Lo medido, en corto:
@@ -153,9 +155,17 @@ Lo medido, en corto:
 - **El corte del catálogo queda en 0 (sin cortar).** Un corte en 30 tira al
   puesto 59 la carrera correcta del perfil artístico: el vector de Diseño Gráfico
   es A+E+C y la alumna es A+S.
-- **La codificación no está revisada a mano** (0/90) y 19 perfiles salieron
-  `SIC` porque el buscador los manda a "Profesores de … de Nivel Postsecundario".
-  Ahí está el reintento honesto, si alguien quiere hacerlo.
+- **El reintento honesto era revisar la codificación a mano, y ya se hizo**
+  (41/90 al 2026-08-18, 16 códigos cambiados). Con el catálogo revisado se
+  repitió el A/B completo: **0/2 otra vez**. Y la evidencia quedó más firme, no
+  más débil — la carrera de Melany subió del puesto 12 al **1** del catálogo
+  ordenado y la recomendación no se movió, así que ya no se puede objetar que
+  el orden no pesaba por estar mal calculado.
+- Lo que la revisión enseñó y sirve para cualquier trabajo futuro con O*NET:
+  **títulos de ocupación limpios no son vector correcto**. 10 de 23
+  alternativas probadas se leían mejor y midieron peor (pedir "Ingenieros
+  Químicos" arrastra operadores de caldera, que suben la R y bajan la I). El
+  criterio de aceptación es el vector.
 
 ## Apertura explícita del chat (2026-08-17)
 
@@ -172,12 +182,22 @@ el ranking (§ arriba). **Integrado en producción el 2026-08-17**:
 
 ## Decisiones abiertas (para retomar)
 
-1. ~~Revisar a mano la codificación RIASEC del catálogo~~ — hecho el
-   2026-08-17, las 90 entradas quedaron `revisado: true` en
-   `holland_catalogo.json` (13 recodificadas por búsquedas erróneas).
-2. **Persistencia.** Hoy no se guarda nada. Para el modo 3 hace falta que el
-   resultado sobreviva al cambio de pestaña (localStorage) y, si entra en la
-   investigación, una tabla como `resultados_psicometricos`.
+1. **Revisar a mano la codificación RIASEC del catálogo** — en curso: **41 de
+   90** al 2026-08-18. Una pasada anterior (2026-08-17) dejó las 90 en
+   `revisado: true` sin haberlas mirado; el flag ya no miente. Ver
+   [experiments/holland-estructura.md](../experiments/holland-estructura.md) §8.
+   Las 49 restantes se leyeron y se veían correctas, pero nadie les probó una
+   alternativa.
+2. ~~Persistencia~~ — hecha. El resultado se guarda en `resultados_holland`
+   (`main.py`, al calificar) y sobrevive al cambio de pestaña por
+   `localStorage`. Se liga a `estudiante_id` cuando hay sesión iniciada, y el
+   historial lo lee de ahí.
 3. **Revisar el psicométrico propio** (pendiente del usuario, 2026-08-16).
 4. ~~Integrar la apertura explícita a producción~~ — hecho el 2026-08-17,
    ver la sección de arriba.
+5. **Si se quiere que Holland pese, el camino que queda es el prompt de
+   arbitraje**, no la codificación del catálogo: eso ya se midió dos veces y no
+   mueve el ranking (§ arriba). La hipótesis sin probar es obligar al modelo a
+   reconciliar de forma explícita lo declarado contra lo medido cuando se
+   contradicen — el caso de Dulce, que declara salud y mide arte. Aplican las
+   reglas 3 y 4 del CLAUDE.md: se mide antes de aceptarse.
