@@ -100,11 +100,13 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
    calificación: los sirve la API de O*NET. El **CIP salió del menú** (2026-08-16)
    por falta de autorización de uso — no reponerlo ni invertirle trabajo hasta
    que exista permiso escrito. Ver [docs/holland.md](docs/holland.md).
-10. **Holland NO alimenta la recomendación**, ni como texto en el prompt ni con
-    el catálogo codificado en RIASEC: las dos cosas se midieron y el ranking no
-    se movió. No afirmarlo en la tesis. Si se quiere reintentar, el paso que
-    falta es revisar a mano `backend/data/holland_catalogo.json`, no escribir
-    código nuevo.
+10. **Holland NO alimenta la recomendación.** Se midió **tres veces** y el
+    ranking no se movió: como texto en el prompt, con el catálogo codificado en
+    RIASEC, y con ese catálogo **revisado a mano** (90/90, 18 códigos
+    cambiados). No afirmarlo en la tesis. La revisión del catálogo ya está
+    hecha: **no es el paso pendiente y no vale la pena reintentarla**. Lo único
+    sin probar es el prompt de arbitraje entre lo declarado y lo medido, ver la
+    decisión abierta #5 de [docs/holland.md](docs/holland.md).
 11. **NUNCA uses la raya o guion largo (—) ni dobles guiones (--) en tus
     respuestas, descripciones de documentos, textos web, comentarios de código
     o código fuente.** En su lugar, utiliza comas para aclaraciones breves,
@@ -164,7 +166,7 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 - [experiments/holland-estructura.md](experiments/holland-estructura.md) —
   catálogo codificado con los RIASEC de O*NET y ordenado por afinidad: el top-1
   no cambió (0/2). Flag `HOLLAND_EN_RECOMENDACION`, apagado. §8 revisó el
-  catálogo a mano (41/90, 16 códigos cambiados) y §9 repitió el A/B con el
+  catálogo a mano (90/90, 18 códigos cambiados) y §9 repitió el A/B con el
   catálogo revisado: **0/2 otra vez**. Los términos de búsqueda corregidos y los
   que midieron peor viven en `codificar_holland.py`, con el motivo.
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —

@@ -51,7 +51,7 @@
     "title": "Tecnólogos y Técnicos en Ingeniería Industrial"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "CUNOC::Ingeniería en Administración de Tierras": {
   "nombre": "Ingeniería en Administración de Tierras",
@@ -105,7 +105,7 @@
     "title": "Directores de Arquitectura e Ingeniería"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "CUNOC::Licenciatura en Economía": {
   "nombre": "Licenciatura en Economía",
@@ -159,7 +159,7 @@
     "title": "Profesores de Ingeniería de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "CUNOC::Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)": {
   "nombre": "Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)",
@@ -213,7 +213,7 @@
     "title": "Psicólogos Escolares"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "CUNTOTO::Ingeniería Forestal": {
   "nombre": "Ingeniería Forestal",
@@ -240,7 +240,7 @@
     "title": "Silvicultores"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "CUNTOTO::PEM en Pedagogía y Educación Intercultural": {
   "nombre": "PEM en Pedagogía y Educación Intercultural",
@@ -321,7 +321,7 @@
     "title": "Agentes de Reservación y Venta de Boletos de Transporte y Empleados de Oficina de Viajes"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Chef Profesional e Internacional (Técnico Universitario)": {
   "nombre": "Chef Profesional e Internacional (Técnico Universitario)",
@@ -483,7 +483,7 @@
     "title": "Profesores de Educación de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Licenciatura en Educación de la Comunicación y Lenguaje": {
   "nombre": "Licenciatura en Educación de la Comunicación y Lenguaje",
@@ -510,7 +510,7 @@
     "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Licenciatura en Educación de la Física y Matemática": {
   "nombre": "Licenciatura en Educación de la Física y Matemática",
@@ -564,7 +564,7 @@
     "title": "Profesores de Ingeniería de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Profesorado en Pedagogía con Especialización": {
   "nombre": "Profesorado en Pedagogía con Especialización",
@@ -672,7 +672,7 @@
     "title": "Gerentes de Sistemas de Computación e Información"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "URG Totonicapán::Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)": {
   "nombre": "Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)",
@@ -699,7 +699,7 @@
     "title": "Gerentes de Relaciones Públicas"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "administracion_empresas": {
   "nombre": "Administración de Empresas",
@@ -780,7 +780,7 @@
     "title": "Tecnólogos y Técnicos de Radiología"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "ciencias_juridicas": {
   "nombre": "Licenciatura en Ciencias Jurídicas y Sociales",
@@ -834,7 +834,7 @@
     "title": "Dentistas Generales"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "comercio_internacional": {
   "nombre": "Licenciatura en Comercio Internacional",
@@ -861,7 +861,7 @@
     "title": "Gerentes de Ventas"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "comunicacion_diseno": {
   "nombre": "Licenciatura en Comunicación y Diseño",
@@ -888,7 +888,7 @@
     "title": "Diseñadores de Página Web y de Interfaz Digital"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "contaduria": {
   "nombre": "Contaduría Pública y Auditoría",
@@ -915,7 +915,7 @@
     "title": "Gerentes Financieros"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "criminalistica": {
   "nombre": "Técnico Universitario en Criminología y Criminalística",
@@ -969,7 +969,7 @@
     "title": "Diseñadores de Página Web y de Interfaz Digital"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "economia": {
   "nombre": "Economía Empresarial",
@@ -1023,7 +1023,7 @@
     "title": "Asistentes de Enfermería"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "enfermeria_veterinaria": {
   "nombre": "Técnico Universitario en Enfermería Veterinaria",
@@ -1050,7 +1050,7 @@
     "title": "Asistentes de Veterinarios y Cuidadores de Animales de Laboratorio"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "gastronomia": {
   "nombre": "Artes Culinarias y Negocios Gastronómicos",
@@ -1077,7 +1077,7 @@
     "title": "Educadores en Gerencia de Granjas y Hogares"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "hemodialisis": {
   "nombre": "Técnico Universitario en Hemodiálisis",
@@ -1181,34 +1181,34 @@
     "title": "Ingenieros de Seguridad de la Información"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "ingenieria_agricola": {
   "nombre": "Ingeniería Agrícola con Énfasis en Gerencia",
   "vector": {
-   "R": 88.0,
-   "I": 22.7,
-   "A": 0.0,
-   "S": 14.0,
-   "E": 24.7,
-   "C": 52.3
+   "R": 71.0,
+   "I": 79.7,
+   "A": 22.7,
+   "S": 43.3,
+   "E": 28.3,
+   "C": 46.0
   },
-  "codigo": "RCE",
+  "codigo": "IRC",
   "ocupaciones": [
    {
-    "code": "45-2091.00",
-    "title": "Operadores de Equipo Agrícola"
+    "code": "17-2021.00",
+    "title": "Ingenieros Agrónomos"
    },
    {
-    "code": "49-3041.00",
-    "title": "Mecánicos y Técnicos de Servicio de Equipo Agrícola"
+    "code": "25-1041.00",
+    "title": "Profesores de Ciencias Agrarias de Nivel Postsecundario"
    },
    {
-    "code": "13-1074.00",
-    "title": "Contratistas de Mano de Obra Agrícola"
+    "code": "19-1031.00",
+    "title": "Científicos Especializados en Conservación"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "ingenieria_ambiental": {
   "nombre": "Ingeniería Ambiental",
@@ -1235,7 +1235,7 @@
     "title": "Ingenieros Ambientales"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "ingenieria_civil": {
   "nombre": "Ingeniería Civil",
@@ -1289,7 +1289,7 @@
     "title": "Directores de Arquitectura e Ingeniería"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "ingenieria_industrial": {
   "nombre": "Ingeniería Industrial",
@@ -1370,7 +1370,7 @@
     "title": "Histotecnólogos"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "laboratorio_dental": {
   "nombre": "Técnico en Laboratorio Dental",
@@ -1397,7 +1397,7 @@
     "title": "Asistentes Dentales"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "marketing_business_analytics": {
   "nombre": "Licenciatura en Marketing and Business Analytics",
@@ -1451,7 +1451,7 @@
     "title": "Médicos de Medicina Interna General"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "mercadotecnia": {
   "nombre": "Técnico Universitario en Gerencia de Ventas",
@@ -1478,7 +1478,7 @@
     "title": "Representantes de Ventas Mayoristas y de Productos Manufacturados Técnicos y Científicos"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "musica_ejecucion": {
   "nombre": "Técnico en Ejecución Musical Popular y Contemporánea",
@@ -1532,7 +1532,7 @@
     "title": "Profesores de Ciencias de la Familia y de los Consumidores de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "optometria": {
   "nombre": "Técnico Universitario en Optometría",
@@ -1559,7 +1559,7 @@
     "title": "Profesores de Especialidades de Salud de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia": {
   "nombre": "Licenciatura en Ciencias de la Educación",
@@ -1586,7 +1586,7 @@
     "title": "Especialistas en Educación de la Salud"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_admin_educativa": {
   "nombre": "Administración Educativa",
@@ -1667,7 +1667,7 @@
     "title": "Profesores de Silvicultura y Ciencias de la Conservación de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_ciencias_sociales": {
   "nombre": "PEM en Historia y Ciencias Sociales",
@@ -1694,7 +1694,7 @@
     "title": "Asistentes de Investigación en Ciencias Sociales"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_comunicacion_lenguaje": {
   "nombre": "PEM en Comunicación y Lenguaje",
@@ -1721,7 +1721,7 @@
     "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_emprendimiento": {
   "nombre": "Profesorado en Emprendimiento para la Productividad",
@@ -1775,7 +1775,7 @@
     "title": "Maestros de Nivel Preescolar"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_ingles": {
   "nombre": "Profesorado de Enseñanza Media en Inglés",
@@ -1802,7 +1802,7 @@
     "title": "Maestros de Educación Especial de Escuela de Nivel Medio"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_intercultural": {
   "nombre": "Profesorado en Idioma Maya, Ciencias Sociales e Interculturalidad",
@@ -1856,7 +1856,7 @@
     "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_matematica_fisica": {
   "nombre": "PEM en Matemática y Física",
@@ -1883,7 +1883,7 @@
     "title": "Maestros de Escuela de Nivel Medio"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_pem_admin_educativa": {
   "nombre": "PEM en Pedagogía y Técnico en Administración Educativa",
@@ -1937,7 +1937,7 @@
     "title": "Auxiliares Docentes de Educación Preescolar, Primaria, Nivel Medio, Secundaria"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_psicologia": {
   "nombre": "PEM en Pedagogía y Psicología",
@@ -1969,29 +1969,29 @@
  "pedagogia_tic": {
   "nombre": "Profesorado en Tecnologías de la Información y la Comunicación",
   "vector": {
-   "R": 32.0,
-   "I": 62.3,
-   "A": 10.0,
-   "S": 35.7,
-   "E": 47.0,
-   "C": 73.3
+   "R": 43.7,
+   "I": 85.0,
+   "A": 36.0,
+   "S": 63.3,
+   "E": 23.0,
+   "C": 52.0
   },
-  "codigo": "CIE",
+  "codigo": "ISC",
   "ocupaciones": [
    {
-    "code": "15-1211.01",
-    "title": "Especialistas en Informática Médica"
+    "code": "25-1021.00",
+    "title": "Profesores de Ciencias de la Computación de Nivel Postsecundario"
    },
    {
-    "code": "15-1299.09",
-    "title": "Gerentes de Proyectos de Informática"
+    "code": "15-1221.00",
+    "title": "Investigadores de Ciencias de la Computación e Información"
    },
    {
-    "code": "15-1244.00",
-    "title": "Administradores de Redes Informáticas y Sistemas de Computación"
+    "code": "25-1051.00",
+    "title": "Profesores de Ciencias Atmosféricas, Geológicas, Oceanográficas y Espaciales de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pem_maya_intercultural": {
   "nombre": "Profesorado en Enseñanza Media en Cultura e Idioma Maya",
@@ -2072,7 +2072,7 @@
     "title": "Operadores de Cámara de Televisión, Video, y Película Cinematográfica"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "psicologia_clinica": {
   "nombre": "Psicología Clínica",
@@ -2153,7 +2153,7 @@
     "title": "Psicólogos Industriales-Organizacionales"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "psicopedagogia": {
   "nombre": "Profesorado en Psicopedagogía",
@@ -2180,7 +2180,7 @@
     "title": "Profesores de Educación de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "quimica_biologica": {
   "nombre": "Licenciatura en Química Biológica",
@@ -2207,7 +2207,7 @@
     "title": "Profesores de Ciencias Biológicas de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "relaciones_internacionales": {
   "nombre": "Relaciones Internacionales",
@@ -2261,7 +2261,7 @@
     "title": "Analistas de Sistemas de Computadoras"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "tecnico_radiologia": {
   "nombre": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
@@ -2288,7 +2288,7 @@
     "title": "Tecnólogos Especializados en Imágenes de Resonancia Magnética"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "telecomunicaciones": {
   "nombre": "Licenciatura en Administración de Telecomunicaciones",
@@ -2315,7 +2315,7 @@
     "title": "Instaladores y Reparadores de Equipo de Telecomunicaciones"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "teologia": {
   "nombre": "Teología",
@@ -2365,7 +2365,7 @@
     "title": "Directores de Servicios Médicos y de Salud"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "trabajo_social": {
   "nombre": "Trabajo Social",
@@ -2419,6 +2419,6 @@
     "title": "Analistas de Inteligencia Empresarial"
    }
   ],
-  "revisado": false
+  "revisado": true
  }
 }

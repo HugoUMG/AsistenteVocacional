@@ -1,6 +1,6 @@
 # Holland como estructura: el catálogo codificado con los RIASEC de O*NET
 
-**Fecha:** 2026-08-16 · rev. 2026-08-18 (§8 revisión a mano de 41/90, §9 A/B
+**Fecha:** 2026-08-16 · rev. 2026-08-18 (§8 revisión a mano de 90/90, §9 A/B
 repetido) · **Estado:** construido y medido **dos veces**. **El flag
 `HOLLAND_EN_RECOMENDACION` queda apagado**: con la conversación presente, el
 orden por afinidad RIASEC **no movió el top-1** en ninguno de los dos perfiles,
@@ -152,7 +152,7 @@ explicación de por qué el emparejamiento por vector falla donde falla (§3).
 4. **En la tesis no se puede decir que Holland alimenta la recomendación.** Ni
    como prosa (medido antes), ni como estructura (medido acá), ni como
    estructura bien codificada (medido en §9, después de revisar el catálogo a
-   mano y cambiar 16 códigos).
+   mano y cambiar 18 códigos).
 5. Lo que **sí** se puede afirmar, y con evidencia: el catálogo está codificado
    con una fuente oficial, la afinidad RIASEC alumno↔carrera es un número
    auditable, y ese número **no cambia el resultado** cuando ya hay una
@@ -164,9 +164,10 @@ explicación de por qué el emparejamiento por vector falla donde falla (§3).
 - **2 perfiles ficticios, 1 corrida cada uno.** Sirve para leer el mecanismo, no
   para afirmar una mejora ni descartarla con fuerza estadística. Compartir la
   conversación quita la varianza entre corridas pero no agrega potencia.
-- **La codificación está revisada a mano en parte: 41/90** (2026-08-17, ver
-  §8). Las 49 restantes se leyeron y se vieron correctas, pero nadie les probó
-  una alternativa.
+- **La codificación está revisada a mano, 90/90** (2026-08-18, ver §8), pero
+  revisada no es lo mismo que correcta: 41 se dieron por buenas sin probarles
+  alternativa, y varias arrastran techos del buscador que quedaron anotados
+  (telecomunicaciones, lenguas mayas, los nombres híbridos).
 - **El corte nunca se probó con Gemini.** Se descartó en la puerta previa por lo
   que le hace al perfil artístico. Probarlo solo con Melany sería elegir el
   perfil al que le conviene.
@@ -176,15 +177,15 @@ explicación de por qué el emparejamiento por vector falla donde falla (§3).
   sustituyen la potencia estadística que ninguno de los dos tiene.
 - La prueba decisiva sigue necesitando alumnos reales respondiendo el test.
 
-## 8. La revisión a mano (2026-08-17)
+## 8. La revisión a mano (2026-08-17 y 2026-08-18)
 
 §7 decía que la codificación no estaba revisada (0/90) mientras el JSON traía
 `"revisado": true` en las 90 entradas. El flag estaba mal: nadie las había
-mirado. Esta pasada revisó **20 de 90** y dejó el flag significando una sola
-cosa, que el nombre esté en `TERMINOS_REVISADOS` (se corrigió) o en
-`SIN_MEJOR_TERMINO` (se miró y se dejó igual). Ambos dicts viven en
-`codificar_holland.py` con el motivo escrito por entrada, y `--recodificar`
-los reaplica: los arreglos son reproducibles, no ediciones sueltas del JSON.
+mirado. Se revisaron en tres pasadas (20, luego 70, luego las 41 que quedaban
+sin probar) y el flag pasó a significar una sola cosa: que alguien tomó una
+decisión explícita sobre esa carrera y la dejó escrita. Los tres grupos viven en
+`codificar_holland.py` con el motivo por entrada, y `--recodificar` los reaplica:
+los arreglos son reproducibles, no ediciones sueltas del JSON.
 
 ### Las dos causas raíz
 
@@ -210,13 +211,17 @@ personal de mostrador y no quien administra.
 
 ### Resultado
 
-Se leyeron las 90. **23 entradas quedaron con término corregido** (16 cambiaron
-de código de 3 letras contra el original) y **18 se revisaron y se dejaron
-igual**, con el motivo anotado. Total: 41/90 con una decisión explícita
-tomada. Las 49 restantes se leyeron en el informe de `--revisar` y el
-emparejamiento era correcto (Médico y Cirujano → cirujanos, Enfermería →
-enfermeros, Contaduría → contadores), pero no se les probó una alternativa, así
-que no cuentan como revisadas.
+**Las 90 quedaron con una decisión explícita tomada**, en tres grupos que viven
+en `codificar_holland.py`:
+
+| Grupo | Cuántas | Qué significa |
+|---|---|---|
+| `TERMINOS_REVISADOS` | **25** | se le corrigió el término de búsqueda, con el motivo |
+| `SIN_MEJOR_TERMINO` | **24** | se le probó una alternativa y **no mejoró**, con el número que la descartó |
+| `YA_CORRECTAS` | **41** | se miró y no había hipótesis que probar (Médico y Cirujano → cirujanos, Enfermería → enfermeros, Contaduría → contadores) |
+
+Contra el catálogo original: **18 códigos de 3 letras cambiados** y 7 más con el
+mismo código y el vector más limpio.
 
 Los peores casos que encontró la 2.ª pasada no eran de sesgo docente sino de
 carreras a las que les faltaba **su rasgo definitorio**:
@@ -267,17 +272,30 @@ los títulos de las ocupaciones **no sirve** y se descartó: "Comunicación y
 Diseño" → "Diseñadores Gráficos" da cero palabras en común y es correcto. La
 revisión fue leer el informe de `--revisar` entero, con el vector al lado.
 
-### Lo que queda
+### Los techos que quedan anotados, para no reintentarlos
 
-- 49 perfiles leídos y aparentemente correctos, sin alternativa probada.
-- Psicología Clínica y Psicología (PEM y Licenciatura) comparten vector.
-- Techos del buscador ya anotados y que no vale la pena reintentar: lenguas
-  mayas, hemodiálisis, emprendimiento, arquitectura, teología.
-- La prueba de si algo de esto importa sigue siendo el A/B de §4, sin correr.
+- **Telecomunicaciones.** `Especialistas en Ingeniería de Telecomunicaciones`,
+  `Ingenieros de Telecomunicaciones` y `Gerentes de Telecomunicaciones e
+  Ingeniería` devuelven **las mismas 3 ocupaciones**, dos de ellas instaladores
+  de líneas. O*NET en español no tiene gestión de telecomunicaciones. Su R=80.3
+  está mal para una licenciatura y aun así se deja: la alternativa la dejaría
+  con el vector *exacto* de otra carrera y sin nada de telecom.
+- **Los híbridos pierden su segunda mitad y no hay cómo evitarlo.** "Ingeniería
+  Agrícola con Énfasis en Gerencia" ya no es un jornalero (I de 22.7 a 79.7),
+  pero la gerencia se sigue perdiendo.
+- Lenguas mayas, hemodiálisis, emprendimiento, arquitectura y teología, ya
+  documentados arriba.
+- **Psicología Clínica y Psicología (PEM y Licenciatura) comparten vector** y
+  con este método no hay forma de separarlas.
+
+Que las 90 estén revisadas **no las vuelve correctas**: quiere decir que alguien
+las miró y dejó dicho qué decidió. Los techos de esta lista siguen ahí.
 
 ## 9. El A/B repetido con el catálogo revisado (2026-08-18)
 
-§8 cambió 16 códigos RIASEC, así que el A/B de §4 se volvió a correr entero.
+§8 cambió 16 códigos RIASEC (18 al terminar la 3.ª pasada), así que el A/B de §4
+se volvió a correr entero. El A/B se corrió con los 16 primeros; las 2 entradas
+que faltaban se corrigieron después y no se volvió a pagar la corrida.
 
 ### La puerta previa sí mejoró
 
