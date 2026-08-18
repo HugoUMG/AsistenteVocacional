@@ -1,7 +1,9 @@
 # ¿Ayuda que el chat NOMBRE el resultado de Holland al abrir la conversación?
 
-**Fecha:** 2026-08-17 · **Estado:** confirmado y con resultado nítido —
-**se adopta la apertura explícita**, con la lectura correcta de qué prueba.
+**Fecha:** 2026-08-17 · rev. 2026-08-18 (§8, repetición con n=6) ·
+**Estado:** confirmado y con resultado nítido — **se adopta la apertura
+explícita**, con la lectura correcta de qué prueba: controla la FORMA de la
+conversación (6/6 y 6/6 en dos mediciones), no el ranking.
 
 Ámbito: catálogo de Quetzaltenango + Totonicapán (202 registros carrera-sede),
 `gemini-3.1-flash-lite`. Banco de pruebas: `backend/experimento_holland_apertura.py`.
@@ -103,6 +105,14 @@ no hay una relación causal fiable entre "nombrar el resultado" y "que gane esa
 área". Con `n=1` no se puede afirmar ni eso — es ruido, igual que la corrida 1
 de `holland-en-chat.md` §5.1 lo fue para las preguntas fijas.
 
+> **Corrección de lectura (§8, 2026-08-18).** "B y C coinciden en 4 de 5" **no
+> es evidencia de que no haya efecto.** Dulce tiene un empate técnico de 1 punto
+> entre sectores opuestos y su resultado es una moneda al aire, así que dos
+> brazos sin ninguna diferencia coincidirían la mitad de las veces por azar. La
+> métrica correcta es la tasa por brazo. Con n=6 por brazo dio 3/6 contra 5/6,
+> favorable a C pero con p = 0.545: sigue sin detectarse efecto, por falta de
+> potencia y no por acuerdo entre brazos.
+
 El caso de empate de Byron (R/I) tampoco discrimina: las dos áreas apuntan al
 mismo sector del catálogo (ingeniería), así que "desempatar" no tenía a dónde
 llevar la conversación que fuera visible en el resultado. Es una limitación
@@ -136,7 +146,9 @@ que ya entendió mis respuestas" que motivó este experimento.
 
 **Lo que no cambia, y no hay que prometer que cambia:** el ranking final. Con
 5 corridas comparables, B y C empatan en 4; en la única que difiere, va al
-revés de lo esperado. Esto es consistente, no contradictorio, con
+revés de lo esperado. §8 lo repitió con n=6 sobre Dulce y el efecto sigue sin
+ser detectable (3/6 vs 5/6, p = 0.545), aunque ahí el motivo es la falta de
+potencia, no el acuerdo entre brazos. Esto es consistente, no contradictorio, con
 `holland-en-chat.md`: la apertura explícita es una intervención en la FORMA de
 la conversación (garantizada), no en el PESO del dato dentro del ranking (que
 sigue sin tenerlo). Son dos preguntas distintas y este experimento contesta la
@@ -165,7 +177,11 @@ primera, no reabre la segunda.
 - 3 perfiles ficticios, 5-6 corridas en total: alcanza para leer el mecanismo
   (¿se cumple la instrucción de forma?, ¿mueve el ranking?), no para afirmar
   una mejora con potencia estadística — igual que los experimentos anteriores
-  de este proyecto.
+  de este proyecto. §8 repitió con n=6 sobre Dulce y sigue sin alcanzar:
+  p = 0.545.
+- **El acuerdo par a par entre brazos, que usa §4.2, engaña cuando el perfil es
+  inestable.** Dos procesos al azar coinciden la mitad de las veces sin que
+  haya ningún efecto. Leer por tasa por brazo, como hace §8.
 - Byron no fue un buen caso de prueba para el desempate: sus dos áreas
   empatadas (R/I) apuntan al mismo sector del catálogo. Un perfil con empate
   entre dos áreas de sectores distintos (como terminó siendo Dulce, sin
@@ -176,7 +192,78 @@ primera, no reabre la segunda.
 - Mismas de siempre: quien responde el chat y quien recomienda es el mismo
   modelo; la prueba decisiva sigue necesitando alumnos reales.
 
-## 8. Reproducir
+## 8. Repetición con n=6 sobre Dulce (2026-08-18), exploratoria
+
+### Por qué se repitió
+
+[holland-sondeo-intereses.md](holland-sondeo-intereses.md) creyó ver que la
+apertura explícita movía el ranking. **Era un hallazgo fantasma** y su propio
+informe lo corrige: comparaba corridas de bancos distintos con n distinto. Pero
+investigarlo destapó algo que sí importa y que §4.2 no podía ver con n=1-2:
+
+**Dulce es una moneda al aire.** Su perfil tiene un empate técnico de 1 punto
+(A=39 vs S=38) entre dos áreas que apuntan a **sectores opuestos**, arte y
+salud. Contando todas las corridas del corpus antes de esta repetición: 6
+Enfermería contra 6 Comunicación y Diseño.
+
+Eso obliga a corregir cómo se leyó §4.2. **"B y C coinciden en 4 de 5 corridas"
+no es evidencia de que no haya efecto**, si el proceso de fondo es inestable:
+dos monedas al aire coinciden la mitad de las veces por puro azar. La métrica
+correcta es la **tasa por brazo**, no el acuerdo par a par.
+
+### Diseño
+
+Solo Dulce, `--repeticiones 6`. Melany sale Contaduría siempre y las dos áreas
+empatadas de Byron apuntan al mismo sector del catálogo, así que ninguno de los
+dos puede discriminar: incluirlos habría duplicado el costo por cero
+información.
+
+### Resultados
+
+| Brazo | top-1 en su área medida | top-1 en el guion de la casa | Nombra Holland |
+|---|---|---|---|
+| **B** apertura pasiva | 3/6 | 3/6 | 0/6 |
+| **C** apertura explícita | **5/6** | 1/6 | **6/6** |
+
+**Fisher exacto bilateral: p = 0.545.** Con n=6 por brazo, 3/6 contra 5/6 es
+indistinguible del azar. Costo: $0.23 equivalentes, 12 conversaciones.
+
+Observación secundaria, del mismo tamaño de muestra y con el mismo valor
+probatorio (poco): B disparó a **4 carreras distintas** en 6 corridas
+(Enfermería, Comunicación y Diseño, Producción Audiovisual, Psicología) y C a
+**3**, con Comunicación y Diseño 4 de 6. La apertura explícita **parece
+concentrar** la salida además de desplazarla. Es una pista, no un resultado.
+
+### Lectura
+
+Lo de §4.1 se confirma otra vez y sin matices: **6/6 contra 0/6** de
+cumplimiento. La instrucción se obedece siempre.
+
+Lo del ranking queda **exploratorio y en dirección favorable, sin poder
+afirmarse**. Esto no contradice §4.2 ni §5: sigue sin haber efecto detectable.
+Lo que cambia es el motivo por el que no se detecta, que ya no es "los brazos
+coinciden" sino "el n es insuficiente para el ruido que tiene este perfil".
+
+Para detectar un efecto de este tamaño (50% → 83%) con 80% de potencia harían
+falta **~15 corridas por brazo**, unos $0.55. **No se corrió**, por decisión
+deliberada: si el proyecto va a hacer una prueba con estudiantes reales, ese
+esfuerzo rinde mucho más ahí. Un n=15 seguiría midiendo a un perfil ficticio
+simulado por el mismo modelo y calificado contra una lista de palabras clave
+del desarrollador, o sea consistencia interna medida bien, no validez.
+
+### Decisión
+
+1. **No cambia nada de §6.** La apertura explícita sigue adoptada por lo que
+   §4.1 mide (la forma de la conversación), no por el ranking.
+2. **Queda cerrado como exploratorio.** Si alguien lo retoma, el camino es
+   n≥15 por brazo, o mejor, conversaciones de alumnos reales.
+3. **Dulce no sirve como perfil suelto para A/B de este tipo.** Su empate
+   técnico la vuelve una moneda al aire. Hace falta un perfil con área
+   dominante clara que igual contradiga el guion de la casa, o aceptar n grande.
+   Su inestabilidad no es un defecto del banco: **cuando el instrumento mismo es
+   ambiguo, la recomendación es inestable**, y eso vale como hallazgo.
+
+## 9. Reproducir
 
 ```bash
 cd backend
@@ -184,6 +271,8 @@ uv run python experimento_holland_apertura.py --self-check   # sin red
 uv run python experimento_holland_apertura.py --hojas        # califica en O*NET, sin Gemini
 uv run python experimento_holland_apertura.py                # el A/B (gasta cuota)
 uv run python experimento_holland_apertura.py --perfil Byron # una corrida de un perfil
+uv run python experimento_holland_apertura.py --perfil Dulce --repeticiones 6  # §8
+uv run python experimento_holland_apertura.py --tasas         # tasas por brazo, sin red
 ```
 
 Crudos: `backend/data/tests/experimento_holland_apertura_resultados.json`

@@ -160,9 +160,12 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   "Holland → chat": las 4 fijas se quedan (más baratas y más cortas), y el bloque
   de Holland en el prompt **no pesa** en la recomendación (5/6 corridas).
 - [experiments/holland-apertura.md](experiments/holland-apertura.md) — obligar
-  al chat a nombrar el resultado de Holland en su primera pregunta se cumple
-  siempre (6/6) y no cambia el ranking (4/5 corridas iguales): cambia la
-  experiencia de apertura, no el motor. Se adopta.
+  al chat a nombrar el resultado de Holland en su primera pregunta **se cumple
+  siempre** (6/6 en dos mediciones independientes): cambia la experiencia de
+  apertura. Se adopta por eso. Sobre el ranking **no hay efecto detectable**;
+  §8 repitió con n=6 sobre Dulce (3/6 vs 5/6, **p = 0.545**) y quedó cerrado
+  como exploratorio. Ojo con §4.2: el acuerdo par a par entre brazos engaña
+  cuando el perfil es inestable, hay que leer por tasa.
 - [experiments/holland-estructura.md](experiments/holland-estructura.md) —
   catálogo codificado con los RIASEC de O*NET y ordenado por afinidad: el top-1
   no cambió (0/2). Flag `HOLLAND_EN_RECOMENDACION`, apagado. §8 revisó el
