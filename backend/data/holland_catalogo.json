@@ -696,26 +696,26 @@
  "administracion_empresas": {
   "nombre": "Administración de Empresas",
   "vector": {
-   "R": 19.0,
-   "I": 29.0,
-   "A": 10.7,
-   "S": 54.3,
-   "E": 75.3,
-   "C": 71.0
+   "R": 57.7,
+   "I": 27.7,
+   "A": 2.7,
+   "S": 25.0,
+   "E": 66.7,
+   "C": 65.3
   },
-  "codigo": "ECS",
+  "codigo": "ECR",
   "ocupaciones": [
    {
-    "code": "53-1042.01",
-    "title": "Coordinadores de Reciclaje"
+    "code": "11-1021.00",
+    "title": "Gerentes Generales y de Operaciones"
    },
    {
-    "code": "11-3012.00",
-    "title": "Gerentes de Servicios Administrativos"
+    "code": "49-9071.00",
+    "title": "Trabajadores de Mantenimiento y Reparación, General"
    },
    {
-    "code": "11-9033.00",
-    "title": "Administradores Educativos de Nivel Postsecundario"
+    "code": "11-9199.09",
+    "title": "Gerentes de Operaciones de Energía Eólica (Proveniente del Viento)"
    }
   ],
   "revisado": true
@@ -2015,26 +2015,26 @@
  "periodismo": {
   "nombre": "Ciencias de la Comunicación Social",
   "vector": {
-   "R": 16.3,
-   "I": 58.7,
-   "A": 56.0,
-   "S": 76.3,
-   "E": 36.3,
-   "C": 43.0
+   "R": 2.3,
+   "I": 24.0,
+   "A": 52.7,
+   "S": 49.0,
+   "E": 91.0,
+   "C": 53.0
   },
-  "codigo": "SIA",
+  "codigo": "ECA",
   "ocupaciones": [
    {
-    "code": "25-1122.00",
-    "title": "Profesores de Comunicaciones de Nivel Postsecundario"
+    "code": "27-3031.00",
+    "title": "Especialistas en Relaciones Públicas"
    },
    {
-    "code": "25-1123.00",
-    "title": "Profesores de Inglés y Literatura de Nivel Postsecundario"
+    "code": "11-2032.00",
+    "title": "Gerentes de Relaciones Públicas"
    },
    {
-    "code": "27-3023.00",
-    "title": "Analistas de Noticias, Reporteros y Periodistas"
+    "code": "27-2012.03",
+    "title": "Directores de Programación de Medios de Comunicación"
    }
   ],
   "revisado": true

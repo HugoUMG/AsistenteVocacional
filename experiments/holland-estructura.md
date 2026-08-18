@@ -157,9 +157,16 @@ explicación de por qué el emparejamiento por vector falla donde falla (§3).
 - **2 perfiles ficticios, 1 corrida cada uno.** Sirve para leer el mecanismo, no
   para afirmar una mejora ni descartarla con fuerza estadística. Compartir la
   conversación quita la varianza entre corridas pero no agrega potencia.
-- **La codificación no está revisada a mano** (0/90). El `SIC` de 19 perfiles
-  dice que hay trabajo pendiente ahí; un catálogo mejor codificado podría dar
-  otro resultado, y ese es el reintento honesto.
+- **Revisión a mano: 2/90 corregidos** (2026-08-17). `administracion_empresas`
+  emparejaba con "Coordinadores de Reciclaje" y `periodismo` (Ciencias de la
+  Comunicación Social) con puros profesores; se corrigieron con una búsqueda
+  más específica ("Gerentes Generales de Operaciones", "Relaciones Públicas y
+  Comunicación"). El resto del catálogo llevaba `"revisado": true` desde antes
+  sin que el contenido estuviera realmente corregido, ese flag no es
+  confiable como métrica de avance. Un caso revisado y dejado tal cual:
+  "Profesorado en Emprendimiento para la Productividad" busca mal
+  ("Atletas y Competidores Deportivos") y no hay mejor término en español que
+  probar, techo real del buscador de O*NET, no de la revisión.
 - **El corte nunca se probó con Gemini.** Se descartó en la puerta previa por lo
   que le hace al perfil artístico. Probarlo solo con Melany sería elegir el
   perfil al que le conviene.
