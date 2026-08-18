@@ -1,6 +1,7 @@
 # Holland como estructura: el catálogo codificado con los RIASEC de O*NET
 
-**Fecha:** 2026-08-16 · **Estado:** construido y medido. **El flag
+**Fecha:** 2026-08-16 · rev. 2026-08-17 (§8, revisión a mano de 20/90) ·
+**Estado:** construido y medido. **El flag
 `HOLLAND_EN_RECOMENDACION` queda apagado**: con la conversación presente, el
 orden por afinidad RIASEC **no movió el top-1** en ninguno de los dos perfiles.
 La codificación del catálogo sí queda hecha y es reutilizable.
@@ -157,31 +158,77 @@ explicación de por qué el emparejamiento por vector falla donde falla (§3).
 - **2 perfiles ficticios, 1 corrida cada uno.** Sirve para leer el mecanismo, no
   para afirmar una mejora ni descartarla con fuerza estadística. Compartir la
   conversación quita la varianza entre corridas pero no agrega potencia.
-- **Revisión a mano: 6/90 corregidos** (2026-08-17). `administracion_empresas`
-  emparejaba con "Coordinadores de Reciclaje", `periodismo` (Ciencias de la
-  Comunicación Social) con puros profesores, y otras 4 (Administración
-  Educativa x2, Economía Empresarial, Relaciones Internacionales) con sesgo de
-  "profesor de la materia" en vez de "quien ejerce la carrera"; se corrigieron
-  con una búsqueda más específica por el nombre de la ocupación real
-  ("Superintendentes de Educación", "Analistas Económicos y Financieros",
-  etc). El resto del catálogo llevaba `"revisado": true` desde antes sin que
-  el contenido estuviera realmente corregido, ese flag no es confiable como
-  métrica de avance. Un caso revisado y dejado tal cual: "Profesorado en
-  Emprendimiento para la Productividad" busca mal ("Atletas y Competidores
-  Deportivos") y no hay mejor término en español que probar, techo real del
-  buscador de O*NET, no de la revisión.
+- **La codificación está revisada a mano solo en parte: 20/90** (2026-08-17,
+  ver §9). Las otras 70 no las ha mirado nadie.
 - **El corte nunca se probó con Gemini.** Se descartó en la puerta previa por lo
   que le hace al perfil artístico. Probarlo solo con Melany sería elegir el
   perfil al que le conviene.
 - La prueba decisiva sigue necesitando alumnos reales respondiendo el test.
 
-## 8. Reproducir
+## 8. La revisión a mano (2026-08-17)
+
+§7 decía que la codificación no estaba revisada (0/90) mientras el JSON traía
+`"revisado": true` en las 90 entradas. El flag estaba mal: nadie las había
+mirado. Esta pasada revisó **20 de 90** y dejó el flag significando una sola
+cosa, que el nombre esté en `TERMINOS_REVISADOS` (se corrigió) o en
+`SIN_MEJOR_TERMINO` (se miró y se dejó igual). Ambos dicts viven en
+`codificar_holland.py` con el motivo escrito por entrada, y `--recodificar`
+los reaplica: los arreglos son reproducibles, no ediciones sueltas del JSON.
+
+### Las dos causas raíz
+
+1. **Sesgo de "profesor de la materia".** El buscador manda el nombre académico
+   a "Profesores de X de Nivel Postsecundario", o sea el vector de *enseñar* la
+   carrera y no el de *ejercerla*. Ya estaba visto en §2 con los 19 `SIC`.
+2. **"Pedagogía" devuelve una sola ocupación y equivocada:** "Profesores de
+   Arte, Teatro, y Música". Es determinista, no azar, y contaminaba 6 entradas.
+   En una de ellas ("Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño
+   Curricular)") el vector entero salía de esa única ocupación, con A=79 y
+   S=100 inventados. En los profesorados la docencia sí es la ocupación
+   correcta, lo que estaba mal era la materia.
+
+   Variante del mismo problema: "Física" se lee como *educación física*.
+   "Licenciatura en Educación de la Física y Matemática" traía "Especialistas
+   en Educación Física Adaptada" de primera.
+
+### Resultado
+
+15 entradas recodificadas: **10 cambiaron de código de 3 letras**, 5 quedaron
+con el mismo código y el vector más limpio. 5 más se revisaron y se dejaron
+igual, con el techo anotado (O*NET no tiene lenguas mayas ni técnico en
+hemodiálisis en español; "Arquitectos" sale peor que lo que ya había).
+
+### Lo que la revisión enseñó, y conviene no exagerar
+
+- **Títulos limpios no son vector correcto.** "Administración de Empresas"
+  emparejaba con "Coordinadores de Reciclaje", pero su código `ECS` ya era el
+  correcto: los otros dos resultados eran gerentes y cargaban la E. Un intento
+  intermedio con "Analistas de Gestión Empresarial" produjo una lista de
+  títulos impecable y un vector peor (E de 75 a 51, S de 54 a 22, C a 86.7: el
+  perfil de un analista de datos, no de un administrador). Hubo que mirar el
+  vector, no la lista, para verlo. Mismo caso en Física y Matemática.
+- Por eso el criterio de aceptación de un término corregido es **el vector**,
+  y los intentos descartados quedaron escritos en el dict junto al bueno.
+- **Esto no reabre la decisión de §6.** Un catálogo mejor codificado sigue sin
+  ser motor de la recomendación mientras no se vuelva a medir el A/B; 22% del
+  catálogo revisado no alcanza para reintentar nada. Lo que sí mejora es la
+  afinidad RIASEC como **dato auditable**, que es lo que §5 dice que este
+  trabajo produjo.
+
+Quedan **70 perfiles sin revisar**. El escaneo que encontró estos casos fue
+leer el informe de `--revisar` entero; el solapamiento léxico entre el nombre
+de la carrera y los títulos de las ocupaciones se probó como filtro automático
+y **no sirve**: "Comunicación y Diseño" → "Diseñadores Gráficos" da cero
+palabras en común y es correcto.
+
+## 9. Reproducir
 
 ```bash
 cd backend
 uv run python codificar_holland.py --self-check                  # sin red
 uv run python codificar_holland.py                               # codifica (solo O*NET, gratis)
 uv run python codificar_holland.py --revisar                     # informe para revisión humana
+uv run python codificar_holland.py --recodificar                 # reaplica los arreglos a mano (§8)
 uv run python -m app.holland_filtro                              # self-check del filtro
 uv run python experimento_holland_estructura.py --self-check     # sin red
 uv run python experimento_holland_estructura.py --ranking        # la tabla de §3, sin Gemini
