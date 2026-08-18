@@ -5,7 +5,9 @@ import { nuevaSesion, sessionId } from './session'
 import { guardarPerfilHolland, olvidarPerfilHolland } from './holland-perfil'
 import { authHeader } from './auth'
 import GuardarResultados from './GuardarResultados'
+import { color } from './colors'
 import './App.css'
+import './Dashboard.css'
 
 const API = 'http://localhost:8000'
 const POR_PAGINA = 12 // el mismo tamaño de página que usa O*NET
@@ -58,6 +60,17 @@ const PERFILES_PRUEBA = [
   { nombre: 'Social+Investigador+Convencional (SIC)', letras: 'SIC' },
   { nombre: 'Artístico+Social (AS)', letras: 'AS' },
 ]
+
+// Best/Great/Good de O*NET, con el mismo semáforo verde-azul-gris que ya usa
+// el resto de la app para "nivel de ajuste" (semántico a propósito, no paleta).
+const FIT_COLOR = { Best: '#16a34a', Great: '#2563eb', Good: '#64748b' }
+function FitBadge({ fit }) {
+  return (
+    <span className="carrera-pct" style={{ color: FIT_COLOR[fit] || 'var(--muted)' }}>
+      {fit}
+    </span>
+  )
+}
 
 function leerBorrador() {
   try {
@@ -376,13 +389,15 @@ function Resultados({ datos, onReiniciar }) {
             ocupaciones del mercado de EE. UU.: sirven para ver el tipo de trabajo,
             no como catálogo de carreras en Guatemala; para eso está el chat.
           </p>
-          <ul className="psi-metricas">
-            {carreras.map((c) => (
-              <li key={c.code}>
-                {c.title} <strong>{c.fit}</strong> · {c.code}
-              </li>
+          <div className="carrera-lista holland-grid">
+            {carreras.map((c, i) => (
+              <div key={c.code} className="carrera-item" style={{ cursor: 'default' }}>
+                <span className="punto" style={{ background: color(i) }} />
+                <span className="carrera-nombre">{c.title}</span>
+                <FitBadge fit={c.fit} />
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
 
         {carreras_catalogo?.length > 0 && (
@@ -394,13 +409,15 @@ function Resultados({ datos, onReiniciar }) {
               chat: la recomendación real usa la conversación completa, no solo
               este perfil.
             </p>
-            <ul className="psi-metricas">
-              {carreras_catalogo.map((c) => (
-                <li key={c.nombre}>
-                  {c.nombre} · {c.codigo}
-                </li>
+            <div className="carrera-lista holland-grid">
+              {carreras_catalogo.map((c, i) => (
+                <div key={c.nombre} className="carrera-item" style={{ cursor: 'default' }}>
+                  <span className="punto" style={{ background: color(i) }} />
+                  <span className="carrera-nombre">{c.nombre}</span>
+                  <span className="carrera-pct">{c.codigo}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </section>
         )}
 
