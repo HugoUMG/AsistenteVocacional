@@ -1,9 +1,10 @@
 # Holland como estructura: el catálogo codificado con los RIASEC de O*NET
 
-**Fecha:** 2026-08-16 · rev. 2026-08-17 (§8, revisión a mano de 41/90) ·
-**Estado:** construido y medido. **El flag
+**Fecha:** 2026-08-16 · rev. 2026-08-18 (§8 revisión a mano de 41/90, §9 A/B
+repetido) · **Estado:** construido y medido **dos veces**. **El flag
 `HOLLAND_EN_RECOMENDACION` queda apagado**: con la conversación presente, el
-orden por afinidad RIASEC **no movió el top-1** en ninguno de los dos perfiles.
+orden por afinidad RIASEC **no movió el top-1** en ninguno de los dos perfiles,
+ni con el catálogo sin revisar (§4) ni con el catálogo revisado (§9).
 La codificación del catálogo sí queda hecha y es reutilizable.
 
 Ámbito: catálogo de Quetzaltenango + Totonicapán (202 registros carrera-sede, 90
@@ -149,11 +150,14 @@ explicación de por qué el emparejamiento por vector falla donde falla (§3).
    mantener, no cuesta nada en tiempo de ejecución y es el insumo de cualquier
    intento futuro.
 4. **En la tesis no se puede decir que Holland alimenta la recomendación.** Ni
-   como prosa (medido antes) ni como estructura (medido acá).
+   como prosa (medido antes), ni como estructura (medido acá), ni como
+   estructura bien codificada (medido en §9, después de revisar el catálogo a
+   mano y cambiar 16 códigos).
 5. Lo que **sí** se puede afirmar, y con evidencia: el catálogo está codificado
    con una fuente oficial, la afinidad RIASEC alumno↔carrera es un número
    auditable, y ese número **no cambia el resultado** cuando ya hay una
-   conversación de por medio.
+   conversación de por medio. §9 lo deja más firme: la carrera de Melany subió
+   del puesto 12 al 1 del catálogo ordenado y la recomendación no se movió.
 
 ## 7. Limitaciones
 
@@ -166,6 +170,10 @@ explicación de por qué el emparejamiento por vector falla donde falla (§3).
 - **El corte nunca se probó con Gemini.** Se descartó en la puerta previa por lo
   que le hace al perfil artístico. Probarlo solo con Melany sería elegir el
   perfil al que le conviene.
+- **El A/B se corrió dos veces, con el mismo n.** §9 repite §4 con el catálogo
+  revisado y vuelve a dar 0/2. Son 2 perfiles ficticios y 1 corrida por brazo
+  las dos veces: dos negativos coincidentes leen mejor que uno, pero no
+  sustituyen la potencia estadística que ninguno de los dos tiene.
 - La prueba decisiva sigue necesitando alumnos reales respondiendo el test.
 
 ## 8. La revisión a mano (2026-08-17)
@@ -249,11 +257,10 @@ carreras a las que les faltaba **su rasgo definitorio**:
 - Por eso el criterio de aceptación de un término corregido es **el vector**,
   y los intentos descartados quedaron escritos en los dicts junto al bueno,
   con el número que los descartó. Sirven para no volver a probarlos.
-- **Esto no reabre la decisión de §6.** Un catálogo mejor codificado sigue sin
-  ser motor de la recomendación mientras no se vuelva a medir el A/B. Lo que sí
-  mejora es la afinidad RIASEC como **dato auditable**, que es lo que §5 dice
-  que este trabajo produjo. Con 16 códigos cambiados, repetir el A/B ahora sí
-  tendría sentido; sigue sin haberse hecho.
+- **Esto no reabre la decisión de §6**, y ya no es una suposición: con los 16
+  códigos cambiados se repitió el A/B entero y dio **0/2 otra vez** (§9). Lo
+  que mejora es la afinidad RIASEC como **dato auditable**, que es lo que §5
+  dice que este trabajo produjo.
 
 El filtro automático por solapamiento léxico entre el nombre de la carrera y
 los títulos de las ocupaciones **no sirve** y se descartó: "Comunicación y
@@ -268,7 +275,69 @@ revisión fue leer el informe de `--revisar` entero, con el vector al lado.
   mayas, hemodiálisis, emprendimiento, arquitectura, teología.
 - La prueba de si algo de esto importa sigue siendo el A/B de §4, sin correr.
 
-## 9. Reproducir
+## 9. El A/B repetido con el catálogo revisado (2026-08-18)
+
+§8 cambió 16 códigos RIASEC, así que el A/B de §4 se volvió a correr entero.
+
+### La puerta previa sí mejoró
+
+Antes de gastar cuota, `--ranking`. La recodificación movió el orden de verdad:
+
+| | §3 (catálogo sin revisar) | ahora |
+|---|---|---|
+| Melany · Contaduría Pública y Auditoría | puesto **12** | puesto **1** |
+| Dulce · Publicidad c/ Diseño Gráfico | puesto 59 | puesto 59 |
+| Dulce · top-1 del catálogo ordenado | pedagogías de S alta | **Profesorado en Educación Artística** |
+
+Para el perfil artístico el catálogo ordenado ahora encabeza con la carrera de
+arte, que es exactamente la entrada que §8 arregló (A=34.3 → 61). Diseño
+Gráfico sigue en el puesto 59 por la razón de §3, que no era de codificación:
+Dulce es A+S y el diseñador de O*NET es A+E+C.
+
+### El resultado: idéntico
+
+| Perfil | VIEJO | NUEVO |
+|---|---|---|
+| **Dulce** (ASC) | Enfermería 35% · Comunicación y Diseño 30% · Producción Audiovisual 20% | Enfermería 35% · Producción Audiovisual 30% · Educación Primaria 20% |
+| **Melany** (CEI) | Contaduría 35% · Adm. de Empresas 25% · Adm. de Sistemas 20% | Contaduría 35% · Adm. de Empresas 25% · Informática e Inteligencia de Negocios 20% |
+
+| Métrica | §4 (sin revisar) | ahora (revisado) |
+|---|---|---|
+| **El top-1 cambió** | **0/2** | **0/2** |
+| Afinidad del top-1 | 35%, 35% | 35%, 35% |
+| Lo creativo en el top-3 de Dulce | sí | sí |
+
+Costo: 15 llamadas, 173k tokens, ~$0.03 equivalentes. La primera corrida se
+cortó con un **503 de Google** después de Dulce (el mismo que dejó sin medir a
+`gemini-3.7-flash` en [comparacion-modelos.md](comparacion-modelos.md)); el
+script es resumible y el reintento solo corrió a Melany.
+
+### Lectura: la evidencia se hizo más fuerte, no más débil
+
+**Melany es el caso que lo prueba.** Su carrera pasó del puesto 12 al **puesto
+1** del catálogo ordenado: Gemini ahora la lee de primera en la lista, con la
+mejor afinidad RIASEC posible. La recomendación **no se movió ni un punto** (35%,
+confianza 90%, mismo top-1 en los dos brazos). Antes se podía objetar que el
+orden no cambiaba nada porque el orden estaba mal calculado. Ya no: el orden
+mejoró mucho y el resultado es el mismo.
+
+Y Dulce sigue en Enfermería aunque el catálogo ordenado le ponga el profesorado
+de arte en el primer lugar. Es lo que §5 ya decía: la alumna **declara** salud y
+el modelo le hace caso por encima de lo medido, con prosa, con estructura y
+ahora también con estructura bien codificada.
+
+Lo que queda igual que en §6: **`HOLLAND_EN_RECOMENDACION` sigue en `0`** y en
+la tesis no se puede decir que Holland alimenta la recomendación. Lo que sí se
+gana con §8 es que la afinidad RIASEC alumno↔carrera es ahora un número
+auditable **y además correcto** en 41 de 90 perfiles, no solo auditable.
+
+Sigue siendo **2 perfiles ficticios y 1 corrida por brazo**: sirve para leer el
+mecanismo, no para cerrar la pregunta con fuerza estadística.
+
+Crudos: `backend/data/tests/experimento_holland_estructura.json` (esta corrida)
+y `..._precodificacion.json` (la de §4, con el catálogo sin revisar).
+
+## 10. Reproducir
 
 ```bash
 cd backend

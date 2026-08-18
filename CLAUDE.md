@@ -163,8 +163,10 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   experiencia de apertura, no el motor. Se adopta.
 - [experiments/holland-estructura.md](experiments/holland-estructura.md) —
   catálogo codificado con los RIASEC de O*NET y ordenado por afinidad: el top-1
-  no cambió (0/2). Flag `HOLLAND_EN_RECOMENDACION`, apagado. La codificación
-  queda hecha y sin revisar a mano.
+  no cambió (0/2). Flag `HOLLAND_EN_RECOMENDACION`, apagado. §8 revisó el
+  catálogo a mano (41/90, 16 códigos cambiados) y §9 repitió el A/B con el
+  catálogo revisado: **0/2 otra vez**. Los términos de búsqueda corregidos y los
+  que midieron peor viven en `codificar_holland.py`, con el motivo.
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
