@@ -98,14 +98,27 @@ defecto del experimento, no un resultado sobre la hipótesis.
 Y hay algo más que llama la atención: en
 [holland-estructura.md](holland-estructura.md) §4 y §9, **Dulce terminaba en
 Enfermería**, no en lo artístico. Acá el brazo de control la manda a Comunicación
-y Diseño 3/3. La diferencia entre bancos: este usa la adenda de producción
-(`adenda_chat`, con la regla de apertura integrada el 2026-08-17) y aquel usaba
-la `adenda_system` vieja del banco de `experimento_holland.py`.
+y Diseño 3/3.
 
-Eso **sugiere** que la apertura explícita pesa más de lo que concluyó
-[holland-apertura.md](holland-apertura.md) ("no cambia qué carrera gana", 4/5
-corridas iguales). No lo prueba: son bancos distintos, n chico y varianza alta.
-Queda como la pista más interesante que salió de acá, ver §7.
+> **Corrección (2026-08-18).** La primera versión de este informe atribuyó esa
+> diferencia a la adenda de producción y la propuso como "la pista más
+> interesante". **Era falso y se comprobó:** el brazo C de
+> [holland-apertura.md](holland-apertura.md) usaba la MISMA apertura explícita
+> que producción y con él Dulce salió Enfermería 2/2. Los dos bancos tenían la
+> apertura; la adenda no explica nada.
+>
+> Lo que sí explica la diferencia, contando todas las corridas de Dulce del
+> corpus, es que **su resultado es una moneda al aire**: 6 Enfermería contra 6
+> Comunicación y Diseño. Y tiene causa estructural, no de banco: su perfil es
+> **A=39 vs S=38, un empate técnico de 1 punto** entre dos áreas que apuntan a
+> sectores opuestos, arte y salud. El propio informe de apertura ya lo había
+> anotado en sus limitaciones. El 3/3 del control de este experimento fueron
+> tres caras seguidas, no una mejora.
+
+De ahí la lección de método, que vale para todo el proyecto: **comparar tasas
+entre experimentos con n distinto, sobre un perfil inestable, produce hallazgos
+fantasma.** Dulce necesita n grande para cualquier afirmación, o un perfil de
+reemplazo sin empate técnico.
 
 ## 6. Por qué el sondeo puede empeorar
 
@@ -141,11 +154,12 @@ de opción binaria empeora eso: obliga a elegir donde antes había matiz.
    que es lo que este experimento no tuvo.
 3. **Si se retoma, no usar opción binaria** para el sondeo (§6). Una pregunta
    abierta, o una que pida ordenar en vez de elegir, no fuerza a descartar.
-4. **La pista que vale la pena seguir es otra:** medir si la apertura explícita
-   (`adenda_chat`) mueve el ranking, con el mismo banco y n≥3 por brazo.
-   [holland-apertura.md](holland-apertura.md) concluyó que no, pero acá el
-   control con la adenda de producción se comportó distinto que los informes
-   anteriores sin ella (§5).
+4. **Dulce ya no sirve como perfil suelto para este tipo de A/B.** Su empate
+   técnico (A=39/S=38, sectores opuestos) la vuelve una moneda al aire: 6 y 6 en
+   todo el corpus (§5). Cualquier medición que la use necesita n grande, o un
+   perfil nuevo con área dominante clara que igual contradiga el guion de la
+   casa. Su inestabilidad no es un defecto del banco, **es el hallazgo**: cuando
+   el instrumento mismo es ambiguo, la recomendación es inestable.
 
 ## 8. Limitaciones
 
