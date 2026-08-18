@@ -1702,6 +1702,11 @@
 .psi-bloque h2 { margin: 0 0 16px; color: var(--navy); font-size: 19px; }
 .psi-bloque h3 { margin: 0 0 8px; color: var(--navy); font-size: 15px; }
 
+/* Grid de 2 columnas para las tarjetas de carreras de Holland: menos scroll
+   que la lista de una columna que usa el dashboard de recomendación. */
+.carrera-lista.holland-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+@media (max-width: 640px) { .carrera-lista.holland-grid { grid-template-columns: 1fr; } }
+
 .psi-rasgo { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .psi-rasgo-nombre { flex: 0 0 190px; color: var(--muted); font-size: 13.5px; }
 .psi-rasgo-valor { flex: 0 0 34px; text-align: right; color: var(--navy); font-weight: 700; font-size: 14px; }
