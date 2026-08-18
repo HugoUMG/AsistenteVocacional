@@ -271,13 +271,23 @@ def _resultado(perfil, res, respuestas, log, tokens, nombra):
     return r
 
 
-def correr(solo=None):
+def correr(solo=None, repeticiones=1):
+    """`repeticiones`: conversaciones por brazo y perfil.
+
+    Con 1 (el default original) se lee el mecanismo, no una tasa. Hace falta n
+    grande en los perfiles con EMPATE TÉCNICO: Dulce (A=39/S=38, sectores
+    opuestos) resultó ser una moneda al aire, 6 y 6 en todo el corpus, así que
+    con n=1 dos corridas del mismo brazo pueden dar resultados contrarios.
+    Ver experiments/holland-sondeo-intereses.md §5.
+    """
     cat = catalogo()
     lista = [p for p in perfiles() if not solo or p["nombre"].lower() == solo.lower()]
     salida = json.load(open(SALIDA, encoding="utf-8")) if os.path.exists(SALIDA) else []
     if solo:
         salida = [s for s in salida if s["perfil"].lower() != solo.lower()]
-    hechos = {s["perfil"] for s in salida}
+    # Con repeticiones el perfil se corre hasta juntar `repeticiones` entradas,
+    # no se salta por estar presente una vez.
+    hechos = {s["perfil"] for s in salida} if repeticiones == 1 else set()
     banco = holland.preguntas()
     print(f"Catálogo: {len(cat)} registros · {len(lista)} perfiles"
           + (f" · ya listos: {sorted(hechos)}" if hechos else "") + "\n")
@@ -292,30 +302,65 @@ def correr(solo=None):
         print(f"  Holland: código {p_holland['codigo']} · "
               + " ".join(f"{a['letra']}={a['score']}" for a in p_holland["areas"])
               + (f" · EMPATE: {empate}" if empate else ""))
-        try:
-            print("  --- B (producción, apertura pasiva)")
-            b = _correr_brazo(perfil, cat, p_holland, explicito=False)
-            print("  --- C (apertura explícita + desempate)")
-            c = _correr_brazo(perfil, cat, p_holland, explicito=True)
-        except Exception as e:
-            print(f"  ABORTADO ({type(e).__name__}: {str(e)[:90]}) — se reintenta al volver a correr\n")
-            continue
-        print(f"  B top1: {b[0].carreras[0].carrera} ({b[0].carreras[0].afinidad}%) · nombra Holland: {b[4]}")
-        print(f"  C top1: {c[0].carreras[0].carrera} ({c[0].carreras[0].afinidad}%) · nombra Holland: {c[4]}\n")
-        salida.append({
-            "perfil": perfil["nombre"],
-            "contexto": perfil["contexto"],
-            "guion": perfil["guion"],
-            "riasec_real": perfil["riasec"],
-            "holland": {"codigo": p_holland["codigo"],
-                        "areas": {x["letra"]: x["score"] for x in p_holland["areas"]},
-                        "hoja": cadena, "empate": empate},
-            "b_produccion": _resultado(perfil, *b),
-            "c_apertura_explicita": _resultado(perfil, *c),
-        })
-        json.dump(salida, open(SALIDA, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        ya = sum(1 for s in salida if s["perfil"] == perfil["nombre"])
+        for corrida in range(ya + 1, repeticiones + 1):
+            if repeticiones > 1:
+                print(f"  ## corrida {corrida}/{repeticiones}")
+            try:
+                print("  --- B (producción, apertura pasiva)")
+                b = _correr_brazo(perfil, cat, p_holland, explicito=False)
+                print("  --- C (apertura explícita + desempate)")
+                c = _correr_brazo(perfil, cat, p_holland, explicito=True)
+            except Exception as e:
+                print(f"  ABORTADO ({type(e).__name__}: {str(e)[:90]}) — se reintenta al volver a correr\n")
+                break
+            print(f"  B top1: {b[0].carreras[0].carrera} ({b[0].carreras[0].afinidad}%) · nombra Holland: {b[4]}")
+            print(f"  C top1: {c[0].carreras[0].carrera} ({c[0].carreras[0].afinidad}%) · nombra Holland: {c[4]}\n")
+            salida.append({
+                "perfil": perfil["nombre"],
+                "corrida": corrida,
+                "contexto": perfil["contexto"],
+                "guion": perfil["guion"],
+                "riasec_real": perfil["riasec"],
+                "holland": {"codigo": p_holland["codigo"],
+                            "areas": {x["letra"]: x["score"] for x in p_holland["areas"]},
+                            "hoja": cadena, "empate": empate},
+                "b_produccion": _resultado(perfil, *b),
+                "c_apertura_explicita": _resultado(perfil, *c),
+            })
+            json.dump(salida, open(SALIDA, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"Resultados en {SALIDA}")
     print(recomendar.resumen_gasto())
+
+
+def tasas():
+    """Tasas por brazo, agrupadas por perfil. Sin red: lee el JSON."""
+    if not os.path.exists(SALIDA):
+        print("No hay resultados todavía.")
+        return
+    datos = json.load(open(SALIDA, encoding="utf-8"))
+    for nombre in sorted({d["perfil"] for d in datos}):
+        filas = [d for d in datos if d["perfil"] == nombre]
+        emp = filas[0]["holland"].get("empate")
+        print(f"\n=== {nombre} · {filas[0]['holland']['codigo']} · n={len(filas)}"
+              + (f" · EMPATE TÉCNICO {emp}" if emp else ""))
+        for brazo, etiqueta in (("b_produccion", "B pasiva"),
+                                ("c_apertura_explicita", "C explícita")):
+            r = [f[brazo] for f in filas]
+            n = len(r)
+            nombra = sum(1 for x in r if x.get("nombra_holland_en_apertura"))
+            # Byron se mide por sus claves de empate, no por suya/casa: no tiene
+            # un "área correcta", tiene dos áreas que compiten.
+            if "top1_area_suya" in r[0]:
+                suya = sum(1 for x in r if x["top1_area_suya"])
+                casa = sum(1 for x in r if x["top1_area_casa"])
+                marca = f"top1 suya {suya}/{n} · top1 casa {casa}/{n}"
+            else:
+                marca = " · ".join(
+                    f"{k.replace('top1_', '')} {sum(1 for x in r if x.get(k))}/{n}"
+                    for k in r[0] if k.startswith("top1_"))
+            print(f"  {etiqueta:12} {marca} · nombra Holland {nombra}/{n}")
+            print("               " + " | ".join(x["top"][0]["carrera"][:30] for x in r))
 
 
 def _hojas():
@@ -362,10 +407,15 @@ if __name__ == "__main__":
     ap.add_argument("--self-check", action="store_true")
     ap.add_argument("--hojas", action="store_true")
     ap.add_argument("--perfil", help="corre un solo perfil por nombre")
+    ap.add_argument("--repeticiones", type=int, default=1,
+                    help="conversaciones por brazo (n>1 para perfiles con empate técnico)")
+    ap.add_argument("--tasas", action="store_true", help="tasas del JSON, sin red")
     a = ap.parse_args()
     if a.self_check:
         _self_check()
     elif a.hojas:
         _hojas()
+    elif a.tasas:
+        tasas()
     else:
-        correr(a.perfil)
+        correr(a.perfil, a.repeticiones)

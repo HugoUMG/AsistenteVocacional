@@ -175,8 +175,9 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   5/6 contra 6/6, +1 pregunta y +12% de tokens. **No se integra.** Ojo, el
   control salió en el techo (6/6), así que no descarta la hipótesis. Deja dos
   cosas: forzar la elección entre lo declarado y lo medido se resuelve a favor
-  de lo declarado, y la sospecha de que la apertura explícita pesa más de lo que
-  midió `holland-apertura.md`.
+  de lo declarado, y que **Dulce es una moneda al aire** (6 y 6 en todo el
+  corpus) por su empate técnico A=39/S=38 entre sectores opuestos. Cualquier
+  A/B que la use necesita n grande.
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
