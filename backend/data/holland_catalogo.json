@@ -24,7 +24,7 @@
     "title": "Directores de Arquitectura e Ingeniería"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "CUNOC::Ingeniería Mecánica Industrial": {
   "nombre": "Ingeniería Mecánica Industrial",
@@ -51,7 +51,7 @@
     "title": "Tecnólogos y Técnicos en Ingeniería Industrial"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "CUNOC::Ingeniería en Administración de Tierras": {
   "nombre": "Ingeniería en Administración de Tierras",
@@ -78,7 +78,7 @@
     "title": "Tecnólogos y Técnicos en Ingeniería Mecánica"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "CUNOC::Ingeniería en Gestión Ambiental Local": {
   "nombre": "Ingeniería en Gestión Ambiental Local",
@@ -105,7 +105,7 @@
     "title": "Directores de Arquitectura e Ingeniería"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "CUNOC::Licenciatura en Economía": {
   "nombre": "Licenciatura en Economía",
@@ -132,7 +132,7 @@
     "title": "Economistas Ambientales"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "CUNOC::Licenciatura en la Enseñanza de la Matemática y la Física": {
   "nombre": "Licenciatura en la Enseñanza de la Matemática y la Física",
@@ -159,23 +159,31 @@
     "title": "Profesores de Ingeniería de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "CUNOC::Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)": {
   "nombre": "Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)",
   "vector": {
-   "R": 34.0,
-   "I": 52.0,
-   "A": 79.0,
-   "S": 100.0,
-   "E": 19.0,
-   "C": 27.0
+   "R": 5.0,
+   "I": 41.0,
+   "A": 36.7,
+   "S": 88.3,
+   "E": 58.3,
+   "C": 54.3
   },
-  "codigo": "SAI",
+  "codigo": "SEC",
   "ocupaciones": [
    {
-    "code": "25-1121.00",
-    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+    "code": "25-9031.00",
+    "title": "Coordinadores Educativos"
+   },
+   {
+    "code": "21-1012.00",
+    "title": "Consejeros y Orientadores Educativos, Académicos, y Ocupacionales"
+   },
+   {
+    "code": "11-9032.00",
+    "title": "Administradores Educativos de Nivel Primario hasta Secundario"
    }
   ],
   "revisado": true
@@ -205,7 +213,7 @@
     "title": "Psicólogos Escolares"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "CUNTOTO::Ingeniería Forestal": {
   "nombre": "Ingeniería Forestal",
@@ -232,31 +240,31 @@
     "title": "Silvicultores"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "CUNTOTO::PEM en Pedagogía y Educación Intercultural": {
   "nombre": "PEM en Pedagogía y Educación Intercultural",
   "vector": {
-   "R": 28.3,
-   "I": 54.0,
-   "A": 55.3,
-   "S": 100.0,
-   "E": 21.0,
-   "C": 37.7
+   "R": 36.0,
+   "I": 62.7,
+   "A": 41.3,
+   "S": 97.7,
+   "E": 26.7,
+   "C": 38.7
   },
-  "codigo": "SAI",
+  "codigo": "SIA",
   "ocupaciones": [
-   {
-    "code": "25-1121.00",
-    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
-   },
    {
     "code": "25-1081.00",
     "title": "Profesores de Educación de Nivel Postsecundario"
    },
    {
-    "code": "25-2058.00",
-    "title": "Maestros de Educación Especial de Escuela Secundaria"
+    "code": "25-1062.00",
+    "title": "Profesores de Estudios Regionales, Étnicos y Culturales de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1194.00",
+    "title": "Profesores de Educación Profesional/Técnica de Nivel Postsecundario"
    }
   ],
   "revisado": true
@@ -264,26 +272,26 @@
  "CUNTOTO::PEM en Pedagogía y Técnico en Administración Educativa con Orientación en Medio Ambiente": {
   "nombre": "PEM en Pedagogía y Técnico en Administración Educativa con Orientación en Medio Ambiente",
   "vector": {
-   "R": 32.7,
-   "I": 37.7,
-   "A": 49.7,
-   "S": 97.3,
-   "E": 24.3,
-   "C": 42.7
+   "R": 5.0,
+   "I": 44.0,
+   "A": 34.7,
+   "S": 80.7,
+   "E": 66.0,
+   "C": 58.7
   },
-  "codigo": "SAC",
+  "codigo": "SEC",
   "ocupaciones": [
    {
-    "code": "25-1121.00",
-    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+    "code": "25-9031.00",
+    "title": "Coordinadores Educativos"
    },
    {
-    "code": "25-2023.00",
-    "title": "Maestros de Educación Profesional/Técnica de Escuela de Nivel Medio"
+    "code": "11-9032.00",
+    "title": "Administradores Educativos de Nivel Primario hasta Secundario"
    },
    {
-    "code": "25-9042.00",
-    "title": "Auxiliares Docentes de Educación Preescolar, Primaria, Nivel Medio, Secundaria"
+    "code": "11-9033.00",
+    "title": "Administradores Educativos de Nivel Postsecundario"
    }
   ],
   "revisado": true
@@ -313,7 +321,7 @@
     "title": "Agentes de Reservación y Venta de Boletos de Transporte y Empleados de Oficina de Viajes"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Chef Profesional e Internacional (Técnico Universitario)": {
   "nombre": "Chef Profesional e Internacional (Técnico Universitario)",
@@ -340,7 +348,7 @@
     "title": "Científicos y Tecnólogos Especializados en Alimentos"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Criminología y Política Criminal": {
   "nombre": "Criminología y Política Criminal",
@@ -367,7 +375,7 @@
     "title": "Técnicos en Ciencias Forenses"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Ingeniería Química": {
   "nombre": "Ingeniería Química",
@@ -394,7 +402,7 @@
     "title": "Ingenieros Biogenéticos y Biomédicos"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Ingeniería en Agronomía": {
   "nombre": "Ingeniería en Agronomía",
@@ -421,7 +429,7 @@
     "title": "Técnicos de Precisión en Agricultura"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Licenciatura en Administración Educativa": {
   "nombre": "Licenciatura en Administración Educativa",
@@ -475,7 +483,7 @@
     "title": "Profesores de Educación de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Licenciatura en Educación de la Comunicación y Lenguaje": {
   "nombre": "Licenciatura en Educación de la Comunicación y Lenguaje",
@@ -502,31 +510,31 @@
     "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Licenciatura en Educación de la Física y Matemática": {
   "nombre": "Licenciatura en Educación de la Física y Matemática",
   "vector": {
-   "R": 36.3,
-   "I": 54.7,
-   "A": 37.7,
-   "S": 95.7,
-   "E": 19.7,
-   "C": 50.7
+   "R": 26.7,
+   "I": 51.3,
+   "A": 38.3,
+   "S": 87.7,
+   "E": 42.3,
+   "C": 49.7
   },
   "codigo": "SIC",
   "ocupaciones": [
    {
-    "code": "25-2059.01",
-    "title": "Especialistas en Educación Física Adaptada"
+    "code": "25-1054.00",
+    "title": "Profesores de Física de Nivel Postsecundario"
    },
    {
-    "code": "25-1022.00",
-    "title": "Profesores de Ciencias Matemáticas de Nivel Postsecundario"
+    "code": "11-9032.00",
+    "title": "Administradores Educativos de Nivel Primario hasta Secundario"
    },
    {
-    "code": "25-2022.00",
-    "title": "Maestros de Escuela de Nivel Medio"
+    "code": "25-2031.00",
+    "title": "Maestros de Escuela Secundaria"
    }
   ],
   "revisado": true
@@ -556,31 +564,31 @@
     "title": "Profesores de Ingeniería de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Profesorado en Pedagogía con Especialización": {
   "nombre": "Profesorado en Pedagogía con Especialización",
   "vector": {
-   "R": 33.3,
-   "I": 63.0,
-   "A": 51.0,
-   "S": 100.0,
-   "E": 21.3,
-   "C": 37.7
+   "R": 32.0,
+   "I": 55.0,
+   "A": 42.0,
+   "S": 98.0,
+   "E": 20.0,
+   "C": 40.0
   },
   "codigo": "SIA",
   "ocupaciones": [
-   {
-    "code": "25-1121.00",
-    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
-   },
    {
     "code": "25-1081.00",
     "title": "Profesores de Educación de Nivel Postsecundario"
    },
    {
-    "code": "25-1071.00",
-    "title": "Profesores de Especialidades de Salud de Nivel Postsecundario"
+    "code": "25-1194.00",
+    "title": "Profesores de Educación Profesional/Técnica de Nivel Postsecundario"
+   },
+   {
+    "code": "25-2057.00",
+    "title": "Maestros de Educación Especial de Escuela de Nivel Medio"
    }
   ],
   "revisado": true
@@ -610,7 +618,7 @@
     "title": "Profesores de Educación Profesional/Técnica de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "UMG Quetzaltenango::Teología Sistemática": {
   "nombre": "Teología Sistemática",
@@ -637,7 +645,7 @@
     "title": "Antropólogos y Arqueólogos"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "URG Totonicapán::Licenciatura en Administración de Sistemas Informáticos": {
   "nombre": "Licenciatura en Administración de Sistemas Informáticos",
@@ -664,7 +672,7 @@
     "title": "Gerentes de Sistemas de Computación e Información"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "URG Totonicapán::Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)": {
   "nombre": "Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)",
@@ -691,31 +699,31 @@
     "title": "Gerentes de Relaciones Públicas"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "administracion_empresas": {
   "nombre": "Administración de Empresas",
   "vector": {
-   "R": 57.7,
-   "I": 27.7,
-   "A": 2.7,
-   "S": 25.0,
-   "E": 66.7,
-   "C": 65.3
+   "R": 8.3,
+   "I": 25.7,
+   "A": 19.3,
+   "S": 46.3,
+   "E": 91.3,
+   "C": 71.7
   },
-  "codigo": "ECR",
+  "codigo": "ECS",
   "ocupaciones": [
    {
-    "code": "11-1021.00",
-    "title": "Gerentes Generales y de Operaciones"
+    "code": "11-3012.00",
+    "title": "Gerentes de Servicios Administrativos"
    },
    {
-    "code": "49-9071.00",
-    "title": "Trabajadores de Mantenimiento y Reparación, General"
+    "code": "11-9111.00",
+    "title": "Directores de Servicios Médicos y de Salud"
    },
    {
-    "code": "11-9199.09",
-    "title": "Gerentes de Operaciones de Energía Eólica (Proveniente del Viento)"
+    "code": "11-2011.00",
+    "title": "Gerentes de Publicidad y Promociones"
    }
   ],
   "revisado": true
@@ -772,27 +780,27 @@
     "title": "Tecnólogos y Técnicos de Radiología"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "ciencias_juridicas": {
   "nombre": "Licenciatura en Ciencias Jurídicas y Sociales",
   "vector": {
-   "R": 13.7,
-   "I": 36.3,
-   "A": 9.7,
-   "S": 32.7,
-   "E": 52.3,
-   "C": 86.3
+   "R": 7.0,
+   "I": 51.7,
+   "A": 17.7,
+   "S": 37.3,
+   "E": 60.3,
+   "C": 75.3
   },
   "codigo": "CEI",
   "ocupaciones": [
    {
-    "code": "23-1012.00",
-    "title": "Oficiales Jurídicos"
+    "code": "23-1011.00",
+    "title": "Abogados"
    },
    {
-    "code": "23-2093.00",
-    "title": "Examinadores, Analistas de Títulos y Gestores de Búsqueda de Títulos"
+    "code": "23-2011.00",
+    "title": "Asistentes Legales y Asistentes de Abogados"
    },
    {
     "code": "43-6012.00",
@@ -826,7 +834,7 @@
     "title": "Dentistas Generales"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "comercio_internacional": {
   "nombre": "Licenciatura en Comercio Internacional",
@@ -853,7 +861,7 @@
     "title": "Gerentes de Ventas"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "comunicacion_diseno": {
   "nombre": "Licenciatura en Comunicación y Diseño",
@@ -880,7 +888,7 @@
     "title": "Diseñadores de Página Web y de Interfaz Digital"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "contaduria": {
   "nombre": "Contaduría Pública y Auditoría",
@@ -907,7 +915,7 @@
     "title": "Gerentes Financieros"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "criminalistica": {
   "nombre": "Técnico Universitario en Criminología y Criminalística",
@@ -934,7 +942,7 @@
     "title": "Asistentes de Estadísticas"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "diseno_grafico": {
   "nombre": "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
@@ -961,7 +969,7 @@
     "title": "Diseñadores de Página Web y de Interfaz Digital"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "economia": {
   "nombre": "Economía Empresarial",
@@ -1015,7 +1023,7 @@
     "title": "Asistentes de Enfermería"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "enfermeria_veterinaria": {
   "nombre": "Técnico Universitario en Enfermería Veterinaria",
@@ -1042,7 +1050,7 @@
     "title": "Asistentes de Veterinarios y Cuidadores de Animales de Laboratorio"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "gastronomia": {
   "nombre": "Artes Culinarias y Negocios Gastronómicos",
@@ -1069,7 +1077,7 @@
     "title": "Educadores en Gerencia de Granjas y Hogares"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "hemodialisis": {
   "nombre": "Técnico Universitario en Hemodiálisis",
@@ -1119,31 +1127,31 @@
     "title": "Empleados de Recepción de Hotel, Motel, y Centro Turístico"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "informatica_administracion": {
   "nombre": "Licenciatura en Informática y Administración de Empresas",
   "vector": {
-   "R": 36.7,
-   "I": 48.7,
-   "A": 18.0,
-   "S": 47.7,
-   "E": 47.0,
-   "C": 70.7
+   "R": 37.3,
+   "I": 82.7,
+   "A": 19.0,
+   "S": 18.3,
+   "E": 38.0,
+   "C": 75.7
   },
-  "codigo": "CIS",
+  "codigo": "ICE",
   "ocupaciones": [
-   {
-    "code": "25-2031.00",
-    "title": "Maestros de Escuela Secundaria"
-   },
-   {
-    "code": "15-1244.00",
-    "title": "Administradores de Redes Informáticas y Sistemas de Computación"
-   },
    {
     "code": "11-3021.00",
     "title": "Gerentes de Sistemas de Computación e Información"
+   },
+   {
+    "code": "15-1221.00",
+    "title": "Investigadores de Ciencias de la Computación e Información"
+   },
+   {
+    "code": "15-1211.00",
+    "title": "Analistas de Sistemas de Computadoras"
    }
   ],
   "revisado": true
@@ -1173,7 +1181,7 @@
     "title": "Ingenieros de Seguridad de la Información"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "ingenieria_agricola": {
   "nombre": "Ingeniería Agrícola con Énfasis en Gerencia",
@@ -1200,7 +1208,7 @@
     "title": "Contratistas de Mano de Obra Agrícola"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "ingenieria_ambiental": {
   "nombre": "Ingeniería Ambiental",
@@ -1227,7 +1235,7 @@
     "title": "Ingenieros Ambientales"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "ingenieria_civil": {
   "nombre": "Ingeniería Civil",
@@ -1254,7 +1262,7 @@
     "title": "Ingenieros Civiles"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "ingenieria_electronica": {
   "nombre": "Ingeniería en Electrónica",
@@ -1281,7 +1289,7 @@
     "title": "Directores de Arquitectura e Ingeniería"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "ingenieria_industrial": {
   "nombre": "Ingeniería Industrial",
@@ -1308,7 +1316,7 @@
     "title": "Mecánicos de Maquinaria Industrial"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "ingenieria_sistemas": {
   "nombre": "Ingeniería en Ciencias y Sistemas",
@@ -1335,7 +1343,7 @@
     "title": "Directores de Ciencias Naturales"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "laboratorio_clinico": {
   "nombre": "Técnico Universitario en Laboratorio Clínico",
@@ -1362,7 +1370,7 @@
     "title": "Histotecnólogos"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "laboratorio_dental": {
   "nombre": "Técnico en Laboratorio Dental",
@@ -1389,7 +1397,7 @@
     "title": "Asistentes Dentales"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "marketing_business_analytics": {
   "nombre": "Licenciatura en Marketing and Business Analytics",
@@ -1416,7 +1424,7 @@
     "title": "Científico de Datos"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "medico_cirujano": {
   "nombre": "Médico y Cirujano",
@@ -1443,7 +1451,7 @@
     "title": "Médicos de Medicina Interna General"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "mercadotecnia": {
   "nombre": "Técnico Universitario en Gerencia de Ventas",
@@ -1470,7 +1478,7 @@
     "title": "Representantes de Ventas Mayoristas y de Productos Manufacturados Técnicos y Científicos"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "musica_ejecucion": {
   "nombre": "Técnico en Ejecución Musical Popular y Contemporánea",
@@ -1497,7 +1505,7 @@
     "title": "Músicos y Cantantes"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "nutricion": {
   "nombre": "Licenciatura en Nutrición",
@@ -1524,7 +1532,7 @@
     "title": "Profesores de Ciencias de la Familia y de los Consumidores de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "optometria": {
   "nombre": "Técnico Universitario en Optometría",
@@ -1551,7 +1559,7 @@
     "title": "Profesores de Especialidades de Salud de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia": {
   "nombre": "Licenciatura en Ciencias de la Educación",
@@ -1578,7 +1586,7 @@
     "title": "Especialistas en Educación de la Salud"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_admin_educativa": {
   "nombre": "Administración Educativa",
@@ -1632,7 +1640,7 @@
     "title": "Especialistas en Educación de la Salud"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_ciencias_naturales": {
   "nombre": "Profesorado en Ciencias Naturales, Química y Biología",
@@ -1659,7 +1667,7 @@
     "title": "Profesores de Silvicultura y Ciencias de la Conservación de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_ciencias_sociales": {
   "nombre": "PEM en Historia y Ciencias Sociales",
@@ -1686,7 +1694,7 @@
     "title": "Asistentes de Investigación en Ciencias Sociales"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_comunicacion_lenguaje": {
   "nombre": "PEM en Comunicación y Lenguaje",
@@ -1713,7 +1721,7 @@
     "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_emprendimiento": {
   "nombre": "Profesorado en Emprendimiento para la Productividad",
@@ -1767,7 +1775,7 @@
     "title": "Maestros de Nivel Preescolar"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_ingles": {
   "nombre": "Profesorado de Enseñanza Media en Inglés",
@@ -1794,7 +1802,7 @@
     "title": "Maestros de Educación Especial de Escuela de Nivel Medio"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_intercultural": {
   "nombre": "Profesorado en Idioma Maya, Ciencias Sociales e Interculturalidad",
@@ -1848,7 +1856,7 @@
     "title": "Instructores de Educación Básica y Secundaria para Adultos, y de Inglés como Segunda Lengua"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_matematica_fisica": {
   "nombre": "PEM en Matemática y Física",
@@ -1875,31 +1883,31 @@
     "title": "Maestros de Escuela de Nivel Medio"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_pem_admin_educativa": {
   "nombre": "PEM en Pedagogía y Técnico en Administración Educativa",
   "vector": {
-   "R": 33.3,
-   "I": 51.3,
-   "A": 53.3,
-   "S": 100.0,
-   "E": 22.7,
-   "C": 39.3
+   "R": 5.0,
+   "I": 44.0,
+   "A": 34.7,
+   "S": 80.7,
+   "E": 66.0,
+   "C": 58.7
   },
-  "codigo": "SAI",
+  "codigo": "SEC",
   "ocupaciones": [
    {
-    "code": "25-1121.00",
-    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
+    "code": "25-9031.00",
+    "title": "Coordinadores Educativos"
    },
    {
-    "code": "25-1081.00",
-    "title": "Profesores de Educación de Nivel Postsecundario"
+    "code": "11-9032.00",
+    "title": "Administradores Educativos de Nivel Primario hasta Secundario"
    },
    {
-    "code": "25-2023.00",
-    "title": "Maestros de Educación Profesional/Técnica de Escuela de Nivel Medio"
+    "code": "11-9033.00",
+    "title": "Administradores Educativos de Nivel Postsecundario"
    }
   ],
   "revisado": true
@@ -1929,27 +1937,27 @@
     "title": "Auxiliares Docentes de Educación Preescolar, Primaria, Nivel Medio, Secundaria"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pedagogia_psicologia": {
   "nombre": "PEM en Pedagogía y Psicología",
   "vector": {
-   "R": 26.3,
-   "I": 69.3,
-   "A": 56.7,
+   "R": 25.7,
+   "I": 73.3,
+   "A": 44.0,
    "S": 98.3,
-   "E": 22.3,
-   "C": 34.3
+   "E": 26.0,
+   "C": 38.7
   },
   "codigo": "SIA",
   "ocupaciones": [
    {
-    "code": "25-1121.00",
-    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
-   },
-   {
     "code": "25-1066.00",
     "title": "Profesores de Psicología de Nivel Postsecundario"
+   },
+   {
+    "code": "25-1192.00",
+    "title": "Profesores de Ciencias de la Familia y de los Consumidores de Nivel Postsecundario"
    },
    {
     "code": "25-1067.00",
@@ -1983,7 +1991,7 @@
     "title": "Administradores de Redes Informáticas y Sistemas de Computación"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "pem_maya_intercultural": {
   "nombre": "Profesorado en Enseñanza Media en Cultura e Idioma Maya",
@@ -2064,7 +2072,7 @@
     "title": "Operadores de Cámara de Televisión, Video, y Película Cinematográfica"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "psicologia_clinica": {
   "nombre": "Psicología Clínica",
@@ -2091,7 +2099,7 @@
     "title": "Psicólogos Escolares"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "psicologia_educativa": {
   "nombre": "Psicología Educativa",
@@ -2118,7 +2126,7 @@
     "title": "Psicólogos Escolares"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "psicologia_industrial": {
   "nombre": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
@@ -2145,7 +2153,7 @@
     "title": "Psicólogos Industriales-Organizacionales"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "psicopedagogia": {
   "nombre": "Profesorado en Psicopedagogía",
@@ -2172,7 +2180,7 @@
     "title": "Profesores de Educación de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "quimica_biologica": {
   "nombre": "Licenciatura en Química Biológica",
@@ -2199,7 +2207,7 @@
     "title": "Profesores de Ciencias Biológicas de Nivel Postsecundario"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "relaciones_internacionales": {
   "nombre": "Relaciones Internacionales",
@@ -2253,7 +2261,7 @@
     "title": "Analistas de Sistemas de Computadoras"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "tecnico_radiologia": {
   "nombre": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
@@ -2280,7 +2288,7 @@
     "title": "Tecnólogos Especializados en Imágenes de Resonancia Magnética"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "telecomunicaciones": {
   "nombre": "Licenciatura en Administración de Telecomunicaciones",
@@ -2307,7 +2315,7 @@
     "title": "Instaladores y Reparadores de Equipo de Telecomunicaciones"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "teologia": {
   "nombre": "Teología",
@@ -2330,7 +2338,7 @@
     "title": "Maestros de Escuela de Nivel Medio"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "terapia_fisica": {
   "nombre": "Fisioterapia",
@@ -2357,7 +2365,7 @@
     "title": "Directores de Servicios Médicos y de Salud"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "trabajo_social": {
   "nombre": "Trabajo Social",
@@ -2384,7 +2392,7 @@
     "title": "Trabajadores Sociales Especializados en Salud Mental y Abuso de Sustancias"
    }
   ],
-  "revisado": true
+  "revisado": false
  },
  "visita_medica_mercadeo": {
   "nombre": "Técnico Universitario en Visita Médica y Mercadeo",
@@ -2411,6 +2419,6 @@
     "title": "Analistas de Inteligencia Empresarial"
    }
   ],
-  "revisado": true
+  "revisado": false
  }
 }

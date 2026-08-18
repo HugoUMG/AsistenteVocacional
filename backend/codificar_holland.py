@@ -41,9 +41,10 @@ humana sea posible y quede dicho que hace falta. `--revisar` imprime el informe.
 
 ## Uso
 
-    uv run python codificar_holland.py --limite 3   # prueba de humo
-    uv run python codificar_holland.py              # el resto
-    uv run python codificar_holland.py --revisar    # informe, sin red
+    uv run python codificar_holland.py --limite 3     # prueba de humo
+    uv run python codificar_holland.py                # el resto
+    uv run python codificar_holland.py --revisar      # informe, sin red
+    uv run python codificar_holland.py --recodificar  # reaplica los arreglos a mano
 """
 
 import argparse
@@ -108,8 +109,113 @@ PREFIJOS = ("Licenciatura en la ", "Licenciatura en ", "Técnico Universitario e
             "Técnico en ")
 
 
+# Términos corregidos a mano durante la revisión humana (2026-08-17). El valor
+# es (qué se busca en O*NET, por qué). Reemplaza al nombre de la carrera.
+#
+# El buscador en español de O*NET falla de dos formas sistemáticas:
+#
+# 1. **Sesgo de "profesor de la materia".** Muchos nombres académicos caen en
+#    "Profesores de X de Nivel Postsecundario", o sea el vector de *enseñar* la
+#    carrera, no el de *ejercerla*. Se corrige nombrando la ocupación real.
+# 2. **"Pedagogía" es una trampa.** Devuelve UNA sola ocupación, "Profesores de
+#    Arte, Teatro, y Música", que no tiene nada que ver. Es determinista, no
+#    azar. En los profesorados la docencia sí es la ocupación correcta (por eso
+#    `termino()` no quita "Profesorado"), lo que estaba mal era la materia.
+#
+# Rehacer solo estas entradas: `uv run python codificar_holland.py --recodificar`
+TERMINOS_REVISADOS: dict[str, tuple[str, str]] = {
+    # -- "Pedagogía" -> profesores de arte y música (causa raíz 2) --
+    "Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)": (
+        "Coordinadores Educativos",
+        "el vector salía de UNA ocupación, profesores de arte/música; la carrera "
+        "es lengua y diseño curricular",
+    ),
+    "PEM en Pedagogía y Técnico en Administración Educativa": (
+        "Administradores Educativos", "la especialidad es gestión escolar, no arte"),
+    "PEM en Pedagogía y Técnico en Administración Educativa con Orientación en Medio Ambiente": (
+        "Administradores Educativos", "igual que la anterior"),
+    "PEM en Pedagogía y Psicología": (
+        "Profesores de Psicología", "la materia es psicología, no arte"),
+    "PEM en Pedagogía y Educación Intercultural": (
+        "Profesores de Educación Intercultural",
+        "trae estudios étnicos y culturales, que es la especialidad real"),
+    "Profesorado en Pedagogía con Especialización": (
+        "Profesores de Educación", "docencia genérica, sin la desviación a arte"),
+
+    # -- "Física" se lee como educación física (causa raíz 2, variante) --
+    "Licenciatura en Educación de la Física y Matemática": (
+        "Profesores de Física de Nivel Postsecundario",
+        "la 1.ª ocupación era 'Especialistas en Educación Física Adaptada': el "
+        "buscador leyó 'física' como deporte. Ojo, 'Profesores de Física' a secas "
+        "tampoco sirve, mete 'Acondicionamiento Físico' y sube la R de 36 a 49; "
+        "hay que pedir la ocupación con nombre completo. R queda en 26.7",
+    ),
+
+    # -- Sesgo de "profesor de la materia" (causa raíz 1) --
+    "Administración Educativa": (
+        "Superintendentes de Educación", "es gestión escolar, no dar clase"),
+    "Licenciatura en Administración Educativa": (
+        "Superintendentes de Educación", "igual que la anterior"),
+    "Economía Empresarial": (
+        "Analistas Económicos y Financieros",
+        "2 de 3 eran profesores de economía; el egresado analiza, no enseña"),
+    "Relaciones Internacionales": (
+        "Especialistas en Asuntos Internacionales",
+        "2 de 3 eran profesores de ciencias políticas"),
+    "Ciencias de la Comunicación Social": (
+        "Relaciones Públicas y Comunicación",
+        "caía en profesores de comunicación y de literatura"),
+
+    # -- Nombres sueltos que el buscador emparejaba mal --
+    "Administración de Empresas": (
+        "Gerentes de Servicios Administrativos",
+        "el nombre tal cual daba 'Coordinadores de Reciclaje'. Costó tres "
+        "intentos: 'Gerentes Generales de Operaciones' arrastró mantenimiento y "
+        "energía eólica (R=57.7 en una carrera de oficina) y 'Analistas de "
+        "Gestión Empresarial' daba títulos limpios pero el vector de un analista, "
+        "no de un administrador (E bajaba a 51, S a 22). Con gerentes de verdad "
+        "queda E=91.3",
+    ),
+    "Licenciatura en Ciencias Jurídicas y Sociales": (
+        "Abogados",
+        "nunca aparecía 'Abogados': salían oficiales jurídicos y secretarios "
+        "legales, que inflan la C con trabajo de asistente",
+    ),
+    "Licenciatura en Informática y Administración de Empresas": (
+        "Gerentes de Sistemas de Computación e Información",
+        "la 1.ª ocupación era 'Maestros de Escuela Secundaria', ruido puro que "
+        "además inflaba la S. Es una carrera híbrida y O*NET no la representa con "
+        "una sola búsqueda: 'Administradores de Redes' daba infraestructura pura y "
+        "borraba la mitad administrativa. Los gerentes de sistemas son lo que más "
+        "se acerca a las dos mitades",
+    ),
+}
+
+# Revisadas a mano y **dejadas como estaban**: el emparejamiento es imperfecto y
+# aun así es lo mejor que O*NET ofrece en español. Se anota el techo para que la
+# próxima revisión no gaste el intento de nuevo.
+SIN_MEJOR_TERMINO: dict[str, str] = {
+    "Técnico Universitario en Hemodiálisis":
+        "O*NET no tiene la ocupación en español; 'Técnicos de Diálisis' devuelve "
+        "laboratorio clínico genérico, que es justo lo que ya tiene",
+    "Arquitectura":
+        "buscar 'Arquitectos' sale peor (navales, paisajistas, diseñadores de "
+        "bases de datos); lo que ya tiene es más cercano",
+    "Profesorado en Enseñanza Media en Cultura e Idioma Maya":
+        "O*NET es el mercado laboral de EE. UU. y no tiene lenguas mayas; "
+        "profesores de idiomas e intérpretes es lo más cercano que existe",
+    "Profesorado en Idioma Maya, Ciencias Sociales e Interculturalidad":
+        "igual que la anterior",
+    "Profesorado en Emprendimiento para la Productividad":
+        "busca mal ('Atletas y Competidores Deportivos') y no hay término en "
+        "español que lo arregle; techo del buscador, no de la revisión",
+}
+
+
 def termino(nombre: str) -> str:
     """El nombre de la carrera como palabras que O*NET pueda buscar."""
+    if nombre in TERMINOS_REVISADOS:
+        return TERMINOS_REVISADOS[nombre][0]
     t = re.sub(r"\s*\([^)]*\)", "", nombre).strip()  # "(Técnico Universitario)" y demás
     for p in PREFIJOS:
         if t.startswith(p):
@@ -154,7 +260,7 @@ def codificar_una(cli: httpx.Client, nombre: str) -> dict | None:
         # Se guarda con qué ocupaciones se armó: sin esto, la revisión humana
         # tendría que adivinar por qué una carrera salió como salió.
         "ocupaciones": [{"code": o["code"], "title": o["title"]} for o in ocupaciones],
-        "revisado": False,
+        "revisado": nombre in TERMINOS_REVISADOS or nombre in SIN_MEJOR_TERMINO,
     }
 
 
@@ -187,6 +293,45 @@ def codificar(limite: int | None = None):
     print(f"\n{SALIDA} · {len(hecho)} carreras codificadas")
 
 
+def recodificar():
+    """Rehace las entradas de `TERMINOS_REVISADOS` y corrige el flag `revisado`.
+
+    Existe porque los arreglos a mano se estaban aplicando con scripts sueltos
+    que mutaban el JSON: el resultado quedaba, pero no el motivo ni la forma de
+    repetirlo. Acá el término corregido vive en el código, con su porqué, y esta
+    función lo vuelve a aplicar cuando haga falta.
+
+    De paso arregla el flag: venía en `true` en las 90 entradas sin que nadie las
+    hubiera mirado, así que no servía para medir el avance de la revisión. Pasa a
+    significar una sola cosa: el nombre está en `TERMINOS_REVISADOS` (se corrigió)
+    o en `SIN_MEJOR_TERMINO` (se miró y se dejó igual, con el techo anotado).
+    """
+    hecho = json.load(open(SALIDA, encoding="utf-8"))
+    objetivo = {k: v for k, v in hecho.items() if v["nombre"] in TERMINOS_REVISADOS}
+    print(f"{len(objetivo)} entradas con término corregido a mano · "
+          f"{(1 + OCUPACIONES) * len(objetivo)} llamadas a O*NET")
+    with _cliente() as cli:
+        for i, (clave, v) in enumerate(objetivo.items(), 1):
+            nombre, antes = v["nombre"], v["codigo"]
+            try:
+                entrada = codificar_una(cli, nombre)
+            except httpx.HTTPError as e:
+                print(f"  [{i}/{len(objetivo)}] {nombre}: falló ({e})")
+                continue
+            if not entrada:
+                print(f"  [{i}/{len(objetivo)}] {nombre}: O*NET no devolvió ocupaciones")
+                continue
+            hecho[clave] = entrada
+            print(f"  [{i}/{len(objetivo)}] {nombre[:42]:<42} {antes} -> {entrada['codigo']}  "
+                  + "; ".join(o["title"] for o in entrada["ocupaciones"]))
+    for v in hecho.values():
+        v["revisado"] = v["nombre"] in TERMINOS_REVISADOS or v["nombre"] in SIN_MEJOR_TERMINO
+    json.dump(dict(sorted(hecho.items())), open(SALIDA, "w", encoding="utf-8"),
+              ensure_ascii=False, indent=1)
+    print(f"\n{SALIDA} · {sum(1 for v in hecho.values() if v['revisado'])}/{len(hecho)} "
+          f"revisadas a mano")
+
+
 def revisar():
     """Informe para la revisión humana. Sin red."""
     hecho = json.load(open(SALIDA, encoding="utf-8"))
@@ -216,18 +361,37 @@ def _self_check():
     p = perfiles_del_catalogo()
     assert len(p) > 50, len(p)
     assert all(v["sedes"] for v in p.values())
-    print(f"self-check OK — {len(p)} perfiles en el catálogo")
+
+    # El término corregido gana sobre el nombre de la carrera.
+    assert termino("Administración de Empresas") == "Gerentes de Servicios Administrativos"
+    # Un nombre mal escrito en los dicts no haría nada, y en silencio: la
+    # entrada se codificaría con el término malo y seguiría contando como
+    # revisada. Por eso se comparan contra el catálogo real.
+    nombres = {v["nombre"] for v in p.values()}
+    huerfanos = (set(TERMINOS_REVISADOS) | set(SIN_MEJOR_TERMINO)) - nombres
+    assert not huerfanos, f"nombres que no existen en el catálogo: {sorted(huerfanos)}"
+    # Una carrera no puede estar corregida y sin arreglo posible a la vez.
+    ambas = set(TERMINOS_REVISADOS) & set(SIN_MEJOR_TERMINO)
+    assert not ambas, f"en los dos dicts a la vez: {sorted(ambas)}"
+
+    print(f"self-check OK — {len(p)} perfiles en el catálogo · "
+          f"{len(TERMINOS_REVISADOS)} términos corregidos · "
+          f"{len(SIN_MEJOR_TERMINO)} sin mejor término")
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--limite", type=int, help="codifica solo N perfiles pendientes")
     ap.add_argument("--revisar", action="store_true", help="informe, sin red")
+    ap.add_argument("--recodificar", action="store_true",
+                    help="rehace las entradas con término corregido a mano")
     ap.add_argument("--self-check", action="store_true")
     a = ap.parse_args()
     if a.self_check:
         _self_check()
     elif a.revisar:
         revisar()
+    elif a.recodificar:
+        recodificar()
     else:
         codificar(a.limite)
