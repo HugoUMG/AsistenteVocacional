@@ -169,6 +169,14 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   catálogo a mano (90/90, 18 códigos cambiados) y §9 repitió el A/B con el
   catálogo revisado: **0/2 otra vez**. Los términos de búsqueda corregidos y los
   que midieron peor viven en `codificar_holland.py`, con el motivo.
+- [experiments/holland-sondeo-intereses.md](experiments/holland-sondeo-intereses.md) —
+  obligar al chat a gastar un turno sondeando el interés MEDIDO (cobertura de
+  `intereses` pendiente y prioritaria). El mecanismo cumple 6/6 pero no mejora:
+  5/6 contra 6/6, +1 pregunta y +12% de tokens. **No se integra.** Ojo, el
+  control salió en el techo (6/6), así que no descarta la hipótesis. Deja dos
+  cosas: forzar la elección entre lo declarado y lo medido se resuelve a favor
+  de lo declarado, y la sospecha de que la apertura explícita pesa más de lo que
+  midió `holland-apertura.md`.
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
