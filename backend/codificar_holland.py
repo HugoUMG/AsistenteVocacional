@@ -181,6 +181,55 @@ TERMINOS_REVISADOS: dict[str, tuple[str, str]] = {
         "nunca aparecía 'Abogados': salían oficiales jurídicos y secretarios "
         "legales, que inflan la C con trabajo de asistente",
     ),
+    # -- 2.ª pasada (70 restantes): la carrera perdía su rasgo distintivo --
+    "Profesorado en Educación Artística (Música y Danza)": (
+        "Profesores de Arte, Teatro, y Música",
+        "el profesorado de arte era el único perfil de arte SIN arte: A=34.3, "
+        "indistinguible de cualquier otra pedagogía. Sube a 61. Irónico, es "
+        "justo la ocupación que 'Pedagogía' devolvía de más en las que no la "
+        "necesitaban. Cuesta S (93.3 a 70.7), y aun así el rasgo que separa a "
+        "esta carrera de las demás es la A",
+    ),
+    "Ingeniería en Ciencias y Sistemas": (
+        "Ingenieros de Software",
+        "una carrera de computación cuyas 3 ocupaciones eran tecnólogos "
+        "eléctricos, mecánicos y directores de ciencias naturales: cero "
+        "computación. I sube de 74.7 a 81",
+    ),
+    "Ingeniería en Administración de Tierras": (
+        "Topógrafos",
+        "las 3 ocupaciones (directores de arquitectura, tecnólogos eléctricos y "
+        "mecánicos) no tenían nada que ver con la tierra; de hecho eran las "
+        "mismas de Ingeniería Mecánica. Ahora agrimensores y cartógrafos",
+    ),
+    "Licenciatura en Administración de Empresas Turísticas y Hoteleras": (
+        "Gerentes de Hospedaje",
+        "traía guías, agentes de reservación y recepcionistas de hotel, o sea el "
+        "personal de mostrador y no quien administra. La C de 70 era trabajo de "
+        "oficina; con gerentes la E sube de 52.7 a 95.7",
+    ),
+    "Ingeniería Industrial": (
+        "Ingenieros Industriales",
+        "'Mecánicos de Maquinaria Industrial' es un mecánico, no un ingeniero, e "
+        "inflaba la R. Con ingenieros de verdad la I sube de 58.7 a 81.3",
+    ),
+    "Ingeniería en Agronomía": (
+        "Ingenieros Agrónomos",
+        "encabezaba un profesor de ciencias agrarias; el vector casi no se mueve "
+        "pero ahora lo lidera la ocupación correcta",
+    ),
+    "Psicología Educativa": (
+        "Psicólogos Escolares",
+        "las tres psicologías (general, clínica y educativa) compartían un vector "
+        "idéntico, o sea que el catálogo no las distinguía. Esta pasa a "
+        "psicólogos escolares y orientadores, que es lo suyo",
+    ),
+    "Trabajo Social": (
+        "Trabajadores Sociales",
+        "encabezaba un profesor de trabajo social; ahora las 3 son trabajadores "
+        "sociales reales, mismo código y sin el sesgo",
+    ),
+
     "Licenciatura en Informática y Administración de Empresas": (
         "Gerentes de Sistemas de Computación e Información",
         "la 1.ª ocupación era 'Maestros de Escuela Secundaria', ruido puro que "
@@ -209,6 +258,51 @@ SIN_MEJOR_TERMINO: dict[str, str] = {
     "Profesorado en Emprendimiento para la Productividad":
         "busca mal ('Atletas y Competidores Deportivos') y no hay término en "
         "español que lo arregle; techo del buscador, no de la revisión",
+
+    # -- 2.ª pasada: se probó una alternativa y MIDIÓ PEOR. La lista de títulos
+    # mejoraba y el vector empeoraba, que es la trampa de esta revisión. --
+    "Teología":
+        "'Clero' trae sepultureros y coordinadores de servicios fúnebres: la I "
+        "cae de 54 a 18.3 y la E salta de 29 a 66.7. Los profesores de filosofía "
+        "y religión describen mejor el perfil contemplativo",
+    "Teología Sistemática": "igual que Teología",
+    "Técnico en Ejecución Musical Popular y Contemporánea":
+        "'Músicos y Cantantes' baja la A de 82.3 a 64.7 (mete 'Mensajeros y "
+        "Repartidores'). El 'Profesores de Inglés y Literatura' que parecía "
+        "ruido puro es el que sostiene la A",
+    "Chef Profesional e Internacional (Técnico Universitario)":
+        "'Chefs y Primeros Chefs' baja la I de 47.7 a 26.7: se pierde a los "
+        "científicos de alimentos, que es la parte técnica de la carrera",
+    "Ingeniería Mecánica":
+        "'Ingenieros Mecánicos' trae 'Operadores de Caldera': la R salta a 91 y "
+        "la I CAE de 67.3 a 50.7. Un ingeniero debe tener I alta",
+    "Ingeniería Química":
+        "mismo caso que Ingeniería Mecánica: 'Ingenieros Químicos' arrastra "
+        "operadores de caldera y la I cae de 82.7 a 65",
+    "Licenciatura en Marketing and Business Analytics":
+        "'Analistas de Investigación de Mercado' deja el perfil de un gerente de "
+        "mercadeo (E=77.3) y borra la mitad analítica (I de 84 a 55.3). El "
+        "profesor que encabeza es 1 de 3; los otros dos son analítica real",
+    "Criminología y Política Criminal":
+        "'Detectives e Investigadores Criminales' da el perfil de un supervisor "
+        "policial (E=66.7) y baja la I de 70.7 a 45; la criminología es estudio",
+    "Técnico Universitario en Criminología y Criminalística":
+        "'Técnicos en Ciencias Forenses' cambia el ruido de 'Asistentes de "
+        "Estadísticas' por el de 'Técnico de Ciencias de los Alimentos'",
+    "Profesorado en Tecnología Educativa":
+        "'Diseñadores Instruccionales' hunde la S de 93.3 a 60 en una carrera "
+        "docente y sigue sin traer nada de tecnología",
+
+    # -- 2.ª pasada: el término correcto devuelve las mismas ocupaciones. El
+    # sesgo de profesor era aparente, el vector ya estaba bien. --
+    "Licenciatura en Economía":
+        "'Economistas' devuelve las mismas 3 ocupaciones, vector idéntico",
+    "Ingeniería Civil":
+        "'Ingenieros Civiles' devuelve las mismas 3, vector idéntico",
+    "Psicología Clínica":
+        "'Psicólogos Clínicos y de Consejería' devuelve las mismas 3, vector "
+        "idéntico. Comparte vector con 'Psicología (PEM y Licenciatura)' y no "
+        "hay forma de separarlas con este método",
 }
 
 
