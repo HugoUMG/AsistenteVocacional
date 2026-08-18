@@ -1,6 +1,6 @@
 # Holland como estructura: el catálogo codificado con los RIASEC de O*NET
 
-**Fecha:** 2026-08-16 · rev. 2026-08-17 (§8, revisión a mano de 20/90) ·
+**Fecha:** 2026-08-16 · rev. 2026-08-17 (§8, revisión a mano de 41/90) ·
 **Estado:** construido y medido. **El flag
 `HOLLAND_EN_RECOMENDACION` queda apagado**: con la conversación presente, el
 orden por afinidad RIASEC **no movió el top-1** en ninguno de los dos perfiles.
@@ -60,9 +60,11 @@ Y los límites, que son grandes y se ven a simple vista:
 - Casos francamente mal emparejados: "Licenciatura en Comunicación y Diseño" →
   instaladores de torres de telefonía (`RCI`); "Administración de Empresas" →
   coordinadores de reciclaje entre las tres.
-- Toda entrada lleva `"revisado": false`. **La revisión humana es parte del
+- Toda entrada nacía con `"revisado": false`. **La revisión humana es parte del
   trabajo, no un adorno**: `--revisar` imprime carrera → código → ocupaciones
-  usadas, en una sola pantalla, para poder corregirla a mano.
+  usadas, en una sola pantalla, para poder corregirla a mano. Los tres límites
+  de esta lista se atacaron en **§8**, que también corrige el flag: había
+  quedado en `true` en las 90 entradas sin que nadie las mirara.
 
 ## 3. La puerta previa: el corte se cayó solo (otra vez)
 
@@ -158,8 +160,9 @@ explicación de por qué el emparejamiento por vector falla donde falla (§3).
 - **2 perfiles ficticios, 1 corrida cada uno.** Sirve para leer el mecanismo, no
   para afirmar una mejora ni descartarla con fuerza estadística. Compartir la
   conversación quita la varianza entre corridas pero no agrega potencia.
-- **La codificación está revisada a mano solo en parte: 20/90** (2026-08-17,
-  ver §9). Las otras 70 no las ha mirado nadie.
+- **La codificación está revisada a mano en parte: 41/90** (2026-08-17, ver
+  §8). Las 49 restantes se leyeron y se vieron correctas, pero nadie les probó
+  una alternativa.
 - **El corte nunca se probó con Gemini.** Se descartó en la puerta previa por lo
   que le hace al perfil artístico. Probarlo solo con Melany sería elegir el
   perfil al que le conviene.
@@ -191,12 +194,38 @@ los reaplica: los arreglos son reproducibles, no ediciones sueltas del JSON.
    "Licenciatura en Educación de la Física y Matemática" traía "Especialistas
    en Educación Física Adaptada" de primera.
 
+Una tercera, vista en la 2.ª pasada: **en los nombres híbridos el buscador se
+come la segunda mitad**. "Ingeniería Agrícola con Énfasis en Gerencia" devuelve
+operadores de maquinaria y jornaleros, cero gerencia; "Administración de
+Empresas Turísticas y Hoteleras" devolvía recepcionistas y guías, o sea el
+personal de mostrador y no quien administra.
+
 ### Resultado
 
-15 entradas recodificadas: **10 cambiaron de código de 3 letras**, 5 quedaron
-con el mismo código y el vector más limpio. 5 más se revisaron y se dejaron
-igual, con el techo anotado (O*NET no tiene lenguas mayas ni técnico en
-hemodiálisis en español; "Arquitectos" sale peor que lo que ya había).
+Se leyeron las 90. **23 entradas quedaron con término corregido** (16 cambiaron
+de código de 3 letras contra el original) y **18 se revisaron y se dejaron
+igual**, con el motivo anotado. Total: 41/90 con una decisión explícita
+tomada. Las 49 restantes se leyeron en el informe de `--revisar` y el
+emparejamiento era correcto (Médico y Cirujano → cirujanos, Enfermería →
+enfermeros, Contaduría → contadores), pero no se les probó una alternativa, así
+que no cuentan como revisadas.
+
+Los peores casos que encontró la 2.ª pasada no eran de sesgo docente sino de
+carreras a las que les faltaba **su rasgo definitorio**:
+
+- **Profesorado en Educación Artística (Música y Danza)** era el único perfil
+  de arte sin arte (A=34.3), indistinguible de cualquier otra pedagogía. Y la
+  ocupación que le faltaba, "Profesores de Arte, Teatro y Música", es
+  exactamente la que "Pedagogía" metía de más en las seis que no la
+  necesitaban.
+- **Ingeniería en Ciencias y Sistemas**, una carrera de computación, tenía
+  tecnólogos eléctricos, mecánicos y directores de ciencias naturales. Cero
+  computación.
+- **Ingeniería en Administración de Tierras** traía las mismas tres ocupaciones
+  que Ingeniería Mecánica, ninguna relacionada con la tierra.
+- Las tres psicologías (general, clínica y educativa) compartían **un vector
+  idéntico**: el catálogo no las distinguía. Educativa ya se separó; clínica y
+  general siguen iguales y con este método no hay cómo separarlas.
 
 ### Lo que la revisión enseñó, y conviene no exagerar
 
@@ -207,19 +236,37 @@ hemodiálisis en español; "Arquitectos" sale peor que lo que ya había).
   títulos impecable y un vector peor (E de 75 a 51, S de 54 a 22, C a 86.7: el
   perfil de un analista de datos, no de un administrador). Hubo que mirar el
   vector, no la lista, para verlo. Mismo caso en Física y Matemática.
+- **En la 2.ª pasada esto pasó de anécdota a regla: 10 de 23 alternativas
+  probadas midieron peor y se rechazaron**, todas con una lista de ocupaciones
+  que se leía mejor que la original. El patrón: pedir la ocupación profesional
+  por su nombre ("Ingenieros Químicos", "Ingenieros Mecánicos") arrastra oficios
+  de planta ("Operadores de Caldera") que suben la R y **bajan la I**, que es
+  justo lo que distingue a un ingeniero. Los "Tecnólogos y Técnicos" que
+  parecían el error daban un vector más equilibrado.
+- Y al revés: ruido que parecía obvio resultó ser señal. El "Profesores de
+  Inglés y Literatura" del técnico en música es lo que sostiene su A=82.3;
+  quitarlo la baja a 64.7.
 - Por eso el criterio de aceptación de un término corregido es **el vector**,
-  y los intentos descartados quedaron escritos en el dict junto al bueno.
+  y los intentos descartados quedaron escritos en los dicts junto al bueno,
+  con el número que los descartó. Sirven para no volver a probarlos.
 - **Esto no reabre la decisión de §6.** Un catálogo mejor codificado sigue sin
-  ser motor de la recomendación mientras no se vuelva a medir el A/B; 22% del
-  catálogo revisado no alcanza para reintentar nada. Lo que sí mejora es la
-  afinidad RIASEC como **dato auditable**, que es lo que §5 dice que este
-  trabajo produjo.
+  ser motor de la recomendación mientras no se vuelva a medir el A/B. Lo que sí
+  mejora es la afinidad RIASEC como **dato auditable**, que es lo que §5 dice
+  que este trabajo produjo. Con 16 códigos cambiados, repetir el A/B ahora sí
+  tendría sentido; sigue sin haberse hecho.
 
-Quedan **70 perfiles sin revisar**. El escaneo que encontró estos casos fue
-leer el informe de `--revisar` entero; el solapamiento léxico entre el nombre
-de la carrera y los títulos de las ocupaciones se probó como filtro automático
-y **no sirve**: "Comunicación y Diseño" → "Diseñadores Gráficos" da cero
-palabras en común y es correcto.
+El filtro automático por solapamiento léxico entre el nombre de la carrera y
+los títulos de las ocupaciones **no sirve** y se descartó: "Comunicación y
+Diseño" → "Diseñadores Gráficos" da cero palabras en común y es correcto. La
+revisión fue leer el informe de `--revisar` entero, con el vector al lado.
+
+### Lo que queda
+
+- 49 perfiles leídos y aparentemente correctos, sin alternativa probada.
+- Psicología Clínica y Psicología (PEM y Licenciatura) comparten vector.
+- Techos del buscador ya anotados y que no vale la pena reintentar: lenguas
+  mayas, hemodiálisis, emprendimiento, arquitectura, teología.
+- La prueba de si algo de esto importa sigue siendo el A/B de §4, sin correr.
 
 ## 9. Reproducir
 

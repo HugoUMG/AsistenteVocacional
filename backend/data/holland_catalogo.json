@@ -24,7 +24,7 @@
     "title": "Directores de Arquitectura e Ingeniería"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "CUNOC::Ingeniería Mecánica Industrial": {
   "nombre": "Ingeniería Mecánica Industrial",
@@ -56,29 +56,29 @@
  "CUNOC::Ingeniería en Administración de Tierras": {
   "nombre": "Ingeniería en Administración de Tierras",
   "vector": {
-   "R": 69.7,
-   "I": 67.3,
-   "A": 20.0,
-   "S": 16.3,
-   "E": 32.0,
-   "C": 62.3
+   "R": 76.0,
+   "I": 62.0,
+   "A": 14.3,
+   "S": 7.7,
+   "E": 8.3,
+   "C": 73.7
   },
-  "codigo": "RIC",
+  "codigo": "RCI",
   "ocupaciones": [
    {
-    "code": "11-9041.00",
-    "title": "Directores de Arquitectura e Ingeniería"
+    "code": "17-3031.00",
+    "title": "Técnicos en Agrimensura y Cartografía"
    },
    {
-    "code": "17-3023.00",
-    "title": "Tecnólogos y Técnicos en Ingeniería Eléctrica y Electrónica"
+    "code": "17-1022.01",
+    "title": "Agrimensores Geodeticos"
    },
    {
-    "code": "17-3027.00",
-    "title": "Tecnólogos y Técnicos en Ingeniería Mecánica"
+    "code": "17-1022.00",
+    "title": "Agrimensores"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "CUNOC::Ingeniería en Gestión Ambiental Local": {
   "nombre": "Ingeniería en Gestión Ambiental Local",
@@ -132,7 +132,7 @@
     "title": "Economistas Ambientales"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "CUNOC::Licenciatura en la Enseñanza de la Matemática y la Física": {
   "nombre": "Licenciatura en la Enseñanza de la Matemática y la Física",
@@ -348,7 +348,7 @@
     "title": "Científicos y Tecnólogos Especializados en Alimentos"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Criminología y Política Criminal": {
   "nombre": "Criminología y Política Criminal",
@@ -375,7 +375,7 @@
     "title": "Técnicos en Ciencias Forenses"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Ingeniería Química": {
   "nombre": "Ingeniería Química",
@@ -402,34 +402,34 @@
     "title": "Ingenieros Biogenéticos y Biomédicos"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Ingeniería en Agronomía": {
   "nombre": "Ingeniería en Agronomía",
   "vector": {
-   "R": 77.3,
-   "I": 80.3,
-   "A": 18.3,
-   "S": 35.0,
-   "E": 19.3,
-   "C": 49.3
+   "R": 71.0,
+   "I": 79.7,
+   "A": 22.7,
+   "S": 43.3,
+   "E": 28.3,
+   "C": 46.0
   },
   "codigo": "IRC",
   "ocupaciones": [
+   {
+    "code": "17-2021.00",
+    "title": "Ingenieros Agrónomos"
+   },
    {
     "code": "25-1041.00",
     "title": "Profesores de Ciencias Agrarias de Nivel Postsecundario"
    },
    {
-    "code": "19-1013.00",
-    "title": "Científicos Especializados en Suelos y Botánica"
-   },
-   {
-    "code": "19-4012.01",
-    "title": "Técnicos de Precisión en Agricultura"
+    "code": "19-1031.00",
+    "title": "Científicos Especializados en Conservación"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Licenciatura en Administración Educativa": {
   "nombre": "Licenciatura en Administración Educativa",
@@ -618,7 +618,7 @@
     "title": "Profesores de Educación Profesional/Técnica de Nivel Postsecundario"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "UMG Quetzaltenango::Teología Sistemática": {
   "nombre": "Teología Sistemática",
@@ -645,7 +645,7 @@
     "title": "Antropólogos y Arqueólogos"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "URG Totonicapán::Licenciatura en Administración de Sistemas Informáticos": {
   "nombre": "Licenciatura en Administración de Sistemas Informáticos",
@@ -942,7 +942,7 @@
     "title": "Asistentes de Estadísticas"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "diseno_grafico": {
   "nombre": "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
@@ -1105,29 +1105,29 @@
  "hoteleria_turismo": {
   "nombre": "Licenciatura en Administración de Empresas Turísticas y Hoteleras",
   "vector": {
-   "R": 23.3,
-   "I": 7.3,
-   "A": 11.7,
-   "S": 59.7,
-   "E": 52.7,
-   "C": 70.0
+   "R": 16.0,
+   "I": 12.3,
+   "A": 20.0,
+   "S": 43.7,
+   "E": 95.7,
+   "C": 66.3
   },
-  "codigo": "CSE",
+  "codigo": "ECS",
   "ocupaciones": [
    {
-    "code": "39-7012.00",
-    "title": "Guías de Viajes"
+    "code": "11-9081.00",
+    "title": "Gerentes de Hospedaje"
    },
    {
-    "code": "43-4181.00",
-    "title": "Agentes de Reservación y Venta de Boletos de Transporte y Empleados de Oficina de Viajes"
+    "code": "11-1021.00",
+    "title": "Gerentes Generales y de Operaciones"
    },
    {
-    "code": "43-4081.00",
-    "title": "Empleados de Recepción de Hotel, Motel, y Centro Turístico"
+    "code": "11-2011.00",
+    "title": "Gerentes de Publicidad y Promociones"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "informatica_administracion": {
   "nombre": "Licenciatura en Informática y Administración de Empresas",
@@ -1262,7 +1262,7 @@
     "title": "Ingenieros Civiles"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "ingenieria_electronica": {
   "nombre": "Ingeniería en Electrónica",
@@ -1294,56 +1294,56 @@
  "ingenieria_industrial": {
   "nombre": "Ingeniería Industrial",
   "vector": {
-   "R": 78.7,
-   "I": 58.7,
-   "A": 13.3,
-   "S": 29.0,
-   "E": 14.0,
-   "C": 55.7
-  },
-  "codigo": "RIC",
-  "ocupaciones": [
-   {
-    "code": "17-3026.00",
-    "title": "Tecnólogos y Técnicos en Ingeniería Industrial"
-   },
-   {
-    "code": "25-1032.00",
-    "title": "Profesores de Ingeniería de Nivel Postsecundario"
-   },
-   {
-    "code": "49-9041.00",
-    "title": "Mecánicos de Maquinaria Industrial"
-   }
-  ],
-  "revisado": false
- },
- "ingenieria_sistemas": {
-  "nombre": "Ingeniería en Ciencias y Sistemas",
-  "vector": {
-   "R": 68.3,
-   "I": 74.7,
-   "A": 19.0,
-   "S": 17.0,
-   "E": 27.7,
+   "R": 66.3,
+   "I": 81.3,
+   "A": 10.0,
+   "S": 14.0,
+   "E": 31.0,
    "C": 61.3
   },
   "codigo": "IRC",
   "ocupaciones": [
    {
-    "code": "17-3023.00",
-    "title": "Tecnólogos y Técnicos en Ingeniería Eléctrica y Electrónica"
+    "code": "17-2112.00",
+    "title": "Ingenieros Industriales"
    },
    {
-    "code": "17-3027.00",
-    "title": "Tecnólogos y Técnicos en Ingeniería Mecánica"
+    "code": "19-2041.03",
+    "title": "Ecólogos Industriales"
    },
    {
-    "code": "11-9121.00",
-    "title": "Directores de Ciencias Naturales"
+    "code": "17-2111.00",
+    "title": "Ingenieros Sanitarios y de Seguridad"
    }
   ],
-  "revisado": false
+  "revisado": true
+ },
+ "ingenieria_sistemas": {
+  "nombre": "Ingeniería en Ciencias y Sistemas",
+  "vector": {
+   "R": 59.3,
+   "I": 81.0,
+   "A": 17.3,
+   "S": 11.0,
+   "E": 11.7,
+   "C": 72.0
+  },
+  "codigo": "ICR",
+  "ocupaciones": [
+   {
+    "code": "15-1252.00",
+    "title": "Diseñadores de Programas Software"
+   },
+   {
+    "code": "15-1253.00",
+    "title": "Analistas y Probadores de Control de Calidad de Software"
+   },
+   {
+    "code": "17-2072.00",
+    "title": "Ingenieros Electrónicos"
+   }
+  ],
+  "revisado": true
  },
  "laboratorio_clinico": {
   "nombre": "Técnico Universitario en Laboratorio Clínico",
@@ -1424,7 +1424,7 @@
     "title": "Científico de Datos"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "medico_cirujano": {
   "nombre": "Médico y Cirujano",
@@ -1505,7 +1505,7 @@
     "title": "Músicos y Cantantes"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "nutricion": {
   "nombre": "Licenciatura en Nutrición",
@@ -1618,29 +1618,29 @@
  "pedagogia_artistica": {
   "nombre": "Profesorado en Educación Artística (Música y Danza)",
   "vector": {
-   "R": 28.3,
-   "I": 62.7,
-   "A": 34.3,
-   "S": 93.3,
-   "E": 28.0,
-   "C": 43.7
+   "R": 44.0,
+   "I": 39.0,
+   "A": 61.0,
+   "S": 70.7,
+   "E": 23.3,
+   "C": 41.7
   },
-  "codigo": "SIC",
+  "codigo": "SAR",
   "ocupaciones": [
    {
-    "code": "25-1081.00",
-    "title": "Profesores de Educación de Nivel Postsecundario"
+    "code": "25-1121.00",
+    "title": "Profesores de Arte, Teatro, y Música de Nivel Postsecundario"
    },
    {
-    "code": "25-1194.00",
-    "title": "Profesores de Educación Profesional/Técnica de Nivel Postsecundario"
+    "code": "27-4014.00",
+    "title": "Técnicos de Ingeniería de Sonido"
    },
    {
-    "code": "21-1091.00",
-    "title": "Especialistas en Educación de la Salud"
+    "code": "25-2031.00",
+    "title": "Maestros de Escuela Secundaria"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "pedagogia_ciencias_naturales": {
   "nombre": "Profesorado en Ciencias Naturales, Química y Biología",
@@ -2099,34 +2099,34 @@
     "title": "Psicólogos Escolares"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "psicologia_educativa": {
   "nombre": "Psicología Educativa",
   "vector": {
-   "R": 6.7,
-   "I": 73.3,
-   "A": 40.3,
-   "S": 96.3,
-   "E": 26.7,
-   "C": 43.3
+   "R": 4.0,
+   "I": 48.0,
+   "A": 35.7,
+   "S": 98.0,
+   "E": 37.0,
+   "C": 48.3
   },
-  "codigo": "SIC",
+  "codigo": "SCI",
   "ocupaciones": [
-   {
-    "code": "25-1066.00",
-    "title": "Profesores de Psicología de Nivel Postsecundario"
-   },
-   {
-    "code": "19-3033.00",
-    "title": "Psicólogos Clínicos y de Consejería"
-   },
    {
     "code": "19-3034.00",
     "title": "Psicólogos Escolares"
+   },
+   {
+    "code": "21-1021.00",
+    "title": "Trabajadores Sociales Especializados en Temas de la Infancia, Familiares y Escolares"
+   },
+   {
+    "code": "21-1012.00",
+    "title": "Consejeros y Orientadores Educativos, Académicos, y Ocupacionales"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "psicologia_industrial": {
   "nombre": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
@@ -2338,7 +2338,7 @@
     "title": "Maestros de Escuela de Nivel Medio"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "terapia_fisica": {
   "nombre": "Fisioterapia",
@@ -2370,18 +2370,18 @@
  "trabajo_social": {
   "nombre": "Trabajo Social",
   "vector": {
-   "R": 16.0,
-   "I": 57.3,
-   "A": 33.3,
-   "S": 99.7,
-   "E": 27.0,
-   "C": 34.7
+   "R": 13.3,
+   "I": 48.0,
+   "A": 28.0,
+   "S": 99.0,
+   "E": 27.3,
+   "C": 37.7
   },
   "codigo": "SIC",
   "ocupaciones": [
    {
-    "code": "25-1113.00",
-    "title": "Profesores de Trabajo Social de Nivel Postsecundario"
+    "code": "21-1021.00",
+    "title": "Trabajadores Sociales Especializados en Temas de la Infancia, Familiares y Escolares"
    },
    {
     "code": "21-1022.00",
@@ -2392,7 +2392,7 @@
     "title": "Trabajadores Sociales Especializados en Salud Mental y Abuso de Sustancias"
    }
   ],
-  "revisado": false
+  "revisado": true
  },
  "visita_medica_mercadeo": {
   "nombre": "Técnico Universitario en Visita Médica y Mercadeo",
