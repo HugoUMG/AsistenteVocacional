@@ -230,6 +230,21 @@ TERMINOS_REVISADOS: dict[str, tuple[str, str]] = {
         "sociales reales, mismo código y sin el sesgo",
     ),
 
+    # -- 3.ª pasada (las 41 que faltaban de revisar) --
+    "Ingeniería Agrícola con Énfasis en Gerencia": (
+        "Ingenieros Agrónomos",
+        "las 3 ocupaciones eran operadores de maquinaria, mecánicos y "
+        "contratistas de mano de obra: I=22.7 y A=0.0, el perfil de un jornalero "
+        "y no de un ingeniero. Sube la I a 79.7. La 'Gerencia' del nombre se "
+        "sigue perdiendo, O*NET no tiene gerencia agrícola en español",
+    ),
+    "Profesorado en Tecnologías de la Información y la Comunicación": (
+        "Profesores de Ciencias de la Computación",
+        "un profesorado sin una sola ocupación docente: traía informática "
+        "médica, gerentes de proyectos y administradores de redes. La S sube de "
+        "35.7 a 63.3, que es lo que corresponde a una carrera de enseñanza",
+    ),
+
     "Licenciatura en Informática y Administración de Empresas": (
         "Gerentes de Sistemas de Computación e Información",
         "la 1.ª ocupación era 'Maestros de Escuela Secundaria', ruido puro que "
@@ -303,7 +318,95 @@ SIN_MEJOR_TERMINO: dict[str, str] = {
         "'Psicólogos Clínicos y de Consejería' devuelve las mismas 3, vector "
         "idéntico. Comparte vector con 'Psicología (PEM y Licenciatura)' y no "
         "hay forma de separarlas con este método",
+
+    # -- 3.ª pasada: probadas y rechazadas --
+    "Licenciatura en Administración de Telecomunicaciones":
+        "techo duro. 'Especialistas en Ingeniería de Telecomunicaciones', "
+        "'Ingenieros de Telecomunicaciones' y 'Gerentes de Telecomunicaciones e "
+        "Ingeniería' devuelven LAS MISMAS 3 ocupaciones, 2 de ellas "
+        "instaladores de líneas: O*NET en español no tiene gestión de "
+        "telecomunicaciones. La R=80.3 es de obrero y está mal para una "
+        "licenciatura, pero 'Gerentes de Sistemas de Computación' la dejaría con "
+        "el vector EXACTO de Informática y Adm. de Empresas y sin telecom",
+    "Ingeniería Mecánica Industrial":
+        "'Ingenieros Industriales' sube la I de 71.7 a 81.3 pero borra la mitad "
+        "mecánica y deja el vector idéntico al de Ingeniería Industrial. La I "
+        "actual ya es alta; el profesor es 1 de 3",
+    "Licenciatura en Ciencias de la Educación":
+        "'Administradores Educativos' la vuelve pura gestión (I de 60.7 a 44) y "
+        "es una carrera de educación amplia, no de administración",
+    "Licenciatura en la Enseñanza de la Matemática y la Física":
+        "ya tiene profesores de matemática Y de física, que es lo correcto. "
+        "'Profesores de Física de Nivel Postsecundario' hunde la I de 79 a 51.3 "
+        "y pierde la matemática. Ojo, no confundir con 'Licenciatura en "
+        "Educación de la Física y Matemática', que sí tenía el bug de educación "
+        "física y sí se corrigió con ese término",
+    "PEM en Matemática y Física":
+        "cambia una materia faltante por otra: hoy le falta física, con "
+        "'Profesores de Física' le faltaría matemática, y encima baja I y S",
+    "Profesorado en Física y Matemática":
+        "igual que el anterior: la I bajaría de 63.7 a 51.3",
 }
+
+# Revisadas y **correctas sin cambio**: la búsqueda por el nombre de la carrera
+# ya devuelve las ocupaciones que la ejercen (Médico y Cirujano → cirujanos,
+# Enfermería → enfermeros, Contaduría → contadores y auditores). Se listan para
+# que `revisado` signifique "alguien la miró", no solo "alguien la corrigió".
+# No se les probó alternativa porque no hay hipótesis de mejora que probar.
+YA_CORRECTAS: frozenset[str] = frozenset({
+    "Administración de Hotelería, Turismo y Gastronomía",
+    "Artes Culinarias y Negocios Gastronómicos",
+    "Cirujano Dentista",
+    "Contaduría Pública y Auditoría",
+    "Fisioterapia",
+    "Ingeniería Ambiental",
+    "Ingeniería Forestal",
+    "Ingeniería en Electrónica",
+    "Ingeniería en Gestión Ambiental Local",
+    "Licenciatura en Administración de Sistemas Informáticos",
+    "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+    "Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)",
+    "Licenciatura en Comercio Internacional",
+    "Licenciatura en Comunicación y Diseño",
+    "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+    "Licenciatura en Educación de la Comunicación y Lenguaje",
+    "Licenciatura en Enfermería",
+    "Licenciatura en Informática e Inteligencia de Negocios",
+    "Licenciatura en Nutrición",
+    "Licenciatura en Producción Audiovisual y Artes Cinematográficas",
+    "Licenciatura en Producción de Imágenes Diagnósticas",
+    "Licenciatura en Publicidad con Especialidad en Diseño Gráfico",
+    "Licenciatura en Química Biológica",
+    "Médico y Cirujano",
+    "PEM en Comunicación y Lenguaje",
+    "PEM en Historia y Ciencias Sociales",
+    "PEM en Lenguaje e Historia",
+    "Profesorado de Enseñanza Media en Inglés",
+    "Profesorado en Ciencias Naturales, Química y Biología",
+    "Profesorado en Educación Inicial y Preprimaria",
+    "Profesorado en Educación Primaria",
+    "Profesorado en Psicopedagogía",
+    "Psicología (PEM y Licenciatura)",
+    "Técnico Universitario en Desarrollo de Software",
+    "Técnico Universitario en Enfermería Veterinaria",
+    "Técnico Universitario en Gerencia de Ventas",
+    "Técnico Universitario en Laboratorio Clínico",
+    "Técnico Universitario en Optometría",
+    "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+    "Técnico Universitario en Visita Médica y Mercadeo",
+    "Técnico en Laboratorio Dental",
+})
+
+
+def _revisada(nombre: str) -> bool:
+    """Si una persona tomó una decisión explícita sobre esta carrera.
+
+    Las tres formas de estarlo: se le corrigió el término (`TERMINOS_REVISADOS`),
+    se le probó una alternativa que no mejoró (`SIN_MEJOR_TERMINO`), o se miró y
+    no había hipótesis que probar (`YA_CORRECTAS`).
+    """
+    return (nombre in TERMINOS_REVISADOS or nombre in SIN_MEJOR_TERMINO
+            or nombre in YA_CORRECTAS)
 
 
 def termino(nombre: str) -> str:
@@ -354,7 +457,7 @@ def codificar_una(cli: httpx.Client, nombre: str) -> dict | None:
         # Se guarda con qué ocupaciones se armó: sin esto, la revisión humana
         # tendría que adivinar por qué una carrera salió como salió.
         "ocupaciones": [{"code": o["code"], "title": o["title"]} for o in ocupaciones],
-        "revisado": nombre in TERMINOS_REVISADOS or nombre in SIN_MEJOR_TERMINO,
+        "revisado": _revisada(nombre),
     }
 
 
@@ -398,7 +501,8 @@ def recodificar():
     De paso arregla el flag: venía en `true` en las 90 entradas sin que nadie las
     hubiera mirado, así que no servía para medir el avance de la revisión. Pasa a
     significar una sola cosa: el nombre está en `TERMINOS_REVISADOS` (se corrigió)
-    o en `SIN_MEJOR_TERMINO` (se miró y se dejó igual, con el techo anotado).
+    o en `SIN_MEJOR_TERMINO` (se probó una alternativa y no mejoró) o en
+    `YA_CORRECTAS` (se miró y no había nada que probar).
     """
     hecho = json.load(open(SALIDA, encoding="utf-8"))
     objetivo = {k: v for k, v in hecho.items() if v["nombre"] in TERMINOS_REVISADOS}
@@ -419,7 +523,7 @@ def recodificar():
             print(f"  [{i}/{len(objetivo)}] {nombre[:42]:<42} {antes} -> {entrada['codigo']}  "
                   + "; ".join(o["title"] for o in entrada["ocupaciones"]))
     for v in hecho.values():
-        v["revisado"] = v["nombre"] in TERMINOS_REVISADOS or v["nombre"] in SIN_MEJOR_TERMINO
+        v["revisado"] = _revisada(v["nombre"])
     json.dump(dict(sorted(hecho.items())), open(SALIDA, "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)
     print(f"\n{SALIDA} · {sum(1 for v in hecho.values() if v['revisado'])}/{len(hecho)} "
@@ -462,15 +566,23 @@ def _self_check():
     # entrada se codificaría con el término malo y seguiría contando como
     # revisada. Por eso se comparan contra el catálogo real.
     nombres = {v["nombre"] for v in p.values()}
-    huerfanos = (set(TERMINOS_REVISADOS) | set(SIN_MEJOR_TERMINO)) - nombres
+    huerfanos = (set(TERMINOS_REVISADOS) | set(SIN_MEJOR_TERMINO) | YA_CORRECTAS) - nombres
     assert not huerfanos, f"nombres que no existen en el catálogo: {sorted(huerfanos)}"
     # Una carrera no puede estar corregida y sin arreglo posible a la vez.
-    ambas = set(TERMINOS_REVISADOS) & set(SIN_MEJOR_TERMINO)
-    assert not ambas, f"en los dos dicts a la vez: {sorted(ambas)}"
+    grupos = {"TERMINOS_REVISADOS": set(TERMINOS_REVISADOS),
+              "SIN_MEJOR_TERMINO": set(SIN_MEJOR_TERMINO),
+              "YA_CORRECTAS": set(YA_CORRECTAS)}
+    for a, b in (("TERMINOS_REVISADOS", "SIN_MEJOR_TERMINO"),
+                 ("TERMINOS_REVISADOS", "YA_CORRECTAS"),
+                 ("SIN_MEJOR_TERMINO", "YA_CORRECTAS")):
+        repetidos = grupos[a] & grupos[b]
+        assert not repetidos, f"en {a} y {b} a la vez: {sorted(repetidos)}"
 
+    revisadas = len(TERMINOS_REVISADOS) + len(SIN_MEJOR_TERMINO) + len(YA_CORRECTAS)
     print(f"self-check OK — {len(p)} perfiles en el catálogo · "
-          f"{len(TERMINOS_REVISADOS)} términos corregidos · "
-          f"{len(SIN_MEJOR_TERMINO)} sin mejor término")
+          f"{len(TERMINOS_REVISADOS)} corregidos · "
+          f"{len(SIN_MEJOR_TERMINO)} sin mejor término · "
+          f"{len(YA_CORRECTAS)} ya correctos · {revisadas}/{len(p)} revisados")
 
 
 if __name__ == "__main__":

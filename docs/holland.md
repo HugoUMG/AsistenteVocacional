@@ -156,7 +156,7 @@ Lo medido, en corto:
   puesto 59 la carrera correcta del perfil artístico: el vector de Diseño Gráfico
   es A+E+C y la alumna es A+S.
 - **El reintento honesto era revisar la codificación a mano, y ya se hizo**
-  (41/90 al 2026-08-18, 16 códigos cambiados). Con el catálogo revisado se
+  (90/90 al 2026-08-18, 18 códigos cambiados). Con el catálogo revisado se
   repitió el A/B completo: **0/2 otra vez**. Y la evidencia quedó más firme, no
   más débil — la carrera de Melany subió del puesto 12 al **1** del catálogo
   ordenado y la recomendación no se movió, así que ya no se puede objetar que
@@ -182,12 +182,12 @@ el ranking (§ arriba). **Integrado en producción el 2026-08-17**:
 
 ## Decisiones abiertas (para retomar)
 
-1. **Revisar a mano la codificación RIASEC del catálogo** — en curso: **41 de
-   90** al 2026-08-18. Una pasada anterior (2026-08-17) dejó las 90 en
+1. ~~Revisar a mano la codificación RIASEC del catálogo~~ — hecho, **90/90** al
+   2026-08-18, en tres pasadas. Una pasada anterior (2026-08-17) dejó las 90 en
    `revisado: true` sin haberlas mirado; el flag ya no miente. Ver
    [experiments/holland-estructura.md](../experiments/holland-estructura.md) §8.
-   Las 49 restantes se leyeron y se veían correctas, pero nadie les probó una
-   alternativa.
+   **Revisada no es correcta**: 41 se dieron por buenas sin probarles
+   alternativa y varias arrastran techos del buscador, anotados ahí.
 2. ~~Persistencia~~ — hecha. El resultado se guarda en `resultados_holland`
    (`main.py`, al calificar) y sobrevive al cambio de pestaña por
    `localStorage`. Se liga a `estudiante_id` cuando hay sesión iniciada, y el
