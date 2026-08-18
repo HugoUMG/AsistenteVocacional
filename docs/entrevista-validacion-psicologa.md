@@ -6,6 +6,14 @@ Holland/O*NET tal como se usa, (2) el examen psicométrico propio de 100
 forma en que se presenta el resultado al alumno, (5) límites éticos y de uso
 responsable.
 
+> **Además de las preguntas, hay algo que pedirle.** Esta entrevista es el paso
+> 1 de [estudio-con-estudiantes.md](estudio-con-estudiantes.md), cuyo criterio
+> recomendado es que **ella califique a ciegas** las salidas del sistema para
+> 25-30 alumnos reales. Eso es un compromiso de tiempo distinto a dar una
+> opinión, así que hay que planteárselo de forma explícita y no darlo por
+> supuesto. Sin un criterio independiente del desarrollador y del modelo, el
+> estudio con alumnos produce datos auténticos sin vara para medirlos.
+
 ## 1. Sobre el enfoque general
 
 1. ¿El flujo de tres modos (solo chat, solo Holland, Holland y luego chat)

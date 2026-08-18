@@ -139,6 +139,12 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   de personalidad/valores/estilo cognitivo, pre-chat, mismo patrón que
   Holland. Pendiente de medir si mueve el ranking.
 - [docs/catalogo.md](docs/catalogo.md) — universidades cargadas y cómo agregar más.
+- [docs/estudio-con-estudiantes.md](docs/estudio-con-estudiantes.md) — plan del
+  estudio con alumnos reales: la evidencia que falta, el truco de reusar
+  conversaciones reales offline, el criterio externo y los bloqueantes de
+  consentimiento. **Sin ejecutar.**
+- [docs/entrevista-validacion-psicologa.md](docs/entrevista-validacion-psicologa.md)
+  — guía de entrevista para validar el sistema con la psicóloga.
 
 **Decisiones técnicas** (fecha · motivo · alternativas descartadas · consecuencias)
 - [decisions/llm-vs-red-neuronal.md](decisions/llm-vs-red-neuronal.md)
