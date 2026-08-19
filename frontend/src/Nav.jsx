@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google'
 import { cerrarSesion, iniciarSesionGoogle, sesionActual } from './auth'
+import { MODO_COMPLETO } from './modo'
 
 // Barra superior compartida por las páginas informativas (inicio, acerca,
 // catálogo, parámetros). El chat y el dashboard no la usan.
@@ -40,7 +41,7 @@ export default function Nav() {
       <nav className="nav-links">
         <NavLink to="/acerca">Acerca de</NavLink>
         <NavLink to="/catalogo">Catálogo de carreras</NavLink>
-        <NavLink to="/psicometrico">Exámenes psicométricos</NavLink>
+        {MODO_COMPLETO && <NavLink to="/psicometrico">Exámenes psicométricos</NavLink>}
         {/* /cip sale del menú: mide lo mismo que Holland (intereses) pero sin
             autorización de uso y con baremos españoles de otra época. La ruta
             sigue viva para poder mostrárselo a quien lo pida. Ver docs/holland.md. */}

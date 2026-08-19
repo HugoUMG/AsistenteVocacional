@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import Nav from './Nav'
+import { MODO_COMPLETO } from './modo'
 import './App.css'
 
 // Ondas decorativas del hero (azules sobre azul marino), inspiradas en el
@@ -94,8 +95,13 @@ const MODOS = [
     texto: '48 frases sobre tu personalidad, tus valores y cómo pensás. Orienta arranca el chat ya sabiendo eso, así que necesita menos preguntas.',
     boton: 'Empezar por el perfil',
     ruta: '/personalidad',
+    soloLocal: true,
   },
 ]
+
+// En producción se ofrecen solo el chat y Holland (ver modo.js).
+const MODOS_VISIBLES = MODOS.filter((m) => MODO_COMPLETO || !m.soloLocal)
+const CUANTAS = ['', 'Una', 'Dos', 'Tres', 'Cuatro']
 
 export default function Inicio() {
   const navigate = useNavigate()
@@ -136,9 +142,9 @@ export default function Inicio() {
 
       <section className="pasos">
         <span className="pasos-kicker">Elige cómo empezar</span>
-        <h2>Cuatro formas de hacerlo</h2>
+        <h2>{CUANTAS[MODOS_VISIBLES.length]} formas de hacerlo</h2>
         <div className="pasos-grid">
-          {MODOS.map((m) => (
+          {MODOS_VISIBLES.map((m) => (
             <article
               key={m.titulo}
               className={`paso-card modo-card${m.destacado ? ' modo-destacado' : ''}`}
@@ -158,8 +164,9 @@ export default function Inicio() {
       <section className="cierre">
         <p>
           Este proyecto nació para apoyar a estudiantes de Quetzaltenango y
-          Totonicapán que están por decidir su futuro. No necesitas registrarte
-          ni pagar nada: solo unos minutos y ganas de conocerte mejor.
+          Totonicapán que están por decidir su futuro. No cuesta nada: entrás
+          con tu cuenta de Google, y solo necesitas unos minutos y ganas de
+          conocerte mejor.
         </p>
       </section>
     </div>
