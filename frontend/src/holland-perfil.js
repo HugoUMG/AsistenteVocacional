@@ -38,3 +38,22 @@ export function leerPerfilHolland() {
 export function olvidarPerfilHolland() {
   localStorage.removeItem(CLAVE)
 }
+
+// Trae de la CUENTA el último perfil de Holland guardado y lo deja en
+// localStorage (o lo borra si esa cuenta no tiene ninguno). Se llama al iniciar
+// sesión: sin esto, dos alumnos que usan la misma computadora se pasan el
+// perfil entre sí. El token va por parámetro para no importar auth.js desde
+// aquí (auth.js ya importa este archivo).
+export async function sincronizarPerfilHolland(token) {
+  try {
+    const r = await fetch('http://localhost:8000/api/holland/mio', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    if (!r.ok) return
+    const perfil = await r.json()
+    if (perfil?.codigo) localStorage.setItem(CLAVE, JSON.stringify(perfil))
+    else olvidarPerfilHolland()
+  } catch {
+    // Sin red se deja lo que haya: el chat corre igual sin perfil de Holland.
+  }
+}

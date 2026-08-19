@@ -3,6 +3,7 @@ import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { color } from './colors'
 import { sessionId } from './session'
 import GuardarResultados from './GuardarResultados'
+import { authHeader } from './auth'
 import './Dashboard.css'
 
 const API = 'http://localhost:8000'
@@ -10,10 +11,14 @@ const API = 'http://localhost:8000'
 const postJSON = (ruta, body) =>
   fetch(`${API}${ruta}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeader() },
     body: JSON.stringify(body),
-  }).then((r) => {
-    if (!r.ok) throw new Error('No se pudo generar. Inténtalo de nuevo.')
+  }).then(async (r) => {
+    if (!r.ok) {
+      // El 429 (tope de uso) trae su propio mensaje: se muestra tal cual.
+      const d = await r.json().catch(() => null)
+      throw new Error(typeof d?.detail === 'string' ? d.detail : 'No se pudo generar. Inténtalo de nuevo.')
+    }
     return r.json()
   })
 
@@ -177,7 +182,7 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
     setFeedback(acertada)
     fetch('http://localhost:8000/api/feedback', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...authHeader() },
       body: JSON.stringify({ respuesta_id: respuestaId, acertada }),
     }).catch(() => {})
   }
