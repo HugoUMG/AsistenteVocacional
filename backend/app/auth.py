@@ -1,6 +1,7 @@
-"""Login opcional con Google: identifica al estudiante entre visitas para que
-pueda ver su historial (`/api/historial`). Sin esto, la app sigue funcionando
-100% anónima, igual que antes — ver docs/historial.md.
+"""Login con Google: identifica al estudiante entre visitas y sostiene su
+historial (`/api/historial`). Iniciar sesión es obligatorio para evaluarse: sin
+cuenta no hay a quién aplicarle el enfriamiento entre evaluaciones ni el tope de
+uso (ver app/cuota.py).
 
 Flujo: el frontend obtiene un ID token de Google (Google Identity Services) y
 lo manda a `POST /api/auth/google`. Este módulo lo verifica contra
