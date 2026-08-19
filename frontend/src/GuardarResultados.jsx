@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 import { sessionId } from './session'
-import { guardarSesion, sesionActual } from './auth'
+import { iniciarSesionGoogle, sesionActual } from './auth'
 
 const API = 'http://localhost:8000'
 
@@ -20,14 +20,7 @@ export default function GuardarResultados() {
   async function alIniciarSesion(credentialResponse) {
     setError('')
     try {
-      const r = await fetch(`${API}/api/auth/google`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ credential: credentialResponse.credential }),
-      })
-      if (!r.ok) throw new Error('No se pudo iniciar sesión.')
-      const { token, estudiante } = await r.json()
-      guardarSesion(token, estudiante)
+      const { token } = await iniciarSesionGoogle(credentialResponse.credential)
 
       const r2 = await fetch(`${API}/api/historial/reclamar`, {
         method: 'POST',

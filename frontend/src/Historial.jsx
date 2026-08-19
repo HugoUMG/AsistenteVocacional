@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 import Nav from './Nav'
 import Dashboard from './Dashboard'
-import { authHeader, guardarSesion, sesionActual } from './auth'
+import { authHeader, iniciarSesionGoogle, sesionActual } from './auth'
 import './App.css'
 
 const API = 'http://localhost:8000'
@@ -88,15 +88,7 @@ export default function Historial() {
   async function alIniciarSesion(credentialResponse) {
     setError('')
     try {
-      const r = await fetch(`${API}/api/auth/google`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ credential: credentialResponse.credential }),
-      })
-      if (!r.ok) throw new Error('No se pudo iniciar sesión.')
-      const { token, estudiante } = await r.json()
-      guardarSesion(token, estudiante)
-      setSesion({ token, estudiante })
+      setSesion(await iniciarSesionGoogle(credentialResponse.credential))
     } catch (e) {
       setError(String(e.message || e))
     }

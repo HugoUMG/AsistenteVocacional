@@ -14,6 +14,7 @@ import Cip from './Cip.jsx'
 import Holland from './Holland.jsx'
 import Personalidad from './Personalidad.jsx'
 import Historial from './Historial.jsx'
+import Protegida from './Protegida.jsx'
 
 // Sin VITE_GOOGLE_CLIENT_ID (frontend/.env), el provider igual monta: los
 // botones de Google Login solo no aparecen o fallan al usarse, el resto de
@@ -29,12 +30,12 @@ createRoot(document.getElementById('root')).render(
           <Route path="/acerca" element={<Acerca />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/parametros" element={<Parametros />} />
-          <Route path="/psicometrico" element={<Psicometrico />} />
+          <Route path="/psicometrico" element={<Protegida><Psicometrico /></Protegida>} />
           <Route path="/mapa" element={<Mapa />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/cip" element={<Cip />} />
-          <Route path="/holland" element={<Holland />} />
-          <Route path="/personalidad" element={<Personalidad />} />
+          <Route path="/chat" element={<Protegida><Chat /></Protegida>} />
+          <Route path="/cip" element={<Protegida><Cip /></Protegida>} />
+          <Route path="/holland" element={<Protegida><Holland /></Protegida>} />
+          <Route path="/personalidad" element={<Protegida><Personalidad /></Protegida>} />
           <Route path="/historial" element={<Historial />} />
         </Routes>
       </BrowserRouter>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Nav from './Nav'
 import './App.css'
+import { authHeader } from './auth'
 
 const API = 'http://localhost:8000'
 // 150 ítems en páginas de 15 → 10 páginas. Paginar NO altera el instrumento
@@ -115,7 +116,7 @@ export default function Cip() {
     try {
       const r = await fetch(`${API}/api/cip`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({ respuestas, sexo }),
       })
       if (!r.ok) {

@@ -104,6 +104,12 @@ class ResultadoHolland(Base):
     respuestas: Mapped[str] = mapped_column(String(60))
     codigo: Mapped[str] = mapped_column(String(3))  # p. ej. "ASC"
     areas: Mapped[dict] = mapped_column(JSON)  # {"R": 12, "I": 10, ...}
+    # El perfil completo tal como lo consume el chat (codigo, areas con su
+    # nombre y puntaje, y los titulos de las ocupaciones). Se guarda porque
+    # 'areas' solo tiene los numeros y las ocupaciones SI entran al prompt:
+    # sin esto, recuperar el perfil desde la base degrada el prompt en
+    # silencio. NULL en filas anteriores a esta columna.
+    perfil: Mapped[dict | None] = mapped_column(JSON, default=None)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
 

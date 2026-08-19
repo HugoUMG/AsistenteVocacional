@@ -9,12 +9,12 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, EmailStr, Field, field_validator
-from sqlalchemy import func
+from sqlalchemy import func, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
-from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland, holland_filtro, personalidad, auth
+from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland, holland_filtro, personalidad, auth, cuota
 
 
 @asynccontextmanager
@@ -22,6 +22,11 @@ async def lifespan(app: FastAPI):
     # ponytail: create_all en arranque en vez de migraciones. Cambiar a Alembic
     # cuando el esquema empiece a evolucionar con datos reales que conservar.
     Base.metadata.create_all(bind=engine)
+    # create_all NO agrega columnas a tablas que ya existen. Las nuevas se
+    # agregan aqui, idempotentes (sintaxis de PostgreSQL). ponytail: sigue sin
+    # ser Alembic; cuando haya mas de un par de estas lineas, migrar.
+    with engine.begin() as con:
+        con.execute(text("ALTER TABLE resultados_holland ADD COLUMN IF NOT EXISTS perfil JSONB"))
     yield
 
 
@@ -197,29 +202,24 @@ def health():
 @app.post("/api/register", response_model=EstudianteOut, status_code=201)
 def register(
     data: RegisterIn, db: Session = Depends(get_db),
-    estudiante: models.Estudiante | None = Depends(auth.estudiante_actual),
+    estudiante: models.Estudiante = Depends(auth.requiere_login),
 ):
-    # Si viene logueado con Google, se reusa SU cuenta en vez de crear una
-    # anónima nueva cada vez que entra al chat (ver docs/historial.md).
-    if estudiante is not None:
-        return estudiante
-    est = models.Estudiante(nombre=data.nombre, email=data.email)
-    db.add(est)
-    try:
-        db.commit()
-    except IntegrityError:
-        db.rollback()
-        raise HTTPException(status_code=409, detail="El email ya está registrado")
-    db.refresh(est)
-    return est
+    """Devuelve la cuenta del alumno logueado. El login es obligatorio para
+    evaluarse (ver app/cuota.py), asi que ya no se crean cuentas anonimas: el
+    nombre que teclea en el chat se sigue usando para el saludo y el PDF, pero
+    la cuenta es siempre la de Google."""
+    return estudiante
 
 
 @app.post("/api/submit-survey", response_model=SurveyOut, status_code=201)
-def submit_survey(data: SurveyIn, db: Session = Depends(get_db)):
-    if db.get(models.Estudiante, data.estudiante_id) is None:
-        raise HTTPException(status_code=404, detail="Estudiante no encontrado")
+def submit_survey(
+    data: SurveyIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(auth.requiere_login),
+):
+    # El estudiante_id sale de la sesion, no del cuerpo: con login obligatorio,
+    # aceptar el id del cliente dejaria escribir en la fila de otra cuenta.
     resp = models.RespuestaCuestionario(
-        estudiante_id=data.estudiante_id, session_id=data.session_id, respuestas=data.respuestas
+        estudiante_id=estudiante.id, session_id=data.session_id, respuestas=data.respuestas
     )
     db.add(resp)
     db.commit()
@@ -324,9 +324,15 @@ def _registrar_uso(db, session_id, endpoint, uso):
 
 
 @app.post("/api/next-question")
-def next_question(data: NextIn, db: Session = Depends(get_db)):
+def next_question(
+    data: NextIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(cuota.evaluador),
+):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
+    # Se revisa en cada turno, no solo en el primero: mide contra el ultimo chat
+    # TERMINADO, asi que no corta al alumno a mitad de su propia conversacion.
+    cuota.revisar_enfriamiento(db, estudiante, "chat")
     carreras = _carreras(db, data.respuestas)
     paso, uso = preguntas.siguiente_pregunta(
         data.respuestas, carreras, data.session_id,
@@ -339,7 +345,10 @@ def next_question(data: NextIn, db: Session = Depends(get_db)):
 
 
 @app.post("/api/recommend")
-def recommend(data: SurveyIn, db: Session = Depends(get_db)):
+def recommend(
+    data: SurveyIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(cuota.evaluador),
+):
     if not recomendar.hay_api_key():
         raise HTTPException(
             status_code=503,
@@ -360,7 +369,7 @@ def recommend(data: SurveyIn, db: Session = Depends(get_db)):
     respuesta_id = None
     resp = (
         db.query(models.RespuestaCuestionario)
-        .filter(models.RespuestaCuestionario.estudiante_id == data.estudiante_id)
+        .filter(models.RespuestaCuestionario.estudiante_id == estudiante.id)
         .order_by(models.RespuestaCuestionario.id.desc())
         .first()
     )
@@ -385,7 +394,10 @@ class SimularIn(BaseModel):
 
 
 @app.post("/api/simular-dia")
-def simular_dia(data: SimularIn, db: Session = Depends(get_db)):
+def simular_dia(
+    data: SimularIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(cuota.evaluador),
+):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
     sim, uso = extras.simular_dia(data.carrera, data.descripcion, data.respuestas)
@@ -403,7 +415,10 @@ class CompararIn(BaseModel):
 
 
 @app.post("/api/comparar")
-def comparar(data: CompararIn, db: Session = Depends(get_db)):
+def comparar(
+    data: CompararIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(cuota.evaluador),
+):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
     cmp, uso = extras.comparar_carreras(
@@ -458,12 +473,12 @@ def psicometrico_preguntas():
 @app.post("/api/psicometrico")
 def psicometrico_calificar(
     data: PsicometricoIn, db: Session = Depends(get_db),
-    estudiante: models.Estudiante | None = Depends(auth.estudiante_actual),
+    estudiante: models.Estudiante = Depends(cuota.evaluador),
 ):
     puntajes = psicometrico.calificar(data.respuestas, data.tiempos)
     fila = models.ResultadoPsicometrico(
         session_id=data.session_id or "sin-sesion",
-        estudiante_id=estudiante.id if estudiante else None,
+        estudiante_id=estudiante.id,
         respuestas={str(k): v for k, v in data.respuestas.items()},
         puntajes=puntajes,
     )
@@ -511,7 +526,7 @@ def cip_preguntas():
 
 
 @app.post("/api/cip")
-def cip_calificar(data: CipIn):
+def cip_calificar(data: CipIn, estudiante: models.Estudiante = Depends(auth.requiere_login)):
     """Califica el CIP y devuelve el perfil por escala.
 
     ponytail: NO guarda nada en la base de datos. Es un prototipo de un instrumento
@@ -563,12 +578,13 @@ def holland_preguntas():
 @app.post("/api/holland")
 def holland_perfil(
     data: HollandIn, db: Session = Depends(get_db),
-    estudiante: models.Estudiante | None = Depends(auth.estudiante_actual),
+    estudiante: models.Estudiante = Depends(cuota.evaluador),
 ):
     """Puntajes RIASEC y carreras afines. El cálculo lo hace la API oficial.
 
     Se guarda el resultado (es el instrumento avalado del proyecto y entra en la
     investigación). Sin session_id no se guarda: son llamadas de prueba."""
+    cuota.revisar_enfriamiento(db, estudiante, "holland")
     perfil = _onet(holland.perfil, data.respuestas, data.zona)
     perfil["carreras_catalogo"] = holland_filtro.carreras_afines(
         {a["letra"]: a["score"] for a in perfil["areas"]}
@@ -576,13 +592,49 @@ def holland_perfil(
     if data.session_id:
         db.add(models.ResultadoHolland(
             session_id=data.session_id,
-            estudiante_id=estudiante.id if estudiante else None,
+            estudiante_id=estudiante.id,
             respuestas=data.respuestas,
             codigo=perfil["codigo"],
             areas={a["letra"]: a["score"] for a in perfil["areas"]},
+            perfil=_perfil_para_el_chat(perfil),
         ))
         db.commit()
     return perfil
+
+
+# Los mismos campos que el chat necesita en el prompt (ver holland-perfil.js en
+# el frontend). Se guardan aparte de 'areas' porque ahi solo van los numeros y
+# los titulos de las ocupaciones tambien entran al prompt.
+_OCUPACIONES_EN_PERFIL = 8
+
+
+def _perfil_para_el_chat(perfil: dict) -> dict:
+    return {
+        "codigo": perfil["codigo"],
+        "areas": [{"letra": a["letra"], "title": a["title"], "score": a["score"]}
+                  for a in perfil["areas"]],
+        "ocupaciones": [c["title"] for c in perfil.get("carreras", [])[:_OCUPACIONES_EN_PERFIL]],
+    }
+
+
+@app.get("/api/holland/mio")
+def holland_mio(
+    db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(auth.requiere_login),
+):
+    """El ultimo perfil de Holland guardado de ESTE alumno.
+
+    El chat lo recupera desde la cuenta y no desde el localStorage del
+    navegador: en un laboratorio, dos alumnos en la misma maquina se estaban
+    quedando con el perfil del anterior. Devuelve null si nunca hizo el test."""
+    fila = (
+        db.query(models.ResultadoHolland)
+        .filter(models.ResultadoHolland.estudiante_id == estudiante.id,
+                models.ResultadoHolland.perfil.isnot(None))
+        .order_by(models.ResultadoHolland.id.desc())
+        .first()
+    )
+    return {**fila.perfil, "fecha": fila.created_at.isoformat()} if fila else None
 
 
 class PersonalidadIn(BaseModel):
@@ -607,7 +659,7 @@ def personalidad_preguntas():
 @app.post("/api/personalidad")
 def personalidad_calificar(
     data: PersonalidadIn, db: Session = Depends(get_db),
-    estudiante: models.Estudiante | None = Depends(auth.estudiante_actual),
+    estudiante: models.Estudiante = Depends(cuota.evaluador),
 ):
     """Puntajes por rasgo, calculados por reglas (sin llamar a Gemini).
 
@@ -616,7 +668,7 @@ def personalidad_calificar(
     if data.session_id:
         db.add(models.ResultadoPersonalidad(
             session_id=data.session_id,
-            estudiante_id=estudiante.id if estudiante else None,
+            estudiante_id=estudiante.id,
             respuestas={str(k): v for k, v in data.respuestas.items()},
             puntajes=puntajes,
         ))

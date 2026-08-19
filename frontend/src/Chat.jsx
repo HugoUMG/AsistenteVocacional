@@ -113,6 +113,14 @@ const post = (ruta, body) =>
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
+// Los 429 los redacta el backend (enfriamiento entre evaluaciones o tope de uso
+// del día, ver backend/app/cuota.py) y se muestran tal cual: un mensaje genérico
+// dejaría al alumno sin saber por qué se detuvo ni cuándo puede volver.
+async function errorDelBackend(r, generico) {
+  const d = await r.json().catch(() => null)
+  return new Error(typeof d?.detail === 'string' ? d.detail : generico)
+}
+
 // Filtro básico de groserías para el nombre (misma lista que backend/app/main.py).
 // El nombre se muestra en el saludo del dashboard y el PDF, así que se corta aquí
 // antes de que avance. ponytail: lista curada, NO exhaustiva; no atrapa evasiones
@@ -279,6 +287,7 @@ async function obtenerCarreras(respuestas) {
     holland: leerPerfilHolland(),
     personalidad: leerPerfilPersonalidad(),
   })
+  if (r.status === 429) throw await errorDelBackend(r, 'Ya hiciste una evaluación hace poco.')
   if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
   if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
   return await r.json()
@@ -611,6 +620,7 @@ function Chat() {
         holland: leerPerfilHolland(),
         personalidad: leerPerfilPersonalidad(),
       })
+      if (r.status === 429) throw await errorDelBackend(r, 'Ya hiciste una evaluación hace poco.')
       if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
       if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
       const q = await r.json()

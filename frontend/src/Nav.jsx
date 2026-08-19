@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google'
-import { cerrarSesion, guardarSesion, sesionActual } from './auth'
-
-const API = 'http://localhost:8000'
+import { cerrarSesion, iniciarSesionGoogle, sesionActual } from './auth'
 
 // Barra superior compartida por las páginas informativas (inicio, acerca,
 // catálogo, parámetros). El chat y el dashboard no la usan.
@@ -15,15 +13,7 @@ export default function Nav() {
   async function alIniciarSesion(credentialResponse) {
     setError('')
     try {
-      const r = await fetch(`${API}/api/auth/google`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ credential: credentialResponse.credential }),
-      })
-      if (!r.ok) throw new Error('No se pudo iniciar sesión.')
-      const { token, estudiante } = await r.json()
-      guardarSesion(token, estudiante)
-      setSesion({ token, estudiante })
+      setSesion(await iniciarSesionGoogle(credentialResponse.credential))
     } catch (e) {
       setError(String(e.message || e))
     }
