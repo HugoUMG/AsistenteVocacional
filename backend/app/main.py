@@ -358,9 +358,8 @@ def next_question(
 ):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
-    # Se revisa en cada turno, no solo en el primero: mide contra el ultimo chat
-    # TERMINADO, asi que no corta al alumno a mitad de su propia conversacion.
-    cuota.revisar_enfriamiento(db, estudiante, "chat")
+    # Se revisa en cada turno, no solo en el primero: cuenta chats TERMINADOS,
+    # asi que no corta al alumno a mitad de su propia conversacion.
     cuota.revisar_tope_diario(db, estudiante)
     carreras = _carreras(db, data.respuestas)
     paso, uso = preguntas.siguiente_pregunta(
@@ -607,14 +606,12 @@ def holland_preguntas():
 @app.post("/api/holland")
 def holland_perfil(
     data: HollandIn, db: Session = Depends(get_db),
-    estudiante: models.Estudiante = Depends(cuota.evaluador),
+    estudiante: models.Estudiante = Depends(auth.requiere_login),
 ):
     """Puntajes RIASEC y carreras afines. El cálculo lo hace la API oficial.
 
     Se guarda el resultado (es el instrumento avalado del proyecto y entra en la
     investigación). Sin session_id no se guarda: son llamadas de prueba."""
-    cuota.revisar_enfriamiento(db, estudiante, "holland")
-    cuota.revisar_tope_diario(db, estudiante)
     perfil = _onet(holland.perfil, data.respuestas, data.zona)
     perfil["carreras_catalogo"] = holland_filtro.carreras_afines(
         {a["letra"]: a["score"] for a in perfil["areas"]}
