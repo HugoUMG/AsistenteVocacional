@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Nav from './Nav'
 import './App.css'
-
-const API = 'http://localhost:8000'
+import { API } from './api'
 
 // Birrete: acento visual de cada tarjeta de carrera.
 function IconoBirrete() {

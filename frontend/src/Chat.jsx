@@ -7,8 +7,8 @@ import { leerPerfilHolland } from './holland-perfil'
 import { leerPerfilPersonalidad } from './personalidad-perfil'
 import { authHeader, sesionActual } from './auth'
 import './App.css'
+import { API } from './api'
 
-const API = 'http://localhost:8000'
 const MIN_ADAPTATIVAS = 4 // mínimo antes de ofrecer el resultado (se siente conversación)
 const MAX_ADAPTATIVAS = 8 // tope: perfiles ambiguos afinan más, sin agotar cuota
 const MOSTRAR_RADAR = false // ponytail: radar de afinidad en vivo desactivado; poner true para reactivarlo

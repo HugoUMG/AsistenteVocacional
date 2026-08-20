@@ -1,3 +1,4 @@
+import os
 import re
 import unicodedata
 from contextlib import asynccontextmanager
@@ -46,9 +47,18 @@ async def _contenido_rechazado(request, exc):
     )
 
 
+# Quien puede llamar a la API desde el navegador: en local, el servidor de
+# desarrollo de Vite; desplegado, la URL del sitio. Varios se separan con coma.
+# No se usa "*": las peticiones llevan el token de sesion en una cabecera.
+ORIGENES = [
+    o.strip()
+    for o in os.getenv("ORIGENES_PERMITIDOS", "http://localhost:5173").split(",")
+    if o.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=ORIGENES,
     allow_methods=["*"],
     allow_headers=["*"],
 )
