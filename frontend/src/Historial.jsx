@@ -25,11 +25,19 @@ function CardChat({ fila, onAbrir }) {
   return (
     <li className="psi-item hist-card" onClick={() => onAbrir(fila)}>
       <p className="psi-enunciado">Chat con Orienta · {fecha(fila.fecha)}</p>
-      <p className="psi-texto">
-        {podio.length
-          ? `Tus carreras más afines: ${podio.map((c, i) => `${i + 1}. ${c.carrera} (${c.afinidad}%)`).join(' · ')}`
-          : 'Sin recomendación guardada.'}
-      </p>
+      {podio.length ? (
+        <ol className="hist-podio">
+          {podio.map((c, i) => (
+            <li key={`${c.carrera}-${i}`}>
+              <span className="hist-puesto">{i + 1}</span>
+              <span className="hist-carrera">{c.carrera}</span>
+              <span className="hist-afinidad">{c.afinidad}%</span>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p className="psi-texto">Sin recomendación guardada.</p>
+      )}
     </li>
   )
 }
