@@ -15,6 +15,8 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db import Base, engine, get_db
+from google.genai import errors as genai_errors
+
 from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland, holland_filtro, personalidad, auth, cuota
 
 
@@ -32,6 +34,22 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Recomendador Vocacional API", version="0.1.0", lifespan=lifespan)
+
+
+@app.exception_handler(genai_errors.APIError)
+async def _gemini_fallo(request, exc):
+    """Cualquier falla de la API de Gemini (modelo retirado, cuota agotada,
+    caida del servicio). Sin este manejador la excepcion sale del stack de
+    middlewares, la respuesta se va SIN cabeceras CORS y el navegador reporta
+    "Failed to fetch": el alumno ve una pantalla muerta y nadie sabe por que.
+    Con 503 y mensaje, el frontend lo muestra tal cual."""
+    from fastapi.responses import JSONResponse
+    print(f"[gemini] la API fallo: {exc}")
+    return JSONResponse(
+        status_code=503,
+        content={"detail": "El asistente no esta disponible en este momento. "
+                 "Intentalo de nuevo en unos minutos."},
+    )
 
 
 @app.exception_handler(recomendar.ContenidoRechazado)

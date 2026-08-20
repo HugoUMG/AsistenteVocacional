@@ -287,9 +287,7 @@ async function obtenerCarreras(respuestas) {
     holland: leerPerfilHolland(),
     personalidad: leerPerfilPersonalidad(),
   })
-  if (r.status === 429) throw await errorDelBackend(r, 'Ya hiciste una evaluación hace poco.')
-  if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
-  if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
+  if (!r.ok) throw await errorDelBackend(r, 'No pude generar las recomendaciones. Inténtalo de nuevo.')
   return await r.json()
 }
 
@@ -620,9 +618,7 @@ function Chat() {
         holland: leerPerfilHolland(),
         personalidad: leerPerfilPersonalidad(),
       })
-      if (r.status === 429) throw await errorDelBackend(r, 'Ya hiciste una evaluación hace poco.')
-      if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
-      if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
+      if (!r.ok) throw await errorDelBackend(r, 'No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
       const q = await r.json()
       if (q.ranking?.length) setRanking(q.ranking)
       // Confianza = afinidad de la carrera líder, pero monotónica: nunca baja.
