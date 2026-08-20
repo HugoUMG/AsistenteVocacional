@@ -40,21 +40,50 @@ VENTANA_DIARIA = timedelta(hours=24)
 
 
 def evaluaciones_recientes(db: Session, estudiante_id: int) -> list[datetime]:
-    """Cuando termino cada evaluacion de este alumno en las ultimas 24 horas,
-    sumando chat y Holland. Ventana deslizante, no dia calendario: asi nadie
-    tiene que esperar al cambio de fecha ni puede juntar seis evaluaciones a
-    caballo de la medianoche."""
+    """Cuando termino cada RECORRIDO de este alumno en las ultimas 24 horas.
+
+    Un recorrido, no una llamada ni un instrumento: el `session_id` acompana al
+    alumno desde el test de Holland hasta el chat y el dashboard, y solo cambia
+    cuando elige empezar otra prueba (ver frontend/src/session.js). Por eso
+    "Holland y luego el chat" cuenta como UNA evaluacion, que es como lo vive el
+    alumno, mientras que hacer Holland hoy y volver manana por el chat cuenta
+    como dos.
+
+    Ventana deslizante, no dia calendario: asi nadie espera al cambio de fecha
+    ni junta seis evaluaciones a caballo de la medianoche."""
     desde = datetime.now(timezone.utc) - VENTANA_DIARIA
-    chats = db.query(models.RespuestaCuestionario.created_at).filter(
+    chats = db.query(
+        models.RespuestaCuestionario.id, models.RespuestaCuestionario.session_id,
+        models.RespuestaCuestionario.created_at,
+    ).filter(
         models.RespuestaCuestionario.estudiante_id == estudiante_id,
         models.RespuestaCuestionario.recomendacion.isnot(None),
         models.RespuestaCuestionario.created_at >= desde,
     ).all()
-    holland = db.query(models.ResultadoHolland.created_at).filter(
+    holland = db.query(
+        models.ResultadoHolland.id, models.ResultadoHolland.session_id,
+        models.ResultadoHolland.created_at,
+    ).filter(
         models.ResultadoHolland.estudiante_id == estudiante_id,
         models.ResultadoHolland.created_at >= desde,
     ).all()
-    return [f[0] for f in chats + holland]
+
+    return agrupar_recorridos((("chat", chats), ("holland", holland)))
+
+
+def agrupar_recorridos(grupos) -> list[datetime]:
+    """De filas (id, session_id, created_at) a una fecha por recorrido: la de lo
+    ultimo que el alumno hizo en el. Las filas que comparten `session_id`
+    colapsan en una sola; sin session_id (filas viejas), cada una cuenta por su
+    cuenta, que es la lectura conservadora."""
+    recorridos: dict[str, datetime] = {}
+    for tabla, filas in grupos:
+        for fila_id, sesion, cuando in filas:
+            clave = sesion or f"{tabla}-{fila_id}"
+            anterior = recorridos.get(clave)
+            if anterior is None or cuando > anterior:
+                recorridos[clave] = cuando
+    return list(recorridos.values())
 
 
 def espera_por_tope(fechas: list[datetime], ahora: datetime | None = None,
@@ -174,6 +203,18 @@ def _self_check():
     assert espera_restante(ahora - espera / 2, ahora) == espera / 2
     # Una fecha futura (reloj torcido) no debe dar una espera negativa.
     assert espera_restante(ahora + timedelta(days=1), ahora) > timedelta(0)
+
+    # Un recorrido = un session_id: Holland y el chat de la misma sesion cuentan
+    # una sola vez, y eso es lo que hace que el modo "test y luego chat" no
+    # consuma dos cupos.
+    t1, t2 = ahora - timedelta(hours=2), ahora - timedelta(hours=1)
+    mezcla = (("chat", [(1, "s-A", t2)]), ("holland", [(9, "s-A", t1)]))
+    assert agrupar_recorridos(mezcla) == [t2], "Holland + chat de una sesion son un recorrido"
+    dos = (("chat", [(1, "s-A", t2)]), ("holland", [(9, "s-B", t1)]))
+    assert sorted(agrupar_recorridos(dos)) == sorted([t2, t1]), "sesiones distintas, dos recorridos"
+    # Sin session_id cada fila cuenta aparte, y no colisionan entre tablas.
+    sin_id = (("chat", [(1, None, t1)]), ("holland", [(1, None, t2)]))
+    assert len(agrupar_recorridos(sin_id)) == 2
 
     # Tope de 3 evaluaciones cada 24 horas.
     tres = [ahora - timedelta(hours=h) for h in (20, 10, 2)]
