@@ -361,6 +361,7 @@ def next_question(
     # Se revisa en cada turno, no solo en el primero: mide contra el ultimo chat
     # TERMINADO, asi que no corta al alumno a mitad de su propia conversacion.
     cuota.revisar_enfriamiento(db, estudiante, "chat")
+    cuota.revisar_tope_diario(db, estudiante)
     carreras = _carreras(db, data.respuestas)
     paso, uso = preguntas.siguiente_pregunta(
         data.respuestas, carreras, data.session_id,
@@ -613,6 +614,7 @@ def holland_perfil(
     Se guarda el resultado (es el instrumento avalado del proyecto y entra en la
     investigación). Sin session_id no se guarda: son llamadas de prueba."""
     cuota.revisar_enfriamiento(db, estudiante, "holland")
+    cuota.revisar_tope_diario(db, estudiante)
     perfil = _onet(holland.perfil, data.respuestas, data.zona)
     perfil["carreras_catalogo"] = holland_filtro.carreras_afines(
         {a["letra"]: a["score"] for a in perfil["areas"]}

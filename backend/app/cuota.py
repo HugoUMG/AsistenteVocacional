@@ -25,10 +25,63 @@ from app import auth, models
 from app.db import get_db
 
 MINUTOS_ENFRIAMIENTO = float(os.getenv("MINUTOS_ENFRIAMIENTO", "10"))
+# Evaluaciones que un mismo alumno puede terminar en 24 horas, sumando todos los
+# instrumentos. El enfriamiento corta la repeticion inmediata; esto corta la
+# insistencia a lo largo del dia, que es la que se come el presupuesto.
+MAX_EVALUACIONES_DIARIAS = int(os.getenv("MAX_EVALUACIONES_DIARIAS", "3"))
 # Suma de tokens de Gemini de TODOS los alumnos en el día UTC en curso. El
-# default alcanza para ~200 evaluaciones completas; ajustar en backend/.env
+# default alcanza para unas 37 evaluaciones completas, medidas en 54,000
+# tokens cada una; ajustar en backend/.env
 # según el crédito real (ver decisions/gemini-costos-y-caching.md).
 TOPE_TOKENS_DIARIO = int(os.getenv("TOPE_TOKENS_DIARIO", "2000000"))
+
+
+VENTANA_DIARIA = timedelta(hours=24)
+
+
+def evaluaciones_recientes(db: Session, estudiante_id: int) -> list[datetime]:
+    """Cuando termino cada evaluacion de este alumno en las ultimas 24 horas,
+    sumando chat y Holland. Ventana deslizante, no dia calendario: asi nadie
+    tiene que esperar al cambio de fecha ni puede juntar seis evaluaciones a
+    caballo de la medianoche."""
+    desde = datetime.now(timezone.utc) - VENTANA_DIARIA
+    chats = db.query(models.RespuestaCuestionario.created_at).filter(
+        models.RespuestaCuestionario.estudiante_id == estudiante_id,
+        models.RespuestaCuestionario.recomendacion.isnot(None),
+        models.RespuestaCuestionario.created_at >= desde,
+    ).all()
+    holland = db.query(models.ResultadoHolland.created_at).filter(
+        models.ResultadoHolland.estudiante_id == estudiante_id,
+        models.ResultadoHolland.created_at >= desde,
+    ).all()
+    return [f[0] for f in chats + holland]
+
+
+def espera_por_tope(fechas: list[datetime], ahora: datetime | None = None,
+                    maximo: int | None = None) -> timedelta:
+    """Cuanto falta para que se libere un cupo. timedelta(0) = todavia le quedan.
+
+    El cupo se libera cuando la evaluacion que lo ocupa sale de la ventana. Si
+    hay mas registros que cupos (porque el limite bajo), se mira la que
+    corresponde al cupo, no la mas vieja de todas."""
+    maximo = MAX_EVALUACIONES_DIARIAS if maximo is None else maximo
+    if maximo <= 0 or len(fechas) < maximo:
+        return timedelta(0)
+    ahora = ahora or datetime.now(timezone.utc)
+    libera = sorted(fechas)[len(fechas) - maximo] + VENTANA_DIARIA
+    return max(timedelta(0), libera - ahora)
+
+
+def revisar_tope_diario(db: Session, estudiante: models.Estudiante) -> None:
+    falta = espera_por_tope(evaluaciones_recientes(db, estudiante.id))
+    if falta:
+        raise HTTPException(
+            status_code=429,
+            detail=f"Ya completaste {MAX_EVALUACIONES_DIARIAS} evaluaciones en las "
+                   f"ultimas 24 horas. Vas a poder hacer otra en {legible(falta)}. "
+                   f"Tus resultados siguen en 'Mi historial'.",
+            headers={"Retry-After": str(int(falta.total_seconds()))},
+        )
 
 
 def ultima_evaluacion(db: Session, estudiante_id: int, instrumento: str) -> datetime | None:
@@ -122,12 +175,23 @@ def _self_check():
     # Una fecha futura (reloj torcido) no debe dar una espera negativa.
     assert espera_restante(ahora + timedelta(days=1), ahora) > timedelta(0)
 
+    # Tope de 3 evaluaciones cada 24 horas.
+    tres = [ahora - timedelta(hours=h) for h in (20, 10, 2)]
+    assert espera_por_tope([], ahora) == timedelta(0)
+    assert espera_por_tope(tres[:2], ahora) == timedelta(0)  # le queda una
+    assert espera_por_tope(tres, ahora) == timedelta(hours=4)  # la de hace 20h libera a las 24
+    # Con mas registros que cupos, libera el que ocupa el cupo, no el mas viejo.
+    assert espera_por_tope([ahora - timedelta(hours=23)] + tres, ahora) == timedelta(hours=4)
+    # Ninguna dentro de la ventana: las viejas no ocupan cupo.
+    assert espera_por_tope([ahora - timedelta(hours=30)] * 5, ahora, maximo=3) == timedelta(0)
+    assert espera_por_tope(tres, ahora, maximo=0) == timedelta(0)  # tope apagado
+
     assert legible(timedelta(hours=3, minutes=12)) == "3 horas y 12 minutos"
     assert legible(timedelta(hours=1)) == "1 hora"
     assert legible(timedelta(minutes=45)) == "45 minutos"
     assert legible(timedelta(seconds=20)) == "1 minuto"  # nunca "0 minutos"
 
-    print("cuota self-check OK — enfriamiento y mensajes, sin base de datos")
+    print("cuota self-check OK: enfriamiento, tope diario y mensajes, sin base de datos")
 
 
 if __name__ == "__main__":
