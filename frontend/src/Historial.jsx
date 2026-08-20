@@ -19,12 +19,16 @@ function fecha(iso) {
 }
 
 function CardChat({ fila, onAbrir }) {
-  const top = fila.recomendacion?.[0]
+  // El podio, no solo el primero: la segunda y la tercera suelen ser las
+  // que el alumno estaba dudando, y sin ellas la tarjeta no dice casi nada.
+  const podio = (fila.recomendacion || []).slice(0, 3)
   return (
     <li className="psi-item hist-card" onClick={() => onAbrir(fila)}>
       <p className="psi-enunciado">Chat con Orienta · {fecha(fila.fecha)}</p>
       <p className="psi-texto">
-        {top ? `Tu carrera más afín fue ${top.carrera} (${top.afinidad}%).` : 'Sin recomendación guardada.'}
+        {podio.length
+          ? `Tus carreras más afines: ${podio.map((c, i) => `${i + 1}. ${c.carrera} (${c.afinidad}%)`).join(' · ')}`
+          : 'Sin recomendación guardada.'}
       </p>
     </li>
   )

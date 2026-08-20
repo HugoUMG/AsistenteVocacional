@@ -69,21 +69,21 @@ const PASOS = [
 const MODOS = [
   {
     titulo: 'Solo el chat',
-    minutos: '10 min',
+    duracion: 'Rápido',
     texto: 'Conversas con Orienta y recibes tu recomendación de carreras con universidades reales de tu departamento.',
     boton: 'Empezar el chat',
     ruta: '/mapa',
   },
   {
     titulo: 'Solo el test de Holland',
-    minutos: '15 min',
+    duracion: 'Un rato',
     texto: 'Las 60 actividades del O*NET Interest Profiler. Te da tu código de intereses (RIASEC) y el tipo de trabajo que te encaja.',
     boton: 'Hacer el test',
     ruta: '/holland',
   },
   {
     titulo: 'El test y luego el chat',
-    minutos: '25 min',
+    duracion: 'Con calma',
     texto: 'Lo más completo: primero el test mide tus intereses, y después Orienta parte de ese resultado para buscar la carrera concreta que te encaja.',
     boton: 'Empezar por el test',
     ruta: '/holland',
@@ -91,7 +91,7 @@ const MODOS = [
   },
   {
     titulo: 'Perfil corto y luego el chat',
-    minutos: '15 min',
+    duracion: 'Un rato',
     texto: '48 frases sobre tu personalidad, tus valores y cómo pensás. Orienta arranca el chat ya sabiendo eso, así que necesita menos preguntas.',
     boton: 'Empezar por el perfil',
     ruta: '/personalidad',
@@ -151,7 +151,7 @@ export default function Inicio() {
             >
               {m.destacado && <span className="modo-sello">Recomendado</span>}
               <h3>{m.titulo}</h3>
-              <span className="modo-minutos">{m.minutos}</span>
+              <span className="modo-minutos">{m.duracion}</span>
               <p>{m.texto}</p>
               <button className="hero-btn" onClick={() => navigate(m.ruta)}>
                 {m.boton} →
