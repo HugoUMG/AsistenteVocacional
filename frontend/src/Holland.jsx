@@ -148,7 +148,13 @@ export default function Holland() {
     try {
       // La API oficial espera una cadena continua: un dígito por pregunta, en
       // el orden de su índice. Sin ese orden el puntaje sale de otra persona.
-      const cadena = cadenaForzada || banco.preguntas.map((p) => respuestas[p.index]).join('')
+      // Solo una cadena de 60 digitos vale como respuesta forzada. Si el
+      // handler recibe otra cosa (un onClick pasa el evento del clic como
+      // primer argumento), se ignora y se califican las respuestas reales:
+      // ese evento terminaba dentro del JSON del POST y reventaba el envio
+      // despues de contestar las 60 preguntas.
+      const forzada = typeof cadenaForzada === 'string' ? cadenaForzada : null
+      const cadena = forzada || banco.preguntas.map((p) => respuestas[p.index]).join('')
       const r = await fetch(`${API}/api/holland`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...authHeader() },
@@ -317,7 +323,7 @@ export default function Holland() {
                 <button
                   className="hero-btn"
                   disabled={faltanEnPagina > 0 || contestadas < total || enviando}
-                  onClick={terminar}
+                  onClick={() => terminar()}
                 >
                   {enviando ? 'Calificando…' : 'Ver mi perfil'}
                 </button>
