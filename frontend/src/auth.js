@@ -3,8 +3,8 @@
 // pestaña. Iniciar sesión es OBLIGATORIO para evaluarse: sostiene el
 // enfriamiento entre evaluaciones y el tope de uso (ver backend/app/cuota.py).
 import { olvidarPerfilHolland, sincronizarPerfilHolland } from './holland-perfil'
+import { API } from './api'
 
-const API = 'http://localhost:8000'
 const CLAVE = 'auth'
 
 export function guardarSesion(token, estudiante) {

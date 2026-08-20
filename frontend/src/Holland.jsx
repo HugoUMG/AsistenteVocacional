@@ -8,8 +8,8 @@ import GuardarResultados from './GuardarResultados'
 import { color } from './colors'
 import './App.css'
 import './Dashboard.css'
+import { API } from './api'
 
-const API = 'http://localhost:8000'
 const POR_PAGINA = 12 // el mismo tamaño de página que usa O*NET
 const BORRADOR = 'holland-borrador'
 // Puntaje máximo por área: 10 ítems, hasta 4 puntos cada uno (escala 1-5, base 0).

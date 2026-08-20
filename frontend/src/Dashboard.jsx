@@ -5,8 +5,7 @@ import { sessionId } from './session'
 import GuardarResultados from './GuardarResultados'
 import { authHeader } from './auth'
 import './Dashboard.css'
-
-const API = 'http://localhost:8000'
+import { API } from './api'
 
 const postJSON = (ruta, body) =>
   fetch(`${API}${ruta}`, {
@@ -180,7 +179,7 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
   const enviarFeedback = (acertada) => {
     if (!respuestaId) return
     setFeedback(acertada)
-    fetch('http://localhost:8000/api/feedback', {
+    fetch(`${API}/api/feedback`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...authHeader() },
       body: JSON.stringify({ respuesta_id: respuestaId, acertada }),

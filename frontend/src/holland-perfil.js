@@ -1,3 +1,4 @@
+import { API } from './api'
 // El perfil de Holland que el chat arrastra cuando el alumno hizo el test antes
 // (modo 3, ver docs/holland.md). Vive en localStorage para que sobreviva a
 // recargar la página o a abrir el chat en otra pestaña.
@@ -46,7 +47,7 @@ export function olvidarPerfilHolland() {
 // aquí (auth.js ya importa este archivo).
 export async function sincronizarPerfilHolland(token) {
   try {
-    const r = await fetch('http://localhost:8000/api/holland/mio', {
+    const r = await fetch(`${API}/api/holland/mio`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     if (!r.ok) return

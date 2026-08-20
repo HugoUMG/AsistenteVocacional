@@ -6,8 +6,8 @@ import { guardarPerfilPersonalidad, olvidarPerfilPersonalidad } from './personal
 import { authHeader } from './auth'
 import GuardarResultados from './GuardarResultados'
 import './App.css'
+import { API } from './api'
 
-const API = 'http://localhost:8000'
 const POR_PAGINA = 16 // 48 ítems / 16 = 3 páginas
 const BORRADOR = 'personalidad-borrador'
 

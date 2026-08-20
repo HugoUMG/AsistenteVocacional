@@ -4,8 +4,7 @@ import Nav from './Nav'
 import Dashboard from './Dashboard'
 import { authHeader, iniciarSesionGoogle, sesionActual } from './auth'
 import './App.css'
-
-const API = 'http://localhost:8000'
+import { API } from './api'
 
 function Barra({ valor }) {
   return (

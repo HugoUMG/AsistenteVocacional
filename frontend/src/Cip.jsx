@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import Nav from './Nav'
 import './App.css'
 import { authHeader } from './auth'
+import { API } from './api'
 
-const API = 'http://localhost:8000'
 // 150 ítems en páginas de 15 → 10 páginas. Paginar NO altera el instrumento
 // siempre que se respete el orden impreso del cuadernillo: los ítems vienen
 // entrelazados entre escalas a propósito, y agruparlos por escala induciría

@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 import { sessionId } from './session'
 import { iniciarSesionGoogle, sesionActual } from './auth'
-
-const API = 'http://localhost:8000'
+import { API } from './api'
 
 // Banner "¿quieres guardar tus resultados?" para la pantalla final de cada
 // instrumento (Dashboard, Holland/Personalidad/Psicometrico Resultados). Si

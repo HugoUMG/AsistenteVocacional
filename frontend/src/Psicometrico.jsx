@@ -4,8 +4,8 @@ import { sessionId } from './session'
 import { authHeader } from './auth'
 import GuardarResultados from './GuardarResultados'
 import './App.css'
+import { API } from './api'
 
-const API = 'http://localhost:8000'
 const POR_PAGINA = 20
 // El examen son 100 ítems (20-30 min): sin esto, una recarga accidental borra
 // todo el avance. Se limpia al terminar.
