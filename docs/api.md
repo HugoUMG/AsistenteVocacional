@@ -35,7 +35,7 @@ y responde **401** sin él: `/api/register`, `/api/submit-survey`,
 
 Encima del login, `backend/app/cuota.py` pone dos límites, ambos **429**:
 
-- **Enfriamiento** (`HORAS_ENFRIAMIENTO`, 4 por defecto): tiempo que un alumno
+- **Enfriamiento** (`MINUTOS_ENFRIAMIENTO`, 10 por defecto): tiempo que un alumno
   espera entre una evaluación **terminada** y la siguiente. Se cuenta por
   instrumento (el chat por su lado, Holland por el suyo) porque en el modo 3 el
   alumno encadena Holland y chat, y un enfriamiento compartido lo dejaría

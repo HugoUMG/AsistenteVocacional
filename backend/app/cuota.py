@@ -4,7 +4,7 @@ evaluaciones y un tope global de tokens por día.
 Por qué existe: el login (app/auth.py) por sí solo NO protege el crédito de
 Gemini, crear una cuenta de Google es gratis y toma dos minutos. Lo que de
 verdad lo protege es esto: el enfriamiento corta al alumno que repite el test
-diez veces en una hora, y el tope diario es el freno de emergencia si algo se
+muchas veces seguidas, y el tope diario es el freno de emergencia si algo se
 sale de control (un curso entero entrando el mismo día, un script, un bug).
 
 El enfriamiento es POR INSTRUMENTO (el chat por su lado, Holland por el suyo)
@@ -24,7 +24,7 @@ from sqlalchemy.orm import Session
 from app import auth, models
 from app.db import get_db
 
-HORAS_ENFRIAMIENTO = float(os.getenv("HORAS_ENFRIAMIENTO", "4"))
+MINUTOS_ENFRIAMIENTO = float(os.getenv("MINUTOS_ENFRIAMIENTO", "10"))
 # Suma de tokens de Gemini de TODOS los alumnos en el día UTC en curso. El
 # default alcanza para ~200 evaluaciones completas; ajustar en backend/.env
 # según el crédito real (ver decisions/gemini-costos-y-caching.md).
@@ -54,7 +54,7 @@ def espera_restante(ultima: datetime | None, ahora: datetime | None = None) -> t
     if ultima is None:
         return timedelta(0)
     ahora = ahora or datetime.now(timezone.utc)
-    return max(timedelta(0), ultima + timedelta(hours=HORAS_ENFRIAMIENTO) - ahora)
+    return max(timedelta(0), ultima + timedelta(minutes=MINUTOS_ENFRIAMIENTO) - ahora)
 
 
 def legible(falta: timedelta) -> str:
@@ -113,11 +113,12 @@ def evaluador(
 def _self_check():
     ahora = datetime(2026, 8, 19, 12, 0, tzinfo=timezone.utc)
 
+    espera = timedelta(minutes=MINUTOS_ENFRIAMIENTO)
     assert espera_restante(None, ahora) == timedelta(0)  # nunca evaluó
-    assert espera_restante(ahora - timedelta(hours=5), ahora) == timedelta(0)  # ya pasó
-    assert espera_restante(ahora - timedelta(hours=4), ahora) == timedelta(0)  # justo en el borde
-    assert espera_restante(ahora, ahora) == timedelta(hours=HORAS_ENFRIAMIENTO)
-    assert espera_restante(ahora - timedelta(hours=1), ahora) == timedelta(hours=3)
+    assert espera_restante(ahora - espera * 2, ahora) == timedelta(0)  # ya pasó
+    assert espera_restante(ahora - espera, ahora) == timedelta(0)  # justo en el borde
+    assert espera_restante(ahora, ahora) == espera
+    assert espera_restante(ahora - espera / 2, ahora) == espera / 2
     # Una fecha futura (reloj torcido) no debe dar una espera negativa.
     assert espera_restante(ahora + timedelta(days=1), ahora) > timedelta(0)
 
