@@ -20,8 +20,11 @@ from app import cip_filtro, holland_filtro
 # - MODELO_FINAL: resultados que el alumno LEE (análisis final, simulador,
 #   comparador; 1 llamada c/u) → prioriza calidad de tono, aunque gaste más cuota.
 # Ambos configurables por .env.
-MODELO = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-MODELO_FINAL = os.getenv("GEMINI_MODEL_FINAL", "gemini-2.5-flash")
+# El default es el modelo medido del proyecto, no uno cualquiera: dejar aqui uno
+# viejo es una mina, porque Google retira modelos y el despliegue que no defina
+# la variable revienta con 404 sin que nadie haya tocado nada. Ya paso.
+MODELO = os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite")
+MODELO_FINAL = os.getenv("GEMINI_MODEL_FINAL", "gemini-3.1-flash-lite")
 
 # Tono compartido por todos los prompts: el lector es un adolescente, no un
 # adulto. Se añade al final de cada SYSTEM (recomendar, preguntas, extras).
