@@ -35,23 +35,15 @@ y responde **401** sin él: `/api/register`, `/api/submit-survey`,
 
 Encima del login, `backend/app/cuota.py` pone dos límites, ambos **429**:
 
-- **Enfriamiento** (`MINUTOS_ENFRIAMIENTO`, 10 por defecto): tiempo que un alumno
-  espera entre una evaluación **terminada** y la siguiente. Se cuenta por
-  instrumento (el chat por su lado, Holland por el suyo) porque en el modo 3 el
-  alumno encadena Holland y chat, y un enfriamiento compartido lo dejaría
-  encerrado en su propia sesión. Las evaluaciones a medias no cuentan: quien
-  perdió la conexión no queda bloqueado cuatro horas. La respuesta trae
-  `Retry-After` y un mensaje con el tiempo que falta.
-- **Tope por alumno** (`MAX_EVALUACIONES_DIARIAS`, 3 por defecto): **recorridos**
-  terminados que una misma cuenta puede acumular en 24 horas. Un recorrido es lo
-  que el alumno vive como una evaluación, y se identifica por el `session_id`
-  que acompaña la prueba de punta a punta: hacer Holland y seguir al chat cuenta
-  **una**, mientras que hacer Holland hoy y volver mañana por el chat cuenta dos.
-  Por eso `/api/submit-survey` **debe** recibir el `session_id`; sin él la fila
-  del chat queda huérfana y el tope cuenta de más. La ventana es deslizante, no
-  día calendario, así nadie espera al cambio de fecha ni junta seis a caballo de
-  la medianoche. El enfriamiento corta la repetición inmediata; este corta la
-  insistencia a lo largo del día, que es la que se come el presupuesto.
+- **Tope por alumno** (`MAX_CHATS_DIARIOS`, 3 por defecto): chats **terminados**
+  (con recomendación entregada) que una misma cuenta puede acumular en una
+  ventana deslizante de 24 horas. Deslizante y no día calendario, así nadie
+  espera al cambio de fecha ni junta seis a caballo de la medianoche. Los chats
+  a medias no gastan cupo: a quien se le cayó la conexión no se le cobra el
+  intento. La respuesta trae `Retry-After` y dice cuándo se libera el siguiente.
+  **Solo se limita el chat**, que es lo único que gasta Gemini: `/api/holland`
+  no tiene tope, ni siquiera depende del presupuesto global, porque lo califica
+  O*NET y no cuesta nada.
 - **Tope global diario** (`TOPE_TOKENS_DIARIO`): suma de `uso_tokens` del día
   UTC. Es el freno de emergencia del crédito de Gemini; el login por sí solo no
   lo protege, crear una cuenta de Google es gratis.
