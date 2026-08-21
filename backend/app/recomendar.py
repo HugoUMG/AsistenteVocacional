@@ -55,6 +55,36 @@ ANTI_INYECCION = (
 )
 
 
+# EXPERIMENTAL (ver experiments/edad-y-grado.md): bloque que le dice al modelo
+# qué hacer con la edad y el grado académico que ahora piden las preguntas fijas.
+# Sin este bloque los dos datos igual llegan al prompt dentro del perfil, pero el
+# modelo no tiene instrucción de actuar sobre ellos. Se lee el flag en cada
+# llamada (no al importar) para poder medir los dos brazos en un mismo proceso.
+CONTEXTO_ACADEMICO = (
+    "\n\nCONTEXTO ACADÉMICO (el perfil puede traer 'edad', 'grado', "
+    "'carrera_cursada' y si le gustó o no: son datos de PESO ALTO y tienes que "
+    "usarlos):\n"
+    "- Háblale SIEMPRE de tú y conecta con lo que él mismo te contó, tenga la "
+    "edad que tenga. Si ya pasó de los 18 no des por hecho que acaba de salir del "
+    "colegio ni que sus papás deciden por él, pero NO te vuelvas impersonal ni "
+    "escribas para 'quienes' en general.\n"
+    "- Si va en básicos todavía está lejos de elegir: mantén opciones amplias y "
+    "explica un poco más de qué se trata cada carrera.\n"
+    "- Si dijo que NO le gustó la carrera de 'carrera_cursada', NO se la "
+    "propongas otra vez ni le propongas variantes casi iguales de lo mismo. Ese "
+    "es el dato más importante del perfil: propón un cambio real de rumbo.\n"
+    "- Aun así, lo que ya cursó cuenta como ventaja. Si alguna carrera que "
+    "propones aprovecha esos cursos o esa experiencia, dilo en las razones.\n"
+    "- Si dijo que SÍ le gusta lo que estudia, lo que propongas debe ir en esa "
+    "línea o ser una especialización de lo mismo, salvo que el resto del perfil "
+    "lo contradiga de forma clara.\n"
+)
+
+
+def contexto_academico_activo() -> bool:
+    return os.getenv("EDAD_Y_GRADO_EN_RECOMENDACION", "0") == "1"
+
+
 class ContenidoRechazado(Exception):
     """Gemini bloqueó la petición o la respuesta por sus filtros de seguridad
     (p. ej. el estudiante escribió algo ofensivo o dañino). El llamador la
@@ -513,7 +543,7 @@ def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None,
 
     resp = generar(
         model=MODELO_FINAL,
-        system=SYSTEM,
+        system=(SYSTEM + CONTEXTO_ACADEMICO) if contexto_academico_activo() else SYSTEM,
         catalogo=f"CATÁLOGO DE CARRERAS:\n{_catalogo_texto(carreras)}",
         variable=variable,
         schema=ResultadoLLM,
