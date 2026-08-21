@@ -103,6 +103,31 @@ def requiere_login(
     return estudiante
 
 
+def _admins() -> set[str]:
+    """Correos con acceso al registro de administración (ADMIN_EMAILS en
+    backend/.env, separados por coma). Vacío = nadie entra, que es el default
+    seguro: en un despliegue sin la variable la sección queda cerrada."""
+    return {e.strip().lower() for e in os.getenv("ADMIN_EMAILS", "").split(",") if e.strip()}
+
+
+def es_admin(estudiante: models.Estudiante) -> bool:
+    return (estudiante.email or "").lower() in _admins()
+
+
+def requiere_admin(
+    estudiante: models.Estudiante = Depends(requiere_login),
+) -> models.Estudiante:
+    """Para el registro de quienes aplican la evaluación (/api/admin/...).
+    Se apoya en el login de Google: el correo lo verifica Google, no el usuario.
+
+    ponytail: lista de correos en el .env, no una tabla de roles. Son dos o tres
+    personas; si algún día hay que dar y quitar accesos desde la app, ahí sí
+    toca una tabla."""
+    if not es_admin(estudiante):
+        raise HTTPException(status_code=403, detail="Esta sección es solo para administradores.")
+    return estudiante
+
+
 def _self_check():
     os.environ["SESSION_SECRET"] = "clave-de-prueba-no-usar-en-produccion"
 
@@ -123,6 +148,12 @@ def _self_check():
     assert _token_de_header(None) is None
     assert _token_de_header("Bearer abc123") == "abc123"
     assert _token_de_header("abc123") is None  # sin el prefijo "Bearer "
+
+    # Admins: se lee del entorno, se normaliza a minúsculas y sin espacios.
+    os.environ["ADMIN_EMAILS"] = " Uno@Gmail.com , dos@gmail.com "
+    assert _admins() == {"uno@gmail.com", "dos@gmail.com"}
+    os.environ["ADMIN_EMAILS"] = ""
+    assert _admins() == set(), "sin la variable no entra nadie"
 
     print("auth self-check OK — JWT propio, sin llamadas a Google")
 

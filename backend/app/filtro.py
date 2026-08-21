@@ -26,6 +26,57 @@ STOPWORDS = {
 
 _PALABRA = re.compile(r"[a-záéíóúüñ]+", re.IGNORECASE)
 
+# Respuestas que NO aportan señal vocacional al solapamiento de palabras. El
+# nivel, el grado y el motivo se excluyen porque su texto ("universidad",
+# "carrera", "estudiar") solapa con casi cualquier perfil y ensucia el puntaje.
+# 'carrera_cursada' SÍ se queda: el bachillerato o la carrera que lleva es señal
+# real de sus intereses. Siguen llegando
+# completas al prompt de Gemini: esto solo afecta el recorte del catálogo.
+_SIN_SENAL = {"departamento", "edad", "nivel", "grado", "motivo"}
+
+
+def _normaliza(texto: str) -> str:
+    """Minúsculas y sin tildes, para comparar 'Ingeniería' con 'ingenieria'."""
+    tabla = str.maketrans("áéíóúü", "aeiouu")
+    return (texto or "").lower().translate(tabla)
+
+
+def _significativas(texto: str) -> set:
+    """Palabras con carga semántica de un nombre de carrera: sin stopwords y de
+    más de 3 letras, para que 'en', 'de' o 'con' no emparejen nada."""
+    return {
+        w for w in _PALABRA.findall(_normaliza(texto))
+        if w not in STOPWORDS and len(w) > 3
+    }
+
+
+def descartar(carreras: list, carrera_abandonada: str | None) -> list:
+    """Saca del catálogo la carrera que el alumno dijo que abandonó, y sus
+    variantes de nombre ('Ingeniería en Sistemas' también saca 'Ingeniería en
+    Ciencias y Sistemas'). Se compara por palabras significativas: una carrera
+    se descarta si comparte TODAS las del texto del alumno, o al menos dos.
+
+    ponytail: emparejamiento por palabras, no semántico. No sabe que 'Derecho'
+    es 'Ciencias Jurídicas y Sociales', así que ahí no descarta nada; el techo
+    se sube con una tabla de sinónimos si hace falta. Prefiere quedarse corto:
+    borrar de más le quitaría opciones válidas al alumno.
+    """
+    query = _significativas(carrera_abandonada or "")
+    if not query:
+        return carreras
+
+    def coincide(carrera) -> bool:
+        palabras = _significativas(carrera.nombre)
+        comunes = query & palabras
+        return comunes == query or len(comunes) >= 2
+
+    quedan = [c for c in carreras if not coincide(c)]
+    # Red de seguridad: si el texto era tan genérico que se llevó medio
+    # catálogo, no se descarta nada y que decida el modelo.
+    if len(quedan) < len(carreras) * 0.7:
+        return carreras
+    return quedan
+
 
 def _palabras(texto: str) -> Counter:
     """Cuenta palabras relevantes (sin stopwords, largo > 2) de un texto."""
@@ -43,7 +94,7 @@ def preseleccionar(respuestas: dict, carreras: list, top: int = TOP_DEFAULT) -> 
         return carreras
 
     texto_estudiante = " ".join(
-        str(v) for k, v in respuestas.items() if k != "departamento"
+        str(v) for k, v in respuestas.items() if k not in _SIN_SENAL
     )
     palabras_estudiante = _palabras(texto_estudiante)
     if not palabras_estudiante:
@@ -73,6 +124,26 @@ if __name__ == "__main__":
     resultado = preseleccionar(respuestas, [lejana, *otras, afin], top=5)
     assert afin in resultado, "la carrera afín debe sobrevivir al recorte"
     assert resultado[0] is afin, "la carrera afín debe quedar primera"
+
+    # descartar(): la carrera abandonada y sus variantes salen del catálogo.
+    sis = _C("Ingeniería en Sistemas", "software programación")
+    sis2 = _C("Ingeniería en Ciencias y Sistemas", "software algoritmos")
+    civil = _C("Ingeniería Civil", "obra estructuras concreto")
+    resto = [_C(f"Otra {i}", "texto neutro") for i in range(20)]
+    quedan = descartar([sis, sis2, civil, *resto], "Ingeniería en Sistemas")
+    assert sis not in quedan and sis2 not in quedan, "debe sacar la carrera y su variante"
+    assert civil in quedan, "no debe llevarse otra ingeniería que no comparte 2 palabras"
+
+    assert descartar([sis, civil], None) == [sis, civil]  # sin dato, no toca nada
+    assert descartar([sis, civil], "de la en") == [sis, civil]  # solo stopwords
+
+    # Red de seguridad: un texto que se llevaría medio catálogo no descarta nada.
+    muchas = [_C(f"Ingeniería en Sistemas {i}", "x") for i in range(10)]
+    assert descartar(muchas, "Ingeniería en Sistemas") == muchas
+
+    # El grado no arrastra el recorte: "universidad" no debe pesar como interés.
+    con_grado = {"grado": "Estoy estudiando en la universidad", "gustos": "tecnología y programación"}
+    assert preseleccionar(con_grado, [lejana, *otras, afin], top=5)[0] is afin
 
     # <= top: no filtra nada, aunque el puntaje sea 0 para todas.
     pocas = [lejana, afin]

@@ -1806,3 +1806,164 @@
   .psi-opciones { grid-template-columns: 1fr; }
   .psi-rasgo-nombre { flex: 0 0 130px; font-size: 12.5px; }
 }
+
+
+/* Registro de administración (/admin): tabla ancha que se desplaza sola en
+   lugar de romper el ancho de la página. */
+.tabla-scroll {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.tabla-registro {
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.tabla-registro th,
+.tabla-registro td {
+  border-bottom: 1px solid var(--linea, #d8dee9);
+  padding: 0.45rem 0.7rem;
+  text-align: left;
+}
+
+.tabla-registro th {
+  position: sticky;
+  top: 0;
+  background: var(--fondo, #fff);
+  font-weight: 600;
+}
+
+
+/* Recorrido del historial: diagrama de arriba abajo (perfil -> preguntas ->
+   resultado). Es HTML y CSS, sin librería de grafos. */
+.rec-acciones {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0 1.4rem;
+}
+
+.rec-diagrama {
+  position: relative;
+  padding-left: 1.6rem;
+  max-width: 780px;
+}
+
+/* La línea vertical que une todo el recorrido. */
+.rec-diagrama::before {
+  content: '';
+  position: absolute;
+  left: 0.35rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 2px;
+  background: var(--linea, #d8dee9);
+}
+
+.rec-nodo,
+.rec-rama {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+/* El punto de cada nodo sobre la línea. */
+.rec-nodo::before,
+.rec-rama::before {
+  content: '';
+  position: absolute;
+  left: -1.45rem;
+  top: 0.55rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--acento, #1f3b63);
+}
+
+.rec-perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--linea, #d8dee9);
+  border-radius: 10px;
+}
+
+.rec-fecha {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.rec-rama-titulo {
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+}
+
+.rec-pasos,
+.rec-resultado,
+.rec-diversificados {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rec-pasos li {
+  display: grid;
+  grid-template-columns: minmax(11rem, 38%) 1fr;
+  gap: 0.6rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--linea, #eef1f5);
+}
+
+.rec-pregunta {
+  opacity: 0.75;
+}
+
+.rec-respuesta {
+  font-weight: 500;
+}
+
+.rec-resultado li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+}
+
+.rec-diversificados {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.rec-diversificados li::before {
+  content: '→ ';
+}
+
+/* En pantalla angosta la pregunta y la respuesta se apilan. */
+@media (max-width: 620px) {
+  .rec-pasos li {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
+/* Filas del registro: se abren para ver el recorrido de esa evaluación. */
+.fila-abrible {
+  cursor: pointer;
+}
+
+.fila-abrible:hover td {
+  background: var(--hover, rgba(31, 59, 99, 0.06));
+}
+
+/* Acceso al registro, solo visible para las cuentas de ADMIN_EMAILS. */
+.nav-admin {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--linea, #d8dee9);
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+}

@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google'
-import { cerrarSesion, iniciarSesionGoogle, sesionActual } from './auth'
+import { authHeader, cerrarSesion, iniciarSesionGoogle, sesionActual } from './auth'
 import { MODO_COMPLETO } from './modo'
+import { API } from './api'
 
 // Barra superior compartida por las páginas informativas (inicio, acerca,
 // catálogo, parámetros). El chat y el dashboard no la usan.
@@ -10,6 +11,17 @@ export default function Nav() {
   const navigate = useNavigate()
   const [sesion, setSesion] = useState(sesionActual)
   const [error, setError] = useState('')
+  // Quién es admin lo decide el backend (ADMIN_EMAILS), no el navegador: acá
+  // solo se pregunta para saber si mostrar el acceso al registro.
+  const [admin, setAdmin] = useState(false)
+
+  useEffect(() => {
+    if (!sesion) { setAdmin(false); return }
+    fetch(`${API}/api/admin/soy`, { headers: authHeader() })
+      .then((r) => (r.ok ? r.json() : { admin: false }))
+      .then((d) => setAdmin(!!d.admin))
+      .catch(() => setAdmin(false))
+  }, [sesion])
 
   async function alIniciarSesion(credentialResponse) {
     setError('')
@@ -53,6 +65,9 @@ export default function Nav() {
         {sesion ? (
           <>
             <span className="nav-nombre">{sesion.estudiante.nombre}</span>
+            {admin && (
+              <NavLink to="/admin" className="nav-admin">Historial de alumnos</NavLink>
+            )}
             <button className="nav-salir" onClick={salir}>Cerrar sesión</button>
           </>
         ) : (

@@ -17,7 +17,7 @@ from sqlalchemy.orm import Session
 from app.db import Base, engine, get_db
 from google.genai import errors as genai_errors
 
-from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland, holland_filtro, personalidad, auth, cuota
+from app import models, recomendar, preguntas, extras, psicometrico, cip_fogliatto, holland, holland_filtro, personalidad, auth, cuota, filtro, diversificado
 
 
 @asynccontextmanager
@@ -330,13 +330,14 @@ def carreras(db: Session = Depends(get_db)):
 
 def _carreras(db, respuestas):
     """Carreras filtradas por el departamento (o región, varios separados por
-    coma) elegido. 'Ambos' = sin filtro."""
+    coma) elegido. 'Ambos' = sin filtro. Si el alumno dijo que abandonó una
+    carrera, esa se descarta aquí: no tiene sentido devolverle lo que ya dejó."""
     q = db.query(models.Carrera)
     depto = (respuestas or {}).get("departamento")
     if depto and depto != "Ambos":
         deptos = [d.strip() for d in depto.split(",")]
         q = q.filter(models.Carrera.departamento.in_(deptos))
-    carreras = q.all()
+    carreras = filtro.descartar(q.all(), (respuestas or {}).get("carrera_descartada"))
     if not carreras:
         raise HTTPException(status_code=409, detail="No hay carreras para ese filtro.")
     return carreras
@@ -411,6 +412,12 @@ def recommend(
         "respuesta_id": respuesta_id,
         "confianza": resultado.confianza,
         "confianza_nota": resultado.confianza_nota,
+        # Solo para quien va en básicos: su siguiente decisión es el
+        # diversificado, no la universidad. Sin IA, ver app/diversificado.py.
+        "diversificados": (
+            diversificado.sugerir([c["carrera"] for c in carreras_out])
+            if (data.respuestas or {}).get("nivel") == "Básico" else []
+        ),
     }
 
 
@@ -799,9 +806,17 @@ def historial(
         .all()
     )
     return {
+        # 'diversificados' se recalcula aquí en vez de guardarse: sale de la
+        # recomendación y del nivel, que ya están en la fila, y así una mejora
+        # de la tabla se refleja también en el historial viejo.
         "chat": [
             {"id": r.id, "fecha": r.created_at, "respuestas": r.respuestas,
-             "recomendacion": r.recomendacion}
+             "recomendacion": r.recomendacion,
+             "diversificados": (
+                 diversificado.sugerir([c.get("carrera", "") for c in r.recomendacion])
+                 if (r.respuestas or {}).get("nivel") == "Básico"
+                 and isinstance(r.recomendacion, list) else []
+             )}
             for r in chat
         ],
         "holland": [
@@ -817,6 +832,83 @@ def historial(
             for r in psicometrico_filas
         ],
     }
+
+
+# Preguntas fijas que se muestran como columnas del registro, en el orden en que
+# el chat las hace (ver frontend/src/Chat.jsx).
+CAMPOS_REGISTRO = ("nombre", "edad", "nivel", "grado", "carrera_cursada",
+                   "gusto_grado", "motivo", "departamento")
+
+
+@app.get("/api/admin/soy")
+def admin_soy(estudiante: models.Estudiante | None = Depends(auth.estudiante_actual)):
+    """¿La sesión actual es de administración? Lo consulta el menú para decidir
+    si muestra el acceso al registro. Nunca lanza 403: responder que no es la
+    respuesta correcta para un alumno, no un error."""
+    return {"admin": bool(estudiante) and auth.es_admin(estudiante)}
+
+
+@app.get("/api/admin/respuestas/{respuesta_id}")
+def admin_respuesta(
+    respuesta_id: int, db: Session = Depends(get_db),
+    admin: models.Estudiante = Depends(auth.requiere_admin),
+):
+    """Una evaluación completa: todo lo que contestó el alumno y todo lo que se
+    le recomendó, para que quien aplica el estudio pueda ver su recorrido y su
+    dashboard igual que lo vio él. Mismo formato que una fila de
+    /api/historial, así el frontend reusa las mismas pantallas."""
+    r = db.get(models.RespuestaCuestionario, respuesta_id)
+    if r is None:
+        raise HTTPException(status_code=404, detail="Esa evaluación no existe.")
+    rec = r.recomendacion if isinstance(r.recomendacion, list) else []
+    return {
+        "id": r.id,
+        "fecha": r.created_at,
+        "respuestas": r.respuestas,
+        "recomendacion": rec,
+        "diversificados": (
+            diversificado.sugerir([c.get("carrera", "") for c in rec])
+            if (r.respuestas or {}).get("nivel") == "Básico" else []
+        ),
+        "cuenta": r.estudiante.email if r.estudiante else None,
+    }
+
+
+@app.get("/api/admin/respuestas")
+def admin_respuestas(
+    db: Session = Depends(get_db),
+    admin: models.Estudiante = Depends(auth.requiere_admin),
+    limite: int = 500,
+):
+    """Registro para quien aplica la evaluación: qué contestó cada alumno en las
+    preguntas fijas y qué carreras le salieron. Solo para los correos de
+    ADMIN_EMAILS (ver app/auth.py).
+
+    Son datos de estudiantes, varios de ellos menores: esta lista no se comparte
+    fuera de quienes aplican el estudio y su consentimiento (ver
+    docs/estudio-con-estudiantes.md)."""
+    filas = (
+        db.query(models.RespuestaCuestionario)
+        .order_by(models.RespuestaCuestionario.created_at.desc())
+        .limit(max(1, min(limite, 2000)))
+        .all()
+    )
+    salida = []
+    for r in filas:
+        resp = r.respuestas or {}
+        # recomendacion se guarda como la LISTA de carreras (ver /api/recommend).
+        rec = r.recomendacion if isinstance(r.recomendacion, list) else []
+        salida.append({
+            "id": r.id,
+            "fecha": r.created_at,
+            **{c: resp.get(c) for c in CAMPOS_REGISTRO},
+            "carrera_descartada": resp.get("carrera_descartada"),
+            "top3": [c.get("carrera") for c in rec[:3]],
+            "termino": bool(rec),  # False = abandonó antes de ver resultados
+            "feedback": r.feedback,
+            "cuenta": r.estudiante.email if r.estudiante else None,
+        })
+    return salida
 
 
 class FeedbackIn(BaseModel):

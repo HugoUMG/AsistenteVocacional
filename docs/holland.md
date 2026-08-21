@@ -70,6 +70,32 @@ La pestaña manda `zona: 4` (Job Zone 4 ≈ carrera universitaria). El campo del
 endpoint propio se llama `zona` justamente para no confundirlo con el `job_zone`
 viejo de la v1.9.
 
+## Dos ítems adaptados a Guatemala (2026-08-21)
+
+Por pedido de la psicóloga en la sesión de validación, dos ítems se muestran con
+otra redacción. Viven en `holland.ADAPTACIONES` y se aplican al servir el banco:
+
+| # | Área | O*NET dice | Se muestra |
+|---|---|---|---|
+| 14 | Realista | Criar peces en un criadero de peces | Criar gallinas, cerdos o ganado en una granja |
+| 56 | Social | Enseñar una clase de high school | Dar clases en un instituto de nivel medio (básicos o diversificado) |
+
+El 14 apunta a **Realista**: trabajo práctico, al aire libre, con seres vivos. La
+crianza de animales de granja conserva eso y sí es una imagen reconocible acá. El
+56 quedó a medio traducir en la versión en español de O*NET y "high school" no se
+entiende; su equivalente local es el nivel medio.
+
+Lo que NO cambia: el índice del ítem, su área RIASEC, la escala, ni el cálculo.
+Las respuestas siguen viajando a O*NET por posición y el puntaje lo sigue
+calculando la API oficial. Si O*NET cambiara el texto original de alguno de los
+dos, `_adaptar()` lanza un error en vez de reetiquetar en silencio una pregunta
+distinta.
+
+**Para la tesis:** esto es una desviación del instrumento estandarizado y hay que
+declararla. Son 2 ítems de 60, se conserva el área que miden, y el motivo es
+validez de contenido en el contexto guatemalteco. No se ha medido si mueve los
+puntajes.
+
 ## Límites conocidos
 
 - Las ocupaciones son del mercado laboral de EE. UU. Sirven para ver *tipo* de

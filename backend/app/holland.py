@@ -62,6 +62,45 @@ def _json(r: httpx.Response) -> dict:
     return r.json()
 
 
+# Dos ítems se reescriben para Guatemala, por pedido de la psicóloga en la
+# sesión de validación. Se cambia SOLO la redacción: el índice y el área RIASEC
+# quedan intactos, las respuestas siguen viajando a O*NET por posición y el
+# puntaje lo sigue calculando la API oficial. Aun así es una desviación del
+# instrumento estandarizado y hay que declararla en la tesis (ver
+# docs/holland.md).
+#
+# {índice: (texto nuevo, texto original de O*NET)}
+ADAPTACIONES = {
+    # Realista, crianza de especies. El criadero de peces no es una imagen
+    # reconocible acá; la crianza de animales de granja sí, y es el mismo tipo
+    # de trabajo (práctico, al aire libre, con seres vivos).
+    14: ("Criar gallinas, cerdos o ganado en una granja",
+         "Criar peces en un criadero de peces"),
+    # Social, enseñanza. "High school" quedó sin traducir en la versión en
+    # español de O*NET y no se entiende acá: su equivalente es el nivel medio.
+    56: ("Dar clases en un instituto de nivel medio (básicos o diversificado)",
+         "Enseñar una clase de high school"),
+}
+
+
+def _adaptar(items: list) -> list:
+    """Aplica ADAPTACIONES sobre los ítems que devuelve O*NET, verificando que
+    el original sea el que se esperaba: si O*NET cambia el banco, mejor fallar
+    aquí que servir en silencio un ítem adaptado sobre otra pregunta."""
+    for item in items:
+        cambio = ADAPTACIONES.get(item.get("index"))
+        if not cambio:
+            continue
+        nuevo, original = cambio
+        if item.get("text") != original:
+            raise RuntimeError(
+                f"El ítem {item['index']} de O*NET dice '{item.get('text')}' y se "
+                f"esperaba '{original}'. Revisar app.holland.ADAPTACIONES."
+            )
+        item["text"] = nuevo
+    return items
+
+
 @functools.cache
 def preguntas() -> dict:
     """Los 60 ítems en español y la escala de 5 puntos, tal cual los da O*NET.
@@ -75,7 +114,7 @@ def preguntas() -> dict:
     items = datos["question"]
     if len(items) != N_PREGUNTAS:
         raise RuntimeError(f"O*NET devolvió {len(items)} preguntas, se esperaban {N_PREGUNTAS}")
-    return {"preguntas": items, "opciones": datos["answer_option"], "total": len(items)}
+    return {"preguntas": _adaptar(items), "opciones": datos["answer_option"], "total": len(items)}
 
 
 def perfil(respuestas: str, zona: int | None = None) -> dict:
