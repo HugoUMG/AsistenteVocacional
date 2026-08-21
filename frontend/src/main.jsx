@@ -15,6 +15,7 @@ import Holland from './Holland.jsx'
 import Personalidad from './Personalidad.jsx'
 import Historial from './Historial.jsx'
 import Protegida from './Protegida.jsx'
+import Admin from './Admin.jsx'
 import { MODO_COMPLETO } from './modo'
 
 // Sin VITE_GOOGLE_CLIENT_ID (frontend/.env), el provider igual monta: los
@@ -35,6 +36,9 @@ createRoot(document.getElementById('root')).render(
           <Route path="/chat" element={<Protegida><Chat /></Protegida>} />
           <Route path="/holland" element={<Protegida><Holland /></Protegida>} />
           <Route path="/historial" element={<Historial />} />
+          {/* Sin enlace en el menú a propósito: se entra escribiendo /admin y
+              el backend valida el correo contra ADMIN_EMAILS. */}
+          <Route path="/admin" element={<Admin />} />
           {/* Solo en local: en producción se ofrecen los dos instrumentos
               confirmados. Ver modo.js. */}
           {MODO_COMPLETO && <Route path="/psicometrico" element={<Protegida><Psicometrico /></Protegida>} />}

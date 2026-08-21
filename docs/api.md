@@ -56,6 +56,26 @@ frontend el contexto ya calculado por `/api/recommend` (descripción, razones), 
 que **no cargan el catálogo** ni dependen de nombres exactos en la BD: 1 llamada
 a Gemini cada una, solo si el estudiante las pide.
 
+## Sugerencia de diversificado (alumnos de básicos)
+
+Cuando `respuestas.nivel == "Básico"`, `POST /api/recommend` agrega
+`diversificados`: hasta 3 carreras de nivel medio que preparan para las carreras
+que le salieron, con una frase de por qué. Sale de `data/diversificados.json`
+cruzando nombres, sin llamar a Gemini y sin gastar tokens. Para el resto de
+niveles llega vacío. `GET /api/historial` lo recalcula para las evaluaciones ya
+guardadas, así que no depende de que se haya guardado.
+
+## Registro de administración
+
+`GET /api/admin/respuestas?limite=500` devuelve, de la más reciente a la más
+antigua, cada evaluación con lo que el alumno contestó en las preguntas fijas
+(nombre, edad, nivel, grado, carrera cursada, si le gustó, motivo, departamento),
+la carrera que pidió descartar, su top-3 recomendado, si terminó y su feedback.
+
+Pide sesión de Google **y** que el correo esté en `ADMIN_EMAILS`
+(`backend/.env`); si no, responde 403. Sin la variable no entra nadie. La página
+que lo consume es `/admin` y no tiene enlace en el menú a propósito.
+
 ## Notas de validación
 
 - El `session_id` está topado a 64 chars con el tipo compartido `SessionId` en

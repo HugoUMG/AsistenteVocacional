@@ -8,6 +8,7 @@ import { leerPerfilPersonalidad } from './personalidad-perfil'
 import { authHeader, sesionActual } from './auth'
 import './App.css'
 import { API } from './api'
+import { FIJAS, grado } from './preguntas-fijas'
 
 const MIN_ADAPTATIVAS = 4 // mínimo antes de ofrecer el resultado (se siente conversación)
 const MAX_ADAPTATIVAS = 8 // tope: perfiles ambiguos afinan más, sin agotar cuota
@@ -23,85 +24,6 @@ const MENSAJES_CARGA = [
   'Calculando afinidades…',
   'Puliendo los detalles…',
   'Casi listo…',
-]
-
-// Preguntas FIJAS (sin llamar a la IA): nombre + 3 vocacionales genéricas.
-// Son catálogo-agnósticas (no mencionan carreras).
-const FIJAS = [
-  {
-    clave: 'nombre',
-    tipo: 'texto',
-    texto: '¡Hola! Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
-    placeholder: 'Escribe tu nombre…',
-  },
-  {
-    clave: 'impacto',
-    tipo: 'opcion',
-    multiple: true, // puede elegir varios
-    texto: '¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)',
-    opciones: [
-      { label: 'Ayudar, enseñar o cuidar a las personas' },
-      { label: 'Defender la justicia y resolver conflictos' },
-      { label: 'Liderar, organizar negocios o usar tecnología y números' },
-      { label: 'Trabajar con la naturaleza, el campo o el ambiente' },
-      { label: 'Comunicar, crear, diseñar o investigar la realidad' },
-      { label: 'Construir, diseñar o hacer que las cosas funcionen' },
-    ],
-  },
-  {
-    clave: 'estilo',
-    tipo: 'opcion',
-    multiple: true, // puede combinar formas de trabajo
-    texto: '¿Cómo prefieres trabajar? (puedes elegir varias)',
-    opciones: [
-      { label: 'Con personas, en trato directo' },
-      { label: 'Analizando datos, ideas y lógica' },
-      { label: 'De forma práctica, con las manos' },
-      { label: 'Al aire libre y en movimiento' },
-    ],
-  },
-  {
-    clave: 'entorno',
-    tipo: 'opcion',
-    multiple: true,
-    texto: '¿Dónde te imaginas trabajando? (puedes elegir varios)',
-    opciones: [
-      { label: 'En una oficina o empresa' },
-      { label: 'En un hospital, clínica o consultorio' },
-      { label: 'Al aire libre, en el campo o la naturaleza' },
-      { label: 'En un laboratorio o taller técnico' },
-      { label: 'En un aula o centro educativo' },
-      { label: 'En una obra, con máquinas o herramientas' },
-      { label: 'En medios, un estudio creativo o diseñando' },
-      { label: 'Con la comunidad, ayudando a personas' },
-    ],
-  },
-  {
-    // Banco de palabras: temas de interés alineados a las áreas del catálogo
-    // (sin nombrar carreras). El alumno elige varios y puede agregar el suyo.
-    clave: 'gustos',
-    tipo: 'opcion',
-    multiple: true,
-    chips: true,
-    texto: '¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).',
-    opciones: [
-      { label: 'Matemáticas y números' },
-      { label: 'Tecnología y computación' },
-      { label: 'Salud y cuidar personas' },
-      { label: 'Biología y naturaleza' },
-      { label: 'Química y laboratorio' },
-      { label: 'Leyes, justicia y debate' },
-      { label: 'Negocios, dinero y emprender' },
-      { label: 'Arte, diseño y creatividad' },
-      { label: 'Comunicación, escritura y medios' },
-      { label: 'Enseñar y educar' },
-      { label: 'Psicología y comportamiento' },
-      { label: 'Medio ambiente y agricultura' },
-      { label: 'Construcción, máquinas y cómo funcionan las cosas' },
-      { label: 'Gastronomía, turismo y hotelería' },
-      { label: 'Historia, sociedad y cultura' },
-    ],
-  },
 ]
 
 const post = (ruta, body) =>
@@ -274,7 +196,10 @@ async function obtenerCarreras(respuestas) {
     const reg = await post('/api/register', { nombre: respuestas.nombre || 'Anónimo' })
     if (reg.ok) {
       estudiante_id = (await reg.json()).id
-      await post('/api/submit-survey', { estudiante_id, respuestas })
+      // El session_id acompana el recorrido entero (Holland -> chat): sin el,
+      // esta fila queda huerfana y el tope diario cuenta dos evaluaciones donde
+      // el alumno hizo una sola. Tambien es por donde /historial/reclamar cruza.
+      await post('/api/submit-survey', { estudiante_id, respuestas, session_id: sessionId() })
     }
   } catch {
     /* backend caído para guardar: seguimos al análisis igual */
@@ -471,7 +396,7 @@ function Opciones({ pregunta, onAnswer }) {
             ×
           </button>
         </div>
-      ) : (
+      ) : pregunta.sinOtro ? null : (
         <button
           className={`opt-color otro ${otroOn ? 'sel' : ''} ${salida('')}`}
           style={{ '--c': '#5c6b80' }}
@@ -505,6 +430,7 @@ function Chat() {
   const [text, setText] = useState('')
   const [phase, setPhase] = useState('chat') // chat | loading | dashboard
   const [carreras, setCarreras] = useState([])
+  const [diversificados, setDiversificados] = useState([]) // solo si va en básicos
   const [respuestaId, setRespuestaId] = useState(null)
   const [confianza, setConfianza] = useState(null)
   const [error, setError] = useState(null) // fallo de API (muestra "Reintentar")
@@ -562,7 +488,9 @@ function Chat() {
   // la página (antes de tocar la burbuja) para que al mostrarlas ya salgan del
   // caché y suenen sin el retraso de pedirle el audio a edge-tts.
   useEffect(() => {
-    FIJAS.forEach((f) => cargarAudio(f.texto))
+    // Solo las de texto fijo: las que dependen de respuestas anteriores (el
+    // grado, la carrera, el gusto) todavía no tienen texto que precargar.
+    FIJAS.forEach((f) => { if (typeof f.texto === 'string') cargarAudio(f.texto) })
   }, [])
 
   async function analizar(resp) {
@@ -570,8 +498,9 @@ function Chat() {
     setPhase('loading')
     setError(null)
     try {
-      const { carreras, respuesta_id, confianza, confianza_nota } = await obtenerCarreras(resp)
+      const { carreras, respuesta_id, confianza, confianza_nota, diversificados } = await obtenerCarreras(resp)
       setCarreras(carreras)
+      setDiversificados(diversificados || [])
       setRespuestaId(respuesta_id ?? null)
       setConfianza(confianza != null ? { valor: confianza, nota: confianza_nota } : null)
       setPhase('dashboard')
@@ -677,10 +606,17 @@ function Chat() {
 
   // Decide qué sigue: fija (sin IA), adaptativa (IA), o análisis final.
   function avanzar(resp) {
-    const fijasAns = FIJAS.filter((f) => resp[f.clave] !== undefined).length
-    if (fijasAns < FIJAS.length) {
-      const q = { ...FIJAS[fijasAns] }
-      q.texto = q.texto.replace('{nombre}', resp.nombre || '')
+    // Primera fija sin responder que APLIQUE a este alumno: 'si' deja saltar las
+    // que no vienen al caso (ver 'carrera_cursada' en básicos).
+    const fija = FIJAS.find((f) => resp[f.clave] === undefined && (!f.si || f.si(resp)))
+    if (fija) {
+      const q = { ...fija }
+      q.texto = typeof q.texto === 'function'
+        ? q.texto(resp)
+        : q.texto.replace('{nombre}', resp.nombre || '')
+      // Las opciones también pueden depender de lo ya contestado (los grados
+      // salen del nivel que eligió, los motivos también).
+      if (typeof q.opciones === 'function') q.opciones = q.opciones(resp)
       setElegida(null) // las fijas no esperan a la IA: no hace falta mostrar la elegida
       setPaso(q)
       setHistory((h) => [...h, { role: 'bot', text: q.texto }])
@@ -697,6 +633,10 @@ function Chat() {
     setUndoStack((s) => [...s, { respuestas, history, paso }])
     const clave = paso.clave ?? paso.texto
     const next = { ...respuestas, [clave]: respuesta }
+    // La carrera que abandonó se guarda aparte para que el backend la saque del
+    // catálogo (filtro.descartar). Va explícita y no adivinada del texto del
+    // grado, que puede cambiar de redacción.
+    if (clave === 'carrera_cursada' && grado(next)?.descarta) next.carrera_descartada = respuesta
     setRespuestas(next)
     setHistory((h) => [...h, { role: 'user', text: respuesta }])
     setText('')
@@ -729,12 +669,29 @@ function Chat() {
     return null
   }
 
+  // La edad entra al prompt y al historial: se acota aquí a un número creíble.
+  function edadInvalida(v) {
+    if (!/^\d{1,2}$/.test(v) || Number(v) < 10) return 'Escribe tu edad en números (de 10 a 99).'
+    return null
+  }
+
+  // La carrera cursada se muestra dentro de la pregunta siguiente y entra al
+  // prompt, así que se corta aquí lo vacío o lo kilométrico.
+  function carreraInvalida(v) {
+    if (v.length < 2 || v.length > 60) return 'Escribe el nombre de la carrera (entre 2 y 60 letras).'
+    if (!/^[\p{L}\p{N}'’\-.,() ]+$/u.test(v)) return 'Usa solo letras, números y espacios.'
+    return null
+  }
+
   function submitText(e) {
     e.preventDefault()
     const val = text.trim().replace(/\s+/g, ' ')
     if (!val) return
-    if (paso?.clave === 'nombre') {
-      const err = nombreInvalido(val)
+    const valida = paso?.clave === 'nombre' ? nombreInvalido
+      : paso?.clave === 'edad' ? edadInvalida
+      : paso?.clave === 'carrera_cursada' ? carreraInvalida : null
+    if (valida) {
+      const err = valida(val)
       if (err) { setAvisoInput(err); return }
     }
     setAvisoInput(null)
@@ -746,6 +703,7 @@ function Chat() {
       <Dashboard
         nombre={respuestas.nombre}
         carreras={carreras}
+        diversificados={diversificados}
         respuestaId={respuestaId}
         confianza={confianza}
         respuestas={respuestas}
@@ -912,6 +870,7 @@ function Chat() {
             <input
               autoFocus
               value={text}
+              inputMode={paso.clave === 'edad' ? 'numeric' : undefined}
               onChange={(e) => setText(e.target.value)}
               placeholder={paso.placeholder || 'Escribe tu respuesta…'}
             />

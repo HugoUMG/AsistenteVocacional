@@ -21,6 +21,30 @@ const postJSON = (ruta, body) =>
     return r.json()
   })
 
+// Para quien va en básicos: el siguiente paso no es la universidad, es el
+// diversificado. Lo calcula el backend sin IA (app/diversificado.py) y llega
+// vacío para todos los demás niveles, así que aquí no se pinta nada.
+function Diversificados({ opciones }) {
+  if (!opciones?.length) return null
+  return (
+    <div className="dash-diversificados">
+      <p className="dash-div-titulo">Antes de la universidad: qué diversificado te conviene llevar</p>
+      <ul>
+        {opciones.map((o) => (
+          <li key={o.nombre}>
+            <strong>{o.nombre}</strong> <span>{o.porque}</span>
+            {/* El departamento, no el colegio: la app orienta, no recomienda
+                establecimientos. */}
+            {!!o.departamentos?.length && (
+              <span className="dash-div-donde">Se ofrece en: {o.departamentos.join(' y ')}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function ConfianzaBadge({ confianza }) {
   if (!confianza) return null
   const { valor, nota } = confianza
@@ -165,7 +189,7 @@ function CatalogoCarreras() {
   )
 }
 
-export default function Dashboard({ nombre, carreras, respuestaId, confianza, respuestas, onReiniciar }) {
+export default function Dashboard({ nombre, carreras, respuestaId, confianza, respuestas, diversificados, onReiniciar, textoReiniciar = '↺ Hacer otro test' }) {
   const [sel, setSel] = useState(0) // carrera seleccionada en el detalle
   const [inst, setInst] = useState(0) // institución seleccionada
   const [hover, setHover] = useState(null) // sector del pastel sobre el que está el mouse
@@ -240,10 +264,12 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
             ↓ Descargar PDF
           </button>
           {onReiniciar && (
-            <button className="dash-reiniciar" onClick={onReiniciar}>↺ Hacer otro test</button>
+            <button className="dash-reiniciar" onClick={onReiniciar}>{textoReiniciar}</button>
           )}
         </div>
       </header>
+
+      <Diversificados opciones={diversificados} />
 
       <GuardarResultados />
 

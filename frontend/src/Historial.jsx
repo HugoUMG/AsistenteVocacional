@@ -3,6 +3,7 @@ import { GoogleLogin } from '@react-oauth/google'
 import Nav from './Nav'
 import Dashboard from './Dashboard'
 import { authHeader, iniciarSesionGoogle, sesionActual } from './auth'
+import Recorrido from './Recorrido'
 import './App.css'
 import { API } from './api'
 
@@ -87,6 +88,7 @@ export default function Historial() {
   const [datos, setDatos] = useState(null)
   const [error, setError] = useState('')
   const [chatAbierto, setChatAbierto] = useState(null)
+  const [verDashboard, setVerDashboard] = useState(false) // el recorrido es lo primero que se ve
 
   useEffect(() => {
     if (!sesion) return
@@ -105,14 +107,26 @@ export default function Historial() {
     }
   }
 
+  if (chatAbierto && !verDashboard) {
+    return (
+      <Recorrido
+        fila={chatAbierto}
+        onVolver={() => setChatAbierto(null)}
+        onDashboard={() => setVerDashboard(true)}
+      />
+    )
+  }
+
   if (chatAbierto) {
     return (
       <Dashboard
         nombre={chatAbierto.respuestas?.nombre}
         carreras={chatAbierto.recomendacion || []}
         respuestas={chatAbierto.respuestas}
+        diversificados={chatAbierto.diversificados}
         confianza={null}
-        onReiniciar={() => setChatAbierto(null)}
+        onReiniciar={() => setVerDashboard(false)}
+        textoReiniciar="← Volver al recorrido"
       />
     )
   }
