@@ -1,0 +1,1150 @@
+[
+  {
+    "perfil": "Kevin",
+    "edad": "17",
+    "grado": "Estoy en diversificado o bachillerato",
+    "gusto": "Sí, mucho",
+    "area_esperada": "informática",
+    "respuestas": {
+      "nombre": "Kevin",
+      "departamento": "Quetzaltenango",
+      "edad": "17",
+      "grado": "Estoy en diversificado o bachillerato",
+      "gusto_grado": "Sí, mucho",
+      "impacto": "Me late más usar tecnología y números, o también construir y hacer que las cosas funcionen. Me gusta que todo quede al centavo y que las compus vuelen.",
+      "estilo": "Analizando datos, ideas y lógica y también de forma práctica con las manos, fijo prefiero estar solo con mis audífonos en lo mío.",
+      "entorno": "En un taller técnico o de plano en mi propio chance, donde nadie me friegue y pueda estar a lo mío.",
+      "gustos": "Fijo Tecnología y computación, Matemáticas y números, y también Construcción, máquinas y cómo funcionan las cosas. Esas ondas son las que más me cuadran.",
+      "Kevin, me queda clarísimo que te gusta estar en lo tuyo con tus audífonos y que la tecnología y la construcción son lo tuyo. Ahora, cuéntame algo sobre tu **forma de ser**: cuando tienes un problema difícil enfrente, ¿eres de los que se queda **dándole vueltas hasta encontrar el error** exacto o prefieres **probar cosas diferentes** rápido hasta que algo funcione?": "Prefiero analizar y buscar el error exacto, la verdad es que me quedo ahí hasta que la máquina agarra porque si no, me desespero.",
+      "Kevin, se nota que eres de los que no tira la toalla hasta encontrar el fallo exacto, lo cual es una gran ventaja. Cuéntame, cuando estás metido en un proyecto, ¿qué te hace sentir más **satisfecho** al terminar: ver que tu trabajo **funciona perfectamente** y sin errores, o saber que lograste **crear algo nuevo** y original que antes no existía?": "Que todo funcione perfecto y sin fallos, no hay nada mejor que ver que la compu quedó al centavo.",
+      "Kevin, se nota que eres un perfeccionista cuando se trata de que las cosas queden al centavo. Ahora, cuéntame sobre tus **habilidades**: si tuvieras que elegir entre dos retos, ¿qué te sale mejor: **diseñar un plano** o esquema detallado de cómo debería funcionar algo, o **armar y configurar** físicamente los componentes para que todo arranque?": "Fijo prefiero armar y configurar componentes físicos, me cuadra más sentir los cables y ver cómo arranca todo de una vez.",
+      "Kevin, ya me quedó claro que eres un crack armando y configurando cosas con tus manos. Ahora, para entender mejor cómo piensas: cuando te enfrentas a un problema nuevo, ¿te gusta más **seguir una guía** o pasos ya probados para no fallar, o prefieres **experimentar por tu cuenta** y descubrir nuevas formas de resolverlo aunque te tome más tiempo?": "Me gusta experimentar por mi cuenta, la verdad es que aprendo más así aunque me tome un cacho más de tiempo probar mis propias mañas."
+    },
+    "log": [
+      {
+        "fija": "impacto",
+        "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+        "respuesta": "Me late más usar tecnología y números, o también construir y hacer que las cosas funcionen. Me gusta que todo quede al centavo y que las compus vuelen."
+      },
+      {
+        "fija": "estilo",
+        "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+        "respuesta": "Analizando datos, ideas y lógica y también de forma práctica con las manos, fijo prefiero estar solo con mis audífonos en lo mío."
+      },
+      {
+        "fija": "entorno",
+        "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+        "respuesta": "En un taller técnico o de plano en mi propio chance, donde nadie me friegue y pueda estar a lo mío."
+      },
+      {
+        "fija": "gustos",
+        "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+        "respuesta": "Fijo Tecnología y computación, Matemáticas y números, y también Construcción, máquinas y cómo funcionan las cosas. Esas ondas son las que más me cuadran."
+      },
+      {
+        "dimension": "personalidad",
+        "tipo": "opcion",
+        "pregunta": "Kevin, me queda clarísimo que te gusta estar en lo tuyo con tus audífonos y que la tecnología y la construcción son lo tuyo. Ahora, cuéntame algo sobre tu **forma de ser**: cuando tienes un problema difícil enfrente, ¿eres de los que se queda **dándole vueltas hasta encontrar el error** exacto o prefieres **probar cosas diferentes** rápido hasta que algo funcione?",
+        "opciones": [
+          "Prefiero analizar y buscar el error exacto",
+          "Prefiero probar rápido hasta que funcione"
+        ],
+        "respuesta": "Prefiero analizar y buscar el error exacto, la verdad es que me quedo ahí hasta que la máquina agarra porque si no, me desespero.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Ingeniería en Ciencias y Sistemas",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Ingeniería Mecánica",
+            "afinidad": 80
+          },
+          {
+            "carrera": "Licenciatura en Administración de Sistemas Informáticos",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Técnico Universitario en Desarrollo de Software",
+            "afinidad": 70
+          },
+          {
+            "carrera": "Ingeniería Mecánica Industrial",
+            "afinidad": 65
+          }
+        ]
+      },
+      {
+        "dimension": "valores",
+        "tipo": "opcion",
+        "pregunta": "Kevin, se nota que eres de los que no tira la toalla hasta encontrar el fallo exacto, lo cual es una gran ventaja. Cuéntame, cuando estás metido en un proyecto, ¿qué te hace sentir más **satisfecho** al terminar: ver que tu trabajo **funciona perfectamente** y sin errores, o saber que lograste **crear algo nuevo** y original que antes no existía?",
+        "opciones": [
+          "Que todo funcione perfecto y sin fallos",
+          "Haber creado algo nuevo y original"
+        ],
+        "respuesta": "Que todo funcione perfecto y sin fallos, no hay nada mejor que ver que la compu quedó al centavo.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Ingeniería en Ciencias y Sistemas",
+            "afinidad": 92
+          },
+          {
+            "carrera": "Ingeniería Mecánica",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Técnico Universitario en Desarrollo de Software",
+            "afinidad": 80
+          },
+          {
+            "carrera": "Ingeniería Mecánica Industrial",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+            "afinidad": 70
+          }
+        ]
+      },
+      {
+        "dimension": "habilidades",
+        "tipo": "opcion",
+        "pregunta": "Kevin, se nota que eres un perfeccionista cuando se trata de que las cosas queden al centavo. Ahora, cuéntame sobre tus **habilidades**: si tuvieras que elegir entre dos retos, ¿qué te sale mejor: **diseñar un plano** o esquema detallado de cómo debería funcionar algo, o **armar y configurar** físicamente los componentes para que todo arranque?",
+        "opciones": [
+          "Diseñar planos y esquemas detallados",
+          "Armar y configurar componentes físicos"
+        ],
+        "respuesta": "Fijo prefiero armar y configurar componentes físicos, me cuadra más sentir los cables y ver cómo arranca todo de una vez.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Ingeniería en Ciencias y Sistemas",
+            "afinidad": 92
+          },
+          {
+            "carrera": "Ingeniería Mecánica",
+            "afinidad": 88
+          },
+          {
+            "carrera": "Técnico Universitario en Desarrollo de Software",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Ingeniería Mecánica Industrial",
+            "afinidad": 80
+          },
+          {
+            "carrera": "Ingeniería Civil",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+            "afinidad": 70
+          }
+        ]
+      },
+      {
+        "dimension": "estilo_cognitivo",
+        "tipo": "opcion",
+        "pregunta": "Kevin, ya me quedó claro que eres un crack armando y configurando cosas con tus manos. Ahora, para entender mejor cómo piensas: cuando te enfrentas a un problema nuevo, ¿te gusta más **seguir una guía** o pasos ya probados para no fallar, o prefieres **experimentar por tu cuenta** y descubrir nuevas formas de resolverlo aunque te tome más tiempo?",
+        "opciones": [
+          "Seguir una guía o pasos probados",
+          "Experimentar por mi cuenta"
+        ],
+        "respuesta": "Me gusta experimentar por mi cuenta, la verdad es que aprendo más así aunque me tome un cacho más de tiempo probar mis propias mañas.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Ingeniería Mecánica",
+            "afinidad": 90
+          },
+          {
+            "carrera": "Ingeniería Mecánica Industrial",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Técnico Universitario en Desarrollo de Software",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Ingeniería Civil",
+            "afinidad": 70
+          }
+        ]
+      },
+      {
+        "terminado": true,
+        "ranking": [
+          {
+            "carrera": "Ingeniería en Electrónica",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Ingeniería Mecánica",
+            "afinidad": 72
+          },
+          {
+            "carrera": "Técnico en Desarrollo de Software",
+            "afinidad": 65
+          },
+          {
+            "carrera": "Ingeniería Mecánica Industrial",
+            "afinidad": 58
+          }
+        ]
+      }
+    ],
+    "A": {
+      "top3": [
+        "Ingeniería en Electrónica",
+        "Ingeniería Mecánica Industrial",
+        "Ingeniería en Ciencias y Sistemas"
+      ],
+      "top1": "Ingeniería en Electrónica",
+      "acierta": false,
+      "repite_lo_que_dejo": null,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy consistentes y apuntan claramente a un perfil técnico, práctico y analítico.",
+      "descripcion_top1": "Esta carrera combina a la perfección tu pasión por la tecnología, el hardware y el trabajo manual de precisión. Aprenderás a diseñar, armar y reparar sistemas electrónicos, permitiéndote estar en tu propio espacio de trabajo resolviendo problemas técnicos complejos.",
+      "razones_top1": [
+        "Te encanta armar y configurar componentes físicos",
+        "Prefieres experimentar por tu cuenta para aprender",
+        "Disfrutas analizar hasta encontrar el error exacto",
+        "Te motiva que todo funcione perfecto y sin fallos"
+      ]
+    },
+    "B": {
+      "top3": [
+        "Ingeniería en Electrónica",
+        "Ingeniería Mecánica Industrial",
+        "Técnico Universitario en Desarrollo de Software"
+      ],
+      "top1": "Ingeniería en Electrónica",
+      "acierta": false,
+      "repite_lo_que_dejo": null,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy claras y consistentes, lo que permite identificar con seguridad tu inclinación hacia la ingeniería técnica y la tecnología.",
+      "descripcion_top1": "Esta carrera combina a la perfección tu pasión por armar y configurar componentes físicos con el análisis lógico profundo. Te permite entender cómo funcionan los sistemas electrónicos desde adentro y aplicar tus propias mañas para resolver problemas técnicos complejos.",
+      "razones_top1": [
+        "Te encanta armar y configurar componentes físicos",
+        "Prefieres experimentar por tu cuenta para aprender",
+        "Disfrutas analizar hasta encontrar el error exacto",
+        "Tu meta es que todo funcione perfecto y sin fallos"
+      ]
+    },
+    "tokens": {
+      "chat": 32367,
+      "recomendar_A": 27481,
+      "recomendar_B": 27807
+    }
+  },
+  {
+    "perfil": "Melany",
+    "edad": "17",
+    "grado": "Estoy en diversificado o bachillerato",
+    "gusto": "Más o menos",
+    "area_esperada": "administración/contaduría",
+    "respuestas": {
+      "nombre": "Melany",
+      "departamento": "Quetzaltenango",
+      "edad": "17",
+      "grado": "Estoy en diversificado o bachillerato",
+      "gusto_grado": "Más o menos",
+      "impacto": "Defender la justicia y resolver conflictos porque quiero estudiar leyes, aunque la verdad organizar negocios y los números se me da rebien en la tienda.",
+      "estilo": "Analizando datos, ideas y lógica. La verdad es que me encanta que todo me cuadre en el inventario y no soporto cuando las cosas no están en orden.",
+      "entorno": "En una oficina o empresa, porque ahí es donde más me luciría ordenando todo y viendo que las cuentas no fallen.",
+      "gustos": "Matemáticas y números, Negocios, dinero y emprender, y también leyes porque quiero ser abogada. La verdad es que me encanta que todo lo que tenga que ver con plata y cuadrar cuentas me sale de una vez.",
+      "Melany, me encanta ver que tienes esa chispa para los negocios y que te gusta que todo cuadre en el inventario. Ahora, cuéntame sobre tu forma de ser: cuando tienes que trabajar en un proyecto importante, ¿prefieres **tomar las riendas** y liderar al grupo para que todo salga perfecto, o te sientes más cómoda trabajando de forma **independiente** para asegurar que cada detalle quede exactamente como tú quieres?": "Prefiero trabajar sola y concentrada, así me aseguro de que nadie haga las cosas a medias y que todo me cuadre bien desde el principio.",
+      "Melany, me queda claro que prefieres trabajar a tu ritmo para que todo quede perfecto, sin distracciones. Ahora, cuéntame sobre tus **habilidades** en el día a día: cuando te enfrentas a un problema nuevo, ¿qué se te da mejor, **investigar a fondo** cada detalle para encontrar la verdad o **aplicar reglas y normas** que ya existen para organizar y resolver la situación?": "Prefiero aplicar reglas y normas para organizar, porque me da paz saber cómo van las cosas y que todo cuadre de una vez sin estar dando tantas vueltas.",
+      "Melany, me encanta que seas tan organizada y que prefieras seguir las reglas para que todo fluya. Ahora, pensando en tu futuro, imagina que tienes que tomar una decisión importante: ¿qué te hace sentir más **satisfecha** al terminar el día, saber que ayudaste a que todo sea **transparente y correcto** según la ley, o sentir que lograste que un proyecto sea **más eficiente y rentable** gracias a tu orden?": "Que todo sea transparente y justo, porque al final del día quiero ser abogada y que todo esté bien legalmente, aunque fijo me encantaría que también fuera rentable.",
+      "Melany, me gusta mucho ver cómo buscas ese equilibrio entre la justicia y la rentabilidad. Ahora, cuéntame sobre tu forma de pensar: cuando tienes un problema complejo frente a ti, ¿prefieres **desarmarlo en partes pequeñas** para entender cómo funciona cada pieza, o te gusta más **mirar el panorama completo** para ver cómo se conectan todas las áreas y tomar una decisión que afecte a todo el sistema?": "Prefiero desarmar el problema en partes pequeñas, porque así voy chequeando que cada cosa cuadre y no se me escapa ni un centavo."
+    },
+    "log": [
+      {
+        "fija": "impacto",
+        "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+        "respuesta": "Defender la justicia y resolver conflictos porque quiero estudiar leyes, aunque la verdad organizar negocios y los números se me da rebien en la tienda."
+      },
+      {
+        "fija": "estilo",
+        "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+        "respuesta": "Analizando datos, ideas y lógica. La verdad es que me encanta que todo me cuadre en el inventario y no soporto cuando las cosas no están en orden."
+      },
+      {
+        "fija": "entorno",
+        "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+        "respuesta": "En una oficina o empresa, porque ahí es donde más me luciría ordenando todo y viendo que las cuentas no fallen."
+      },
+      {
+        "fija": "gustos",
+        "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+        "respuesta": "Matemáticas y números, Negocios, dinero y emprender, y también leyes porque quiero ser abogada. La verdad es que me encanta que todo lo que tenga que ver con plata y cuadrar cuentas me sale de una vez."
+      },
+      {
+        "dimension": "personalidad",
+        "tipo": "opcion",
+        "pregunta": "Melany, me encanta ver que tienes esa chispa para los negocios y que te gusta que todo cuadre en el inventario. Ahora, cuéntame sobre tu forma de ser: cuando tienes que trabajar en un proyecto importante, ¿prefieres **tomar las riendas** y liderar al grupo para que todo salga perfecto, o te sientes más cómoda trabajando de forma **independiente** para asegurar que cada detalle quede exactamente como tú quieres?",
+        "opciones": [
+          "Prefiero liderar y coordinar a los demás",
+          "Prefiero trabajar sola y concentrada"
+        ],
+        "respuesta": "Prefiero trabajar sola y concentrada, así me aseguro de que nadie haga las cosas a medias y que todo me cuadre bien desde el principio.",
+        "alerta_contradiccion": "Noto que te apasionan tanto los negocios como la justicia, y aunque ambas requieren orden, a veces tienen ritmos distintos. Quiero entender mejor cómo te gusta trabajar.",
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 90
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Ciencias Jurídicas y Sociales",
+            "afinidad": 70
+          },
+          {
+            "carrera": "Ingeniería en Administración de Tierras",
+            "afinidad": 50
+          }
+        ]
+      },
+      {
+        "dimension": "habilidades",
+        "tipo": "opcion",
+        "pregunta": "Melany, me queda claro que prefieres trabajar a tu ritmo para que todo quede perfecto, sin distracciones. Ahora, cuéntame sobre tus **habilidades** en el día a día: cuando te enfrentas a un problema nuevo, ¿qué se te da mejor, **investigar a fondo** cada detalle para encontrar la verdad o **aplicar reglas y normas** que ya existen para organizar y resolver la situación?",
+        "opciones": [
+          "Investigar a fondo para descubrir la verdad",
+          "Aplicar reglas y normas para organizar"
+        ],
+        "respuesta": "Prefiero aplicar reglas y normas para organizar, porque me da paz saber cómo van las cosas y que todo cuadre de una vez sin estar dando tantas vueltas.",
+        "alerta_contradiccion": "Noto que te apasiona la justicia pero también te encanta el orden estricto de los números; quiero entender mejor si prefieres la lógica de las leyes o la lógica de las finanzas.",
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 90
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Ciencias Jurídicas y Sociales",
+            "afinidad": 65
+          },
+          {
+            "carrera": "Técnico en Criminología y Criminalística",
+            "afinidad": 60
+          },
+          {
+            "carrera": "Ciencias de la Comunicación Social",
+            "afinidad": 40
+          }
+        ]
+      },
+      {
+        "dimension": "valores",
+        "tipo": "opcion",
+        "pregunta": "Melany, me encanta que seas tan organizada y que prefieras seguir las reglas para que todo fluya. Ahora, pensando en tu futuro, imagina que tienes que tomar una decisión importante: ¿qué te hace sentir más **satisfecha** al terminar el día, saber que ayudaste a que todo sea **transparente y correcto** según la ley, o sentir que lograste que un proyecto sea **más eficiente y rentable** gracias a tu orden?",
+        "opciones": [
+          "Que todo sea transparente y justo",
+          "Que todo sea eficiente y rentable"
+        ],
+        "respuesta": "Que todo sea transparente y justo, porque al final del día quiero ser abogada y que todo esté bien legalmente, aunque fijo me encantaría que también fuera rentable.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Ciencias Jurídicas y Sociales",
+            "afinidad": 70
+          },
+          {
+            "carrera": "Técnico en Criminología",
+            "afinidad": 60
+          }
+        ]
+      },
+      {
+        "dimension": "estilo_cognitivo",
+        "tipo": "opcion",
+        "pregunta": "Melany, me gusta mucho ver cómo buscas ese equilibrio entre la justicia y la rentabilidad. Ahora, cuéntame sobre tu forma de pensar: cuando tienes un problema complejo frente a ti, ¿prefieres **desarmarlo en partes pequeñas** para entender cómo funciona cada pieza, o te gusta más **mirar el panorama completo** para ver cómo se conectan todas las áreas y tomar una decisión que afecte a todo el sistema?",
+        "opciones": [
+          "Desarmar el problema en partes pequeñas y detalladas",
+          "Mirar el panorama completo y cómo se conecta todo"
+        ],
+        "respuesta": "Prefiero desarmar el problema en partes pequeñas, porque así voy chequeando que cada cosa cuadre y no se me escapa ni un centavo.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 92
+          },
+          {
+            "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+            "afinidad": 88
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Técnico Universitario en Criminología y Criminalística",
+            "afinidad": 60
+          }
+        ]
+      },
+      {
+        "terminado": true,
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+            "afinidad": 70
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 65
+          },
+          {
+            "carrera": "Técnico Universitario en Criminología y Criminalística",
+            "afinidad": 50
+          }
+        ]
+      }
+    ],
+    "A": {
+      "top3": [
+        "Contaduría Pública y Auditoría",
+        "Licenciatura en Ciencias Jurídicas y Sociales",
+        "Administración de Empresas"
+      ],
+      "top1": "Contaduría Pública y Auditoría",
+      "acierta": true,
+      "repite_lo_que_dejo": null,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy consistentes y apuntan claramente a tu gusto por el orden, los números y la justicia.",
+      "descripcion_top1": "Esta carrera es perfecta para ti porque combina tu amor por los números con la necesidad de orden y transparencia. Te permite ser la detective financiera que asegura que todo esté en regla y bajo la ley, algo que te da mucha paz.",
+      "razones_top1": [
+        "Te encanta que los números cuadren al centavo",
+        "Disfrutas seguir reglas y normas estrictas",
+        "Prefieres trabajar sola y concentrada",
+        "Te motiva la transparencia y la justicia financiera"
+      ]
+    },
+    "B": {
+      "top3": [
+        "Contaduría Pública y Auditoría",
+        "Licenciatura en Ciencias Jurídicas y Sociales",
+        "Administración de Empresas"
+      ],
+      "top1": "Contaduría Pública y Auditoría",
+      "acierta": true,
+      "repite_lo_que_dejo": null,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy consistentes: tienes una inclinación clara hacia el orden, la legalidad y el manejo preciso de números.",
+      "descripcion_top1": "Esta carrera es perfecta para ti porque combina tu amor por los números y el orden con la necesidad de transparencia y legalidad. Te permite trabajar con precisión técnica para asegurar que cada centavo esté donde debe estar, cumpliendo con las normas y leyes vigentes.",
+      "razones_top1": [
+        "Te encanta que todo cuadre en el inventario",
+        "Disfrutas aplicar reglas y normas para organizar",
+        "Tienes gran facilidad para los números y las cuentas",
+        "Buscas transparencia y rectitud en tu trabajo"
+      ]
+    },
+    "tokens": {
+      "chat": 22938,
+      "recomendar_A": 27350,
+      "recomendar_B": 27672
+    }
+  },
+  {
+    "perfil": "Ana",
+    "edad": "23",
+    "grado": "Empecé una carrera universitaria pero la dejé",
+    "gusto": "No, nada",
+    "area_esperada": "educación/humanidades",
+    "respuestas": {
+      "nombre": "Ana",
+      "departamento": "Quetzaltenango",
+      "edad": "23",
+      "grado": "Empecé una carrera universitaria pero la dejé",
+      "gusto_grado": "No, nada",
+      "impacto": "Ayudar, enseñar o cuidar a las personas. Siento que mi onda es compartir lo que sé, me llena un montón ver cuando los patojos por fin entienden algo que les costaba.",
+      "estilo": "Con personas, fijo. Me encanta el trato directo con los patojos cuando les enseño, eso es lo mío.",
+      "entorno": "En un aula o centro educativo y con la comunidad, ayudando a personas. Es que ahí es donde de verdad siento que hago algo útil y me la paso bien.",
+      "gustos": "Fijo me quedo con enseñar y educar, y también con salud y cuidar personas. Es que con los patojos me siento en mi mero punto, ahí es donde sí me nace meterle ganas.",
+      "Ana, me encanta ver que tienes tan claro que lo tuyo es enseñar y cuidar a otros, eso es un don genial. Ahora, cuéntame algo sobre tu **forma de ser**: cuando tienes que resolver un problema o aprender algo nuevo, ¿prefieres seguir **pasos ordenados** y reglas claras, o te gusta más **improvisar** y buscar soluciones creativas aunque no haya un manual?": "La verdad prefiero pasos ordenados, me ayuda a no hacerme bolas y me siento más tranquila. Como trabajo en el banco, el orden me sirve un montón para que todo me cuadre bien.",
+      "Qué bueno que el orden te ayuda a sentirte tranquila en el banco, Ana. Ahora, pensando en cómo te gusta **relacionarte con los demás**, cuando alguien viene a pedirte ayuda o consejo, ¿qué te sale más natural: **escuchar con mucha paciencia** y tratar de entender sus sentimientos, o prefieres **darles soluciones prácticas** y pasos concretos para que resuelvan su problema rápido?": "Escuchar con mucha paciencia y tratar de entender lo que sienten, porque al final siento que eso es lo que más necesitan los patojos cuando vienen conmigo.",
+      "Ana, me emociona ver que tienes esa paciencia tan especial para escuchar a los patojos y entender lo que sienten. Ahora, pensando en lo que sabes hacer, cuéntame: ¿qué te hace sentir más realizada, **diseñar un plan** o una actividad paso a paso para que alguien aprenda algo nuevo, o prefieres **atender directamente** a una persona que necesita ayuda con un malestar físico o una necesidad de salud?": "Diseñar planes para que otros aprendan. Me encanta armar cómo les voy a enseñar las cosas para que no se me pierdan, es lo que más me llena.",
+      "Ana, me encanta esa pasión que tienes por preparar tus clases y ver cómo los patojos aprenden gracias a tu esfuerzo. Ahora, cuéntame algo importante sobre lo que te mueve: cuando eliges un camino, ¿qué te hace sentir más satisfecha al final del día: **sentir que aportas algo valioso** para que la sociedad sea más justa y equitativa, o **ver que tu trabajo diario** ayuda a que una institución o grupo funcione de manera impecable y organizada?": "Aportar a una sociedad más justa y equitativa. Al final eso es lo que de verdad importa, que uno pueda cambiar aunque sea un poquito la vida de los demás."
+    },
+    "log": [
+      {
+        "fija": "impacto",
+        "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+        "respuesta": "Ayudar, enseñar o cuidar a las personas. Siento que mi onda es compartir lo que sé, me llena un montón ver cuando los patojos por fin entienden algo que les costaba."
+      },
+      {
+        "fija": "estilo",
+        "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+        "respuesta": "Con personas, fijo. Me encanta el trato directo con los patojos cuando les enseño, eso es lo mío."
+      },
+      {
+        "fija": "entorno",
+        "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+        "respuesta": "En un aula o centro educativo y con la comunidad, ayudando a personas. Es que ahí es donde de verdad siento que hago algo útil y me la paso bien."
+      },
+      {
+        "fija": "gustos",
+        "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+        "respuesta": "Fijo me quedo con enseñar y educar, y también con salud y cuidar personas. Es que con los patojos me siento en mi mero punto, ahí es donde sí me nace meterle ganas."
+      },
+      {
+        "dimension": "estilo_cognitivo",
+        "tipo": "opcion",
+        "pregunta": "Ana, me encanta ver que tienes tan claro que lo tuyo es enseñar y cuidar a otros, eso es un don genial. Ahora, cuéntame algo sobre tu **forma de ser**: cuando tienes que resolver un problema o aprender algo nuevo, ¿prefieres seguir **pasos ordenados** y reglas claras, o te gusta más **improvisar** y buscar soluciones creativas aunque no haya un manual?",
+        "opciones": [
+          "Prefiero seguir pasos ordenados y tener un plan claro",
+          "Me gusta más improvisar y buscar soluciones creativas"
+        ],
+        "respuesta": "La verdad prefiero pasos ordenados, me ayuda a no hacerme bolas y me siento más tranquila. Como trabajo en el banco, el orden me sirve un montón para que todo me cuadre bien.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Profesorado en Pedagogía con Especialización",
+            "afinidad": 90
+          },
+          {
+            "carrera": "Licenciatura en Ciencias de la Educación",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Licenciatura en Nutrición",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Fisioterapia",
+            "afinidad": 70
+          },
+          {
+            "carrera": "Trabajo Social",
+            "afinidad": 65
+          }
+        ]
+      },
+      {
+        "dimension": "personalidad",
+        "tipo": "opcion",
+        "pregunta": "Qué bueno que el orden te ayuda a sentirte tranquila en el banco, Ana. Ahora, pensando en cómo te gusta **relacionarte con los demás**, cuando alguien viene a pedirte ayuda o consejo, ¿qué te sale más natural: **escuchar con mucha paciencia** y tratar de entender sus sentimientos, o prefieres **darles soluciones prácticas** y pasos concretos para que resuelvan su problema rápido?",
+        "opciones": [
+          "Escuchar con paciencia y entender lo que sienten",
+          "Dar soluciones prácticas y pasos concretos"
+        ],
+        "respuesta": "Escuchar con mucha paciencia y tratar de entender lo que sienten, porque al final siento que eso es lo que más necesitan los patojos cuando vienen conmigo.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Licenciatura en Ciencias de la Educación",
+            "afinidad": 90
+          },
+          {
+            "carrera": "PEM en Pedagogía",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Psicología",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Fisioterapia",
+            "afinidad": 70
+          },
+          {
+            "carrera": "Licenciatura en Nutrición",
+            "afinidad": 65
+          }
+        ]
+      },
+      {
+        "dimension": "habilidades",
+        "tipo": "opcion",
+        "pregunta": "Ana, me emociona ver que tienes esa paciencia tan especial para escuchar a los patojos y entender lo que sienten. Ahora, pensando en lo que sabes hacer, cuéntame: ¿qué te hace sentir más realizada, **diseñar un plan** o una actividad paso a paso para que alguien aprenda algo nuevo, o prefieres **atender directamente** a una persona que necesita ayuda con un malestar físico o una necesidad de salud?",
+        "opciones": [
+          "Diseñar planes para que otros aprendan",
+          "Atender necesidades de salud y bienestar"
+        ],
+        "respuesta": "Diseñar planes para que otros aprendan. Me encanta armar cómo les voy a enseñar las cosas para que no se me pierdan, es lo que más me llena.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "PEM en Pedagogía y Psicología",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Licenciatura en Ciencias de la Educación",
+            "afinidad": 90
+          },
+          {
+            "carrera": "Licenciatura en Nutrición",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Fisioterapia",
+            "afinidad": 70
+          }
+        ]
+      },
+      {
+        "dimension": "valores",
+        "tipo": "opcion",
+        "pregunta": "Ana, me encanta esa pasión que tienes por preparar tus clases y ver cómo los patojos aprenden gracias a tu esfuerzo. Ahora, cuéntame algo importante sobre lo que te mueve: cuando eliges un camino, ¿qué te hace sentir más satisfecha al final del día: **sentir que aportas algo valioso** para que la sociedad sea más justa y equitativa, o **ver que tu trabajo diario** ayuda a que una institución o grupo funcione de manera impecable y organizada?",
+        "opciones": [
+          "Aportar a una sociedad más justa y equitativa",
+          "Ver que las cosas funcionan de forma impecable y organizada"
+        ],
+        "respuesta": "Aportar a una sociedad más justa y equitativa. Al final eso es lo que de verdad importa, que uno pueda cambiar aunque sea un poquito la vida de los demás.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "PEM en Pedagogía y Psicología",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Licenciatura en Ciencias de la Educación",
+            "afinidad": 92
+          },
+          {
+            "carrera": "PEM en Comunicación y Lenguaje",
+            "afinidad": 85
+          },
+          {
+            "carrera": "PEM en Pedagogía y Técnico en Administración Educativa",
+            "afinidad": 80
+          }
+        ]
+      },
+      {
+        "terminado": true,
+        "ranking": [
+          {
+            "carrera": "Licenciatura en Ciencias de la Educación",
+            "afinidad": 95
+          },
+          {
+            "carrera": "PEM en Pedagogía y Psicología",
+            "afinidad": 88
+          },
+          {
+            "carrera": "PEM en Comunicación y Lenguaje",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Trabajo Social",
+            "afinidad": 70
+          },
+          {
+            "carrera": "PEM en Pedagogía y Técnico en Administración Educativa",
+            "afinidad": 65
+          }
+        ]
+      }
+    ],
+    "A": {
+      "top3": [
+        "Profesorado en Pedagogía con Especialización",
+        "Psicología Educativa",
+        "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural"
+      ],
+      "top1": "Profesorado en Pedagogía con Especialización",
+      "acierta": true,
+      "repite_lo_que_dejo": false,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy consistentes al señalar el área educativa y social como tu lugar ideal.",
+      "descripcion_top1": "Esta carrera es perfecta para ti porque combina tu amor por la enseñanza con una base sólida y ordenada. Te permite profesionalizar tu vocación docente, dándote las herramientas para diseñar planes de aprendizaje efectivos mientras impactas positivamente en la sociedad.",
+      "razones_top1": [
+        "Te apasiona enseñar y ver aprender a los patojos",
+        "Prefieres seguir pasos ordenados para planificar",
+        "Buscas aportar a una sociedad más justa",
+        "Disfrutas diseñar actividades de aprendizaje"
+      ]
+    },
+    "B": {
+      "top3": [
+        "Profesorado en Educación Primaria",
+        "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+        "Psicología Educativa"
+      ],
+      "top1": "Profesorado en Educación Primaria",
+      "acierta": true,
+      "repite_lo_que_dejo": false,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy consistentes al señalar tu vocación docente, tu paciencia y tu deseo de generar un impacto social positivo.",
+      "descripcion_top1": "Esta carrera es perfecta para quienes tienen vocación de servicio y disfrutan acompañar el desarrollo integral de los niños en sus años más importantes. Te permite diseñar experiencias de aprendizaje lúdicas y significativas, creando un ambiente seguro donde los pequeños pueden crecer y entender el mundo.",
+      "razones_top1": [
+        "Te apasiona enseñar a los patojos",
+        "Disfrutas diseñar planes de aprendizaje",
+        "Tienes mucha paciencia para escuchar",
+        "Buscas un impacto social positivo"
+      ]
+    },
+    "tokens": {
+      "chat": 34719,
+      "recomendar_A": 27603,
+      "recomendar_B": 27885
+    }
+  },
+  {
+    "perfil": "Sergio",
+    "edad": "26",
+    "grado": "Empecé una carrera universitaria pero la dejé",
+    "gusto": "No, nada",
+    "area_esperada": "gastronomía/turismo",
+    "respuestas": {
+      "nombre": "Sergio",
+      "departamento": "Quetzaltenango",
+      "edad": "26",
+      "grado": "Empecé una carrera universitaria pero la dejé",
+      "gusto_grado": "No, nada",
+      "impacto": "Me gustaría liderar y organizar mi propio negocio de comida, porque me cuadra ver cómo todo fluye en la cocina.",
+      "estilo": "De forma práctica, con las manos y al aire libre y en movimiento. Es que a mí me gusta estar en la pura acción, no me veo encerrado en una oficina aburrida.",
+      "entorno": "La verdad en ningún lugar de esos, yo me imagino en mi propio restaurante. Me veo ahí dándole con todo al servicio y dirigiendo mi propia cocina, que es lo que realmente me cuadra.",
+      "gustos": "Gastronomía, turismo y hotelería y también Negocios, dinero y emprender. Es que me encanta combinar sabores y ver cómo saco adelante el negocio, eso es lo mío.",
+      "Sergio, me queda súper claro que lo tuyo es la acción, el movimiento y ese sueño de tener tu propio restaurante. Ahora, cuéntame un poco sobre tu **forma de trabajar** cuando hay mucha presión: ¿prefieres ser tú quien toma todas las decisiones importantes y guía a los demás, o te sientes más cómodo siendo parte de un equipo donde cada quien tiene una tarea específica para que todo salga bien?": "Prefiero tomar las decisiones y dirigir al equipo. En la cocina no podés andar dudando, así que me gusta mandar para que el servicio salga nítido y a tiempo.",
+      "Sergio, me encanta esa seguridad que tienes para liderar y que tengas tan claro que quieres que el servicio salga nítido. Ahora, pensando en tu día a día en esa cocina que imaginas, cuéntame: cuando se trata de aprender cosas nuevas, ¿qué te resulta más sencillo: **seguir una receta o técnica** al pie de la letra para que todo sea perfecto, o te gusta más **experimentar y crear** tus propias combinaciones aunque a veces sea un poco arriesgado?": "Experimentar y crear mis propias mezclas. Es que me gusta probar sabores nuevos para que mi restaurante sea único y no sea igual a todos los demás.",
+      "Sergio, me encanta esa chispa creativa que tienes para inventar sabores nuevos y hacer que tu restaurante destaque. Ahora, cuéntame algo: cuando tienes un problema difícil en el trabajo, ¿prefieres **analizar los datos** y los números para ver qué está pasando exactamente, o te guías más por tu **intuición y experiencia** para resolverlo rápido y seguir adelante?": "Guiarme por mi intuición y experiencia. Uno ya conoce cómo se mueve la cocina y no tengo tiempo de estar sentado viendo números, hay que resolver en el momento.",
+      "Sergio, admiro mucho esa capacidad tuya para confiar en tu instinto y resolver todo al momento en la cocina. Ahora, pensando en el éxito de tu futuro negocio, cuéntame: ¿qué es lo que más te hace sentir **orgulloso** al final de un día de trabajo: saber que lograste una **ganancia económica** importante, o sentir que tus clientes se fueron felices y satisfechos con la **experiencia** que les diste?": "Ver a los clientes felices y satisfechos. Ver cómo la gente sale feliz de mi restaurante es lo que me llena, al final eso es lo que hace que regresen y el negocio camine solo."
+    },
+    "log": [
+      {
+        "fija": "impacto",
+        "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+        "respuesta": "Me gustaría liderar y organizar mi propio negocio de comida, porque me cuadra ver cómo todo fluye en la cocina."
+      },
+      {
+        "fija": "estilo",
+        "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+        "respuesta": "De forma práctica, con las manos y al aire libre y en movimiento. Es que a mí me gusta estar en la pura acción, no me veo encerrado en una oficina aburrida."
+      },
+      {
+        "fija": "entorno",
+        "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+        "respuesta": "La verdad en ningún lugar de esos, yo me imagino en mi propio restaurante. Me veo ahí dándole con todo al servicio y dirigiendo mi propia cocina, que es lo que realmente me cuadra."
+      },
+      {
+        "fija": "gustos",
+        "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+        "respuesta": "Gastronomía, turismo y hotelería y también Negocios, dinero y emprender. Es que me encanta combinar sabores y ver cómo saco adelante el negocio, eso es lo mío."
+      },
+      {
+        "dimension": "personalidad",
+        "tipo": "opcion",
+        "pregunta": "Sergio, me queda súper claro que lo tuyo es la acción, el movimiento y ese sueño de tener tu propio restaurante. Ahora, cuéntame un poco sobre tu **forma de trabajar** cuando hay mucha presión: ¿prefieres ser tú quien toma todas las decisiones importantes y guía a los demás, o te sientes más cómodo siendo parte de un equipo donde cada quien tiene una tarea específica para que todo salga bien?",
+        "opciones": [
+          "Prefiero tomar las decisiones y dirigir al equipo",
+          "Prefiero colaborar en equipo con tareas claras"
+        ],
+        "respuesta": "Prefiero tomar las decisiones y dirigir al equipo. En la cocina no podés andar dudando, así que me gusta mandar para que el servicio salga nítido y a tiempo.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Chef Profesional e Internacional",
+            "afinidad": 90
+          },
+          {
+            "carrera": "Artes Culinarias y Negocios Gastronómicos",
+            "afinidad": 88
+          },
+          {
+            "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+            "afinidad": 40
+          }
+        ]
+      },
+      {
+        "dimension": "habilidades",
+        "tipo": "opcion",
+        "pregunta": "Sergio, me encanta esa seguridad que tienes para liderar y que tengas tan claro que quieres que el servicio salga nítido. Ahora, pensando en tu día a día en esa cocina que imaginas, cuéntame: cuando se trata de aprender cosas nuevas, ¿qué te resulta más sencillo: **seguir una receta o técnica** al pie de la letra para que todo sea perfecto, o te gusta más **experimentar y crear** tus propias combinaciones aunque a veces sea un poco arriesgado?",
+        "opciones": [
+          "Seguir técnicas y recetas con precisión",
+          "Experimentar y crear mis propias mezclas"
+        ],
+        "respuesta": "Experimentar y crear mis propias mezclas. Es que me gusta probar sabores nuevos para que mi restaurante sea único y no sea igual a todos los demás.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Chef Profesional e Internacional",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Artes Culinarias y Negocios Gastronómicos",
+            "afinidad": 92
+          },
+          {
+            "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Ingeniería en Agronomía",
+            "afinidad": 40
+          }
+        ]
+      },
+      {
+        "dimension": "estilo_cognitivo",
+        "tipo": "opcion",
+        "pregunta": "Sergio, me encanta esa chispa creativa que tienes para inventar sabores nuevos y hacer que tu restaurante destaque. Ahora, cuéntame algo: cuando tienes un problema difícil en el trabajo, ¿prefieres **analizar los datos** y los números para ver qué está pasando exactamente, o te guías más por tu **intuición y experiencia** para resolverlo rápido y seguir adelante?",
+        "opciones": [
+          "Analizar los números y datos para decidir",
+          "Guiarme por mi intuición y experiencia"
+        ],
+        "respuesta": "Guiarme por mi intuición y experiencia. Uno ya conoce cómo se mueve la cocina y no tengo tiempo de estar sentado viendo números, hay que resolver en el momento.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Chef Profesional e Internacional",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Artes Culinarias y Negocios Gastronómicos",
+            "afinidad": 92
+          },
+          {
+            "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Ingeniería en Agronomía",
+            "afinidad": 40
+          }
+        ]
+      },
+      {
+        "dimension": "valores",
+        "tipo": "opcion",
+        "pregunta": "Sergio, admiro mucho esa capacidad tuya para confiar en tu instinto y resolver todo al momento en la cocina. Ahora, pensando en el éxito de tu futuro negocio, cuéntame: ¿qué es lo que más te hace sentir **orgulloso** al final de un día de trabajo: saber que lograste una **ganancia económica** importante, o sentir que tus clientes se fueron felices y satisfechos con la **experiencia** que les diste?",
+        "opciones": [
+          "Lograr una buena ganancia económica",
+          "Ver a los clientes felices y satisfechos"
+        ],
+        "respuesta": "Ver a los clientes felices y satisfechos. Ver cómo la gente sale feliz de mi restaurante es lo que me llena, al final eso es lo que hace que regresen y el negocio camine solo.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Chef Profesional e Internacional",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Artes Culinarias y Negocios Gastronómicos",
+            "afinidad": 92
+          },
+          {
+            "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+            "afinidad": 75
+          }
+        ]
+      },
+      {
+        "terminado": true,
+        "ranking": [
+          {
+            "carrera": "Artes Culinarias y Negocios Gastronómicos",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Chef Profesional e Internacional",
+            "afinidad": 70
+          },
+          {
+            "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+            "afinidad": 60
+          },
+          {
+            "carrera": "Licenciatura en Administración de Sistemas Informáticos",
+            "afinidad": 20
+          }
+        ]
+      }
+    ],
+    "A": {
+      "top3": [
+        "Artes Culinarias y Negocios Gastronómicos",
+        "Administración de Hotelería, Turismo y Gastronomía",
+        "Chef Profesional e Internacional (Técnico Universitario)"
+      ],
+      "top1": "Artes Culinarias y Negocios Gastronómicos",
+      "acierta": true,
+      "repite_lo_que_dejo": false,
+      "confianza": 95,
+      "confianza_nota": "Tus respuestas son muy consistentes y apuntan claramente hacia el emprendimiento gastronómico y el liderazgo en la cocina.",
+      "descripcion_top1": "Esta carrera combina a la perfección la pasión por la cocina creativa con las herramientas necesarias para gestionar tu propio restaurante. Aprenderás técnicas culinarias avanzadas y cómo administrar un negocio para que sea exitoso y rentable.",
+      "razones_top1": [
+        "Te apasiona la gastronomía y crear sabores únicos",
+        "Quieres liderar tu propio negocio de comida",
+        "Prefieres la acción y el movimiento de una cocina",
+        "Tu prioridad es la satisfacción total de tus clientes"
+      ]
+    },
+    "B": {
+      "top3": [
+        "Artes Culinarias y Negocios Gastronómicos",
+        "Administración de Hotelería, Turismo y Gastronomía",
+        "Administración de Empresas"
+      ],
+      "top1": "Artes Culinarias y Negocios Gastronómicos",
+      "acierta": true,
+      "repite_lo_que_dejo": false,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy consistentes: tienes una vocación clara por la gastronomía, el liderazgo y el emprendimiento práctico.",
+      "descripcion_top1": "Esta carrera combina la maestría en técnicas culinarias con la visión estratégica necesaria para gestionar un negocio propio. Es el camino ideal para quienes desean transformar su pasión por los sabores en una experiencia memorable para el cliente.",
+      "razones_top1": [
+        "Te apasiona crear tus propias mezclas de sabores",
+        "Quieres liderar y dirigir tu propia cocina",
+        "Tu prioridad es la satisfacción total del cliente",
+        "Prefieres la acción y el movimiento sobre una oficina"
+      ]
+    },
+    "tokens": {
+      "chat": 38289,
+      "recomendar_A": 27421,
+      "recomendar_B": 27634
+    }
+  },
+  {
+    "perfil": "Marvin",
+    "edad": "31",
+    "grado": "Terminé el diversificado o bachillerato",
+    "gusto": "Más o menos",
+    "area_esperada": "administración/contaduría",
+    "respuestas": {
+      "nombre": "Marvin",
+      "departamento": "Quetzaltenango",
+      "edad": "31",
+      "grado": "Terminé el diversificado o bachillerato",
+      "gusto_grado": "Más o menos",
+      "impacto": "Liderar, organizar negocios o usar tecnología y números. Me gusta cuadrar cuentas y dejar todo ordenadito en los negocios, ahí es donde mejor me muevo.",
+      "estilo": "Analizando datos, ideas y lógica. Es lo que me gusta porque cuadrar cuentas y organizar negocios es lo mío, ahí sí me hallo bien.",
+      "entorno": "En una oficina o empresa, porque ahí es donde llevo las cuentas de los negocios de mi familia y me siento tranquilo trabajando.",
+      "gustos": "Matemáticas y números, y Negocios, dinero y emprender. Es lo que siempre he hecho con los negocios de mi familia y donde me siento más capaz.",
+      "Marvin, me queda clarísimo que los números y los negocios son tu fuerte. Ahora, cuéntame un poco sobre tu forma de ser: cuando surge un problema inesperado en el negocio familiar, ¿prefieres **tomar el control** y decidir rápido qué hacer, o te sientes más cómodo **analizando los detalles** con calma para encontrar el error exacto antes de actuar?": "Prefiero analizar los detalles con calma, así no meto la pata con los negocios porque a veces uno se confunde por andar a la carrera.",
+      "Me gusta mucho que seas tan precavido con los negocios de tu familia, prefieres analizar todo bien antes de decidir. Ahora, cuéntame sobre tus habilidades: cuando tienes que organizar la información de un negocio, ¿qué se te da mejor? ¿Te sientes más hábil **creando sistemas** para que todo esté ordenado y automatizado, o prefieres **revisar minuciosamente** cada dato para asegurarte de que no haya ni un solo error contable?": "Prefiero revisar cada detalle para que todo cuadre perfecto, porque con la tecnología nueva me hago bolas y prefiero irme a lo seguro.",
+      "Marvin, me queda muy claro que eres una persona detallista y que prefieres irte a lo seguro para que todo cuadre. Pensando en tu futuro, ¿qué es lo que más te motiva a la hora de trabajar: sentir que tu labor ayuda a que una empresa sea **totalmente transparente y honesta** ante la ley, o prefieres sentir que tu trabajo ayuda a que el negocio sea **más rentable y exitoso** cada día?": "Que el negocio crezca y sea más rentable, porque al final del día eso es lo que ayuda a que los negocios de mi familia salgan adelante.",
+      "Marvin, me queda claro que buscas que el negocio crezca y sea rentable, y que te gusta ir a lo seguro revisando cada detalle. Ahora, para entender mejor cómo piensas, imagínate que tienes que resolver un problema complejo en la empresa: ¿prefieres **seguir una guía o norma** ya establecida que te asegure el camino correcto, o prefieres **buscar soluciones nuevas** por tu cuenta, aunque eso signifique probar algo que nadie ha intentado antes?": "Prefiero seguir una guía o norma, mejor no arriesgarse con cosas nuevas que uno no conoce y que pueden salir mal."
+    },
+    "log": [
+      {
+        "fija": "impacto",
+        "pregunta": "¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)",
+        "respuesta": "Liderar, organizar negocios o usar tecnología y números. Me gusta cuadrar cuentas y dejar todo ordenadito en los negocios, ahí es donde mejor me muevo."
+      },
+      {
+        "fija": "estilo",
+        "pregunta": "¿Cómo prefieres trabajar? (puedes elegir varias)",
+        "respuesta": "Analizando datos, ideas y lógica. Es lo que me gusta porque cuadrar cuentas y organizar negocios es lo mío, ahí sí me hallo bien."
+      },
+      {
+        "fija": "entorno",
+        "pregunta": "¿Dónde te imaginas trabajando? (puedes elegir varios)",
+        "respuesta": "En una oficina o empresa, porque ahí es donde llevo las cuentas de los negocios de mi familia y me siento tranquilo trabajando."
+      },
+      {
+        "fija": "gustos",
+        "pregunta": "¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).",
+        "respuesta": "Matemáticas y números, y Negocios, dinero y emprender. Es lo que siempre he hecho con los negocios de mi familia y donde me siento más capaz."
+      },
+      {
+        "dimension": "personalidad",
+        "tipo": "opcion",
+        "pregunta": "Marvin, me queda clarísimo que los números y los negocios son tu fuerte. Ahora, cuéntame un poco sobre tu forma de ser: cuando surge un problema inesperado en el negocio familiar, ¿prefieres **tomar el control** y decidir rápido qué hacer, o te sientes más cómodo **analizando los detalles** con calma para encontrar el error exacto antes de actuar?",
+        "opciones": [
+          "Prefiero tomar el control y decidir rápido.",
+          "Prefiero analizar los detalles con calma."
+        ],
+        "respuesta": "Prefiero analizar los detalles con calma, así no meto la pata con los negocios porque a veces uno se confunde por andar a la carrera.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 90
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 85
+          },
+          {
+            "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Licenciatura en Informática y Administración de Empresas",
+            "afinidad": 70
+          }
+        ]
+      },
+      {
+        "dimension": "habilidades",
+        "tipo": "opcion",
+        "pregunta": "Me gusta mucho que seas tan precavido con los negocios de tu familia, prefieres analizar todo bien antes de decidir. Ahora, cuéntame sobre tus habilidades: cuando tienes que organizar la información de un negocio, ¿qué se te da mejor? ¿Te sientes más hábil **creando sistemas** para que todo esté ordenado y automatizado, o prefieres **revisar minuciosamente** cada dato para asegurarte de que no haya ni un solo error contable?",
+        "opciones": [
+          "Crear sistemas y procesos para organizar todo",
+          "Revisar cada detalle para que todo cuadre perfecto"
+        ],
+        "respuesta": "Prefiero revisar cada detalle para que todo cuadre perfecto, porque con la tecnología nueva me hago bolas y prefiero irme a lo seguro.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 90
+          },
+          {
+            "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 70
+          },
+          {
+            "carrera": "Licenciatura en Informática y Administración de Empresas",
+            "afinidad": 65
+          }
+        ]
+      },
+      {
+        "dimension": "valores",
+        "tipo": "opcion",
+        "pregunta": "Marvin, me queda muy claro que eres una persona detallista y que prefieres irte a lo seguro para que todo cuadre. Pensando en tu futuro, ¿qué es lo que más te motiva a la hora de trabajar: sentir que tu labor ayuda a que una empresa sea **totalmente transparente y honesta** ante la ley, o prefieres sentir que tu trabajo ayuda a que el negocio sea **más rentable y exitoso** cada día?",
+        "opciones": [
+          "Que todo sea transparente y esté en orden legal",
+          "Que el negocio crezca y sea más rentable"
+        ],
+        "respuesta": "Que el negocio crezca y sea más rentable, porque al final del día eso es lo que ayuda a que los negocios de mi familia salgan adelante.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 75
+          },
+          {
+            "carrera": "Licenciatura en Informática y Administración de Empresas",
+            "afinidad": 60
+          },
+          {
+            "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+            "afinidad": 50
+          }
+        ]
+      },
+      {
+        "dimension": "estilo_cognitivo",
+        "tipo": "sino",
+        "pregunta": "Marvin, me queda claro que buscas que el negocio crezca y sea rentable, y que te gusta ir a lo seguro revisando cada detalle. Ahora, para entender mejor cómo piensas, imagínate que tienes que resolver un problema complejo en la empresa: ¿prefieres **seguir una guía o norma** ya establecida que te asegure el camino correcto, o prefieres **buscar soluciones nuevas** por tu cuenta, aunque eso signifique probar algo que nadie ha intentado antes?",
+        "opciones": [
+          "Seguir una guía o norma establecida",
+          "Buscar soluciones nuevas por mi cuenta"
+        ],
+        "respuesta": "Prefiero seguir una guía o norma, mejor no arriesgarse con cosas nuevas que uno no conoce y que pueden salir mal.",
+        "alerta_contradiccion": "",
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 80
+          },
+          {
+            "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+            "afinidad": 60
+          },
+          {
+            "carrera": "Licenciatura en Informática y Administración de Empresas",
+            "afinidad": 55
+          }
+        ]
+      },
+      {
+        "terminado": true,
+        "ranking": [
+          {
+            "carrera": "Contaduría Pública y Auditoría",
+            "afinidad": 95
+          },
+          {
+            "carrera": "Administración de Empresas",
+            "afinidad": 65
+          },
+          {
+            "carrera": "Licenciatura en Informática y Administración de Empresas",
+            "afinidad": 45
+          },
+          {
+            "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+            "afinidad": 30
+          }
+        ]
+      }
+    ],
+    "A": {
+      "top3": [
+        "Contaduría Pública y Auditoría",
+        "Administración de Empresas",
+        "Ingeniería Industrial"
+      ],
+      "top1": "Contaduría Pública y Auditoría",
+      "acierta": true,
+      "repite_lo_que_dejo": null,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy consistentes y apuntan claramente hacia un perfil analítico, ordenado y enfocado en la rentabilidad de los negocios.",
+      "descripcion_top1": "Esta carrera es ideal para ti porque se centra en el orden, la precisión y el análisis detallado de las finanzas. Te permitirá asegurar que los números de los negocios de tu familia cuadren a la perfección, siguiendo normas claras para garantizar que todo esté en orden.",
+      "razones_top1": [
+        "Te encanta revisar cada detalle para que todo cuadre",
+        "Prefieres seguir normas establecidas en lugar de arriesgarte",
+        "Disfrutas trabajar con números y cuentas",
+        "Tu enfoque es metódico y muy precavido"
+      ]
+    },
+    "B": {
+      "top3": [
+        "Contaduría Pública y Auditoría",
+        "Administración de Empresas",
+        "Ingeniería Industrial"
+      ],
+      "top1": "Contaduría Pública y Auditoría",
+      "acierta": true,
+      "repite_lo_que_dejo": null,
+      "confianza": 90,
+      "confianza_nota": "Tus respuestas son muy consistentes y apuntan claramente a áreas donde el orden, los números y la rentabilidad son los protagonistas.",
+      "descripcion_top1": "Esta carrera es ideal para quien disfruta de la precisión, el orden y la exactitud numérica. Te permite convertirte en el garante de la salud financiera de una empresa, asegurando que cada número cuadre perfectamente bajo normas claras y establecidas.",
+      "razones_top1": [
+        "Te encanta revisar cada detalle para que todo cuadre",
+        "Prefieres seguir normas establecidas antes que arriesgarte",
+        "Disfrutas trabajar con números y cuentas",
+        "Te sientes cómodo en entornos de oficina"
+      ]
+    },
+    "tokens": {
+      "chat": 30720,
+      "recomendar_A": 27364,
+      "recomendar_B": 27629
+    }
+  }
+]

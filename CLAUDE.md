@@ -187,6 +187,18 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   de lo declarado, y que **Dulce es una moneda al aire** (6 y 6 en todo el
   corpus) por su empate técnico A=39/S=38 entre sectores opuestos. Cualquier
   A/B que la use necesita n grande.
+- [experiments/edad-y-grado.md](experiments/edad-y-grado.md) — decirle al prompt
+  qué hacer con la edad, el grado y la carrera cursada. Medido **dos veces** (la
+  segunda ya con `carrera_cursada` y con perfiles que NO la nombran en el chat):
+  11 comparaciones A/B, cero mejoras y una regresión. Flag
+  `EDAD_Y_GRADO_EN_RECOMENDACION`, **apagado y sin pendientes**. Lo que sí quedó
+  demostrado es que las cuatro preguntas fijas nuevas **solas** cambian la
+  recomendación: en el brazo de producción nadie vuelve a la carrera que dejó
+  (0/3). No agregar prosa al prompt para esto.
+- [experiments/adaptativas-desempate.md](experiments/adaptativas-desempate.md) —
+  **sin ejecutar.** ¿Las 4 adaptativas sirven para elegir DENTRO del área, entre
+  carreras de pensum parecido? Explica también por qué siempre giran sobre los
+  mismos dos ejes (es la regla de cobertura, no el modelo).
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
