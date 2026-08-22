@@ -33,8 +33,8 @@ createRoot(document.getElementById('root')).render(
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/parametros" element={<Parametros />} />
           <Route path="/mapa" element={<Mapa />} />
-          <Route path="/chat" element={<Protegida><Chat /></Protegida>} />
-          <Route path="/holland" element={<Protegida><Holland /></Protegida>} />
+          <Route path="/chat" element={<Protegida test="chat"><Chat /></Protegida>} />
+          <Route path="/holland" element={<Protegida test="holland"><Holland /></Protegida>} />
           <Route path="/historial" element={<Historial />} />
           {/* Sin enlace en el menú a propósito: se entra escribiendo /admin y
               el backend valida el correo contra ADMIN_EMAILS. */}

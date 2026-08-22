@@ -592,34 +592,6 @@
 }
 .mapa-page > p { color: var(--muted); margin: 0 0 18px; font-size: 16px; text-align: center; }
 
-/* Control segmentado (por departamento / por región) */
-.mapa-modos {
-  display: inline-flex;
-  gap: 4px;
-  margin-bottom: 24px;
-  padding: 5px;
-  background: var(--bot-bubble);
-  border-radius: 999px;
-  box-shadow: inset 0 1px 3px rgba(18, 41, 77, 0.08);
-}
-.mapa-modos button {
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 9px 22px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-.mapa-modos button:hover { color: var(--accent); }
-.mapa-modos button.sel {
-  background: #fff;
-  color: var(--accent);
-  box-shadow: 0 4px 12px -4px rgba(18, 41, 77, 0.25);
-}
-
 /* Panel que enmarca el mapa */
 .mapa-panel {
   position: relative;
@@ -651,34 +623,6 @@
   fill: var(--accent-2);
   transform: scale(1.04);
 }
-.depto.inactivo { fill: #d4dbe6; opacity: 0.7; cursor: default; }
-
-/* Leyenda del mapa */
-.mapa-legend {
-  display: flex;
-  gap: 22px;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-top: 4px;
-  border-top: 1px solid rgba(18, 41, 77, 0.07);
-  width: 100%;
-}
-.mapa-legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-}
-.mapa-legend-dot {
-  width: 13px;
-  height: 13px;
-  border-radius: 4px;
-}
-.mapa-legend-dot.activo { background: var(--accent); }
-.mapa-legend-dot.inactivo { background: #d4dbe6; }
-
 .mapa-ambos-btn {
   margin-top: 28px;
   border: none;
@@ -1966,4 +1910,62 @@
   border-radius: 999px;
   text-decoration: none;
   white-space: nowrap;
+}
+
+/* Presentación de cada evaluación antes del login (ver Protegida.jsx) */
+.acceso-puntos {
+  margin: 0 auto 22px;
+  max-width: 560px;
+  text-align: left;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.acceso-puntos li { margin-bottom: 8px; }
+.acceso-cta {
+  margin: 0 0 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Tarjeta del perfil de la evaluación anterior (pantalla inicial del chat) */
+.perfil-previo {
+  max-width: 420px;
+  margin: 18px auto 0;
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(18, 41, 77, 0.08);
+  border-radius: 22px;
+  box-shadow: 0 22px 48px -28px rgba(18, 41, 77, 0.45);
+  text-align: left;
+}
+.perfil-previo-titulo {
+  margin: 0 0 14px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+}
+.perfil-previo-datos { list-style: none; margin: 0 0 18px; padding: 0; }
+.perfil-previo-datos li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(18, 41, 77, 0.06);
+  font-size: 14px;
+}
+.perfil-previo-datos span { color: var(--muted); }
+.perfil-previo-datos strong { text-align: right; }
+.perfil-previo-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+.depto-grupo { cursor: pointer; }
+.depto-nombre {
+  fill: #fff;
+  font-size: 7px;
+  font-weight: 700;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: rgba(18, 41, 77, 0.55);
+  stroke-width: 1.6px;
+  pointer-events: none;
 }
