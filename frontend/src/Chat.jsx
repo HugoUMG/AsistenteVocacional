@@ -35,6 +35,16 @@ const post = (ruta, body) =>
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
+// Cuanto dejar una burbuja en pantalla cuando la voz esta apagada: a ~200
+// palabras por minuto de lectura (300 ms por palabra) mas un respiro fijo, y
+// escalado con el mismo control de velocidad que la voz.
+// ponytail: cuenta palabras, no silabas ni signos; alcanza para frases cortas.
+function tiempoLectura(texto) {
+  const palabras = (texto || '').trim().split(/\s+/).filter(Boolean).length
+  const ms = (500 + palabras * 300) / velocidad
+  return Math.min(9000, Math.max(900, ms))
+}
+
 // Los 429 los redacta el backend (enfriamiento entre evaluaciones o tope de uso
 // del día, ver backend/app/cuota.py) y se muestran tal cual: un mensaje genérico
 // dejaría al alumno sin saber por qué se detuvo ni cuándo puede volver.
@@ -146,6 +156,7 @@ function reproducirUrl(url) {
     audioActual.playbackRate = velocidad
     audioActual.onended = resolve
     audioActual.onerror = resolve
+    audioActual.onpause = resolve // silenciar a media lectura no debe colgar el turno
     audioActual.play().catch(resolve)
   })
 }
@@ -517,10 +528,12 @@ function Chat() {
   async function botDice(texto) {
     const partes = enPartes(texto)
     const limpios = partes.map(limpiarParaVoz)
-    const audios = vozHabilitada ? limpios.map(cargarAudio) : []
+    // Si la voz esta apagada no se pide nada; si el alumno la enciende a media
+    // lectura, la parte pendiente pide su audio al vuelo (por eso el ||=).
+    const audios = limpios.map((t) => (vozHabilitada ? cargarAudio(t) : null))
     for (let i = 0; i < partes.length; i++) {
       setCargando(true)
-      const url = vozHabilitada ? await audios[i] : null
+      const url = vozHabilitada ? await (audios[i] ||= cargarAudio(limpios[i])) : null
       setCargando(false)
       setElegida(null) // ya llegó la siguiente pregunta: se retira la respuesta anterior
       setHistory((h) => [...h, { role: 'bot', text: partes[i] }])
@@ -530,7 +543,7 @@ function Chat() {
         else await hablarNativo(limpios[i])
         setHablando(false)
       } else {
-        await sleep(650) // sin voz: mantiene el ritmo de conversación
+        await sleep(tiempoLectura(partes[i])) // sin voz: da tiempo de leer
       }
     }
   }
