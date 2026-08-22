@@ -8,11 +8,21 @@ import './App.css'
 // evaluarse: sostiene el enfriamiento entre evaluaciones y el tope de uso
 // diario (ver backend/app/cuota.py). El backend lo exige por su lado con
 // 401; esto solo evita que el alumno llene un test para descubrirlo al final.
+//
+// En desarrollo (npm run dev) se puede pasar sin sesión, para no tener que
+// loguearse cada vez que se prueba un detalle del chat. El backend tiene que
+// estar de acuerdo: LOGIN_OPCIONAL=1 en backend/.env, si no responde 401. El
+// build de producción nunca entra por acá (import.meta.env.DEV es false).
 export default function Protegida({ children }) {
   const [sesion, setSesion] = useState(sesionActual)
   const [error, setError] = useState('')
+  // sessionStorage y no useState: si no, cada recarga vuelve a pedir el clic.
+  // Muere al cerrar la pestaña, que para una llave de desarrollo alcanza.
+  const [sinLogin, setSinLogin] = useState(
+    () => import.meta.env.DEV && sessionStorage.getItem('dev-sin-login') === '1'
+  )
 
-  if (sesion) return children
+  if (sesion || sinLogin) return children
 
   async function entrar(respuesta) {
     setError('')
@@ -38,6 +48,13 @@ export default function Protegida({ children }) {
           <GoogleLogin onSuccess={entrar} onError={() => setError('No se pudo iniciar sesión.')} />
         </div>
         {error && <p className="nav-login-error">{error}</p>}
+        {import.meta.env.DEV && (
+          <p className="intro">
+            <button className="psi-btn-sec" onClick={() => { sessionStorage.setItem('dev-sin-login', '1'); setSinLogin(true) }}>
+              Entrar sin sesión (solo local)
+            </button>
+          </p>
+        )}
       </main>
     </div>
   )

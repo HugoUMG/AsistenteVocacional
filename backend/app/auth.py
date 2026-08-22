@@ -94,10 +94,39 @@ def estudiante_actual(
     return db.get(models.Estudiante, eid) if eid else None
 
 
+# Correo del alumno de prueba que sostiene la sesión cuando LOGIN_OPCIONAL=1.
+# Es una cuenta real en la tabla, así el enfriamiento y el historial se pueden
+# probar igual que con una cuenta de Google.
+EMAIL_DE_PRUEBA = "dev@local"
+
+
+def login_opcional() -> bool:
+    """True solo si el .env local lo pide. En Render la variable no existe, así
+    que el default es el de producción: sin sesión, 401."""
+    return os.getenv("LOGIN_OPCIONAL", "").strip() == "1"
+
+
+def _estudiante_de_prueba(db: Session) -> models.Estudiante:
+    est = db.query(models.Estudiante).filter(models.Estudiante.email == EMAIL_DE_PRUEBA).first()
+    if est is None:
+        est = models.Estudiante(nombre="Alumno de prueba", email=EMAIL_DE_PRUEBA)
+        db.add(est)
+        db.commit()
+        db.refresh(est)
+    return est
+
+
 def requiere_login(
     estudiante: models.Estudiante | None = Depends(estudiante_actual),
+    db: Session = Depends(get_db),
 ) -> models.Estudiante:
-    """Para endpoints que SÍ necesitan sesión (ej. /api/historial)."""
+    """Para endpoints que SÍ necesitan sesión (ej. /api/historial).
+
+    Con LOGIN_OPCIONAL=1 (solo local) no exige sesión: cae al alumno de prueba
+    para poder probar el chat sin pasar por Google. Nunca en producción.
+    """
+    if estudiante is None and login_opcional():
+        return _estudiante_de_prueba(db)
     if estudiante is None:
         raise HTTPException(status_code=401, detail="Inicia sesión para ver tu historial.")
     return estudiante
@@ -155,7 +184,23 @@ def _self_check():
     os.environ["ADMIN_EMAILS"] = ""
     assert _admins() == set(), "sin la variable no entra nadie"
 
-    print("auth self-check OK — JWT propio, sin llamadas a Google")
+    # El bypass local es opt-in explícito: cualquier otro valor (o ninguno)
+    # deja el 401 de producción en pie.
+    os.environ.pop("LOGIN_OPCIONAL", None)
+    assert login_opcional() is False, "sin la variable manda produccion"
+    os.environ["LOGIN_OPCIONAL"] = "0"
+    assert login_opcional() is False
+    os.environ["LOGIN_OPCIONAL"] = "true"
+    assert login_opcional() is False, "solo el 1 exacto abre el bypass"
+    os.environ["LOGIN_OPCIONAL"] = "1"
+    assert login_opcional() is True
+    os.environ.pop("LOGIN_OPCIONAL", None)
+
+    # El alumno de prueba nunca es admin: no tiene por que estar en ADMIN_EMAILS.
+    os.environ["ADMIN_EMAILS"] = "uno@gmail.com"
+    assert not es_admin(models.Estudiante(nombre="x", email=EMAIL_DE_PRUEBA))
+
+    print("auth self-check OK: JWT propio, bypass local opt-in, sin llamadas a Google")
 
 
 if __name__ == "__main__":

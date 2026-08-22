@@ -33,6 +33,13 @@ y responde **401** sin él: `/api/register`, `/api/submit-survey`,
 `/health` siguen abiertos. El JWT lo emite `/api/auth/google` (ver
 `backend/app/auth.py`).
 
+**Solo en local**, con `LOGIN_OPCIONAL=1` en `backend/.env`, esos endpoints
+dejan de pedir sesión y caen a un alumno de prueba (`dev@local`), para no tener
+que loguearse en cada prueba de un detalle del chat. El frontend tiene el botón
+equivalente ("Entrar sin sesión") solo en `npm run dev`. En Render la variable
+no se define y manda el default: 401. El bypass **no abre `/api/admin/*`**, el
+alumno de prueba no está en `ADMIN_EMAILS`.
+
 Encima del login, `backend/app/cuota.py` pone dos límites, ambos **429**:
 
 - **Tope por alumno** (`MAX_CHATS_DIARIOS`, 3 por defecto): chats **terminados**
