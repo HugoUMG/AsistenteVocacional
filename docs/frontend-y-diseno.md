@@ -10,7 +10,7 @@ React 19 (Vite) + `react-router`, gráficas con Recharts, PDF con jsPDF.
 | `/acerca` | `Acerca.jsx` | Página informativa |
 | `/catalogo` | `Catalogo.jsx` | Catálogo público con filtros (texto, departamento, universidad), desde `GET /api/carreras` |
 | `/parametros` | `Parametros.jsx` | Explica las 7 dimensiones vocacionales que explora la IA |
-| `/mapa` | `Mapa.jsx` | Mapa SVG de Guatemala: elegir departamento o región antes del chat |
+| `/mapa` | `Mapa.jsx` | Mapa SVG: los departamentos con catálogo, para elegir antes del chat |
 | `/chat` | `Chat.jsx` | El chat + el dashboard al terminar |
 | `/holland` | `Holland.jsx` | Test de intereses RIASEC (O*NET) |
 | `/historial` | `Historial.jsx` | Resultados guardados de la cuenta |
@@ -45,9 +45,26 @@ ofrece**, no qué existe. Para ver el build tal como lo recibe el alumno:
 `.claude/launch.json`, puerto 4173).
 
 `Nav.jsx` es la barra superior de las páginas informativas; **el chat y el
-dashboard no la usan**. El mapa marca como "próximamente" todo departamento sin
-catálogo (`ACTIVOS` en `Mapa.jsx`, hoy Quetzaltenango y Totonicapán): agregar uno
-es editar ese set, no el SVG.
+dashboard no la usan**. El mapa dibuja **solo** los departamentos con
+catálogo (`ACTIVOS` en `Mapa.jsx`, hoy Quetzaltenango y Totonicapán), con el
+`viewBox` calculado sobre esos paths: agregar uno es editar ese set, no el SVG,
+y el encuadre se reajusta solo. Antes se pintaba el país entero en gris con los
+demás como "próximamente" y una vista "por región": las dos se quitaron
+(2026-08-22) porque invitaban a tocar departamentos que no llevan a ningún lado
+y porque los dos activos caen en la misma región.
+
+Las rutas de evaluación van envueltas en `Protegida.jsx`, que **antes** del
+login presenta de qué se trata cada instrumento (`PRESENTACION`, con una entrada
+por `test`) y remata con "Evaluate ahora con tu cuenta de Google". Es una
+pantalla de venta, no un muro: el alumno no debería tener que loguearse para
+enterarse de qué mide el test.
+
+Con sesión iniciada, el chat le ofrece al alumno reusar lo que contestó sobre sí
+mismo en su última evaluación (`CLAVES_PERFIL` en `preguntas-fijas.js`): dos
+botones, "Continuar con estos datos" o "Empezar de nuevo". Los datos salen de
+`GET /api/historial`, no de `localStorage`, así que lo sigue a otro dispositivo.
+Las respuestas de intereses (impacto, estilo, entorno, gustos) **no** se reusan:
+son las que se están midiendo.
 
 ⚠️ **`App.jsx` ya no existe** — el chat es `Chat.jsx`. `App.css` sí sigue siendo
 la hoja de estilos compartida.

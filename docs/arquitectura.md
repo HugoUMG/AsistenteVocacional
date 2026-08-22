@@ -65,14 +65,14 @@ El estudiante puede apagarla.
 │       ├── main.jsx        rutas: / /acerca /catalogo /parametros /psicometrico /mapa /chat
 │       ├── Inicio.jsx      landing
 │       ├── Nav.jsx         barra superior de las paginas informativas (el chat no la usa)
-│       ├── Mapa.jsx        mapa de Guatemala: elegir departamento o region
+│       ├── Mapa.jsx        mapa: los departamentos con catálogo (Totonicapán y Quetzaltenango)
 │       ├── Chat.jsx        chat (fijas + adaptativas), voz, fases chat/loading/dashboard
 │       ├── Dashboard.jsx   graficas, detalle por institucion, PDF, simulador, comparador, feedback
 │       ├── Catalogo.jsx    catalogo publico con filtros (GET /api/carreras)
 │       ├── Parametros.jsx  explicacion de las 7 dimensiones vocacionales
 │       ├── Acerca.jsx      pagina informativa
 │       ├── Psicometrico.jsx examen psicometrico (pestaña aparte del chat)
-│       ├── data/           SVG de departamentos y regiones de Guatemala
+│       ├── data/           SVG de los departamentos de Guatemala
 │       ├── reporte.js      PDF con jsPDF
 │       ├── session.js      SESSION_ID (uno por carga de pagina)
 │       └── colors.js       paleta compartida
