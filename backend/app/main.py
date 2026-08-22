@@ -1,6 +1,7 @@
 import os
 import re
 import unicodedata
+from collections import Counter
 from contextlib import asynccontextmanager
 from typing import Annotated
 
@@ -10,7 +11,7 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, EmailStr, Field, field_validator
-from sqlalchemy import func, text
+from sqlalchemy import func, or_, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -840,6 +841,82 @@ CAMPOS_REGISTRO = ("nombre", "edad", "nivel", "grado", "carrera_cursada",
                    "gusto_grado", "motivo", "departamento")
 
 
+# Orden en que se muestran los puntajes RIASEC (el mismo de O*NET).
+_LETRAS_RIASEC = ("R", "I", "A", "S", "E", "C")
+
+
+def _holland_por_evaluacion(db: Session, filas) -> dict[int, dict]:
+    """Para cada evaluación del chat, el resultado de Holland del alumno: el del
+    MISMO recorrido (mismo session_id) y, si no hay, el más reciente de esa
+    cuenta. El psicólogo necesita saber si el alumno ya venía medido y con qué
+    puntajes, no solo qué contestó en el chat.
+
+    ponytail: trae todas las filas de Holland de las cuentas involucradas y las
+    cruza en memoria. Son cientos de filas; si crece, un LATERAL por session_id.
+    """
+    sesiones = {f.session_id for f in filas if f.session_id}
+    cuentas = {f.estudiante_id for f in filas if f.estudiante_id}
+    if not sesiones and not cuentas:
+        return {}
+    hollands = (
+        db.query(models.ResultadoHolland)
+        .filter(or_(models.ResultadoHolland.session_id.in_(sesiones or {""}),
+                    models.ResultadoHolland.estudiante_id.in_(cuentas or {0})))
+        .order_by(models.ResultadoHolland.id)
+        .all()
+    )
+    return _cruza_holland(filas, hollands)
+
+
+def _cruza_holland(filas, hollands) -> dict[int, dict]:
+    """La parte sin base de datos de _holland_por_evaluacion, para poder
+    probarla (ver el self-check al final del archivo)."""
+    # El id crece con el tiempo, así que la última escritura gana: el más reciente.
+    por_sesion = {h.session_id: h for h in hollands}
+    por_cuenta = {h.estudiante_id: h for h in hollands if h.estudiante_id}
+    # Un alumno puede repetir el test cuantas veces quiera: se cuentan todos y
+    # el detalle los lista, pero en el registro se muestra el que corresponde.
+    cuantos = Counter(h.estudiante_id for h in hollands if h.estudiante_id)
+    salida = {}
+    for f in filas:
+        h = por_sesion.get(f.session_id) or por_cuenta.get(f.estudiante_id)
+        if h is None:
+            continue
+        salida[f.id] = {**_holland_dict(h, f.session_id),
+                        "total": cuantos.get(f.estudiante_id, 1)}
+    return salida
+
+
+def _holland_dict(h, session_id=None) -> dict:
+    """Un resultado de Holland como lo consume el frontend."""
+    areas = h.areas or {}
+    return {
+        "codigo": h.codigo,
+        "areas": {le: areas.get(le) for le in _LETRAS_RIASEC},
+        "fecha": h.created_at,
+        # False = lo hizo en otro recorrido, no antes de ESTE chat.
+        "mismo_recorrido": bool(session_id) and h.session_id == session_id,
+    }
+
+
+def _holland_historial(db: Session, r) -> list[dict]:
+    """Todos los Holland de ese alumno, del más reciente al más viejo. Repetir
+    el test es válido y el psicólogo necesita ver cómo se movió el perfil, no
+    solo la última foto."""
+    if not r.estudiante_id and not r.session_id:
+        return []
+    filas = (
+        db.query(models.ResultadoHolland)
+        .filter(or_(models.ResultadoHolland.estudiante_id == r.estudiante_id,
+                    models.ResultadoHolland.session_id == r.session_id)
+                if r.estudiante_id else
+                models.ResultadoHolland.session_id == r.session_id)
+        .order_by(models.ResultadoHolland.id.desc())
+        .all()
+    )
+    return [_holland_dict(h, r.session_id) for h in filas]
+
+
 @app.get("/api/admin/soy")
 def admin_soy(estudiante: models.Estudiante | None = Depends(auth.estudiante_actual)):
     """¿La sesión actual es de administración? Lo consulta el menú para decidir
@@ -871,6 +948,8 @@ def admin_respuesta(
             if (r.respuestas or {}).get("nivel") == "Básico" else []
         ),
         "cuenta": r.estudiante.email if r.estudiante else None,
+        "holland": _holland_por_evaluacion(db, [r]).get(r.id),
+        "holland_historial": _holland_historial(db, r),
     }
 
 
@@ -893,9 +972,11 @@ def admin_respuestas(
         .limit(max(1, min(limite, 2000)))
         .all()
     )
+    hollands = _holland_por_evaluacion(db, filas)
     salida = []
     for r in filas:
         resp = r.respuestas or {}
+        h = hollands.get(r.id)
         # recomendacion se guarda como la LISTA de carreras (ver /api/recommend).
         rec = r.recomendacion if isinstance(r.recomendacion, list) else []
         salida.append({
@@ -907,6 +988,13 @@ def admin_respuestas(
             "termino": bool(rec),  # False = abandonó antes de ver resultados
             "feedback": r.feedback,
             "cuenta": r.estudiante.email if r.estudiante else None,
+            "holland": h["codigo"] if h else None,
+            "holland_puntajes": (
+                " ".join(f"{l}{h['areas'][l]}" for l in _LETRAS_RIASEC
+                         if h["areas"].get(l) is not None) if h else None
+            ),
+            "holland_previo": bool(h) and h["mismo_recorrido"],
+            "holland_total": h["total"] if h else 0,
         })
     return salida
 
@@ -978,3 +1066,24 @@ def resumen_uso_tokens(db: Session = Depends(get_db)):
         ],
         "sesiones": sesiones,
     }
+
+
+if __name__ == "__main__":
+    # Self-check del cruce de Holland con el registro (sin base de datos).
+    from types import SimpleNamespace as N
+
+    ev = [N(id=1, session_id="s1", estudiante_id=7),   # Holland del mismo recorrido
+          N(id=2, session_id="s2", estudiante_id=7),   # solo tiene uno viejo, de la cuenta
+          N(id=3, session_id="s3", estudiante_id=9)]   # nunca hizo Holland
+    hs = [N(id=10, session_id="s0", estudiante_id=7, codigo="ASE",
+            areas={"R": 1, "I": 2, "A": 3, "S": 4, "E": 5, "C": 6}, created_at="ayer"),
+          N(id=11, session_id="s1", estudiante_id=7, codigo="RIA",
+            areas={"R": 9, "I": 8, "A": 7}, created_at="hoy")]
+    out = _cruza_holland(ev, hs)
+    assert out[1]["codigo"] == "RIA" and out[1]["mismo_recorrido"] is True
+    assert out[1]["areas"] == {"R": 9, "I": 8, "A": 7, "S": None, "E": None, "C": None}
+    # Sin fila de su recorrido cae a la más reciente de la cuenta (id mayor).
+    assert out[2]["codigo"] == "RIA" and out[2]["mismo_recorrido"] is False
+    assert out[2]["total"] == 2  # repitió el test: los dos se cuentan
+    assert 3 not in out
+    print("cruce de Holland: ok")

@@ -23,6 +23,8 @@ const COLUMNAS = [
   ['motivo', 'Motivo del test'],
   ['carrera_descartada', 'Descartada'],
   ['departamento', 'Departamento'],
+  ['holland', 'Holland'],
+  ['holland_puntajes', 'Puntajes RIASEC'],
   ['top3', 'Top 3 recomendado'],
   ['feedback', '¿Acertó?'],
   ['cuenta', 'Cuenta'],
@@ -35,6 +37,13 @@ function celda(fila, clave) {
   if (clave === 'fecha') return fecha(v)
   if (clave === 'top3') return (v || []).join(' · ') || (fila.termino ? '' : 'No terminó')
   if (clave === 'feedback') return v === true ? 'Sí' : v === false ? 'No' : ''
+  // Sin código = no hizo Holland. Con código pero de otro recorrido, se marca:
+  // el psicólogo necesita saber si el chat partió de ese perfil o no.
+  if (clave === 'holland') {
+    if (!v) return 'No lo hizo'
+    const veces = fila.holland_total > 1 ? ` · ${fila.holland_total} tests` : ''
+    return `${v}${fila.holland_previo ? '' : ' (otro test)'}${veces}`
+  }
   return v ?? ''
 }
 
