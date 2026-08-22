@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 import Nav from './Nav'
 import Dashboard from './Dashboard'
+import { Resultados as ResultadosHolland } from './Holland'
 import { authHeader, iniciarSesionGoogle, sesionActual } from './auth'
 import Recorrido from './Recorrido'
 import './App.css'
@@ -43,10 +44,10 @@ function CardChat({ fila, onAbrir }) {
   )
 }
 
-function CardHolland({ fila }) {
+function CardHolland({ fila, onAbrir }) {
   const orden = Object.entries(fila.areas).sort((a, b) => b[1] - a[1])
   return (
-    <li className="psi-item">
+    <li className="psi-item hist-card" onClick={() => onAbrir(fila)}>
       <p className="psi-enunciado">Test de Holland · {fecha(fila.fecha)}</p>
       <p className="psi-texto">Código {fila.codigo}</p>
       {orden.slice(0, 3).map(([letra, score]) => (
@@ -89,6 +90,21 @@ export default function Historial() {
   const [error, setError] = useState('')
   const [chatAbierto, setChatAbierto] = useState(null)
   const [verDashboard, setVerDashboard] = useState(false) // el recorrido es lo primero que se ve
+  const [holland, setHolland] = useState(null) // el resultado completo, recalculado al abrirlo
+
+  async function abrirHolland(fila) {
+    setError('')
+    setHolland('cargando')
+    try {
+      const r = await fetch(`${API}/api/holland/${fila.id}`, { headers: authHeader() })
+      if (!r.ok) throw new Error((await r.json()).detail || 'No se pudo abrir el resultado.')
+      setHolland(await r.json())
+      window.scrollTo({ top: 0 })
+    } catch (e) {
+      setHolland(null)
+      setError(String(e.message || e))
+    }
+  }
 
   useEffect(() => {
     if (!sesion) return
@@ -105,6 +121,10 @@ export default function Historial() {
     } catch (e) {
       setError(String(e.message || e))
     }
+  }
+
+  if (holland && holland !== 'cargando') {
+    return <ResultadosHolland datos={holland} onVolver={() => setHolland(null)} />
   }
 
   if (chatAbierto && !verDashboard) {
@@ -147,6 +167,8 @@ export default function Historial() {
 
         {error && <p className="psi-error">{error}</p>}
 
+        {holland === 'cargando' && <p className="intro">Abriendo el resultado…</p>}
+
         {sesion && !datos && !error && <p className="intro">Cargando…</p>}
 
         {sesion && datos && (
@@ -171,7 +193,7 @@ export default function Historial() {
               <section className="psi-bloque">
                 <h2>Test de Holland</h2>
                 <ul className="psi-lista">
-                  {datos.holland.map((f) => <CardHolland key={f.id} fila={f} />)}
+                  {datos.holland.map((f) => <CardHolland key={f.id} fila={f} onAbrir={abrirHolland} />)}
                 </ul>
               </section>
             )}

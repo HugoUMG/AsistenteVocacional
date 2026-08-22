@@ -336,7 +336,7 @@ export default function Holland() {
   )
 }
 
-function Resultados({ datos, onReiniciar }) {
+export function Resultados({ datos, onReiniciar, onVolver }) {
   const { areas, codigo, carreras, carreras_total, carreras_catalogo } = datos
   const orden = [...areas].sort((a, b) => b.score - a.score)
   const navigate = useNavigate()
@@ -353,7 +353,7 @@ function Resultados({ datos, onReiniciar }) {
           entre las seis.
         </p>
 
-        <GuardarResultados />
+        {!onVolver && <GuardarResultados />}
 
         <section className="psi-bloque">
           <h2>Perfil por área</h2>
@@ -453,8 +453,8 @@ function Resultados({ datos, onReiniciar }) {
         </section>
 
         <div className="psi-nav">
-          <button className="psi-btn-sec" onClick={onReiniciar}>
-            Responderlo de nuevo
+          <button className="psi-btn-sec" onClick={onVolver || onReiniciar}>
+            {onVolver ? '← Volver al historial' : 'Responderlo de nuevo'}
           </button>
         </div>
       </main>

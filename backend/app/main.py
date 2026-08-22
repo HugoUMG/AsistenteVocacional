@@ -672,6 +672,32 @@ def holland_mio(
     return {**fila.perfil, "fecha": fila.created_at.isoformat()} if fila else None
 
 
+@app.get("/api/holland/{rid}")
+def holland_guardado(
+    rid: int, db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(auth.requiere_login),
+):
+    """El resultado completo de un Holland guardado, tal como se vio al
+    terminar el test. Se recalcula desde la cadena de 60 dígitos en vez de
+    guardar el perfil entero: así las filas viejas tambien abren completas.
+
+    ponytail: una llamada a O*NET por cada apertura, sin cache. Si pesa,
+    guardar el perfil completo en la fila."""
+    fila = (
+        db.query(models.ResultadoHolland)
+        .filter(models.ResultadoHolland.id == rid,
+                models.ResultadoHolland.estudiante_id == estudiante.id)
+        .first()
+    )
+    if not fila:
+        raise HTTPException(404, "No se encontró ese resultado.")
+    perfil = _onet(holland.perfil, fila.respuestas, 4)
+    perfil["carreras_catalogo"] = holland_filtro.carreras_afines(
+        {a["letra"]: a["score"] for a in perfil["areas"]}
+    )
+    return perfil
+
+
 class PersonalidadIn(BaseModel):
     # {id_item: 1..5}, los 48 ítems del test corto (personalidad/valores/estilo).
     respuestas: dict[int, int]
