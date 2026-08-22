@@ -225,3 +225,11 @@ export const FIJAS = [
 // Para que el historial separe estas de las adaptativas (cuya clave es el texto
 // mismo de la pregunta) sin mantener una segunda lista que se desincronice.
 export const CLAVES_FIJAS = FIJAS.map((f) => f.clave)
+
+// Las respuestas que describen al alumno y no a sus intereses: es lo que el
+// chat ofrece reusar de su última evaluación ("continuar con mi perfil"), para
+// que no vuelva a escribir su nombre, su edad y su carrera cada vez. Las de
+// intereses (impacto, estilo, entorno, gustos) NO se reusan: son las que se
+// están midiendo y pueden haber cambiado.
+export const CLAVES_PERFIL = ['nombre', 'edad', 'nivel', 'grado',
+  'carrera_cursada', 'gusto_grado', 'motivo']
