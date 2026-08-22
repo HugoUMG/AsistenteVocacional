@@ -8,7 +8,7 @@ import { leerPerfilPersonalidad } from './personalidad-perfil'
 import { authHeader, sesionActual } from './auth'
 import './App.css'
 import { API } from './api'
-import { FIJAS, grado } from './preguntas-fijas'
+import { CLAVES_PERFIL, FIJAS, grado } from './preguntas-fijas'
 
 const MIN_ADAPTATIVAS = 4 // mínimo antes de ofrecer el resultado (se siente conversación)
 const MAX_ADAPTATIVAS = 8 // tope: perfiles ambiguos afinan más, sin agotar cuota
@@ -430,6 +430,28 @@ function Opciones({ pregunta, onAnswer }) {
   )
 }
 
+// Cómo se nombra cada dato en la tarjeta del perfil anterior.
+const ETIQUETAS_PERFIL = {
+  nombre: 'Nombre', edad: 'Edad', nivel: 'Nivel', grado: 'Grado',
+  carrera_cursada: 'Carrera', gusto_grado: '¿Le gustó?', motivo: 'Motivo',
+}
+
+// El perfil que se le ofrece reusar al alumno: lo que contestó sobre sí mismo
+// en su ÚLTIMA evaluación. Sale del historial que ya expone el backend, así no
+// hay nada nuevo que guardar y funciona aunque cambie de dispositivo.
+// Devuelve null si no hay historial o si esa evaluación no llegó ni al nombre.
+// 'carrera_descartada' no se copia: se recalcula en iniciar(), porque depende
+// del grado elegido y no del historial.
+// No se exporta a propósito: un archivo que exporta componentes Y funciones
+// rompe el refresco en caliente de Vite.
+function perfilPrevioDe(historial) {
+  const r = historial?.chat?.[0]?.respuestas
+  if (!r?.nombre) return null
+  const perfil = {}
+  for (const c of CLAVES_PERFIL) if (r[c] !== undefined) perfil[c] = r[c]
+  return perfil
+}
+
 function Chat() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -461,7 +483,19 @@ function Chat() {
   const [iniciado, setIniciado] = useState(false) // false = solo la burbuja flotante (pantalla tipo Siri)
   const [hablando, setHablando] = useState(false) // true mientras suena el audio de la pregunta actual
   const [elegida, setElegida] = useState(null) // respuesta recién elegida, visible bajo la pregunta mientras carga la siguiente
+  const [perfilPrevio, setPerfilPrevio] = useState(null) // datos de su última evaluación, para ofrecer continuarla
   const logRef = useRef(null)
+
+  // Su última evaluación, para ofrecerle empezar con esos datos en vez de
+  // volver a escribirlos. Si falla, el chat arranca normal: es una comodidad,
+  // no un requisito.
+  useEffect(() => {
+    if (!sesionActual()) return
+    fetch(`${API}/api/historial`, { headers: authHeader() })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => setPerfilPrevio(perfilPrevioDe(d)))
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     logRef.current?.scrollTo(0, logRef.current.scrollHeight)
@@ -481,9 +515,20 @@ function Chat() {
     setHablando(false)
   }
 
-  function iniciar() {
+  // Arranca el chat. Con 'perfil' (el de su evaluación anterior) se dan por
+  // contestadas las preguntas sobre él mismo y avanzar() salta directo a la
+  // primera que falta; sin él, el flujo normal desde el saludo.
+  function iniciar(perfil) {
     setIniciado(true)
-    decir(FIJAS[0].texto) // el saludo no se leyó al montar (falta el gesto del usuario para el audio)
+    if (!perfil) {
+      decir(FIJAS[0].texto) // el saludo no se leyó al montar (falta el gesto del usuario para el audio)
+      return
+    }
+    const next = { ...respuestas, ...perfil }
+    if (grado(next)?.descarta && next.carrera_cursada) next.carrera_descartada = next.carrera_cursada
+    setRespuestas(next)
+    setHistory([{ role: 'bot', text: `¡Qué bueno verte de nuevo, ${perfil.nombre}!` }])
+    avanzar(next)
   }
 
   // Último mensaje del bot/alerta (lo único que se muestra en pantalla; el
@@ -758,10 +803,41 @@ function Chat() {
   // Pantalla inicial: solo la burbuja flotante. Se toca para empezar (el click
   // también sirve de gesto del usuario para que el navegador permita el audio).
   if (!iniciado) {
+    // Con evaluación previa, la burbuja no arranca sola: primero elige si sigue
+    // con sus datos o empieza de cero. El clic de cualquiera de las dos sirve
+    // igual de gesto del usuario para que el navegador permita el audio.
+    if (perfilPrevio) {
+      return (
+        <div className="layout">
+          <div className="siri-idle">
+            <Robot thinking />
+            <div className="perfil-previo">
+              <p className="perfil-previo-titulo">Ya te habías evaluado antes, {perfilPrevio.nombre}</p>
+              <ul className="perfil-previo-datos">
+                {CLAVES_PERFIL.filter((c) => perfilPrevio[c]).map((c) => (
+                  <li key={c}>
+                    <span>{ETIQUETAS_PERFIL[c]}</span>
+                    <strong>{perfilPrevio[c]}</strong>
+                  </li>
+                ))}
+              </ul>
+              <div className="perfil-previo-tabs">
+                <button className="opt" onClick={() => iniciar(perfilPrevio)}>
+                  Continuar con estos datos
+                </button>
+                <button className="opt ghost" onClick={() => iniciar(null)}>
+                  Empezar de nuevo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return (
       <div className="layout">
-        <div className="siri-idle" onClick={iniciar} role="button" tabIndex={0}
-          onKeyDown={(e) => e.key === 'Enter' && iniciar()}>
+        <div className="siri-idle" onClick={() => iniciar(null)} role="button" tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && iniciar(null)}>
           <Robot thinking />
           <p className="siri-idle-hint">Toca para hablar con Orienta</p>
         </div>
