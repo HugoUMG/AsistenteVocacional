@@ -44,6 +44,47 @@ function Rama({ titulo, pasos }) {
   )
 }
 
+// Qué midió el test de Holland de este alumno, si lo hizo. Va antes de las
+// preguntas fijas porque en el modo 3 el chat parte de este perfil.
+const LETRAS_RIASEC = { R: 'Realista', I: 'Investigador', A: 'Artístico',
+  S: 'Social', E: 'Emprendedor', C: 'Convencional' }
+
+function Holland({ h, historial = [] }) {
+  if (!h) return null
+  // Un alumno puede repetir el test: los demás intentos van como lista corta
+  // debajo, para ver si el perfil se movió entre una evaluación y otra.
+  const otros = historial.filter((o) => o.fecha !== h.fecha)
+  return (
+    <div className="rec-rama">
+      <p className="rec-rama-titulo">
+        Test de Holland {h.mismo_recorrido ? '' : '(de otro recorrido)'}
+      </p>
+      <ul className="rec-pasos">
+        <li>
+          <span className="rec-pregunta">Código RIASEC</span>
+          <span className="rec-respuesta">{h.codigo} · {fecha(h.fecha)}</span>
+        </li>
+        {Object.entries(LETRAS_RIASEC).map(([l, nombre]) => (
+          <li key={l}>
+            <span className="rec-pregunta">{nombre} ({l})</span>
+            <span className="rec-respuesta">{h.areas?.[l] ?? '-'}</span>
+          </li>
+        ))}
+      </ul>
+      {!!otros.length && (
+        <ul className="rec-pasos">
+          <li>
+            <span className="rec-pregunta">Otros intentos ({otros.length})</span>
+            <span className="rec-respuesta">
+              {otros.map((o) => `${o.codigo} (${fecha(o.fecha)})`).join(' · ')}
+            </span>
+          </li>
+        </ul>
+      )}
+    </div>
+  )
+}
+
 // El recorrido completo de una evaluación, como diagrama de arriba abajo:
 // quién es, qué contestó en las fijas, qué le preguntó Orienta y qué le salió.
 // ponytail: el diagrama es HTML y CSS (una línea vertical y nodos), sin
@@ -80,6 +121,7 @@ export default function Recorrido({ fila, onVolver, onDashboard }) {
             <span className="rec-fecha">{fecha(fila.fecha)}</span>
           </div>
 
+          <Holland h={fila.holland} historial={fila.holland_historial} />
           <Rama titulo="Preguntas fijas" pasos={fijas} />
           <Rama titulo="Preguntas de Orienta" pasos={adaptativas} />
 

@@ -79,6 +79,15 @@ antigua, cada evaluación con lo que el alumno contestó en las preguntas fijas
 (nombre, edad, nivel, grado, carrera cursada, si le gustó, motivo, departamento),
 la carrera que pidió descartar, su top-3 recomendado, si terminó y su feedback.
 
+Cada fila trae además el **resultado de Holland** de ese alumno (`holland` con el
+código RIASEC, `holland_puntajes` con los seis puntajes y `holland_previo`): el
+del mismo recorrido si lo hizo antes del chat y, si no, el más reciente de su
+cuenta, marcado como de otro recorrido. Es dato clínico para quien interpreta la
+evaluación, no alimenta la recomendación (ver docs/holland.md). Un alumno puede
+repetir el test cuantas veces quiera: `holland_total` dice cuántos lleva y el
+detalle, `GET /api/admin/respuestas/{id}`, trae el que corresponde en `holland`
+y todos los demás en `holland_historial`, del más reciente al más viejo.
+
 Pide sesión de Google **y** que el correo esté en `ADMIN_EMAILS`
 (`backend/.env`); si no, responde 403. Sin la variable no entra nadie. La página
 que lo consume es `/admin` y no tiene enlace en el menú a propósito.
