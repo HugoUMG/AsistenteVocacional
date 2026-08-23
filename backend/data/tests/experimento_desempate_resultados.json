@@ -4006,6 +4006,2669 @@
       "gano": "empate",
       "coherencia_A": 5,
       "coherencia_B": 5
+    },
+    {
+      "ronda": "R2",
+      "persona": "Mynor",
+      "contexto": "18 anios, termino el diversificado. Desde chiquito cocina en la casa y ahora vende comida los fines de semana afuera del estadio con su hermano; el inventa los platos y su hermano cobra. Le gusta que la gente le diga que esta rico y anda pensando en como hacer que rinda mas. Suenia con tener su propio local algun dia.",
+      "fijas": {
+        "nombre": "Mynor",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "Al aire libre, en el campo o la naturaleza, Con la comunidad, ayudando a personas",
+        "gustos": "Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Organizar y dirigir equipos o instituciones, Gastronomía, turismo y hotelería"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Administración Educativa",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Mynor, me encanta ver que te mueve tanto el emprendimiento como el trabajo con la gente y la naturaleza. Para conocerte mejor, cuéntame: cuando tienes que **resolver un problema difícil**, ¿prefieres analizar los datos y buscar una solución lógica y ordenada, o te sientes más cómodo confiando en tu intuición y en cómo se sienten las personas involucradas?",
+          "respuesta": "Prefiero confiar en mi intuicion y en lo que sienten los demas. Es que uno sabe como va la onda con la gente al probar la comida, se siente cuando algo va a funcionar."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 10,
+          "dimension": "valores",
+          "pregunta": "Mynor, me gusta mucho esa forma en la que conectas con la gente y confías en tu intuición, se nota que eres alguien muy humano. Ahora, pensando en tu futuro, ¿qué te hace sentir más **orgulloso y satisfecho** al final del día: saber que ayudaste a alguien a mejorar su situación personal, o ver que lograste **crear o gestionar** algo que funciona bien y hace crecer un negocio?",
+          "respuesta": "La verdad me llena más ver que el negocio crece, cuando la gente llega y todo sale bien con la comida, eso es lo que más me cuadra."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Artes Culinarias y Negocios Gastronómicos",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+              "afinidad": 50
+            }
+          ],
+          "brecha": 15,
+          "dimension": "personalidad",
+          "pregunta": "Mynor, me queda super claro que ver crecer tu negocio y que la gente disfrute de tu comida es lo que te llena de orgullo. Ahora, cuéntame un poco sobre ti: cuando trabajas en equipo, ¿te gusta más **tomar el mando** y organizar cómo deben hacerse las cosas, o prefieres **colaborar de cerca** con tus compañeros para que todos aporten sus ideas y el ambiente sea más relajado?",
+          "respuesta": "Prefiero tomar el mando y organizar, es que me gusta que las cosas salgan bien y rápido, así que yo mismo me encargo de que todo marche como tiene que ser."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Artes Culinarias y Negocios Gastronómicos",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 10,
+          "dimension": "habilidades",
+          "pregunta": "Mynor, ya me contaste que te gusta tomar el mando para que todo salga rápido y bien en tu negocio. Ahora, para entender mejor lo que sabes hacer, cuéntame: a la hora de trabajar, ¿qué te resulta más natural o divertido: **manejar números y presupuestos** para que el negocio sea rentable, o **crear recetas y presentaciones** nuevas para sorprender a tus clientes?",
+          "respuesta": "Crear recetas y diseños para la comida, eso es lo que más me cuadra porque me gusta inventar cosas nuevas para que la gente siempre quiera volver por más."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Artes Culinarias y Negocios Gastronómicos",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 55
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 50
+            }
+          ],
+          "brecha": 25,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 25,
+      "A_top3": [
+        {
+          "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Artes Culinarias y Negocios Gastronómicos",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería en Agronomía",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se centra totalmente en el interés gastronómico y la visión emprendedora del estudiante. Las opciones refuerzan su deseo de gestionar su propio local y profesionalizar su experiencia actual.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque incluye administración y gastronomía, la inclusión de Agronomía no tiene una conexión clara con el perfil del estudiante. No se menciona interés por la producción agrícola o el campo, lo que debilita la propuesta.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es mucho más coherente al enfocarse exclusivamente en el área de negocios gastronómicos, que es donde el estudiante ya ha demostrado iniciativa y pasión.",
+        "misma_area": true,
+        "area": "gastronomía"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 3
+    },
+    {
+      "ronda": "R2",
+      "persona": "Katherine",
+      "contexto": "17 anios, quinto bachillerato. Le hizo una pagina web al negocio de su tio y le cobro. Se pasa las tardes viendo tutoriales y probando cosas hasta que le salen. Le gusta cuando algo que estaba roto por fin funciona. Tambien es la que lleva las cuentas del negocio familiar en una hoja de calculo que ella misma armo.",
+      "fijas": {
+        "nombre": "Katherine",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos",
+        "entorno": "En una oficina o empresa, En un laboratorio o taller técnico, En medios de comunicación o diseñando",
+        "gustos": "Matemáticas y números, Tecnología y computación, Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 3,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Katherine, me encanta ver que tienes tantos intereses, desde la tecnología hasta el diseño. Para conocerte mejor, cuéntame: cuando tienes que **tomar una decisión importante** o resolver un problema difícil, ¿prefieres confiar más en tu **intuición y creatividad** para encontrar una salida nueva, o te sientes más cómoda siguiendo un **plan lógico y ordenado** paso a paso?",
+          "respuesta": "Prefiero un plan lógico y ordenado paso a paso porque así es como me aseguro de que las cosas sí salgan bien a la primera."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Licenciatura en Informática y Administración de Empresas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 3,
+          "dimension": "valores",
+          "pregunta": "Me gusta mucho cómo piensas, Katherine, se nota que eres alguien que busca seguridad en el orden. Ahora, pensando en el futuro, ¿qué te hace sentir más **orgullosa** al terminar un proyecto: saber que **ayudaste a otras personas** a mejorar su situación, o sentir que lograste **eficiencia máxima** y que todo funciona a la perfección?",
+          "respuesta": "Lograr eficiencia máxima y que todo funciona perfecto. Me cuadra más ver que algo que armé sale justo como quería y no falla."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 3,
+          "dimension": "personalidad",
+          "pregunta": "Katherine, ya me quedó claro que te encanta que las cosas funcionen a la perfección y con mucha precisión. Ahora, cuéntame sobre cómo te gusta trabajar con otros: ¿prefieres **liderar un equipo** y organizar las tareas de todos, o te sientes mejor **enfocada en tu propia parte** técnica para asegurar que cada detalle técnico quede impecable?",
+          "respuesta": "Prefiero enfocarme en mi parte técnica, la verdad me estresa menos y así me aseguro de que no haya ni un error en lo que estoy haciendo."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Ingeniería Química",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 72
+            }
+          ],
+          "brecha": 3,
+          "dimension": "habilidades",
+          "pregunta": "Katherine, me queda claro que prefieres concentrarte al máximo en tu parte técnica para que todo salga perfecto. Pensando en esas tareas técnicas que te gusta hacer, ¿qué se te da mejor: **resolver problemas con números y cálculos** complejos, o prefieres **usar herramientas y manipular objetos físicos** para construir o reparar cosas?",
+          "respuesta": "La verdad es que prefiero los números y los cálculos. Me siento más cómoda ordenando todo en las hojas de cálculo que andar ahí con herramientas físicas."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Contaduría Pública y Auditoría",
+              "afinidad": 72
+            },
+            {
+              "carrera": "Licenciatura en Informática y Administración de Empresas",
+              "afinidad": 68
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 55
+            }
+          ],
+          "brecha": 23,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 23,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Contaduría Pública y Auditoría",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se centra en el desarrollo técnico y la resolución de problemas lógicos, lo cual encaja perfectamente con su habilidad para programar y su curiosidad autodidacta. Valora su capacidad para crear soluciones funcionales desde cero.",
+        "coherencia_2": 4,
+        "porque_2": "Aunque incluye opciones técnicas, la inclusión de Contaduría Pública se aleja del perfil creativo y de desarrollo tecnológico que ella demuestra. Es una opción más administrativa que no aprovecha su pasión por la experimentación técnica.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista mantiene una coherencia total con su perfil de creadora y solucionadora de problemas técnicos, mientras que la segunda desvía el enfoque hacia áreas contables más tradicionales que limitan su potencial creativo.",
+        "misma_area": false,
+        "area": "ingeniería"
+      },
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R3",
+      "persona": "Diego",
+      "contexto": "17 anios, quinto bachillerato. Juega futbol en una liga del municipio y se rompio la rodilla el anio pasado; paso seis meses yendo a terapia y le fascino todo lo que le hacian para volver a caminar bien. Le gusta el cuerpo humano y como se recupera. Es sociable, siempre anda con gente, y no se imagina metido en una oficina. Tiene dos perros y los cuida el.",
+      "fijas": {
+        "nombre": "Diego",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+        "gustos": "Salud, cuidados y atención a pacientes, Cuerpo, deporte y rehabilitación, Animales y su cuidado"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Enfermería Veterinaria",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Nutrición",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Cirujano Dentista",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Diego, me encanta ver que tienes claro que quieres estar en movimiento y ayudando a otros, ya sea con personas o animales. Pensando en cómo te gusta trabajar cuando tienes un reto importante, ¿prefieres **seguir pasos y reglas** muy claras para que todo salga perfecto, o te sientes más cómodo **tomando decisiones rápidas** y creativas según lo que vaya pasando en el momento?",
+          "respuesta": "Prefiero decidir rápido según la situación, porque en el fútbol y en la terapia todo cambia a cada rato y toca actuar de una."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Enfermería",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Técnico Universitario en Enfermería Veterinaria",
+              "afinidad": 75
+            }
+          ],
+          "brecha": 5,
+          "dimension": "valores",
+          "pregunta": "Qué buena comparación con el fútbol, Diego. Se nota que te gusta la adrenalina de resolver cosas al instante. Ahora, cuéntame sobre tus **valores**: cuando te toca ayudar a alguien que está pasando por un momento difícil, ¿qué es lo que más te motiva: **sentir que le diste una solución técnica** que arregló su problema, o **sentir que lo acompañaste y escuchaste** para que se sintiera mejor?",
+          "respuesta": "La neta prefiero darle una solución física, es que ver que alguien ya puede moverse bien otra vez es lo que más me cuadra."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Cirujano Dentista",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Enfermería",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Técnico Universitario en Enfermería Veterinaria",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 10,
+          "dimension": "personalidad",
+          "pregunta": "Diego, me queda clarísimo que te motiva ver resultados reales y físicos, como cuando alguien recupera su movilidad. Ahora, pensando en tu forma de ser, cuando trabajas en equipo, ¿te sientes más cómodo siendo quien **toma el mando** y organiza a los demás para que el trabajo salga adelante, o prefieres ser quien **apoya desde adentro** con tareas específicas para que el grupo funcione bien?",
+          "respuesta": "Prefiero apoyar con tareas específicas y técnicas, la verdad me siento mejor haciendo mi parte bien hecha para que todos salgamos adelante."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Cirujano Dentista",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Optometria",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Enfermeria",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Enfermeria Veterinaria",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 15,
+          "dimension": "habilidades",
+          "pregunta": "Diego, me queda muy claro que te gusta ser el experto que hace su parte técnica a la perfección para ayudar a los demás. Ya que te sientes cómodo trabajando con las manos y en movimiento, cuéntame: cuando te enfrentas a un problema físico, ¿qué te resulta más natural hacer: **analizar con cuidado** cada detalle y usar instrumentos de precisión para encontrar el fallo, o **aplicar técnicas manuales** de fuerza y movimiento para corregir directamente lo que no está funcionando?",
+          "respuesta": "Aplicar técnicas manuales de fuerza y movimiento, fijo. Es que me cuadra más sentir lo que estoy arreglando con mis propias manos, como me hacían en la terapia."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Técnico Universitario en Enfermería Veterinaria",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Cirujano Dentista",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Licenciatura en Enfermería",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+              "afinidad": 55
+            }
+          ],
+          "brecha": 25,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 25,
+      "A_top3": [
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Médico y Cirujano",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Técnico Universitario en Enfermería Veterinaria",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Técnico Universitario en Enfermería Veterinaria",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista conecta directamente con su experiencia personal en rehabilitación física y su interés por el cuerpo humano. Incluir medicina es coherente con su curiosidad biológica, mientras que la enfermería veterinaria valida su responsabilidad en el cuidado de sus mascotas.",
+        "coherencia_2": 4,
+        "porque_2": "Aunque la fisioterapia es muy acertada, la enfermería general es una opción más estática que podría chocar con su rechazo a las oficinas. La lista es sólida, pero pierde un poco de fuerza al no considerar su interés específico por la recuperación física avanzada.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es superior porque incluye medicina, una carrera que aprovecha su fascinación por el cuerpo humano y la recuperación, alineándose mejor con su experiencia de vida que la enfermería general.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 4
+    },
+    {
+      "ronda": "R3",
+      "persona": "Mynor",
+      "contexto": "18 anios, termino el diversificado. Desde chiquito cocina en la casa y ahora vende comida los fines de semana afuera del estadio con su hermano; el inventa los platos y su hermano cobra. Le gusta que la gente le diga que esta rico y anda pensando en como hacer que rinda mas. Suenia con tener su propio local algun dia.",
+      "fijas": {
+        "nombre": "Mynor",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "Al aire libre, en el campo o la naturaleza, Con la comunidad, ayudando a personas",
+        "gustos": "Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Organizar y dirigir equipos o instituciones, Gastronomía, turismo y hotelería"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Licenciatura en Administración Educativa",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Mynor, me encanta que tengas tantas ganas de liderar y emprender, pero también de ayudar a la gente. Imagina que tienes que resolver un problema difícil en tu equipo: ¿te sientes más cómodo **analizando los números y los datos** para tomar una decisión lógica, o prefieres **hablar directamente con las personas** para entender qué sienten y buscar una solución juntos?",
+          "respuesta": "Prefiero hablar con la gente, la verdad es que entiendo mejor los problemas viendo cómo se sienten ellos que sentado viendo puros números."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería en Gestión Ambiental Local",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "valores",
+          "pregunta": "Mynor, me queda super claro que prefieres conectar con las personas antes que encerrarte con los números. Pensando en cómo te gusta trabajar, dime: cuando tienes un reto frente a ti, ¿te sientes más motivado si el trabajo tiene un **propósito social** claro para mejorar la vida de otros, o te atrae más el **desafío de crear algo nuevo** y que funcione a la perfección?",
+          "respuesta": "Me atrae más crear cosas nuevas y que funcionen bien, me gusta ver que todo salga calidad cuando invento un plato nuevo."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 55
+            }
+          ],
+          "brecha": 15,
+          "dimension": "personalidad",
+          "pregunta": "Mynor, me encanta esa chispa que tienes para crear cosas nuevas y que todo salga perfecto, como cuando inventas un plato. Ahora, cuéntame sobre cómo eres cuando trabajas en equipo: ¿prefieres ser quien **toma las decisiones** y guía a todos hacia la meta, o te sientes más cómodo **apoyando a los demás** para que ellos brillen y el grupo funcione mejor?",
+          "respuesta": "Prefiero ser quien guía y toma las decisiones, es que a veces ya tengo la idea en la cabeza y me gusta que salga justo como la planeé."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 15,
+          "dimension": "habilidades",
+          "pregunta": "Mynor, ya me quedó claro que te gusta tomar el mando y que las cosas salgan tal cual las imaginas, como cuando preparas algo especial. Ahora, cuéntame sobre lo que sabes hacer: cuando tienes que aprender algo técnico nuevo, ¿te resulta más fácil **entender cómo funcionan las máquinas y los materiales** con tus propias manos, o se te da mejor **planificar y organizar los pasos** para que un servicio o un evento salga impecable?",
+          "respuesta": "Me sale mejor planificar y organizar los pasos, me gusta tener todo controlado para que el servicio salga bien y no haya fallas."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Administración Educativa",
+              "afinidad": 55
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 50
+            }
+          ],
+          "brecha": 25,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 25,
+      "A_top3": [
+        {
+          "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Chef Profesional e Internacional (Técnico Universitario)",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Ingeniería en Agronomía",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se alinea perfectamente con su experiencia práctica en cocina y su visión emprendedora. Incluir la formación técnica en cocina potencia su talento natural para crear platos.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque la administración es relevante, la ingeniería en agronomía no guarda una relación directa con su interés por la gastronomía y el servicio al cliente. Esta opción parece desconectada de su vocación creativa y comercial.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es superior porque todas sus opciones refuerzan el objetivo del estudiante de profesionalizar su negocio de comida y su pasión por la cocina, mientras que la segunda incluye una carrera técnica sin conexión con su perfil.",
+        "misma_area": true,
+        "area": "gastronomía"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 3
+    },
+    {
+      "ronda": "R3",
+      "persona": "Katherine",
+      "contexto": "17 anios, quinto bachillerato. Le hizo una pagina web al negocio de su tio y le cobro. Se pasa las tardes viendo tutoriales y probando cosas hasta que le salen. Le gusta cuando algo que estaba roto por fin funciona. Tambien es la que lleva las cuentas del negocio familiar en una hoja de calculo que ella misma armo.",
+      "fijas": {
+        "nombre": "Katherine",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos",
+        "entorno": "En una oficina o empresa, En un laboratorio o taller técnico, En medios de comunicación o diseñando",
+        "gustos": "Matemáticas y números, Tecnología y computación, Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Katherine, me encanta que tengas tantos intereses distintos, desde la tecnología hasta el diseño. Para entenderte mejor, cuéntame: cuando tienes que aprender algo nuevo o resolver un problema difícil, ¿qué te sale mejor: **analizar los detalles** poco a poco hasta encontrar la lógica, o prefieres **probar y experimentar** directamente con las manos hasta que las cosas funcionen?",
+          "respuesta": "La verdad prefiero probar y experimentar con las manos, es que así me entretengo más viendo cómo queda la onda y al final siempre me sale."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "personalidad",
+          "pregunta": "Katherine, me gusta mucho esa chispa que tienes para meter las manos en la masa y ver resultados reales. Ahora, pensando en cómo te gusta trabajar con otros, ¿qué te hace sentir más cómoda: **liderar un equipo** y tomar las decisiones importantes, o prefieres **enfocarte en tu tarea** y que cada detalle técnico salga perfecto por tu cuenta?",
+          "respuesta": "Prefiero concentrarme en mi trabajo técnico, es que así me enfoco mejor y no ando lidiando con la gente, solo quiero que lo que estoy haciendo me salga bien."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 3,
+          "dimension": "valores",
+          "pregunta": "Katherine, ya me quedó claro que prefieres trabajar a tu ritmo y enfocarte en que las cosas queden perfectas. Ahora, pensando en lo que te motiva a largo plazo, ¿qué es lo que más te hace sentir **satisfecha** al terminar un proyecto: saber que ayudaste a **resolver un problema** que afectaba a otros, o sentir que lograste algo **técnicamente impecable** y muy eficiente?",
+          "respuesta": "Lograr un resultado impecable y eficiente, la verdad es que me da una satisfacción bien chilera ver que algo quedó perfecto y funcionando al cien."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 7,
+          "dimension": "habilidades",
+          "pregunta": "Qué bien que te motive tanto la excelencia técnica, Katherine. Ya que te gusta tanto que las cosas queden perfectas, cuéntame: cuando te enfrentas a un reto, ¿qué se te da mejor: **hacer cálculos**, mediciones y organizar datos con precisión, o prefieres **usar herramientas** y materiales para armar, reparar o dar forma a algo físico?",
+          "respuesta": "La verdad es que prefiero hacer cálculos y organizar datos con precisión, me relaja un montón ver que todo cuadra al centavo."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Contaduría Pública y Auditoría",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Informática y Administración de Empresas",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 55
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 45
+            }
+          ],
+          "brecha": 20,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 20,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Contaduría Pública y Auditoría",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Marketing and Business Analytics",
+          "afinidad": 18
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se alinea perfectamente con su capacidad técnica para el desarrollo web y su interés por la resolución de problemas lógicos. El enfoque en Business Analytics aprovecha directamente su experiencia gestionando finanzas mediante hojas de cálculo.",
+        "coherencia_2": 4,
+        "porque_2": "Es una propuesta sólida que reconoce su habilidad con los números y la gestión de procesos. Sin embargo, la Contaduría Pública es un enfoque más rígido que podría limitar su interés creativo por la programación y la experimentación técnica.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista captura mejor la dualidad entre su perfil técnico-creativo y su capacidad analítica aplicada a negocios, integrando mejor su experiencia con el desarrollo web.",
+        "misma_area": false,
+        "area": "ingeniería"
+      },
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R4",
+      "persona": "Wendy",
+      "contexto": "17 anios, quinto bachillerato en un instituto de Quetzaltenango. Toca la marimba en el grupo del colegio desde los 12 y ahora tambien guitarra; se junta los sabados con unos amigos a ensayar. Es la que organiza los ensayos y la que se pelea para que todos lleguen a tiempo. Le va bien en clase sin esforzarse mucho, pero se aburre rapido de lo que es puro memorizar. Le gusta ensenarle a los mas chiquitos del grupo.",
+      "fijas": {
+        "nombre": "Wendy",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos",
+        "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
+        "gustos": "Arte, diseño y creatividad, Música, danza y artes escénicas, Enseñanza, docencia y educación, Organizar y dirigir equipos o instituciones"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Pedagogía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Educación Artística",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Educación Primaria Intercultural",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Administración Educativa",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 72
+            }
+          ],
+          "brecha": 3,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Wendy, me encanta ver que tienes un lado creativo y que te motiva mucho el trabajo con la gente. Pensando en cómo prefieres resolver los retos del día a día, ¿te sientes más cómoda **analizando los detalles** y buscando la lógica detrás de las cosas, o prefieres **confiar en tu intuición** y dejar que las ideas fluyan mientras trabajas?",
+          "respuesta": "Prefiero confiar en mi intuición y dejar que las ideas fluyan, porque así me sale mejor todo cuando estamos ensayando con los chavos."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Pedagogía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Administración Educativa",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "personalidad",
+          "pregunta": "Wendy, me encanta esa chispa que tienes para dejar que las ideas fluyan cuando trabajas con los chavos. Ahora, cuéntame algo sobre ti: cuando hay un problema difícil en grupo, ¿eres de las que **toma la iniciativa** para organizar a todos y buscar una solución, o prefieres **escuchar a los demás** y apoyar desde un rol más tranquilo para que todos estén bien?",
+          "respuesta": "Tomo la iniciativa y organizo al grupo, es que si uno no se pone las pilas nadie hace nada y me estreso."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Lic. en Administración Educativa",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Profesorado en Educación Artística",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Lic. en Educación Primaria",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Pedagogía",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "valores",
+          "pregunta": "Wendy, me queda claro que eres una líder nata que prefiere tomar el mando para que las cosas salgan bien. Ahora, pensando en lo que haces con tu grupo, ¿qué te hace sentir más orgullosa: **lograr un resultado concreto** y bien hecho, o saber que **ayudaste a que alguien más creciera** o se sintiera mejor gracias a lo que hiciste?",
+          "respuesta": "Ayudar a que alguien más creciera o se sintiera mejor, me cuadra un montón ver cómo los patojos del grupo aprenden cosas nuevas por lo que les enseño."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Pedagogía",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Profesorado en Educación Artística",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Profesorado en Educación Primaria",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+              "afinidad": 78
+            }
+          ],
+          "brecha": 4,
+          "dimension": "habilidades",
+          "pregunta": "Wendy, me encanta ver esa vocación que tienes para ver crecer a los demás, se nota que te sale natural. Ahora, cuéntame sobre lo que sabes hacer: cuando tienes que explicarle algo complicado a alguien, ¿qué te resulta más fácil: **usar ejemplos prácticos** o materiales visuales para que lo vean claro, o prefieres **usar palabras y explicaciones** detalladas para que lo entiendan paso a paso?",
+          "respuesta": "Usar ejemplos prácticos o materiales visuales, es que a puro hablar uno se aburre y mejor si les enseño cómo tocar o qué hacer de una vez."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Profesorado en Educación Artística (Música y Danza)",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Pedagogía (PEM en Comunicación y Lenguaje)",
+              "afinidad": 72
+            },
+            {
+              "carrera": "Profesorado en Educación Primaria",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 58
+            }
+          ],
+          "brecha": 23,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 23,
+      "A_top3": [
+        {
+          "carrera": "Profesorado en Educación Artística (Música y Danza)",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Profesorado en Educación Primaria",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Profesorado en Educación Artística (Música y Danza)",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Administración Educativa",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista prioriza la música, que es su pasión principal desde los 12 años. Además, integra su habilidad natural para enseñar a los más pequeños y su capacidad de liderazgo al organizar ensayos.",
+        "coherencia_2": 4,
+        "porque_2": "Es coherente al incluir la gestión educativa, aprovechando su perfil organizativo. Sin embargo, relega la música a un segundo plano, ignorando que es su principal motor de motivación.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es superior porque coloca la música como eje central, lo cual es fundamental para alguien que se aburre con la memorización pura y necesita un estímulo creativo constante.",
+        "misma_area": true,
+        "area": "educación"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 4
+    },
+    {
+      "ronda": "R4",
+      "persona": "Elmer",
+      "contexto": "19 anios, termino el diversificado hace un anio y esta trabajando en la tienda de su mama mientras decide. Le arregla el celular y la compu a medio barrio, aprendio viendo videos. Le fascina abrir las cosas y ver que tienen adentro. En su aldea la senial es pesima y el se subio al techo a mover la antena hasta que agarro. Es callado, prefiere resolver solo antes que pedir ayuda.",
+      "fijas": {
+        "nombre": "Elmer",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos",
+        "entorno": "En un laboratorio o taller técnico, En una obra, con máquinas o herramientas",
+        "gustos": "Tecnología y computación, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Técnico en Desarrollo de Software",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Elmer, me queda claro que te gusta mucho el trabajo práctico, ya sea con máquinas, computadoras o herramientas. Pensando en cómo te gusta trabajar cuando tienes un reto importante, ¿prefieres **seguir pasos y reglas** muy claras para que todo salga perfecto, o te sientes más cómodo **probando cosas nuevas** y ajustando sobre la marcha aunque no sepas el resultado final?",
+          "respuesta": "Prefiero probar y ajustar sobre la marcha, al final así es como uno aprende bien viendo qué onda con los aparatos."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Técnico en Desarrollo de Software",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 3,
+          "dimension": "personalidad",
+          "pregunta": "Elmer, me gusta esa actitud de aprender probando y ajustando, se nota que eres alguien curioso. Ahora, cuéntame: cuando trabajas en un proyecto difícil, ¿prefieres **hacerlo tú solo** para concentrarte al máximo y tener el control total, o te gusta **trabajar en equipo** donde todos aportan ideas y se dividen las tareas?",
+          "respuesta": "No, prefiero hacerlo solo porque así nadie me molesta y me concentro mejor en lo que estoy haciendo."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 4,
+          "dimension": "habilidades",
+          "pregunta": "Entiendo perfectamente, Elmer. A veces uno rinde mucho mejor cuando tiene su propio espacio y nadie lo interrumpe. Ya que te gusta tanto meterle mano a las cosas y trabajar a tu ritmo, cuéntame: al terminar un proyecto, ¿qué es lo que más te da satisfacción: **lograr que algo funcione** a la perfección aunque sea algo pequeño, o **resolver un problema complejo** que nadie más pudo arreglar?",
+          "respuesta": "Resolver un problema difícil que se veía imposible, eso es lo que más me cuadra porque uno se siente bien cabrón cuando logra que algo reviva."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Técnico en Desarrollo de Software",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 4,
+          "dimension": "valores",
+          "pregunta": "Qué buena vibra tienes para los retos, Elmer. Se nota que te motiva mucho ese sentimiento de victoria al arreglar algo difícil. Pensando en tu futuro, ¿qué te parece más importante: **ganar muy bien** dinero aunque el trabajo sea muy exigente, o tener un trabajo que te permita **aprender cosas nuevas** y que te apasione, aunque al principio no sea tan bien pagado?",
+          "respuesta": "Aprender y que me apasione, porque si uno es bueno en lo que hace el pisto llega solo después."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 10,
+          "dimension": "intereses",
+          "pregunta": "Elmer, me encanta esa mentalidad de que la pasión te llevará lejos. Ahora, para terminar de ver qué camino te queda mejor, cuéntame: cuando te imaginas trabajando en un proyecto, ¿qué te emociona más: **crear programas, algoritmos y software** que vivan dentro de una computadora, o **armar, medir y reparar circuitos y sensores** físicos que hacen que las máquinas cobren vida?",
+          "respuesta": "Armar y reparar circuitos físicos, porque me gusta sentir el aparato en las manos y ver cómo reacciona al meterle mano."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 50
+            }
+          ],
+          "brecha": 25,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 5,
+      "brecha_cierre": 25,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería en Electrónica",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Ingeniería Mecánica",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería en Electrónica",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista identifica correctamente su habilidad técnica autodidacta y su curiosidad por el funcionamiento interno de los dispositivos. Las opciones cubren tanto el software como el hardware, alineándose con su perfil de resolución de problemas prácticos.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista se enfoca con mayor precisión en el hardware y la mecánica, lo cual encaja perfectamente con su experiencia reparando celulares y ajustando antenas. Es una selección muy coherente con su naturaleza práctica y solitaria.",
+        "mejor": "empate",
+        "porque_mejor": "Ambas listas son excelentes y capturan la esencia técnica y autodidacta del estudiante. La primera es un poco más amplia al incluir sistemas, mientras que la segunda es más específica hacia el hardware, pero ambas son totalmente coherentes con su perfil.",
+        "misma_area": true,
+        "area": "ingeniería"
+      },
+      "gano": "empate",
+      "coherencia_A": 5,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R4",
+      "persona": "Rosa",
+      "contexto": "18 anios, bachillerato en ciencias y letras. Su abuela estuvo enferma dos anios y ella fue quien la baniaba, le daba sus pastillas y la llevaba a las citas. Se dio cuenta de que no le da impresion nada y que la gente se calma cuando ella habla. En el hospital le llamaron la atencion las maquinas grandes y le pregunto al tecnico como funcionaban. No le gusta estar sentada todo el dia.",
+      "fijas": {
+        "nombre": "Rosa",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "En un hospital, clínica o consultorio, En un laboratorio o taller técnico, Con la comunidad, ayudando a personas",
+        "gustos": "Salud, cuidados y atención a pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Psicología y comportamiento, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Psicología",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Licenciatura en Nutrición",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Técnico Universitario en Enfermería Veterinaria",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Rosa, me encanta ver que tienes tantas ganas de ayudar a otros y que te interesan cosas muy distintas, desde la salud hasta construir máquinas. Para ir conociéndote mejor, cuéntame esto: cuando tienes que resolver un problema difícil, ¿prefieres **analizarlo con calma** y pensar en todos los detalles antes de actuar, o te gusta más **lanzarte a la acción** y probar soluciones rápidas para ver qué pasa?",
+          "respuesta": "Prefiero lanzarme a la acción y probar rápido, la verdad es que no tengo paciencia para andar pensando tanto, mejor me pongo a hacer algo de una vez."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Licenciatura en Nutrición",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 68
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 3,
+          "dimension": "personalidad",
+          "pregunta": "Rosa, me gusta mucho esa energía tuya de querer ponerte manos a la obra de una vez. Ya que eres de las que prefiere la acción, cuéntame: cuando trabajas con otras personas, ¿te sientes más cómoda **tomando las decisiones** y dirigiendo lo que hay que hacer, o prefieres **apoyar al equipo** siguiendo las instrucciones para que todo salga bien?",
+          "respuesta": "Prefiero guiar y tomar las decisiones principales, es que me gusta mandar y que las cosas se hagan rápido y bien."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 10,
+          "dimension": "habilidades",
+          "pregunta": "Rosa, me queda super claro que te gusta tomar el mando y ver resultados rápidos, eso es genial para liderar proyectos. Ahora, pensando en lo que sabes hacer o te gustaría aprender a hacer, ¿qué te atrae más: **manejar herramientas técnicas** y maquinaria compleja con precisión, o prefieres **enfocarte en el trato directo** y la comunicación para entender y ayudar a las personas?",
+          "respuesta": "La mera verdad es que me gustan las dos, pero prefiero manejar herramientas y máquinas porque me da curiosidad cómo funcionan, aunque igual me gusta un montón ayudar a la gente."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 10,
+          "dimension": "valores",
+          "pregunta": "Rosa, entiendo que te llama mucho la atención el mundo de las máquinas y herramientas, pero que también tienes ese deseo de ayudar. Pensando en tu futuro, ¿qué te hace sentir más orgullosa: **lograr una meta** que beneficie a mucha gente aunque sea un trabajo duro, o **sentirte libre** de elegir tus propios horarios y proyectos aunque el impacto sea más pequeño?",
+          "respuesta": "Sí, prefiero mil veces lograr una meta que ayude a la gente, aunque me toque trabajar duro y desvelarme, porque siento que así vale la pena lo que hago."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 10,
+          "dimension": "intereses",
+          "pregunta": "Rosa, me encanta ver que tienes esa chispa para liderar y que te motiva tanto ayudar a los demás con metas grandes. Para terminar de entender cómo te imaginas tu día a día, imagina que tienes dos proyectos frente a ti: uno donde pasas el tiempo **diseñando y calculando estructuras** grandes como puentes o edificios para que sean seguras, o uno donde te enfocas en **crear y optimizar mecanismos** o motores que mueven cosas. ¿Cuál de estos dos mundos te emociona más?",
+          "respuesta": "Me emociona más crear y optimizar motores y sistemas mecánicos, porque ver cómo se mueven las piezas y hacer que todo funcione me vuela la cabeza más que solo estar calculando paredes."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 72
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 40
+            }
+          ],
+          "brecha": 23,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 5,
+      "brecha_cierre": 23,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Ingeniería Mecánica",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+          "afinidad": 18
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 2,
+        "porque_1": "La lista ignora completamente la vocación de servicio y la capacidad de calma demostrada por la estudiante en el cuidado de su abuela. Se centra únicamente en su curiosidad técnica, dejando de lado su perfil empático y su experiencia directa en el ámbito hospitalario.",
+        "coherencia_2": 5,
+        "porque_2": "La lista integra perfectamente su experiencia de cuidado, su habilidad para transmitir calma y su interés por la tecnología médica. Las opciones permiten movimiento físico y contacto humano, alineándose con su rechazo a trabajos sedentarios.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista es superior porque abarca la totalidad del perfil: la parte asistencial, la habilidad de trato con pacientes y la curiosidad técnica por los equipos médicos, mientras que la primera solo se enfoca en una faceta técnica aislada.",
+        "misma_area": false,
+        "area": "ingeniería"
+      },
+      "gano": "B",
+      "coherencia_A": 2,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R4",
+      "persona": "Kevin",
+      "contexto": "18 anios, recien graduado de perito contador. Lo que de verdad le quita el sueino es entender por que su aldea sigue igual de pobre que cuando el era ninio, mientras la cabecera crece. Lee todo lo que encuentra sobre eso y discute con quien sea. Es bueno con los numeros y le gusta hacer cuadros y graficas para explicar sus argumentos. Le aburre soberanamente la idea de llevar la contabilidad de una tienda.",
+      "fijas": {
+        "nombre": "Kevin",
+        "departamento": "Quetzaltenango",
+        "impacto": "Defender la justicia y resolver conflictos, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Analizando datos, ideas y lógica",
+        "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
+        "gustos": "Matemáticas y números, Leyes, justicia y debate, Economía, pobreza y desarrollo del país, Historia, sociedad y cultura"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "personalidad",
+          "pregunta": "Kevin, me alegra ver que te apasionan temas como la justicia, los números y el desarrollo del país. Ahora, cuéntame algo sobre tu **forma de ser**: cuando tienes que resolver un problema difícil, ¿prefieres **analizarlo solo** con calma y lógica, o te sientes mejor **discutiéndolo con otros** para encontrar la solución entre todos?",
+          "respuesta": "La verdad prefiero discutirlo con otros, es que así uno escucha puntos de vista diferentes y le agarra más sentido a las cosas, aunque a veces termine peleando."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Economía",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en la Enseñanza de la Matemática y la Física",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "habilidades",
+          "pregunta": "Me encanta que seas tan abierto a escuchar a los demás, Kevin, aunque a veces salten chispas en la discusión. Ya que te gusta tanto el trabajo en equipo, cuéntame: cuando se trata de **habilidades**, ¿qué sientes que se te da mejor: **explicar ideas complejas** para que los demás las entiendan, o **investigar y organizar datos** para encontrar una solución lógica?",
+          "respuesta": "Me gusta más investigar, organizar datos y analizar. La verdad es que me la paso haciendo cuadros y gráficas para que la mara entienda por qué la situación en mi aldea no mejora."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Economía",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Ingeniería Industrial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Contaduría Pública y Auditoría",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 7,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Kevin, me impresiona mucho que uses cuadros y gráficas para explicar la realidad de tu aldea, eso demuestra que tienes una mente muy analítica. Ahora, pensando en cómo te gusta trabajar, ¿cómo te sientes más cómodo: **siguiendo reglas y procesos** ya establecidos para asegurar que todo salga bien, o prefieres **cuestionar cómo se hacen las cosas** para buscar formas nuevas y más justas de resolver los problemas?",
+          "respuesta": "Prefiero cuestionar las reglas actuales para buscar cambios y mejoras, es que si uno se queda haciendo lo mismo de siempre, la pobreza nunca se va a terminar."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 5,
+          "dimension": "valores",
+          "pregunta": "Kevin, admiro mucho esa chispa que tienes para querer cambiar las cosas y no conformarte con lo de siempre. Ahora, cuéntame sobre lo que más te mueve por dentro: cuando piensas en tu futuro, ¿qué te hace sentir más **orgulloso**: saber que ayudaste a **aplicar la ley** para que las cosas sean justas, o sentir que lograste **mejorar la economía** o la vida de la gente en tu comunidad?",
+          "respuesta": "Mejorar la economía y la vida de mi comunidad. Es que de nada sirve tanta ley si al final mi gente sigue igual de fregada y sin oportunidades."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Ingeniería Industrial",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 7,
+          "dimension": "motivaciones",
+          "pregunta": "Kevin, se nota que tienes un corazón muy puesto en el desarrollo de tu comunidad y en mejorar la calidad de vida de la gente. Para terminar de ver cuál es el mejor camino para ti, cuéntame: cuando imaginas tu trabajo ideal, ¿te ves más enfocado en **entender las causas profundas** de los problemas sociales y proponer soluciones desde la investigación, o te atrae más **usar herramientas tecnológicas y datos** para optimizar procesos y ver resultados prácticos y tangibles en una organización?",
+          "respuesta": "Me voy por entender las causas profundas. Al final de cuentas, si no atacamos la raíz de por qué mi aldea está olvidada, ningún proceso práctico va a servir de mucho a largo plazo."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Economía",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Ciencias de la Comunicación Social",
+              "afinidad": 50
+            }
+          ],
+          "brecha": 20,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 5,
+      "brecha_cierre": 20,
+      "A_top3": [
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Criminología y Política Criminal",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 15
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La economía conecta directamente con su interés por la desigualdad regional y su habilidad con los números. Incluir trabajo social y política criminal aborda su deseo de entender las causas estructurales de la pobreza en su aldea.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque economía es pertinente, la administración de empresas ignora su rechazo explícito a la contabilidad rutinaria. Ciencias jurídicas es una opción válida, pero menos enfocada en el análisis cuantitativo de la pobreza que él disfruta.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista captura mejor la pasión del estudiante por el análisis socioeconómico y su habilidad analítica, evitando áreas operativas que le resultan aburridas.",
+        "misma_area": true,
+        "area": "economía"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 3
+    },
+    {
+      "ronda": "R4",
+      "persona": "Ixchel",
+      "contexto": "20 anios, termino magisterio. Habla k'iche' con su familia y espanol en el pueblo, y aprendio ingles sola con series y hablando con turistas en el parque. Da clases particulares a ninios del barrio y le encanta el momento en que a alguien 'le cae el veinte'. Le duele que sus primos mas chiquitos ya no quieran hablar k'iche'. Es paciente y no se enoja cuando alguien se equivoca.",
+      "fijas": {
+        "nombre": "Ixchel",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica",
+        "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
+        "gustos": "Economía, pobreza y desarrollo del país, Comunicación, escritura y medios, Idiomas y otras culturas, Enseñanza, docencia y educación, Historia, sociedad y cultura"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Pedagogía",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Economía",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ciencias de la Educación",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Administración en Recursos Humanos",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "personalidad",
+          "pregunta": "Ixchel, me encanta ver que tienes tantas ganas de ayudar y conectar con otros, ya sea enseñando o analizando cómo mejorar nuestro país. Pensando en cómo te gusta trabajar, cuéntame: cuando tienes un reto difícil entre manos, ¿prefieres **tomar el mando** y organizar a los demás para que todo salga bien, o te sientes más cómoda **trabajando en equipo** como una pieza clave que aporta sus ideas sin necesidad de dirigir?",
+          "respuesta": "Prefiero ser parte del equipo y aportar mis ideas, la verdad me siento más tranquila así, sin andar mandando a nadie."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Pedagogía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Profesorado en Idioma Maya",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 5,
+          "dimension": "habilidades",
+          "pregunta": "Me queda súper claro que te gusta sumar desde el equipo y no necesariamente liderar, eso es genial. Ahora, pensando en lo que sabes hacer o te gustaría aprender, ¿qué te resulta más emocionante: **investigar y analizar datos** para entender problemas complejos de la sociedad, o prefieres **crear materiales y estrategias** para enseñar y ayudar a otros de forma más directa?",
+          "respuesta": "Crear materiales y enseñar a otros, es que me encanta ver cuando a los patojos por fin les cae el veinte con algo que les explicás."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Pedagogía",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ciencias de la Educación",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Profesorado en Idioma Maya",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Profesorado en Educación Artística",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 70
+            }
+          ],
+          "brecha": 7,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Qué lindo que te emocione ver ese momento en que los alumnos aprenden algo nuevo. Ya que disfrutas tanto ese proceso creativo y cercano, cuéntame: cuando te enfrentas a un problema, ¿te gusta más **analizar las cosas con calma** y buscar una lógica detrás de todo, o prefieres **confiar en tu intuición** y en lo que sientes que funcionará mejor en el momento?",
+          "respuesta": "Analizar todo con calma y lógica, es que a veces siento que si no le busco bien la vuelta a las cosas me voy a perder."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Pedagogía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "PEM en Comunicación y Lenguaje",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Profesorado en Idioma Maya",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "valores",
+          "pregunta": "Qué bueno que te gusta analizar todo con calma para no perderte, eso te hace muy detallista. Ahora, pensando en el futuro y en el impacto que quieres dejar en el mundo, ¿qué te mueve más: **luchar por la justicia** y defender los derechos de quienes más lo necesitan, o te motiva más **mejorar la calidad de la educación** para que todos tengan mejores oportunidades de aprender?",
+          "respuesta": "Mejorar la calidad de la educación, porque me duele ver que a muchos les cuesta aprender y quiero que tengan mejores oportunidades."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Pedagogía y Diseño Curricular",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Ciencias de la Educación",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Profesorado en Idioma Maya",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 7,
+          "dimension": "motivaciones",
+          "pregunta": "Me encanta tu compromiso con mejorar la educación, Ixchel. Para entender mejor cómo te ves trabajando, cuéntame: cuando piensas en tu futuro, ¿te emociona más **diseñar los libros y los planes de estudio** que los alumnos usarán en clase, o te ves más como alguien que **gestiona y dirige centros educativos** para que todo funcione bien para los estudiantes y los maestros?",
+          "respuesta": "Diseñar materiales, libros y planes de estudio. Me gusta más esa onda de crear algo que sirva para enseñar que andar metida en el relajo de administrar un colegio."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Pedagogía (Comunicación y Diseño Curricular)",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 70
+            },
+            {
+              "carrera": "PEM en Comunicación y Lenguaje",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Profesorado en Educación Artística",
+              "afinidad": 45
+            }
+          ],
+          "brecha": 25,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 5,
+      "brecha_cierre": 25,
+      "A_top3": [
+        {
+          "carrera": "Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Licenciatura en Educación de la Comunicación y Lenguaje",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Profesorado en Tecnología Educativa",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Ciencias de la Educación",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Ciencias de la Comunicación Social",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 2,
+        "porque_1": "La recomendación de Economía carece de conexión con su vocación docente y su interés por la preservación lingüística. Aunque Educación es pertinente, la lista es dispersa y no aprovecha su talento multilingüe.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista se alinea perfectamente con su experiencia en magisterio y su pasión por la enseñanza. Además, integra su habilidad con los idiomas y su interés por la preservación cultural de forma técnica y profesional.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista profundiza en el perfil pedagógico y lingüístico del estudiante, mientras que la primera incluye opciones que no guardan relación con su vocación demostrada.",
+        "misma_area": false,
+        "area": "economía"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 2
+    },
+    {
+      "ronda": "R4",
+      "persona": "Diego",
+      "contexto": "17 anios, quinto bachillerato. Juega futbol en una liga del municipio y se rompio la rodilla el anio pasado; paso seis meses yendo a terapia y le fascino todo lo que le hacian para volver a caminar bien. Le gusta el cuerpo humano y como se recupera. Es sociable, siempre anda con gente, y no se imagina metido en una oficina. Tiene dos perros y los cuida el.",
+      "fijas": {
+        "nombre": "Diego",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+        "gustos": "Salud, cuidados y atención a pacientes, Cuerpo, deporte y rehabilitación, Animales y su cuidado"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Enfermería Veterinaria",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Nutrición",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Cirujano Dentista",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Diego, me encanta que tengas tan claro que quieres ayudar a otros y que te gusta el movimiento. Ahora, pensando en cómo te gusta hacer las cosas, ¿qué te atrae más: **resolver problemas técnicos** usando herramientas y máquinas, o prefieres **enfocarte en las emociones** y en lo que sienten las personas cuando las ayudas?",
+          "respuesta": "Prefiero enfocarme en los sentimientos y el bienestar de las personas. La verdad es que me gusta ver cómo se sienten mejor después de que uno les echa la mano, eso llena más que estar ahí solo con máquinas."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Nutrición",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "habilidades",
+          "pregunta": "Me queda súper claro que lo que más te llena es ver cómo alguien se siente mejor gracias a tu apoyo. Pensando en esos momentos en los que estás ayudando a alguien, ¿qué te resulta más fácil o natural: **escuchar y entender** lo que le pasa por dentro, o **acompañar físicamente** a alguien mientras hace ejercicios o sigue un tratamiento para recuperarse?",
+          "respuesta": "Acompañar físicamente en su recuperación. Me cuadra más andar ahí ayudando con el movimiento, como cuando me tocaba a mí en la terapia."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Enfermería Veterinaria",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Nutrición",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 45
+            }
+          ],
+          "brecha": 25,
+          "dimension": "valores",
+          "pregunta": "Qué bueno que te sientas tan cómodo acompañando a otros en su recuperación física. Ahora, cuéntame un poco sobre lo que te mueve por dentro: cuando te imaginas trabajando, ¿qué es más importante para ti: **sentir que haces una diferencia directa** en la vida de una persona cada día, o **trabajar en equipo** con otros profesionales para lograr una meta común?",
+          "respuesta": "Ver el cambio directo en la persona. Me gusta ver con mis propios ojos cómo la gente va mejorando gracias a lo que uno hace."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Nutrición",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Enfermería Veterinaria",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Optometría",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Producción de Imágenes Diagnósticas",
+              "afinidad": 55
+            }
+          ],
+          "brecha": 25,
+          "dimension": "personalidad",
+          "pregunta": "Me encanta ver cómo te motiva el cambio directo en las personas, eso es súper valioso. Ahora, cuéntame un poco sobre tu forma de ser: cuando te toca enfrentar una situación difícil o un problema inesperado con alguien, ¿eres más de **mantener la calma y seguir un plan** paso a paso, o prefieres **adaptarte sobre la marcha** y buscar una solución creativa según cómo se sienta la persona en ese momento?",
+          "respuesta": "Prefiero adaptarme y ser creativo según el momento, porque cada persona es diferente y a veces toca improvisar para que se sientan bien."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Licenciatura en Nutrición",
+              "afinidad": 55
+            },
+            {
+              "carrera": "Profesorado en Educación Inicial y Preprimaria",
+              "afinidad": 50
+            }
+          ],
+          "brecha": 30,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 30,
+      "A_top3": [
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Técnico Universitario en Enfermería Veterinaria",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Técnico Universitario en Enfermería Veterinaria",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista conecta directamente con su experiencia personal en rehabilitación física y su interés por el cuerpo humano. Además, integra su faceta sociable y su cuidado por los animales de manera lógica.",
+        "coherencia_2": 5,
+        "porque_2": "La selección de carreras es idéntica en contenido a la primera, manteniendo una coherencia total con su perfil. La distribución de porcentajes es menos determinante que la elección de las disciplinas, las cuales encajan perfectamente con sus vivencias.",
+        "mejor": "empate",
+        "porque_mejor": "Ambas listas proponen exactamente las mismas carreras, las cuales responden con precisión a su interés por la rehabilitación, el cuidado de personas y el bienestar animal, evitando entornos de oficina.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "empate",
+      "coherencia_A": 5,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R4",
+      "persona": "Mynor",
+      "contexto": "18 anios, termino el diversificado. Desde chiquito cocina en la casa y ahora vende comida los fines de semana afuera del estadio con su hermano; el inventa los platos y su hermano cobra. Le gusta que la gente le diga que esta rico y anda pensando en como hacer que rinda mas. Suenia con tener su propio local algun dia.",
+      "fijas": {
+        "nombre": "Mynor",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "Al aire libre, en el campo o la naturaleza, Con la comunidad, ayudando a personas",
+        "gustos": "Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Organizar y dirigir equipos o instituciones, Gastronomía, turismo y hotelería"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 10,
+          "dimension": "personalidad",
+          "pregunta": "Mynor, me encanta que tengas tan claro que te gusta el contacto con la gente y el aire libre, eso dice mucho de tu buena energía. Imagina que tienes que resolver un problema difícil en un equipo, ¿qué te sale mejor: **tomar el mando** y organizar a todos para que las cosas salgan bien, o prefieres **escuchar a cada uno** y buscar una solución que deje a todos contentos y tranquilos?",
+          "respuesta": "Tomar el mando y organizar al equipo, es que a veces hay que ponerse las pilas de una vez para que todo salga bien y no se nos haga tarde."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Mynor, me queda superclaro que te gusta tomar las riendas y ponerte las pilas para que todo avance. Pensando en cómo te gusta trabajar, cuéntame: cuando tienes que aprender algo nuevo o resolver un reto, ¿te sientes más cómodo **usando números y datos** para tomar decisiones frías y precisas, o prefieres **usar tu creatividad** y tu intuición para diseñar algo nuevo desde cero?",
+          "respuesta": "Prefiero usar mi creatividad y diseñar cosas nuevas, es que me gusta inventar platos y ver cómo sale el sabor, no estar ahí todo el día pegado a los números."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Artes Culinarias y Negocios Gastronómicos",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 15,
+          "dimension": "habilidades",
+          "pregunta": "Mynor, me encanta esa chispa creativa que tienes para inventar sabores y diseñar cosas nuevas. Ahora, pensando en lo que sabes hacer o te gustaría aprender a manejar, ¿qué te atrae más: **aprender técnicas específicas** para construir o fabricar objetos con tus manos, o prefieres **desarrollar habilidades de gestión** para organizar proyectos, liderar equipos y hacer que un negocio crezca?",
+          "respuesta": "Desarrollar habilidades para organizar proyectos y negocios, porque fijo mi sueño es tener mi propio local y que crezca bien macizo."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Artes Culinarias y Negocios Gastronómicos",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Profesorado en Emprendimiento para la Productividad",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 10,
+          "dimension": "valores",
+          "pregunta": "Mynor, me queda superclaro que tienes la meta fija en tu propio negocio y en hacerlo crecer con tu creatividad. Ahora, cuéntame algo importante: al trabajar en tu proyecto, ¿qué te hace sentir más realizado: **generar ganancias** y éxito económico personal, o **ayudar a tu comunidad** y mejorar la vida de las personas que te rodean?",
+          "respuesta": "Generar ganancias y éxito económico, porque al final del día uno lo que quiere es que el negocio funcione y salga adelante, así de plano."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Artes Culinarias y Negocios Gastronómicos",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 55
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 40
+            }
+          ],
+          "brecha": 25,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 25,
+      "A_top3": [
+        {
+          "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Chef Profesional e Internacional (Técnico Universitario)",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería en Agronomía",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se alinea perfectamente con su experiencia práctica en cocina y su visión emprendedora. Incluye formación técnica y administrativa que le permitirá gestionar su futuro local con éxito.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque incluye administración y gastronomía, la inclusión de agronomía no tiene una conexión clara con su perfil comercial y culinario. Es una opción que se aleja de su interés directo por la atención al cliente y la creación de platos.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es más coherente porque todas las opciones refuerzan su deseo de tener un negocio propio y su pasión por la cocina, sin incluir áreas ajenas a su trayectoria actual.",
+        "misma_area": true,
+        "area": "gastronomía"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 3
+    },
+    {
+      "ronda": "R4",
+      "persona": "Katherine",
+      "contexto": "17 anios, quinto bachillerato. Le hizo una pagina web al negocio de su tio y le cobro. Se pasa las tardes viendo tutoriales y probando cosas hasta que le salen. Le gusta cuando algo que estaba roto por fin funciona. Tambien es la que lleva las cuentas del negocio familiar en una hoja de calculo que ella misma armo.",
+      "fijas": {
+        "nombre": "Katherine",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos",
+        "entorno": "En una oficina o empresa, En un laboratorio o taller técnico, En medios de comunicación o diseñando",
+        "gustos": "Matemáticas y números, Tecnología y computación, Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Organizar y dirigir equipos o instituciones, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "pasos": [
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Administración de Empresas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Hola Katherine, me encanta ver que tienes tantos intereses, desde los números hasta el diseño. Para conocerte mejor, cuéntame: cuando tienes que resolver un problema difícil, ¿qué te sale más natural: **analizar los datos** y la lógica paso a paso, o prefieres **usar tus manos** y herramientas para probar soluciones físicas hasta que algo funcione?",
+          "respuesta": "La verdad me gusta más hacer cosas con las manos, ahí probando y moviendo las piezas hasta que por fin jalan las ondas, es más de pura práctica."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "personalidad",
+          "pregunta": "Katherine, me encanta que seas de las que prefiere ensuciarse las manos y probar hasta que las cosas funcionan. Pensando en cómo te gusta trabajar, dime: cuando te toca hacer un proyecto, ¿qué te hace sentir más **orgullosa** al terminar: ver que lograste **organizar a todo un equipo** para alcanzar una meta, o ver que creaste algo **único y bien hecho** con tus propias manos?",
+          "respuesta": "Definitivamente prefiero crear algo funcional con mis manos, me llena más ver que la cosa ya camina bien después de tanto estarle moviendo."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 65
+            }
+          ],
+          "brecha": 5,
+          "dimension": "valores",
+          "pregunta": "Me queda clarísimo que lo tuyo es meterle mano a las cosas y ver cómo cobran vida. Ahora, pensando en el tipo de retos que te gustaría enfrentar en el futuro, ¿qué te hace sentir más satisfecha al trabajar: **seguir reglas muy estrictas** para que todo sea perfecto y seguro, o **experimentar con ideas nuevas** aunque eso signifique tener que corregir y ajustar varias veces sobre la marcha?",
+          "respuesta": "Experimentar y ajustar sobre la marcha, porque así es como aprendo moviéndole hasta que sale bien."
+        },
+        {
+          "terminado": false,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Arquitectura",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 60
+            }
+          ],
+          "brecha": 5,
+          "dimension": "habilidades",
+          "pregunta": "Katherine, me encanta esa chispa que tienes para experimentar y no rendirte hasta que algo funciona. Como te gusta tanto meterle mano a las cosas, cuéntame: cuando estás trabajando en un proyecto, ¿qué se te da mejor o qué disfrutas más hacer: **dibujar o diseñar** cómo debería quedar algo antes de armarlo, o prefieres **manejar herramientas y materiales** directamente para darle forma con tus propias manos?",
+          "respuesta": "Prefiero manejar herramientas y armar el proyecto directamente, me da igual el diseño, yo solo quiero ponerme a trabajar y ver que la cosa jala de una vez."
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 55
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 40
+            }
+          ],
+          "brecha": 25,
+          "dimension": "",
+          "pregunta": ""
+        }
+      ],
+      "adaptativas_hechas": 4,
+      "brecha_cierre": 25,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería Mecánica",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Ingeniería en Electrónica",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 15
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 3,
+        "porque_1": "La lista se enfoca en la resolución de problemas técnicos y mecánicos, lo cual conecta con su gusto por reparar cosas. Sin embargo, ignora su clara inclinación hacia el desarrollo web y la gestión de datos.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista es altamente coherente al incluir Ciencias y Sistemas, que capitaliza directamente su experiencia creando páginas web. Además, Ingeniería Industrial integra perfectamente su habilidad para organizar procesos y llevar cuentas.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista aprovecha mejor el perfil híbrido de la estudiante, combinando su capacidad de programación con su aptitud para la gestión administrativa y de procesos.",
+        "misma_area": false,
+        "area": "ingeniería"
+      },
+      "gano": "B",
+      "coherencia_A": 3,
+      "coherencia_B": 5
     }
   ]
 }

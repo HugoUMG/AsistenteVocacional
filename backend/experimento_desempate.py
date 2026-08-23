@@ -213,7 +213,8 @@ def correr(rondas=2):
                 print(f"!! tope ${TOPE_USD} alcanzado; se detiene en {ronda}/{p['nombre']}")
                 _reporte(casos)
                 return casos
-            print(f"\n=== R{ronda} · {p['nombre']} ===")
+            # `ronda` ya viene con la R de _etiquetas(); no anteponerla otra vez.
+            print(f"\n=== {ronda} · {p['nombre']} ===")
             # Las fijas se contestan UNA vez y se comparten: así la única
             # diferencia entre brazos son las adaptativas, no el arranque.
             base = _fijas(p, banco)
