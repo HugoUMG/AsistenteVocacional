@@ -87,7 +87,7 @@ export default function Protegida({ children, test }) {
           </ul>
         )}
         <p className="acceso-cta">{p.cta}</p>
-        <div className="nav-login">
+        <div className="nav-login acceso-login">
           <GoogleLogin onSuccess={entrar} onError={() => setError('No se pudo iniciar sesión.')} />
         </div>
         {error && <p className="nav-login-error">{error}</p>}
