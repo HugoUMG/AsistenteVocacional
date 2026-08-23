@@ -659,3 +659,444 @@ a la recomendación. Mismas respuestas fijas en los dos.
 - Sobre A: La lista es altamente coherente al priorizar la fisioterapia, conectando directamente con su experiencia personal de rehabilitación. Además, integra su interés por el cuidado animal y el trabajo dinámico fuera de oficinas.
 - Sobre B: La lista presenta las mismas opciones que la primera, manteniendo una lógica impecable respecto a sus intereses en salud humana y animal. La coherencia es total al reflejar sus vivencias y habilidades sociales.
 - Comparación: Ambas listas proponen exactamente las mismas carreras, las cuales se alinean perfectamente con el perfil del estudiante, su experiencia de recuperación física y su vocación de servicio.
+
+## R2 · Mynor
+
+18 anios, termino el diversificado. Desde chiquito cocina en la casa y ahora vende comida los fines de semana afuera del estadio con su hermano; el inventa los platos y su hermano cobra. Le gusta que la gente le diga que esta rico y anda pensando en como hacer que rinda mas. Suenia con tener su propio local algun dia.
+
+**Marcó:** Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Organizar y dirigir equipos o instituciones, Gastronomía, turismo y hotelería
+
+**Adaptativas (4):**
+
+- [estilo_cognitivo] Mynor, me encanta ver que te mueve tanto el emprendimiento como el trabajo con la gente y la naturaleza. Para conocerte mejor, cuéntame: cuando tienes que **resolver un problema difícil**, ¿prefieres analizar los datos y buscar una solución lógica y ordenada, o te sientes más cómodo confiando en tu intuición y en cómo se sienten las personas involucradas?
+  - Prefiero confiar en mi intuicion y en lo que sienten los demas. Es que uno sabe como va la onda con la gente al probar la comida, se siente cuando algo va a funcionar.
+  - ranking: Administración de Hotelería, Turismo y Gastronomía 85, Administración de Empresas 80, Ingeniería Agrícola con Énfasis en Gerencia 75
+- [valores] Mynor, me gusta mucho esa forma en la que conectas con la gente y confías en tu intuición, se nota que eres alguien muy humano. Ahora, pensando en tu futuro, ¿qué te hace sentir más **orgulloso y satisfecho** al final del día: saber que ayudaste a alguien a mejorar su situación personal, o ver que lograste **crear o gestionar** algo que funciona bien y hace crecer un negocio?
+  - La verdad me llena más ver que el negocio crece, cuando la gente llega y todo sale bien con la comida, eso es lo que más me cuadra.
+  - ranking: Administración de Hotelería, Turismo y Gastronomía 85, Trabajo Social 75, Administración de Empresas 70
+- [personalidad] Mynor, me queda super claro que ver crecer tu negocio y que la gente disfrute de tu comida es lo que te llena de orgullo. Ahora, cuéntame un poco sobre ti: cuando trabajas en equipo, ¿te gusta más **tomar el mando** y organizar cómo deben hacerse las cosas, o prefieres **colaborar de cerca** con tus compañeros para que todos aporten sus ideas y el ambiente sea más relajado?
+  - Prefiero tomar el mando y organizar, es que me gusta que las cosas salgan bien y rápido, así que yo mismo me encargo de que todo marche como tiene que ser.
+  - ranking: Artes Culinarias y Negocios Gastronómicos 95, Administración de Empresas 80, Ingeniería Agrícola con Énfasis en Gerencia 70
+- [habilidades] Mynor, ya me contaste que te gusta tomar el mando para que todo salga rápido y bien en tu negocio. Ahora, para entender mejor lo que sabes hacer, cuéntame: a la hora de trabajar, ¿qué te resulta más natural o divertido: **manejar números y presupuestos** para que el negocio sea rentable, o **crear recetas y presentaciones** nuevas para sorprender a tus clientes?
+  - Crear recetas y diseños para la comida, eso es lo que más me cuadra porque me gusta inventar cosas nuevas para que la gente siempre quiera volver por más.
+  - ranking: Artes Culinarias y Negocios Gastronómicos 95, Administración de Empresas 85, Ingeniería Agrícola con Énfasis en Gerencia 70
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Administración de Hotelería, Turismo y Gastronomía (35%) | Administración de Hotelería, Turismo y Gastronomía (25%) |
+| 2 | Artes Culinarias y Negocios Gastronómicos (30%) | Ingeniería en Agronomía (20%) |
+| 3 | Administración de Empresas (20%) | Administración de Empresas (20%) |
+
+**Juez ciego:** gana A · A=5 B=3 · misma área: True (gastronomía)
+
+- Sobre A: La lista se centra totalmente en el interés gastronómico y la visión emprendedora del estudiante. Las opciones refuerzan su deseo de gestionar su propio local y profesionalizar su experiencia actual.
+- Sobre B: Aunque incluye administración y gastronomía, la inclusión de Agronomía no tiene una conexión clara con el perfil del estudiante. No se menciona interés por la producción agrícola o el campo, lo que debilita la propuesta.
+- Comparación: La primera lista es mucho más coherente al enfocarse exclusivamente en el área de negocios gastronómicos, que es donde el estudiante ya ha demostrado iniciativa y pasión.
+
+## R2 · Katherine
+
+17 anios, quinto bachillerato. Le hizo una pagina web al negocio de su tio y le cobro. Se pasa las tardes viendo tutoriales y probando cosas hasta que le salen. Le gusta cuando algo que estaba roto por fin funciona. Tambien es la que lleva las cuentas del negocio familiar en una hoja de calculo que ella misma armo.
+
+**Marcó:** Matemáticas y números, Tecnología y computación, Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas
+
+**Adaptativas (4):**
+
+- [estilo_cognitivo] Katherine, me encanta ver que tienes tantos intereses, desde la tecnología hasta el diseño. Para conocerte mejor, cuéntame: cuando tienes que **tomar una decisión importante** o resolver un problema difícil, ¿prefieres confiar más en tu **intuición y creatividad** para encontrar una salida nueva, o te sientes más cómoda siguiendo un **plan lógico y ordenado** paso a paso?
+  - Prefiero un plan lógico y ordenado paso a paso porque así es como me aseguro de que las cosas sí salgan bien a la primera.
+  - ranking: Ingeniería en Ciencias y Sistemas 85, Licenciatura en Informática e Inteligencia de Negocios 82, Administración de Empresas 78
+- [valores] Me gusta mucho cómo piensas, Katherine, se nota que eres alguien que busca seguridad en el orden. Ahora, pensando en el futuro, ¿qué te hace sentir más **orgullosa** al terminar un proyecto: saber que **ayudaste a otras personas** a mejorar su situación, o sentir que lograste **eficiencia máxima** y que todo funciona a la perfección?
+  - Lograr eficiencia máxima y que todo funciona perfecto. Me cuadra más ver que algo que armé sale justo como quería y no falla.
+  - ranking: Ingeniería en Ciencias y Sistemas 85, Licenciatura en Informática e Inteligencia de Negocios 82, Ingeniería Mecánica Industrial 78
+- [personalidad] Katherine, ya me quedó claro que te encanta que las cosas funcionen a la perfección y con mucha precisión. Ahora, cuéntame sobre cómo te gusta trabajar con otros: ¿prefieres **liderar un equipo** y organizar las tareas de todos, o te sientes mejor **enfocada en tu propia parte** técnica para asegurar que cada detalle técnico quede impecable?
+  - Prefiero enfocarme en mi parte técnica, la verdad me estresa menos y así me aseguro de que no haya ni un error en lo que estoy haciendo.
+  - ranking: Ingeniería en Ciencias y Sistemas 85, Ingeniería Mecánica Industrial 82, Licenciatura en Informática e Inteligencia de Negocios 78
+- [habilidades] Katherine, me queda claro que prefieres concentrarte al máximo en tu parte técnica para que todo salga perfecto. Pensando en esas tareas técnicas que te gusta hacer, ¿qué se te da mejor: **resolver problemas con números y cálculos** complejos, o prefieres **usar herramientas y manipular objetos físicos** para construir o reparar cosas?
+  - La verdad es que prefiero los números y los cálculos. Me siento más cómoda ordenando todo en las hojas de cálculo que andar ahí con herramientas físicas.
+  - ranking: Ingeniería en Ciencias y Sistemas 85, Ingeniería Mecánica 82, Ingeniería en Electrónica 78
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Ingeniería Industrial (30%) | Ingeniería en Ciencias y Sistemas (25%) |
+| 2 | Licenciatura en Informática e Inteligencia de Negocios (25%) | Ingeniería Industrial (20%) |
+| 3 | Contaduría Pública y Auditoría (25%) | Licenciatura en Informática e Inteligencia de Negocios (20%) |
+
+**Juez ciego:** gana B · A=4 B=5 · misma área: False (ingeniería)
+
+- Sobre A: Aunque incluye opciones técnicas, la inclusión de Contaduría Pública se aleja del perfil creativo y de desarrollo tecnológico que ella demuestra. Es una opción más administrativa que no aprovecha su pasión por la experimentación técnica.
+- Sobre B: La lista se centra en el desarrollo técnico y la resolución de problemas lógicos, lo cual encaja perfectamente con su habilidad para programar y su curiosidad autodidacta. Valora su capacidad para crear soluciones funcionales desde cero.
+- Comparación: La primera lista mantiene una coherencia total con su perfil de creadora y solucionadora de problemas técnicos, mientras que la segunda desvía el enfoque hacia áreas contables más tradicionales que limitan su potencial creativo.
+
+## R3 · Diego
+
+17 anios, quinto bachillerato. Juega futbol en una liga del municipio y se rompio la rodilla el anio pasado; paso seis meses yendo a terapia y le fascino todo lo que le hacian para volver a caminar bien. Le gusta el cuerpo humano y como se recupera. Es sociable, siempre anda con gente, y no se imagina metido en una oficina. Tiene dos perros y los cuida el.
+
+**Marcó:** Salud, cuidados y atención a pacientes, Cuerpo, deporte y rehabilitación, Animales y su cuidado
+
+**Adaptativas (4):**
+
+- [estilo_cognitivo] Diego, me encanta ver que tienes claro que quieres estar en movimiento y ayudando a otros, ya sea con personas o animales. Pensando en cómo te gusta trabajar cuando tienes un reto importante, ¿prefieres **seguir pasos y reglas** muy claras para que todo salga perfecto, o te sientes más cómodo **tomando decisiones rápidas** y creativas según lo que vaya pasando en el momento?
+  - Prefiero decidir rápido según la situación, porque en el fútbol y en la terapia todo cambia a cada rato y toca actuar de una.
+  - ranking: Fisioterapia 90, Enfermería Veterinaria 85, Nutrición 75
+- [valores] Qué buena comparación con el fútbol, Diego. Se nota que te gusta la adrenalina de resolver cosas al instante. Ahora, cuéntame sobre tus **valores**: cuando te toca ayudar a alguien que está pasando por un momento difícil, ¿qué es lo que más te motiva: **sentir que le diste una solución técnica** que arregló su problema, o **sentir que lo acompañaste y escuchaste** para que se sintiera mejor?
+  - La neta prefiero darle una solución física, es que ver que alguien ya puede moverse bien otra vez es lo que más me cuadra.
+  - ranking: Fisioterapia 90, Médico y Cirujano 85, Licenciatura en Enfermería 80
+- [personalidad] Diego, me queda clarísimo que te motiva ver resultados reales y físicos, como cuando alguien recupera su movilidad. Ahora, pensando en tu forma de ser, cuando trabajas en equipo, ¿te sientes más cómodo siendo quien **toma el mando** y organiza a los demás para que el trabajo salga adelante, o prefieres ser quien **apoya desde adentro** con tareas específicas para que el grupo funcione bien?
+  - Prefiero apoyar con tareas específicas y técnicas, la verdad me siento mejor haciendo mi parte bien hecha para que todos salgamos adelante.
+  - ranking: Fisioterapia 95, Médico y Cirujano 85, Cirujano Dentista 75
+- [habilidades] Diego, me queda muy claro que te gusta ser el experto que hace su parte técnica a la perfección para ayudar a los demás. Ya que te sientes cómodo trabajando con las manos y en movimiento, cuéntame: cuando te enfrentas a un problema físico, ¿qué te resulta más natural hacer: **analizar con cuidado** cada detalle y usar instrumentos de precisión para encontrar el fallo, o **aplicar técnicas manuales** de fuerza y movimiento para corregir directamente lo que no está funcionando?
+  - Aplicar técnicas manuales de fuerza y movimiento, fijo. Es que me cuadra más sentir lo que estoy arreglando con mis propias manos, como me hacían en la terapia.
+  - ranking: Fisioterapia 95, Cirujano Dentista 80, Optometria 75
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Fisioterapia (45%) | Fisioterapia (25%) |
+| 2 | Médico y Cirujano (25%) | Licenciatura en Enfermería (25%) |
+| 3 | Técnico Universitario en Enfermería Veterinaria (20%) | Técnico Universitario en Enfermería Veterinaria (20%) |
+
+**Juez ciego:** gana A · A=5 B=4 · misma área: True (salud)
+
+- Sobre A: La lista conecta directamente con su experiencia personal en rehabilitación física y su interés por el cuerpo humano. Incluir medicina es coherente con su curiosidad biológica, mientras que la enfermería veterinaria valida su responsabilidad en el cuidado de sus mascotas.
+- Sobre B: Aunque la fisioterapia es muy acertada, la enfermería general es una opción más estática que podría chocar con su rechazo a las oficinas. La lista es sólida, pero pierde un poco de fuerza al no considerar su interés específico por la recuperación física avanzada.
+- Comparación: La primera lista es superior porque incluye medicina, una carrera que aprovecha su fascinación por el cuerpo humano y la recuperación, alineándose mejor con su experiencia de vida que la enfermería general.
+
+## R3 · Mynor
+
+18 anios, termino el diversificado. Desde chiquito cocina en la casa y ahora vende comida los fines de semana afuera del estadio con su hermano; el inventa los platos y su hermano cobra. Le gusta que la gente le diga que esta rico y anda pensando en como hacer que rinda mas. Suenia con tener su propio local algun dia.
+
+**Marcó:** Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Organizar y dirigir equipos o instituciones, Gastronomía, turismo y hotelería
+
+**Adaptativas (4):**
+
+- [estilo_cognitivo] Mynor, me encanta que tengas tantas ganas de liderar y emprender, pero también de ayudar a la gente. Imagina que tienes que resolver un problema difícil en tu equipo: ¿te sientes más cómodo **analizando los números y los datos** para tomar una decisión lógica, o prefieres **hablar directamente con las personas** para entender qué sienten y buscar una solución juntos?
+  - Prefiero hablar con la gente, la verdad es que entiendo mejor los problemas viendo cómo se sienten ellos que sentado viendo puros números.
+  - ranking: Administración de Empresas 85, Administración de Hotelería, Turismo y Gastronomía 80, Licenciatura en Administración Educativa 75
+- [valores] Mynor, me queda super claro que prefieres conectar con las personas antes que encerrarte con los números. Pensando en cómo te gusta trabajar, dime: cuando tienes un reto frente a ti, ¿te sientes más motivado si el trabajo tiene un **propósito social** claro para mejorar la vida de otros, o te atrae más el **desafío de crear algo nuevo** y que funcione a la perfección?
+  - Me atrae más crear cosas nuevas y que funcionen bien, me gusta ver que todo salga calidad cuando invento un plato nuevo.
+  - ranking: Administración de Hotelería, Turismo y Gastronomía 85, Trabajo Social 80, Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural 75
+- [personalidad] Mynor, me encanta esa chispa que tienes para crear cosas nuevas y que todo salga perfecto, como cuando inventas un plato. Ahora, cuéntame sobre cómo eres cuando trabajas en equipo: ¿prefieres ser quien **toma las decisiones** y guía a todos hacia la meta, o te sientes más cómodo **apoyando a los demás** para que ellos brillen y el grupo funcione mejor?
+  - Prefiero ser quien guía y toma las decisiones, es que a veces ya tengo la idea en la cabeza y me gusta que salga justo como la planeé.
+  - ranking: Administración de Hotelería, Turismo y Gastronomía 90, Administración de Empresas 75, Ingeniería Mecánica Industrial 60
+- [habilidades] Mynor, ya me quedó claro que te gusta tomar el mando y que las cosas salgan tal cual las imaginas, como cuando preparas algo especial. Ahora, cuéntame sobre lo que sabes hacer: cuando tienes que aprender algo técnico nuevo, ¿te resulta más fácil **entender cómo funcionan las máquinas y los materiales** con tus propias manos, o se te da mejor **planificar y organizar los pasos** para que un servicio o un evento salga impecable?
+  - Me sale mejor planificar y organizar los pasos, me gusta tener todo controlado para que el servicio salga bien y no haya fallas.
+  - ranking: Administración de Hotelería, Turismo y Gastronomía 90, Administración de Empresas 75, Ingeniería Mecánica Industrial 65
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Administración de Hotelería, Turismo y Gastronomía (35%) | Administración de Hotelería, Turismo y Gastronomía (35%) |
+| 2 | Chef Profesional e Internacional (Técnico Universitario) (25%) | Ingeniería en Agronomía (25%) |
+| 3 | Administración de Empresas (20%) | Administración de Empresas (20%) |
+
+**Juez ciego:** gana A · A=5 B=3 · misma área: True (gastronomía)
+
+- Sobre A: La lista se alinea perfectamente con su experiencia práctica en cocina y su visión emprendedora. Incluir la formación técnica en cocina potencia su talento natural para crear platos.
+- Sobre B: Aunque la administración es relevante, la ingeniería en agronomía no guarda una relación directa con su interés por la gastronomía y el servicio al cliente. Esta opción parece desconectada de su vocación creativa y comercial.
+- Comparación: La primera lista es superior porque todas sus opciones refuerzan el objetivo del estudiante de profesionalizar su negocio de comida y su pasión por la cocina, mientras que la segunda incluye una carrera técnica sin conexión con su perfil.
+
+## R3 · Katherine
+
+17 anios, quinto bachillerato. Le hizo una pagina web al negocio de su tio y le cobro. Se pasa las tardes viendo tutoriales y probando cosas hasta que le salen. Le gusta cuando algo que estaba roto por fin funciona. Tambien es la que lleva las cuentas del negocio familiar en una hoja de calculo que ella misma armo.
+
+**Marcó:** Matemáticas y números, Tecnología y computación, Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas
+
+**Adaptativas (4):**
+
+- [estilo_cognitivo] Katherine, me encanta que tengas tantos intereses distintos, desde la tecnología hasta el diseño. Para entenderte mejor, cuéntame: cuando tienes que aprender algo nuevo o resolver un problema difícil, ¿qué te sale mejor: **analizar los detalles** poco a poco hasta encontrar la lógica, o prefieres **probar y experimentar** directamente con las manos hasta que las cosas funcionen?
+  - La verdad prefiero probar y experimentar con las manos, es que así me entretengo más viendo cómo queda la onda y al final siempre me sale.
+  - ranking: Ingeniería en Ciencias y Sistemas 85, Licenciatura en Informática e Inteligencia de Negocios 80, Ingeniería Mecánica Industrial 75
+- [personalidad] Katherine, me gusta mucho esa chispa que tienes para meter las manos en la masa y ver resultados reales. Ahora, pensando en cómo te gusta trabajar con otros, ¿qué te hace sentir más cómoda: **liderar un equipo** y tomar las decisiones importantes, o prefieres **enfocarte en tu tarea** y que cada detalle técnico salga perfecto por tu cuenta?
+  - Prefiero concentrarme en mi trabajo técnico, es que así me enfoco mejor y no ando lidiando con la gente, solo quiero que lo que estoy haciendo me salga bien.
+  - ranking: Ingeniería Mecánica Industrial 85, Ingeniería en Electrónica 80, Ingeniería Mecánica 75
+- [valores] Katherine, ya me quedó claro que prefieres trabajar a tu ritmo y enfocarte en que las cosas queden perfectas. Ahora, pensando en lo que te motiva a largo plazo, ¿qué es lo que más te hace sentir **satisfecha** al terminar un proyecto: saber que ayudaste a **resolver un problema** que afectaba a otros, o sentir que lograste algo **técnicamente impecable** y muy eficiente?
+  - Lograr un resultado impecable y eficiente, la verdad es que me da una satisfacción bien chilera ver que algo quedó perfecto y funcionando al cien.
+  - ranking: Ingeniería Mecánica 85, Ingeniería en Electrónica 82, Ingeniería Civil 75
+- [habilidades] Qué bien que te motive tanto la excelencia técnica, Katherine. Ya que te gusta tanto que las cosas queden perfectas, cuéntame: cuando te enfrentas a un reto, ¿qué se te da mejor: **hacer cálculos**, mediciones y organizar datos con precisión, o prefieres **usar herramientas** y materiales para armar, reparar o dar forma a algo físico?
+  - La verdad es que prefiero hacer cálculos y organizar datos con precisión, me relaja un montón ver que todo cuadra al centavo.
+  - ranking: Técnico en Laboratorio Dental 92, Ingeniería Mecánica 85, Ingeniería en Electrónica 82
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Ingeniería Industrial (25%) | Ingeniería en Ciencias y Sistemas (25%) |
+| 2 | Contaduría Pública y Auditoría (20%) | Ingeniería Industrial (20%) |
+| 3 | Ingeniería en Ciencias y Sistemas (20%) | Licenciatura en Marketing and Business Analytics (18%) |
+
+**Juez ciego:** gana B · A=4 B=5 · misma área: False (ingeniería)
+
+- Sobre A: Es una propuesta sólida que reconoce su habilidad con los números y la gestión de procesos. Sin embargo, la Contaduría Pública es un enfoque más rígido que podría limitar su interés creativo por la programación y la experimentación técnica.
+- Sobre B: La lista se alinea perfectamente con su capacidad técnica para el desarrollo web y su interés por la resolución de problemas lógicos. El enfoque en Business Analytics aprovecha directamente su experiencia gestionando finanzas mediante hojas de cálculo.
+- Comparación: La primera lista captura mejor la dualidad entre su perfil técnico-creativo y su capacidad analítica aplicada a negocios, integrando mejor su experiencia con el desarrollo web.
+
+## R4 · Wendy
+
+17 anios, quinto bachillerato en un instituto de Quetzaltenango. Toca la marimba en el grupo del colegio desde los 12 y ahora tambien guitarra; se junta los sabados con unos amigos a ensayar. Es la que organiza los ensayos y la que se pelea para que todos lleguen a tiempo. Le va bien en clase sin esforzarse mucho, pero se aburre rapido de lo que es puro memorizar. Le gusta ensenarle a los mas chiquitos del grupo.
+
+**Marcó:** Arte, diseño y creatividad, Música, danza y artes escénicas, Enseñanza, docencia y educación, Organizar y dirigir equipos o instituciones
+
+**Adaptativas (4):**
+
+- [estilo_cognitivo] Wendy, me encanta ver que tienes un lado creativo y que te motiva mucho el trabajo con la gente. Pensando en cómo prefieres resolver los retos del día a día, ¿te sientes más cómoda **analizando los detalles** y buscando la lógica detrás de las cosas, o prefieres **confiar en tu intuición** y dejar que las ideas fluyan mientras trabajas?
+  - Prefiero confiar en mi intuición y dejar que las ideas fluyan, porque así me sale mejor todo cuando estamos ensayando con los chavos.
+  - ranking: Pedagogía 85, Educación Artística 82, Educación Primaria Intercultural 78
+- [personalidad] Wendy, me encanta esa chispa que tienes para dejar que las ideas fluyan cuando trabajas con los chavos. Ahora, cuéntame algo sobre ti: cuando hay un problema difícil en grupo, ¿eres de las que **toma la iniciativa** para organizar a todos y buscar una solución, o prefieres **escuchar a los demás** y apoyar desde un rol más tranquilo para que todos estén bien?
+  - Tomo la iniciativa y organizo al grupo, es que si uno no se pone las pilas nadie hace nada y me estreso.
+  - ranking: Pedagogía 85, Licenciatura en Educación Primaria 80, Licenciatura en Ciencias de la Educación 75
+- [valores] Wendy, me queda claro que eres una líder nata que prefiere tomar el mando para que las cosas salgan bien. Ahora, pensando en lo que haces con tu grupo, ¿qué te hace sentir más orgullosa: **lograr un resultado concreto** y bien hecho, o saber que **ayudaste a que alguien más creciera** o se sintiera mejor gracias a lo que hiciste?
+  - Ayudar a que alguien más creciera o se sintiera mejor, me cuadra un montón ver cómo los patojos del grupo aprenden cosas nuevas por lo que les enseño.
+  - ranking: Lic. en Administración Educativa 85, Profesorado en Educación Artística 80, Lic. en Educación Primaria 75
+- [habilidades] Wendy, me encanta ver esa vocación que tienes para ver crecer a los demás, se nota que te sale natural. Ahora, cuéntame sobre lo que sabes hacer: cuando tienes que explicarle algo complicado a alguien, ¿qué te resulta más fácil: **usar ejemplos prácticos** o materiales visuales para que lo vean claro, o prefieres **usar palabras y explicaciones** detalladas para que lo entiendan paso a paso?
+  - Usar ejemplos prácticos o materiales visuales, es que a puro hablar uno se aburre y mejor si les enseño cómo tocar o qué hacer de una vez.
+  - ranking: Pedagogía 92, Profesorado en Educación Artística 88, Licenciatura en Ciencias de la Educación 85
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Profesorado en Educación Artística (Música y Danza) (35%) | Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural (25%) |
+| 2 | Profesorado en Educación Primaria (25%) | Profesorado en Educación Artística (Música y Danza) (20%) |
+| 3 | Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural (20%) | Licenciatura en Administración Educativa (20%) |
+
+**Juez ciego:** gana A · A=5 B=4 · misma área: True (educación)
+
+- Sobre A: La lista prioriza la música, que es su pasión principal desde los 12 años. Además, integra su habilidad natural para enseñar a los más pequeños y su capacidad de liderazgo al organizar ensayos.
+- Sobre B: Es coherente al incluir la gestión educativa, aprovechando su perfil organizativo. Sin embargo, relega la música a un segundo plano, ignorando que es su principal motor de motivación.
+- Comparación: La primera lista es superior porque coloca la música como eje central, lo cual es fundamental para alguien que se aburre con la memorización pura y necesita un estímulo creativo constante.
+
+## R4 · Elmer
+
+19 anios, termino el diversificado hace un anio y esta trabajando en la tienda de su mama mientras decide. Le arregla el celular y la compu a medio barrio, aprendio viendo videos. Le fascina abrir las cosas y ver que tienen adentro. En su aldea la senial es pesima y el se subio al techo a mover la antena hasta que agarro. Es callado, prefiere resolver solo antes que pedir ayuda.
+
+**Marcó:** Tecnología y computación, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas
+
+**Adaptativas (5):**
+
+- [estilo_cognitivo] Elmer, me queda claro que te gusta mucho el trabajo práctico, ya sea con máquinas, computadoras o herramientas. Pensando en cómo te gusta trabajar cuando tienes un reto importante, ¿prefieres **seguir pasos y reglas** muy claras para que todo salga perfecto, o te sientes más cómodo **probando cosas nuevas** y ajustando sobre la marcha aunque no sepas el resultado final?
+  - Prefiero probar y ajustar sobre la marcha, al final así es como uno aprende bien viendo qué onda con los aparatos.
+  - ranking: Ingeniería en Electrónica 90, Ingeniería Mecánica 85, Ingeniería en Ciencias y Sistemas 80
+- [personalidad] Elmer, me gusta esa actitud de aprender probando y ajustando, se nota que eres alguien curioso. Ahora, cuéntame: cuando trabajas en un proyecto difícil, ¿prefieres **hacerlo tú solo** para concentrarte al máximo y tener el control total, o te gusta **trabajar en equipo** donde todos aportan ideas y se dividen las tareas?
+  - No, prefiero hacerlo solo porque así nadie me molesta y me concentro mejor en lo que estoy haciendo.
+  - ranking: Ingeniería en Ciencias y Sistemas 85, Ingeniería en Electrónica 82, Ingeniería Mecánica 78
+- [habilidades] Entiendo perfectamente, Elmer. A veces uno rinde mucho mejor cuando tiene su propio espacio y nadie lo interrumpe. Ya que te gusta tanto meterle mano a las cosas y trabajar a tu ritmo, cuéntame: al terminar un proyecto, ¿qué es lo que más te da satisfacción: **lograr que algo funcione** a la perfección aunque sea algo pequeño, o **resolver un problema complejo** que nadie más pudo arreglar?
+  - Resolver un problema difícil que se veía imposible, eso es lo que más me cuadra porque uno se siente bien cabrón cuando logra que algo reviva.
+  - ranking: Ingeniería en Electrónica 92, Ingeniería Mecánica 88, Técnico Universitario en Desarrollo de Software 80
+- [valores] Qué buena vibra tienes para los retos, Elmer. Se nota que te motiva mucho ese sentimiento de victoria al arreglar algo difícil. Pensando en tu futuro, ¿qué te parece más importante: **ganar muy bien** dinero aunque el trabajo sea muy exigente, o tener un trabajo que te permita **aprender cosas nuevas** y que te apasione, aunque al principio no sea tan bien pagado?
+  - Aprender y que me apasione, porque si uno es bueno en lo que hace el pisto llega solo después.
+  - ranking: Ingeniería en Ciencias y Sistemas 92, Ingeniería en Electrónica 88, Ingeniería Mecánica 82
+- [intereses] Elmer, me encanta esa mentalidad de que la pasión te llevará lejos. Ahora, para terminar de ver qué camino te queda mejor, cuéntame: cuando te imaginas trabajando en un proyecto, ¿qué te emociona más: **crear programas, algoritmos y software** que vivan dentro de una computadora, o **armar, medir y reparar circuitos y sensores** físicos que hacen que las máquinas cobren vida?
+  - Armar y reparar circuitos físicos, porque me gusta sentir el aparato en las manos y ver cómo reacciona al meterle mano.
+  - ranking: Ingeniería en Ciencias y Sistemas 85, Ingeniería en Electrónica 75, Ingeniería Mecánica 65
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Ingeniería en Electrónica (45%) | Ingeniería en Ciencias y Sistemas (25%) |
+| 2 | Ingeniería Mecánica (30%) | Ingeniería en Electrónica (25%) |
+| 3 | Ingeniería Mecánica Industrial (25%) | Ingeniería Mecánica Industrial (20%) |
+
+**Juez ciego:** gana empate · A=5 B=5 · misma área: True (ingeniería)
+
+- Sobre A: Esta lista se enfoca con mayor precisión en el hardware y la mecánica, lo cual encaja perfectamente con su experiencia reparando celulares y ajustando antenas. Es una selección muy coherente con su naturaleza práctica y solitaria.
+- Sobre B: La lista identifica correctamente su habilidad técnica autodidacta y su curiosidad por el funcionamiento interno de los dispositivos. Las opciones cubren tanto el software como el hardware, alineándose con su perfil de resolución de problemas prácticos.
+- Comparación: Ambas listas son excelentes y capturan la esencia técnica y autodidacta del estudiante. La primera es un poco más amplia al incluir sistemas, mientras que la segunda es más específica hacia el hardware, pero ambas son totalmente coherentes con su perfil.
+
+## R4 · Rosa
+
+18 anios, bachillerato en ciencias y letras. Su abuela estuvo enferma dos anios y ella fue quien la baniaba, le daba sus pastillas y la llevaba a las citas. Se dio cuenta de que no le da impresion nada y que la gente se calma cuando ella habla. En el hospital le llamaron la atencion las maquinas grandes y le pregunto al tecnico como funcionaban. No le gusta estar sentada todo el dia.
+
+**Marcó:** Salud, cuidados y atención a pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Psicología y comportamiento, Construcción, máquinas y cómo funcionan las cosas
+
+**Adaptativas (5):**
+
+- [estilo_cognitivo] Rosa, me encanta ver que tienes tantas ganas de ayudar a otros y que te interesan cosas muy distintas, desde la salud hasta construir máquinas. Para ir conociéndote mejor, cuéntame esto: cuando tienes que resolver un problema difícil, ¿prefieres **analizarlo con calma** y pensar en todos los detalles antes de actuar, o te gusta más **lanzarte a la acción** y probar soluciones rápidas para ver qué pasa?
+  - Prefiero lanzarme a la acción y probar rápido, la verdad es que no tengo paciencia para andar pensando tanto, mejor me pongo a hacer algo de una vez.
+  - ranking: Psicología 85, Ingeniería Civil 80, Licenciatura en Nutrición 75
+- [personalidad] Rosa, me gusta mucho esa energía tuya de querer ponerte manos a la obra de una vez. Ya que eres de las que prefiere la acción, cuéntame: cuando trabajas con otras personas, ¿te sientes más cómoda **tomando las decisiones** y dirigiendo lo que hay que hacer, o prefieres **apoyar al equipo** siguiendo las instrucciones para que todo salga bien?
+  - Prefiero guiar y tomar las decisiones principales, es que me gusta mandar y que las cosas se hagan rápido y bien.
+  - ranking: Ingeniería Civil 85, Administración de Empresas 82, Licenciatura en Nutrición 70
+- [habilidades] Rosa, me queda super claro que te gusta tomar el mando y ver resultados rápidos, eso es genial para liderar proyectos. Ahora, pensando en lo que sabes hacer o te gustaría aprender a hacer, ¿qué te atrae más: **manejar herramientas técnicas** y maquinaria compleja con precisión, o prefieres **enfocarte en el trato directo** y la comunicación para entender y ayudar a las personas?
+  - La mera verdad es que me gustan las dos, pero prefiero manejar herramientas y máquinas porque me da curiosidad cómo funcionan, aunque igual me gusta un montón ayudar a la gente.
+  - ranking: Administración de Empresas 85, Médico y Cirujano 75, Ingeniería Civil 70
+- [valores] Rosa, entiendo que te llama mucho la atención el mundo de las máquinas y herramientas, pero que también tienes ese deseo de ayudar. Pensando en tu futuro, ¿qué te hace sentir más orgullosa: **lograr una meta** que beneficie a mucha gente aunque sea un trabajo duro, o **sentirte libre** de elegir tus propios horarios y proyectos aunque el impacto sea más pequeño?
+  - Sí, prefiero mil veces lograr una meta que ayude a la gente, aunque me toque trabajar duro y desvelarme, porque siento que así vale la pena lo que hago.
+  - ranking: Ingeniería Mecánica Industrial 85, Ingeniería Civil 75, Médico y Cirujano 70
+- [intereses] Rosa, me encanta ver que tienes esa chispa para liderar y que te motiva tanto ayudar a los demás con metas grandes. Para terminar de entender cómo te imaginas tu día a día, imagina que tienes dos proyectos frente a ti: uno donde pasas el tiempo **diseñando y calculando estructuras** grandes como puentes o edificios para que sean seguras, o uno donde te enfocas en **crear y optimizar mecanismos** o motores que mueven cosas. ¿Cuál de estos dos mundos te emociona más?
+  - Me emociona más crear y optimizar motores y sistemas mecánicos, porque ver cómo se mueven las piezas y hacer que todo funcione me vuela la cabeza más que solo estar calculando paredes.
+  - ranking: Ingeniería Civil 85, Ingeniería Mecánica 75, Médico y Cirujano 65
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Ingeniería Mecánica Industrial (35%) | Licenciatura en Enfermería (25%) |
+| 2 | Ingeniería Mecánica (25%) | Fisioterapia (20%) |
+| 3 | Ingeniería Industrial (20%) | Licenciatura en Producción de Imágenes Diagnósticas (18%) |
+
+**Juez ciego:** gana B · A=2 B=5 · misma área: False (ingeniería)
+
+- Sobre A: La lista ignora completamente la vocación de servicio y la capacidad de calma demostrada por la estudiante en el cuidado de su abuela. Se centra únicamente en su curiosidad técnica, dejando de lado su perfil empático y su experiencia directa en el ámbito hospitalario.
+- Sobre B: La lista integra perfectamente su experiencia de cuidado, su habilidad para transmitir calma y su interés por la tecnología médica. Las opciones permiten movimiento físico y contacto humano, alineándose con su rechazo a trabajos sedentarios.
+- Comparación: La segunda lista es superior porque abarca la totalidad del perfil: la parte asistencial, la habilidad de trato con pacientes y la curiosidad técnica por los equipos médicos, mientras que la primera solo se enfoca en una faceta técnica aislada.
+
+## R4 · Kevin
+
+18 anios, recien graduado de perito contador. Lo que de verdad le quita el sueino es entender por que su aldea sigue igual de pobre que cuando el era ninio, mientras la cabecera crece. Lee todo lo que encuentra sobre eso y discute con quien sea. Es bueno con los numeros y le gusta hacer cuadros y graficas para explicar sus argumentos. Le aburre soberanamente la idea de llevar la contabilidad de una tienda.
+
+**Marcó:** Matemáticas y números, Leyes, justicia y debate, Economía, pobreza y desarrollo del país, Historia, sociedad y cultura
+
+**Adaptativas (5):**
+
+- [personalidad] Kevin, me alegra ver que te apasionan temas como la justicia, los números y el desarrollo del país. Ahora, cuéntame algo sobre tu **forma de ser**: cuando tienes que resolver un problema difícil, ¿prefieres **analizarlo solo** con calma y lógica, o te sientes mejor **discutiéndolo con otros** para encontrar la solución entre todos?
+  - La verdad prefiero discutirlo con otros, es que así uno escucha puntos de vista diferentes y le agarra más sentido a las cosas, aunque a veces termine peleando.
+  - ranking: Licenciatura en Ciencias Jurídicas y Sociales 85, Licenciatura en Economía 80, Ingeniería en Ciencias y Sistemas 75
+- [habilidades] Me encanta que seas tan abierto a escuchar a los demás, Kevin, aunque a veces salten chispas en la discusión. Ya que te gusta tanto el trabajo en equipo, cuéntame: cuando se trata de **habilidades**, ¿qué sientes que se te da mejor: **explicar ideas complejas** para que los demás las entiendan, o **investigar y organizar datos** para encontrar una solución lógica?
+  - Me gusta más investigar, organizar datos y analizar. La verdad es que me la paso haciendo cuadros y gráficas para que la mara entienda por qué la situación en mi aldea no mejora.
+  - ranking: Ciencias Jurídicas y Sociales 85, Economía 80, Trabajo Social 75
+- [estilo_cognitivo] Kevin, me impresiona mucho que uses cuadros y gráficas para explicar la realidad de tu aldea, eso demuestra que tienes una mente muy analítica. Ahora, pensando en cómo te gusta trabajar, ¿cómo te sientes más cómodo: **siguiendo reglas y procesos** ya establecidos para asegurar que todo salga bien, o prefieres **cuestionar cómo se hacen las cosas** para buscar formas nuevas y más justas de resolver los problemas?
+  - Prefiero cuestionar las reglas actuales para buscar cambios y mejoras, es que si uno se queda haciendo lo mismo de siempre, la pobreza nunca se va a terminar.
+  - ranking: Economía 92, Ingeniería Industrial 85, Ciencias Jurídicas y Sociales 80
+- [valores] Kevin, admiro mucho esa chispa que tienes para querer cambiar las cosas y no conformarte con lo de siempre. Ahora, cuéntame sobre lo que más te mueve por dentro: cuando piensas en tu futuro, ¿qué te hace sentir más **orgulloso**: saber que ayudaste a **aplicar la ley** para que las cosas sean justas, o sentir que lograste **mejorar la economía** o la vida de la gente en tu comunidad?
+  - Mejorar la economía y la vida de mi comunidad. Es que de nada sirve tanta ley si al final mi gente sigue igual de fregada y sin oportunidades.
+  - ranking: Economía 85, Ciencias Jurídicas y Sociales 80, Trabajo Social 75
+- [motivaciones] Kevin, se nota que tienes un corazón muy puesto en el desarrollo de tu comunidad y en mejorar la calidad de vida de la gente. Para terminar de ver cuál es el mejor camino para ti, cuéntame: cuando imaginas tu trabajo ideal, ¿te ves más enfocado en **entender las causas profundas** de los problemas sociales y proponer soluciones desde la investigación, o te atrae más **usar herramientas tecnológicas y datos** para optimizar procesos y ver resultados prácticos y tangibles en una organización?
+  - Me voy por entender las causas profundas. Al final de cuentas, si no atacamos la raíz de por qué mi aldea está olvidada, ningún proceso práctico va a servir de mucho a largo plazo.
+  - ranking: Licenciatura en Economía 92, Economía Empresarial 85, Trabajo Social 78
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Licenciatura en Economía (45%) | Licenciatura en Ciencias Jurídicas y Sociales (25%) |
+| 2 | Trabajo Social (30%) | Licenciatura en Economía (20%) |
+| 3 | Criminología y Política Criminal (25%) | Administración de Empresas (15%) |
+
+**Juez ciego:** gana A · A=5 B=3 · misma área: True (economía)
+
+- Sobre A: La economía conecta directamente con su interés por la desigualdad regional y su habilidad con los números. Incluir trabajo social y política criminal aborda su deseo de entender las causas estructurales de la pobreza en su aldea.
+- Sobre B: Aunque economía es pertinente, la administración de empresas ignora su rechazo explícito a la contabilidad rutinaria. Ciencias jurídicas es una opción válida, pero menos enfocada en el análisis cuantitativo de la pobreza que él disfruta.
+- Comparación: La primera lista captura mejor la pasión del estudiante por el análisis socioeconómico y su habilidad analítica, evitando áreas operativas que le resultan aburridas.
+
+## R4 · Ixchel
+
+20 anios, termino magisterio. Habla k'iche' con su familia y espanol en el pueblo, y aprendio ingles sola con series y hablando con turistas en el parque. Da clases particulares a ninios del barrio y le encanta el momento en que a alguien 'le cae el veinte'. Le duele que sus primos mas chiquitos ya no quieran hablar k'iche'. Es paciente y no se enoja cuando alguien se equivoca.
+
+**Marcó:** Economía, pobreza y desarrollo del país, Comunicación, escritura y medios, Idiomas y otras culturas, Enseñanza, docencia y educación, Historia, sociedad y cultura
+
+**Adaptativas (5):**
+
+- [personalidad] Ixchel, me encanta ver que tienes tantas ganas de ayudar y conectar con otros, ya sea enseñando o analizando cómo mejorar nuestro país. Pensando en cómo te gusta trabajar, cuéntame: cuando tienes un reto difícil entre manos, ¿prefieres **tomar el mando** y organizar a los demás para que todo salga bien, o te sientes más cómoda **trabajando en equipo** como una pieza clave que aporta sus ideas sin necesidad de dirigir?
+  - Prefiero ser parte del equipo y aportar mis ideas, la verdad me siento más tranquila así, sin andar mandando a nadie.
+  - ranking: Trabajo Social 85, Pedagogía 80, Economía 75
+- [habilidades] Me queda súper claro que te gusta sumar desde el equipo y no necesariamente liderar, eso es genial. Ahora, pensando en lo que sabes hacer o te gustaría aprender, ¿qué te resulta más emocionante: **investigar y analizar datos** para entender problemas complejos de la sociedad, o prefieres **crear materiales y estrategias** para enseñar y ayudar a otros de forma más directa?
+  - Crear materiales y enseñar a otros, es que me encanta ver cuando a los patojos por fin les cae el veinte con algo que les explicás.
+  - ranking: Trabajo Social 90, Pedagogía 85, Licenciatura en Ciencias de la Educación 80
+- [estilo_cognitivo] Qué lindo que te emocione ver ese momento en que los alumnos aprenden algo nuevo. Ya que disfrutas tanto ese proceso creativo y cercano, cuéntame: cuando te enfrentas a un problema, ¿te gusta más **analizar las cosas con calma** y buscar una lógica detrás de todo, o prefieres **confiar en tu intuición** y en lo que sientes que funcionará mejor en el momento?
+  - Analizar todo con calma y lógica, es que a veces siento que si no le busco bien la vuelta a las cosas me voy a perder.
+  - ranking: Pedagogía 95, Ciencias de la Educación 88, Profesorado en Idioma Maya 82
+- [valores] Qué bueno que te gusta analizar todo con calma para no perderte, eso te hace muy detallista. Ahora, pensando en el futuro y en el impacto que quieres dejar en el mundo, ¿qué te mueve más: **luchar por la justicia** y defender los derechos de quienes más lo necesitan, o te motiva más **mejorar la calidad de la educación** para que todos tengan mejores oportunidades de aprender?
+  - Mejorar la calidad de la educación, porque me duele ver que a muchos les cuesta aprender y quiero que tengan mejores oportunidades.
+  - ranking: Pedagogía 85, PEM en Comunicación y Lenguaje 80, Trabajo Social 75
+- [motivaciones] Me encanta tu compromiso con mejorar la educación, Ixchel. Para entender mejor cómo te ves trabajando, cuéntame: cuando piensas en tu futuro, ¿te emociona más **diseñar los libros y los planes de estudio** que los alumnos usarán en clase, o te ves más como alguien que **gestiona y dirige centros educativos** para que todo funcione bien para los estudiantes y los maestros?
+  - Diseñar materiales, libros y planes de estudio. Me gusta más esa onda de crear algo que sirva para enseñar que andar metida en el relajo de administrar un colegio.
+  - ranking: Pedagogía y Diseño Curricular 92, Ciencias de la Educación 85, Profesorado en Idioma Maya 70
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular) (35%) | Licenciatura en Economía (25%) |
+| 2 | Licenciatura en Educación de la Comunicación y Lenguaje (25%) | Licenciatura en Ciencias de la Educación (20%) |
+| 3 | Profesorado en Tecnología Educativa (20%) | Ciencias de la Comunicación Social (20%) |
+
+**Juez ciego:** gana A · A=5 B=2 · misma área: False (economía)
+
+- Sobre A: Esta lista se alinea perfectamente con su experiencia en magisterio y su pasión por la enseñanza. Además, integra su habilidad con los idiomas y su interés por la preservación cultural de forma técnica y profesional.
+- Sobre B: La recomendación de Economía carece de conexión con su vocación docente y su interés por la preservación lingüística. Aunque Educación es pertinente, la lista es dispersa y no aprovecha su talento multilingüe.
+- Comparación: La segunda lista profundiza en el perfil pedagógico y lingüístico del estudiante, mientras que la primera incluye opciones que no guardan relación con su vocación demostrada.
+
+## R4 · Diego
+
+17 anios, quinto bachillerato. Juega futbol en una liga del municipio y se rompio la rodilla el anio pasado; paso seis meses yendo a terapia y le fascino todo lo que le hacian para volver a caminar bien. Le gusta el cuerpo humano y como se recupera. Es sociable, siempre anda con gente, y no se imagina metido en una oficina. Tiene dos perros y los cuida el.
+
+**Marcó:** Salud, cuidados y atención a pacientes, Cuerpo, deporte y rehabilitación, Animales y su cuidado
+
+**Adaptativas (4):**
+
+- [estilo_cognitivo] Diego, me encanta que tengas tan claro que quieres ayudar a otros y que te gusta el movimiento. Ahora, pensando en cómo te gusta hacer las cosas, ¿qué te atrae más: **resolver problemas técnicos** usando herramientas y máquinas, o prefieres **enfocarte en las emociones** y en lo que sienten las personas cuando las ayudas?
+  - Prefiero enfocarme en los sentimientos y el bienestar de las personas. La verdad es que me gusta ver cómo se sienten mejor después de que uno les echa la mano, eso llena más que estar ahí solo con máquinas.
+  - ranking: Fisioterapia 90, Enfermería Veterinaria 85, Nutrición 75
+- [habilidades] Me queda súper claro que lo que más te llena es ver cómo alguien se siente mejor gracias a tu apoyo. Pensando en esos momentos en los que estás ayudando a alguien, ¿qué te resulta más fácil o natural: **escuchar y entender** lo que le pasa por dentro, o **acompañar físicamente** a alguien mientras hace ejercicios o sigue un tratamiento para recuperarse?
+  - Acompañar físicamente en su recuperación. Me cuadra más andar ahí ayudando con el movimiento, como cuando me tocaba a mí en la terapia.
+  - ranking: Fisioterapia 90, Psicología Clínica 85, Nutrición 75
+- [valores] Qué bueno que te sientas tan cómodo acompañando a otros en su recuperación física. Ahora, cuéntame un poco sobre lo que te mueve por dentro: cuando te imaginas trabajando, ¿qué es más importante para ti: **sentir que haces una diferencia directa** en la vida de una persona cada día, o **trabajar en equipo** con otros profesionales para lograr una meta común?
+  - Ver el cambio directo en la persona. Me gusta ver con mis propios ojos cómo la gente va mejorando gracias a lo que uno hace.
+  - ranking: Fisioterapia 95, Enfermería Veterinaria 70, Nutrición 60
+- [personalidad] Me encanta ver cómo te motiva el cambio directo en las personas, eso es súper valioso. Ahora, cuéntame un poco sobre tu forma de ser: cuando te toca enfrentar una situación difícil o un problema inesperado con alguien, ¿eres más de **mantener la calma y seguir un plan** paso a paso, o prefieres **adaptarte sobre la marcha** y buscar una solución creativa según cómo se sienta la persona en ese momento?
+  - Prefiero adaptarme y ser creativo según el momento, porque cada persona es diferente y a veces toca improvisar para que se sientan bien.
+  - ranking: Fisioterapia 95, Nutrición 70, Enfermería Veterinaria 65
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Fisioterapia (45%) | Fisioterapia (25%) |
+| 2 | Licenciatura en Enfermería (30%) | Licenciatura en Enfermería (25%) |
+| 3 | Técnico Universitario en Enfermería Veterinaria (25%) | Técnico Universitario en Enfermería Veterinaria (20%) |
+
+**Juez ciego:** gana empate · A=5 B=5 · misma área: True (salud)
+
+- Sobre A: La lista conecta directamente con su experiencia personal en rehabilitación física y su interés por el cuerpo humano. Además, integra su faceta sociable y su cuidado por los animales de manera lógica.
+- Sobre B: La selección de carreras es idéntica en contenido a la primera, manteniendo una coherencia total con su perfil. La distribución de porcentajes es menos determinante que la elección de las disciplinas, las cuales encajan perfectamente con sus vivencias.
+- Comparación: Ambas listas proponen exactamente las mismas carreras, las cuales responden con precisión a su interés por la rehabilitación, el cuidado de personas y el bienestar animal, evitando entornos de oficina.
+
+## R4 · Mynor
+
+18 anios, termino el diversificado. Desde chiquito cocina en la casa y ahora vende comida los fines de semana afuera del estadio con su hermano; el inventa los platos y su hermano cobra. Le gusta que la gente le diga que esta rico y anda pensando en como hacer que rinda mas. Suenia con tener su propio local algun dia.
+
+**Marcó:** Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Organizar y dirigir equipos o instituciones, Gastronomía, turismo y hotelería
+
+**Adaptativas (4):**
+
+- [personalidad] Mynor, me encanta que tengas tan claro que te gusta el contacto con la gente y el aire libre, eso dice mucho de tu buena energía. Imagina que tienes que resolver un problema difícil en un equipo, ¿qué te sale mejor: **tomar el mando** y organizar a todos para que las cosas salgan bien, o prefieres **escuchar a cada uno** y buscar una solución que deje a todos contentos y tranquilos?
+  - Tomar el mando y organizar al equipo, es que a veces hay que ponerse las pilas de una vez para que todo salga bien y no se nos haga tarde.
+  - ranking: Administración de Hotelería, Turismo y Gastronomía 85, Trabajo Social 75, Ingeniería Agrícola con Énfasis en Gerencia 70
+- [estilo_cognitivo] Mynor, me queda superclaro que te gusta tomar las riendas y ponerte las pilas para que todo avance. Pensando en cómo te gusta trabajar, cuéntame: cuando tienes que aprender algo nuevo o resolver un reto, ¿te sientes más cómodo **usando números y datos** para tomar decisiones frías y precisas, o prefieres **usar tu creatividad** y tu intuición para diseñar algo nuevo desde cero?
+  - Prefiero usar mi creatividad y diseñar cosas nuevas, es que me gusta inventar platos y ver cómo sale el sabor, no estar ahí todo el día pegado a los números.
+  - ranking: Administración de Empresas 85, Administración de Hotelería, Turismo y Gastronomía 80, Ingeniería Agrícola con Énfasis en Gerencia 75
+- [habilidades] Mynor, me encanta esa chispa creativa que tienes para inventar sabores y diseñar cosas nuevas. Ahora, pensando en lo que sabes hacer o te gustaría aprender a manejar, ¿qué te atrae más: **aprender técnicas específicas** para construir o fabricar objetos con tus manos, o prefieres **desarrollar habilidades de gestión** para organizar proyectos, liderar equipos y hacer que un negocio crezca?
+  - Desarrollar habilidades para organizar proyectos y negocios, porque fijo mi sueño es tener mi propio local y que crezca bien macizo.
+  - ranking: Artes Culinarias y Negocios Gastronómicos 90, Administración de Empresas 75, Ingeniería Agrícola con Énfasis en Gerencia 70
+- [valores] Mynor, me queda superclaro que tienes la meta fija en tu propio negocio y en hacerlo crecer con tu creatividad. Ahora, cuéntame algo importante: al trabajar en tu proyecto, ¿qué te hace sentir más realizado: **generar ganancias** y éxito económico personal, o **ayudar a tu comunidad** y mejorar la vida de las personas que te rodean?
+  - Generar ganancias y éxito económico, porque al final del día uno lo que quiere es que el negocio funcione y salga adelante, así de plano.
+  - ranking: Artes Culinarias y Negocios Gastronómicos 95, Administración de Empresas 85, Ingeniería Agrícola con Énfasis en Gerencia 70
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Administración de Hotelería, Turismo y Gastronomía (35%) | Administración de Hotelería, Turismo y Gastronomía (25%) |
+| 2 | Administración de Empresas (25%) | Ingeniería en Agronomía (20%) |
+| 3 | Chef Profesional e Internacional (Técnico Universitario) (20%) | Administración de Empresas (20%) |
+
+**Juez ciego:** gana A · A=5 B=3 · misma área: True (gastronomía)
+
+- Sobre A: La lista se alinea perfectamente con su experiencia práctica en cocina y su visión emprendedora. Incluye formación técnica y administrativa que le permitirá gestionar su futuro local con éxito.
+- Sobre B: Aunque incluye administración y gastronomía, la inclusión de agronomía no tiene una conexión clara con su perfil comercial y culinario. Es una opción que se aleja de su interés directo por la atención al cliente y la creación de platos.
+- Comparación: La primera lista es más coherente porque todas las opciones refuerzan su deseo de tener un negocio propio y su pasión por la cocina, sin incluir áreas ajenas a su trayectoria actual.
+
+## R4 · Katherine
+
+17 anios, quinto bachillerato. Le hizo una pagina web al negocio de su tio y le cobro. Se pasa las tardes viendo tutoriales y probando cosas hasta que le salen. Le gusta cuando algo que estaba roto por fin funciona. Tambien es la que lleva las cuentas del negocio familiar en una hoja de calculo que ella misma armo.
+
+**Marcó:** Matemáticas y números, Tecnología y computación, Negocios, dinero y emprendimiento, Arte, diseño y creatividad, Organizar y dirigir equipos o instituciones, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas
+
+**Adaptativas (4):**
+
+- [estilo_cognitivo] Hola Katherine, me encanta ver que tienes tantos intereses, desde los números hasta el diseño. Para conocerte mejor, cuéntame: cuando tienes que resolver un problema difícil, ¿qué te sale más natural: **analizar los datos** y la lógica paso a paso, o prefieres **usar tus manos** y herramientas para probar soluciones físicas hasta que algo funcione?
+  - La verdad me gusta más hacer cosas con las manos, ahí probando y moviendo las piezas hasta que por fin jalan las ondas, es más de pura práctica.
+  - ranking: Ingeniería en Ciencias y Sistemas 85, Licenciatura en Informática e Inteligencia de Negocios 80, Administración de Empresas 75
+- [personalidad] Katherine, me encanta que seas de las que prefiere ensuciarse las manos y probar hasta que las cosas funcionan. Pensando en cómo te gusta trabajar, dime: cuando te toca hacer un proyecto, ¿qué te hace sentir más **orgullosa** al terminar: ver que lograste **organizar a todo un equipo** para alcanzar una meta, o ver que creaste algo **único y bien hecho** con tus propias manos?
+  - Definitivamente prefiero crear algo funcional con mis manos, me llena más ver que la cosa ya camina bien después de tanto estarle moviendo.
+  - ranking: Ingeniería Mecánica 85, Ingeniería Mecánica Industrial 80, Arquitectura 75
+- [valores] Me queda clarísimo que lo tuyo es meterle mano a las cosas y ver cómo cobran vida. Ahora, pensando en el tipo de retos que te gustaría enfrentar en el futuro, ¿qué te hace sentir más satisfecha al trabajar: **seguir reglas muy estrictas** para que todo sea perfecto y seguro, o **experimentar con ideas nuevas** aunque eso signifique tener que corregir y ajustar varias veces sobre la marcha?
+  - Experimentar y ajustar sobre la marcha, porque así es como aprendo moviéndole hasta que sale bien.
+  - ranking: Ingeniería Mecánica 85, Ingeniería Mecánica Industrial 80, Técnico en Laboratorio Dental 75
+- [habilidades] Katherine, me encanta esa chispa que tienes para experimentar y no rendirte hasta que algo funciona. Como te gusta tanto meterle mano a las cosas, cuéntame: cuando estás trabajando en un proyecto, ¿qué se te da mejor o qué disfrutas más hacer: **dibujar o diseñar** cómo debería quedar algo antes de armarlo, o prefieres **manejar herramientas y materiales** directamente para darle forma con tus propias manos?
+  - Prefiero manejar herramientas y armar el proyecto directamente, me da igual el diseño, yo solo quiero ponerme a trabajar y ver que la cosa jala de una vez.
+  - ranking: Ingeniería Mecánica 85, Ingeniería Mecánica Industrial 80, Técnico en Laboratorio Dental 75
+
+| # | A (con adaptativas) | B (sin adaptativas) |
+|---|---|---|
+| 1 | Ingeniería Mecánica (35%) | Ingeniería en Ciencias y Sistemas (25%) |
+| 2 | Ingeniería en Electrónica (25%) | Ingeniería Industrial (20%) |
+| 3 | Ingeniería Mecánica Industrial (20%) | Ingeniería Mecánica Industrial (15%) |
+
+**Juez ciego:** gana B · A=3 B=5 · misma área: False (ingeniería)
+
+- Sobre A: La lista se enfoca en la resolución de problemas técnicos y mecánicos, lo cual conecta con su gusto por reparar cosas. Sin embargo, ignora su clara inclinación hacia el desarrollo web y la gestión de datos.
+- Sobre B: Esta lista es altamente coherente al incluir Ciencias y Sistemas, que capitaliza directamente su experiencia creando páginas web. Además, Ingeniería Industrial integra perfectamente su habilidad para organizar procesos y llevar cuentas.
+- Comparación: La segunda lista aprovecha mejor el perfil híbrido de la estudiante, combinando su capacidad de programación con su aptitud para la gestión administrativa y de procesos.

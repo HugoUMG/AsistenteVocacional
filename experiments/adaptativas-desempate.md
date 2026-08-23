@@ -157,60 +157,88 @@ Brazos: **A** = producción (4 fijas + adaptativas + recomendación).
 fijas se contestan UNA vez y se comparten, así lo único que cambia son las
 adaptativas.
 
-## Resultado 1: las adaptativas sí sirven, y sirven DENTRO del área
+## Resultado 1: la dirección se sostiene, la significancia NO
+
+Diseño balanceado, **4 réplicas por cada una de las 8 personas, n=32**.
+
+| | A (con adaptativas) | B (sin adaptativas) |
+|---|---:|---:|
+| Juez ciego prefiere | **17** | 9 |
+| Empate | 6 | |
+| Coherencia media (1-5) | **4.56** | 4.06 |
+
+**Sign test sobre las 26 decisivas: p = 0.17.** No es significativo. La primera
+lectura con n=19 (10-5-4) parecía más fuerte de lo que es; al balancear y subir
+a n=32 la ventaja se mantiene en dirección pero no alcanza. **No se puede
+afirmar que las adaptativas mejoren la coherencia en general.**
+
+### Pero el efecto no es parejo, está concentrado
+
+Con 4 réplicas por persona se ve algo que el agregado esconde:
+
+| Persona | Juez A-B-empate | Coherencia A | Coherencia B |
+|---|---|---:|---:|
+| **Kevin** | **4-0-0** | 4.50 | 2.75 |
+| **Ixchel** | **4-0-0** | 5.00 | 3.25 |
+| **Mynor** | **4-0-0** | 5.00 | 3.00 |
+| Wendy | 2-2-0 | 4.50 | 4.50 |
+| Elmer | 1-1-2 | 4.75 | 4.75 |
+| Diego | 1-1-2 | 4.75 | 4.75 |
+| Rosa | 1-2-1 | 4.00 | 4.50 |
+| **Katherine** | **0-3-1** | 4.00 | 5.00 |
+
+En 3 de 8 personas el brazo con adaptativas gana **las 4 réplicas**, con brechas
+de coherencia grandes (hasta 2 puntos). En 1 pierde 3 de 4. En las otras 4 no
+hay diferencia.
+
+**Hipótesis, no conclusión:** las adaptativas pesan cuando las respuestas fijas
+dejan el perfil ambiguo entre áreas (Kevin entre economía y derecho, Ixchel
+entre educación y social, Mynor entre cocina y negocio) y no pesan cuando las
+fijas ya lo fijaron (Diego no cambió de top-1 en ninguna de las 4; Katherine
+salió a sistemas desde el arranque). Probar eso necesita clasificar las
+respuestas fijas por ambigüedad de antemano, que es otro experimento.
+
+### ¿Eligen DENTRO del área?
 
 | | |
 |---|---:|
-| Juez ciego prefiere A (con adaptativas) | **10** de 19 |
-| Prefiere B (sin adaptativas) | 5 |
-| Empate | 4 |
-| Coherencia media A | **4.63** |
-| Coherencia media B | 4.11 |
+| Top-1 IGUAL con y sin adaptativas | 12 de 32 |
+| Top-1 distinto, **dentro de la misma área** | **11 de 32** |
+| Top-1 distinto, cambiando de área | 9 de 32 |
 
-Y la pregunta concreta del experimento:
+Un tercio de las sesiones cambia de carrera sin cambiar de campo. Wendy cambia
+dentro del área en las 4 réplicas. Ese es el mecanismo que el documento quería
+ver, y existe; lo que no está demostrado es que el cambio sea para mejor.
 
-| | |
-|---|---:|
-| Top-1 IGUAL con y sin adaptativas | 7 de 19 |
-| Top-1 distinto, **dentro de la misma área** | **8 de 19** |
-| Top-1 distinto, cambiando de área | 4 de 19 |
-
-Casos de hermanas de verdad: Mynor (cocina y vende comida) recibe **Chef
-Profesional** con adaptativas y **Administración de Hotelería y Turismo** sin
-ellas. Rosa oscila entre Fisioterapia y Enfermería. Elmer entre Electrónica y
-Ciencias y Sistemas.
-
-**Esto contesta que sí:** las adaptativas eligen dentro del área, no solo el
-área. La hipótesis pesimista del documento original queda sin sostén.
-
-Confound a tener presente: el brazo A llega a la recomendación con más
-conversación encima, y un juez puede premiar una lista que se explica con más
-detalle. El prompt del juez le pide explícitamente no premiar la especificidad
-por sí sola, pero no se puede descartar del todo.
+Confound a tener presente: el brazo A llega con más conversación encima y un
+juez puede premiar una lista que se explica con más detalle. El prompt del juez
+pide no premiar la especificidad sola, pero no lo descarta.
 
 ## Resultado 2: el guard del desempate cumple la regla sin demostrar que desempata
 
-Sobre el papel salió perfecto: **19 de 19 cierres con la #1 separada de la #2 por
-al menos 20 puntos**, contra 12 de 32 (37%) empatados antes del guard. Y 8 de 19
+Sobre el papel salió perfecto: **32 de 32 cierres con la #1 separada de la #2 por
+al menos 20 puntos**, contra 12 de 32 (37%) empatados antes del guard. Y 12 de 32
 sesiones necesitaron la pregunta extra.
 
 Pero al mirar los números, no aguantan:
 
-- La brecha al cierre es **siempre 23 o 25**. Nunca 40, nunca 60. Catorce veces
-  23 y cinco veces 25, justo encima del umbral de 20.
-- En el cierre la #1 vale **95 en las 8 sesiones** con pregunta extra, y la #2
-  cae a **70-72**. Antes del cierre iban 85-92 contra 78-88.
+- La brecha al cierre, en las 32 sesiones: **20 dos veces, 23 diecisiete veces,
+  25 doce veces, 30 una vez**. O sea **31 de 32 aterrizan entre 20 y 25**, justo
+  encima del umbral. Nunca 40, nunca 60.
+- En el cierre la #1 vale 95 y la #2 cae a 70-72. Antes del cierre iban 85-92
+  contra 78-88.
 
 O sea: cuando se le obliga a no cerrar empatado, el modelo **sube la #1 a 95 y
 hunde la #2 a ~71**, aterrizando siempre apenas encima del mínimo. Eso es
 satisfacer la restricción, no reportar un juicio que se resolvió.
 
-En 6 de las 8 sesiones la identidad de la #1 sí cambió en el paso final, lo que
+En 6 de las primeras 8 sesiones con pregunta extra la identidad de la #1 sí
+cambió en el paso final, lo que
 podría leerse como que la pregunta extra discriminó. Pero con el #2 aterrizando
 siempre en la misma franja, la lectura económica es que el modelo reordena para
 cumplir, no que haya aprendido algo.
 
-**Consecuencia práctica:** el guard no hace daño (una pregunta más en el 42% de
+**Consecuencia práctica:** el guard no hace daño (una pregunta más en el 38% de
 las sesiones, ~$0.0008) y garantiza que la UI no muestre un top empatado. Pero
 **no se puede afirmar en la tesis que "el chat desempata"**. Lo que se puede
 afirmar es lo del Resultado 1, que no depende del guard: las adaptativas cambian
