@@ -66,3 +66,70 @@ cobertura que produce esta repetición es la misma que subió el acierto de 7/10
 intento que sonaba mejor y midió peor
 ([microexperiencias.md](microexperiencias.md)). Primero hay que saber si las
 adaptativas aportan al desempate; recién después tiene sentido rediseñarlas.
+
+---
+
+## Actualización 2026-08-23: el guard del desempate ya existe (el experimento sigue pendiente)
+
+Revisando el flujo salió que el prompt **ya pedía** no cerrar con el top parejo
+(`SYSTEM` de `preguntas.py`: terminado=true solo si la #1 supera a la #2 por al
+menos 20 puntos), pero **el código nunca lo verificaba**. El único guard era:
+
+```python
+corta_antes_de_tiempo = paso.terminado and pendientes and hechas < MAX_ADAPTATIVAS
+```
+
+Solo miraba dimensiones pendientes. Un `terminado=true` con 78 contra 78 pasaba
+tal cual. O sea: la cobertura tenía guard más reintento, y el desempate no tenía
+nada, aunque las dos reglas viven en el mismo prompt.
+
+### Cuánto pasaba
+
+Medido sobre los 32 cierres reales de `filtro-catalogo-ab.md`, sin gastar cuota
+(los rankings ya estaban guardados):
+
+**12 de 32 cierres (37%) tenían el top empatado** por debajo del margen de 20.
+Y las parejas son justo las carreras hermanas de las que trata este experimento:
+
+| Diferencia | Empate en el cierre |
+|---:|---|
+| 3 | Téc. Univ. en Laboratorio Clínico vs Téc. Univ. en Radiología |
+| 3 | Ing. en Electrónica vs Lic. en Administración de Telecomunicaciones |
+| 6 | Ing. en Ciencias y Sistemas vs Téc. Univ. en Desarrollo de Software |
+| 7 | Lic. en Economía vs Economía Empresarial |
+| 7 | Ing. en Ciencias y Sistemas vs Ingeniería Industrial |
+| 7 | PEM en Comunicación y Lenguaje vs PEM en Pedagogía y Psicología |
+
+Más de un tercio de los chats se cerraban con el top-1 decidido a cara o cruz.
+
+### Qué se cambió
+
+`MARGEN_DESEMPATE = 20` (una sola constante, que ahora alimenta el prompt Y el
+guard, para que no se desincronicen), `empatado(ranking)` y el guard extendido:
+
+```python
+corta_antes_de_tiempo = (
+    paso.terminado and (pendientes or empatado(paso.ranking))
+    and hechas < MAX_ADAPTATIVAS
+)
+```
+
+En el reintento por empate el recordatorio le nombra al modelo **las dos
+carreras empatadas** y le pide una pregunta que las separe, sin nombrárselas al
+estudiante. Self-check en `python -m app.preguntas`: verifica que el reintento
+dispare con el top parejo, que no dispare con el top resuelto, y que no dispare
+cuando el modelo no está intentando cerrar.
+
+### Lo que este cambio NO resuelve
+
+Fuerza una pregunta más, no garantiza que esa pregunta desempate. Cuando entra,
+ya no quedan dimensiones prioritarias pendientes, así que la pregunta extra
+puede volver a subir a las dos por igual: es exactamente la hipótesis que este
+experimento sigue sin medir. El guard cierra el hueco entre lo que el prompt
+pide y lo que el código exige; **el experimento de abajo sigue sin ejecutar** y
+ahora tiene una medida más que mirar: de esos 37% de cierres empatados, ¿cuántos
+desempata la pregunta extra?
+
+Costo: la pregunta extra es una llamada de `next-question` más (~$0.0008 con
+caché caliente) en el 37% de las sesiones. Despreciable frente al tiempo que
+agrega al chat, que es lo que sí habría que vigilar.
