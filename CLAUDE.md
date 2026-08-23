@@ -199,6 +199,13 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   **sin ejecutar.** ¿Las 4 adaptativas sirven para elegir DENTRO del área, entre
   carreras de pensum parecido? Explica también por qué siempre giran sobre los
   mismos dos ejes (es la regla de cobertura, no el modelo).
+- [experiments/filtro-catalogo-ab.md](experiments/filtro-catalogo-ab.md) — A/B
+  de quitar el pre-filtro: **empate 13/16 vs 12/16 dentro de un piso de ruido de
+  3/8**, no se quita. Deja medido que el filtro NO gatea el resultado final
+  (Enfermería sale top-1 con 0/5 de presencia en las candidatas) y que la key con
+  billing está en `GEMINI_API_KEY_RESPALDO`, que es de donde salen los picos de
+  latencia. Incluye la depuración del banco: 9 palabras muertas y 57% del
+  catálogo alcanzable solo por accidente.
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.

@@ -1,5 +1,8 @@
 .env
-.env.bak
+# Cualquier respaldo o variante: .env.bak, .env.local, .env.respaldo-...
+# Todos llevan las API keys adentro.
+.env.*
+!.env.example
 gasto25.json
 .venv/
 __pycache__/
