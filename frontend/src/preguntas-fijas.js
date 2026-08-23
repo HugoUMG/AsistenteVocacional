@@ -158,11 +158,11 @@ export const FIJAS = [
     multiple: true, // puede elegir varios
     texto: '¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)',
     opciones: [
-      { label: 'Ayudar, enseñar o cuidar a las personas' },
+      { label: 'Ayudar, enseñar o dar cuidados a las personas' },
       { label: 'Defender la justicia y resolver conflictos' },
       { label: 'Liderar, organizar negocios o usar tecnología y números' },
       { label: 'Trabajar con la naturaleza, el campo o el ambiente' },
-      { label: 'Comunicar, crear, diseñar o investigar la realidad' },
+      { label: 'Comunicar, crear, diseñar o hacer investigación' },
       { label: 'Construir, diseñar o hacer que las cosas funcionen' },
     ],
   },
@@ -190,13 +190,29 @@ export const FIJAS = [
       { label: 'En un laboratorio o taller técnico' },
       { label: 'En un aula o centro educativo' },
       { label: 'En una obra, con máquinas o herramientas' },
-      { label: 'En medios, un estudio creativo o diseñando' },
+      // 'un estudio creativo' se quitó a propósito: 'estudio' es la palabra por
+      // la que Radiología, Bio Imágenes y Teología entraban al pre-filtro ("el
+      // estudio solicitado", "el estudio y el servicio"). Ver
+      // experiments/banco-de-opciones.md.
+      { label: 'En medios de comunicación o diseñando' },
       { label: 'Con la comunidad, ayudando a personas' },
     ],
   },
   {
     // Banco de palabras: temas de interés alineados a las áreas del catálogo
     // (sin nombrar carreras). El alumno elige varios y puede agregar el suyo.
+    //
+    // La lista se revisó tema por tema contra el catálogo el 2026-08-23
+    // (backend/cobertura_banco.py agrupa las 147 carreras en 90 temas por
+    // `perfil_id` y dice cuáles el alumno no tenía forma de nombrar). Había 18
+    // temas sin ninguna palabra que los tocara: enfermería, imágenes médicas,
+    // telecomunicaciones, electrónica, idiomas, música, teología, economía,
+    // dirección de centros educativos y comercio exterior, entre otros.
+    //
+    // Criterio al agregarlos: nombran el TEMA, nunca la carrera (regla 2 del
+    // CLAUDE.md), y se redactaron para que el alumno se reconozca, no para
+    // alimentar al pre-filtro; el A/B midió que el filtro no mueve el resultado
+    // final (experiments/filtro-catalogo-ab.md).
     clave: 'gustos',
     tipo: 'opcion',
     multiple: true,
@@ -205,19 +221,29 @@ export const FIJAS = [
     opciones: [
       { label: 'Matemáticas y números' },
       { label: 'Tecnología y computación' },
-      { label: 'Salud y cuidar personas' },
+      { label: 'Salud, cuidados y atención a pacientes' },
+      { label: 'Equipos médicos, laboratorio e imágenes' },
+      { label: 'Cuerpo, deporte y rehabilitación' },
       { label: 'Biología y naturaleza' },
+      { label: 'Animales y su cuidado' },
       { label: 'Química y laboratorio' },
       { label: 'Leyes, justicia y debate' },
-      { label: 'Negocios, dinero y emprender' },
+      { label: 'Negocios, dinero y emprendimiento' },
+      { label: 'Economía, pobreza y desarrollo del país' },
+      { label: 'Comercio, política y otros países' },
       { label: 'Arte, diseño y creatividad' },
+      { label: 'Música, danza y artes escénicas' },
       { label: 'Comunicación, escritura y medios' },
-      { label: 'Enseñar y educar' },
+      { label: 'Idiomas y otras culturas' },
+      { label: 'Enseñanza, docencia y educación' },
+      { label: 'Organizar y dirigir equipos o instituciones' },
       { label: 'Psicología y comportamiento' },
-      { label: 'Medio ambiente y agricultura' },
+      { label: 'Ambiente, agricultura y agronegocios' },
+      { label: 'Redes, señal y electrónica' },
       { label: 'Construcción, máquinas y cómo funcionan las cosas' },
       { label: 'Gastronomía, turismo y hotelería' },
       { label: 'Historia, sociedad y cultura' },
+      { label: 'Fe, religión y espiritualidad' },
     ],
   },
 ]

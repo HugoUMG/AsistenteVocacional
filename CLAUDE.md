@@ -199,6 +199,12 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   **sin ejecutar.** ¿Las 4 adaptativas sirven para elegir DENTRO del área, entre
   carreras de pensum parecido? Explica también por qué siempre giran sobre los
   mismos dos ejes (es la regla de cobertura, no el modelo).
+- [experiments/banco-de-opciones.md](experiments/banco-de-opciones.md) — revisión
+  del banco de opciones contra los 90 temas del catálogo: había **18 temas que el
+  alumno no tenía forma de nombrar** (enfermería, imágenes médicas, idiomas,
+  música, teología, telecomunicaciones...). `gustos` pasó de 15 a 25 chips y se
+  reescribieron 5 etiquetas. **APLICADO Y SIN MEDIR**: no subir a MiOrienta hasta
+  medirlo. Las etiquetas se redactan para el alumno, NO para el pre-filtro.
 - [experiments/filtro-catalogo-ab.md](experiments/filtro-catalogo-ab.md) — A/B
   de quitar el pre-filtro: **empate 13/16 vs 12/16 dentro de un piso de ruido de
   3/8**, no se quita. Deja medido que el filtro NO gatea el resultado final
