@@ -111,7 +111,7 @@ móvil, no recortar el banco.
 
 ## La medición (2026-08-23)
 
-Script: `backend/experimento_banco.py` · $0.1012 · 6 personas, 12 sesiones.
+Script: `backend/experimento_banco.py` · 6 personas · dos rondas · $0.20.
 
 ### Por qué NO se midió con `claves`
 
@@ -124,65 +124,74 @@ está roto, y hay que decirlo porque es tentador reusarlo:
 2. Si el brazo nuevo propone una carrera **distinta pero igual de sensata**, la
    métrica la cuenta como fallo.
 
-El banco viejo ganaba por construcción. Así que se cambió a: **personas**
-descritas sin ninguna carrera en mente (un self-check verifica que ningún perfil
-nombre carreras ni repita etiquetas del banco), y un **juez ciego** que puntúa
-COHERENCIA con la persona, con el orden de las listas sorteado.
+El banco viejo ganaba por construcción. Se cambió a **personas** descritas sin
+ninguna carrera en mente (un self-check verifica que ningún perfil nombre
+carreras ni repita etiquetas del banco) y un **juez ciego** que puntúa coherencia
+con la persona, con el orden de las listas sorteado.
 
-### Marcador
+### El arnés tenía un sesgo, y corregirlo dio vuelta el marcador
+
+**Ronda 1:** el alumno simulado contestaba las fijas con un párrafo y la etiqueta
+se recuperaba buscándola como subcadena. Cuando parafraseaba, la respuesta se
+guardaba como texto libre: **15 de 48 veces**, y asimétricamente (6 en A, 9 en B),
+porque son las etiquetas NUEVAS las que no se reconocían. El sesgo iba contra el
+brazo que se estaba probando.
+
+**Ronda 2:** `_marcar()` pide índices de las opciones, que es lo que hace el
+alumno real en `Chat.jsx` (toca chips, y solo escribe si usa 'Otro'). Caídas a
+texto libre: **0 de 48**.
 
 | | A (banco viejo) | B (banco nuevo) |
 |---|---:|---:|
-| Juez ciego prefiere | 3 | 2 (+1 empate) |
-| Coherencia media (1-5) | 4.33 | 4.17 |
-| Top-1 distinto entre brazos | 3 de 6 | |
+| Ronda 1, arnés sesgado | 3 | 2 (+1 empate) |
+| **Ronda 2, arnés corregido** | **2** | **4** |
+| Coherencia media R2 (1-5) | 4.17 | 4.33 |
+| Top-1 distinto entre brazos, R2 | 4 de 6 | |
 
-**El marcador no dice nada** con n=6 y el piso de ruido conocido (3 de 8
-perfiles cambian solos entre corridas). Lo informativo son los casos.
+**Las dos rondas están dentro del ruido y ninguna prueba una mejora general.**
+De 6 personas, 3 cambiaron de veredicto entre rondas. Con el piso de ruido
+conocido (3 de 8 perfiles cambian solos), un 2-4 no es un resultado. Lo que sí
+quedó demostrado es que **el marcador de la ronda 1 no era confiable**.
 
-### El caso que justifica el cambio: Wendy
+### Lo único que se repitió en las dos rondas
 
-Toca marimba y guitarra desde los 12, organiza los ensayos, le gusta enseñarle a
-los más chiquitos.
+**Wendy** toca marimba desde los 12. `Profesorado en Educación Artística (Música
+y Danza)` aparece en el top-3 del banco nuevo en **las dos rondas** (top-1 en la
+1, top-2 en la 2) y en el del banco viejo en **ninguna de las dos**. Con el banco
+viejo su música se pierde: marca "Arte, diseño y creatividad" y sale
+psicopedagogía o educación primaria.
 
-| | Marcó | Recomendación top-1 |
-|---|---|---|
-| A, banco viejo | "Arte, diseño y creatividad" | Profesorado en Psicopedagogía (35%) |
-| B, banco nuevo | "Música, danza y artes escénicas" | **Profesorado en Educación Artística (Música y Danza)** (45%) |
+Esa carrera existe en el catálogo y antes no había forma de llegar a ella. Es la
+afirmación que este experimento sostiene: **el banco nuevo representa gente que
+el viejo no podía representar.** No sostiene que recomiende mejor en general.
 
-Con el banco viejo su música **desaparece**: el top-3 entero es psicopedagogía.
-El juez ciego le dio a B un 5 contra 3, y su razón fue literalmente que la otra
-lista "ignora por completo su faceta artística y musical".
+Los chips nuevos se marcan: las 6 personas usaron al menos uno en la ronda 2.
 
-Educación Artística existe en el catálogo. Antes no había forma de llegar a ella.
+### Evidencia en contra, sin maquillarla
 
-### Los chips nuevos se usan
+- **Rosa** (quiere salud pero con aparatos, no trato largo con pacientes). En la
+  ronda 2 el banco nuevo le dio Fisioterapia, **Ingeniería Mecánica Industrial**
+  y **Cirujano Dentista**, peor que el viejo. Más chips también puede dispersar.
+- **Kevin.** El banco nuevo perdió las dos rondas. En la 1 metió Administración
+  de Empresas, que él había rechazado explícitamente.
+- **El juez no es un instrumento estable.** Trabajo Social como top-1 le pareció
+  un acierto en una ronda y lo castigó en la otra, según el resto de la lista.
+  Es una segunda opinión, no un veredicto.
 
-5 de 6 personas marcaron al menos uno: Elmer "Redes, señal y electrónica", Rosa
-"Equipos médicos, laboratorio e imágenes", Kevin "Economía, pobreza y desarrollo
-del país", Diego "Cuerpo, deporte y rehabilitación" y "Animales y su cuidado".
-No son decorativos.
+### Veredicto
 
-### Dónde ganó el banco viejo, sin maquillarlo
+El banco nuevo **se queda**, por la razón por la que se hizo: cubre 18 temas del
+catálogo que no tenían forma de nombrarse, los chips se usan, y el caso Wendy se
+repitió. **No se afirma que mejore el ranking**, porque no se midió eso.
 
-- **Kevin.** B puso Economía de top-1 (mejor que A, que la puso de 2), pero metió
-  Administración de Empresas de 3, y Kevin había dicho que lo administrativo lo
-  aburre. El juez castigó eso y tiene razón.
-- **Ixchel.** Gana A, pero **su brazo B está contaminado**: las 4 respuestas fijas
-  cayeron a texto libre porque el alumno simulado parafraseó en vez de marcar, así
-  que nunca "marcó" el chip de idiomas. Ese caso no prueba nada sobre el banco.
+Antes de subirlo a MiOrienta conviene mirar el caso Rosa con más n: si dispersar
+resulta ser un patrón y no un caso, la palanca es afinar la redacción de los
+chips de salud, no volver al banco de 15.
 
-### Defecto conocido del arnés
+### Lo que este experimento deja para el resto del repo
 
-El alumno simulado a veces parafrasea en vez de repetir la etiqueta, y entonces
-`_solo_etiquetas` deja la prosa. Pasó 6 de 24 veces en A y 9 de 24 en B, o sea
-que la asimetría juega en contra de B. Se arregla pidiéndole al simulador que
-devuelva los índices de las opciones que marca, no texto.
+El diseño "personas + juez ciego + coherencia" sirve para releer experimentos
+viejos cuyo veredicto dependía de `claves` fijadas de antemano. En particular
+[adaptativas-desempate.md](adaptativas-desempate.md), donde la pregunta no es
+"¿acertó?" sino "¿la pregunta extra separó dos carreras hermanas?".
 
-### Qué queda
-
-- Rehacer Ixchel y arreglar el defecto del arnés antes de sacar conclusiones más
-  fuertes.
-- El juez es el mismo modelo que recomienda. La salida legible
-  (`data/tests/experimento_banco_para_leer.md`) está para que la revise una
-  persona, idealmente la psicóloga.
