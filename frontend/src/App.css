@@ -1101,7 +1101,11 @@
 .options.choices .continuar-btn {
   grid-column: 1 / -1;
 }
-/* El banco de palabras son 15 opciones cortas: caben en 3 columnas */
+/* El banco de palabras son 25 opciones cortas: caben en 3 columnas.
+   Ojo con el móvil: abajo de 560px cae a 1 columna y son 25 filas de scroll.
+   Si eso molesta, la palanca es dejarlo en 2 columnas también en móvil, no
+   recortar el banco: cada chip cubre un tema del catálogo que si no queda sin
+   forma de nombrarse (ver backend/cobertura_banco.py). */
 .options.choices.chips { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 860px) {
   .options.choices.chips { grid-template-columns: 1fr 1fr; }
