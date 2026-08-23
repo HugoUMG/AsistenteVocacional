@@ -101,19 +101,9 @@ techo conocido de `filtro.py`, que empareja forma exacta de palabra sin lematiza
 No se siguió persiguiendo formas de palabra: sería contorsionar el español para
 un filtro que ya se midió que no decide el resultado.
 
-## Lo que falta, y es lo importante
+## Pendiente aparte: el móvil
 
-**Medirlo.** Cambia la señal que entra al prompt en las 4 preguntas fijas, así
-que aplica la regla 4. El A/B natural es el mismo arnés de
-`experimento_filtro.py`: brazo A con el banco viejo, brazo B con el nuevo, mismos
-perfiles, y contar top-1. Los perfiles que ya existen (Byron, Kimberly, Yesenia,
-Alfredo) apuntan justo a los temas que se agregaron.
-
-Ojo con el piso de ruido: el A/B del filtro midió que **3 de 8 perfiles cambian
-de resultado solos entre rondas**. Cualquier diferencia menor que eso no se puede
-leer.
-
-**Y mirar el móvil.** `.options.choices.chips` cae a 1 columna abajo de 560px:
+**Mirar el móvil.** `.options.choices.chips` cae a 1 columna abajo de 560px:
 25 chips son 25 filas de scroll. La palanca es dejarlo en 2 columnas también en
 móvil, no recortar el banco.
 
