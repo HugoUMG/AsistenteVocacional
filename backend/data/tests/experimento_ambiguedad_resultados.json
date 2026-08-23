@@ -1,0 +1,688 @@
+{
+  "casos": [
+    {
+      "ronda": "R1",
+      "persona": "Brenda",
+      "ambigua": true,
+      "contexto": "18 anios, termino el diversificado. Trabaja medio tiempo en la farmacia de la esquina y le gusta explicarle a la gente como tomarse las cosas; la buscan a ella. Pero tambien lleva la caja y se dio cuenta de que es buena viendo que producto conviene pedir y cual no se vende. Le gustan las dos partes y no sabe cual pesa mas.",
+      "fijas": {
+        "nombre": "Brenda",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números",
+        "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica",
+        "entorno": "En una oficina o empresa, En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+        "gustos": "Salud, cuidados y atención a pacientes, Química y laboratorio, Negocios, dinero y emprendimiento, Organizar y dirigir equipos o instituciones"
+      },
+      "adaptativas_hechas": 5,
+      "A_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Nutrición",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Administración de Empresas",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Química Biológica",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista integra perfectamente su vocación de servicio y explicación de medicamentos con su habilidad analítica para la gestión de inventarios. Incluir Nutrición es un acierto, ya que combina el área de salud con un enfoque preventivo y de asesoría al cliente.",
+        "coherencia_2": 4,
+        "porque_2": "La lista es sólida al reconocer su interés en la salud y la administración. Sin embargo, Química Biológica se enfoca más en el laboratorio que en el trato directo con el paciente, perdiendo la esencia de lo que ella disfruta al explicar los productos.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es superior porque Nutrición permite un contacto directo y educativo con las personas, alineándose mejor con su habilidad para explicar y asesorar, mientras mantiene el equilibrio con la visión comercial.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 4
+    },
+    {
+      "ronda": "R1",
+      "persona": "Osmar",
+      "ambigua": true,
+      "contexto": "19 anios. Ayuda a su papa en la milpa desde chiquito y conoce el terreno, las lluvias y las plagas. Al mismo tiempo es el que arregla la bomba de agua y el motor cuando se descomponen, y le entretiene mas eso que sembrar. En la casa no se ponen de acuerdo sobre para que es mejor.",
+      "fijas": {
+        "nombre": "Osmar",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Trabajar con la naturaleza, el campo o el ambiente, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "Al aire libre, en el campo o la naturaleza, En un laboratorio o taller técnico, En una obra, con máquinas o herramientas",
+        "gustos": "Ambiente, agricultura y agronegocios, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "adaptativas_hechas": 4,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería Mecánica",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería en Agronomía",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería en Agronomía",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Ingeniería en Electrónica",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 4,
+        "porque_1": "La lista integra bien su conocimiento del campo con su interés técnico. Incluir agronomía aprovecha su experiencia previa, mientras que las ingenierías mecánicas validan su habilidad para reparar motores.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista prioriza correctamente su preferencia declarada por la reparación de maquinaria sobre la siembra. Al poner la mecánica como eje central, responde mejor a lo que realmente le entretiene y motiva.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista es superior porque jerarquiza las opciones basándose en la inclinación del estudiante hacia la mecánica, que es donde reside su mayor interés personal frente a la labor agrícola.",
+        "misma_area": false,
+        "area": "ingeniería"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 4
+    },
+    {
+      "ronda": "R1",
+      "persona": "Lucia",
+      "ambigua": true,
+      "contexto": "17 anios, quinto bachillerato. Es la que escribe los discursos del colegio y le sale facil convencer a la gente cuando habla en publico. Tambien es la que consuela a sus amigas cuando estan mal y siempre termina escuchando problemas ajenos. No sabe si lo suyo es hablarle a mucha gente o a una sola.",
+      "fijas": {
+        "nombre": "Lucia",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Defender la justicia y resolver conflictos, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo",
+        "entorno": "En un aula o centro educativo, En medios de comunicación o diseñando, Con la comunidad, ayudando a personas",
+        "gustos": "Leyes, justicia y debate, Comunicación, escritura y medios, Enseñanza, docencia y educación, Psicología y comportamiento, Historia, sociedad y cultura"
+      },
+      "adaptativas_hechas": 4,
+      "A_top3": [
+        {
+          "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Ciencias de la Comunicación Social",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Administración Educativa",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Psicología (PEM y Licenciatura)",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Ciencias de la Educación",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 4,
+        "porque_1": "La lista aprovecha su capacidad de oratoria y persuasión mediante el Derecho y la Comunicación. Sin embargo, la Administración Educativa parece menos alineada con su perfil de escucha activa y empatía.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista integra perfectamente sus dos facetas: la persuasión pública en el Derecho y su habilidad natural para la escucha y el apoyo emocional en la Psicología. Es una propuesta más equilibrada respecto a sus intereses personales.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista comprende mejor la dualidad del estudiante, ofreciendo la Psicología como una vía directa para canalizar su vocación de servicio y escucha, algo que la primera lista ignora al enfocarse en la gestión educativa.",
+        "misma_area": true,
+        "area": "derecho"
+      },
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R1",
+      "persona": "Fredy",
+      "ambigua": false,
+      "contexto": "18 anios. Desde los 14 anda con su tio en las obras y ya sabe leer un plano y calcular cuanto material lleva una losa. Le gusta ver el edificio parado al final y saber que aguanta. Los fines de semana dibuja casas en un cuaderno. Todo lo que le gusta es de eso.",
+      "fijas": {
+        "nombre": "Fredy",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "En un laboratorio o taller técnico, En una obra, con máquinas o herramientas",
+        "gustos": "Matemáticas y números, Arte, diseño y creatividad, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "adaptativas_hechas": 5,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería Mecánica",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Ingeniería Civil",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Ingeniería Civil",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 4,
+        "porque_1": "La lista se centra en el ámbito de la construcción y el cálculo estructural, lo cual es coherente con su experiencia práctica leyendo planos y calculando materiales. Aunque la mecánica es un área distinta, mantiene un enfoque técnico y de ingeniería que se alinea con su interés por la solidez de las estructuras.",
+        "coherencia_2": 2,
+        "porque_2": "Incluye Ingeniería en Ciencias y Sistemas, una carrera que se aleja significativamente de su interés concreto por la construcción y el dibujo de casas. La propuesta carece de una línea temática clara que conecte con su experiencia previa en obras.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista mantiene una mayor consistencia técnica y temática, priorizando la ingeniería civil y mecánica que se vinculan directamente con su habilidad para calcular materiales y su interés por la edificación.",
+        "misma_area": true,
+        "area": "ingeniería"
+      },
+      "gano": "A",
+      "coherencia_A": 4,
+      "coherencia_B": 2
+    },
+    {
+      "ronda": "R1",
+      "persona": "Sandra",
+      "ambigua": false,
+      "contexto": "17 anios, quinto bachillerato. Le fascina el cuerpo humano desde que vio un documental, y se sabe los huesos de memoria. Pasa horas viendo casos raros y explicandoselos a sus companieras. Cuando alguien se lastima en el colegio ella es la primera en llegar y sabe que hacer. No le interesa nada que no sea eso.",
+      "fijas": {
+        "nombre": "Sandra",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica, De forma práctica, con las manos",
+        "entorno": "En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+        "gustos": "Salud, cuidados y atención a pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Biología y naturaleza"
+      },
+      "adaptativas_hechas": 5,
+      "A_top3": [
+        {
+          "carrera": "Médico y Cirujano",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Licenciatura en Química Biológica",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Nutrición",
+          "afinidad": 15
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se alinea perfectamente con su fascinación por el cuerpo humano y su capacidad de respuesta ante emergencias. Incluir medicina y enfermería responde directamente a su interés por casos clínicos y atención directa.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque las carreras son del área de salud, la lista ignora su claro interés por la patología y la atención de emergencias. Se enfoca en áreas más preventivas o de rehabilitación que no aprovechan su perfil clínico.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista captura mejor la intensidad del interés de la estudiante por la anatomía y la resolución de casos médicos, mientras que la segunda es demasiado general y menos alineada con su vocación de acción.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 3
+    },
+    {
+      "ronda": "R1",
+      "persona": "Julio",
+      "ambigua": false,
+      "contexto": "19 anios. Lleva tres anios llevando las cuentas del negocio de su familia, hizo el sistema de facturacion en una hoja de calculo y descubrio dos veces que un proveedor les estaba cobrando de mas. Le cuadra que los numeros cierren y le molesta el desorden. Es lo unico que le entretiene de verdad.",
+      "fijas": {
+        "nombre": "Julio",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica",
+        "entorno": "En una oficina o empresa, En un laboratorio o taller técnico",
+        "gustos": "Matemáticas y números, Tecnología y computación, Negocios, dinero y emprendimiento"
+      },
+      "adaptativas_hechas": 5,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se alinea perfectamente con su habilidad para el análisis de datos y la optimización de procesos. Valora correctamente su capacidad para crear sistemas de facturación y su atención al detalle en el control financiero.",
+        "coherencia_2": 5,
+        "porque_2": "La lista es igualmente coherente al proponer carreras que requieren rigor lógico y estructuración de información. Reconoce su perfil orientado a la eficiencia y la resolución de problemas mediante herramientas tecnológicas.",
+        "mejor": "empate",
+        "porque_mejor": "Ambas listas proponen exactamente las mismas carreras, basándose en la misma lógica de aprovechar su talento para los sistemas, la automatización y el orden financiero.",
+        "misma_area": true,
+        "area": "ingeniería"
+      },
+      "gano": "empate",
+      "coherencia_A": 5,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R2",
+      "persona": "Brenda",
+      "ambigua": true,
+      "contexto": "18 anios, termino el diversificado. Trabaja medio tiempo en la farmacia de la esquina y le gusta explicarle a la gente como tomarse las cosas; la buscan a ella. Pero tambien lleva la caja y se dio cuenta de que es buena viendo que producto conviene pedir y cual no se vende. Le gustan las dos partes y no sabe cual pesa mas.",
+      "fijas": {
+        "nombre": "Brenda",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números",
+        "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica",
+        "entorno": "En una oficina o empresa, En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+        "gustos": "Salud, cuidados y atención a pacientes, Química y laboratorio, Negocios, dinero y emprendimiento, Organizar y dirigir equipos o instituciones"
+      },
+      "adaptativas_hechas": 5,
+      "A_top3": [
+        {
+          "carrera": "Licenciatura en Nutrición",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Licenciatura en Administración de Empresas",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Administración de Empresas",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Química Biológica",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 4,
+        "porque_1": "La lista integra bien su vocación de servicio y explicación con la parte analítica de inventarios. Nutrición es un punto medio excelente entre el área de salud y la gestión de productos.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque incluye administración, la opción de Química Biológica se aleja de su interés por el trato directo con las personas. La lista pierde el enfoque en la parte de asesoría y comunicación que ella disfruta.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es superior porque Nutrición permite combinar la atención al paciente con una visión de gestión de recursos, capturando mejor la dualidad de sus intereses actuales.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "A",
+      "coherencia_A": 4,
+      "coherencia_B": 3
+    },
+    {
+      "ronda": "R2",
+      "persona": "Osmar",
+      "ambigua": true,
+      "contexto": "19 anios. Ayuda a su papa en la milpa desde chiquito y conoce el terreno, las lluvias y las plagas. Al mismo tiempo es el que arregla la bomba de agua y el motor cuando se descomponen, y le entretiene mas eso que sembrar. En la casa no se ponen de acuerdo sobre para que es mejor.",
+      "fijas": {
+        "nombre": "Osmar",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Trabajar con la naturaleza, el campo o el ambiente, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "Al aire libre, en el campo o la naturaleza, En un laboratorio o taller técnico, En una obra, con máquinas o herramientas",
+        "gustos": "Biología y naturaleza, Ambiente, agricultura y agronegocios, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "adaptativas_hechas": 4,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería Mecánica",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería en Electrónica",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería en Agronomía",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Ingeniería en Electrónica",
+          "afinidad": 18
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se enfoca directamente en la habilidad técnica y el interés del estudiante por reparar motores y sistemas mecánicos. Prioriza su preferencia por la mecánica sobre la actividad agrícola, alineándose con lo que realmente le entretiene.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque incluye opciones técnicas, prioriza la agronomía, ignorando que el estudiante disfruta más de la reparación que de la siembra. Es una recomendación basada en su entorno familiar pero no en su motivación personal.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista respeta la preferencia explícita del estudiante por la mecánica y la reparación, mientras que la segunda intenta forzar una conexión con el campo que el estudiante parece querer trascender.",
+        "misma_area": false,
+        "area": "ingeniería"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 3
+    },
+    {
+      "ronda": "R2",
+      "persona": "Lucia",
+      "ambigua": true,
+      "contexto": "17 anios, quinto bachillerato. Es la que escribe los discursos del colegio y le sale facil convencer a la gente cuando habla en publico. Tambien es la que consuela a sus amigas cuando estan mal y siempre termina escuchando problemas ajenos. No sabe si lo suyo es hablarle a mucha gente o a una sola.",
+      "fijas": {
+        "nombre": "Lucia",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Defender la justicia y resolver conflictos, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo",
+        "entorno": "En un aula o centro educativo, En medios de comunicación o diseñando, Con la comunidad, ayudando a personas",
+        "gustos": "Leyes, justicia y debate, Comunicación, escritura y medios, Enseñanza, docencia y educación, Psicología y comportamiento, Historia, sociedad y cultura"
+      },
+      "adaptativas_hechas": 5,
+      "A_top3": [
+        {
+          "carrera": "Psicología (PEM y Licenciatura)",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Psicología Clínica",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Licenciatura en Ciencias de la Educación",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Psicología (PEM y Licenciatura)",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Ciencias de la Educación",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista aprovecha su capacidad de oratoria y persuasión con el Derecho, mientras que la Psicología y Educación capitalizan su empatía y habilidad para escuchar problemas ajenos.",
+        "coherencia_2": 4,
+        "porque_2": "La lista es muy sólida en cuanto a su faceta de escucha y apoyo emocional, pero ignora su talento destacado para la oratoria y la persuasión pública.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es superior porque integra ambas facetas del perfil: tanto la capacidad de comunicación persuasiva como la habilidad de escucha empática, ofreciendo un espectro más amplio de opciones.",
+        "misma_area": false,
+        "area": "derecho"
+      },
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R2",
+      "persona": "Fredy",
+      "ambigua": false,
+      "contexto": "18 anios. Desde los 14 anda con su tio en las obras y ya sabe leer un plano y calcular cuanto material lleva una losa. Le gusta ver el edificio parado al final y saber que aguanta. Los fines de semana dibuja casas en un cuaderno. Todo lo que le gusta es de eso.",
+      "fijas": {
+        "nombre": "Fredy",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "En un laboratorio o taller técnico, En una obra, con máquinas o herramientas",
+        "gustos": "Matemáticas y números, Arte, diseño y creatividad, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "adaptativas_hechas": 4,
+      "A_top3": [
+        {
+          "carrera": "Ingeniería Civil",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Ingeniería Mecánica",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Arquitectura",
+          "afinidad": 15
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Civil",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se alinea perfectamente con su experiencia práctica en obras y su interés por la estructura. Incluir Arquitectura e Ingeniería Civil responde directamente a su pasión por el diseño y la construcción de edificios.",
+        "coherencia_2": 2,
+        "porque_2": "Aunque incluye Ingeniería Civil, la propuesta de Ingeniería en Sistemas se aleja demasiado de su perfil técnico-constructivo. La lista pierde el foco en su interés concreto por la edificación y el dibujo de casas.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista comprende mejor la vocación del estudiante al priorizar carreras que permiten materializar su interés por la construcción y el cálculo estructural, mientras que la segunda incluye áreas ajenas a su experiencia.",
+        "misma_area": false,
+        "area": "ingeniería"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 2
+    },
+    {
+      "ronda": "R2",
+      "persona": "Sandra",
+      "ambigua": false,
+      "contexto": "17 anios, quinto bachillerato. Le fascina el cuerpo humano desde que vio un documental, y se sabe los huesos de memoria. Pasa horas viendo casos raros y explicandoselos a sus companieras. Cuando alguien se lastima en el colegio ella es la primera en llegar y sabe que hacer. No le interesa nada que no sea eso.",
+      "fijas": {
+        "nombre": "Sandra",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica, De forma práctica, con las manos",
+        "entorno": "En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+        "gustos": "Salud, cuidados y atención a pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Biología y naturaleza"
+      },
+      "adaptativas_hechas": 5,
+      "A_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Médico y Cirujano",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Nutrición",
+          "afinidad": 18
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 4,
+        "porque_1": "La lista identifica correctamente el interés por la salud y la vocación de servicio al incluir medicina y enfermería. Sin embargo, incluir trabajo social se aleja del enfoque biológico y clínico que la estudiante ha demostrado tener.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista es altamente coherente al centrarse exclusivamente en el área de ciencias de la salud. Las opciones propuestas aprovechan su interés por el cuerpo humano y su disposición para la atención directa de pacientes.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista mantiene una mayor consistencia temática con el perfil clínico y biológico de la estudiante, evitando incluir áreas sociales que no parecen alinearse con su fascinación específica por la anatomía y los casos médicos.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5
+    },
+    {
+      "ronda": "R2",
+      "persona": "Julio",
+      "ambigua": false,
+      "contexto": "19 anios. Lleva tres anios llevando las cuentas del negocio de su familia, hizo el sistema de facturacion en una hoja de calculo y descubrio dos veces que un proveedor les estaba cobrando de mas. Le cuadra que los numeros cierren y le molesta el desorden. Es lo unico que le entretiene de verdad.",
+      "fijas": {
+        "nombre": "Julio",
+        "departamento": "Quetzaltenango",
+        "impacto": "Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Analizando datos, ideas y lógica",
+        "entorno": "En una oficina o empresa, En un laboratorio o taller técnico",
+        "gustos": "Matemáticas y números, Tecnología y computación, Negocios, dinero y emprendimiento"
+      },
+      "adaptativas_hechas": 4,
+      "A_top3": [
+        {
+          "carrera": "Contaduría Pública y Auditoría",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 4,
+        "porque_1": "La lista aprovecha su capacidad técnica para crear sistemas y optimizar procesos. Se alinea bien con su habilidad para gestionar datos y detectar errores mediante herramientas digitales.",
+        "coherencia_2": 5,
+        "porque_2": "La inclusión de Contaduría y Auditoría conecta directamente con su experiencia real gestionando cuentas y detectando cobros excesivos. Es una propuesta que valida su interés por el orden financiero y la precisión numérica.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista prioriza la naturaleza de sus actividades actuales, que son de índole financiera y de control, mientras que la primera se enfoca más en el desarrollo técnico puro.",
+        "misma_area": false,
+        "area": "ingeniería"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 4
+    }
+  ]
+}

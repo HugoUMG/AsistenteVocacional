@@ -195,8 +195,9 @@ hay diferencia.
 dejan el perfil ambiguo entre áreas (Kevin entre economía y derecho, Ixchel
 entre educación y social, Mynor entre cocina y negocio) y no pesan cuando las
 fijas ya lo fijaron (Diego no cambió de top-1 en ninguna de las 4; Katherine
-salió a sistemas desde el arranque). Probar eso necesita clasificar las
-respuestas fijas por ambigüedad de antemano, que es otro experimento.
+salió a sistemas desde el arranque).
+
+**Se probó y FALLÓ.** Ver "La hipótesis de la ambigüedad" al final.
 
 ### ¿Eligen DENTRO del área?
 
@@ -261,3 +262,82 @@ corridas independientes válidas y se conservaron como réplicas extra (Wendy,
 Elmer, Rosa, Kevin e Ixchel tienen 3; Diego 2; Mynor y Katherine 1). Arreglado
 con `_etiquetas()`, que es ahora el único lugar donde se decide el nombre de una
 ronda, más un self-check.
+
+
+---
+
+# La hipótesis de la ambigüedad: probada y descartada (2026-08-23)
+
+Script: `backend/experimento_ambiguedad.py` · $0.14.
+
+## Parte A, exploratoria: clasificar a ciegas los 32 casos ya corridos
+
+Un clasificador que ve **solo las 4 respuestas fijas** (no la persona, no las
+adaptativas, no las recomendaciones, no quién ganó) dice si apuntan a un campo o
+a varios. Cuesta $0.006 porque reusa datos ya pagados.
+
+| Fijas | n | Juez A-B-emp | Coherencia A-B | Top-1 cambia |
+|---|---:|---|---:|---|
+| AMBIGUAS | 22 | 13-7-2 | +0.64 | 16/22 (73%) |
+| CLARAS | 10 | 4-2-4 | +0.20 | 4/10 (40%) |
+
+Va en la dirección de la hipótesis. **Pero no confirma nada**: la hipótesis salió
+de estos mismos datos, así que encontrarla acá era lo esperable. Sirvió para ver
+que el clasificador separa algo, y para una pista honesta en contra: marcó a
+Katherine como ambigua en las 4 réplicas, y Katherine es justo la persona donde
+el brazo SIN adaptativas ganó 3 de 4.
+
+## Parte B, confirmatoria: personas etiquetadas ANTES de correr
+
+Seis personas nuevas, tres diseñadas ambiguas y tres claras, con la etiqueta
+puesta en el código antes de ver un solo resultado (un self-check lo verifica).
+Dos réplicas cada una, n=12.
+
+**Predicción: la ventaja del brazo con adaptativas debía ser MAYOR en las
+ambiguas.**
+
+| Predichas | n | Juez A-B-emp | Coherencia A-B | Top-1 cambia |
+|---|---:|---|---:|---|
+| AMBIGUAS | 6 | 4-2-0 | **+0.50** | 4/6 |
+| CLARAS | 6 | 4-1-1 | **+1.17** | 4/6 |
+
+**La predicción falla, y se invierte.** La ventaja fue más del doble en las
+personas cuyo perfil ya estaba claro, y el top-1 cambió en la misma proporción
+en los dos grupos (4 de 6). La hipótesis de la ambigüedad **se descarta**.
+
+Con n=6 por grupo tampoco se puede afirmar lo contrario. Lo que queda dicho es
+que la explicación bonita que salió del análisis por persona no sobrevivió a una
+predicción hecha de antemano, y por eso no debe entrar en la tesis.
+
+Nota de diseño: las "claras" no salieron tan claras como se pretendía. Fredy
+osciló entre Mecánica, Civil y Mecánica Industrial, y Julio saltó de Sistemas a
+Contaduría. Escribir un perfil que fije el área de verdad es más difícil de lo
+que parece, y eso también debilita la prueba.
+
+## Lo que sí queda, sumando todo el corpus
+
+Los 32 casos del A/B más los 12 de la parte B comparten brazos y juez, así que
+se pueden sumar:
+
+| | |
+|---|---:|
+| n | **44** |
+| Juez ciego prefiere A (con adaptativas) | **25** |
+| Prefiere B (sin adaptativas) | 12 |
+| Empate | 7 |
+| **Sign test sobre las 37 decisivas** | **p = 0.047** |
+| Coherencia media A - B | **+0.59** |
+
+Cruza el umbral convencional, **apenas y sobre datos agrupados**. Las dos
+muestras van en la misma dirección por separado (32 casos: 17-9-6; 12 casos:
+8-3-1), lo que ayuda, pero agrupar después de mirar no es lo mismo que haberlo
+planeado así. Léase como evidencia moderada, no como resultado fuerte.
+
+**Afirmación defendible para la tesis:** las 4 preguntas adaptativas cambian la
+carrera recomendada en cerca de dos tercios de los casos, un tercio de las veces
+dentro del mismo campo, y las listas que producen son juzgadas algo más
+coherentes con el perfil del estudiante (p = 0.047, n = 44, juez ciego).
+
+**Lo que sigue sin poder afirmarse:** que el chat desempata (el guard produce
+números que cumplen la regla), y que las adaptativas sirvan especialmente en
+perfiles ambiguos (probado y descartado).
