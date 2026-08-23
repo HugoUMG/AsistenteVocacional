@@ -1,0 +1,271 @@
+{
+  "R1|Wendy": {
+    "campos": [
+      "educación",
+      "gestión"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan un fuerte interés por la docencia y el servicio social con una inclinación hacia el liderazgo y la organización de equipos, lo que genera una dualidad entre el ámbito educativo y el administrativo."
+  },
+  "R1|Elmer": {
+    "campos": [
+      "ingeniería",
+      "tecnología"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia el razonamiento lógico, el trabajo técnico manual y el interés por el funcionamiento de sistemas y maquinaria."
+  },
+  "R1|Rosa": {
+    "campos": [
+      "salud",
+      "ingeniería"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés dividido entre el área asistencial y de salud, y el área técnica o de construcción, sin una inclinación definitiva hacia una sola de ellas."
+  },
+  "R1|Kevin": {
+    "campos": [
+      "derecho",
+      "ciencias sociales",
+      "negocios"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan intereses analíticos y sociales con una inclinación hacia la gestión, la justicia y el impacto comunitario, lo que sugiere múltiples áreas de aplicación sin una preferencia única definida."
+  },
+  "R1|Ixchel": {
+    "campos": [
+      "educación",
+      "ciencias sociales"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia la interacción humana, la transmisión de conocimientos y el análisis de contextos sociales y culturales."
+  },
+  "R1|Diego": {
+    "campos": [
+      "salud",
+      "bienestar"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia el cuidado directo, la rehabilitación física y la atención sanitaria en entornos prácticos."
+  },
+  "R1|Mynor": {
+    "campos": [
+      "negocios",
+      "turismo",
+      "gestión social"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan intereses en liderazgo y emprendimiento con una fuerte inclinación hacia el trabajo práctico, el servicio a la comunidad y el entorno al aire libre, lo que dispersa el enfoque entre áreas administrativas, operativas y de servicio."
+  },
+  "R1|Katherine": {
+    "campos": [
+      "ingeniería",
+      "negocios",
+      "tecnología"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés muy amplio que abarca desde la gestión empresarial y el liderazgo hasta el trabajo técnico, la ingeniería y la creatividad, sin una inclinación definitiva hacia una sola área."
+  },
+  "R2|Wendy": {
+    "campos": [
+      "educación",
+      "gestión"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan un fuerte interés por la docencia y el servicio social con una inclinación hacia el liderazgo y la organización de equipos, lo que genera una dualidad entre el ámbito educativo y el administrativo."
+  },
+  "R2|Elmer": {
+    "campos": [
+      "ingeniería",
+      "tecnología"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia el razonamiento lógico, el trabajo técnico manual y el interés por el funcionamiento de sistemas y maquinaria."
+  },
+  "R2|Rosa": {
+    "campos": [
+      "salud",
+      "ingeniería"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés dividido entre el área asistencial y de salud, y el área técnica o de construcción, sin una inclinación definitiva hacia una sola de ellas."
+  },
+  "R2|Kevin": {
+    "campos": [
+      "derecho",
+      "ciencias sociales",
+      "economía"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan un fuerte interés por la lógica y los números con una marcada vocación por la justicia, la estructura social y el impacto comunitario, lo que permite múltiples caminos profesionales."
+  },
+  "R2|Ixchel": {
+    "campos": [
+      "educación",
+      "ciencias sociales"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés equilibrado entre la vocación de servicio y enseñanza directa con el análisis crítico de fenómenos sociales y culturales."
+  },
+  "R3|Wendy": {
+    "campos": [
+      "educación",
+      "arte",
+      "comunicación"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés equilibrado entre la vocación de servicio y enseñanza, y una fuerte inclinación hacia la expresión creativa y el diseño, sin que ninguna de estas áreas predomine claramente sobre la otra."
+  },
+  "R3|Elmer": {
+    "campos": [
+      "ingeniería",
+      "tecnología"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia el razonamiento lógico, el trabajo técnico manual y el interés por el funcionamiento de sistemas y maquinaria."
+  },
+  "R3|Rosa": {
+    "campos": [
+      "salud",
+      "ingeniería"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés dividido entre el cuidado directo de personas en entornos clínicos y el trabajo técnico o práctico relacionado con la construcción y el funcionamiento de sistemas."
+  },
+  "R3|Kevin": {
+    "campos": [
+      "derecho",
+      "ciencias sociales",
+      "economía"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan un fuerte interés por la lógica y los números con una marcada vocación por la justicia, la estructura social y el impacto comunitario, lo que permite múltiples caminos profesionales."
+  },
+  "R3|Ixchel": {
+    "campos": [
+      "educación",
+      "ciencias sociales"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia la interacción humana, la transmisión de conocimientos y el análisis de contextos sociales y culturales."
+  },
+  "R2|Diego": {
+    "campos": [
+      "salud",
+      "bienestar"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia el cuidado directo, la rehabilitación física y la atención sanitaria en entornos prácticos."
+  },
+  "R2|Mynor": {
+    "campos": [
+      "negocios",
+      "gestión",
+      "turismo"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran una dispersión entre el interés por el liderazgo empresarial, la creatividad y el trabajo con personas, sin una inclinación única definida."
+  },
+  "R2|Katherine": {
+    "campos": [
+      "ingeniería",
+      "negocios",
+      "tecnología"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés muy amplio que abarca desde la gestión empresarial y el análisis de datos hasta la creación técnica y el diseño, sin una inclinación definitiva hacia un solo sector."
+  },
+  "R3|Diego": {
+    "campos": [
+      "salud",
+      "bienestar"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia el cuidado directo, la rehabilitación física y la atención sanitaria en entornos prácticos."
+  },
+  "R3|Mynor": {
+    "campos": [
+      "negocios",
+      "turismo",
+      "gestión social"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan intereses en liderazgo y emprendimiento con una fuerte inclinación hacia el trabajo práctico, el servicio a la comunidad y el entorno al aire libre, lo que dispersa el enfoque entre áreas administrativas, operativas y de servicio."
+  },
+  "R3|Katherine": {
+    "campos": [
+      "ingeniería",
+      "negocios",
+      "tecnología"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés muy amplio que abarca desde la gestión empresarial y el análisis de datos hasta la creación técnica y el diseño, sin una inclinación definitiva hacia un solo sector."
+  },
+  "R4|Wendy": {
+    "campos": [
+      "educación",
+      "arte"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran una fuerte inclinación tanto hacia la labor pedagógica y de servicio social como hacia la expresión creativa y artística, sin que una predomine claramente sobre la otra."
+  },
+  "R4|Elmer": {
+    "campos": [
+      "ingeniería",
+      "tecnología"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia el razonamiento lógico, el trabajo técnico manual y el interés por el funcionamiento de sistemas y maquinaria."
+  },
+  "R4|Rosa": {
+    "campos": [
+      "salud",
+      "ingeniería"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés dividido entre el área asistencial y de salud, y el área técnica o de construcción, sin una inclinación definitiva hacia una sola de ellas."
+  },
+  "R4|Kevin": {
+    "campos": [
+      "derecho",
+      "ciencias sociales",
+      "economía"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan un fuerte interés por la lógica y los números con una marcada vocación por la justicia, la estructura social y el impacto comunitario, lo que permite múltiples caminos profesionales."
+  },
+  "R4|Ixchel": {
+    "campos": [
+      "educación",
+      "ciencias sociales"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés equilibrado entre la vocación pedagógica y el análisis de problemáticas sociales, lo que permite orientarse hacia la enseñanza o hacia la investigación y gestión de políticas públicas."
+  },
+  "R4|Diego": {
+    "campos": [
+      "salud",
+      "bienestar"
+    ],
+    "ambigua": false,
+    "porque": "Las respuestas muestran una inclinación consistente hacia el cuidado directo, la rehabilitación física y la atención sanitaria en entornos prácticos."
+  },
+  "R4|Mynor": {
+    "campos": [
+      "negocios",
+      "turismo",
+      "gestión social"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas combinan intereses en liderazgo y emprendimiento con una fuerte inclinación hacia el trabajo práctico, el servicio a la comunidad y el entorno al aire libre, lo que dispersa el enfoque entre áreas administrativas, operativas y de servicio."
+  },
+  "R4|Katherine": {
+    "campos": [
+      "ingeniería",
+      "negocios",
+      "tecnología"
+    ],
+    "ambigua": true,
+    "porque": "Las respuestas muestran un interés muy amplio que abarca desde la gestión empresarial y el liderazgo hasta el trabajo técnico, la ingeniería y la creatividad, sin una inclinación definitiva hacia una sola área."
+  }
+}
