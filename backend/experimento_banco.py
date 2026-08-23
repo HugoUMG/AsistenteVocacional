@@ -70,7 +70,7 @@ from pydantic import BaseModel  # noqa: E402
 
 from app import preguntas, recomendar  # noqa: E402
 from cobertura_banco import banco as banco_nuevo  # noqa: E402
-from experimento_filtro import _solo_etiquetas, _top  # noqa: E402
+from experimento_filtro import _top  # noqa: E402
 from experimento_psicometrico import (  # noqa: E402
     DEPARTAMENTO,
     _responder,
@@ -82,7 +82,7 @@ DATA = os.path.join(os.path.dirname(__file__), "data")
 SALIDA = os.path.join(DATA, "tests", "experimento_banco_resultados.json")
 LECTURA = os.path.join(DATA, "tests", "experimento_banco_para_leer.md")
 
-TOPE_USD = 0.15  # lo que queda del presupuesto autorizado
+TOPE_USD = 0.10  # lo que queda del presupuesto autorizado de $0.50
 
 # --- Banco VIEJO (brazo A), recuperado del commit 38c8df7 -----------------
 BANCO_VIEJO = {
@@ -219,6 +219,56 @@ PERSONAS = [
 
 # --- El juez ciego --------------------------------------------------------
 
+class Marcadas(BaseModel):
+    indices: list[int]   # 1-based, las opciones que marca
+    otro: str            # texto libre si NADA de la lista le calza; "" si no
+
+
+SYSTEM_MARCAR = (
+    "Eres un estudiante de Guatemala contestando un test vocacional en una app. "
+    "La pregunta te muestra opciones NUMERADAS y tú las marcas con el dedo.\n\n"
+    "Devuelve en 'indices' los números de las opciones que marcarías, según quién "
+    "eres. Marca las que de verdad te calzan: una, dos o tres normalmente; no "
+    "marques todas por marcar.\n"
+    "Si NINGUNA de las opciones dice lo tuyo, deja 'indices' vacío y escribe en "
+    "'otro' lo que pondrías tú, en pocas palabras (así funciona el botón "
+    "'Otro / especificar'). Si alguna te calza, deja 'otro' vacío.\n"
+    "No expliques nada. Solo marca."
+)
+
+
+def _marcar(persona, clave, opciones, previo):
+    """El alumno simulado MARCA opciones, no escribe prosa.
+
+    Antes esto reusaba `_responder`, que devuelve un párrafo, y luego se
+    intentaba recuperar la etiqueta buscándola como subcadena. Cuando el
+    simulado parafraseaba ("me gusta la enseñanza, los idiomas y la cultura")
+    la etiqueta no aparecía y la respuesta se guardaba como texto libre. En la
+    corrida del 2026-08-23 pasó 6 de 24 veces en el brazo A y 9 de 24 en el B:
+    una asimetría que juega en contra del brazo cuyo banco se está probando,
+    porque son justo sus etiquetas nuevas las que no se reconocían.
+
+    Devolver índices es además lo que hace el alumno de verdad en Chat.jsx:
+    toca chips, y solo escribe si usa 'Otro / especificar'.
+    """
+    numeradas = "\n".join(f"{i}. {o}" for i, o in enumerate(opciones, 1))
+    resp = recomendar.generar(
+        model=recomendar.MODELO,
+        system=SYSTEM_MARCAR,
+        catalogo="",
+        variable=(f"QUIÉN ERES: {persona['nombre']}, {persona['contexto']}\n\n"
+                  f"LO QUE YA CONTESTASTE:\n{previo or '(nada aún)'}\n\n"
+                  f"PREGUNTA: {TEXTOS[clave]}\nOPCIONES:\n{numeradas}"),
+        schema=Marcadas,
+        temperature=0.9,  # alto a propósito: un alumno real no es determinista
+    )
+    m = Marcadas.model_validate_json(recomendar._texto_seguro(resp))
+    elegidas = [opciones[i - 1] for i in m.indices if 1 <= i <= len(opciones)]
+    if elegidas:
+        return ", ".join(elegidas), False
+    return (m.otro.strip() or "(no contestó)"), True
+
+
 class Juicio(BaseModel):
     coherencia_1: int          # 1-5
     porque_1: str
@@ -277,11 +327,11 @@ def _sesion(persona, cat, banco, etiqueta):
     for clave in ORDEN:
         opciones = banco[clave]
         previo = "\n".join(f"P: {k}\nR: {v}" for k, v in respuestas.items() if k != "nombre")
-        r = _responder(persona, f"{TEXTOS[clave]}\nOpciones: {' / '.join(opciones)}", previo)
-        elegidas = _solo_etiquetas(r, opciones)
+        elegidas, uso_otro = _marcar(persona, clave, opciones, previo)
         respuestas[clave] = elegidas
         log["fijas"][clave] = elegidas
-        print(f"    [{etiqueta}:{clave}] {elegidas[:95]}")
+        log.setdefault("uso_otro", []).append(clave) if uso_otro else None
+        print(f"    [{etiqueta}:{clave}]{' (OTRO)' if uso_otro else ''} {elegidas[:90]}")
 
     sid = f"banco-{etiqueta}-{persona['nombre']}"
     preguntas._COBERTURA_POR_SESION.pop(sid, None)
@@ -425,6 +475,19 @@ def _self_check():
             assert x not in bajo, f"{p['nombre']} nombra una carrera: '{x}'"
         for etq in nuevo["gustos"] + BANCO_VIEJO["gustos"]:
             assert etq.lower() not in bajo, f"{p['nombre']} repite la etiqueta '{etq}'"
+    # El marcado por índices: 1-based, ignora fuera de rango, y si no marca nada
+    # cae a 'Otro'. Se prueba la traducción de índices a etiquetas, que es lo
+    # único con lógica; la llamada al modelo no se simula.
+    ops = ["uno", "dos", "tres"]
+    def traducir(indices, otro):
+        eleg = [ops[i - 1] for i in indices if 1 <= i <= len(ops)]
+        return (", ".join(eleg), False) if eleg else ((otro.strip() or "(no contestó)"), True)
+    assert traducir([1, 3], "") == ("uno, tres", False)
+    assert traducir([2], "") == ("dos", False)
+    assert traducir([], "la marimba") == ("la marimba", True)      # usó 'Otro'
+    assert traducir([9, 0, -1], "") == ("(no contestó)", True)     # fuera de rango
+    assert traducir([1, 99], "") == ("uno", False)                 # mezcla: se queda lo válido
+
     # El desciframiento del ciego: si A fue primero y el juez dice "1", gana A.
     for primero_es_a, mejor, esperado in [(True, "1", "A"), (True, "2", "B"),
                                           (False, "1", "B"), (False, "2", "A")]:

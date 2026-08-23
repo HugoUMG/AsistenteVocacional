@@ -11,24 +11,24 @@ si al leer esto la recomendación tiene lógica para la persona descrita.
 
 | | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| impacto | Ayudar, enseñar o cuidar a las personas | Me late más enseñar, me gusta un montón cuando los patojos aprenden algo nuevo conmigo. También me gusta eso de organizar a la mara, como hago en el grupo de música para que todos se pongan las pilas. |
-| estilo | Con personas y de forma práctica, porque me cuadra un montón explicar cómo se tocan los instrumentos y no estar sentada ahí haciendo nada. | Con personas y de forma práctica, porque me aburro si solo estoy ahí sentada viendo libros. Me cuadra más estar enseñando y moviéndome con la mara. |
-| entorno | En un aula o centro educativo | En un aula o centro educativo |
-| gustos | Arte, diseño y creatividad, Enseñar y educar | Música, danza y artes escénicas, Enseñanza, docencia y educación |
+| impacto | Ayudar, enseñar o cuidar a las personas, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o investigar la realidad | Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación |
+| estilo | Con personas, en trato directo, De forma práctica, con las manos | Con personas, en trato directo, De forma práctica, con las manos |
+| entorno | En un aula o centro educativo, En medios, un estudio creativo o diseñando, Con la comunidad, ayudando a personas | En un aula o centro educativo, En medios de comunicación o diseñando, Con la comunidad, ayudando a personas |
+| gustos | Arte, diseño y creatividad, Enseñar y educar, Historia, sociedad y cultura | Arte, diseño y creatividad, Música, danza y artes escénicas, Enseñanza, docencia y educación, Organizar y dirigir equipos o instituciones |
 
 ### Recomendación
 
 | # | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| 1 | Profesorado en Psicopedagogía (35%) | Profesorado en Educación Artística (Música y Danza) (45%) |
-| 2 | Psicología Educativa (30%) | Profesorado en Pedagogía con Especialización (30%) |
-| 3 | PEM en Pedagogía y Psicología (20%) | Profesorado en Emprendimiento para la Productividad (25%) |
+| 1 | Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural (25%) | Licenciatura en Educación de la Comunicación y Lenguaje (25%) |
+| 2 | Licenciatura en Comunicación y Diseño (20%) | Profesorado en Educación Artística (Música y Danza) (20%) |
+| 3 | Licenciatura en Ciencias de la Educación (20%) | Licenciatura en Producción Audiovisual y Artes Cinematográficas (20%) |
 
 **Juez ciego:** gana B · coherencia A=3 B=5
 
-- Sobre A: Aunque la parte pedagógica y psicológica encaja con su interés por la enseñanza, la lista ignora por completo su faceta artística y musical. Se centra solo en una parte del perfil, dejando fuera lo que la motiva en su tiempo libre.
-- Sobre B: La lista integra perfectamente su pasión por la música y su rol de liderazgo al organizar ensayos. Además, conecta su gusto por enseñar a los más pequeños con la formación pedagógica específica.
-- Comparación: La primera lista es superior porque abarca tanto su talento musical como su capacidad de liderazgo y vocación docente, mientras que la segunda es demasiado limitada al omitir su fuerte identidad artística.
+- Sobre A: Aunque la gestión educativa conecta con su rol organizador, las opciones son demasiado teóricas y administrativas. Ignoran su lado creativo y artístico, que es el motor principal de su motivación actual.
+- Sobre B: La lista integra perfectamente su pasión por la música y su habilidad para liderar grupos. El enfoque en educación artística y producción audiovisual aprovecha su experiencia práctica y su interés por enseñar a los más pequeños.
+- Comparación: La primera lista es superior porque capitaliza su talento musical y su capacidad de liderazgo creativo, mientras que la segunda se vuelve demasiado académica y burocrática, ignorando el componente artístico que la define.
 
 ## Elmer
 
@@ -38,24 +38,24 @@ si al leer esto la recomendación tiene lógica para la persona descrita.
 
 | | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| impacto | Construir, diseñar o hacer que las cosas funcionen | Construir, diseñar o hacer que las cosas funcionen |
-| estilo | De forma práctica, con las manos | De forma práctica, con las manos |
-| entorno | En un taller técnico y también donde haya máquinas o herramientas, ahí es donde más me hallo. | En un taller técnico o en una obra con herramientas, ahí es donde mejor me la llevo arreglando cosas. |
-| gustos | Tecnología y computación, Construcción, máquinas y cómo funcionan las cosas | Tecnología y computación, Redes, señal y electrónica |
+| impacto | Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen | Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen |
+| estilo | Analizando datos, ideas y lógica, De forma práctica, con las manos | Analizando datos, ideas y lógica, De forma práctica, con las manos |
+| entorno | En un laboratorio o taller técnico, En una obra, con máquinas o herramientas | En un laboratorio o taller técnico, En una obra, con máquinas o herramientas |
+| gustos | Tecnología y computación, Negocios, dinero y emprender, Construcción, máquinas y cómo funcionan las cosas | Tecnología y computación, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas |
 
 ### Recomendación
 
 | # | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| 1 | Ingeniería en Electrónica (45%) | Ingeniería en Electrónica (35%) |
+| 1 | Ingeniería en Electrónica (45%) | Ingeniería en Electrónica (45%) |
 | 2 | Técnico Universitario en Desarrollo de Software (30%) | Ingeniería Mecánica Industrial (30%) |
-| 3 | Ingeniería en Ciencias y Sistemas (25%) | Técnico Universitario en Desarrollo de Software (20%) |
+| 3 | Ingeniería en Ciencias y Sistemas (25%) | Ingeniería en Ciencias y Sistemas (25%) |
 
 **Juez ciego:** gana B · coherencia A=4 B=5
 
-- Sobre A: Las opciones se alinean perfectamente con su habilidad autodidacta para reparar dispositivos y su curiosidad por el funcionamiento interno de la tecnología. El enfoque en sistemas y software es coherente con su destreza técnica, aunque ignora su interés físico por el hardware tangible.
-- Sobre B: Esta lista es superior porque incluye Ingeniería Mecánica Industrial, que conecta directamente con su gusto por abrir objetos y su capacidad para resolver problemas físicos, como el ajuste de la antena. Mantiene el equilibrio entre su destreza técnica y su inclinación por el trabajo manual y solitario.
-- Comparación: La segunda lista es más completa al integrar la parte mecánica, que refleja mejor su interés por el hardware y la resolución de problemas físicos, algo que el estudiante demostró al reparar la antena y desarmar dispositivos.
+- Sobre A: La lista se alinea bien con su habilidad autodidacta para reparar dispositivos y su curiosidad técnica. Sin embargo, el desarrollo de software es un área más abstracta que no refleja necesariamente su interés físico por abrir cosas y manipular hardware.
+- Sobre B: Esta lista es altamente coherente porque todas las opciones implican el trabajo físico, mecánico y electrónico que él ya realiza de forma empírica. La ingeniería mecánica industrial encaja perfectamente con su iniciativa de reparar antenas y su fascinación por entender cómo funcionan los mecanismos internos.
+- Comparación: La segunda lista es superior porque prioriza el componente físico y mecánico de su perfil, el cual es más evidente en su descripción que el desarrollo de software puro. La ingeniería mecánica industrial captura mejor su naturaleza práctica y su gusto por el trabajo manual y técnico.
 
 ## Rosa
 
@@ -65,24 +65,24 @@ si al leer esto la recomendación tiene lógica para la persona descrita.
 
 | | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| impacto | Ayudar, enseñar o cuidar a las personas, Construir, diseñar o hacer que las cosas funcionen | Ayudar, enseñar o dar cuidados a las personas |
-| estilo | Con personas y de forma práctica, es que no aguanto estar ahí sentada viendo papeles todo el santo día, mejor me muevo. | Con personas y de forma práctica porque me gusta moverme y no estar clavada en una silla todo el día, eso me aburre un montón. |
-| entorno | En un hospital o clínica y también donde haya máquinas o herramientas, ahí es donde más me hallo porque me gusta ver cómo funcionan las cosas y no me da miedo ayudar a la gente. | En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas |
-| gustos | Salud y cuidar personas, Construcción, máquinas y cómo funcionan las cosas | Salud, cuidados y atención a pacientes, Equipos médicos, laboratorio e imágenes, Construcción, máquinas y cómo funcionan las cosas |
+| impacto | Ayudar, enseñar o cuidar a las personas, Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen | Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen |
+| estilo | Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento | Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento |
+| entorno | En un hospital, clínica o consultorio, En un laboratorio o taller técnico, Con la comunidad, ayudando a personas | En un hospital, clínica o consultorio, En un laboratorio o taller técnico, Con la comunidad, ayudando a personas |
+| gustos | Salud y cuidar personas, Psicología y comportamiento, Construcción, máquinas y cómo funcionan las cosas | Salud, cuidados y atención a pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Psicología y comportamiento, Construcción, máquinas y cómo funcionan las cosas |
 
 ### Recomendación
 
 | # | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| 1 | Licenciatura en Producción de Imágenes Diagnósticas (35%) | Licenciatura en Producción de Imágenes Diagnósticas (35%) |
-| 2 | Técnico Universitario en Radiología e Imágenes Diagnósticas (30%) | Técnico Universitario en Radiología e Imágenes Diagnósticas (30%) |
-| 3 | Fisioterapia (20%) | Fisioterapia (20%) |
+| 1 | Licenciatura en Enfermería (35%) | Fisioterapia (35%) |
+| 2 | Fisioterapia (25%) | Ingeniería Mecánica Industrial (25%) |
+| 3 | Técnico Universitario en Hemodiálisis (20%) | Cirujano Dentista (20%) |
 
-**Juez ciego:** gana empate · coherencia A=5 B=5
+**Juez ciego:** gana A · coherencia A=5 B=3
 
-- Sobre A: La lista es altamente coherente porque conecta su curiosidad técnica por las máquinas hospitalarias con la radiología y su vocación de cuidado y capacidad de calma con la fisioterapia. Además, estas opciones evitan el sedentarismo al requerir movimiento constante en entornos clínicos.
-- Sobre B: La lista es idéntica a la primera y mantiene la misma lógica de coherencia. Responde perfectamente a su experiencia de cuidado, su interés por la tecnología médica y su rechazo a trabajos de escritorio.
-- Comparación: Ambas listas son exactamente iguales, por lo que presentan el mismo nivel de análisis y pertinencia respecto al perfil del estudiante.
+- Sobre A: La lista se alinea perfectamente con su experiencia cuidando a su abuela y su capacidad para mantener la calma en entornos clínicos. Además, las opciones seleccionadas implican movimiento constante, evitando el sedentarismo que ella rechaza.
+- Sobre B: Aunque Fisioterapia es coherente, Ingeniería Mecánica Industrial ignora su vocación de servicio y cuidado directo. Cirujano Dentista es una opción válida, pero no aprovecha su experiencia específica en el manejo de pacientes con necesidades de salud complejas.
+- Comparación: La primera lista es superior porque todas sus opciones capitalizan directamente la experiencia de cuidado y la curiosidad técnica que ella demostró en el hospital, manteniendo un enfoque asistencial que es central en su perfil.
 
 ## Kevin
 
@@ -92,24 +92,24 @@ si al leer esto la recomendación tiene lógica para la persona descrita.
 
 | | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| impacto | Comunicar, crear, diseñar o investigar la realidad | Liderar, organizar negocios o usar tecnología y números |
+| impacto | Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o investigar la realidad | Defender la justicia y resolver conflictos, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación |
 | estilo | Analizando datos, ideas y lógica | Analizando datos, ideas y lógica |
-| entorno | Con la comunidad, ayudando a personas | En una oficina o empresa, Con la comunidad, ayudando a personas |
-| gustos | Leyes, justicia y debate, Historia, sociedad y cultura | Leyes, justicia y debate, Economía, pobreza y desarrollo del país |
+| entorno | En un aula o centro educativo, Con la comunidad, ayudando a personas | En un aula o centro educativo, Con la comunidad, ayudando a personas |
+| gustos | Matemáticas y números, Leyes, justicia y debate, Historia, sociedad y cultura | Matemáticas y números, Leyes, justicia y debate, Economía, pobreza y desarrollo del país, Historia, sociedad y cultura |
 
 ### Recomendación
 
 | # | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| 1 | Licenciatura en Ciencias Jurídicas y Sociales (35%) | Licenciatura en Economía (35%) |
-| 2 | Licenciatura en Economía (30%) | Licenciatura en Ciencias Jurídicas y Sociales (25%) |
-| 3 | Trabajo Social (20%) | Administración de Empresas (20%) |
+| 1 | Ingeniería en Gestión Ambiental Local (35%) | Licenciatura en Ciencias Jurídicas y Sociales (35%) |
+| 2 | Licenciatura en Economía (25%) | Trabajo Social (25%) |
+| 3 | Trabajo Social (20%) | Licenciatura en Economía (20%) |
 
 **Juez ciego:** gana A · coherencia A=5 B=3
 
-- Sobre A: La lista conecta perfectamente con su interés por el desarrollo social y la desigualdad. Incluir Trabajo Social es un acierto para abordar la pobreza desde una perspectiva comunitaria, aprovechando su capacidad analítica.
-- Sobre B: Aunque Economía y Derecho son pertinentes, incluir Administración de Empresas contradice directamente su aversión a la contabilidad y tareas administrativas. Esta opción ignora su interés explícito por el análisis macro y social.
-- Comparación: La primera lista es superior porque todas sus opciones se alinean con su deseo de entender la pobreza y el desarrollo, mientras que la segunda incluye una carrera que el estudiante ha rechazado explícitamente por aburrimiento.
+- Sobre A: La lista conecta directamente con su interés por el desarrollo económico y la desigualdad regional. Aprovecha su habilidad con los números y gráficos, alejándose de la contabilidad tradicional que le resulta aburrida.
+- Sobre B: Aunque incluye Economía, las Ciencias Jurídicas no parecen alinearse con su perfil analítico y cuantitativo. La lista ignora su fuerte inclinación por el análisis de datos y la visualización de información para explicar la pobreza.
+- Comparación: La lista 1 es superior porque capitaliza su destreza técnica con números y gráficos para abordar el problema del desarrollo, mientras que la lista 2 introduce áreas legales que no tienen una conexión clara con su pasión por el análisis de datos y la economía.
 
 ## Ixchel
 
@@ -119,24 +119,24 @@ si al leer esto la recomendación tiene lógica para la persona descrita.
 
 | | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| impacto | Ayudar, enseñar o cuidar a las personas | Ayudar, enseñar o dar cuidados a las personas |
-| estilo | Con personas, cien por ciento. Me encanta verles la cara cuando por fin entienden algo que les costaba, es lo más chileros. | Con personas, es lo que más me gusta porque me llena ver cuando aprenden algo nuevo. |
-| entorno | En un aula o centro educativo, Con la comunidad, ayudando a personas | La verdad me veo más con la comunidad ayudando a personas o quizás en un aula, es donde siento que más puedo aportar. |
-| gustos | Enseñar y educar | Me gusta un montón la enseñanza, los idiomas y también la cultura porque es lo que vivo a diario con los patojos y mi familia. |
+| impacto | Ayudar, enseñar o cuidar a las personas, Comunicar, crear, diseñar o investigar la realidad | Ayudar, enseñar o dar cuidados a las personas, Comunicar, crear, diseñar o hacer investigación |
+| estilo | Con personas, en trato directo | Con personas, en trato directo, Analizando datos, ideas y lógica |
+| entorno | En un aula o centro educativo, Con la comunidad, ayudando a personas | En un aula o centro educativo, Con la comunidad, ayudando a personas |
+| gustos | Comunicación, escritura y medios, Enseñar y educar, Historia, sociedad y cultura | Economía, pobreza y desarrollo del país, Comunicación, escritura y medios, Idiomas y otras culturas, Enseñanza, docencia y educación, Psicología y comportamiento, Historia, sociedad y cultura |
 
 ### Recomendación
 
 | # | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| 1 | Trabajo Social (35%) | Profesorado en Pedagogía con Especialización (25%) |
-| 2 | Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural (30%) | Licenciatura en Educación de la Comunicación y Lenguaje (20%) |
-| 3 | Licenciatura en Ciencias de la Educación (20%) | Profesorado en Educación Primaria (20%) |
+| 1 | Licenciatura en Educación de la Comunicación y Lenguaje (35%) | Trabajo Social (25%) |
+| 2 | PEM en Comunicación y Lenguaje (30%) | Psicología (PEM y Licenciatura) (20%) |
+| 3 | Licenciatura en Ciencias de la Educación (20%) | Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural (18%) |
 
-**Juez ciego:** gana A · coherencia A=5 B=4
+**Juez ciego:** gana B · coherencia A=4 B=5
 
-- Sobre A: La lista conecta perfectamente con su vocación docente y su interés por la preservación cultural. La especialización en gestión intercultural aborda directamente su preocupación por la pérdida del k'iche' en las nuevas generaciones.
-- Sobre B: Las opciones son muy coherentes con su experiencia dando clases y su facilidad con los idiomas. Sin embargo, se centra casi exclusivamente en la pedagogía técnica, dejando de lado el componente social y de preservación cultural que ella valora.
-- Comparación: La primera lista es superior porque integra la dimensión social y cultural de su perfil, no solo su capacidad para enseñar, sino su deseo de proteger su lengua materna y trabajar con la comunidad.
+- Sobre A: La lista se centra correctamente en su vocación docente y su facilidad con los idiomas. Sin embargo, ignora el componente cultural y lingüístico específico del k'iche' que es central en su identidad.
+- Sobre B: Esta lista integra perfectamente su experiencia docente con su preocupación por la pérdida del idioma k'iche' y su habilidad para conectar con las personas. La especialización en gestión intercultural es una respuesta directa a su dolor por la desconexión cultural de sus primos.
+- Comparación: La segunda lista es superior porque no solo atiende a su capacidad pedagógica, sino que aborda el trasfondo social y cultural de la estudiante, proponiendo caminos que permiten proteger y revitalizar su lengua materna.
 
 ## Diego
 
@@ -146,21 +146,21 @@ si al leer esto la recomendación tiene lógica para la persona descrita.
 
 | | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| impacto | Ayudar, enseñar o cuidar a las personas | Ayudar y dar cuidados a las personas, porque me cuadra un montón ver cómo la mara mejora después de estar fregada. |
-| estilo | Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento | Con personas, de forma práctica y al aire libre, porque fijo me aburro un montón si me toca estar sentado todo el día viendo compus. |
-| entorno | En un hospital o clínica fijo, y también me cuadra estar con la comunidad ayudando a la mara. No me veo encerrado entre cuatro paredes viendo papeles. | En un hospital, clínica o consultorio |
+| impacto | Ayudar, enseñar o cuidar a las personas | Ayudar, enseñar o dar cuidados a las personas |
+| estilo | Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento | Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento |
+| entorno | En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas | En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas |
 | gustos | Salud y cuidar personas, Biología y naturaleza | Salud, cuidados y atención a pacientes, Cuerpo, deporte y rehabilitación, Animales y su cuidado |
 
 ### Recomendación
 
 | # | A (banco viejo) | B (banco nuevo) |
 |---|---|---|
-| 1 | Fisioterapia (45%) | Fisioterapia (35%) |
-| 2 | Licenciatura en Enfermería (30%) | Técnico Universitario en Radiología e Imágenes Diagnósticas (25%) |
-| 3 | Ingeniería en Gestión Ambiental Local (25%) | Técnico Universitario en Hemodiálisis (20%) |
+| 1 | Fisioterapia (45%) | Fisioterapia (45%) |
+| 2 | Licenciatura en Enfermería (30%) | Trabajo Social (30%) |
+| 3 | Psicología (PEM y Licenciatura) (25%) | Técnico Universitario en Enfermería Veterinaria (25%) |
 
-**Juez ciego:** gana A · coherencia A=4 B=3
+**Juez ciego:** gana B · coherencia A=4 B=5
 
-- Sobre A: La fisioterapia conecta directamente con su experiencia personal de rehabilitación. La enfermería aprovecha su naturaleza sociable y su interés por el cuidado del cuerpo, aunque la ingeniería ambiental no tiene una conexión clara con sus intereses descritos.
-- Sobre B: Aunque la fisioterapia es muy acertada, las otras dos opciones son carreras técnicas muy enfocadas en entornos hospitalarios cerrados y solitarios, lo cual contradice su rechazo explícito a trabajar en oficinas y su necesidad de interacción social.
-- Comparación: La primera lista es superior porque, a pesar de incluir una opción menos relevante, las otras dos se alinean mejor con su personalidad sociable y su deseo de contacto humano, mientras que la segunda lista propone entornos de trabajo técnicos que podrían resultar aislantes para alguien que no quiere estar encerrado.
+- Sobre A: La fisioterapia es una elección excelente basada en su experiencia personal de rehabilitación. La enfermería conecta bien con su interés por el cuerpo humano, aunque la psicología parece menos conectada con su perfil práctico y sociable.
+- Sobre B: Esta lista aprovecha mejor su perfil al incluir la enfermería veterinaria, que se alinea con su responsabilidad y cuidado de sus perros. El trabajo social encaja con su naturaleza sociable y su rechazo a entornos de oficina cerrados.
+- Comparación: La segunda lista es superior porque integra el interés por los animales mencionado en el perfil y ofrece opciones que se alejan del trabajo de oficina, respetando mejor la personalidad sociable y activa del estudiante.
