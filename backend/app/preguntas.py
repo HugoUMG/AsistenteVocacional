@@ -17,6 +17,12 @@ from app.recomendar import (
     uso_tokens,
 )
 
+# Puntos de afinidad que la carrera #1 debe sacarle a la #2 para que el chat
+# pueda darse por terminado. Va en el prompt Y en el guard de código de
+# siguiente_pregunta(), desde la misma constante para que no se desincronicen:
+# antes solo estaba escrito en el prompt y nadie verificaba que se cumpliera.
+MARGEN_DESEMPATE = 20
+
 SYSTEM = (
     "Eres un orientador vocacional que conduce un test tipo 'Akinator' para "
     "descubrir qué carrera del catálogo encaja mejor con el estudiante.\n"
@@ -62,9 +68,10 @@ SYSTEM = (
     "respuestas a la vez (p. ej. varios intereses o metas); si no, false.\n"
     "- El estudiante YA respondió unas preguntas iniciales. Cuando ya no queden "
     "dimensiones pendientes (según el mensaje del usuario), marca terminado=true "
-    "SOLO si además la carrera #1 del ranking supera a la #2 por al menos 20 "
-    "puntos; si el top está parejo (diferencia < 20), sigue preguntando para "
-    "desempatar.\n"
+    f"SOLO si además la carrera #1 del ranking supera a la #2 por al menos "
+    f"{MARGEN_DESEMPATE} puntos; si el top está parejo (diferencia < "
+    f"{MARGEN_DESEMPATE}), sigue preguntando para desempatar, y que esa pregunta "
+    "SEPARE a esas dos carreras en concreto (sin nombrárselas al estudiante).\n"
     "- 'ranking': tu estimación ACTUAL y provisional de afinidad de las 4 a 6 "
     "carreras más probables según lo respondido hasta ahora, cada una con 'carrera' "
     "(nombre corto y claro) y 'afinidad' entero 0-100, de mayor a menor. Se irá "
@@ -154,6 +161,20 @@ def _cobertura(session_id: str | None, extra: dict[str, int] | None = None) -> d
     return _COBERTURA_POR_SESION[clave]
 
 
+def empatado(ranking: list) -> bool:
+    """¿El top del ranking provisional está demasiado parejo para terminar?
+
+    El prompt ya pedía no terminar con el top empatado, pero nadie lo
+    verificaba: el guard de siguiente_pregunta() solo miraba las dimensiones
+    pendientes, así que un terminado=true con 78 contra 78 pasaba tal cual.
+
+    ponytail: compara #1 contra #2 y ya. No mira si hay tres empatadas ni pesa
+    cuántas van; si el chat resulta cortarse parejo seguido, el techo se sube
+    mirando toda la cola del ranking.
+    """
+    return len(ranking) >= 2 and (ranking[0].afinidad - ranking[1].afinidad) < MARGEN_DESEMPATE
+
+
 def _texto_cobertura(cobertura: dict[str, int]) -> str:
     partes = [f"{d}:{'cubierta' if cobertura[d] else 'PENDIENTE'}" for d in DIMENSIONES]
     return ", ".join(partes)
@@ -226,15 +247,33 @@ def siguiente_pregunta(
         )
         paso = SiguientePaso.model_validate_json(_texto_seguro(resp))
         uso_total = uso_tokens(resp, MODELO)
-        corta_antes_de_tiempo = paso.terminado and pendientes and hechas < MAX_ADAPTATIVAS
+        corta_antes_de_tiempo = (
+            paso.terminado
+            and (pendientes or empatado(paso.ranking))
+            and hechas < MAX_ADAPTATIVAS
+        )
         if not corta_antes_de_tiempo:
             break
-        print(f"[dimension] next-question: terminó con pendientes {pendientes}, reintentando")
-        variable += (
-            f"\n\nRECORDATORIO: quedan dimensiones prioritarias sin cubrir "
-            f"({', '.join(pendientes)}). terminado DEBE ser false; dirige la "
-            "pregunta a una de ellas."
-        )
+        if pendientes:
+            motivo = f"pendientes {pendientes}"
+            recordatorio = (
+                f"\n\nRECORDATORIO: quedan dimensiones prioritarias sin cubrir "
+                f"({', '.join(pendientes)}). terminado DEBE ser false; dirige la "
+                "pregunta a una de ellas."
+            )
+        else:
+            motivo = (f"empate {paso.ranking[0].carrera} {paso.ranking[0].afinidad} vs "
+                      f"{paso.ranking[1].carrera} {paso.ranking[1].afinidad}")
+            recordatorio = (
+                f"\n\nRECORDATORIO: tu propio ranking deja a '{paso.ranking[0].carrera}' "
+                f"y '{paso.ranking[1].carrera}' separadas por menos de {MARGEN_DESEMPATE} "
+                "puntos, así que el top NO está resuelto. terminado DEBE ser false. Haz "
+                "una pregunta cuya respuesta SEPARE a esas dos en concreto: busca en qué "
+                "se diferencian sus perfiles dentro del catálogo y pregunta por eso. NO "
+                "las nombres al estudiante."
+            )
+        print(f"[dimension] next-question: terminó con {motivo}, reintentando")
+        variable += recordatorio
 
     if paso.dimension_objetivo:
         cobertura[paso.dimension_objetivo] = 1
@@ -255,4 +294,77 @@ if __name__ == "__main__":
     cob["personalidad"] = 1
     assert _cobertura("s1")["personalidad"] == 1  # persiste entre llamadas de la misma sesión
     assert _cobertura("s2")["personalidad"] == 0  # sesiones distintas no se mezclan
+
+    # empatado(): el guard que faltaba. El prompt pedía no terminar con el top
+    # parejo y el código no lo verificaba.
+    def _r(*afinidades):
+        return [Ranking(carrera=f"C{i}", afinidad=a) for i, a in enumerate(afinidades)]
+
+    assert empatado(_r(78, 78)), "78 contra 78 es empate"
+    assert empatado(_r(80, 61)), "19 de diferencia sigue siendo empate"
+    assert not empatado(_r(80, 60)), "20 justos ya desempata"
+    assert not empatado(_r(90, 10)), "diferencia amplia no es empate"
+    assert not empatado(_r(50)), "con una sola carrera no hay con quién empatar"
+    assert not empatado([]), "ranking vacío no debe romper ni bloquear el cierre"
+
+    # El margen del prompt y el del guard salen de la misma constante.
+    assert f"{MARGEN_DESEMPATE} puntos" in SYSTEM
+
+    # El guard de verdad: que el reintento SE DISPARE con el top empatado. Se
+    # sustituye generar() por un doble que no llama a la API y que devuelve
+    # terminado=true; lo que se mide es cuántas veces lo llamó siguiente_pregunta
+    # y qué recordatorio le mandó en el segundo intento.
+    # OJO: se parchean los globals de ESTE módulo, no los de `app.preguntas`
+    # importado aparte. Con `python -m app.preguntas` el archivo se carga dos
+    # veces (como __main__ y como app.preguntas) y son objetos distintos: tocar
+    # el otro no afecta a la siguiente_pregunta() que se llama aquí.
+    _g = globals()
+
+    def _doble(paso_json):
+        llamadas = []
+
+        class _Resp:
+            text = paso_json
+            usage_metadata = None
+        def _fake(**kw):
+            llamadas.append(kw["variable"])
+            return _Resp()
+        return _fake, llamadas
+
+    def _paso(terminado, ranking, dimension=""):
+        return SiguientePaso(
+            terminado=terminado, pregunta_texto="", pregunta_tipo="sino", multiple=False,
+            opciones=[], ranking=_r(*ranking), alerta_contradiccion="",
+            dimension_objetivo=dimension,
+        ).model_dump_json()
+
+    _real_generar, _real_cat = _g["generar"], _g["_catalogo_texto"]
+    _g["_catalogo_texto"] = lambda c: "catalogo"
+    try:
+        # Todas las dimensiones cubiertas, pero el top empatado: debe reintentar
+        # y el recordatorio debe nombrar a las dos carreras empatadas.
+        _COBERTURA_POR_SESION["empate"] = {d: 1 for d in DIMENSIONES}
+        _g["generar"], vistas = _doble(_paso(True, (70, 70)))
+        siguiente_pregunta({"nombre": "Ana"}, [], "empate")
+        assert len(vistas) == 2, f"debió reintentar con el top empatado, llamó {len(vistas)}"
+        assert "C0" in vistas[1] and "C1" in vistas[1], \
+            "el recordatorio debe nombrarle al modelo las dos carreras empatadas"
+
+        # Mismo caso pero con el top resuelto: NO debe reintentar.
+        _COBERTURA_POR_SESION["claro"] = {d: 1 for d in DIMENSIONES}
+        _g["generar"], vistas = _doble(_paso(True, (90, 40)))
+        siguiente_pregunta({"nombre": "Ana"}, [], "claro")
+        assert len(vistas) == 1, "con el top resuelto debe cerrar en un solo intento"
+
+        # Y una pregunta normal (terminado=false) tampoco reintenta, aunque el
+        # ranking venga parejo: el guard solo mira si intenta CERRAR.
+        _COBERTURA_POR_SESION["sigue"] = {d: 1 for d in DIMENSIONES}
+        _g["generar"], vistas = _doble(_paso(False, (70, 70), "valores"))
+        siguiente_pregunta({"nombre": "Ana"}, [], "sigue")
+        assert len(vistas) == 1, "si no intenta cerrar, no hay nada que forzar"
+    finally:
+        _g["generar"], _g["_catalogo_texto"] = _real_generar, _real_cat
+        for k in ("empate", "claro", "sigue"):
+            _COBERTURA_POR_SESION.pop(k, None)
+
     print("ok")
