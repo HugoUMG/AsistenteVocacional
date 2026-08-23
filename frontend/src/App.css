@@ -89,7 +89,10 @@
 }
 
 @media (max-width: 720px) {
-  .nav { flex-wrap: wrap; gap: 12px; }
+  .nav { flex-direction: column; gap: 14px; padding: 16px 6vw; }
+  .nav-logo { margin-right: 0; }
+  .nav-cuenta { justify-content: center; flex-wrap: wrap; gap: 10px 14px; }
+  .nav-cta { align-self: center; }
   .nav-links { order: 3; width: 100%; flex-wrap: wrap; justify-content: center; gap: 10px 16px; }
 }
 
