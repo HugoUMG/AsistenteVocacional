@@ -1,6 +1,6 @@
 # Revisión del banco de opciones contra el catálogo completo
 
-**Estado:** APLICADO y MEDIDO 2026-08-23. El banco pasó de 15 a 25 chips en
+**Estado:** APLICADO, MEDIDO y con sus dos pendientes cerrados, 2026-08-23. El banco pasó de 15 a 25 chips en
 `gustos` y se reescribieron 5 etiquetas más. La medición está abajo: no prueba
 una mejora general, sí prueba que el banco nuevo representa personas que el
 viejo no podía representar.
@@ -101,11 +101,43 @@ techo conocido de `filtro.py`, que empareja forma exacta de palabra sin lematiza
 No se siguió persiguiendo formas de palabra: sería contorsionar el español para
 un filtro que ya se midió que no decide el resultado.
 
-## Pendiente aparte: el móvil
+## Los dos pendientes, cerrados
 
-**Mirar el móvil.** `.options.choices.chips` cae a 1 columna abajo de 560px:
-25 chips son 25 filas de scroll. La palanca es dejarlo en 2 columnas también en
-móvil, no recortar el banco.
+### El caso Rosa NO era dispersión
+
+Se revisó qué marcó Rosa en cada brazo y **marcó exactamente los mismos chips de
+máquinas y construcción en los dos**:
+
+| Chip | Brazo A (viejo) | Brazo B (nuevo) |
+|---|---|---|
+| Construir, diseñar o hacer que las cosas funcionen | sí | sí |
+| Construcción, máquinas y cómo funcionan las cosas | sí | sí |
+| Liderar, organizar negocios o usar tecnología y números | sí | sí |
+| En un laboratorio o taller técnico | sí | sí |
+
+La única diferencia fue que en el brazo nuevo marcó 5 chips de `gustos` en vez
+de 3, y los 2 extra eran de salud. **El ingrediente que produjo Ingeniería
+Mecánica Industrial estaba presente en los dos brazos**, así que la diferencia
+cae dentro del ruido ya medido (3 de 8 personas cambian de resultado solas entre
+corridas).
+
+Lección repetida: "más chips dispersan" era una explicación bonita colgada de un
+solo caso, igual que la hipótesis de la ambigüedad. Un caso llamativo no es un
+patrón hasta que se revisa de dónde salió.
+
+### El móvil, arreglado y verificado
+
+`.options.choices.chips` caía a 1 columna abajo de 560px. Ahora se queda en 2 y
+las demás preguntas siguen cayendo a 1. Medido contra la hoja de estilos de la
+app en el navegador:
+
+| Ancho | Chips | Otras preguntas |
+|---|---|---|
+| 375px | **2** (antes 1) | 1 |
+| 768px | 2 | 2 |
+| 1014px | 3 | 2 |
+
+25 chips pasan de 25 filas de scroll a 13 en teléfono.
 
 ---
 
@@ -171,7 +203,8 @@ Los chips nuevos se marcan: las 6 personas usaron al menos uno en la ronda 2.
 
 - **Rosa** (quiere salud pero con aparatos, no trato largo con pacientes). En la
   ronda 2 el banco nuevo le dio Fisioterapia, **Ingeniería Mecánica Industrial**
-  y **Cirujano Dentista**, peor que el viejo. Más chips también puede dispersar.
+  y **Cirujano Dentista**, peor que el viejo. Se dijo que "más chips también
+  puede dispersar" y **eso resultó falso**: ver abajo.
 - **Kevin.** El banco nuevo perdió las dos rondas. En la 1 metió Administración
   de Empresas, que él había rechazado explícitamente.
 - **El juez no es un instrumento estable.** Trabajo Social como top-1 le pareció

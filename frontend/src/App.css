@@ -1101,18 +1101,20 @@
 .options.choices .continuar-btn {
   grid-column: 1 / -1;
 }
-/* El banco de palabras son 25 opciones cortas: caben en 3 columnas.
-   Ojo con el móvil: abajo de 560px cae a 1 columna y son 25 filas de scroll.
-   Si eso molesta, la palanca es dejarlo en 2 columnas también en móvil, no
-   recortar el banco: cada chip cubre un tema del catálogo que si no queda sin
-   forma de nombrarse (ver backend/cobertura_banco.py). */
+/* El banco de palabras son 25 opciones cortas: caben en 3 columnas, 2 en
+   tablet y 2 en teléfono (ver el media query de 560px). Cada chip cubre un
+   tema del catálogo que si no queda sin forma de nombrarse, así que si algún
+   día estorban por cantidad, la palanca es la cuadrícula, no recortar el
+   banco (ver backend/cobertura_banco.py). */
 .options.choices.chips { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 860px) {
   .options.choices.chips { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 560px) {
-  .options.choices,
-  .options.choices.chips { grid-template-columns: 1fr; }
+  .options.choices { grid-template-columns: 1fr; }
+  /* Los chips NO caen a una columna: son 25 y serían 25 filas de scroll en un
+     teléfono. Se quedan en dos y el texto envuelve dentro del chip. */
+  .options.choices.chips { grid-template-columns: 1fr 1fr; }
 }
 
 /* Banco de palabras: chips que fluyen en varias filas */
