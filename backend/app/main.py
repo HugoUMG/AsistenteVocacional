@@ -392,6 +392,7 @@ def recommend(
         holland=data.holland.bloque() if data.holland else None,
         holland_puntajes=data.holland.puntajes() if data.holland else None,
         personalidad=data.personalidad.bloque() if data.personalidad else None,
+        session_id=data.session_id,
     )
     _registrar_uso(db, data.session_id, "recommend", uso)
     carreras_out = [r.model_dump() for r in resultado.carreras]
