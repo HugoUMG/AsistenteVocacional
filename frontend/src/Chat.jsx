@@ -374,7 +374,8 @@ function Opciones({ pregunta, onAnswer }) {
   const salida = (label) => (saliendo ? (saliendo.includes(label) ? 'elegido' : 'saliendo') : '')
 
   return (
-    <div className={`options choices ${pregunta.chips ? 'chips' : ''}`}>
+    <>
+      <div className={`options choices ${pregunta.chips ? 'chips' : ''}`}>
       {pregunta.opciones.map((o, i) => (
         // El título de grupo se dibuja cuando 'grupo' cambia respecto de la
         // opción anterior, así el banco de 25 chips se lee por bloques en vez
@@ -425,6 +426,12 @@ function Opciones({ pregunta, onAnswer }) {
         </button>
       )}
 
+      </div>
+
+      {/* Continuar va FUERA de la cuadrícula a propósito: con 25 chips la lista
+          no cabe en pantalla ni a 4 columnas, así que hace scroll, y cuando el
+          botón vivía dentro se iba con ella y quedaba escondido abajo. Ahora la
+          que se desplaza es solo la lista y el botón se queda fijo al pie. */}
       {multiple && (
         <button
           className={`continuar-btn ${salida('')}`}
@@ -434,7 +441,7 @@ function Opciones({ pregunta, onAnswer }) {
           Continuar →
         </button>
       )}
-    </div>
+    </>
   )
 }
 

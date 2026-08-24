@@ -861,6 +861,29 @@
 .chat-footer::-webkit-scrollbar { width: 8px; }
 .chat-footer::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 999px; }
 
+/* Con 25 chips la lista no cabe en pantalla ni a 4 columnas, así que se
+   desplaza ELLA y no el footer entero: si se desplazara el footer, el botón
+   Continuar se iría con la lista y quedaría escondido abajo (que es justo lo
+   que pasaba). El degradado del pie solo se ve cuando queda contenido debajo,
+   como aviso de que hay más. */
+.chat-footer > .options.choices {
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+  /* el degradado se pinta pegado al borde inferior y desaparece al llegar al
+     final, usando el truco de dos fondos con background-attachment: local */
+  background:
+    linear-gradient(var(--bg2), rgba(255, 255, 255, 0)) top / 100% 1px no-repeat local,
+    linear-gradient(rgba(255, 255, 255, 0), var(--bg2)) bottom / 100% 26px no-repeat scroll;
+}
+.chat-footer > .options.choices::-webkit-scrollbar { width: 8px; }
+.chat-footer > .options.choices::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 999px;
+}
+.chat-footer > .continuar-btn { flex-shrink: 0; }
+
 /* Con muchas opciones (chips, listas largas) el footer podía comerse hasta el
    82% y dejar tan poco alto al header que el robot quedaba recortado por el
    overflow:hidden de .chat. Se le reserva un piso fijo. */
@@ -1101,12 +1124,14 @@
 .options.choices .continuar-btn {
   grid-column: 1 / -1;
 }
-/* El banco de palabras son 25 opciones cortas: caben en 3 columnas, 2 en
-   tablet y 2 en teléfono (ver el media query de 560px). Cada chip cubre un
-   tema del catálogo que si no queda sin forma de nombrarse, así que si algún
-   día estorban por cantidad, la palanca es la cuadrícula, no recortar el
-   banco (ver backend/cobertura_banco.py). */
+/* El banco de palabras son 25 opciones cortas: 4 columnas en pantalla ancha,
+   3 en pantalla normal, 2 en tablet y 2 en teléfono. Cada chip cubre un tema
+   del catálogo que si no queda sin forma de nombrarse, así que si estorban por
+   cantidad la palanca es la cuadrícula, no recortar el banco. */
 .options.choices.chips { grid-template-columns: repeat(3, 1fr); }
+@media (min-width: 1100px) {
+  .options.choices.chips { grid-template-columns: repeat(4, 1fr); }
+}
 @media (max-width: 860px) {
   .options.choices.chips { grid-template-columns: 1fr 1fr; }
 }
