@@ -29,10 +29,14 @@ _PALABRA = re.compile(r"[a-záéíóúüñ]+", re.IGNORECASE)
 # Respuestas que NO aportan señal vocacional al solapamiento de palabras. El
 # nivel, el grado y el motivo se excluyen porque su texto ("universidad",
 # "carrera", "estudiar") solapa con casi cualquier perfil y ensucia el puntaje.
+# El nombre se excluye por lo mismo y por una razón de costo: el catálogo
+# recortado es la clave del caché de Gemini (sha256 en recomendar._clave_cache),
+# así que meter el nombre del alumno le da un hash propio a cada uno y ningún
+# caché se reusa. Ver experiments/cache-compartido.md.
 # 'carrera_cursada' SÍ se queda: el bachillerato o la carrera que lleva es señal
 # real de sus intereses. Siguen llegando
 # completas al prompt de Gemini: esto solo afecta el recorte del catálogo.
-_SIN_SENAL = {"departamento", "edad", "nivel", "grado", "motivo"}
+_SIN_SENAL = {"departamento", "nombre", "edad", "nivel", "grado", "motivo"}
 
 
 def _normaliza(texto: str) -> str:
@@ -144,6 +148,17 @@ if __name__ == "__main__":
     # El grado no arrastra el recorte: "universidad" no debe pesar como interés.
     con_grado = {"grado": "Estoy estudiando en la universidad", "gustos": "tecnología y programación"}
     assert preseleccionar(con_grado, [lejana, *otras, afin], top=5)[0] is afin
+
+    # El nombre no pesa ni cambia el recorte: dos alumnos con los mismos gustos
+    # deben producir EXACTAMENTE las mismas candidatas, o el caché no se reusa.
+    # El nombre lleva palabras que solapan con un perfil ("Justicia Comunidad"
+    # con Trabajo Social): sin la exclusión eso reordena el top y le da a cada
+    # alumno un hash propio.
+    base = {"gustos": "tecnología y programación"}
+    cat = [lejana, *otras, afin]
+    ana = preseleccionar({**base, "nombre": "Ana Justicia Comunidad"}, cat, top=3)
+    luis = preseleccionar({**base, "nombre": "Luis"}, cat, top=3)
+    assert ana == luis, "el nombre no debe mover el recorte (rompe el caché)"
 
     # <= top: no filtra nada, aunque el puntaje sea 0 para todas.
     pocas = [lejana, afin]

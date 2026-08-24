@@ -224,6 +224,15 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
+- [experiments/cache-compartido.md](experiments/cache-compartido.md) — el
+  pre-filtro rompe el caching explícito: el top-35 se recalcula tras cada
+  respuesta, cambia el hash y crea **un CachedContent por llamada** (9 cachés en
+  9 llamadas, contra 1 si se manda el catálogo completo). Con 3 alumnos, quitar
+  el filtro cuesta 62% de lo de hoy; con 30, un 24%. **NO aplicar sin confirmar antes** que el
+  caché explícito corre parejo en producción (`gasto_24h.py 48` sobre Neon, ~95%
+  esperado): si `caches.create` falla, el catálogo completo es 4x MÁS caro. La
+  métrica que engaña es el % cacheado, que se ve alto aunque no se reuse nada; la
+  que importa es el número de cachés.
 - [experiments/comparacion-modelos.md](experiments/comparacion-modelos.md) —
   `gemini-3.5-flash-lite` contra el actual: 2/5 top-1 cambiaron y leyeron peor
   la señal indirecta, cuesta 25-40% más. Se mantiene `gemini-3.1-flash-lite`.
