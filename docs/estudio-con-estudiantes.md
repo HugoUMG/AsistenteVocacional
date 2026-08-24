@@ -105,10 +105,10 @@ No alcanza para cerrar la apertura, y eso hay que declararlo, no estirarlo.
    años. No es un trámite: es un cuello de botella de calendario y hay que
    arrancarlo con semanas de anticipación.
 2. **Asentimiento del propio alumno**, aparte del consentimiento de los padres.
-3. **Quitar el panel de perfiles de prueba de Holland**
-   ([Holland.jsx:199](../frontend/src/Holland.jsx:199), "Solo pruebas: perfiles
-   predeterminados"). Es temporal, para la psicóloga, y con alumnos reales
-   contamina los datos.
+3. ~~**Quitar el panel de perfiles de prueba de Holland.**~~ **RESUELTO**
+   (verificado 2026-08-23): el panel está detrás de `import.meta.env.DEV` en
+   `frontend/src/Holland.jsx`, así que no existe en el build de producción, y
+   en el repo público no está el bloque. No hay nada que hacer acá.
 4. **Definir qué se guarda y cómo se anonimiza.** Hoy existen cuatro tablas de
    resultados (`respuestas_cuestionario`, `resultados_holland`,
    `resultados_psicometricos`, `resultados_personalidad`) más `uso_tokens`. Hay
