@@ -380,6 +380,11 @@ def correr():
         t0 = time.perf_counter()
         a = _sesion(p, cat, BANCO_VIEJO, "A")
         b = _sesion(p, cat, nuevo, "B")
+        # BRAZO DE CONTROL: el banco NUEVO otra vez. Mismo banco que B, así que
+        # todo lo que difiera entre B y C es ruido del sistema (el alumno marca
+        # distinto por la temperatura, y las adaptativas divergen solas). Sin
+        # esta vara, la comparación A contra B no se puede leer.
+        c = _sesion(p, cat, nuevo, "C")
 
         # Ciego: se sortea quién es la Lista 1 y el juez nunca ve las etiquetas.
         primero_es_a = rnd.random() < 0.5
@@ -388,17 +393,30 @@ def correr():
         gano = ("empate" if j.mejor == "empate"
                 else ("A" if (j.mejor == "1") == primero_es_a else "B"))
 
+        # El mismo juez, ciego, sobre el par de control (B contra B repetido).
+        primero_es_b_ctrl = rnd.random() < 0.5
+        c1, c2 = ((b["top3"], c["top3"]) if primero_es_b_ctrl
+                  else (c["top3"], b["top3"]))
+        jc = _juzgar(p, c1, c2)
+
         caso = {"persona": p["nombre"], "contexto": p["contexto"],
-                "A": a, "B": b, "primero_es_a": primero_es_a,
+                "A": a, "B": b, "C": c, "primero_es_a": primero_es_a,
                 "juicio": j.model_dump(), "gano": gano,
                 "coherencia_A": j.coherencia_1 if primero_es_a else j.coherencia_2,
                 "coherencia_B": j.coherencia_2 if primero_es_a else j.coherencia_1,
+                # control: B contra B repetido, mismo banco
+                "control_top1_igual": b["top3"][0]["carrera"] == c["top3"][0]["carrera"],
+                "control_empate_juez": jc.mejor == "empate",
+                "control_dif_coherencia": abs(jc.coherencia_1 - jc.coherencia_2),
+                "juicio_control": jc.model_dump(),
                 "segundos": round(time.perf_counter() - t0, 1)}
         casos.append(caso)
         json.dump({"casos": casos}, open(SALIDA, "w", encoding="utf-8"),
                   ensure_ascii=False, indent=2)
         print(f"    A: {a['top3'][0]['carrera']}")
         print(f"    B: {b['top3'][0]['carrera']}")
+        print(f"    C (control, mismo banco que B): {c['top3'][0]['carrera']}"
+              f"   {'igual' if caso['control_top1_igual'] else '<< DISTINTO: eso es ruido'}")
         print(f"    juez (ciego): {gano}   coherencia A={caso['coherencia_A']} "
               f"B={caso['coherencia_B']}   gastado ${_gastado():.4f}")
 
@@ -419,6 +437,23 @@ def _reporte(casos):
         print(f"   B (banco nuevo): {', '.join(x['carrera'] for x in c['B']['top3'])}")
         print(f"   juez: {c['gano']}  (coherencia A={c['coherencia_A']} B={c['coherencia_B']})")
     n = len(casos)
+
+    # El control va primero a propósito: es contra lo que se lee todo lo demás.
+    conctrl = [c for c in casos if "control_top1_igual" in c]
+    if conctrl:
+        m = len(conctrl)
+        dist = sum(1 for c in conctrl if not c["control_top1_igual"])
+        noemp = sum(1 for c in conctrl if not c["control_empate_juez"])
+        difmed = sum(c["control_dif_coherencia"] for c in conctrl) / m
+        print(f"\n   PISO DE RUIDO - control: B contra B repetido, mismo banco (n={m})")
+        print(f"     Top-1 distinto pese al mismo banco: {dist}/{m}")
+        print(f"     El juez prefirió una de las dos: {noemp}/{m}")
+        print(f"     Diferencia media de coherencia entre corridas iguales: {difmed:.2f}")
+        print("     >> Nada de lo de abajo que no supere esto se puede interpretar.")
+    else:
+        print("\n   PISO DE RUIDO: estos casos se corrieron SIN brazo de control.")
+        print("     Los números de abajo no tienen contra qué compararse.")
+
     gana_a = sum(1 for c in casos if c["gano"] == "A")
     gana_b = sum(1 for c in casos if c["gano"] == "B")
     emp = sum(1 for c in casos if c["gano"] == "empate")

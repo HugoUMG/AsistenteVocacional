@@ -292,3 +292,27 @@ ruido que ya se venía advirtiendo (3 de 8 personas cambiaban solas entre
 rondas en `adaptativas-desempate.md`). **Cualquier A/B de este sistema que no
 lleve un brazo de control con entrada idéntica está sobreinterpretando sus
 diferencias.**
+
+---
+
+## Brazo de control agregado (2026-08-23), SIN correr
+
+El A/B de las etiquetas descubrió que este sistema devuelve resultados
+distintos con entrada idéntica: un caso de control recibió Economía en una
+corrida y Contaduría Pública en la otra, con 3 puntos de diferencia de
+coherencia. Las adaptativas se conversan por separado y divergen solas.
+
+Eso vuelve **no interpretables** los números de arriba: no tienen contra qué
+compararse. El script ya lo dice al reportar datos viejos ("estos casos se
+corrieron SIN brazo de control").
+
+**El brazo ya está implementado**, corre el brazo B (banco nuevo) una segunda vez con el mismo banco y juzga ese par. El reporte lo imprime PRIMERO, antes
+de cualquier resultado, porque es la vara con la que hay que leer el resto:
+
+    0) PISO DE RUIDO - control: ... (n=N)
+       Top-1 distinto pese a la entrada idéntica: X/N
+       El juez prefirió una de las dos: X/N
+       >> Ninguna diferencia de abajo que no supere esto se puede interpretar.
+
+**Falta correrlo**, y con eso volver a leer las conclusiones de arriba. Costo
+estimado: unos $0.15 las 6 personas.
