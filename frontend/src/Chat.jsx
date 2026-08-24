@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import { color } from './colors'
@@ -376,14 +376,22 @@ function Opciones({ pregunta, onAnswer }) {
   return (
     <div className={`options choices ${pregunta.chips ? 'chips' : ''}`}>
       {pregunta.opciones.map((o, i) => (
-        <button
-          key={i}
-          className={`opt-color ${sel.includes(i) ? 'sel' : ''} ${salida(o.label)}`}
-          style={{ '--c': color(i) }}
-          onClick={() => clickOpcion(o.label, i)}
-        >
-          {o.label}
-        </button>
+        // El título de grupo se dibuja cuando 'grupo' cambia respecto de la
+        // opción anterior, así el banco de 25 chips se lee por bloques en vez
+        // de como una lista plana. Solo lo usan las preguntas que lo definen
+        // (ver preguntas-fijas.js); las demás siguen igual.
+        <Fragment key={i}>
+          {o.grupo && o.grupo !== pregunta.opciones[i - 1]?.grupo && (
+            <h4 className={`grupo-opciones ${saliendo ? 'saliendo' : ''}`}>{o.grupo}</h4>
+          )}
+          <button
+            className={`opt-color ${sel.includes(i) ? 'sel' : ''} ${salida(o.label)}`}
+            style={{ '--c': color(i) }}
+            onClick={() => clickOpcion(o.label, i)}
+          >
+            {o.label}
+          </button>
+        </Fragment>
       ))}
 
       {multiple && otroOn ? (
