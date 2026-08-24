@@ -80,9 +80,11 @@ billing como primaria (corroborado por el autor). **Corrige lo que dice
 `experiments/filtro-catalogo-ab.md`**, que quedó viejo.
 
 Las 7 sesiones de Neon dan 28.5% de cacheado global, dentado entre 0% y 92.6%,
-pero eso es **historia, no estado actual**: la sesión más reciente da 92.6% y
-las de 0% son anteriores al arreglo. Confirmar sobre una ventana limpia con
-`backend/gasto_24h.py 48` antes de apoyarse en ese número.
+pero eso es **historia, no estado actual**: el cambio en Render entró entre las
+dos últimas sesiones, la anterior da 0% (key gratis) y la posterior 92.6% (key
+con billing). Ese 92.6% coincide con el 94.6% medido en local, o sea el caché
+explícito ya corre bien en producción. Al leer promedios de esta tabla, filtrar
+por fecha: `backend/gasto_24h.py 48`.
 
 Diagnóstico rápido de cualquier base: `backend/gasto_24h.py`, que imprime el %
 cacheado por sesión y el global.

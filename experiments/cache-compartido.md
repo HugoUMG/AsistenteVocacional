@@ -140,15 +140,23 @@ Lo que explica el número es **la fecha**: la sesión más reciente (08-24 02:44
 da **92.6%**, y las de 0% son todas anteriores. El 28.5% global es un promedio
 sobre sesiones de antes del arreglo, no el estado de hoy.
 
-**Antes de aplicar B hay que confirmarlo sobre una ventana limpia**, o sea solo
-sesiones posteriores al arreglo:
+**Confirmado el 2026-08-23 sobre ventana limpia.** El cambio de variable de
+entorno en Render entró entre las dos últimas sesiones, y cada una cae del lado
+que le toca:
 
-```bash
-cd backend && DATABASE_URL="...neon..." uv run python gasto_24h.py 48
-```
+| Sesión | Key | Cacheado |
+|---|---|---|
+| 08-23 18:51 | gratis (pre-arreglo) | 0.0% |
+| 08-24 02:44 | billing (post-arreglo) | **92.6%** |
 
-Si da ~95% parejo, B es seguro. Si sigue dentado, hay otra causa y B
-cuadruplica el costo en vez de bajarlo.
+El 92.6% es casi calcado del **94.6% del brazo A** de §4, que es exactamente lo
+que predice el modelo: el caché explícito funciona *y* el pre-filtro sigue
+creando uno por llamada. El 25.9% global es un promedio sobre sesiones viejas,
+no el estado de hoy.
+
+**El bloqueante del caché queda cerrado.** El que sigue abierto es el alquiler
+(§7), y es el que decide si B conviene: n=1 sesión post-arreglo alcanza para
+confirmar el mecanismo, no para presupuestar.
 
 ## 7. Pendientes
 
