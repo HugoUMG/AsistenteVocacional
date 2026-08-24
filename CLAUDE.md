@@ -228,12 +228,14 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   pre-filtro rompe el caching explícito: el top-35 se recalcula tras cada
   respuesta, cambia el hash y crea **un CachedContent por llamada** (9 cachés en
   9 llamadas, contra 1 si se manda el catálogo completo). Con 3 alumnos, quitar
-  el filtro cuesta 62% de lo de hoy; con 30, un 24%. El caché explícito ya corre bien en
-  producción (92.6% medido el 2026-08-24), así que ese bloqueante está cerrado;
-  **el que queda es el alquiler**: todo el ahorro depende de $1/1M tok/hora, que
-  nunca se ha visto como SKU en la factura de Google. Sin eso confirmado, el
-  filtro actual gana en tokens puros. La métrica que engaña es el % cacheado, que
-  se ve alto aunque no se reuse nada; la que importa es el número de cachés.
+  el filtro cuesta 62% de lo de hoy; con 30, un 24%. Sin bloqueantes: el caché
+  explícito ya corre bien en producción (92.6%) y la factura confirmó el
+  alquiler ($0.60 de $1.59,
+  **el 38% del gasto**, la línea más cara). ⚠️ **`uso_tokens` no registra el
+  almacenamiento, así que toda cifra de esa tabla es una cota inferior.** Costo
+  por alumno defendible: $0.014 en Totonicapán, $0.044 en Quetzaltenango. La
+  métrica que engaña es el % cacheado, que se ve alto aunque no se reuse nada; la
+  que importa es el número de cachés.
 - [experiments/comparacion-modelos.md](experiments/comparacion-modelos.md) —
   `gemini-3.5-flash-lite` contra el actual: 2/5 top-1 cambiaron y leyeron peor
   la señal indirecta, cuesta 25-40% más. Se mantiene `gemini-3.1-flash-lite`.
