@@ -341,3 +341,27 @@ coherentes con el perfil del estudiante (p = 0.047, n = 44, juez ciego).
 **Lo que sigue sin poder afirmarse:** que el chat desempata (el guard produce
 números que cumplen la regla), y que las adaptativas sirvan especialmente en
 perfiles ambiguos (probado y descartado).
+
+---
+
+## Brazo de control agregado (2026-08-23), SIN correr
+
+El A/B de las etiquetas descubrió que este sistema devuelve resultados
+distintos con entrada idéntica: un caso de control recibió Economía en una
+corrida y Contaduría Pública en la otra, con 3 puntos de diferencia de
+coherencia. Las adaptativas se conversan por separado y divergen solas.
+
+Eso vuelve **no interpretables** los números de arriba: no tienen contra qué
+compararse. El script ya lo dice al reportar datos viejos ("estos casos se
+corrieron SIN brazo de control").
+
+**El brazo ya está implementado**, corre el brazo A una segunda vez con la misma entrada y juzga ese par con el mismo juez ciego. El reporte lo imprime PRIMERO, antes
+de cualquier resultado, porque es la vara con la que hay que leer el resto:
+
+    0) PISO DE RUIDO - control: ... (n=N)
+       Top-1 distinto pese a la entrada idéntica: X/N
+       El juez prefirió una de las dos: X/N
+       >> Ninguna diferencia de abajo que no supere esto se puede interpretar.
+
+**Falta correrlo**, y con eso volver a leer las conclusiones de arriba. Costo
+estimado: unos $0.15 una ronda de 8 casos, o $0.60 rehacer los 32.

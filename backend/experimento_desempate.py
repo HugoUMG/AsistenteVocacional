@@ -226,11 +226,27 @@ def correr(rondas=2):
             res_b, _u = recomendar.recomendar(dict(base), cat)
             ta, tb = _top(res_a, 3), _top(res_b, 3)
 
+            # BRAZO DE CONTROL: A otra vez, con la MISMA entrada. Todo lo que
+            # difiera entre A y C es ruido del sistema, no efecto de nada. Sin
+            # esto la comparación A contra B no se puede leer: en el A/B de las
+            # etiquetas (2026-08-23) un control con entrada idéntica devolvió
+            # Economía en una corrida y Contaduría en la otra.
+            respuestas_c = dict(base)
+            _brazo_a(p, cat, respuestas_c, f"des-ctrl-{ronda}-{p['nombre']}")
+            res_c, _u = recomendar.recomendar(respuestas_c, cat)
+            tc = _top(res_c, 3)
+
             primero_es_a = rnd.random() < 0.5
             l1, l2 = (ta, tb) if primero_es_a else (tb, ta)
             j = _juzgar(p, l1, l2)
             gano = ("empate" if j.mejor == "empate"
                     else ("A" if (j.mejor == "1") == primero_es_a else "B"))
+
+            # El mismo juez, ciego, sobre el par de control.
+            primero_es_a_ctrl = rnd.random() < 0.5
+            c1, c2 = (ta, tc) if primero_es_a_ctrl else (tc, ta)
+            jc = _juzgar(p, c1, c2)
+            empate_ctrl = jc.mejor == "empate"
 
             hechas = len([x for x in pasos if not x["terminado"]])
             cierre = pasos[-1] if pasos else {}
@@ -238,16 +254,24 @@ def correr(rondas=2):
                 "ronda": ronda, "persona": p["nombre"], "contexto": p["contexto"],
                 "fijas": base, "pasos": pasos, "adaptativas_hechas": hechas,
                 "brecha_cierre": cierre.get("brecha"),
-                "A_top3": ta, "B_top3": tb, "primero_es_a": primero_es_a,
+                "A_top3": ta, "B_top3": tb, "C_top3": tc,
+                "primero_es_a": primero_es_a,
                 "juicio": j.model_dump(), "gano": gano,
                 "coherencia_A": j.coherencia_1 if primero_es_a else j.coherencia_2,
                 "coherencia_B": j.coherencia_2 if primero_es_a else j.coherencia_1,
+                # control: A contra A repetido, misma entrada
+                "control_top1_igual": ta[0]["carrera"] == tc[0]["carrera"],
+                "control_empate_juez": empate_ctrl,
+                "control_dif_coherencia": abs(jc.coherencia_1 - jc.coherencia_2),
+                "juicio_control": jc.model_dump(),
             }
             casos.append(caso)
             json.dump({"casos": casos}, open(SALIDA, "w", encoding="utf-8"),
                       ensure_ascii=False, indent=2)
             print(f"    A ({hechas} adaptativas): {ta[0]['carrera']}")
             print(f"    B (cero adaptativas):    {tb[0]['carrera']}")
+            print(f"    C (control, = que A):    {tc[0]['carrera']}"
+                  f"   {'igual' if ta[0]['carrera'] == tc[0]['carrera'] else '<< DISTINTO: eso es ruido'}")
             print(f"    juez: {gano}  misma_area={j.misma_area}  "
                   f"brecha_cierre={caso['brecha_cierre']}  ${_gastado():.4f}")
     _reporte(casos)
@@ -262,6 +286,25 @@ def _reporte(casos):
         print("sin casos")
         return
     n = len(casos)
+
+    # El control va PRIMERO a propósito: es la vara contra la que hay que leer
+    # todo lo demás. Si A y su repetición difieren tanto como A y B, entonces la
+    # diferencia entre brazos no dice nada.
+    conctrl = [c for c in casos if "control_top1_igual" in c]
+    if conctrl:
+        m = len(conctrl)
+        dist = sum(1 for c in conctrl if not c["control_top1_igual"])
+        noemp = sum(1 for c in conctrl if not c["control_empate_juez"])
+        difmed = sum(c["control_dif_coherencia"] for c in conctrl) / m
+        print(f"\n0) PISO DE RUIDO — control: A contra A repetido, MISMA entrada (n={m})")
+        print(f"   Top-1 DISTINTO pese a la entrada idéntica: {dist}/{m}")
+        print(f"   El juez prefirió una de las dos (no empató): {noemp}/{m}")
+        print(f"   Diferencia media de coherencia entre dos corridas iguales: {difmed:.2f}")
+        print("   >> Ninguna diferencia de abajo que no supere esto se puede interpretar.")
+    else:
+        print("\n0) PISO DE RUIDO: estos casos se corrieron SIN brazo de control.")
+        print("   Los números de abajo no tienen contra qué compararse.")
+
     print(f"\n1) COHERENCIA (juez ciego, n={n})")
     ga = sum(1 for c in casos if c["gano"] == "A")
     gb = sum(1 for c in casos if c["gano"] == "B")
