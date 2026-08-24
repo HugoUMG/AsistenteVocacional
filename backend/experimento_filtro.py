@@ -552,7 +552,7 @@ def _reporte(logs, detenido=None):
         print(f"\n0) PISO DE RUIDO (control A vs A2, misma configuración)")
         for n in ctrl_n:
             a, a2 = por[(n, "A")], por[(n, "A2")]
-            igual = "=" if a["top1"] == a2["top1"] else "≠"
+            igual = "==" if a["top1"] == a2["top1"] else "!="
             print(f"{n:10s} {a['top1'][:30]:32s} {igual} {a2['top1'][:30]:32s}")
         print(f"\n   top-1 distinto SIN cambiar nada: {ruido}/{len(ctrl_n)}")
 

@@ -243,7 +243,53 @@ Con el alquiler confirmado, los dos hallazgos de este experimento pasan de
    alumnos, 24% con 30. **Ya no hay bloqueante técnico**; falta decidir hacerlo.
 2. La ventaja de Totonicapán (§7) es real, no un artefacto del precio de lista.
 
-## 9. Pendientes
+## 9. El A/B con brazo de control (2026-08-24)
+
+`experimento_filtro.py` corrido con tres brazos: A (filtro), **A2 (control,
+idéntico a A)** y B (catálogo completo). 8 perfiles, 24 sesiones, $0.2186 de
+crédito real. Reporte completo en
+`backend/data/tests/experimento_filtro_reporte_20260824.txt`.
+
+### Calidad: no hay señal
+
+| | Resultado |
+|---|---|
+| Ruido (A vs A2, misma config) | top-1 distinto **5/8** |
+| Efecto (A vs B) | top-1 distinto **4/8** |
+
+**El efecto es menor que el ruido**, así que quitar el filtro no cambia la
+calidad de forma detectable. La fila de aciertos (A 4/8, B 6/8) parece favorecer
+a B, pero con 5/8 de ruido esa diferencia no significa nada. Esto es lo que la
+corrida anterior de [filtro-catalogo-ab.md](filtro-catalogo-ab.md) (13/16 vs
+12/16, sin control) no podía ver: interpretó como señal lo que era ruido.
+
+### Costo: la señal es limpia y decisiva
+
+| | A (filtro) | A2 (control) | B (completo) |
+|---|---|---|---|
+| **Cachés (8 alumnos)** | **42** | 44 | **1** |
+| Costo tokens | $0.0452 | $0.0488 | $0.0723 |
+| Alquiler | $0.3719 | $0.3662 | $0.0247 |
+| **TOTAL** | **$0.4172** | $0.4150 | **$0.0970** |
+
+**B cuesta el 23% de A** ($0.0121 vs $0.0522 por sesión), clavando la predicción
+de §5. Y este experimento demuestra el señuelo en vivo: la fila "solo tokens" da
+A $0.0056 vs B $0.0090, o sea mirando solo `uso_tokens` el filtro parece 38% MÁS
+barato. El alquiler invierte todo.
+
+Latencia: empate (B 15.0s, A 15.5s por sesión; A2 salió en 18.6s siendo idéntico
+a A, más evidencia de ruido).
+
+### Veredicto
+
+**Quitar el pre-filtro de `next-question`.** Calidad indistinguible (efecto <
+ruido), costo real a ~1/4, latencia igual. El cambio es borrar la llamada a
+`preseleccionar` en `preguntas.siguiente_pregunta`; el monkeypatch `_sin_filtro`
+del experimento ya prueba que el resto del flujo lo tolera. Límite honesto: n=8
+con ruido de 5/8 da "sin diferencia detectable", no "equivalencia probada"; para
+la decisión basta, porque el costo cae 4x.
+
+## 10. Pendientes
 
 - ~~El alquiler es estimado a precio de lista.~~ **RESUELTO el 2026-08-24, ver
   §8**: el SKU existe, cobra $1.004/1M tokens-hora y es el 38% de la factura.
