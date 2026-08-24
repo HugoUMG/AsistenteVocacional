@@ -2031,3 +2031,27 @@
   stroke-width: 1.6px;
   pointer-events: none;
 }
+
+/* Panel de calificación del profesional (solo /admin, ver Recorrido.jsx). */
+.rec-juicio-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+.rec-juicio-nota {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 0.6rem 0.8rem;
+}
+.rec-juicio-nota:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--ring);
+}

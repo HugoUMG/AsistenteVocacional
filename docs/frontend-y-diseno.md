@@ -84,7 +84,6 @@ Un **dashboard a pantalla completa** (`Dashboard.jsx`) con:
   en esa carrera, con retos incluidos. On-demand: 1 llamada a Gemini.
 - **Comparador** de la carrera principal contra otra del resultado
   (`POST /api/comparar`). On-demand: 1 llamada a Gemini.
-- **Feedback** 👍/👎 sobre la recomendación (`POST /api/feedback`).
 
 Ejemplo: si sale "Derecho" con "Ambos", ve las 4 sedes juntas (CUNTOTO, URG, UMG
 en Totonicapán y CUNOC en Quetzaltenango), cada una con su sello.

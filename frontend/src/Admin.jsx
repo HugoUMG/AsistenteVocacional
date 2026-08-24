@@ -26,9 +26,12 @@ const COLUMNAS = [
   ['holland', 'Holland'],
   ['holland_puntajes', 'Puntajes RIASEC'],
   ['top3', 'Top 3 recomendado'],
-  ['feedback', '¿Acertó?'],
+  ['juicio', 'Juicio del profesional'],
+  ['juicio_nota', 'Comentario'],
   ['cuenta', 'Cuenta'],
 ]
+
+const JUICIOS = { acerto: 'Acertó', parcial: 'Acertó en parte', no_acerto: 'No acertó' }
 
 const fecha = (f) => (f ? new Date(f).toLocaleString('es-GT') : '')
 
@@ -36,7 +39,7 @@ function celda(fila, clave) {
   const v = fila[clave]
   if (clave === 'fecha') return fecha(v)
   if (clave === 'top3') return (v || []).join(' · ') || (fila.termino ? '' : 'No terminó')
-  if (clave === 'feedback') return v === true ? 'Sí' : v === false ? 'No' : ''
+  if (clave === 'juicio') return JUICIOS[v] || 'Sin calificar'
   // Sin código = no hizo Holland. Con código pero de otro recorrido, se marca:
   // el psicólogo necesita saber si el chat partió de ese perfil o no.
   if (clave === 'holland') {
@@ -85,6 +88,20 @@ function Registro() {
     }
   }
 
+  // Guarda la calificación y refleja el cambio en la lista sin recargar todo:
+  // la psicóloga va a calificar varias seguidas y volver a la tabla cada vez.
+  async function guardarJuicio(juicio, nota) {
+    const r = await fetch(`${API}/api/admin/juicio`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...authHeader() },
+      body: JSON.stringify({ respuesta_id: abierta.id, juicio, nota }),
+    })
+    if (!r.ok) throw new Error((await r.json().catch(() => null))?.detail || 'No se pudo guardar la calificación.')
+    const limpia = (nota || '').trim() || null
+    setAbierta((a) => ({ ...a, juicio, juicio_nota: limpia }))
+    setFilas((fs) => (fs || []).map((f) => (f.id === abierta.id ? { ...f, juicio, juicio_nota: limpia } : f)))
+  }
+
   useEffect(() => {
     fetch(`${API}/api/admin/respuestas`, { headers: authHeader() })
       .then(async (r) => {
@@ -101,6 +118,7 @@ function Registro() {
         fila={abierta}
         onVolver={() => setAbierta(null)}
         onDashboard={() => setVerDashboard(true)}
+        onGuardarJuicio={guardarJuicio}
       />
     )
   }

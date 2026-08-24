@@ -2,6 +2,7 @@
 // preguntas fijas, qué le preguntó Orienta y qué le salió. Lo usan el historial
 // del propio alumno y el registro de administración, que muestran exactamente lo
 // mismo.
+import { useState } from 'react'
 import Nav from './Nav'
 import { CLAVES_FIJAS } from './preguntas-fijas'
 import './App.css'
@@ -85,11 +86,70 @@ function Holland({ h, historial = [] }) {
   )
 }
 
+// Calificación del profesional que aplica el estudio. Solo aparece en /admin
+// (el historial del alumno no manda onGuardar y el panel no se dibuja): es la
+// vara EXTERNA de docs/estudio-con-estudiantes.md §4, no la opinión del alumno.
+const OPCIONES_JUICIO = [
+  ['acerto', 'Acertó'],
+  ['parcial', 'Acertó en parte'],
+  ['no_acerto', 'No acertó'],
+]
+
+function Juicio({ valor, nota, onGuardar }) {
+  const [juicio, setJuicio] = useState(valor ?? null)
+  const [texto, setTexto] = useState(nota ?? '')
+  const [estado, setEstado] = useState('')
+
+  async function guardar(nuevoJuicio, nuevoTexto) {
+    setEstado('Guardando…')
+    try {
+      await onGuardar(nuevoJuicio, nuevoTexto)
+      setEstado('Guardado')
+    } catch (e) {
+      setEstado(String(e.message || e))
+    }
+  }
+
+  function elegir(v) {
+    // Segundo clic en la misma opción = deseleccionar, por si se equivocó.
+    const nuevo = juicio === v ? null : v
+    setJuicio(nuevo)
+    guardar(nuevo, texto)
+  }
+
+  return (
+    <div className="rec-rama">
+      <p className="rec-rama-titulo">Calificación del profesional</p>
+      <div className="rec-juicio-opciones">
+        {OPCIONES_JUICIO.map(([v, t]) => (
+          <button
+            key={v}
+            className={juicio === v ? 'opt' : 'opt ghost'}
+            onClick={() => elegir(v)}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+      <textarea
+        className="rec-juicio-nota"
+        rows={4}
+        placeholder="Comentarios: qué matiz tiene este caso, qué habrías recomendado, qué se le escapó al sistema…"
+        value={texto}
+        onChange={(e) => { setTexto(e.target.value); setEstado('') }}
+        onBlur={() => (texto ?? '') !== (nota ?? '') && guardar(juicio, texto)}
+        maxLength={4000}
+      />
+      <p className="psi-texto">{estado || 'Se guarda solo al elegir y al salir del comentario.'}</p>
+    </div>
+  )
+}
+
 // El recorrido completo de una evaluación, como diagrama de arriba abajo:
 // quién es, qué contestó en las fijas, qué le preguntó Orienta y qué le salió.
 // ponytail: el diagrama es HTML y CSS (una línea vertical y nodos), sin
 // librería de grafos. Si algún día hay que ramificar de verdad, ahí sí.
-export default function Recorrido({ fila, onVolver, onDashboard }) {
+export default function Recorrido({ fila, onVolver, onDashboard, onGuardarJuicio }) {
   const r0 = fila.respuestas || {}
   const entradas = Object.entries(r0)
   const esFija = ([c]) => CLAVES_FIJAS.includes(c) || c === 'departamento' || c === 'carrera_descartada'
@@ -146,6 +206,15 @@ export default function Recorrido({ fila, onVolver, onDashboard }) {
               </ul>
             )}
           </div>
+
+          {onGuardarJuicio && (
+            <Juicio
+              key={fila.id}
+              valor={fila.juicio}
+              nota={fila.juicio_nota}
+              onGuardar={onGuardarJuicio}
+            />
+          )}
         </div>
       </main>
     </div>

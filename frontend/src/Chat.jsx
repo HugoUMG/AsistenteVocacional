@@ -479,7 +479,6 @@ function Chat() {
   const [phase, setPhase] = useState('chat') // chat | loading | dashboard
   const [carreras, setCarreras] = useState([])
   const [diversificados, setDiversificados] = useState([]) // solo si va en básicos
-  const [respuestaId, setRespuestaId] = useState(null)
   const [confianza, setConfianza] = useState(null)
   const [error, setError] = useState(null) // fallo de API (muestra "Reintentar")
   const [avisoInput, setAvisoInput] = useState(null) // validación del input (nombre)
@@ -569,10 +568,9 @@ function Chat() {
     setPhase('loading')
     setError(null)
     try {
-      const { carreras, respuesta_id, confianza, confianza_nota, diversificados } = await obtenerCarreras(resp)
+      const { carreras, confianza, confianza_nota, diversificados } = await obtenerCarreras(resp)
       setCarreras(carreras)
       setDiversificados(diversificados || [])
-      setRespuestaId(respuesta_id ?? null)
       setConfianza(confianza != null ? { valor: confianza, nota: confianza_nota } : null)
       setPhase('dashboard')
     } catch (e) {
@@ -777,7 +775,6 @@ function Chat() {
         nombre={respuestas.nombre}
         carreras={carreras}
         diversificados={diversificados}
-        respuestaId={respuestaId}
         confianza={confianza}
         respuestas={respuestas}
         onReiniciar={() => {

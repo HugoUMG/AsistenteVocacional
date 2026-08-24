@@ -67,7 +67,7 @@ El estudiante puede apagarla.
 │       ├── Nav.jsx         barra superior de las paginas informativas (el chat no la usa)
 │       ├── Mapa.jsx        mapa: los departamentos con catálogo (Totonicapán y Quetzaltenango)
 │       ├── Chat.jsx        chat (fijas + adaptativas), voz, fases chat/loading/dashboard
-│       ├── Dashboard.jsx   graficas, detalle por institucion, PDF, simulador, comparador, feedback
+│       ├── Dashboard.jsx   graficas, detalle por institucion, PDF, simulador, comparador
 │       ├── Catalogo.jsx    catalogo publico con filtros (GET /api/carreras)
 │       ├── Parametros.jsx  explicacion de las 7 dimensiones vocacionales
 │       ├── Acerca.jsx      pagina informativa
@@ -92,8 +92,11 @@ desactualizada.
 Se guarda en PostgreSQL (`backend/app/models.py`), 6 tablas:
 - **`estudiantes`**: nombre (el email es opcional, hoy no se pide).
 - **`respuestas_cuestionario`**: todas las respuestas del test como JSON, ligadas
-  al estudiante, más la `recomendacion` que devolvió la IA y el `feedback`
-  (👍/👎, `bool | None`) que dio el estudiante en el dashboard.
+  al estudiante, más la `recomendacion` que devolvió la IA y el `juicio` del
+  profesional (`acerto` | `parcial` | `no_acerto`) con su `juicio_nota`. El
+  alumno NO califica su propia recomendación: el 👍/👎 que había en el
+  dashboard se quitó porque no puede saber si acertó hasta que la evalúe un
+  profesional.
 - **`carreras`**: el catálogo (nombre, departamento, centro, universidad,
   `perfil`, `perfil_grupo` y `sello`). `perfil_grupo` apunta a un perfil
   compartido (`data/perfiles_compartidos.json`): la misma carrera en varias sedes
