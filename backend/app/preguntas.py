@@ -6,7 +6,6 @@ haya cargadas."""
 from pydantic import BaseModel
 
 from app import holland as holland_mod
-from app.filtro import preseleccionar
 from app.recomendar import (
     ANTI_INYECCION,
     MODELO,
@@ -187,10 +186,10 @@ def siguiente_pregunta(
 ) -> tuple[SiguientePaso, dict]:
     """`holland`: bloque de texto con el perfil RIASEC medido, si el alumno hizo
     el test antes del chat (modo 3, ver docs/holland.md). Va como sección aparte
-    del prompt y NO entra al pre-filtro del catálogo: recortar el catálogo al
-    sector de Holland se midió y borra las carreras correctas
-    (experiments/holland-en-chat.md §3). La cobertura de dimensiones no cambia:
-    las 4 preguntas fijas se quedan y ya cubren intereses.
+    del prompt. Recortar el catálogo al sector de Holland se midió y borra las
+    carreras correctas (experiments/holland-en-chat.md §3); de todas formas ya no
+    hay ningún pre-filtro que tocar. La cobertura de dimensiones no cambia: las 4
+    preguntas fijas se quedan y ya cubren intereses.
 
     `holland_puntajes`: {letra: 0-40}, los seis puntajes del alumno; obligatorio
     junto con `holland` para armar la adenda (`holland_mod.adenda_chat` nombra el
@@ -202,13 +201,12 @@ def siguiente_pregunta(
     `personalidad_cobertura`: {dimensión: 1}, las que ese test ya cubrió (siempre
     personalidad/valores/estilo_cognitivo); se usa para SEMBRAR la cobertura de
     la sesión y así el chat no vuelve a preguntarlas."""
-    # Pre-filtro sin IA: recalculado en cada llamada con TODAS las respuestas
-    # acumuladas hasta ahora (ver app/filtro.py). Si el catálogo ya es chico
-    # (p. ej. un solo departamento pequeño), no recorta nada.
-    candidatas = preseleccionar(respuestas, carreras)
-    if len(candidatas) < len(carreras):
-        print(f"[filtro] next-question: {len(carreras)} -> {len(candidatas)} carreras candidatas")
-
+    # Sin pre-filtro: el chat ve el catálogo completo, igual que recommend. El
+    # A/B con brazo de control (experiments/cache-compartido.md §9) midió que
+    # recortarlo no cambia la recomendación (efecto 4/8 < ruido 5/8) y cuesta 4x
+    # en caché: el top-35 se recalculaba tras cada respuesta, cambiaba el hash y
+    # creaba un CachedContent por llamada, mientras que el catálogo completo es
+    # idéntico entre llamadas y entre alumnos, así que comparten uno solo.
     cobertura = _cobertura(session_id, personalidad_cobertura)
     hechas = sum(cobertura.values()) - sum(COBERTURA_INICIAL.values())
     pendientes = [d for d in PRIORITARIAS if not cobertura[d]]
@@ -239,7 +237,7 @@ def siguiente_pregunta(
             system=SYSTEM + (holland_mod.adenda_chat(holland_puntajes) if holland else ""),
             catalogo=(
                 "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
-                f"{_catalogo_texto(candidatas)}"
+                f"{_catalogo_texto(carreras)}"
             ),
             variable=variable,
             schema=SiguientePaso,
