@@ -570,28 +570,6 @@
   margin: 0;
 }
 
-/* --- Feedback: cierre del flujo --- */
-.dash-feedback {
-  margin-top: 28px;
-  display: flex;
-  justify-content: center;
-}
-.dash-feedback p {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 12px 24px;
-  font-size: 14.5px;
-  color: var(--text);
-  box-shadow: var(--shadow-sm);
-}
-.dash-feedback .opt { padding: 9px 22px; }
 
 
 /* Sugerencia de diversificado: solo aparece para quien va en básicos. Va como

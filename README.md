@@ -109,7 +109,7 @@ cd backend && uv run python seed_carreras.py
 | POST | `/api/recommend` | Recomienda carreras agrupadas con % de afinidad |
 | POST | `/api/simular-dia` | "Un día siendo…" para una carrera del resultado |
 | POST | `/api/comparar` | Compara dos carreras del resultado |
-| POST | `/api/feedback` | 👍/👎 del estudiante sobre la recomendación |
+| POST | `/api/admin/juicio` | Calificación del profesional sobre una evaluación (solo admin) |
 | POST | `/api/tts` | Voz neuronal (edge-tts) para leer los mensajes del chat |
 | GET | `/api/psicometrico/preguntas` | Banco de 100 ítems, sin la clave |
 | POST | `/api/psicometrico` | Califica, guarda y devuelve el resumen con IA |
@@ -132,7 +132,7 @@ cd backend && uv run python -m app.psicometrico
 - [x] Selección de departamento/región en un mapa de Guatemala antes del chat.
 - [x] Dashboard: barras + dona por % de afinidad, carreras agrupadas con detalle
   por institución, PDF descargable, simulador de "un día siendo…", comparador de
-  dos carreras y feedback.
+  dos carreras.
 - [x] Voz neuronal en el chat (edge-tts) con caída a la voz del navegador.
 - [x] Catálogo cerrado para Quetzaltenango (9 centros) y Totonicapán (3 centros).
 - [x] Examen psicométrico de 100 ítems en pestaña aparte, con resumen de IA.

@@ -83,6 +83,15 @@ independiente del desarrollador y del modelo, que es exactamente lo que falta.
 Detalle de diseño: presentar las salidas **en orden aleatorizado y sin
 etiquetas** de origen. Si sabe cuál es cuál, el sesgo de expectativa se cuela.
 
+**Dónde se registra ese juicio:** ya está en la app. Dentro de `/admin`, al
+abrir una evaluación, al final del recorrido hay tres opciones (Acertó, Acertó
+en parte, No acertó) y un campo de comentarios. Se guarda en
+`respuestas_cuestionario.juicio` y `.juicio_nota` (`POST /api/admin/juicio`) y
+sale en el CSV del registro, así que entra al análisis junto con el resto de la
+fila. Ojo con §4: para que sea a ciegas, quien califica **no debería ver el
+recorrido completo** de un solo golpe; hoy la pantalla lo muestra todo, y eso
+hay que resolverlo con el protocolo de la sesión, no con la UI.
+
 La guía de [entrevista-validacion-psicologa.md](entrevista-validacion-psicologa.md)
 ya toca esto en su ítem 6. **Falta pedirle explícitamente que acepte hacer de
 criterio externo**, que es un compromiso de tiempo distinto a dar una opinión.

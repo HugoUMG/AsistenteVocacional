@@ -64,8 +64,13 @@ class RespuestaCuestionario(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
     # resultado de /api/recommend, guardado para poder evaluar precisión luego.
     recomendacion: Mapped[dict | None] = mapped_column(JSON, default=None)
-    # feedback del alumno: True = le pareció acertada, False = no, None = sin responder.
-    feedback: Mapped[bool | None] = mapped_column(default=None)
+    # Juicio del profesional que aplica el estudio (la psicóloga), desde /admin.
+    # Es la vara EXTERNA de docs/estudio-con-estudiantes.md §4. El alumno NO
+    # califica su propia recomendación: no puede saber si acertó hasta que la
+    # evalúe un profesional (por eso se quitó el 👍/👎 del dashboard).
+    # "acerto" | "parcial" | "no_acerto", None = sin calificar todavía.
+    juicio: Mapped[str | None] = mapped_column(String(12), default=None)
+    juicio_nota: Mapped[str | None] = mapped_column(Text, default=None)
 
     estudiante: Mapped["Estudiante"] = relationship(back_populates="respuestas")
 

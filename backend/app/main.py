@@ -3,7 +3,7 @@ import re
 import unicodedata
 from collections import Counter
 from contextlib import asynccontextmanager
-from typing import Annotated
+from typing import Annotated, Literal
 
 import edge_tts
 import httpx
@@ -31,6 +31,8 @@ async def lifespan(app: FastAPI):
     # ser Alembic; cuando haya mas de un par de estas lineas, migrar.
     with engine.begin() as con:
         con.execute(text("ALTER TABLE resultados_holland ADD COLUMN IF NOT EXISTS perfil JSONB"))
+        con.execute(text("ALTER TABLE respuestas_cuestionario ADD COLUMN IF NOT EXISTS juicio VARCHAR(12)"))
+        con.execute(text("ALTER TABLE respuestas_cuestionario ADD COLUMN IF NOT EXISTS juicio_nota TEXT"))
     yield
 
 
@@ -395,7 +397,7 @@ def recommend(
     carreras_out = [r.model_dump() for r in resultado.carreras]
 
     # Guarda la recomendación en el registro más reciente de este alumno,
-    # para poder cruzarla luego con el feedback y medir precisión.
+    # para poder cruzarla luego con el juicio del profesional y medir precisión.
     respuesta_id = None
     resp = (
         db.query(models.RespuestaCuestionario)
@@ -969,6 +971,8 @@ def admin_respuesta(
         "fecha": r.created_at,
         "respuestas": r.respuestas,
         "recomendacion": rec,
+        "juicio": r.juicio,
+        "juicio_nota": r.juicio_nota,
         "diversificados": (
             diversificado.sugerir([c.get("carrera", "") for c in rec])
             if (r.respuestas or {}).get("nivel") == "Básico" else []
@@ -1012,7 +1016,8 @@ def admin_respuestas(
             "carrera_descartada": resp.get("carrera_descartada"),
             "top3": [c.get("carrera") for c in rec[:3]],
             "termino": bool(rec),  # False = abandonó antes de ver resultados
-            "feedback": r.feedback,
+            "juicio": r.juicio,
+            "juicio_nota": r.juicio_nota,
             "cuenta": r.estudiante.email if r.estudiante else None,
             "holland": h["codigo"] if h else None,
             "holland_puntajes": (
@@ -1025,17 +1030,27 @@ def admin_respuestas(
     return salida
 
 
-class FeedbackIn(BaseModel):
+class JuicioIn(BaseModel):
     respuesta_id: int
-    acertada: bool
+    # Literal en vez de texto libre: es la variable que se va a tabular, y un
+    # "Acertó " con espacio o un "si" suelto arruinan el conteo en silencio.
+    juicio: Literal["acerto", "parcial", "no_acerto"] | None = None
+    nota: str | None = Field(default=None, max_length=4000)
 
 
-@app.post("/api/feedback", status_code=204)
-def feedback(data: FeedbackIn, db: Session = Depends(get_db)):
+@app.post("/api/admin/juicio", status_code=204)
+def admin_juicio(
+    data: JuicioIn, db: Session = Depends(get_db),
+    admin: models.Estudiante = Depends(auth.requiere_admin),
+):
+    """Calificación del profesional sobre una evaluación, desde /admin. Es el
+    criterio externo de docs/estudio-con-estudiantes.md §4 y se exporta junto
+    con el resto de la fila."""
     resp = db.get(models.RespuestaCuestionario, data.respuesta_id)
     if resp is None:
-        raise HTTPException(status_code=404, detail="Registro no encontrado")
-    resp.feedback = data.acertada
+        raise HTTPException(status_code=404, detail="Esa evaluación no existe.")
+    resp.juicio = data.juicio
+    resp.juicio_nota = (data.nota or "").strip() or None
     db.commit()
 
 

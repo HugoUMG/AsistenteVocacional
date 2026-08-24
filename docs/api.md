@@ -14,7 +14,7 @@ http://localhost:8000/docs mientras corre el backend.
 | POST | `/api/recommend` | **sí** | Recomienda carreras agrupadas con % (filtra por departamento, sin pre-filtro) |
 | POST | `/api/simular-dia` | **sí** | "Un día siendo…": 5-7 eventos con hora + cierre, on-demand desde el dashboard |
 | POST | `/api/comparar` | **sí** | Compara dos carreras del resultado, on-demand |
-| POST | `/api/feedback` | no | 👍/👎 sobre la recomendación (204, se guarda en `respuestas_cuestionario.feedback`) |
+| POST | `/api/admin/juicio` | no | Calificación del profesional sobre una evaluación (204, solo `ADMIN_EMAILS`) |
 | POST | `/api/tts` | no | Audio de un texto con `edge-tts` (voz `es-MX-DaliaNeural`), en streaming |
 | GET | `/api/psicometrico/preguntas` | no | Banco de 100 ítems, sin la clave de respuestas |
 | POST | `/api/psicometrico` | **sí** | Califica, guarda y devuelve el resumen con IA |
@@ -77,7 +77,8 @@ guardadas, así que no depende de que se haya guardado.
 `GET /api/admin/respuestas?limite=500` devuelve, de la más reciente a la más
 antigua, cada evaluación con lo que el alumno contestó en las preguntas fijas
 (nombre, edad, nivel, grado, carrera cursada, si le gustó, motivo, departamento),
-la carrera que pidió descartar, su top-3 recomendado, si terminó y su feedback.
+la carrera que pidió descartar, su top-3 recomendado, si terminó y la
+calificación del profesional.
 
 Cada fila trae además el **resultado de Holland** de ese alumno (`holland` con el
 código RIASEC, `holland_puntajes` con los seis puntajes y `holland_previo`): el
@@ -87,6 +88,15 @@ evaluación, no alimenta la recomendación (ver docs/holland.md). Un alumno pued
 repetir el test cuantas veces quiera: `holland_total` dice cuántos lleva y el
 detalle, `GET /api/admin/respuestas/{id}`, trae el que corresponde en `holland`
 y todos los demás en `holland_historial`, del más reciente al más viejo.
+
+`POST /api/admin/juicio` guarda la calificación del profesional sobre una
+evaluación: `juicio` (`acerto` | `parcial` | `no_acerto`, o `null` para
+descalificarla) y `nota` (comentario libre, hasta 4000 chars). Se guarda en
+`respuestas_cuestionario.juicio` y `.juicio_nota`, y sale en el listado, en el
+detalle y en el CSV. Es el **criterio externo** de
+[estudio-con-estudiantes.md](estudio-con-estudiantes.md) §4 y es la **única**
+calificación que existe: el 👍/👎 del alumno se quitó del dashboard, porque él
+no puede saber si la recomendación acertó hasta que la evalúe un profesional.
 
 Pide sesión de Google **y** que el correo esté en `ADMIN_EMAILS`
 (`backend/.env`); si no, responde 403. Sin la variable no entra nadie. La página
