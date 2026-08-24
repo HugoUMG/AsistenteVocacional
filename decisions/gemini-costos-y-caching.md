@@ -51,6 +51,42 @@ fallo anterior y no lo reintenta.
 Reproducir: `backend/flujo_gasto.py` (N conversaciones completas contra el backend
 local, lee `/api/uso-tokens` y calcula ambos costos).
 
+## El pre-filtro crea un caché por llamada (2026-08-23)
+
+El caché se indexa por `sha256(system + catálogo)`, y el catálogo de
+`next-question` sale de `filtro.preseleccionar`, que se recalcula tras cada
+respuesta. Resultado: el hash cambia en cada llamada y se crea **un
+CachedContent nuevo cada vez** (9 cachés en 9 llamadas, medido). Como el
+almacenamiento se cobra por hora y por caché, eso es una renta por alumno que
+nunca se amortiza. Mandar el catálogo completo deja **1 caché para todo el
+grupo**. Números, brazos y bloqueantes en
+[../experiments/cache-compartido.md](../experiments/cache-compartido.md).
+
+⚠️ **El % cacheado no sirve para detectar esto.** Un caché recién creado ya
+reporta sus tokens como cacheados, así que ambos brazos dan >94%. La métrica es
+el **número de cachés distintos**.
+
+⚠️ **El modelo de costo de almacenamiento de este archivo no está verificado.**
+Nunca se ha visto el SKU de almacenamiento en la factura de Google, y la
+reconciliación del 2026-08-11 encontró ~$0.003 de diferencia, mucho menos de lo
+que predice $1/1M tok/hora con TTL de 1h. Verificar en Facturación → Informes
+agrupando por SKU antes de apoyar cualquier decisión en esas cifras.
+
+## La key con billing ya es la primaria en local (2026-08-23)
+
+Verificado probando `caches.create` con cada una: `GEMINI_API_KEY` crea cachés,
+`GEMINI_API_KEY_RESPALDO` falla con 429. En **Render también** está la de
+billing como primaria (corroborado por el autor). **Corrige lo que dice
+`experiments/filtro-catalogo-ab.md`**, que quedó viejo.
+
+Las 7 sesiones de Neon dan 28.5% de cacheado global, dentado entre 0% y 92.6%,
+pero eso es **historia, no estado actual**: la sesión más reciente da 92.6% y
+las de 0% son anteriores al arreglo. Confirmar sobre una ventana limpia con
+`backend/gasto_24h.py 48` antes de apoyarse en ese número.
+
+Diagnóstico rápido de cualquier base: `backend/gasto_24h.py`, que imprime el %
+cacheado por sesión y el global.
+
 ## Los experimentos no quedaban en `uso_tokens` (2026-08-12)
 
 `uso_tokens` solo se llena desde los endpoints (`_registrar_uso` en `main.py`).
