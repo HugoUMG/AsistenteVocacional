@@ -228,3 +228,67 @@ viejos cuyo veredicto dependía de `claves` fijadas de antemano. En particular
 [adaptativas-desempate.md](adaptativas-desempate.md), donde la pregunta no es
 "¿acertó?" sino "¿la pregunta extra separó dos carreras hermanas?".
 
+---
+
+## A/B de las 3 etiquetas acortadas (2026-08-23)
+
+Script: `backend/experimento_etiquetas.py` · $0.1318 · 8 casos.
+
+### Qué se cambió y por qué se midió
+
+Para que los 25 chips quepan en una línea (y desaparezca el scroll en
+escritorio) habría que bajar todas las etiquetas a 26 caracteres. Se probó:
+la lista pasa de 696px a 608px y caben los 25 de una vez. Pero
+`verifica_etiquetas.py` marcó **13 de 16 pares como no equivalentes**:
+"Ambiente y agronegocios" pierde *agricultura*, "Comunicación y medios" pierde
+*escritura*, "Comercio y otros países" pierde *política*. En 26 caracteres no
+caben tres conceptos, y cada chip lleva tres porque así cubre tres cosas.
+
+Se conservaron solo las 3 que salieron limpias:
+
+| Antes | Ahora |
+|---|---|
+| Salud, cuidados y atención a pacientes | Salud y cuidar pacientes |
+| Enseñanza, docencia y educación | Enseñanza y docencia |
+| Psicología y comportamiento | Psicología y conducta |
+
+Eso baja la lista a 679px y el scroll de 65px a 48px, con 24 de 25 chips
+visibles. Igual cambia la señal que entra al prompt, así que se midió.
+
+### El diseño, y por qué no el de siempre
+
+Con 22 de 25 etiquetas idénticas, un A/B donde cada brazo conversa por su
+cuenta gastaría el presupuesto midiendo qué chips marcó el alumno por azar.
+Acá las 4 fijas se contestan **una sola vez** y los dos brazos salen de ahí,
+difiriendo **solo en esas 3 cadenas**. Se agregó a Kevin como **control**: su
+perfil no roza salud, educación ni psicología, así que sus dos brazos reciben
+entradas idénticas.
+
+### Resultado
+
+| Grupo | n | Juez A-B-empate | Coherencia A-B | Top-1 igual |
+|---|---:|---|---:|---|
+| Marcaron una etiqueta cambiada | 7 | 1-5-1 | -0.71 | 3/7 |
+| **Kevin (control, entrada idéntica)** | 1 | 1-0-0 | **+3.00** | **0/1** |
+
+**El control disparó, y ese es el hallazgo.** Kevin recibió exactamente la
+misma entrada en los dos brazos y aun así recibió Economía en uno y Contaduría
+en el otro, con 3 puntos de diferencia de coherencia. El motivo: el diseño
+iguala las respuestas FIJAS, pero las adaptativas se conversan por separado y
+divergen solas (temperatura 0.5 en las preguntas, 0.9 en el alumno).
+
+Con un control que se mueve así, **el 1-5-1 a favor de las cortas no se puede
+leer como que las cortas sean mejores**, ni el 4 de 7 top-1 distintos como que
+el cambio mueva algo. Lo que sí se puede decir:
+
+**No hay evidencia de que acortar esas 3 etiquetas haya degradado nada.** Es lo
+que se necesitaba para dejarlas, y es todo lo que este experimento sostiene.
+
+### Qué queda dicho para el resto del repo
+
+Un solo caso de control con entrada idéntica produjo un top-1 distinto. Eso
+respalda, con una demostración directa y no con una estimación, el piso de
+ruido que ya se venía advirtiendo (3 de 8 personas cambiaban solas entre
+rondas en `adaptativas-desempate.md`). **Cualquier A/B de este sistema que no
+lleve un brazo de control con entrada idéntica está sobreinterpretando sus
+diferencias.**
