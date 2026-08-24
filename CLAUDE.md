@@ -154,6 +154,15 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   (`TOP_DEFAULT = 35`) y su límite con la negación.
 
 **Experimentos** (evidencia medida)
+> ⚠️ **Piso de ruido, medido el 2026-08-23.** Este sistema devuelve resultados
+> distintos con entrada IDÉNTICA: correr el mismo brazo dos veces cambia el
+> top-1 en 2 a 3 de cada 4 casos y mueve la coherencia 1.0-2.0 puntos. En los
+> tres experimentos con brazo de control, **el ruido igualó o superó al efecto
+> medido**. Todo A/B de abajo que se haya corrido SIN control está
+> sobreinterpretando sus diferencias, incluido el p = 0.047 de
+> `adaptativas-desempate.md`. Cualquier medición nueva lleva brazo de control
+> o no se reporta.
+
 - [experiments/cobertura-dimensiones.md](experiments/cobertura-dimensiones.md) —
   A/B del vector de cobertura: 40%→100% de cumplimiento, 7/10→10/10 de acierto.
 - [experiments/microexperiencias.md](experiments/microexperiencias.md) — intento

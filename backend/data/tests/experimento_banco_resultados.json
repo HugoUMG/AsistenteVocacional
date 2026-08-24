@@ -8,39 +8,51 @@
         "persona": "Wendy",
         "fijas": {
           "impacto": "Ayudar, enseñar o cuidar a las personas, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o investigar la realidad",
-          "estilo": "Con personas, en trato directo, De forma práctica, con las manos",
+          "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica, De forma práctica, con las manos",
           "entorno": "En un aula o centro educativo, En medios, un estudio creativo o diseñando, Con la comunidad, ayudando a personas",
           "gustos": "Arte, diseño y creatividad, Enseñar y educar, Historia, sociedad y cultura"
         },
         "adaptativas": [
           {
-            "pregunta": "Wendy, me encanta que tengas tan claro que te gusta el arte, enseñar y estar con la gente. Ahora, para conocerte un poquito más, imagina que tienes que resolver un problema difícil en un grupo: ¿prefieres **tomar la iniciativa** y organizar a todos para lograr la meta, o te sientes más cómoda **apoyando desde atrás** y asegurándote de que cada detalle salga perfecto?",
-            "respuesta": "Prefiero tomar la iniciativa y dirigir al grupo. Siempre termino regañando a mis cuates para que ensayemos a tiempo porque si no, nunca hacemos nada."
+            "pregunta": "Wendy, me encanta ver que tienes intereses tan variados, desde el arte hasta la enseñanza. Ahora, cuéntame algo sobre tu forma de ser: cuando tienes que resolver un problema difícil, ¿qué te sale mejor: **analizar los detalles** con calma y paciencia, o prefieres **tomar la iniciativa** y liderar al grupo para que las cosas pasen rápido?",
+            "respuesta": "Tomar la iniciativa y liderar, porque me desespera que la gente no se mueva y prefiero que las cosas salgan de una vez."
           },
           {
-            "pregunta": "Se nota que tienes mucha chispa para liderar y que no te da miedo tomar las riendas cuando hay que trabajar en equipo. Ahora, cuéntame sobre lo que sabes hacer: cuando te enfrentas a una tarea nueva, ¿qué te resulta más natural: **analizar datos** y buscar la lógica detrás de las cosas, o prefieres **usar tu creatividad** para inventar algo desde cero?",
-            "respuesta": "Prefiero usar mi creatividad para inventar cosas, eso de los números y tanta lógica me aburre un montón y prefiero mil veces algo que sea más original."
+            "pregunta": "Me encanta esa energía que tienes para que las cosas avancen, Wendy. Se nota que eres alguien que toma las riendas. Ahora, pensando en lo que sabes hacer o te gustaría aprender a hacer, ¿qué te atrae más: **diseñar planes** o materiales para que otros aprendan, o prefieres **analizar información** y datos para tomar decisiones que mejoren un proyecto?",
+            "respuesta": "Diseñar materiales o planes de aprendizaje, es que me gusta un montón explicarle cosas a los patojos y ver cómo aprenden mejor."
           },
           {
-            "pregunta": "Me queda clarísimo que prefieres mil veces crear algo nuevo y original antes que perderte en números y datos. Ahora, pensando en cómo te gusta pensar y resolver las cosas, ¿qué te resulta más natural: **imaginar cómo se verá** un proyecto terminado en tu cabeza antes de empezar, o te gusta más **ir probando diferentes ideas** sobre la marcha hasta que todo encaje?",
-            "respuesta": "Ir probando y cambiando ideas sobre la marcha. Me sale mejor ir viendo cómo queda el asunto mientras le meto mano, porque así invento cosas que ni me imaginaba al principio."
+            "pregunta": "Wendy, me alegra mucho saber que disfrutas tanto enseñando y viendo cómo otros aprenden. Ahora, cuéntame sobre lo que más valoras en tu trabajo ideal: ¿te sentirías más realizada si tu esfuerzo ayuda a **transformar la realidad** de una comunidad o grupo social, o prefieres que tu trabajo te permita **crear algo nuevo** y original que deje una huella estética o funcional en el mundo?",
+            "respuesta": "Yo diría que crear algo nuevo y original, porque me cuadra un montón inventar cosas propias y ver cómo la mara las disfruta."
           },
           {
-            "pregunta": "Me encanta esa forma tuya de ir creando sobre la marcha, se nota que eres súper espontánea. Ahora, cuéntame algo importante sobre lo que te mueve: cuando eliges en qué dedicar tu tiempo, ¿qué te hace sentir más satisfecha: **dejar una huella positiva** en la vida de alguien más, o **lograr un reconocimiento** por algo increíble que tú misma creaste?",
-            "respuesta": "Sentir que ayudé a alguien o mejoré su día. Me llena mucho más ver que pude enseñar algo o apoyar a alguien que solo recibir un aplauso por lo que hice."
+            "pregunta": "Wendy, qué bien que te guste tanto crear cosas nuevas para que los demás las disfruten. Ahora, cuéntame cómo funciona tu cabeza cuando te enfrentas a un reto: ¿te sientes más cómoda **ordenando ideas y pasos** de forma lógica y estructurada para que todo salga perfecto, o prefieres **explorar soluciones creativas** sobre la marcha, dejando que las ideas fluyan aunque no todo esté planeado desde el inicio?",
+            "respuesta": "Prefiero explorar soluciones creativas sobre la marcha, me aburro un montón si todo tiene que ir super cuadrado y prefiero que las ideas fluyan así bien natural."
+          },
+          {
+            "pregunta": "Wendy, me encanta esa chispa creativa que tienes para dejar fluir las ideas. Ahora, para entender mejor qué camino te emociona más, cuéntame: cuando imaginas tu trabajo ideal, ¿te ves más enfocada en **crear herramientas digitales** y usar tecnología avanzada para que la gente aprenda, o prefieres centrarte en **el poder de las palabras**, la lectura y la narrativa para conectar con las personas?",
+            "respuesta": "Me tiro más por el lado de la lectura, la escritura y la narrativa. Siento que las palabras conectan más directo con la mara que estar ahí pegada a una compu todo el día."
+          },
+          {
+            "pregunta": "Wendy, me encanta cómo valoras el poder de las palabras para conectar con la gente. Ahora, para ver qué camino te llena más, cuéntame: ¿te imaginas más **frente a un grupo** en el día a día, disfrutando de la enseñanza directa y el contacto constante con estudiantes, o te llama más la atención el reto de **diseñar los planes y materiales** educativos que otros usarán, trabajando más en la parte creativa y de planeación detrás de escena?",
+            "respuesta": "Estar frente a un grupo enseñando, me gusta sentir el ambiente en vivo y ver cómo reaccionan los patojos al momento."
+          },
+          {
+            "pregunta": "Wendy, me encanta que te guste tanto el ambiente en vivo de un salón de clases. Ya que te apasiona conectar con la mara a través de las palabras, cuéntame: cuando piensas en los temas que más te gustaría enseñar, ¿te atrae más **analizar textos literarios** y narrativas para que los patojos se expresen mejor, o te emociona más **contar historias del pasado** y explicar cómo los hechos de antes nos hicieron ser quienes somos hoy?",
+            "respuesta": "Enfocarme en la lectura, la escritura y la expresión creativa. Me gusta más que los patojos aprendan a decir lo que sienten con sus propias palabras."
           }
         ],
         "top3": [
           {
-            "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+            "carrera": "PEM en Comunicación y Lenguaje",
+            "afinidad": 35
+          },
+          {
+            "carrera": "Licenciatura en Educación de la Comunicación y Lenguaje",
             "afinidad": 25
           },
           {
             "carrera": "Licenciatura en Comunicación y Diseño",
-            "afinidad": 20
-          },
-          {
-            "carrera": "Licenciatura en Ciencias de la Educación",
             "afinidad": 20
           }
         ]
@@ -51,55 +63,108 @@
         "fijas": {
           "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
           "estilo": "Con personas, en trato directo, De forma práctica, con las manos",
-          "entorno": "En un aula o centro educativo, En medios de comunicación o diseñando, Con la comunidad, ayudando a personas",
-          "gustos": "Arte, diseño y creatividad, Música, danza y artes escénicas, Enseñanza, docencia y educación, Organizar y dirigir equipos o instituciones"
+          "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
+          "gustos": "Enseñanza y docencia, Arte, diseño y creatividad, Música, danza y artes escénicas, Organizar y dirigir equipos o instituciones"
         },
         "adaptativas": [
           {
-            "pregunta": "Wendy, me encanta ver que te apasiona tanto crear y enseñar. Ahora, cuéntame algo sobre tu forma de ser: cuando tienes que **resolver un problema difícil**, ¿prefieres sentarte a analizar los datos y buscar una solución lógica o te sientes más cómoda confiando en tu intuición y en cómo se sienten las personas involucradas?",
-            "respuesta": "Confiar en mi intuición y en los sentimientos de los demás, porque al final es mejor ver cómo se sienten todos para que el grupo siga sonando bien."
+            "pregunta": "Wendy, me encanta ver que tienes un corazón tan dispuesto a ayudar y a organizar cosas, ya sea enseñando o creando. Pensando en cómo te gusta trabajar, cuéntame: cuando tienes que resolver un problema difícil, ¿prefieres **analizar los datos** y planear todo con calma antes de actuar, o te sientes más cómoda **lanzándote a la acción** para probar soluciones rápidas y ver qué funciona mejor sobre la marcha?",
+            "respuesta": "Prefiero actuar rápido y probar en el momento, porque a veces me desespero y prefiero ver qué onda ahí mismo en la práctica."
           },
           {
-            "pregunta": "Wendy, me encanta que valores tanto el bienestar de los demás para que todo fluya bien. Pensando ahora en tu día a día, ¿qué te hace sentir más satisfecha: **lograr que un grupo trabaje unido** y en armonía, o **ver un resultado concreto** que tú misma creaste o diseñaste con tus propias manos?",
-            "respuesta": "Lograr que el grupo trabaje unido y en armonía, es que si el grupo no conecta, de nada sirve que el resultado salga bonito."
+            "pregunta": "Wendy, me queda claro que eres de las que prefiere la acción inmediata para ver resultados. Ahora, cuéntame algo sobre tu personalidad: cuando trabajas en equipo para lograr una meta, ¿te ves más como quien **toma la iniciativa** y guía a los demás para que todo salga bien, o prefieres ser quien **apoya y acompaña** a cada persona para que se sienta escuchada y cómoda?",
+            "respuesta": "Me gusta tomar la iniciativa y guiar al grupo, porque siempre termino yo arriando a todos para que no se me distraigan y avancemos."
           },
           {
-            "pregunta": "Wendy, me alegra mucho ver que para ti lo más importante es que las personas se sientan bien y conectadas. Pensando en tus **habilidades**, ¿qué te resulta más natural hacer cuando trabajas con otros: **explicarles conceptos** para que aprendan algo nuevo, o **mediar en un conflicto** para que todos se pongan de acuerdo y avancen juntos?",
-            "respuesta": "Mediador en un conflicto, la verdad es que me sale natural calmar las cosas para que nadie se enoje y sigamos con la música."
+            "pregunta": "Wendy, me encanta que seas esa líder que toma la iniciativa y mantiene a todos enfocados. Ahora, pensando en lo que sabes hacer, cuéntame: cuando te enfrentas a una tarea nueva, ¿qué te sale mejor: **organizar los pasos** y los recursos para que un proyecto funcione, o **crear algo nuevo** desde cero usando tu imaginación y tu estilo propio?",
+            "respuesta": "Me sale mejor organizar los pasos porque si no todo se vuelve un desmadre y no sale nada, así que prefiero tener bien planeado qué toca hacer."
           },
           {
-            "pregunta": "Wendy, me encanta cómo te sale natural calmar las aguas y unir a las personas, se nota que eres alguien que busca la paz. Ahora, cuéntame: cuando piensas en tu futuro trabajo, ¿qué te hace sentir más realizada: **ayudar a que los demás tengan las mismas oportunidades** sin importar de dónde vienen, o **tener la libertad de crear y expresar** tus propias ideas artísticas o educativas sin que nadie te ponga límites?",
-            "respuesta": "Tener libertad total para crear y expresarme, es que si no puedo inventar o hacer mis ondas a mi estilo siento que me ahogo."
+            "pregunta": "Wendy, me gusta mucho ver que eres tan organizada y que te haces cargo de que las cosas salgan bien. Ahora, cuéntame: cuando piensas en tu futuro trabajo, ¿qué te hace sentir más realizada: **mejorar la vida de las personas** a través de la educación y el apoyo social, o **hacer crecer una organización** o proyecto para que sea más eficiente y exitoso?",
+            "respuesta": "Mejorar la vida de las personas, porque la verdad siento bien chileros ver cuando alguien aprende algo gracias a lo que les enseñé."
           }
         ],
         "top3": [
           {
-            "carrera": "Licenciatura en Educación de la Comunicación y Lenguaje",
+            "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+            "afinidad": 35
+          },
+          {
+            "carrera": "Licenciatura en Administración Educativa",
+            "afinidad": 30
+          },
+          {
+            "carrera": "Profesorado en Pedagogía con Especialización",
+            "afinidad": 20
+          }
+        ]
+      },
+      "C": {
+        "brazo": "C",
+        "persona": "Wendy",
+        "fijas": {
+          "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
+          "estilo": "Con personas, en trato directo, De forma práctica, con las manos",
+          "entorno": "En un aula o centro educativo, En medios de comunicación o diseñando, Con la comunidad, ayudando a personas",
+          "gustos": "Enseñanza y docencia, Arte, diseño y creatividad, Música, danza y artes escénicas, Organizar y dirigir equipos o instituciones"
+        },
+        "adaptativas": [
+          {
+            "pregunta": "Wendy, me encanta ver que tienes tantas ganas de ayudar y crear cosas nuevas. Pensando en cómo prefieres trabajar, cuéntame: cuando tienes un problema difícil frente a ti, ¿prefieres **analizar los datos** y buscar una solución lógica paso a paso, o prefieres **confiar en tu intuición** y probar formas creativas y diferentes de resolverlo?",
+            "respuesta": "Confiar en mi intuición y probar cosas nuevas, porque la neta me aburro un montón si me pongo a seguir pasos aburridos y mejor le meto creatividad para salir del clavo rápido."
+          },
+          {
+            "pregunta": "Me gusta mucho esa chispa que tienes para resolver las cosas a tu manera y no aburrirte con lo de siempre. Ahora, cuéntame algo importante para conocerte mejor: cuando ves una situación injusta o alguien que la está pasando mal, ¿qué es lo que más te mueve a actuar? ¿Sientes la necesidad de **organizar un grupo** para cambiar las cosas de raíz, o prefieres **acompañar directamente** a la persona para darle apoyo y alivio en su momento?",
+            "respuesta": "Prefiero dar apoyo directo y cercano a la persona, porque siento que es mejor estar ahí con ellos y darles ánimos de una vez."
+          },
+          {
+            "pregunta": "Wendy, me encanta esa calidez que tienes para estar ahí con la gente cuando más lo necesita. Ahora, cuéntame sobre cómo te sientes trabajando con otros: ¿eres de las que prefiere **tomar la iniciativa** y guiar al grupo para que las cosas salgan bien, o te sientes más cómoda siendo la que **apoya y colabora** desde adentro para que todos trabajen en equipo?",
+            "respuesta": "Prefiero tomar la iniciativa y guiar al grupo, porque siempre me toca estar arreando a mis cuates para que lleguen a los ensayos y al final todo salga bien."
+          },
+          {
+            "pregunta": "Wendy, me encanta que seas la que toma la batuta con tus cuates para que todo salga bien en los ensayos. Ahora, cuéntame sobre lo que mejor sabes hacer: cuando tienes que explicarle algo complicado a alguien o poner orden en una actividad, ¿qué te sale más natural? ¿Prefieres **usar palabras y explicaciones** para que todos entiendan la idea, o te sientes mejor **haciendo demostraciones prácticas** y enseñando con el ejemplo mientras todos trabajan?",
+            "respuesta": "Hacer demostraciones prácticas, porque me gusta más enseñarles con la marimba o la guitarra en mano para que aprendan moviéndose y no solo escuchando puro hablar."
+          }
+        ],
+        "top3": [
+          {
+            "carrera": "Profesorado en Educación Artística (Música y Danza)",
+            "afinidad": 35
+          },
+          {
+            "carrera": "Profesorado en Educación Primaria",
             "afinidad": 25
           },
           {
-            "carrera": "Profesorado en Educación Artística (Música y Danza)",
-            "afinidad": 20
-          },
-          {
-            "carrera": "Licenciatura en Producción Audiovisual y Artes Cinematográficas",
+            "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
             "afinidad": 20
           }
         ]
       },
       "primero_es_a": false,
       "juicio": {
-        "coherencia_1": 5,
-        "porque_1": "La lista integra perfectamente su pasión por la música y su habilidad para liderar grupos. El enfoque en educación artística y producción audiovisual aprovecha su experiencia práctica y su interés por enseñar a los más pequeños.",
+        "coherencia_1": 4,
+        "porque_1": "La lista captura muy bien su capacidad de liderazgo y organización al proponer gestión y administración educativa. Además, conecta con su gusto por enseñar a los más pequeños del grupo de marimba.",
         "coherencia_2": 3,
-        "porque_2": "Aunque la gestión educativa conecta con su rol organizador, las opciones son demasiado teóricas y administrativas. Ignoran su lado creativo y artístico, que es el motor principal de su motivación actual.",
+        "porque_2": "Aunque la parte de comunicación es relevante, la lista ignora su perfil organizativo y de liderazgo. Se centra únicamente en el área lingüística, dejando de lado su habilidad para coordinar grupos y gestionar ensayos.",
         "mejor": "1",
-        "porque_mejor": "La primera lista es superior porque capitaliza su talento musical y su capacidad de liderazgo creativo, mientras que la segunda se vuelve demasiado académica y burocrática, ignorando el componente artístico que la define."
+        "porque_mejor": "La primera lista es superior porque integra tanto su vocación docente como su rol activo de líder y organizadora, aspectos que son centrales en su descripción y que la segunda lista omite por completo."
       },
       "gano": "B",
       "coherencia_A": 3,
-      "coherencia_B": 5,
-      "segundos": 55.3
+      "coherencia_B": 4,
+      "control_top1_igual": false,
+      "control_empate_juez": false,
+      "control_dif_coherencia": 2,
+      "juicio_control": {
+        "coherencia_1": 3,
+        "porque_1": "La lista identifica correctamente su capacidad de liderazgo y organización al proponer gestión educativa. Sin embargo, ignora por completo su fuerte inclinación artística y musical, que es una parte central de su identidad.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista integra perfectamente su pasión por la música y la enseñanza con su rol de liderazgo al organizar grupos. Es una propuesta equilibrada que aprovecha sus habilidades pedagógicas y su experiencia práctica con la marimba y la guitarra.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista es superior porque no solo considera su vocación docente, sino que valida su trayectoria artística, algo fundamental para alguien que dedica su tiempo libre a ensayar y enseñar música."
+      },
+      "segundos": 90.8
     },
     {
       "persona": "Elmer",
@@ -115,38 +180,34 @@
         },
         "adaptativas": [
           {
-            "pregunta": "Elmer, me encanta ver que te gusta tanto la tecnología como construir cosas con tus manos. Para conocerte mejor, cuéntame: cuando tienes que resolver un problema difícil, ¿qué te sale más natural: **analizar los datos** y la lógica detrás de todo, o prefieres **meter las manos** y probar soluciones físicas hasta que algo funcione?",
-            "respuesta": "Probar soluciones físicas. La verdad me da mucha pereza ponerme a leer o pensar tanto, yo mejor desarmo de una vez y ahí voy viendo cómo queda la cosa."
+            "pregunta": "Elmer, me encanta ver que te gusta tanto la tecnología como construir cosas con tus manos. Para conocerte mejor, cuéntame: cuando tienes que resolver un problema difícil, prefieres **analizarlo con calma** y usar números o lógica, o te sientes más cómodo **lanzándote a la acción** para probar soluciones y ver qué pasa?",
+            "respuesta": "Prefiero lanzarme a la acción y probar. Es que así aprendo más rápido desarmando las cosas a ver qué onda."
           },
           {
-            "pregunta": "Me queda superclaro que eres de los que prefieren la acción directa y aprender haciendo, ¡eso es genial! Ahora, pensando en el futuro y en tu **forma de ser**, cuando trabajas en un proyecto, ¿qué te hace sentir más orgulloso: **liderar a un grupo** de personas para que todos logren una meta, o prefieres **trabajar por tu cuenta** concentrado en que tu parte salga perfecta y sin distracciones?",
-            "respuesta": "Trabajar concentrado por mi cuenta. Es que la verdad me estresa tener gente hablándome o diciéndome qué hacer, mejor me quedo solo y así no me distraigo."
+            "pregunta": "Genial, Elmer. Me queda claro que eres de los que **aprenden haciendo** y metiendo mano a las cosas. Ahora, pensando en el futuro, ¿qué te hace sentir más orgulloso: **liderar a un equipo** para lograr una meta, o saber que creaste algo **técnico y preciso** que funciona a la perfección?",
+            "respuesta": "Crear algo técnico y preciso con mis manos. La verdad me gusta más estar metido en mis cosas sin que nadie me esté diciendo qué hacer."
           },
           {
-            "pregunta": "Ya veo que prefieres trabajar a tu ritmo y sin que nadie te interrumpa, eso te ayuda a enfocarte mejor. Ahora, cuéntame sobre tus **habilidades**: cuando te enfrentas a algo nuevo que no sabes cómo funciona, ¿qué te resulta más fácil aprender: **seguir instrucciones técnicas** paso a paso para armar o reparar algo, o **dibujar y diseñar** cómo debería verse una pieza o un objeto desde cero?",
-            "respuesta": "Seguir instrucciones técnicas para armar o reparar. La verdad me da igual lo de dibujar, yo prefiero mil veces tener el aparato en la mano y ver cómo se arregla."
+            "pregunta": "Elmer, me queda clarísimo que lo tuyo es meter mano y lograr que las cosas funcionen con tus propias manos, sin tantas vueltas. Ahora, cuéntame sobre lo que sabes hacer: cuando se trata de enfrentar un reto nuevo, ¿qué se te da mejor: **entender cómo funcionan** las piezas y los mecanismos, o te sientes más hábil **organizando los pasos** y los recursos necesarios para que un proyecto se termine bien?",
+            "respuesta": "Entender cómo funcionan las piezas y mecanismos. Me gusta más ver qué trae adentro el aparato y arreglarlo yo solo que andar organizando a otros."
           },
           {
-            "pregunta": "Me queda clarísimo que lo tuyo es la acción directa y que prefieres concentrarte en tus propias manos para arreglar las cosas. Ahora, pensando en lo que más te importa, cuando eliges un trabajo, ¿qué te parece más importante: **ganar bien** y tener estabilidad económica, o sentir que lo que haces **ayuda directamente** a que otras personas vivan mejor o tengan una vida más segura?",
-            "respuesta": "Tener un buen sueldo y estabilidad. La neta lo que quiero es tener mis centavos para no andar viendo cómo le hago cada fin de mes."
-          },
-          {
-            "pregunta": "Elmer, me queda clarísimo que lo tuyo es la acción directa y que buscas estabilidad económica. Ahora, para terminar de ver qué camino te queda mejor, cuéntame: cuando imaginas tu trabajo ideal, ¿te ves más **reparando y conectando circuitos** electrónicos y sensores, o te emociona más **trabajar con motores, engranajes** y piezas mecánicas grandes?",
-            "respuesta": "Circuitos, sensores y tecnología electrónica. Es que me cuadra más estar viendo cómo funcionan los celulares y esas ondas, se siente más calidad que andar con motores grandes."
+            "pregunta": "Se nota que te apasiona entender cómo funcionan las cosas por dentro y prefieres trabajar a tu ritmo. Pensando en lo que más valoras, dime: cuando terminas un proyecto, ¿qué te da más satisfacción: **saber que es útil** y que ayuda a que otros vivan mejor, o **sentir que es perfecto** y que nadie más podría haberlo dejado mejor que tú?",
+            "respuesta": "Que sea perfecto y preciso. Me da una satisfacción pura ver que algo que yo arreglé quedó nítido y nadie más lo pudo haber dejado mejor."
           }
         ],
         "top3": [
           {
+            "carrera": "Ingeniería Mecánica",
+            "afinidad": 35
+          },
+          {
             "carrera": "Ingeniería en Electrónica",
-            "afinidad": 45
-          },
-          {
-            "carrera": "Técnico Universitario en Desarrollo de Software",
-            "afinidad": 30
-          },
-          {
-            "carrera": "Ingeniería en Ciencias y Sistemas",
             "afinidad": 25
+          },
+          {
+            "carrera": "Ingeniería Mecánica Industrial",
+            "afinidad": 20
           }
         ]
       },
@@ -161,54 +222,103 @@
         },
         "adaptativas": [
           {
-            "pregunta": "Hola Elmer, me encanta ver que tienes claro que te gusta tanto la parte técnica de las máquinas como el mundo de la tecnología. Pensando en cómo te gusta trabajar, dime una cosa: cuando tienes que resolver un problema difícil, ¿prefieres **seguir reglas y pasos** muy precisos para que todo salga perfecto, o te gusta más **experimentar y probar** diferentes ideas aunque no sepas bien cómo va a terminar?",
-            "respuesta": "Prefiero experimentar y probar ideas nuevas, así es como aprendí a arreglar las compus de los vecinos."
+            "pregunta": "Elmer, me encanta que tengas tan claro que te gusta trabajar con las manos y con tecnología en talleres o laboratorios. Pensando en cómo te sientes mejor trabajando, ¿prefieres **enfrentarte a retos** donde tienes que resolver problemas técnicos tú solo con mucha concentración, o te gusta más **coordinar y trabajar** en equipo para que un proyecto grande salga adelante?",
+            "respuesta": "Prefiero concentrarme en mis tareas técnicas por mi cuenta. Es que la verdad me estresa tener a gente encima diciéndome qué hacer, mejor me pongo mis audífonos y ahí solito saco el clavo."
           },
           {
-            "pregunta": "Qué buena onda que seas autodidacta y te guste experimentar para arreglar las computadoras de tus vecinos, Elmer. Eso dice mucho de tu curiosidad. Ahora, cuéntame: cuando trabajas en un proyecto, ¿qué te hace sentir más **satisfecho** al terminar? ¿Ver que tu trabajo ayuda a que otros aprendan o se organicen mejor, o sentir que has creado algo **técnico y funcional** que funciona a la perfección?",
-            "respuesta": "Crear algo técnico y funcional que funcione a la perfección, porque me da una gran satisfacción ver que logré arreglar algo que no servía."
+            "pregunta": "Entiendo perfectamente, Elmer. A veces uno trabaja mejor a su ritmo y sin interrupciones. Ahora, cuéntame sobre lo que sabes hacer: cuando te toca aprender algo nuevo, ¿qué se te da mejor, **seguir instrucciones** paso a paso para que todo quede perfecto, o prefieres **experimentar y probar** diferentes formas de armar o arreglar algo hasta que funcione?",
+            "respuesta": "Mejor prefiero experimentar y probar hasta encontrar la solución. Es que a puro ver videos uno aprende mejor, así tocando las piezas y viendo qué pasa, total que al final siempre termino arreglando el aparato."
           },
           {
-            "pregunta": "Me queda clarísimo que te llena de orgullo ver cómo algo vuelve a funcionar gracias a tus manos. Pensando en cómo te relacionas con los demás, imagínate que estás trabajando en un proyecto: ¿prefieres **enfocarte tú solo** en la parte técnica y resolver el problema a tu ritmo, o te gusta más **coordinar con un equipo** para que todos aporten ideas y logren el objetivo juntos?",
-            "respuesta": "Prefiero trabajar solo y concentrarme en la parte técnica, así me enfoco mejor y no me distraigo con tanta plática."
+            "pregunta": "Qué buena onda que aprendas mejor experimentando y metiéndole mano a las cosas, Elmer. Se nota que eres alguien que busca sus propias respuestas. Ahora, cuéntame sobre lo que más valoras al trabajar: ¿qué te da más satisfacción, **ver que algo que construiste o arreglaste funciona** a la perfección, o **descubrir cómo funciona** algo complejo para entender sus secretos?",
+            "respuesta": "Que mi trabajo funcione y sea útil. La verdad ver que el aparato prende y ya sirve es lo que más me llena, ahí sí que me siento bien chileros."
           },
           {
-            "pregunta": "Me gusta mucho cómo tienes claro que prefieres trabajar a tu ritmo para que las cosas queden perfectas. Ahora, cuéntame sobre lo que sabes hacer: cuando te enfrentas a un reto técnico, ¿qué se te da mejor? ¿Te sientes más cómodo **programando código** y lidiando con sistemas digitales, o prefieres **usar herramientas físicas** para ajustar, soldar o reparar piezas mecánicas y circuitos?",
-            "respuesta": "Reparar piezas mecánicas o circuitos, me gusta más sentir el chirmol con las manos y ver cómo conecto todo para que arranque de nuevo."
-          },
-          {
-            "pregunta": "Elmer, me queda muy claro que disfrutas el trabajo manual y ver cómo las cosas cobran vida bajo tus manos. Para terminar de entender hacia dónde te inclinas más, imagina que tienes un proyecto frente a ti: ¿te atrae más **diseñar y entender cómo fluye la energía** en circuitos, sensores y sistemas automáticos, o prefieres **enfocarte en la estructura**, el movimiento de piezas pesadas y la fuerza de los materiales en máquinas grandes?",
-            "respuesta": "Me late más los circuitos, sensores y automatización, porque me gusta ver cómo pasan las señales y hacer que todo conecte bien chileramente."
+            "pregunta": "Me encanta esa actitud, Elmer, de que lo importante es que el aparato prenda y funcione. Ya que te gusta tanto meterle mano a las cosas hasta que quedan bien, cuéntame: cuando tienes un problema técnico frente a ti, ¿prefieres **desarmar todo** para entender pieza por pieza cómo está conectado, o te enfocas más en **buscar la falla** específica para arreglarla rápido y que todo vuelva a caminar?",
+            "respuesta": "Desarmar y entender cada pieza. Es que si no veo bien qué hay adentro y cómo está todo conectado, siento que no hice el trabajo bien del todo."
           }
         ],
         "top3": [
           {
             "carrera": "Ingeniería en Electrónica",
-            "afinidad": 45
+            "afinidad": 35
+          },
+          {
+            "carrera": "Ingeniería Mecánica",
+            "afinidad": 30
+          },
+          {
+            "carrera": "Técnico Universitario en Desarrollo de Software",
+            "afinidad": 20
+          }
+        ]
+      },
+      "C": {
+        "brazo": "C",
+        "persona": "Elmer",
+        "fijas": {
+          "impacto": "Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
+          "estilo": "Analizando datos, ideas y lógica, De forma práctica, con las manos",
+          "entorno": "En un laboratorio o taller técnico, En una obra, con máquinas o herramientas",
+          "gustos": "Tecnología y computación, Redes, señal y electrónica, Construcción, máquinas y cómo funcionan las cosas"
+        },
+        "adaptativas": [
+          {
+            "pregunta": "Elmer, me encanta ver que tienes claro que te gusta tanto la parte técnica y de máquinas como el lado de los números y la tecnología. Para entender mejor cómo prefieres trabajar, cuéntame: cuando tienes un problema difícil enfrente, ¿te sientes más cómodo **buscando la solución tú solo** y concentrándote a fondo hasta que salga, o prefieres **trabajar en equipo** discutiendo ideas con otros para encontrar la mejor salida?",
+            "respuesta": "Prefiero trabajar solo y concentrarme en mi propio ritmo. Es que me estreso menos así y al final siempre termino sacando el clavo yo mismo."
+          },
+          {
+            "pregunta": "Entiendo perfectamente, Elmer. A veces uno logra mejores resultados cuando se encierra en su propio mundo y se concentra al máximo. Ahora, pensando en lo que sabes hacer o lo que te gustaría aprender a hacer, ¿qué te llama más la atención: **diseñar y calcular** cómo deben funcionar las cosas antes de construirlas, o **manipular y reparar** directamente los componentes físicos cuando algo ya está fallando?",
+            "respuesta": "Me gusta más manipular, armar y reparar componentes porque prefiero meterle mano de una vez a los aparatos en vez de tanto cálculo."
+          },
+          {
+            "pregunta": "Me queda súper claro que prefieres la acción directa y meterle mano a los aparatos antes que perderte en los cálculos. Pensando en cómo prefieres aprender o enfrentar un reto nuevo, ¿te sientes más cómodo **siguiendo un proceso paso a paso** que ya está probado para asegurar que todo quede perfecto, o prefieres **experimentar y probar** diferentes formas de hacer las cosas aunque eso signifique equivocarte un par de veces?",
+            "respuesta": "Prefiero experimentar y probar, así aprendo más rápido viendo qué onda aunque me toque repetir la jugada."
+          },
+          {
+            "pregunta": "Me gusta mucho esa actitud tuya de experimentar y aprender probando, Elmer. Ya que eres de los que prefiere meterle mano a las cosas, cuéntame: al elegir a qué dedicarte, ¿qué te importa más: **tener un trabajo seguro** y estable donde sepas exactamente qué esperar cada día, o **enfrentar retos nuevos** y diferentes constantemente, aunque eso signifique que el trabajo sea más incierto?",
+            "respuesta": "Prefiero enfrentar retos nuevos y diferentes siempre, porque me aburro rápido si siempre hago lo mismo y prefiero ir viendo qué sale."
+          }
+        ],
+        "top3": [
+          {
+            "carrera": "Ingeniería en Electrónica",
+            "afinidad": 35
           },
           {
             "carrera": "Ingeniería Mecánica Industrial",
             "afinidad": 30
           },
           {
-            "carrera": "Ingeniería en Ciencias y Sistemas",
-            "afinidad": 25
+            "carrera": "Técnico Universitario en Desarrollo de Software",
+            "afinidad": 20
           }
         ]
       },
       "primero_es_a": true,
       "juicio": {
         "coherencia_1": 4,
-        "porque_1": "La lista se alinea bien con su habilidad autodidacta para reparar dispositivos y su curiosidad técnica. Sin embargo, el desarrollo de software es un área más abstracta que no refleja necesariamente su interés físico por abrir cosas y manipular hardware.",
+        "porque_1": "Las opciones se alinean perfectamente con su habilidad autodidacta para reparar dispositivos y su curiosidad por el funcionamiento interno de los objetos. Sin embargo, se limita exclusivamente al área mecánica y electrónica, ignorando su capacidad de resolución de problemas lógicos.",
         "coherencia_2": 5,
-        "porque_2": "Esta lista es altamente coherente porque todas las opciones implican el trabajo físico, mecánico y electrónico que él ya realiza de forma empírica. La ingeniería mecánica industrial encaja perfectamente con su iniciativa de reparar antenas y su fascinación por entender cómo funcionan los mecanismos internos.",
+        "porque_2": "Esta lista es superior al incluir el desarrollo de software, lo cual complementa su destreza técnica con la capacidad de resolución de problemas complejos que ya demostró al arreglar computadoras y antenas. Mantiene la coherencia con su perfil práctico y su preferencia por el trabajo autónomo.",
         "mejor": "2",
-        "porque_mejor": "La segunda lista es superior porque prioriza el componente físico y mecánico de su perfil, el cual es más evidente en su descripción que el desarrollo de software puro. La ingeniería mecánica industrial captura mejor su naturaleza práctica y su gusto por el trabajo manual y técnico."
+        "porque_mejor": "La segunda lista es más completa porque integra el componente lógico-digital que el estudiante ya domina al reparar computadoras, mientras que la primera se restringe únicamente a la parte física o mecánica."
       },
       "gano": "B",
       "coherencia_A": 4,
       "coherencia_B": 5,
-      "segundos": 61.0
+      "control_top1_igual": true,
+      "control_empate_juez": true,
+      "control_dif_coherencia": 0,
+      "juicio_control": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se alinea perfectamente con su habilidad autodidacta para reparar hardware y su curiosidad por el funcionamiento interno de los dispositivos. Las opciones reflejan su perfil técnico y su preferencia por el trabajo práctico y autónomo.",
+        "coherencia_2": 5,
+        "porque_2": "Al igual que la primera, esta lista captura su destreza técnica y su interés por desarmar y reparar objetos. La inclusión de la rama industrial es coherente con su capacidad para resolver problemas de infraestructura, como el ajuste de la antena.",
+        "mejor": "empate",
+        "porque_mejor": "Ambas listas son idénticas en su enfoque y coherencia, ya que todas las carreras propuestas responden directamente a su curiosidad técnica, su capacidad de aprendizaje autodidacta y su aptitud para la resolución de problemas físicos y electrónicos."
+      },
+      "segundos": 72.3
     },
     {
       "persona": "Rosa",
@@ -217,27 +327,27 @@
         "brazo": "A",
         "persona": "Rosa",
         "fijas": {
-          "impacto": "Ayudar, enseñar o cuidar a las personas, Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
+          "impacto": "Ayudar, enseñar o cuidar a las personas, Construir, diseñar o hacer que las cosas funcionen",
           "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
           "entorno": "En un hospital, clínica o consultorio, En un laboratorio o taller técnico, Con la comunidad, ayudando a personas",
           "gustos": "Salud y cuidar personas, Psicología y comportamiento, Construcción, máquinas y cómo funcionan las cosas"
         },
         "adaptativas": [
           {
-            "pregunta": "Rosa, me encanta ver que tienes tantas ganas de ayudar a la gente y también de meter las manos en proyectos prácticos. Pensando en cómo prefieres trabajar, cuéntame: cuando tienes que resolver un problema difícil, ¿te sientes más cómoda **analizando los detalles** y buscando una solución paso a paso, o prefieres **lanzarte a probar** cosas nuevas hasta que algo funcione?",
-            "respuesta": "Prefiero probar y experimentar hasta que funcione, es que me aburro si me pongo a pensar tanto tiempo y mejor me pongo a ver cómo le hallo el modo."
+            "pregunta": "Rosa, me encanta ver que tienes un corazón muy dispuesto a ayudar y también muchas ganas de meter las manos en la acción. Para entender mejor cómo te gusta enfrentar los retos, cuéntame: cuando tienes un problema difícil enfrente, ¿prefieres **analizarlo con calma** y buscar la lógica detrás de todo, o te gusta más **lanzarte a probar** soluciones rápidas hasta que algo funcione?",
+            "respuesta": "Prefiero probar soluciones rápidas hasta que funcione, es que me desespera quedarme solo viendo las cosas y prefiero empezar a moverme de una vez."
           },
           {
-            "pregunta": "Rosa, me encanta tu energía para lanzarte a experimentar y buscar soluciones prácticas sobre la marcha. Pensando en cómo te gusta trabajar con los demás, dime una cosa: cuando hay un conflicto en un grupo o alguien necesita apoyo, ¿prefieres **escuchar y entender** lo que siente la otra persona para ayudarla, o te sientes mejor **organizando al equipo** para que todos se pongan manos a la obra y logren la meta?",
-            "respuesta": "Prefiero escuchar y entender lo que sienten para ayudarles, la verdad es que cuando alguien está mal siento que hay que darle su tiempo antes de ponerse a correr."
+            "pregunta": "Me queda clarísimo que eres de las que prefiere la acción y no te gusta quedarte de brazos cruzados. Ahora, pensando en el futuro y en cómo te gustaría sentirte al final del día, ¿qué te daría más satisfacción: **saber que lograste cambiar** la vida de una persona con tu ayuda, o **ver algo construido** o reparado por ti que funcionará por mucho tiempo?",
+            "respuesta": "Cambiar la vida de alguien con mi ayuda, la verdad es que ver cómo la gente se siente mejor cuando estoy ahí me llena más."
           },
           {
-            "pregunta": "Rosa, me parece muy noble que te tomes el tiempo de escuchar y entender a los demás, eso dice mucho de ti. Ahora, pensando en lo que sabes hacer o te gustaría aprender a hacer en el futuro, ¿qué te llama más la atención: **aprender técnicas** para medir, curar o mejorar la salud de alguien, o **aprender a diseñar** y construir cosas que sirvan para que la gente viva mejor?",
-            "respuesta": "Fíjese que me llaman la atención las dos, pero me inclino más por aprender técnicas para cuidar la salud porque ya me acostumbré a ese rollo de andar pendiente de la gente."
+            "pregunta": "Rosa, me encanta ver que tu prioridad es el bienestar de las personas, eso dice mucho de tu calidad humana. Ahora, cuéntame sobre tu forma de ser: cuando estás trabajando en equipo, ¿te sientes más cómoda **tomando la iniciativa** y guiando a los demás para que todo salga bien, o prefieres **apoyar desde atrás** asegurándote de que cada detalle esté perfecto para que el grupo brille?",
+            "respuesta": "Prefiero apoyar en los detalles para que todo funcione. Me gusta más estar ahí pendiente de que todo salga bien sin tener que andar mandando a nadie."
           },
           {
-            "pregunta": "Rosa, me encanta que tengas tan claro que cuidar la salud es lo tuyo, se nota que tienes un corazón muy atento. Ahora, pensando en lo que te mueve a elegir una carrera, ¿qué te hace sentir más satisfecha: **sentir que aportas directamente** al bienestar y alivio de una sola persona a la vez, o **saber que tu trabajo ayuda** a mejorar la calidad de vida de grupos grandes o comunidades enteras?",
-            "respuesta": "Ayudar a una persona a la vez, porque así siento que realmente conecto y hago algo por alguien, como me pasaba con mi abuelita."
+            "pregunta": "Qué bueno saber que te gusta cuidar los detalles para que todo salga bien, Rosa. Eso es súper valioso. Ahora, hablando de lo que sabes hacer o te gustaría aprender a manejar, ¿qué te llama más la atención: **aprender a usar instrumentos** o tecnología médica para revisar la salud de alguien, o **aprender a organizar planes** y actividades para que un grupo de personas aprenda o mejore su situación?",
+            "respuesta": "Me llama más la atención usar equipos y tecnología para la salud, me quedé bien picada con las máquinas que vi en el hospital."
           }
         ],
         "top3": [
@@ -246,11 +356,11 @@
             "afinidad": 35
           },
           {
-            "carrera": "Fisioterapia",
+            "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
             "afinidad": 25
           },
           {
-            "carrera": "Técnico Universitario en Hemodiálisis",
+            "carrera": "Técnico Universitario en Laboratorio Clínico",
             "afinidad": 20
           }
         ]
@@ -262,24 +372,66 @@
           "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
           "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
           "entorno": "En un hospital, clínica o consultorio, En un laboratorio o taller técnico, Con la comunidad, ayudando a personas",
-          "gustos": "Salud, cuidados y atención a pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Psicología y comportamiento, Construcción, máquinas y cómo funcionan las cosas"
+          "gustos": "Salud y cuidar pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Construcción, máquinas y cómo funcionan las cosas"
         },
         "adaptativas": [
           {
-            "pregunta": "Rosa, me encanta ver que tienes tantas ganas de ayudar y que te gusta tanto el trabajo práctico como el de estar en clínicas. Para conocerte mejor, cuéntame: cuando tienes que resolver un problema difícil, ¿eres de las que **prefiere seguir pasos** ya probados para no fallar o te gusta más **inventar una forma nueva** de hacer las cosas aunque sea arriesgado?",
-            "respuesta": "Prefiero buscar soluciones nuevas y creativas, la verdad me aburro si todo es igual y siempre me gusta ver cómo sacarle la vuelta a las cosas."
+            "pregunta": "Rosa, me encanta ver que tienes un montón de intereses, desde la salud hasta construir cosas. Para conocerte mejor, cuéntame: cuando tienes que resolver un problema difícil, ¿qué te sale mejor? ¿Prefieres **analizar los detalles** con calma y lógica, o te gusta más **lanzarte a probar** soluciones prácticas hasta que algo funcione?",
+            "respuesta": "Prefiero lanzarme a probar soluciones prácticas, así aprendo más rápido y no me quedo esperando."
           },
           {
-            "pregunta": "Rosa, me encanta ver que tienes esa chispa creativa y que no te gusta quedarte con lo de siempre. Ahora, pensando en tu futuro, ¿qué te hace sentir más **orgullosa** al terminar el día: saber que lograste **ayudar a alguien** a sentirse mejor o sentir que **creaste algo nuevo** con tus manos o tu mente?",
-            "respuesta": "Fijo prefiero haber ayudado a alguien, ver que alguien ya está mejor por lo que hice me llena más que cualquier otra cosa."
+            "pregunta": "Rosa, me parece genial que seas de las que prefieren pasar a la acción y probar cosas nuevas. Ahora, pensando en lo que te motiva, ¿qué es lo que más te hace sentir **orgullosa** al terminar una tarea? ¿Sentir que **ayudaste a alguien** a sentirse mejor o ver que lograste **crear o arreglar** algo con tus manos?",
+            "respuesta": "Me gusta más ayudar a personas, es que me da una satisfacción bien chilera ver que alguien ya está mejor por lo que hice."
           },
           {
-            "pregunta": "Rosa, me encanta ver que tienes ese corazón tan grande y que ayudar a los demás es lo que más te motiva. Ahora, cuéntame sobre tu forma de ser: cuando estás trabajando en equipo, ¿eres de las que **prefiere tomar el mando** y organizar a los demás para que todo salga bien, o te sientes más cómoda **apoyando desde atrás** y haciendo que las cosas fluyan sin tener que ser la jefa?",
-            "respuesta": "Prefiero tomar el mando y organizar al grupo, porque si no, siento que todo se descontrola y prefiero que las cosas salgan bien desde el principio."
+            "pregunta": "Rosa, me encanta esa chispa que tienes por ayudar a los demás, se nota que te llena mucho. Ahora, imagínate en un día de trabajo: ¿qué te sentirías más cómoda haciendo? ¿Prefieres **trabajar siguiendo pasos** y reglas muy claras para no cometer errores, o te gusta tener **libertad para decidir** cómo hacer las cosas según lo que necesite la persona en ese momento?",
+            "respuesta": "Prefiero tener libertad para decidir cómo actuar, porque cada persona es diferente y a veces hay que ver qué onda en el momento para ayudar mejor."
           },
           {
-            "pregunta": "Rosa, me encanta ver que tienes ese liderazgo natural y que te gusta que las cosas salgan bien cuando trabajas con otros. Pensando en lo que sabes hacer hoy, ¿qué te resulta más natural: **explicar ideas** o temas complicados para que otros los entiendan, o prefieres **usar herramientas** o instrumentos técnicos para realizar una tarea con mucha precisión?",
-            "respuesta": "Fijo prefiero usar herramientas y equipos técnicos, me da más curiosidad cómo funcionan las máquinas y ver cómo se usan para arreglar algo que andar explicando cosas."
+            "pregunta": "Rosa, me gusta mucho esa forma tuya de ver las cosas, buscando siempre la mejor manera de ayudar según cada quien. Ahora cuéntame, para saber qué cosas se te dan mejor: ¿qué te resulta más fácil hacer? ¿Te sientes más cómoda **explicando conceptos** o dando instrucciones claras para que otros aprendan, o prefieres **usar herramientas** y equipos técnicos para realizar una tarea física?",
+            "respuesta": "Prefiero usar herramientas y equipos técnicos, me gusta ver cómo funcionan las cosas y meterles mano de una vez."
+          }
+        ],
+        "top3": [
+          {
+            "carrera": "Fisioterapia",
+            "afinidad": 25
+          },
+          {
+            "carrera": "Licenciatura en Enfermería",
+            "afinidad": 20
+          },
+          {
+            "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+            "afinidad": 18
+          }
+        ]
+      },
+      "C": {
+        "brazo": "C",
+        "persona": "Rosa",
+        "fijas": {
+          "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
+          "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+          "entorno": "En un hospital, clínica o consultorio, En un laboratorio o taller técnico, Con la comunidad, ayudando a personas",
+          "gustos": "Salud y cuidar pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Construcción, máquinas y cómo funcionan las cosas"
+        },
+        "adaptativas": [
+          {
+            "pregunta": "Rosa, me encanta que tengas tanta energía para ayudar a los demás y que a la vez te llame la atención cómo funcionan las cosas. Pensando en cómo te gusta trabajar, cuéntame: ¿prefieres **seguir pasos muy claros** y reglas fijas para que todo salga perfecto, o te gusta más **inventar soluciones nuevas** y probar formas distintas aunque no sepas bien qué pasará?",
+            "respuesta": "Prefiero inventar y probar formas nuevas, es que estar solo siguiendo reglas me aburre un montón y prefiero ver qué onda si intento algo diferente."
+          },
+          {
+            "pregunta": "Rosa, me encanta esa chispa que tienes para buscar caminos nuevos y no quedarte solo con lo de siempre. Ahora, pensando en cómo te sientes cuando trabajas con otros, cuéntame: cuando hay un problema en un grupo, ¿prefieres **tomar la iniciativa** y organizar a los demás para que todo salga bien, o te sientes más cómoda **escuchando y apoyando** desde un lado para que todos se sientan bien y en calma?",
+            "respuesta": "Prefiero tomar la iniciativa y organizar al grupo, porque siento que así se hacen mejor las cosas y no nos quedamos trabados ahí viendo qué hacer."
+          },
+          {
+            "pregunta": "Rosa, me encanta ver que tienes esa chispa para liderar y buscar soluciones nuevas. Ahora, pensando en lo que sabes hacer o te gustaría aprender, ¿qué te da más satisfacción: **usar herramientas y tecnología** para crear o reparar cosas tangibles, o **analizar información y datos** para tomar decisiones que ayuden a mejorar la vida de las personas?",
+            "respuesta": "Usar herramientas y tecnología para crear o reparar cosas, porque me gusta ver cómo funcionan las máquinas y no me gusta estar sentada analizando papeles todo el día."
+          },
+          {
+            "pregunta": "Rosa, me encanta que seas tan práctica y que te guste tanto meter las manos en la tecnología y las máquinas. Ahora, cuéntame algo importante para tu futuro: si pudieras elegir, ¿qué te haría sentir más orgullosa al final del día: **ver el impacto directo** de tu trabajo en la salud o bienestar de una persona, o **admirar una obra o máquina** que tú misma construiste y que funciona a la perfección?",
+            "respuesta": "Ayudar directamente a que las personas se sientan mejor, porque ver que alguien se pone bien por lo que hice me llena más que solo ver una máquina funcionando."
           }
         ],
         "top3": [
@@ -288,28 +440,39 @@
             "afinidad": 35
           },
           {
-            "carrera": "Ingeniería Mecánica Industrial",
-            "afinidad": 25
+            "carrera": "Licenciatura en Enfermería",
+            "afinidad": 30
           },
           {
-            "carrera": "Cirujano Dentista",
+            "carrera": "Ingeniería Mecánica Industrial",
             "afinidad": 20
           }
         ]
       },
       "primero_es_a": true,
       "juicio": {
-        "coherencia_1": 5,
-        "porque_1": "La lista se alinea perfectamente con su experiencia cuidando a su abuela y su capacidad para mantener la calma en entornos clínicos. Además, las opciones seleccionadas implican movimiento constante, evitando el sedentarismo que ella rechaza.",
-        "coherencia_2": 3,
-        "porque_2": "Aunque Fisioterapia es coherente, Ingeniería Mecánica Industrial ignora su vocación de servicio y cuidado directo. Cirujano Dentista es una opción válida, pero no aprovecha su experiencia específica en el manejo de pacientes con necesidades de salud complejas.",
-        "mejor": "1",
-        "porque_mejor": "La primera lista es superior porque todas sus opciones capitalizan directamente la experiencia de cuidado y la curiosidad técnica que ella demostró en el hospital, manteniendo un enfoque asistencial que es central en su perfil."
+        "coherencia_1": 4,
+        "porque_1": "La lista es muy coherente con su experiencia de cuidado directo y su curiosidad por la tecnología hospitalaria. Sin embargo, el laboratorio clínico es una labor mayormente sedentaria, lo cual contradice su preferencia explícita por no estar sentada todo el día.",
+        "coherencia_2": 5,
+        "porque_2": "Las tres opciones integran perfectamente su capacidad de calma, el contacto físico con pacientes y el interés por la tecnología. Además, todas estas disciplinas requieren movimiento constante, respetando su aversión a estar sentada.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista es superior porque todas sus recomendaciones se alinean con la necesidad de movimiento de la estudiante, mientras que la primera incluye una opción (laboratorio) que ignora su preferencia por el trabajo activo."
       },
-      "gano": "A",
-      "coherencia_A": 5,
-      "coherencia_B": 3,
-      "segundos": 59.3
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5,
+      "control_top1_igual": true,
+      "control_empate_juez": false,
+      "control_dif_coherencia": 2,
+      "juicio_control": {
+        "coherencia_1": 5,
+        "porque_1": "La lista es altamente coherente porque todas las opciones aprovechan su vocación de servicio y su capacidad de mantener la calma. Además, Radiología conecta directamente con su curiosidad técnica sobre las máquinas hospitalarias.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque Fisioterapia y Enfermería encajan bien, Ingeniería Mecánica Industrial es una elección arriesgada. Aunque explica su interés por las máquinas, ignora su clara vocación de cuidado y su experiencia práctica en el ámbito de la salud.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es superior porque todas sus recomendaciones integran tanto el interés técnico como la vocación de cuidado demostrada, mientras que la segunda lista se desvía hacia un área técnica que pierde el componente humano que define al estudiante."
+      },
+      "segundos": 75.4
     },
     {
       "persona": "Kevin",
@@ -318,36 +481,36 @@
         "brazo": "A",
         "persona": "Kevin",
         "fijas": {
-          "impacto": "Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o investigar la realidad",
+          "impacto": "Defender la justicia y resolver conflictos, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o investigar la realidad",
           "estilo": "Analizando datos, ideas y lógica",
           "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
           "gustos": "Matemáticas y números, Leyes, justicia y debate, Historia, sociedad y cultura"
         },
         "adaptativas": [
           {
-            "pregunta": "Kevin, me encanta que te llame la atención tanto la parte de los números como el análisis de temas sociales y de justicia. Para seguir conociéndote mejor, imagina que tienes un problema difícil frente a ti: ¿prefieres **buscar una solución lógica** y exacta que se pueda comprobar, o prefieres **dialogar y debatir** con otras personas para encontrar un acuerdo que sea justo para todos?",
-            "respuesta": "La verdad me inclino por dialogar y debatir. Es que al final los números no arreglan solos el desmadre que vivimos en la aldea si no logramos ponernos de acuerdo primero."
+            "pregunta": "Kevin, me alegra mucho conocer tus intereses. Ahora, pensando en cómo te gusta trabajar cuando tienes un reto importante, ¿qué te hace sentir más cómodo: **resolver problemas solo** concentrado en tu lógica, o **trabajar en equipo** discutiendo ideas con otros para llegar a una solución?",
+            "respuesta": "Prefiero trabajar en equipo y debatir, porque así es como uno saca de verdad las mejores ideas para cambiar las cosas en la aldea."
           },
           {
-            "pregunta": "Me gusta mucho cómo piensas, Kevin. Es muy valioso que le des prioridad a los acuerdos para mejorar las cosas en tu comunidad. Ahora, cuéntame sobre lo que mejor sabes hacer: cuando tienes que convencer a alguien de una idea tuya, ¿qué te resulta más natural: **exponer razones y pruebas** con mucha calma para que la otra persona entienda tu punto, o prefieres **usar tu capacidad de organización** para proponer un plan de acción concreto que resuelva el problema?",
-            "respuesta": "Proponer un plan de acción, porque si solo hablo no pasa nada y la mara necesita ver cosas que de verdad cambien su realidad."
+            "pregunta": "Qué bien que te guste debatir y trabajar con otros para mejorar las cosas en tu aldea. Ahora, cuéntame sobre lo que sabes hacer: cuando te enfrentas a un problema nuevo, ¿qué se te da mejor: **organizar información** y datos para que todo tenga sentido, o **persuadir a las personas** con tus argumentos para que se unan a una causa?",
+            "respuesta": "Me gusta más organizar información y datos, porque con mis gráficas es más fácil que la mara entienda por qué estamos tan mal y así mis argumentos tienen más peso."
           },
           {
-            "pregunta": "Kevin, se nota que eres de los que prefiere pasar a la acción y ver resultados reales para ayudar a tu gente. Pensando en cómo te gusta trabajar, ¿qué te hace sentir más satisfecho al final del día: **seguir un método o regla** que asegure que todo se hizo de forma correcta y transparente, o **explorar ideas nuevas** y creativas para mejorar cómo funcionan las cosas aunque eso signifique cambiar el plan original?",
-            "respuesta": "Explorar ideas nuevas y cambiar el plan si es necesario. Al chile, no sirve de nada seguir reglas viejas si al final del día la aldea sigue igual de pisada."
+            "pregunta": "Veo que te encanta usar datos para que los demás entiendan la realidad, eso es genial. Ahora, imagina que tienes que decidir cómo actuar ante un problema difícil en tu comunidad: ¿te sientes más cómodo **siguiendo reglas** y leyes claras para asegurar que todo sea justo, o prefieres **crear nuevas formas** de hacer las cosas aunque eso signifique romper con lo que siempre se ha hecho?",
+            "respuesta": "Crear nuevas formas aunque cambien las reglas, porque las leyes de ahorita no han servido para que mi gente salga adelante."
           },
           {
-            "pregunta": "Kevin, me queda clarísimo que buscas cambiar las cosas con ideas nuevas y planes que sí funcionen en la realidad. Pensando en lo que te mueve por dentro, cuando te imaginas trabajando en el futuro, ¿qué te hace sentir más orgulloso: **defender la justicia** y los derechos de las personas frente a cualquier injusticia, o **impulsar el desarrollo** y el progreso de tu comunidad a través de proyectos que mejoren su calidad de vida?",
-            "respuesta": "Impulsar el progreso y desarrollo de mi comunidad. Es que si la gente tiene oportunidades y sale de la miseria, la justicia viene solita, pero primero hay que arreglar este abandono."
+            "pregunta": "Kevin, me gusta mucho esa chispa que tienes para buscar soluciones nuevas cuando las cosas no funcionan. Ya que prefieres crear caminos distintos, cuéntame: cuando te toca resolver un problema, ¿te sientes más cómodo **desarmando el problema en partes pequeñas** para ver cómo funciona cada pieza, o prefieres **mirar el panorama completo** para entender cómo se conecta todo con la sociedad?",
+            "respuesta": "Mirar el panorama completo, porque lo que me interesa es entender por qué mi aldea sigue estancada mientras otros lugares avanzan."
           }
         ],
         "top3": [
           {
-            "carrera": "Ingeniería en Gestión Ambiental Local",
+            "carrera": "Licenciatura en Economía",
             "afinidad": 35
           },
           {
-            "carrera": "Licenciatura en Economía",
+            "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
             "afinidad": 25
           },
           {
@@ -362,34 +525,34 @@
         "fijas": {
           "impacto": "Defender la justicia y resolver conflictos, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
           "estilo": "Analizando datos, ideas y lógica",
-          "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
-          "gustos": "Matemáticas y números, Leyes, justicia y debate, Economía, pobreza y desarrollo del país, Historia, sociedad y cultura"
+          "entorno": "En una oficina o empresa, En un aula o centro educativo, Con la comunidad, ayudando a personas",
+          "gustos": "Matemáticas y números, Leyes, justicia y debate, Historia, sociedad y cultura, Economía, pobreza y desarrollo del país, Comercio, política y otros países"
         },
         "adaptativas": [
           {
-            "pregunta": "Kevin, me alegra mucho conocerte. Veo que tienes un interés muy marcado por los números, las leyes y el impacto social. Para entender mejor cómo te gusta trabajar, cuéntame: cuando tienes un problema difícil enfrente, ¿prefieres **analizar los datos** y buscar una solución lógica por tu cuenta, o prefieres **hablar con otras personas** para debatir ideas y llegar a un acuerdo juntos?",
-            "respuesta": "La verdad me gusta más debatir, aunque mis cuadros ayudan, prefiero hablar con la mara para ver qué onda y entender por qué la cosa no cambia en mi aldea."
+            "pregunta": "Kevin, me encanta ver que te interesan tanto los números como el impacto social. Ahora, cuéntame sobre tu forma de ser: cuando tienes que tomar una decisión importante, ¿prefieres **seguir tu intuición** y lo que sientes que es correcto en el momento, o te sientes más cómodo **analizando cada detalle** y buscando pruebas concretas antes de elegir?",
+            "respuesta": "Prefiero analizar datos y hechos concretos, es que si no tengo números que respalden lo que digo siento que hablo por hablar."
           },
           {
-            "pregunta": "Me gusta mucho que prefieras el debate y el contacto directo con la gente para entender los problemas de tu aldea, Kevin. Eso dice mucho de ti. Ahora, pensando en cómo te sientes cuando las cosas se ponen intensas, dime: ¿te consideras una persona que prefiere **mantener la calma** y seguir un orden muy estricto para que todo salga bien, o eres de los que se siente más cómodo **lanzándose a la acción** y buscando soluciones rápidas aunque el ambiente sea un poco caótico?",
-            "respuesta": "Prefiero la acción rápida aunque haya caos, porque estar ahí viendo cómo resolver las cosas es lo que hace que uno entienda la realidad de verdad."
+            "pregunta": "Kevin, me queda clarísimo que te gusta ir a la segura con los números y los datos. Ahora, pensando en lo que sabes hacer mejor, cuando tienes un problema difícil frente a ti, ¿qué te sale más natural: **desarmar el problema** en partes pequeñas para entender cómo funciona cada pieza, o prefieres **ver el panorama completo** y buscar una solución que ayude a las personas involucradas?",
+            "respuesta": "Ver el panorama completo y el impacto en las personas. Aunque los datos me encantan, lo que más me urge es entender cómo cambiar la situación de mi gente."
           },
           {
-            "pregunta": "Kevin, se nota que te gusta meterte de lleno en la acción y no te asusta el caos si eso ayuda a resolver problemas reales. Ahora, cuéntame sobre lo que sabes hacer: cuando tienes que explicar un tema complejo o defender una idea, ¿qué se te da mejor: **escribir informes** detallados y ordenados para que otros los lean, o **hablar frente a un grupo** para convencerlos y explicarles cómo mejorar las cosas?",
-            "respuesta": "Hablar y convencer a un grupo de personas, porque me gusta ver las caras de la mara cuando les explico por qué estamos tan fregados."
+            "pregunta": "Kevin, me gusta mucho esa visión que tienes de querer cambiar las cosas para tu gente. Ya que te importa tanto el impacto social, imagínate esto: tienes que elegir entre dos proyectos. Uno busca **mejorar la eficiencia** de una empresa para que sea más rentable, y el otro busca **defender derechos** o mejorar la calidad de vida de un grupo vulnerable. ¿Cuál de los dos te hace sentir que tu trabajo realmente valió la pena al final del día?",
+            "respuesta": "Definitivamente defender derechos y mejorar la vida de personas vulnerables, porque de nada sirve que una empresa gane más si mi gente se sigue quedando atrás."
           },
           {
-            "pregunta": "Kevin, me encanta esa energía que tienes para convencer a los demás y buscar cambios reales. Ya que te importa tanto ver por qué estamos tan fregados, cuéntame: cuando piensas en el futuro de tu comunidad, ¿qué te mueve más: **luchar por la justicia** y que se respeten los derechos de todos, o **impulsar el desarrollo** económico para que haya más dinero y oportunidades para la gente?",
-            "respuesta": "Luchar por la justicia y los derechos, porque de nada sirve que haya más plata si al final siempre se la quedan los mismos de siempre."
+            "pregunta": "Kevin, me queda muy claro que tu prioridad es el bienestar de las personas y el impacto social. Ahora, pensando en el día a día de tu futuro trabajo, ¿qué te ves haciendo con más facilidad: **escribir documentos legales** o informes detallados para defender una causa, o prefieres **organizar actividades** y trabajar directamente en el campo junto a la comunidad para resolver sus problemas?",
+            "respuesta": "Me voy por organizar actividades y estar de una vez en el campo, porque ahí es donde realmente se ve qué onda con la gente y cómo ayudarlos."
           }
         ],
         "top3": [
           {
-            "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+            "carrera": "Trabajo Social",
             "afinidad": 35
           },
           {
-            "carrera": "Trabajo Social",
+            "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
             "afinidad": 25
           },
           {
@@ -398,225 +561,72 @@
           }
         ]
       },
-      "primero_es_a": true,
-      "juicio": {
-        "coherencia_1": 5,
-        "porque_1": "La lista conecta directamente con su interés por el desarrollo económico y la desigualdad regional. Aprovecha su habilidad con los números y gráficos, alejándose de la contabilidad tradicional que le resulta aburrida.",
-        "coherencia_2": 3,
-        "porque_2": "Aunque incluye Economía, las Ciencias Jurídicas no parecen alinearse con su perfil analítico y cuantitativo. La lista ignora su fuerte inclinación por el análisis de datos y la visualización de información para explicar la pobreza.",
-        "mejor": "1",
-        "porque_mejor": "La lista 1 es superior porque capitaliza su destreza técnica con números y gráficos para abordar el problema del desarrollo, mientras que la lista 2 introduce áreas legales que no tienen una conexión clara con su pasión por el análisis de datos y la economía."
-      },
-      "gano": "A",
-      "coherencia_A": 5,
-      "coherencia_B": 3,
-      "segundos": 61.3
-    },
-    {
-      "persona": "Ixchel",
-      "contexto": "20 anios, termino magisterio. Habla k'iche' con su familia y espanol en el pueblo, y aprendio ingles sola con series y hablando con turistas en el parque. Da clases particulares a ninios del barrio y le encanta el momento en que a alguien 'le cae el veinte'. Le duele que sus primos mas chiquitos ya no quieran hablar k'iche'. Es paciente y no se enoja cuando alguien se equivoca.",
-      "A": {
-        "brazo": "A",
-        "persona": "Ixchel",
+      "C": {
+        "brazo": "C",
+        "persona": "Kevin",
         "fijas": {
-          "impacto": "Ayudar, enseñar o cuidar a las personas, Comunicar, crear, diseñar o investigar la realidad",
-          "estilo": "Con personas, en trato directo",
+          "impacto": "Defender la justicia y resolver conflictos, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
+          "estilo": "Analizando datos, ideas y lógica",
           "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
-          "gustos": "Comunicación, escritura y medios, Enseñar y educar, Historia, sociedad y cultura"
+          "gustos": "Matemáticas y números, Leyes, justicia y debate, Historia, sociedad y cultura, Economía, pobreza y desarrollo del país, Comercio, política y otros países"
         },
         "adaptativas": [
           {
-            "pregunta": "Ixchel, me encanta ver que tienes tan claro que quieres trabajar con personas y en entornos educativos o comunitarios. Ahora, cuéntame un poco sobre tu forma de ser: cuando te enfrentas a un problema nuevo, ¿eres más de **analizar los detalles** con mucha calma y lógica, o prefieres lanzarte a **probar ideas creativas** y ver qué pasa sobre la marcha?",
-            "respuesta": "Prefiero probar ideas creativas sobre la marcha, la verdad me gusta ver qué sale y así aprendo mejor con los patojos."
+            "pregunta": "Kevin, me encanta ver que te interesan tanto las leyes como los números y la realidad del país. Ahora, cuéntame sobre tu **forma de ser**: cuando tienes que tomar una decisión importante, ¿prefieres seguir tu *intuición* y lo que sientes que es correcto, o te gusta más apoyarte en **reglas claras** y pruebas que puedas comprobar?",
+            "respuesta": "Prefiero apoyarme en normas y datos concretos. Es que si no tengo números o pruebas que respalden lo que digo, siento que mis argumentos no valen nada frente a otros."
           },
           {
-            "pregunta": "Me encanta esa chispa creativa que tienes, Ixchel, ¡es genial que aprendas haciendo! Pensando en cómo te gusta trabajar con otros, dime una cosa: cuando hay un conflicto o una diferencia de opinión en un grupo, ¿te sientes más cómoda **mediando y buscando un acuerdo** para que todos estén bien, o prefieres **liderar y tomar la decisión** final para que el grupo avance?",
-            "respuesta": "Prefiero mediar y buscar que todos lleguen a un acuerdo, porque al final lo que importa es que todos estemos tranquilos y nos entendamos."
+            "pregunta": "Kevin, me queda clarísimo que te sientes mucho más seguro cuando tienes **datos y normas** en la mano para respaldar tus ideas. Pensando en lo que sabes hacer hoy, ¿qué te resulta más natural al resolver un problema difícil: **desarmar el problema** en partes pequeñas para entender cómo funciona cada pieza o prefieres **buscar soluciones** que conecten con las necesidades de las personas en tu comunidad?",
+            "respuesta": "Me gusta desarmar el problema y analizarlo a fondo. Siento que si no entiendo bien la raíz de por qué todo está trabado, no sirve de nada querer ayudar porque al final las cosas no cambian."
           },
           {
-            "pregunta": "Ixchel, me gusta mucho ver que prefieres mediar y buscar acuerdos para que todos estén bien. Ahora, pensando en lo que sabes hacer mejor, ¿qué te sale más natural cuando tienes que trabajar en un proyecto: **organizar toda la información** y los pasos a seguir para que nada se escape, o **expresarte y convencer** a los demás con tus ideas y palabras?",
-            "respuesta": "La verdad me sale mejor expresarme y convencer con mis palabras, porque siempre encuentro cómo explicarle las cosas a los patojos para que me entiendan bien."
+            "pregunta": "Kevin, me parece genial esa capacidad que tienes para analizar las cosas a fondo y buscar la raíz de los problemas. Ahora, pensando en lo que te mueve, ¿qué es lo que más te motiva cuando imaginas tu futuro profesional: **tener un impacto directo** ayudando a personas o grupos específicos a mejorar su situación, o te llama más la atención **crear sistemas o estructuras** que ayuden a que el país funcione de forma más ordenada y justa?",
+            "respuesta": "Me voy por crear sistemas o estructuras, porque si uno no cambia la raíz del desorden y la injusticia, al final todo sigue igual aunque uno ayude un ratito."
           },
           {
-            "pregunta": "Ixchel, qué bien que te salga tan natural explicar las cosas y convencer a los demás, eso es una habilidad increíble para conectar. Ahora, pensando en lo que te mueve por dentro, ¿qué te hace sentir más satisfecha al final del día: saber que **ayudaste a alguien a superarse** y crecer, o sentir que **defendiste una causa justa** o ayudaste a que las cosas en tu comunidad sean más equitativas?",
-            "respuesta": "Ver que alguien aprende y crece gracias a mi apoyo, es pura emoción ver cuando a los patojos les cae el veinte."
+            "pregunta": "Kevin, entiendo perfectamente que prefieres enfocarte en cambiar las estructuras de fondo en lugar de solo dar ayuda inmediata. Ya que te gusta tanto analizar la raíz de las cosas, cuéntame: cuando te enfrentas a un reto, ¿prefieres **crear un modelo o sistema** que funcione con reglas lógicas y fijas, o te sientes más cómodo **investigando y conectando** diferentes hechos históricos y sociales para entender por qué la realidad es como es?",
+            "respuesta": "Me gusta más investigar y conectar los hechos sociales, porque si no entiendo bien la historia y por qué estamos así, no puedo crear ningún sistema que de verdad sirva."
           }
         ],
         "top3": [
           {
-            "carrera": "Licenciatura en Educación de la Comunicación y Lenguaje",
+            "carrera": "Licenciatura en Economía",
             "afinidad": 35
           },
           {
-            "carrera": "PEM en Comunicación y Lenguaje",
+            "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
             "afinidad": 30
           },
           {
-            "carrera": "Licenciatura en Ciencias de la Educación",
+            "carrera": "Criminología y Política Criminal",
             "afinidad": 20
           }
         ]
       },
-      "B": {
-        "brazo": "B",
-        "persona": "Ixchel",
-        "fijas": {
-          "impacto": "Ayudar, enseñar o dar cuidados a las personas, Comunicar, crear, diseñar o hacer investigación",
-          "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica",
-          "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
-          "gustos": "Economía, pobreza y desarrollo del país, Comunicación, escritura y medios, Idiomas y otras culturas, Enseñanza, docencia y educación, Psicología y comportamiento, Historia, sociedad y cultura"
-        },
-        "adaptativas": [
-          {
-            "pregunta": "Ixchel, me encanta ver que te motiva tanto el impacto social y el trabajo con la comunidad. Pensando en cómo te gusta trabajar, imagina que tienes un proyecto importante entre manos: ¿prefieres **tomar las decisiones tú sola** y guiar el camino, o te sientes más cómoda **trabajando en equipo** donde todos aportan ideas para lograr el resultado?",
-            "respuesta": "Trabajando en equipo, así es más de ahuevo porque escuchamos qué piensa cada quien y salen mejores ideas."
-          },
-          {
-            "pregunta": "Me encanta que valores tanto el trabajo en equipo, Ixchel, porque las mejores ideas siempre salen de compartir puntos de vista. Ahora, cuéntame: cuando te toca resolver un problema difícil, ¿qué se te da mejor: **organizar los pasos** y los datos para que todo tenga lógica, o prefieres **usar tu creatividad** para encontrar una solución nueva que nadie más ha visto?",
-            "respuesta": "Me gusta más usar mi creatividad para soluciones nuevas, siento que así le doy la vuelta a los problemas de una forma más chilera."
-          },
-          {
-            "pregunta": "Qué buena onda que te guste buscar soluciones creativas, Ixchel. Ahora, pensando en lo que realmente te mueve por dentro, cuando te imaginas trabajando en el futuro, ¿qué es lo que más te hace sentir bien: **ayudar a que las personas mejoren** su situación actual o **descubrir cómo funcionan las cosas** para entender mejor por qué pasan los problemas en nuestro país?",
-            "respuesta": "Ayudar a las personas a mejorar su situación, la neta es que prefiero ver cambios en la gente que solo estar metida en teorías."
-          },
-          {
-            "pregunta": "Ixchel, me queda súper claro que prefieres la acción directa para ayudar a la gente. Ahora, para entender mejor cómo piensas, cuando te enfrentas a un reto, ¿qué te sale más natural: **analizar cada detalle** y seguir un orden paso a paso para no perderte, o prefieres **mirar el panorama completo** y ver cómo todo se conecta, aunque las cosas se sientan un poco más libres o desordenadas al principio?",
-            "respuesta": "Prefiero mirar el panorama completo, siento que así veo mejor cómo conectar las ondas y no me quedo encerrada solo en los detalles."
-          }
-        ],
-        "top3": [
-          {
-            "carrera": "Trabajo Social",
-            "afinidad": 25
-          },
-          {
-            "carrera": "Psicología (PEM y Licenciatura)",
-            "afinidad": 20
-          },
-          {
-            "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
-            "afinidad": 18
-          }
-        ]
-      },
-      "primero_es_a": true,
+      "primero_es_a": false,
       "juicio": {
         "coherencia_1": 4,
-        "porque_1": "La lista se centra correctamente en su vocación docente y su facilidad con los idiomas. Sin embargo, ignora el componente cultural y lingüístico específico del k'iche' que es central en su identidad.",
+        "porque_1": "Las carreras seleccionadas abordan la problemática social y económica que le apasiona. Sin embargo, Trabajo Social como primera opción podría no aprovechar al máximo su habilidad analítica con números y gráficos.",
         "coherencia_2": 5,
-        "porque_2": "Esta lista integra perfectamente su experiencia docente con su preocupación por la pérdida del idioma k'iche' y su habilidad para conectar con las personas. La especialización en gestión intercultural es una respuesta directa a su dolor por la desconexión cultural de sus primos.",
+        "porque_2": "Esta lista prioriza la Economía, que es la disciplina que mejor integra su interés por el desarrollo regional con su destreza para el análisis cuantitativo y la creación de gráficos. Es una propuesta que conecta perfectamente su perfil técnico con su vocación de cambio social.",
         "mejor": "2",
-        "porque_mejor": "La segunda lista es superior porque no solo atiende a su capacidad pedagógica, sino que aborda el trasfondo social y cultural de la estudiante, proponiendo caminos que permiten proteger y revitalizar su lengua materna."
+        "porque_mejor": "La segunda lista es superior porque coloca a la Economía en primer lugar, alineándose mejor con su capacidad para manejar números y datos para explicar fenómenos complejos, algo que es central en su interés por la desigualdad de su aldea."
       },
-      "gano": "B",
-      "coherencia_A": 4,
-      "coherencia_B": 5,
-      "segundos": 51.5
-    },
-    {
-      "persona": "Diego",
-      "contexto": "17 anios, quinto bachillerato. Juega futbol en una liga del municipio y se rompio la rodilla el anio pasado; paso seis meses yendo a terapia y le fascino todo lo que le hacian para volver a caminar bien. Le gusta el cuerpo humano y como se recupera. Es sociable, siempre anda con gente, y no se imagina metido en una oficina. Tiene dos perros y los cuida el.",
-      "A": {
-        "brazo": "A",
-        "persona": "Diego",
-        "fijas": {
-          "impacto": "Ayudar, enseñar o cuidar a las personas",
-          "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
-          "entorno": "En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
-          "gustos": "Salud y cuidar personas, Biología y naturaleza"
-        },
-        "adaptativas": [
-          {
-            "pregunta": "Diego, me encanta ver que tienes tan claro que quieres ayudar a otros en temas de salud y naturaleza. Pensando en cómo te gusta trabajar, dime: cuando tienes un problema difícil enfrente, ¿prefieres **analizar los datos** y buscar una respuesta lógica o te sientes más cómodo **confiando en tu intuición** y en cómo te hace sentir la situación?",
-            "respuesta": "La neta prefiero confiar en lo que siento, me guío más por cómo veo las cosas al momento que por andar viendo números o datos aburridos."
-          },
-          {
-            "pregunta": "Me queda súper claro que te dejas llevar por lo que sientes en el momento, ¡eso es genial! Ahora, cuéntame un poco sobre ti: cuando hay que tomar una decisión importante o trabajar con otros, ¿eres de los que prefiere **tomar el mando** y organizar cómo se hacen las cosas, o te sientes más cómodo **apoyando desde atrás** y asegurándote de que todos estén bien y tranquilos?",
-            "respuesta": "Prefiero apoyar y cuidar que todos estén bien, me gusta más ver que el grupo se sienta tranquilo y que todos estemos echando punta juntos."
-          },
-          {
-            "pregunta": "Qué buena onda que prefieras apoyar a tu equipo para que todos estén bien, se nota que te importa mucho el bienestar de los demás. Ya que hablamos de eso, cuéntame: cuando te toca hacer algo nuevo, ¿te gusta más **aprender a usar herramientas** o máquinas para arreglar cosas, o prefieres **enfocarte en hablar** y escuchar a la gente para entender qué les pasa?",
-            "respuesta": "La verdad prefiero escuchar y hablar con la gente, me gusta conectar con ellos y entender qué onda con lo que sienten."
-          },
-          {
-            "pregunta": "Me encanta ver que eres de los que prefiere escuchar a la gente para conectar con lo que sienten. Ahora, pensando en lo que te mueve por dentro, dime una cosa: cuando piensas en tu futuro trabajo, ¿qué te hace sentir más realizado: **ayudar a una persona** a la vez para que se sienta mejor, o ser parte de un cambio más grande que **ayude a toda una comunidad** a vivir de forma más justa y tranquila?",
-            "respuesta": "La verdad prefiero ayudar a una persona a la vez, me gusta ver cómo cada quien mejora y sentir que pude hacer algo directo por ellos."
-          },
-          {
-            "pregunta": "Se nota que te llena mucho ver el progreso de cada persona de forma directa. Para terminar de entender cómo te imaginas ayudando, cuéntame: cuando alguien llega contigo buscando apoyo, ¿prefieres enfocarte más en **hablar sobre lo que siente** y sus emociones para que se sienta mejor, o te gusta más trabajar con su **cuerpo y movimiento** para que recupere su fuerza física?",
-            "respuesta": "Me voy más por trabajar con el cuerpo y el movimiento, me cuadra un montón ver cómo la gente recupera su fuerza y vuelve a moverse bien."
-          }
-        ],
-        "top3": [
-          {
-            "carrera": "Fisioterapia",
-            "afinidad": 45
-          },
-          {
-            "carrera": "Licenciatura en Enfermería",
-            "afinidad": 30
-          },
-          {
-            "carrera": "Psicología (PEM y Licenciatura)",
-            "afinidad": 25
-          }
-        ]
-      },
-      "B": {
-        "brazo": "B",
-        "persona": "Diego",
-        "fijas": {
-          "impacto": "Ayudar, enseñar o dar cuidados a las personas",
-          "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
-          "entorno": "En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
-          "gustos": "Salud, cuidados y atención a pacientes, Cuerpo, deporte y rehabilitación, Animales y su cuidado"
-        },
-        "adaptativas": [
-          {
-            "pregunta": "Diego, me encanta que tengas tan claro que quieres estar en movimiento y ayudando a otros, ya sea con personas o animales. Ahora, cuéntame sobre tu **forma de trabajar**: cuando tienes un problema difícil enfrente, ¿prefieres **analizarlo con calma** y buscar una respuesta lógica, o te sientes mejor **actuando rápido** y resolviendo las cosas sobre la marcha?",
-            "respuesta": "Prefiero actuar rápido y resolver en el momento, porque en la cancha no hay tiempo para pensar tanto, solo hay que moverse."
-          },
-          {
-            "pregunta": "Me gusta mucho esa actitud tuya de resolver rápido, Diego, se nota que eres alguien de acción. Pensando en cómo te gusta trabajar con otros, ¿te sientes más cómodo **tomando las decisiones** tú solo para avanzar rápido, o prefieres **trabajar en equipo** donde todos opinan y se apoyan para lograr la meta?",
-            "respuesta": "Prefiero trabajar en equipo y decidir juntos, porque uno solo se pone muy tenso y en grupo todo sale mejor."
-          },
-          {
-            "pregunta": "Qué bueno que prefieras el trabajo en equipo, Diego, eso ayuda mucho cuando las cosas se ponen intensas. Hablando de lo que sabes hacer o te gustaría aprender, imagínate un día de trabajo: ¿te atrae más **aprender técnicas manuales** para curar o reparar lesiones físicas, o te ves más apoyando con **tareas de organización y acompañamiento** para que las personas o animales se sientan mejor?",
-            "respuesta": "Aprender técnicas manuales para reparar o curar, porque me cuadró mucho cómo me arreglaron la rodilla y quiero aprender a hacer eso mismo."
-          },
-          {
-            "pregunta": "Qué buena experiencia la de tu rodilla, Diego, eso explica mucho por qué te gusta tanto la idea de reparar y curar. Ahora, pensando en el futuro, ¿qué te llena más el corazón: trabajar en un lugar donde la **prioridad sea la eficiencia** y los resultados rápidos, o un sitio donde lo más importante sea la **justicia social** y ayudar a quienes menos tienen, aunque el proceso sea lento?",
-            "respuesta": "La justicia social y ayudar a los más necesitados, porque a veces la gente no tiene ni para lo más básico y eso sí me llega."
-          }
-        ],
-        "top3": [
-          {
-            "carrera": "Fisioterapia",
-            "afinidad": 45
-          },
-          {
-            "carrera": "Trabajo Social",
-            "afinidad": 30
-          },
-          {
-            "carrera": "Técnico Universitario en Enfermería Veterinaria",
-            "afinidad": 25
-          }
-        ]
-      },
-      "primero_es_a": true,
-      "juicio": {
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 4,
+      "control_top1_igual": false,
+      "control_empate_juez": false,
+      "control_dif_coherencia": 1,
+      "juicio_control": {
         "coherencia_1": 4,
-        "porque_1": "La fisioterapia es una elección excelente basada en su experiencia personal de rehabilitación. La enfermería conecta bien con su interés por el cuerpo humano, aunque la psicología parece menos conectada con su perfil práctico y sociable.",
+        "porque_1": "La economía se alinea perfectamente con su interés por la desigualdad regional y su habilidad con los números. Ciencias Jurídicas aporta herramientas para entender las estructuras de poder, aunque Criminología parece menos conectada con su enfoque en el desarrollo económico.",
         "coherencia_2": 5,
-        "porque_2": "Esta lista aprovecha mejor su perfil al incluir la enfermería veterinaria, que se alinea con su responsabilidad y cuidado de sus perros. El trabajo social encaja con su naturaleza sociable y su rechazo a entornos de oficina cerrados.",
+        "porque_2": "Esta lista es muy sólida al incluir Economía y Ciencias Jurídicas, que responden a su interés analítico y social. Trabajo Social conecta directamente con su vocación de transformar la realidad de su aldea, aprovechando su capacidad de análisis de datos para el impacto comunitario.",
         "mejor": "2",
-        "porque_mejor": "La segunda lista es superior porque integra el interés por los animales mencionado en el perfil y ofrece opciones que se alejan del trabajo de oficina, respetando mejor la personalidad sociable y activa del estudiante."
+        "porque_mejor": "La segunda lista es superior porque Trabajo Social canaliza mejor el deseo del estudiante de cambiar la situación de su aldea, integrando su perfil analítico con una aplicación práctica y directa hacia el desarrollo social, evitando áreas como la criminología que no guardan relación con su inquietud principal."
       },
-      "gano": "B",
-      "coherencia_A": 4,
-      "coherencia_B": 5,
-      "segundos": 56.5
+      "segundos": 79.1
     }
   ]
 }
