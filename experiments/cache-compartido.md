@@ -158,7 +158,7 @@ no el estado de hoy.
 (§7), y es el que decide si B conviene: n=1 sesión post-arreglo alcanza para
 confirmar el mecanismo, no para presupuestar.
 
-## 8. Cada departamento tiene su propio juego de cachés (2026-08-23)
+## 7. Cada departamento tiene su propio juego de cachés (2026-08-23)
 
 El catálogo viene filtrado por departamento antes de entrar al hash, así que
 Quetzaltenango, Totonicapán y "Ambos" nunca comparten caché. Dentro de cada uno
@@ -197,32 +197,61 @@ iguales: la primera tanda crea **12 cachés**, la segunda agrega **8**.
 domina es la salida (~2,900 tok a $1.50/1M), no el catálogo. **Con alquiler,
 Totonicapán sale 3x más barato** y la elección pesa muchísimo.
 
-Y aquí está la evidencia que apunta contra el modelo de alquiler: la sesión real
-de Neon del 2026-08-24 costó **$0.0051**, que coincide con la columna de solo
-tokens ($0.0053), no con la de alquiler ($0.0441). Dos lecturas posibles, y no
-se pueden distinguir desde el código:
+Durante un rato pareció que el alquiler no se cobraba: la sesión real de Neon
+del 2026-08-24 costó **$0.0051**, que coincide con la columna de solo tokens
+($0.0053) y no con la de alquiler ($0.0441). **La factura desmintió esa
+lectura** (ver §8): el alquiler existe, y lo que pasaba es que `uso_tokens` no
+lo registra. **La columna correcta es la de alquiler.**
 
-1. Google **no** cobra el alquiler como el precio de lista, y el costo real es
-   ~$0.005 por alumno sin importar el departamento.
-2. Sí lo cobra, pero `uso_tokens` no lo ve porque cae en la factura y no en la
-   tabla, y el gasto real es ~4x lo que reporta el script.
+## 8. La factura confirma el alquiler (2026-08-24)
 
-Para 6 alumnos son $0.032 contra $0.15: da igual. Para 1,000 son **$5 contra
-$45**, y ahí decide el presupuesto de la tesis. Resolverlo es un vistazo a
-Facturación → Informes agrupando por SKU, y **vale más que cualquier otra
-medición pendiente de este experimento**.
+Facturación → Informes, agrupado por SKU, proyecto `API PAGA GEMINI`, del 19 al
+31 de agosto:
 
-## 7. Pendientes
+| SKU | Uso | Costo | Precio implícito | Modelado |
+|---|---|---|---|---|
+| **cached content storage token hours** | 597,510 h | **$0.60** | $1.004 / 1M tok-hora | $1.00 ✅ |
+| output token count | 373,808 | $0.56 | $1.498 / 1M | $1.50 ✅ |
+| input token count | 876,944 | $0.22 | $0.251 / 1M | $0.25 ✅ |
+| cached input token count | 8,330,285 | $0.21 | $0.0252 / 1M | $0.025 ✅ |
+| | | **$1.59** | | |
 
-- **(El más importante, ver §8.)** El alquiler es **estimado a precio de lista**,
-  asumiendo que Google cobra el TTL completo. Nunca se ha visto un SKU de almacenamiento en la factura, y la
-  reconciliación del 2026-08-11 solo encontró ~$0.003 de diferencia, mucho menos
-  de lo que este modelo predice. Verificar en Facturación → Informes, agrupando
-  por SKU. **Si Google no cobra el alquiler como se modela aquí, el ahorro de B
-  se reduce al de tokens, y ahí A gana** ($0.0068 vs $0.0113).
-- `_SIN_SENAL` no excluye `nombre` (`filtro.py:35`): el nombre del alumno entra
-  al texto que puntúa el filtro. No aporta señal vocacional y ensucia el hash.
-  Arreglo de una palabra, sin relación con el A/B.
+Los cuatro precios salen exactos contra el modelo. Y el resultado que importa:
+
+**El almacenamiento es $0.60 de $1.59, el 38% del gasto total, y es la línea
+individual más cara de la factura.** Más que la salida y más que el input. La
+columna de cambio marcaba `↑1900%`, que es la firma del bug de §1: cada llamada
+dejando su propio caché rentado una hora.
+
+⚠️ **`uso_tokens` oculta el 38% del gasto real.** Cualquier cifra sacada de esa
+tabla, incluidas las sesiones de Neon y las proyecciones de
+`decisions/gemini-costos-y-caching.md`, es una **cota inferior**. Para la tesis,
+el costo por alumno defendible es el de la columna "con alquiler" del §7:
+**$0.014 en Totonicapán, $0.044 en Quetzaltenango**, no los $0.005 de solo
+tokens.
+
+Nota buena de la misma factura: 8,330,285 tokens cacheados contra 876,944
+frescos, o sea **90.5% del input va a tarifa de caché**. Esa parte del diseño
+funciona.
+
+### Qué se desbloquea
+
+Con el alquiler confirmado, los dos hallazgos de este experimento pasan de
+"depende" a accionables:
+
+1. Quitar el pre-filtro de `next-question` (§4-§5) ahorra de verdad: 62% con 3
+   alumnos, 24% con 30. **Ya no hay bloqueante técnico**; falta decidir hacerlo.
+2. La ventaja de Totonicapán (§7) es real, no un artefacto del precio de lista.
+
+## 9. Pendientes
+
+- ~~El alquiler es estimado a precio de lista.~~ **RESUELTO el 2026-08-24, ver
+  §8**: el SKU existe, cobra $1.004/1M tokens-hora y es el 38% de la factura.
+  El ahorro de B es real.
+- ~~`_SIN_SENAL` no excluye `nombre`.~~ **HECHO el 2026-08-23** (`filtro.py:35`):
+  el nombre del alumno entraba al texto que puntúa el filtro, no aporta señal
+  vocacional y le daba a cada alumno un hash propio. El self-check nuevo falla
+  sin el arreglo.
 - Alternativa intermedia sin medir: **congelar** las candidatas tras las 4 fijas
   en vez de quitar el filtro. Baja de 5 cachés a 1 por sesión, pero **no** da
   reuso entre alumnos (los chips son multi-selección sobre 25 opciones, dos

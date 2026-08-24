@@ -15,12 +15,10 @@ Imprime dos columnas de costo a proposito:
 
 - **solo tokens**: lo que ve `uso_tokens`, y lo que coincide con las sesiones
   reales de Neon.
-- **con alquiler**: sumando $1/1M tokens/hora por cada caché distinto. Ese
-  precio es de lista y NUNCA se ha visto como SKU en la factura de Google.
-
-Si las dos columnas discrepan tanto como discrepan hoy, la respuesta no esta en
-este script: esta en Facturacion -> Informes. Ver
-experiments/cache-compartido.md.
+- **con alquiler**: sumando $1/1M tokens/hora por cada caché distinto. Esta es
+  la columna CORRECTA: la factura del 2026-08-24 confirmo el SKU
+  `cached content storage token hours` a $1.004/1M tokens-hora, o sea el 38% del
+  gasto total. Ver experiments/cache-compartido.md §8.
 
     uv run python costo_por_departamento.py
 """
@@ -108,9 +106,9 @@ def main():
         print(f"{depto:16} {prompt:>9,} ${solo_tokens:>11.4f} "
               f"${solo_tokens + renta_1:>10.4f} ${solo_tokens + renta_2:>10.4f}")
 
-    print("\nLa columna 'solo tokens' es la que coincide con las sesiones reales de")
-    print("Neon. Si el alquiler se cobrara como dice el precio de lista, el gasto")
-    print("real seria hasta 4x mayor y uso_tokens no lo mostraria.")
+    print("\nLa columna con renta es la CORRECTA: la factura del 2026-08-24 confirmo")
+    print("el SKU de almacenamiento a $1.004/1M tokens-hora, el 38% del gasto total.")
+    print("'solo tokens' es lo que reporta uso_tokens, o sea una cota inferior.")
 
 
 if __name__ == "__main__":

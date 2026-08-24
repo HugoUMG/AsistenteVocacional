@@ -66,11 +66,14 @@ grupo**. Números, brazos y bloqueantes en
 reporta sus tokens como cacheados, así que ambos brazos dan >94%. La métrica es
 el **número de cachés distintos**.
 
-⚠️ **El modelo de costo de almacenamiento de este archivo no está verificado.**
-Nunca se ha visto el SKU de almacenamiento en la factura de Google, y la
-reconciliación del 2026-08-11 encontró ~$0.003 de diferencia, mucho menos de lo
-que predice $1/1M tok/hora con TTL de 1h. Verificar en Facturación → Informes
-agrupando por SKU antes de apoyar cualquier decisión en esas cifras.
+⚠️ **`uso_tokens` oculta el 38% del gasto real (verificado 2026-08-24).** La
+factura de Google, agrupada por SKU, trae
+`Generate content cached content storage token hours`: 597,510 tokens-hora por
+**$0.60 de un total de $1.59**, la línea individual más cara, por encima de la
+salida y del input. El precio implícito es $1.004/1M tokens-hora, exacto contra
+el de lista. Como esa tabla solo registra tokens, **toda cifra sacada de ella es
+una cota inferior**, incluidas las proyecciones de este archivo. Detalle en
+[../experiments/cache-compartido.md](../experiments/cache-compartido.md) §8.
 
 ## La key con billing ya es la primaria en local (2026-08-23)
 
