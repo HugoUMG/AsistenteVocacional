@@ -158,10 +158,64 @@ no el estado de hoy.
 (§7), y es el que decide si B conviene: n=1 sesión post-arreglo alcanza para
 confirmar el mecanismo, no para presupuestar.
 
+## 8. Cada departamento tiene su propio juego de cachés (2026-08-23)
+
+El catálogo viene filtrado por departamento antes de entrar al hash, así que
+Quetzaltenango, Totonicapán y "Ambos" nunca comparten caché. Dentro de cada uno
+hay dos familias: la de `next-question` (catálogo recortado, cambia por llamada)
+y la de `recommend` (catálogo completo, estable y compartido por todos los
+alumnos de ese departamento).
+
+Medido con `backend/costo_por_departamento.py`, que no gasta cuota
+(`count_tokens` es gratis y los hashes se calculan local):
+
+| Depto | Carreras | Chat por llamada | Recommend | Cachés del 1er alumno | Que agrega el 2do |
+|---|---|---|---|---|---|
+| Quetzaltenango | 185 | 3,870 tok | 23,330 tok | **5** (4 chat + 1 rec) | **+4** |
+| Totonicapán | 17 | 4,752 tok | 4,752 tok | **2** (1 chat + 1 rec) | **+0** |
+| Ambos | 202 | 3,793 tok | 25,115 tok | **5** | **+4** |
+
+**Totonicapán es el caso sano y lo es por accidente:** 17 carreras < `TOP_DEFAULT`
+= 35, así que `preseleccionar` no recorta nada, el catálogo del chat no cambia
+nunca y el segundo alumno entra sin crear un solo caché. Su catálogo por llamada
+es incluso MÁS grande que el de Quetzaltenango (4,752 vs 3,870) y aun así gana:
+la métrica que manda es el número de cachés, no su tamaño. Es la misma
+conclusión de §4 vista desde otro ángulo.
+
+Escenario de 3 alumnos simultáneos, uno por departamento, y luego otros 3
+iguales: la primera tanda crea **12 cachés**, la segunda agrega **8**.
+
+### Costo por alumno, y las dos columnas que se contradicen
+
+| Depto | Solo tokens | Con alquiler, 1er alumno | Con alquiler, 2do |
+|---|---|---|---|
+| Quetzaltenango | $0.0053 | $0.0441 | $0.0208 |
+| Totonicapán | $0.0049 | $0.0144 | $0.0049 |
+| Ambos | $0.0054 | $0.0456 | $0.0205 |
+
+**En tokens puros el departamento casi no importa** (~$0.005 en los tres): lo que
+domina es la salida (~2,900 tok a $1.50/1M), no el catálogo. **Con alquiler,
+Totonicapán sale 3x más barato** y la elección pesa muchísimo.
+
+Y aquí está la evidencia que apunta contra el modelo de alquiler: la sesión real
+de Neon del 2026-08-24 costó **$0.0051**, que coincide con la columna de solo
+tokens ($0.0053), no con la de alquiler ($0.0441). Dos lecturas posibles, y no
+se pueden distinguir desde el código:
+
+1. Google **no** cobra el alquiler como el precio de lista, y el costo real es
+   ~$0.005 por alumno sin importar el departamento.
+2. Sí lo cobra, pero `uso_tokens` no lo ve porque cae en la factura y no en la
+   tabla, y el gasto real es ~4x lo que reporta el script.
+
+Para 6 alumnos son $0.032 contra $0.15: da igual. Para 1,000 son **$5 contra
+$45**, y ahí decide el presupuesto de la tesis. Resolverlo es un vistazo a
+Facturación → Informes agrupando por SKU, y **vale más que cualquier otra
+medición pendiente de este experimento**.
+
 ## 7. Pendientes
 
-- El alquiler es **estimado a precio de lista**, asumiendo que Google cobra el
-  TTL completo. Nunca se ha visto un SKU de almacenamiento en la factura, y la
+- **(El más importante, ver §8.)** El alquiler es **estimado a precio de lista**,
+  asumiendo que Google cobra el TTL completo. Nunca se ha visto un SKU de almacenamiento en la factura, y la
   reconciliación del 2026-08-11 solo encontró ~$0.003 de diferencia, mucho menos
   de lo que este modelo predice. Verificar en Facturación → Informes, agrupando
   por SKU. **Si Google no cobra el alquiler como se modela aquí, el ahorro de B
