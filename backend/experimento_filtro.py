@@ -22,21 +22,34 @@ en tiempo de respuesta.
 
 ## Brazos
 
-Los dos corren el flujo de producción completo (4 fijas + adaptativas +
+Los tres corren el flujo de producción completo (4 fijas + adaptativas +
 recomendación) con el MISMO perfil de alumno. Lo único que cambia:
 
-- **A (control)** — producción de hoy: `next-question` ve el top-35 del filtro.
+- **A** — producción de hoy: `next-question` ve el top-35 del filtro.
+- **A2 (CONTROL)** — idéntico a A, corrido aparte.
 - **B** — `next-question` ve el catálogo completo del departamento (185 filas).
 
-`recomendar()` NO usa el filtro en ninguno de los dos brazos (nunca lo ha
-usado), así que la diferencia entra solo por las preguntas que el modelo elige.
+`recomendar()` NO usa el filtro en ninguno de los brazos (nunca lo ha usado), así
+que la diferencia entra solo por las preguntas que el modelo elige.
 
-## Por qué dos conversaciones y no una
+## Por qué hace falta A2
+
+Este sistema devuelve resultados distintos con entrada IDÉNTICA: correr el mismo
+brazo dos veces cambia el top-1 en 2 a 3 de cada 4 casos (piso de ruido medido el
+2026-08-23, ver CLAUDE.md). **A2 es la misma configuración que A**, así que todo
+lo que cambie entre ellos es ruido del sistema y nada más. La regla de lectura es
+una sola: si la tasa de cambio de A vs B no supera la de A vs A2, no hay efecto
+de calidad que reportar.
+
+La primera corrida de este experimento (13/16 vs 12/16) se hizo SIN control y por
+eso su conclusión quedó sobreinterpretada.
+
+## Por qué tres conversaciones y no una
 
 En el experimento de edad y grado bastaba una conversación porque el cambio
 estaba en el último paso. Aquí no: el filtro cambia lo que el modelo ve al
 ELEGIR cada pregunta, así que cada brazo necesita su propia conversación. Cuesta
-el doble y no hay forma de evitarlo sin medir otra cosa.
+el triple y no hay forma de evitarlo sin medir otra cosa.
 
 ## Qué se mide
 
@@ -50,10 +63,14 @@ el doble y no hay forma de evitarlo sin medir otra cosa.
    10s. Se cronometra CADA llamada de producción por separado
    (`next-question` y `recommend`), y se reportan mediana y p95. Las llamadas
    del alumno simulado NO cuentan: no existen en producción.
-4. **Costo real**, con el desglose de cacheados. Sin filtro el catálogo es
-   constante, así que la entrada de caché es estable y sirve a todos los
-   alumnos; con filtro el top-35 cambia con las respuestas y el caché se recrea
-   más seguido. Eso se ve en `cached_tokens`.
+4. **Costo real, con alquiler.** Sin filtro el catálogo es constante, así que la
+   entrada de caché es estable y sirve a todos los alumnos; con filtro el top-35
+   cambia con las respuestas y se crea un caché por llamada. Se cuenta
+   `caches_nuevos` por sesión y se suma el alquiler aparte, porque `uso_tokens`
+   NO lo registra y sin él el costo sale 38% por debajo del real (factura del
+   2026-08-24). ⚠️ El `% cacheado` NO distingue los brazos: un caché recién
+   creado ya reporta sus tokens como cacheados. **La métrica es el número de
+   cachés.** Ver experiments/cache-compartido.md.
 
 ## Los perfiles
 
@@ -64,18 +81,21 @@ servía.
 
 ## Presupuesto
 
-Tope duro de $0.45 (`TOPE_USD`). Se revisa después de cada sesión y el script se
-detiene solo, guardando lo que lleva. Estimado: ~$0.012 por sesión del brazo A y
-~$0.015 del brazo B, contando al alumno simulado. 16 sesiones ~ $0.22.
+Tope duro de $0.70 (`TOPE_USD`). Se revisa después de cada sesión y el script se
+detiene solo, guardando lo que lleva. Con el brazo de control son **24 sesiones**
+(8 perfiles x 3 brazos) en vez de 16. Estimado: ~$0.012 por sesión de A/A2 y
+~$0.015 de B, contando al alumno simulado, o sea ~$0.33 mas el alquiler.
 
 ## Limitaciones, dichas de frente
 
 - 8 perfiles ficticios no dan potencia estadística. Sirve para ver SI el
   mecanismo cambia, no para afirmar una mejora general.
 - Circularidad parcial: el alumno simulado y el orientador son el mismo modelo.
-- La latencia depende de la carga de Google en ese momento. Los dos brazos se
-  corren intercalados (A, B, A, B...) justamente para que una racha lenta de
-  Google no le caiga entera a un solo brazo.
+- La latencia depende de la carga de Google en ese momento. Los brazos se corren
+  intercalados (A, A2, B por perfil) justamente para que una racha lenta de
+  Google no le caiga entera a uno solo.
+- Con 8 perfiles, el control da una tasa de ruido sobre n=8. Es poco, pero es
+  infinitamente mejor que la corrida anterior, que no tenia ninguno.
 - La primera sesión de cada brazo paga el caché frío. Se reporta aparte.
 
 ## Uso
@@ -83,6 +103,7 @@ detiene solo, guardando lo que lleva. Estimado: ~$0.012 por sesión del brazo A 
     uv run python experimento_filtro.py --self-check   # sin red, sin gastar
     uv run python experimento_filtro.py --seco         # solo el mecanismo, sin API
     uv run python experimento_filtro.py                # el A/B (gasta cuota)
+    #   reanudable: si se corta, volver a correrlo retoma donde quedo
     uv run python experimento_filtro.py --perfil Byron
 """
 
@@ -113,7 +134,19 @@ SALIDA = os.path.join(DATA, "tests", "experimento_filtro_resultados.json")
 
 # Tope de gasto. Se revisa después de cada sesión: si el acumulado lo pasa, el
 # script para y guarda. Es el presupuesto autorizado para esta prueba.
-TOPE_USD = 0.45
+# Subió de $0.45 a $0.70 al agregar el brazo de control: son 50% más sesiones.
+TOPE_USD = 0.70
+
+# Los tres brazos, en el orden en que se intercalan por perfil.
+# A2 corre EXACTAMENTE lo mismo que A: es el control que mide cuánto se mueve el
+# sistema solo, sin que cambie nada. Sin él, cualquier diferencia entre A y B se
+# está sobreinterpretando (ver el piso de ruido de CLAUDE.md, 2026-08-23).
+BRAZOS = (("A", True), ("A2", True), ("B", False))
+
+# $/1M tokens-hora del SKU `cached content storage token hours`, confirmado en la
+# factura del 2026-08-24 ($0.60 de $1.59). uso_tokens NO lo registra, así que hay
+# que sumarlo aparte o el costo sale 38% por debajo del real.
+PRECIO_ALQUILER_POR_1M_HORA = 1.00
 
 
 # --- Los 8 perfiles -------------------------------------------------------
@@ -282,14 +315,24 @@ def _solo_etiquetas(respuesta: str, opciones: list) -> str:
     return ", ".join(elegidas) if elegidas else respuesta.strip()
 
 
-def _sesion(perfil, cat, con_filtro):
+def _sesion(perfil, cat, con_filtro, brazo=None):
     """Una conversación completa de producción, cronometrada llamada por llamada.
 
     Devuelve (resultado, log). El log trae, por cada llamada de producción, los
     segundos que tardó y sus tokens. Las llamadas del alumno simulado se
     cronometran aparte y NO entran en la latencia reportada.
+
+    `brazo` se pasa explícito porque A y A2 corren la MISMA configuración
+    (con_filtro=True) y necesitan session_id distinto: si compartieran el id,
+    compartirían el estado de cobertura y A2 dejaría de ser una repetición
+    independiente.
     """
-    brazo = "A" if con_filtro else "B"
+    if brazo is None:
+        brazo = "A" if con_filtro else "B"
+    # Cachés que ya existían antes de esta sesión: lo que aparezca de más es lo
+    # que este alumno tuvo que crear (los que reusa no cuentan). Ver
+    # experiments/cache-compartido.md.
+    caches_antes = set(recomendar._caches)
     respuestas = {"nombre": perfil["nombre"], "departamento": DEPARTAMENTO}
     log = {"brazo": brazo, "perfil": perfil["nombre"], "llamadas": [],
            "fijas": {}, "adaptativas": [], "objetivo_en_candidatas": []}
@@ -348,7 +391,9 @@ def _sesion(perfil, cat, con_filtro):
     res, uso = recomendar.recomendar(respuestas, cat)
     dt = time.perf_counter() - t0
     log["llamadas"].append({"tipo": "recommend", "segundos": round(dt, 2), **uso})
-    print(f"    [{brazo}] recommend      {dt:5.2f}s")
+    log["caches_nuevos"] = len(set(recomendar._caches) - caches_antes)
+    print(f"    [{brazo}] recommend      {dt:5.2f}s   "
+          f"(caches nuevos de este alumno: {log['caches_nuevos']})")
     return res, log
 
 
@@ -401,6 +446,13 @@ def _resumen_brazo(logs, brazo):
     prompt = sum(ll["prompt_tokens"] for x in lg for ll in x["llamadas"])
     cache = sum(ll["cached_tokens"] for x in lg for ll in x["llamadas"])
     out = sum(ll["output_tokens"] for x in lg for ll in x["llamadas"])
+    caches = sum(x.get("caches_nuevos", 0) for x in lg)
+    # Alquiler: cada caché distinto renta su contenido 1h (TTL de _get_cache).
+    # Se aproxima su tamaño con el promedio de tokens cacheados por llamada.
+    tok_por_cache = cache / max(len(todas), 1)
+    alquiler = caches * tok_por_cache * PRECIO_ALQUILER_POR_1M_HORA / 1e6
+    tokens_usd = recomendar.costo_usd(
+        {"prompt_tokens": prompt, "cached_tokens": cache, "output_tokens": out})
     return {
         "sesiones": len(lg),
         "llamadas": len(todas),
@@ -414,8 +466,10 @@ def _resumen_brazo(logs, brazo):
         "prompt_tokens": prompt,
         "cached_tokens": cache,
         "pct_cacheado": round(100 * cache / prompt, 1) if prompt else 0,
-        "costo_usd": round(recomendar.costo_usd(
-            {"prompt_tokens": prompt, "cached_tokens": cache, "output_tokens": out}), 4),
+        "caches": caches,
+        "costo_usd": round(tokens_usd, 4),
+        "alquiler_usd": round(alquiler, 4),
+        "total_usd": round(tokens_usd + alquiler, 4),
     }
 
 
@@ -440,19 +494,21 @@ def correr(solo=None):
 
     resultados = list(hechos.values())
     detenido = None
-    # Intercalado A,B por perfil: una racha lenta de Google no le cae entera a
-    # un solo brazo.
+    # Intercalado A,A2,B por perfil: una racha lenta de Google no le cae entera a
+    # un solo brazo. A2 es el BRAZO DE CONTROL: misma configuración que A, corrida
+    # aparte. A vs A2 mide el ruido del sistema; A vs B solo significa algo si su
+    # diferencia supera esa. Ver el piso de ruido de CLAUDE.md.
     for p in perfiles:
-        for con_filtro in (True, False):
-            brazo = "A" if con_filtro else "B"
+        for brazo, con_filtro in BRAZOS:
             if (p["nombre"], brazo) in hechos:
                 continue
             if _gastado() >= TOPE_USD:
                 detenido = f"tope de ${TOPE_USD} alcanzado antes de {p['nombre']}/{brazo}"
                 break
             print(f"\n=== {p['nombre']} · brazo {brazo} "
-                  f"({'con filtro' if con_filtro else 'SIN filtro'}) ===")
-            res, log = _sesion(p, cat, con_filtro)
+                  f"({'con filtro' if con_filtro else 'SIN filtro'}"
+                  f"{', CONTROL' if brazo == 'A2' else ''}) ===")
+            res, log = _sesion(p, cat, con_filtro, brazo)
             top3 = _top(res)
             log.update({
                 "top3": top3,
@@ -485,6 +541,21 @@ def _reporte(logs, detenido=None):
     por = {(x["perfil"], x["brazo"]): x for x in logs}
     nombres = [p["nombre"] for p in PERFILES if (p["nombre"], "A") in por and (p["nombre"], "B") in por]
 
+    # 0) EL CONTROL PRIMERO. A2 corre lo mismo que A, así que todo lo que cambie
+    # entre ellos es ruido del sistema. Si A vs B no supera esto, no hay efecto
+    # que reportar por más bonita que se vea la tabla de abajo.
+    ctrl_n = [p["nombre"] for p in PERFILES
+              if (p["nombre"], "A") in por and (p["nombre"], "A2") in por]
+    ruido = None
+    if ctrl_n:
+        ruido = sum(por[(n, "A")]["top1"] != por[(n, "A2")]["top1"] for n in ctrl_n)
+        print(f"\n0) PISO DE RUIDO (control A vs A2, misma configuración)")
+        for n in ctrl_n:
+            a, a2 = por[(n, "A")], por[(n, "A2")]
+            igual = "=" if a["top1"] == a2["top1"] else "≠"
+            print(f"{n:10s} {a['top1'][:30]:32s} {igual} {a2['top1'][:30]:32s}")
+        print(f"\n   top-1 distinto SIN cambiar nada: {ruido}/{len(ctrl_n)}")
+
     print("\n1) TOP-1 Y DISPONIBILIDAD DE LA CARRERA OBJETIVO")
     print(f"{'perfil':10s} {'A: con filtro':32s} {'B: sin filtro':32s} {'obj en 35':9s}")
     cambios = a_ok = b_ok = 0
@@ -502,6 +573,14 @@ def _reporte(logs, detenido=None):
     if nombres:
         print(f"\n   Aciertos: A {a_ok}/{len(nombres)}   B {b_ok}/{len(nombres)}"
               f"   |  top-1 distinto en {cambios}/{len(nombres)}")
+        if ruido is not None:
+            tasa_ruido = ruido / len(ctrl_n)
+            tasa_efecto = cambios / len(nombres)
+            print(f"   Contra el control: efecto {cambios}/{len(nombres)} vs "
+                  f"ruido {ruido}/{len(ctrl_n)}  ->  "
+                  + ("EL RUIDO IGUALA O SUPERA AL EFECTO, no hay señal de calidad"
+                     if tasa_efecto <= tasa_ruido
+                     else "el efecto supera al ruido, mirar si es para bien"))
         rotos = [n for n in nombres if por[(n, "A")]["roto"]]
         if rotos:
             ra = sum(por[(n, "A")]["acierta"] for n in rotos)
@@ -514,9 +593,11 @@ def _reporte(logs, detenido=None):
             print(f"   Solo los control (regresión): A {ca}/{len(ctrl)}   B {cb}/{len(ctrl)}")
 
     print("\n2) LATENCIA Y COSTO")
-    print(f"{'':16s} {'A: con filtro':>16s} {'B: sin filtro':>16s}")
-    ra, rb = _resumen_brazo(logs, "A"), _resumen_brazo(logs, "B")
+    print(f"{'':16s} {'A: con filtro':>16s} {'A2: control':>16s} {'B: sin filtro':>16s}")
+    ra, r2, rb = (_resumen_brazo(logs, "A"), _resumen_brazo(logs, "A2"),
+                  _resumen_brazo(logs, "B"))
     if ra and rb:
+        vacio = {k: "-" for k in ra}
         for etiq, k in [("sesiones", "sesiones"), ("llamadas", "llamadas"),
                         ("mediana (s)", "seg_mediana"), ("p95 (s)", "seg_p95"),
                         ("max (s)", "seg_max"),
@@ -524,15 +605,23 @@ def _reporte(logs, detenido=None):
                         ("recommend med.", "rec_mediana"),
                         ("seg/sesión", "seg_por_sesion"),
                         ("prompt tok", "prompt_tokens"), ("% cacheado", "pct_cacheado"),
-                        ("costo USD", "costo_usd")]:
-            print(f"{etiq:16s} {ra[k]:>16} {rb[k]:>16}")
+                        ("CACHES", "caches"),
+                        ("costo tokens", "costo_usd"),
+                        ("alquiler", "alquiler_usd"),
+                        ("TOTAL USD", "total_usd")]:
+            print(f"{etiq:16s} {ra[k]:>16} {(r2 or vacio)[k]:>16} {rb[k]:>16}")
         if ra["seg_por_sesion"]:
             print(f"\n   Sobrecosto de tiempo por sesión: "
                   f"{rb['seg_por_sesion'] - ra['seg_por_sesion']:+.1f}s "
                   f"({100 * rb['seg_por_sesion'] / ra['seg_por_sesion'] - 100:+.0f}%)")
-        if ra["costo_usd"]:
-            print(f"   Sobrecosto en dinero por sesión: "
-                  f"${(rb['costo_usd'] / rb['sesiones']) - (ra['costo_usd'] / ra['sesiones']):+.4f}")
+        if ra["total_usd"]:
+            por_a = ra["total_usd"] / ra["sesiones"]
+            por_b = rb["total_usd"] / rb["sesiones"]
+            print(f"   Costo por sesión (con alquiler): A ${por_a:.4f}  B ${por_b:.4f}  "
+                  f"->  B es el {100 * por_b / por_a:.0f}% de A")
+            print(f"   Solo tokens, que es lo que veria uso_tokens: "
+                  f"A ${ra['costo_usd'] / ra['sesiones']:.4f}  "
+                  f"B ${rb['costo_usd'] / rb['sesiones']:.4f}")
 
     print(recomendar.resumen_gasto())
     print(f"\nGastado en total: ${_gastado():.4f} de ${TOPE_USD} autorizados")
@@ -626,8 +715,19 @@ def _self_check():
         [{"carrera": "X", "afinidad": 40}]
 
     # El tope de gasto es el autorizado y se lee sin llamadas hechas.
-    assert TOPE_USD == 0.45
+    assert TOPE_USD == 0.70
     assert _gastado() == 0.0
+
+    # El control tiene que ser IDENTICO a A en configuracion y DISTINTO en
+    # etiqueta: si comparten session_id comparten el estado de cobertura y A2
+    # deja de ser una repeticion independiente.
+    assert dict(BRAZOS)["A2"] == dict(BRAZOS)["A"] is True, "A2 corre con filtro, igual que A"
+    assert dict(BRAZOS)["B"] is False
+    assert len({b for b, _ in BRAZOS}) == 3, "tres etiquetas distintas"
+
+    # _sesion respeta la etiqueta que se le pasa (de ahi sale el session_id).
+    import inspect
+    assert "brazo" in inspect.signature(_sesion).parameters
 
     print("ok: mecanismo del experimento validado, sin gastar cuota")
 
