@@ -51,6 +51,30 @@ fallo anterior y no lo reintenta.
 Reproducir: `backend/flujo_gasto.py` (N conversaciones completas contra el backend
 local, lee `/api/uso-tokens` y calcula ambos costos).
 
+## El caché explícito ahora es opt-in: CACHE_EXPLICITO (2026-08-24)
+
+Susto del 2026-08-24: el crédito bajó ~$3 en horas casi sin tráfico (Neon: 3
+sesiones, $0.026 de generación). Causa: **alquiler de caché**. Cada
+`caches.create` renta almacenamiento ($1/1M tok/hora) hasta su TTL de 1h, y con
+tráfico goteado esas horas de alquiler no se amortizan entre alumnos. Una sesión
+suelta llega a costar ~$0.05 de alquiler contra ~$0.008 de generación: el caché
+explícito **multiplica** el costo en vez de bajarlo. Solo conviene con la clase
+concentrada (muchos alumnos en la misma hora comparten los cachés). Agravado por
+la **latencia de horas** de la consola de Pagos, que hizo ver el gasto de ayer
+como "de la noche".
+
+Arreglo: `caches.create` quedó detrás del flag **`CACHE_EXPLICITO`** (apagado por
+defecto, ver `cache_explicito_activo()` en `recomendar.py`). Apagado usa el caché
+**implícito** de Gemini, automático y sin alquiler. Encenderlo (=1) solo el día
+de la clase, con la key de billing. Así la key de billing se puede dejar de
+principal para tener velocidad sin arriesgar fuga de alquiler.
+
+`experimento_filtro.py` ahora **borra sus cachés al terminar** (`_borrar_caches`):
+antes los dejaba rentando hasta expirar, que fue parte del susto.
+
+Diagnóstico y limpieza rápida: `backend/gasto_24h.py` (gasto por sesión) y listar
+`client.caches.list()` para ver cachés vivos y borrarlos.
+
 ## El pre-filtro crea un caché por llamada (2026-08-23)
 
 El caché se indexa por `sha256(system + catálogo)`, y el catálogo de
