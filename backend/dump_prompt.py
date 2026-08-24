@@ -2,8 +2,8 @@
 adaptativa (justo después de las 5 preguntas fijas), sin llamar a la API.
 
 Reconstruye lo mismo que arma /api/next-question: catálogo filtrado por
-departamento -> pre-filtro de app/filtro.py -> texto de catálogo + estado de
-cobertura. Útil para la tesis y para revisar el prompt sin gastar cuota.
+departamento (sin pre-filtro, se quitó el 2026-08-24) -> texto de catálogo +
+estado de cobertura. Útil para la tesis y para revisar el prompt sin gastar cuota.
 
     uv run python dump_prompt.py [departamento]     # default: Quetzaltenango
 """
@@ -13,7 +13,6 @@ import os
 import sys
 
 from app.db import SessionLocal
-from app.filtro import preseleccionar
 from app.models import Carrera
 from app.preguntas import (
     COBERTURA_INICIAL,
@@ -51,11 +50,11 @@ def main():
     carreras = q.all()
     db.close()
 
-    candidatas = preseleccionar(RESPUESTAS, carreras)
-
+    # Sin pre-filtro: producción manda el catálogo completo a next-question desde
+    # 2026-08-24 (experiments/cache-compartido.md §9). Esto lo refleja.
     catalogo = (
         "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
-        f"{_catalogo_texto(candidatas)}"
+        f"{_catalogo_texto(carreras)}"
     )
     # Primera adaptativa: cobertura inicial, 0 preguntas hechas, 4 pendientes.
     variable = (
