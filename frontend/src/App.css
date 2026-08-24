@@ -1319,6 +1319,16 @@
   border-radius: 999px;
   font-weight: 600;
 }
+
+/* Chips algo más compactos SOLO en escritorio: ahí se apunta con el mouse. En
+   tablet y teléfono se quedan como están, porque a 36px de alto ya incomodan
+   al dedo.
+   OJO con el orden: esta regla tiene la MISMA especificidad que la de arriba,
+   así que tiene que ir DESPUÉS o no se aplica. Estaba junto al media query de
+   las 4 columnas (más arriba en el archivo) y la de arriba la pisaba sin avisar. */
+@media (min-width: 1100px) {
+  .options.chips .opt-color { padding: 8px 14px; }
+}
 .options.chips .opt-color::before {
   width: 9px;
   height: 9px;
