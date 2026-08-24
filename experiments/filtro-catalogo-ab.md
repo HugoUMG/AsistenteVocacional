@@ -3,12 +3,19 @@
 **Estado:** MEDIDO, 2026-08-23. Dos rondas, 8 perfiles, 32 sesiones completas,
 448 llamadas a Gemini, $0.2948 de crédito real (presupuesto autorizado: $0.45).
 
-**Resultado corto:** el filtro **no se quita**. La calidad quedó empatada
-(13/16 contra 12/16) dentro de un piso de ruido de 3/8, así que la medida no
-distingue nada. Lo que sí quedó medido, y es lo que importa, es otra cosa: el
-filtro **no decide el resultado final** pero **sí cuesta latencia**, y el pico
-de espera que se ve en producción no viene del filtro sino de estar corriendo
-con la key gratis.
+> ⚠️ **La conclusión "no se quita" quedó SUPERADA el 2026-08-24.** Se basaba en
+> que el filtro parecía ahorrar en costo. La factura de Google mostró que
+> `uso_tokens` oculta el alquiler del caché (38% del gasto), y el filtro crea un
+> caché por llamada mientras que el catálogo completo comparte uno. Un rerun **con
+> brazo de control** confirmó las dos mitades: en calidad no hay señal (efecto
+> 4/8 < ruido 5/8) y en costo el catálogo completo cuesta el **23%** del filtrado.
+> **El veredicto se invirtió: conviene quitarlo.** Ver
+> [cache-compartido.md](cache-compartido.md) §4 y §9.
+
+**Resultado corto (histórico):** la calidad quedó empatada (13/16 contra 12/16)
+dentro de un piso de ruido de 3/8, así que la medida no distingue nada. El filtro
+**no decide el resultado final**. La parte de latencia del pico de producción es
+real y viene de la key gratis, no del filtro.
 
 Script: `backend/experimento_filtro.py` · Análisis: `backend/analiza_filtro.py`
 Datos: `backend/data/tests/experimento_filtro_ronda1.json` y

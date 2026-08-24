@@ -228,7 +228,9 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   pre-filtro rompe el caching explícito: el top-35 se recalcula tras cada
   respuesta, cambia el hash y crea **un CachedContent por llamada** (9 cachés en
   9 llamadas, contra 1 si se manda el catálogo completo). Con 3 alumnos, quitar
-  el filtro cuesta 62% de lo de hoy; con 30, un 24%. Sin bloqueantes: el caché
+  el filtro cuesta 62% de lo de hoy; con 30, un 24%. **A/B con brazo de control
+  (2026-08-24): calidad indistinguible (efecto 4/8 < ruido 5/8), costo 23% del
+  filtrado -> conviene quitar el filtro.** Sin bloqueantes: el caché
   explícito ya corre bien en producción (92.6%) y la factura confirmó el
   alquiler ($0.60 de $1.59,
   **el 38% del gasto**, la línea más cara). ⚠️ **`uso_tokens` no registra el
