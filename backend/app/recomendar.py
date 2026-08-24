@@ -6,6 +6,7 @@ import hashlib
 import os
 import random
 import re
+import threading
 import time
 
 import httpx
@@ -219,7 +220,54 @@ def _buscar_grupo(nombre: str, por_nombre: dict[str, list]) -> list:
 
 
 def hay_api_key() -> bool:
-    return bool(os.getenv("GEMINI_API_KEY"))
+    return bool(os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY_1"))
+
+
+# --- Pool de API keys gratis, una dedicada por sesión ---------------------
+# El caché explícito de Gemini alquila almacenamiento por hora y con tráfico
+# goteado sale carísimo (ver experiments/cache-compartido.md), así que se
+# abandonó para producción. Sin caché, la forma de atender una clase entera sin
+# gastar es repartir la carga entre varias keys GRATIS, cada una en su propio
+# proyecto con su propia cuota (~15 RPM / 500 RPD). Cada sesión toma UNA key y la
+# usa para todas sus llamadas; las sesiones nuevas rotan a la siguiente, así N
+# keys atienden N sesiones simultáneas sin que ninguna tope su límite. Se
+# configuran como GEMINI_API_KEY_1, GEMINI_API_KEY_2, ...
+#
+# ponytail: asignación en memoria del proceso. Con un solo worker (Render hoy)
+# alcanza; con varios workers, cada uno rota su propio contador (la carga se
+# reparte igual de bien) o se mueve a un hash estable de session_id si molesta.
+_sesion_key: dict[str, int] = {}   # session_id -> índice en el pool
+_sesion_next = 0
+_sesion_lock = threading.Lock()
+
+
+def _pool_keys() -> list[str]:
+    keys, i = [], 1
+    while (k := os.getenv(f"GEMINI_API_KEY_{i}")):
+        keys.append(k.strip())
+        i += 1
+    return keys
+
+
+def key_de_sesion(session_id: str | None) -> tuple[str, str]:
+    """(api_key, etiqueta) para esa sesión. La primera vez que se ve un
+    session_id se le asigna la siguiente key en rotación (0,1,2,3,0,1...: la más
+    antigua es la más pronta a quedar libre); las demás llamadas de esa sesión
+    reusan la misma. Sin pool configurado cae a GEMINI_API_KEY (etiqueta
+    'primaria'), para no romper dev/local ni los self-checks."""
+    pool = _pool_keys()
+    if not pool:
+        return os.getenv("GEMINI_API_KEY", ""), "primaria"
+    if not session_id:
+        return pool[0], "key-1"
+    global _sesion_next
+    with _sesion_lock:
+        idx = _sesion_key.get(session_id)
+        if idx is None:
+            idx = _sesion_next % len(pool)
+            _sesion_key[session_id] = idx
+            _sesion_next += 1
+    return pool[idx % len(pool)], f"key-{idx + 1}"
 
 
 def uso_tokens(resp, modelo: str) -> dict:
@@ -489,21 +537,23 @@ def _generar_con_cliente(client, key_label, model, system, catalogo, variable, s
     )
 
 
-def generar(model, system, catalogo, variable, schema, temperature):
-    """Punto de entrada usado por recomendar()/siguiente_pregunta(). Usa
-    GEMINI_API_KEY (proyecto gratis); si se agotan los reintentos con un 429
-    (RPM/RPD realmente agotado) y hay GEMINI_API_KEY_RESPALDO configurada
-    (proyecto con billing), reintenta UNA vez ahí antes de rendirse. Si no hay
-    key de respaldo, o el error no es 429, se propaga tal cual."""
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+def generar(model, system, catalogo, variable, schema, temperature, session_id=None):
+    """Punto de entrada usado por recomendar()/siguiente_pregunta(). Usa la key
+    dedicada de la sesión (ver key_de_sesion): con un pool de keys gratis, cada
+    sesión pega a la suya, así una clase entera se reparte sin topar cuotas. Si
+    esa key agota cuota (429) y hay GEMINI_API_KEY_RESPALDO configurada, reintenta
+    UNA vez ahí antes de rendirse. Si no hay respaldo, o el error no es 429, se
+    propaga tal cual."""
+    api_key, etiqueta = key_de_sesion(session_id)
+    client = genai.Client(api_key=api_key)
     try:
-        resp = _generar_con_cliente(client, "primaria", model, system, catalogo, variable, schema, temperature)
-        return _acumular("primaria", resp, model)
+        resp = _generar_con_cliente(client, etiqueta, model, system, catalogo, variable, schema, temperature)
+        return _acumular(etiqueta, resp, model)
     except errors.ClientError as e:
         key_respaldo = os.getenv("GEMINI_API_KEY_RESPALDO")
         if e.code != 429 or not key_respaldo:
             raise
-        print(f"[gemini] key primaria agoto cuota (429), reintentando con GEMINI_API_KEY_RESPALDO — model={model}")
+        print(f"[gemini] {etiqueta} agoto cuota (429), reintentando con GEMINI_API_KEY_RESPALDO — model={model}")
         client_respaldo = genai.Client(api_key=key_respaldo)
         resp = _generar_con_cliente(client_respaldo, "respaldo", model, system, catalogo, variable, schema, temperature)
         return _acumular("respaldo", resp, model)
@@ -512,7 +562,8 @@ def generar(model, system, catalogo, variable, schema, temperature):
 def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None,
                holland: str | None = None,
                holland_puntajes: dict[str, int] | None = None,
-               personalidad: str | None = None) -> tuple[Resultado, dict]:
+               personalidad: str | None = None,
+               session_id: str | None = None) -> tuple[Resultado, dict]:
     """respuestas: dict con las respuestas del cuestionario.
     carreras: lista de models.Carrera (el catálogo).
     holland: bloque con el perfil RIASEC medido, si el alumno hizo el test antes
@@ -564,6 +615,7 @@ def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None,
         variable=variable,
         schema=ResultadoLLM,
         temperature=0.3,
+        session_id=session_id,
     )
     llm = ResultadoLLM.model_validate_json(_texto_seguro(resp))
 
@@ -714,6 +766,11 @@ if __name__ == "__main__":
     _mod = sys.modules[__name__]  # NO "import app.recomendar": al correr como
     # __main__ ese import crea un módulo aparte y el patch no afectaría a las
     # funciones que en verdad se están ejecutando.
+    # Sin pool configurado, key_de_sesion cae a GEMINI_API_KEY con etiqueta
+    # 'primaria', que es lo que este self-check espera. Limpio por si el .env de
+    # dev ya trae keys del pool (cambiarían la etiqueta a 'key-1').
+    for _i in range(1, 10):
+        os.environ.pop(f"GEMINI_API_KEY_{_i}", None)
     llamados = []
 
     def _fake_generar_con_cliente(client, key_label, model, system, catalogo, variable, schema, temperature):

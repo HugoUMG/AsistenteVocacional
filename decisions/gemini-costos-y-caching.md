@@ -51,6 +51,28 @@ fallo anterior y no lo reintenta.
 Reproducir: `backend/flujo_gasto.py` (N conversaciones completas contra el backend
 local, lee `/api/uso-tokens` y calcula ambos costos).
 
+## Producción: pool de keys gratis + filtro de vuelta (2026-08-24)
+
+Decisión operativa tras el susto del alquiler: **producción no usa caché**. En su
+lugar, un **pool de keys GRATIS con una dedicada por sesión** (round-robin), y el
+**pre-filtro vuelve**. Razonamiento:
+
+- Sin caché, el catálogo completo (~25k tok) solo infla los tokens y presiona la
+  cuota de las keys gratis. El filtro lo recorta a ~5k. El A/B con control ya
+  probó que recortar **no cambia la recomendación** (efecto 4/8 < ruido 5/8,
+  [../experiments/cache-compartido.md](../experiments/cache-compartido.md) §9), así
+  que se recupera el ahorro de tokens sin costo de calidad.
+- Cada sesión toma una key del pool (`GEMINI_API_KEY_1..N`) y la usa entera; las
+  sesiones nuevas rotan a la siguiente (0,1,2,3,0,...). Con 4 keys, una clase de
+  ~20 se reparte en ~5 alumnos por key, muy por debajo de los 15 RPM / 500 RPD de
+  cada proyecto. **Costo real: $0. Sin caché, sin alquiler, sin fuga posible.**
+- Implementación: `key_de_sesion()` y `generar(session_id=...)` en `recomendar.py`
+  (asignación en memoria del proceso, ver el `ponytail:` ahí). Sin pool configurado
+  cae a `GEMINI_API_KEY` con etiqueta 'primaria', así dev/local no cambia.
+
+`CACHE_EXPLICITO` sigue existiendo para el caso concentrado de verdad (si algún
+día se quiere), pero con el pool gratis ya no hace falta encenderlo.
+
 ## El caché explícito ahora es opt-in: CACHE_EXPLICITO (2026-08-24)
 
 Susto del 2026-08-24: el crédito bajó ~$3 en horas casi sin tráfico (Neon: 3

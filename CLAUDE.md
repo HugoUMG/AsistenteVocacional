@@ -43,7 +43,7 @@ React (Chat.jsx)
   ↓  nombre + 4 preguntas vocacionales fijas (sin IA), con voz neuronal (/api/tts)
   ↓  4-8 preguntas adaptativas  →  POST /api/next-question
 FastAPI (main.py)
-  ↓  el chat ve el catálogo completo del depto (el pre-filtro se quitó 2026-08-24)
+  ↓  filtro.py recorta el catálogo a ~35 carreras (sin IA); cada sesión usa 1 key gratis del pool
 Gemini (preguntas.py / recomendar.py)
   ↓  JSON estructurado validado con Pydantic
 PostgreSQL (respuestas, uso de tokens, resultados)
