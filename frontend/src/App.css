@@ -1117,6 +1117,23 @@
   .options.choices.chips { grid-template-columns: 1fr 1fr; }
 }
 
+/* Título de bloque dentro del banco de chips. Ocupa la fila completa para que
+   los chips de abajo sigan alineados en la cuadrícula. */
+.options.choices .grupo-opciones {
+  grid-column: 1 / -1;
+  margin: 14px 0 2px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.options.choices .grupo-opciones:first-child { margin-top: 0; }
+.options.choices .grupo-opciones.saliendo {
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
 /* Banco de palabras: chips que fluyen en varias filas */
 .options.chips {
   flex-direction: row;
