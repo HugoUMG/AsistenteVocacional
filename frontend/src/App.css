@@ -869,6 +869,9 @@
 .chat-footer > .options.choices {
   min-height: 0;
   overflow-y: auto;
+  /* El chip se levanta 2px al pasarle el mouse y overflow-y lo recortaba por
+     arriba en la primera fila. Este colchón le da el espacio. */
+  padding-top: 4px;
   scrollbar-width: thin;
   scrollbar-color: var(--line-2) transparent;
   /* el degradado se pinta pegado al borde inferior y desaparece al llegar al
@@ -1128,18 +1131,32 @@
    3 en pantalla normal, 2 en tablet y 2 en teléfono. Cada chip cubre un tema
    del catálogo que si no queda sin forma de nombrarse, así que si estorban por
    cantidad la palanca es la cuadrícula, no recortar el banco. */
-.options.choices.chips { grid-template-columns: repeat(3, 1fr); }
+/* Los chips van en flex y no en cuadricula: cuando el ultimo renglon de un
+   bloque queda incompleto, la cuadricula lo dejaba pegado a la izquierda con
+   un hueco a la derecha. Con flex + justify-content ese renglon queda
+   centrado. La base imita las columnas que habia: 3, y 4 en pantalla ancha. */
+.options.choices.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.options.choices.chips .grupo-opciones {
+  flex: 1 0 100%;
+  text-align: center;
+}
+.options.choices.chips .opt-color { flex: 0 1 calc(33.333% - 7px); }
+.options.choices.chips .opt-color.otro { flex: 1 0 100%; }
 @media (min-width: 1100px) {
-  .options.choices.chips { grid-template-columns: repeat(4, 1fr); }
+  .options.choices.chips .opt-color { flex-basis: calc(25% - 8px); }
 }
 @media (max-width: 860px) {
-  .options.choices.chips { grid-template-columns: 1fr 1fr; }
+  .options.choices.chips .opt-color { flex-basis: calc(50% - 5px); }
 }
 @media (max-width: 560px) {
   .options.choices { grid-template-columns: 1fr; }
   /* Los chips NO caen a una columna: son 25 y serían 25 filas de scroll en un
      teléfono. Se quedan en dos y el texto envuelve dentro del chip. */
-  .options.choices.chips { grid-template-columns: 1fr 1fr; }
+  .options.choices.chips .opt-color { flex-basis: calc(50% - 5px); }
 }
 
 /* Título de bloque dentro del banco de chips. Ocupa la fila completa para que
