@@ -363,5 +363,25 @@ de cualquier resultado, porque es la vara con la que hay que leer el resto:
        El juez prefirió una de las dos: X/N
        >> Ninguna diferencia de abajo que no supere esto se puede interpretar.
 
-**Falta correrlo**, y con eso volver a leer las conclusiones de arriba. Costo
-estimado: unos $0.15 una ronda de 8 casos, o $0.60 rehacer los 32.
+### Corrido (2026-08-23): el control iguala al tratamiento
+
+Ronda de 5 casos con el brazo de control. $0.1008.
+
+| Medida | Control (A contra A, entrada idéntica) | Tratamiento (A contra B) |
+|---|---:|---:|
+| Top-1 distinto | **3/5** | 3/5 |
+| El juez prefirió una | **5/5** | 5/5 |
+| Diferencia de coherencia | **1.00** | 1.00 |
+
+**Las tres medidas coinciden.** Correr el mismo brazo dos veces produce tanta
+diferencia como comparar con adaptativas contra sin adaptativas.
+
+**Esto pone en duda el Resultado 1.** El 25-12-7 con p = 0.047 sobre n=44 se
+midió sin control; con un ruido de esta magnitud, esa significancia
+probablemente sea un artefacto de comparar dos muestras ruidosas. **No uses ese
+p en la tesis.**
+
+Lo que sobrevive es el mecanismo, que no depende del juez: las adaptativas
+cambian el top-1 (3 de 5 acá, 20 de 32 antes) y una parte de esos cambios es
+dentro del mismo campo. Que el cambio sea para MEJOR es lo que no se puede
+sostener.

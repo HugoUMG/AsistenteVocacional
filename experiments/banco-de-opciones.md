@@ -314,5 +314,16 @@ de cualquier resultado, porque es la vara con la que hay que leer el resto:
        El juez prefirió una de las dos: X/N
        >> Ninguna diferencia de abajo que no supere esto se puede interpretar.
 
-**Falta correrlo**, y con eso volver a leer las conclusiones de arriba. Costo
-estimado: unos $0.15 las 6 personas.
+### Corrido (2026-08-23): el efecto es más chico que el ruido
+
+Cuatro personas con el brazo de control. $0.1008.
+
+| Medida | Control (B contra B, mismo banco) | Tratamiento (A contra B) |
+|---|---:|---:|
+| Top-1 distinto | 2/4 | 4/4 |
+| Diferencia de coherencia | **1.25** | **0.50** |
+
+La diferencia entre el banco viejo y el nuevo (0.50) es **menos de la mitad del
+ruido** (1.25). Confirma, ahora con vara, lo que ya se decía arriba: **el banco
+nuevo no está probado como mejor**. Sigue en pie por la otra razón, que no
+depende del juez: representa temas que antes no se podían nombrar.

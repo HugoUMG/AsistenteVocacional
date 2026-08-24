@@ -68,7 +68,7 @@ DATA = os.path.join(os.path.dirname(__file__), "data", "tests")
 SALIDA = os.path.join(DATA, "experimento_desempate_resultados.json")
 LECTURA = os.path.join(DATA, "experimento_desempate_para_leer.md")
 
-TOPE_USD = 0.45  # de los $0.50 autorizados, con margen
+TOPE_USD = 0.10  # de los $0.50 autorizados, con margen
 
 # Las 6 personas del A/B del banco (ya validadas: no nombran carreras) más dos
 # que caen en áreas con hermanas de verdad, que es donde la pregunta tiene
