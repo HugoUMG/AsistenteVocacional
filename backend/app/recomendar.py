@@ -356,10 +356,26 @@ def _clave_cache(model: str, system: str, catalogo: str, key_label: str) -> tupl
     return (model, h, key_label)
 
 
+def cache_explicito_activo() -> bool:
+    """El caché explícito (`caches.create`) alquila almacenamiento por hora
+    ($1/1M tok/hora) y SOLO conviene con tráfico concentrado, que amortiza el
+    alquiler entre muchos alumnos en la misma hora (una clase). Con tráfico
+    goteado cada sesión paga una hora de alquiler por cachés que nadie reusa, y
+    sale más caro que mandar todo inline (medido: una sesión suelta ~$0.05 de
+    alquiler vs ~$0.008 de generación, ver experiments/cache-compartido.md).
+    Por eso está APAGADO por defecto: sin el flag, se usa el caché implícito de
+    Gemini, que es automático y sin alquiler. Encenderlo solo el día de la clase.
+    """
+    return os.getenv("CACHE_EXPLICITO", "0") == "1"
+
+
 def _get_cache(client, model: str, system: str, catalogo: str, key_label: str) -> str | None:
     """name de un CachedContent para (model, system, catalogo) EN ESE proyecto
-    (key_label), creado la 1ª vez y reusado. None si Gemini no lo puede cachear
-    (p. ej. catálogo bajo el mínimo de tokens) → el llamador manda todo inline."""
+    (key_label), creado la 1ª vez y reusado. None si el caché explícito está
+    apagado (ver cache_explicito_activo) o si Gemini no lo puede cachear (p. ej.
+    catálogo bajo el mínimo de tokens) → el llamador manda todo inline."""
+    if not cache_explicito_activo():
+        return None
     clave = _clave_cache(model, system, catalogo, key_label)
     if clave in _caches:
         return _caches[clave]

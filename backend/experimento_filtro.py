@@ -346,8 +346,12 @@ def _sesion(perfil, cat, con_filtro, brazo=None):
         log["fijas"][clave] = {"elegido": etiquetas, "dijo": r}
         print(f"    [fija:{clave}] -> {etiquetas[:80]}")
 
-    original = preguntas.preseleccionar
-    if not con_filtro:
+    # El pre-filtro se quitó de producción el 2026-08-24 (cache-compartido.md
+    # §9), así que preguntas ya no expone `preseleccionar` y AMBOS brazos ven el
+    # catálogo completo: el A/B de calidad quedó cerrado. El monkeypatch se
+    # conserva por si se reintroduce el filtro; con getattr no crashea si no está.
+    original = getattr(preguntas, "preseleccionar", None)
+    if not con_filtro and original is not None:
         preguntas.preseleccionar = _sin_filtro
     sid = f"filtro-{brazo}-{perfil['nombre']}"
     preguntas._COBERTURA_POR_SESION.pop(sid, None)
@@ -385,7 +389,8 @@ def _sesion(perfil, cat, con_filtro, brazo=None):
             print(f"       [{paso.dimension_objetivo or '-'}] {paso.pregunta_texto[:65]}")
             print(f"       -> {respuesta[:80]}")
     finally:
-        preguntas.preseleccionar = original
+        if original is not None:
+            preguntas.preseleccionar = original
 
     t0 = time.perf_counter()
     res, uso = recomendar.recomendar(respuestas, cat)
@@ -528,7 +533,30 @@ def correr(solo=None):
             break
 
     _reporte(resultados, detenido)
+    _borrar_caches()
     return resultados
+
+
+def _borrar_caches():
+    """Borra los CachedContent que la corrida creó. Sin esto, cada caché sigue
+    rentando almacenamiento ($1/1M tok/hora) hasta que expira su TTL de 1h: la
+    causa del susto del 2026-08-24, cuando una corrida dejó decenas de cachés
+    rentando y el gasto apareció horas después por la latencia de la consola.
+    Los nombres viven en recomendar._caches, indexados por key_label."""
+    from google import genai
+
+    clientes = {"primaria": os.getenv("GEMINI_API_KEY"),
+                "respaldo": os.getenv("GEMINI_API_KEY_RESPALDO")}
+    borrados = 0
+    for (_model, _hash, key_label), name in list(recomendar._caches.items()):
+        if not name or not clientes.get(key_label):
+            continue
+        try:
+            genai.Client(api_key=clientes[key_label]).caches.delete(name=name)
+            borrados += 1
+        except Exception as e:  # noqa: BLE001
+            print(f"  no se pudo borrar {name}: {type(e).__name__}")
+    print(f"Caches borrados: {borrados} (dejan de rentar almacenamiento)")
 
 
 def _reporte(logs, detenido=None):
@@ -676,12 +704,14 @@ def _self_check():
     assert len(_sin_filtro({"gustos": "x"}, cat)) == len(cat)
     assert len(filtro.preseleccionar({"gustos": "tecnología"}, cat)) == filtro.TOP_DEFAULT
 
-    # El monkeypatch entra y sale: `siguiente_pregunta` usa el nombre del módulo.
-    original = preguntas.preseleccionar
-    preguntas.preseleccionar = _sin_filtro
-    assert preguntas.preseleccionar is not original
-    preguntas.preseleccionar = original
-    assert preguntas.preseleccionar is original, "el finally debe restaurar el filtro"
+    # El monkeypatch entra y sale, solo si el filtro sigue existiendo. Se quitó
+    # de producción el 2026-08-24, así que hoy este bloque no aplica (getattr).
+    original = getattr(preguntas, "preseleccionar", None)
+    if original is not None:
+        preguntas.preseleccionar = _sin_filtro
+        assert preguntas.preseleccionar is not original
+        preguntas.preseleccionar = original
+        assert preguntas.preseleccionar is original, "el finally debe restaurar el filtro"
 
     # Cada perfil apunta a una carrera que EXISTE en el catálogo (si no, la
     # medida 2 mediría siempre 'FUERA' por un typo).
