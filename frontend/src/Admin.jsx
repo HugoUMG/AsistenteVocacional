@@ -31,7 +31,13 @@ const COLUMNAS = [
   ['cuenta', 'Cuenta'],
 ]
 
-const JUICIOS = { acerto: 'Acertó', parcial: 'Acertó en parte', no_acerto: 'No acertó' }
+const JUICIOS = {
+  acerto: 'Acertó',
+  parcial: 'Acertó en parte',
+  no_acerto: 'No acertó',
+  descartada: 'Fuera del estudio',
+}
+const DESCARTADA = 'descartada'
 
 const fecha = (f) => (f ? new Date(f).toLocaleString('es-GT') : '')
 
@@ -71,6 +77,10 @@ function descargarCsv(filas) {
 function Registro() {
   const [filas, setFilas] = useState(null)
   const [error, setError] = useState('')
+  // Las pruebas de desarrollo y las de conocidos se hicieron contra producción y
+  // están mezcladas con las de alumnos reales. Se ocultan por defecto para que
+  // quien califica vea solo lo que debe calificar; la casilla las trae de vuelta.
+  const [ocultarDescartadas, setOcultarDescartadas] = useState(true)
   // La evaluación abierta, con TODO lo que contestó el alumno. La lista solo
   // trae el resumen, así que el detalle se pide al abrirla.
   const [abierta, setAbierta] = useState(null)
@@ -145,22 +155,41 @@ function Registro() {
         <h1>Registro de evaluaciones</h1>
         {error && <p className="nav-login-error">{error}</p>}
         {!error && !filas && <p className="intro">Cargando…</p>}
-        {filas && (
+        {filas && (() => {
+        const descartadas = filas.filter((f) => f.juicio === DESCARTADA).length
+        const visibles = ocultarDescartadas
+          ? filas.filter((f) => f.juicio !== DESCARTADA)
+          : filas
+        return (
           <>
             <p className="intro">
-              {filas.length} {filas.length === 1 ? 'evaluación' : 'evaluaciones'}, de la
+              {visibles.length} {visibles.length === 1 ? 'evaluación' : 'evaluaciones'}, de la
               más reciente a la más antigua. Tocá una fila para ver su recorrido y
               su dashboard. Son datos de estudiantes: no los compartas fuera de
               quienes aplican el estudio.
             </p>
-            <button className="opt" onClick={() => descargarCsv(filas)}>Descargar CSV</button>
+            {descartadas > 0 && (
+              <label className="intro">
+                <input
+                  type="checkbox"
+                  checked={ocultarDescartadas}
+                  onChange={(e) => setOcultarDescartadas(e.target.checked)}
+                />{' '}
+                Ocultar {descartadas}{' '}
+                {descartadas === 1 ? 'evaluación que está' : 'evaluaciones que están'} fuera
+                del estudio (pruebas y conocidos)
+              </label>
+            )}
+            {/* El CSV exporta lo que se ve, no todo: si están ocultas es porque
+                no entran al análisis, y exportarlas las devuelve al conteo. */}
+            <button className="opt" onClick={() => descargarCsv(visibles)}>Descargar CSV</button>
             <div className="tabla-scroll">
               <table className="tabla-registro">
                 <thead>
                   <tr>{COLUMNAS.map(([c, t]) => <th key={c}>{t}</th>)}</tr>
                 </thead>
                 <tbody>
-                  {filas.map((f) => (
+                  {visibles.map((f) => (
                     <tr key={f.id} className="fila-abrible" onClick={() => abrir(f.id)}>
                       {COLUMNAS.map(([c]) => <td key={c}>{celda(f, c)}</td>)}
                     </tr>
@@ -169,7 +198,8 @@ function Registro() {
               </table>
             </div>
           </>
-        )}
+        )
+        })()}
       </main>
     </div>
   )

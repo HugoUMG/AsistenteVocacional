@@ -1035,7 +1035,14 @@ class JuicioIn(BaseModel):
     respuesta_id: int
     # Literal en vez de texto libre: es la variable que se va a tabular, y un
     # "Acertó " con espacio o un "si" suelto arruinan el conteo en silencio.
-    juicio: Literal["acerto", "parcial", "no_acerto"] | None = None
+    #
+    # "descartada" NO es un juicio de la psicóloga: la pone quien aplica el
+    # estudio para sacar del registro las pruebas de desarrollo y las de
+    # conocidos, que se hicieron contra producción y no son de alumnos reales.
+    # Va en esta columna en vez de una nueva porque reusa endpoint, botones y
+    # CSV, y al ser un valor aparte no ensucia el conteo de acierto. Al tabular,
+    # filtrarla ANTES de contar.
+    juicio: Literal["acerto", "parcial", "no_acerto", "descartada"] | None = None
     nota: str | None = Field(default=None, max_length=4000)
 
 
