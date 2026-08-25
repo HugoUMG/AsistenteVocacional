@@ -29,10 +29,12 @@ aguantó la concurrencia sin cortar a nadie a media conversación, que era el
 riesgo principal de la corrida.
 
 Detalle menor pero visible: 3 de 18 escribieron un saludo en el campo del
-nombre ("Hola", "Hola soy Yesi", "me llamo Gabriela"), y ese texto se usa tal
-cual en el chat y en el dashboard. Un alumno leyó "Hola, Hola". El campo pide un
-nombre pero la primera burbuja se siente como un saludo. Se arregla en el texto
-de la pregunta, no en el código.
+nombre ("Hola", "Hola soy Yesi", "me llamo Gabriela"), y ese texto se usaba tal
+cual en el chat, el dashboard, el PDF y el prompt. Uno leyó "Mucho gusto, Hola".
+La pregunta era "¿cómo te llamas?", que invita a saludar de vuelta. **Ya
+arreglado:** la pregunta ahora pide el nombre como dato y `limpiaNombre()` en
+`frontend/src/preguntas-fijas.js` quita el saludo antes de validar. Quien
+escribe solo "Hola" no pasa la validación y se le vuelve a preguntar.
 
 Otro detalle: una alumna contestó "Medicina y enfermeria" a una pregunta de
 opción entre analítico y creativo (id 21). El chat no se atoró, siguió con un
