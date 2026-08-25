@@ -151,6 +151,22 @@ MAX_ADAPTATIVAS = 8
 _COBERTURA_POR_SESION: dict[str, dict[str, int]] = {}
 
 
+# Claves de `respuestas` que NO son adaptativas: las fijas de Chat.jsx más
+# 'departamento' y 'carrera_descartada'. Las adaptativas se guardan con el TEXTO
+# de la pregunta como clave, así que basta con listar estas.
+CLAVES_FIJAS = frozenset((
+    "departamento", "nombre", "edad", "nivel", "grado", "carrera_cursada",
+    "gusto_grado", "motivo", "impacto", "estilo", "entorno", "gustos",
+    "carrera_descartada",
+))
+
+
+def adaptativas_respondidas(respuestas: dict) -> int:
+    """Cuántas preguntas adaptativas lleva contestadas el alumno, contando el
+    dato real en vez de confiar en el estado de la sesión."""
+    return sum(1 for k in respuestas if k not in CLAVES_FIJAS)
+
+
 def _cobertura(session_id: str | None, extra: dict[str, int] | None = None) -> dict[str, int]:
     """`extra`: dimensiones que ya llegan cubiertas desde afuera (el test corto
     de personalidad, ver app/personalidad.py). Solo se aplica al CREAR la
@@ -216,6 +232,15 @@ def siguiente_pregunta(
     candidatas = preseleccionar(respuestas, carreras)
     if len(candidatas) < len(carreras):
         print(f"[filtro] next-question: {len(carreras)} -> {len(candidatas)} carreras candidatas")
+
+    # Chat que empieza (cero adaptativas) = prueba nueva, aunque reuse el
+    # session_id. Volver al mapa y entrar otra vez NO pasa por nuevaSesion(), y
+    # sin esto la cobertura llena de la corrida anterior seguía ahí: el modelo
+    # cerraba con terminado=true en la primera llamada y el alumno recibía una
+    # recomendación con CERO preguntas. Pasó en campo, ver
+    # experiments/prueba-alumnos-2026-08-24.md.
+    if not adaptativas_respondidas(respuestas):
+        _COBERTURA_POR_SESION.pop(session_id or "_sin_sesion", None)
 
     cobertura = _cobertura(session_id, personalidad_cobertura)
     hechas = sum(cobertura.values()) - sum(COBERTURA_INICIAL.values())
@@ -304,6 +329,21 @@ if __name__ == "__main__":
     assert _cobertura("s1")["personalidad"] == 1  # persiste entre llamadas de la misma sesión
     assert _cobertura("s2")["personalidad"] == 0  # sesiones distintas no se mezclan
 
+    # Contar adaptativas: 'departamento' y 'carrera_descartada' NO son adaptativas.
+    fijas = {"departamento": "Quetzaltenango", "nombre": "Ana", "edad": "17",
+             "nivel": "Diversificado", "grado": "Quinto bachillerato",
+             "carrera_cursada": "Medicina", "gusto_grado": "No", "motivo": "Saber",
+             "impacto": "Ayudar", "estilo": "Con personas", "entorno": "Hospital",
+             "gustos": "Salud", "carrera_descartada": "Medicina"}
+    assert adaptativas_respondidas(fijas) == 0
+    assert adaptativas_respondidas({**fijas, "¿Datos o personas?": "Datos"}) == 1
+
+    # Otra prueba en la misma sesión arranca con la cobertura limpia.
+    _COBERTURA_POR_SESION["s3"] = dict.fromkeys(DIMENSIONES, 1)
+    if not adaptativas_respondidas(fijas):
+        _COBERTURA_POR_SESION.pop("s3", None)
+    assert [d for d in PRIORITARIAS if not _cobertura("s3")[d]] == list(PRIORITARIAS)
+
     # empatado(): el guard que faltaba. El prompt pedía no terminar con el top
     # parejo y el código no lo verificaba.
     def _r(*afinidades):
@@ -347,6 +387,11 @@ if __name__ == "__main__":
             dimension_objetivo=dimension,
         ).model_dump_json()
 
+    # Conversación YA EMPEZADA: lleva una adaptativa contestada. Con cero
+    # adaptativas siguiente_pregunta() considera que es otra prueba y limpia la
+    # cobertura de la sesión, así que el escenario de empate no se daría.
+    EN_CURSO = {"nombre": "Ana", "¿Datos o personas?": "Datos"}
+
     _real_generar, _real_cat = _g["generar"], _g["_catalogo_texto"]
     _g["_catalogo_texto"] = lambda c: "catalogo"
     try:
@@ -354,7 +399,7 @@ if __name__ == "__main__":
         # y el recordatorio debe nombrar a las dos carreras empatadas.
         _COBERTURA_POR_SESION["empate"] = {d: 1 for d in DIMENSIONES}
         _g["generar"], vistas = _doble(_paso(True, (70, 70)))
-        siguiente_pregunta({"nombre": "Ana"}, [], "empate")
+        siguiente_pregunta(EN_CURSO, [], "empate")
         assert len(vistas) == 2, f"debió reintentar con el top empatado, llamó {len(vistas)}"
         assert "C0" in vistas[1] and "C1" in vistas[1], \
             "el recordatorio debe nombrarle al modelo las dos carreras empatadas"
@@ -362,14 +407,14 @@ if __name__ == "__main__":
         # Mismo caso pero con el top resuelto: NO debe reintentar.
         _COBERTURA_POR_SESION["claro"] = {d: 1 for d in DIMENSIONES}
         _g["generar"], vistas = _doble(_paso(True, (90, 40)))
-        siguiente_pregunta({"nombre": "Ana"}, [], "claro")
+        siguiente_pregunta(EN_CURSO, [], "claro")
         assert len(vistas) == 1, "con el top resuelto debe cerrar en un solo intento"
 
         # Y una pregunta normal (terminado=false) tampoco reintenta, aunque el
         # ranking venga parejo: el guard solo mira si intenta CERRAR.
         _COBERTURA_POR_SESION["sigue"] = {d: 1 for d in DIMENSIONES}
         _g["generar"], vistas = _doble(_paso(False, (70, 70), "valores"))
-        siguiente_pregunta({"nombre": "Ana"}, [], "sigue")
+        siguiente_pregunta(EN_CURSO, [], "sigue")
         assert len(vistas) == 1, "si no intenta cerrar, no hay nada que forzar"
     finally:
         _g["generar"], _g["_catalogo_texto"] = _real_generar, _real_cat

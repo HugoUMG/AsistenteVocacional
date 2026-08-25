@@ -142,7 +142,9 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 - [docs/estudio-con-estudiantes.md](docs/estudio-con-estudiantes.md) — plan del
   estudio con alumnos reales: la evidencia que falta, el truco de reusar
   conversaciones reales offline, el criterio externo y los bloqueantes de
-  consentimiento. **Sin ejecutar.**
+  consentimiento. **Primera corrida en campo hecha el 2026-08-24**, ver
+  [experiments/prueba-alumnos-2026-08-24.md](experiments/prueba-alumnos-2026-08-24.md).
+  Falta el criterio externo: nadie ha calificado esas 18 evaluaciones.
 - [docs/entrevista-validacion-psicologa.md](docs/entrevista-validacion-psicologa.md)
   — guía de entrevista para validar el sistema con la psicóloga.
 
@@ -163,8 +165,17 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 > `adaptativas-desempate.md`. Cualquier medición nueva lleva brazo de control
 > o no se reporta.
 
+- [experiments/prueba-alumnos-2026-08-24.md](experiments/prueba-alumnos-2026-08-24.md)
+  — **primera corrida en campo**, 18 alumnos reales en producción, observacional
+  (sin brazo de control). Cero abandonos y la clase entera en 13 minutos. Dejó
+  **dos defectos**: el frontend cuenta mal las adaptativas y cierra a las 3 en
+  vez de las 4, así que una dimensión prioritaria nunca se cubre; y la cobertura
+  en memoria por `session_id` no se limpia, así que repetir la prueba sin
+  "Empezar de nuevo" da un chat de cero preguntas. Ninguna evaluación tiene
+  juicio de la psicóloga todavía: describe comportamiento, no acierto.
 - [experiments/cobertura-dimensiones.md](experiments/cobertura-dimensiones.md) —
   A/B del vector de cobertura: 40%→100% de cumplimiento, 7/10→10/10 de acierto.
+  ⚠️ En producción no se estaba cumpliendo: ver la corrida de campo de arriba.
 - [experiments/microexperiencias.md](experiments/microexperiencias.md) — intento
   revertido: 6/10, transcripciones y diagnóstico.
 - [experiments/psicometrico-en-chat.md](experiments/psicometrico-en-chat.md) —
