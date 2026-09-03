@@ -223,11 +223,19 @@ export const FIJAS = [
     // se entra a uno. Los títulos son presentación pura: NO se le mandan al
     // modelo, que solo recibe las etiquetas que el alumno marcó, así que
     // reagruparlos no cambia la señal ni exige volver a medir.
+    //
+    // Tope de 5: la revisión con la psicóloga (2026-09-03) vio que las
+    // evaluaciones con muchos gustos marcados le dejaban al chat una lista tan
+    // ancha que no lograba distinguir qué quiere el alumno de verdad, y las
+    // preguntas adaptativas salían genéricas. Obligar a elegir YA es parte de
+    // la orientación. Sin medir todavía, igual que el banco de 25 chips
+    // (experiments/banco-de-opciones.md).
     clave: 'gustos',
     tipo: 'opcion',
     multiple: true,
+    max: 5,
     chips: true,
-    texto: '¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).',
+    texto: '¿Qué temas te apasionan? Elige hasta 5 (o agrega el tuyo).',
     opciones: [
       { grupo: 'Salud y cuerpo', label: 'Salud y cuidar pacientes' },
       { label: 'Equipos médicos, laboratorio e imágenes' },
