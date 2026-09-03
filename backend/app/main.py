@@ -684,14 +684,15 @@ def holland_guardado(
     terminar el test. Se recalcula desde la cadena de 60 dígitos en vez de
     guardar el perfil entero: así las filas viejas tambien abren completas.
 
+    Quien aplica el estudio (ADMIN_EMAILS) abre el de cualquier alumno: el
+    resumen final es parte del analisis, ver docs/estudio-con-estudiantes.md.
+
     ponytail: una llamada a O*NET por cada apertura, sin cache. Si pesa,
     guardar el perfil completo en la fila."""
-    fila = (
-        db.query(models.ResultadoHolland)
-        .filter(models.ResultadoHolland.id == rid,
-                models.ResultadoHolland.estudiante_id == estudiante.id)
-        .first()
-    )
+    q = db.query(models.ResultadoHolland).filter(models.ResultadoHolland.id == rid)
+    if not auth.es_admin(estudiante):
+        q = q.filter(models.ResultadoHolland.estudiante_id == estudiante.id)
+    fila = q.first()
     if not fila:
         raise HTTPException(404, "No se encontró ese resultado.")
     perfil = _onet(holland.perfil, fila.respuestas, 4)
@@ -920,6 +921,7 @@ def _holland_dict(h, session_id=None) -> dict:
     """Un resultado de Holland como lo consume el frontend."""
     areas = h.areas or {}
     return {
+        "id": h.id,
         "codigo": h.codigo,
         "areas": {le: areas.get(le) for le in _LETRAS_RIASEC},
         "fecha": h.created_at,
@@ -1130,6 +1132,7 @@ if __name__ == "__main__":
             areas={"R": 9, "I": 8, "A": 7}, created_at="hoy")]
     out = _cruza_holland(ev, hs)
     assert out[1]["codigo"] == "RIA" and out[1]["mismo_recorrido"] is True
+    assert out[1]["id"] == 11  # el id abre el resumen completo desde /admin
     assert out[1]["areas"] == {"R": 9, "I": 8, "A": 7, "S": None, "E": None, "C": None}
     # Sin fila de su recorrido cae a la más reciente de la cuenta (id mayor).
     assert out[2]["codigo"] == "RIA" and out[2]["mismo_recorrido"] is False
