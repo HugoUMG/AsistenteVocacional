@@ -1,4 +1,9 @@
 .env
+# Cualquier respaldo o variante: .env.bak, .env.local, .env.respaldo-...
+# Todos llevan las API keys adentro.
+.env.*
+!.env.example
+gasto25.json
 .venv/
 __pycache__/
 node_modules/
@@ -11,3 +16,9 @@ dist/
 # permiten administrar el test.
 backend/data/tests/cip_items.json
 backend/data/tests/cip_fogliatto_items.json
+
+# Material interno de la validación con la psicóloga (notas de sesión,
+# transcripciones, borradores para la defensa). Es insumo de la tesis, no del
+# producto: se queda en disco y no va a GitHub.
+docs/*.docx
+docs/*.docx.js

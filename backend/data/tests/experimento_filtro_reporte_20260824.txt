@@ -1,0 +1,64 @@
+RESULTADO A/B DEL PRE-FILTRO
+========================================================================
+
+0) PISO DE RUIDO (control A vs A2, misma configuración)
+Byron      Licenciatura en Economía         == Licenciatura en Economía        
+Kimberly   Licenciatura en Administración   != Ingeniería en Telecomunicacion  
+Dilan      Trabajo Social                   != Criminología y Política Crimin  
+Yesenia    Técnico Universitario en Labor   != Ingeniería en Electrónica       
+Alfredo    Profesorado de Enseñanza Media   != Profesorado en Pedagogía con E  
+Josué      Ingeniería en Ciencias y Siste   == Ingeniería en Ciencias y Siste  
+Marisol    Médico y Cirujano                != Licenciatura en Producción de   
+Andrea     Trabajo Social                   == Trabajo Social                  
+
+   top-1 distinto SIN cambiar nada: 5/8
+
+1) TOP-1 Y DISPONIBILIDAD DE LA CARRERA OBJETIVO
+perfil     A: con filtro                    B: sin filtro                    obj en 35
+Byron      Licenciatura en Economía         Licenciatura en Economía         4/5      
+           ACIERTA                          ACIERTA                         
+Kimberly   Licenciatura en Administración   Licenciatura en Administración   5/5      
+           ACIERTA                          ACIERTA                         
+Dilan      Trabajo Social                   Trabajo Social                   0/5      
+           falla                            falla                           
+Yesenia    Técnico Universitario en Labor   Técnico Universitario en Radio   0/5      
+           falla                            ACIERTA                         
+Alfredo    Profesorado de Enseñanza Media   PEM en Pedagogía y Psicología    4/5      
+           ACIERTA                          falla                           
+Josué      Ingeniería en Ciencias y Siste   Ingeniería en Ciencias y Siste   5/5      
+           ACIERTA                          ACIERTA                         
+Marisol    Médico y Cirujano                Licenciatura en Enfermería       0/5      
+           falla                            ACIERTA                         
+Andrea     Trabajo Social                   Licenciatura en Ciencias Juríd   5/5      
+           falla                            ACIERTA                         
+
+   Aciertos: A 4/8   B 6/8   |  top-1 distinto en 4/8
+   Contra el control: efecto 4/8 vs ruido 5/8  ->  EL RUIDO IGUALA O SUPERA AL EFECTO, no hay señal de calidad
+   Solo los perfiles 'rotos': A 3/5   B 3/5
+   Solo los control (regresión): A 1/3   B 3/3
+
+2) LATENCIA Y COSTO
+                    A: con filtro      A2: control    B: sin filtro
+sesiones                        8                8                8
+llamadas                       48               52               53
+mediana (s)                  2.58             2.51              2.0
+p95 (s)                      3.35             4.66             3.59
+max (s)                      3.91             6.03             4.46
+next-q mediana               2.51              2.5             1.98
+next-q p95                   2.81              4.7             3.47
+recommend med.               3.24             2.98             3.22
+seg/sesión                   15.5             18.6             15.0
+prompt tok                 449986           462256          1340223
+% cacheado                   94.5             93.6             97.7
+CACHES                         42               44                1
+costo tokens               0.0452           0.0488           0.0723
+alquiler                   0.3719           0.3662           0.0247
+TOTAL USD                  0.4172            0.415            0.097
+
+   Sobrecosto de tiempo por sesión: -0.5s (-3%)
+   Costo por sesión (con alquiler): A $0.0522  B $0.0121  ->  B es el 23% de A
+   Solo tokens, que es lo que veria uso_tokens: A $0.0056  B $0.0090
+Sin llamadas a Gemini en este proceso.
+
+Gastado en total: $0.0000 de $0.7 autorizados
+Detalle completo en C:\Users\hgo32\OneDrive\Documentos\PROYECTO DE GRADUACIÓN\backend\data\tests\experimento_filtro_resultados.json

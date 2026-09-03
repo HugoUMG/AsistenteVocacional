@@ -30,6 +30,12 @@ Modelo por defecto: `gemini-3.1-flash-lite` (configurable con `GEMINI_MODEL` en
 
 ## Arquitectura resumida
 
+El alumno elige uno de **tres modos** en el inicio: solo chat, solo el test de
+Holland, o **Holland y luego el chat** (modo 3: el chat parte del perfil RIASEC
+medido). El diagrama de abajo es el chat; en el modo 3 llega con el perfil de
+Holland encima, y **las 4 preguntas fijas se quedan igual** — quitarlas se midió
+y salió peor ([experiments/holland-en-chat.md](experiments/holland-en-chat.md)).
+
 ```
 Alumno
   ↓  elige departamento o región en el mapa (Mapa.jsx) → /chat?depto=
@@ -37,7 +43,7 @@ React (Chat.jsx)
   ↓  nombre + 4 preguntas vocacionales fijas (sin IA), con voz neuronal (/api/tts)
   ↓  4-8 preguntas adaptativas  →  POST /api/next-question
 FastAPI (main.py)
-  ↓  filtro.py recorta el catálogo a 35 carreras (sin IA)
+  ↓  filtro.py recorta el catálogo a ~35 carreras (sin IA); cada sesión usa 1 key gratis del pool
 Gemini (preguntas.py / recomendar.py)
   ↓  JSON estructurado validado con Pydantic
 PostgreSQL (respuestas, uso de tokens, resultados)
@@ -90,6 +96,24 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
 7. **Español** en UI, comentarios, mensajes y documentación.
 8. Los comentarios `ponytail:` en el código marcan simplificaciones deliberadas
    con techo conocido — leer el comentario antes de "arreglarlas".
+9. **Holland es el instrumento de intereses.** No reimplementar sus ítems ni su
+   calificación: los sirve la API de O*NET. El **CIP salió del menú** (2026-08-16)
+   por falta de autorización de uso — no reponerlo ni invertirle trabajo hasta
+   que exista permiso escrito. Ver [docs/holland.md](docs/holland.md).
+10. **Holland NO alimenta la recomendación.** Se midió **tres veces** y el
+    ranking no se movió: como texto en el prompt, con el catálogo codificado en
+    RIASEC, y con ese catálogo **revisado a mano** (90/90, 18 códigos
+    cambiados). No afirmarlo en la tesis. La revisión del catálogo ya está
+    hecha: **no es el paso pendiente y no vale la pena reintentarla**. Lo único
+    sin probar es el prompt de arbitraje entre lo declarado y lo medido, ver la
+    decisión abierta #5 de [docs/holland.md](docs/holland.md).
+11. **NUNCA uses la raya o guion largo (—) ni dobles guiones (--) en tus
+    respuestas, descripciones de documentos, textos web, comentarios de código
+    o código fuente.** En su lugar, utiliza comas para aclaraciones breves,
+    puntos para separar ideas en frases cortas, o guiones cortos estándar (-)
+    únicamente si la sintaxis del código o lenguaje lo requiere. Los "—" que ya
+    existen en este repo son históricos: no es necesario purgarlos, solo no
+    agregar más.
 
 ---
 
@@ -107,7 +131,22 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   de las 7 dimensiones vocacionales, intento descartado de microexperiencias.
 - [docs/psicometrico.md](docs/psicometrico.md) — examen de 100 ítems: secciones,
   calificación, coherencia, deseabilidad social, baremo y sus límites.
+- [docs/holland.md](docs/holland.md) — test RIASEC servido por la API oficial de
+  O*NET (proxy con API key, no reimplementación). **Es el instrumento de
+  intereses del proyecto**; incluye la tabla de qué mide cada test y las
+  decisiones abiertas (¿alimenta la recomendación?, persistencia).
+- [docs/personalidad.md](docs/personalidad.md) — test corto (48 ítems, sin IA)
+  de personalidad/valores/estilo cognitivo, pre-chat, mismo patrón que
+  Holland. Pendiente de medir si mueve el ranking.
 - [docs/catalogo.md](docs/catalogo.md) — universidades cargadas y cómo agregar más.
+- [docs/estudio-con-estudiantes.md](docs/estudio-con-estudiantes.md) — plan del
+  estudio con alumnos reales: la evidencia que falta, el truco de reusar
+  conversaciones reales offline, el criterio externo y los bloqueantes de
+  consentimiento. **Primera corrida en campo hecha el 2026-08-24**, ver
+  [experiments/prueba-alumnos-2026-08-24.md](experiments/prueba-alumnos-2026-08-24.md).
+  Falta el criterio externo: nadie ha calificado esas 18 evaluaciones.
+- [docs/entrevista-validacion-psicologa.md](docs/entrevista-validacion-psicologa.md)
+  — guía de entrevista para validar el sistema con la psicóloga.
 
 **Decisiones técnicas** (fecha · motivo · alternativas descartadas · consecuencias)
 - [decisions/llm-vs-red-neuronal.md](decisions/llm-vs-red-neuronal.md)
@@ -117,12 +156,102 @@ Manual y self-checks sin API: [docs/arquitectura.md](docs/arquitectura.md).
   (`TOP_DEFAULT = 35`) y su límite con la negación.
 
 **Experimentos** (evidencia medida)
+> ⚠️ **Piso de ruido, medido el 2026-08-23.** Este sistema devuelve resultados
+> distintos con entrada IDÉNTICA: correr el mismo brazo dos veces cambia el
+> top-1 en 2 a 3 de cada 4 casos y mueve la coherencia 1.0-2.0 puntos. En los
+> tres experimentos con brazo de control, **el ruido igualó o superó al efecto
+> medido**. Todo A/B de abajo que se haya corrido SIN control está
+> sobreinterpretando sus diferencias, incluido el p = 0.047 de
+> `adaptativas-desempate.md`. Cualquier medición nueva lleva brazo de control
+> o no se reporta.
+
+- [experiments/prueba-alumnos-2026-08-24.md](experiments/prueba-alumnos-2026-08-24.md)
+  — **primera corrida en campo**, 18 alumnos reales en producción, observacional
+  (sin brazo de control). Cero abandonos y la clase entera en 13 minutos. Dejó
+  **dos defectos**: el frontend cuenta mal las adaptativas y cierra a las 3 en
+  vez de las 4, así que una dimensión prioritaria nunca se cubre; y la cobertura
+  en memoria por `session_id` no se limpia, así que repetir la prueba sin
+  "Empezar de nuevo" da un chat de cero preguntas. Ninguna evaluación tiene
+  juicio de la psicóloga todavía: describe comportamiento, no acierto.
 - [experiments/cobertura-dimensiones.md](experiments/cobertura-dimensiones.md) —
   A/B del vector de cobertura: 40%→100% de cumplimiento, 7/10→10/10 de acierto.
+  ⚠️ En producción no se estaba cumpliendo: ver la corrida de campo de arriba.
 - [experiments/microexperiencias.md](experiments/microexperiencias.md) — intento
   revertido: 6/10, transcripciones y diagnóstico.
+- [experiments/psicometrico-en-chat.md](experiments/psicometrico-en-chat.md) —
+  psicométrico primero y chat sin preguntas fijas: NO se integra. Las fijas y el
+  test miden cosas distintas (intereses declarados vs. aptitud real) y quitarlas
+  costó el canal de revelación de los chips y la alerta de contradicción.
+- [experiments/holland-en-chat.md](experiments/holland-en-chat.md) — modo
+  "Holland → chat": las 4 fijas se quedan (más baratas y más cortas), y el bloque
+  de Holland en el prompt **no pesa** en la recomendación (5/6 corridas).
+- [experiments/holland-apertura.md](experiments/holland-apertura.md) — obligar
+  al chat a nombrar el resultado de Holland en su primera pregunta **se cumple
+  siempre** (6/6 en dos mediciones independientes): cambia la experiencia de
+  apertura. Se adopta por eso. Sobre el ranking **no hay efecto detectable**;
+  §8 repitió con n=6 sobre Dulce (3/6 vs 5/6, **p = 0.545**) y quedó cerrado
+  como exploratorio. Ojo con §4.2: el acuerdo par a par entre brazos engaña
+  cuando el perfil es inestable, hay que leer por tasa.
+- [experiments/holland-estructura.md](experiments/holland-estructura.md) —
+  catálogo codificado con los RIASEC de O*NET y ordenado por afinidad: el top-1
+  no cambió (0/2). Flag `HOLLAND_EN_RECOMENDACION`, apagado. §8 revisó el
+  catálogo a mano (90/90, 18 códigos cambiados) y §9 repitió el A/B con el
+  catálogo revisado: **0/2 otra vez**. Los términos de búsqueda corregidos y los
+  que midieron peor viven en `codificar_holland.py`, con el motivo.
+- [experiments/holland-sondeo-intereses.md](experiments/holland-sondeo-intereses.md) —
+  obligar al chat a gastar un turno sondeando el interés MEDIDO (cobertura de
+  `intereses` pendiente y prioritaria). El mecanismo cumple 6/6 pero no mejora:
+  5/6 contra 6/6, +1 pregunta y +12% de tokens. **No se integra.** Ojo, el
+  control salió en el techo (6/6), así que no descarta la hipótesis. Deja dos
+  cosas: forzar la elección entre lo declarado y lo medido se resuelve a favor
+  de lo declarado, y que **Dulce es una moneda al aire** (6 y 6 en todo el
+  corpus) por su empate técnico A=39/S=38 entre sectores opuestos. Cualquier
+  A/B que la use necesita n grande.
+- [experiments/edad-y-grado.md](experiments/edad-y-grado.md) — decirle al prompt
+  qué hacer con la edad, el grado y la carrera cursada. Medido **dos veces** (la
+  segunda ya con `carrera_cursada` y con perfiles que NO la nombran en el chat):
+  11 comparaciones A/B, cero mejoras y una regresión. Flag
+  `EDAD_Y_GRADO_EN_RECOMENDACION`, **apagado y sin pendientes**. Lo que sí quedó
+  demostrado es que las cuatro preguntas fijas nuevas **solas** cambian la
+  recomendación: en el brazo de producción nadie vuelve a la carrera que dejó
+  (0/3). No agregar prosa al prompt para esto.
+- [experiments/adaptativas-desempate.md](experiments/adaptativas-desempate.md) —
+  **sin ejecutar.** ¿Las 4 adaptativas sirven para elegir DENTRO del área, entre
+  carreras de pensum parecido? Explica también por qué siempre giran sobre los
+  mismos dos ejes (es la regla de cobertura, no el modelo).
+- [experiments/banco-de-opciones.md](experiments/banco-de-opciones.md) — revisión
+  del banco de opciones contra los 90 temas del catálogo: había **18 temas que el
+  alumno no tenía forma de nombrar** (enfermería, imágenes médicas, idiomas,
+  música, teología, telecomunicaciones...). `gustos` pasó de 15 a 25 chips y se
+  reescribieron 5 etiquetas. **APLICADO Y SIN MEDIR**: no subir a MiOrienta hasta
+  medirlo. Las etiquetas se redactan para el alumno, NO para el pre-filtro.
+- [experiments/filtro-catalogo-ab.md](experiments/filtro-catalogo-ab.md) — A/B
+  de quitar el pre-filtro: **empate 13/16 vs 12/16 dentro de un piso de ruido de
+  3/8**, no se quita. Deja medido que el filtro NO gatea el resultado final
+  (Enfermería sale top-1 con 0/5 de presencia en las candidatas) y que la key con
+  billing está en `GEMINI_API_KEY_RESPALDO`, que es de donde salen los picos de
+  latencia. Incluye la depuración del banco: 9 palabras muertas y 57% del
+  catálogo alcanzable solo por accidente.
 - [experiments/cip-en-recomendacion.md](experiments/cip-en-recomendacion.md) —
   CIP priorizando el catálogo: revertido (9/10 vs 10/10), y el diseño no llegó a
   probar la hipótesis. Flag `CIP_EN_RECOMENDACION`, apagado.
+- [experiments/cache-compartido.md](experiments/cache-compartido.md) — el
+  pre-filtro rompe el caching explícito: el top-35 se recalcula tras cada
+  respuesta, cambia el hash y crea **un CachedContent por llamada** (9 cachés en
+  9 llamadas, contra 1 si se manda el catálogo completo). Con 3 alumnos, quitar
+  el filtro cuesta 62% de lo de hoy; con 30, un 24%. **A/B con brazo de control
+  (2026-08-24): calidad indistinguible (efecto 4/8 < ruido 5/8), costo 23% del
+  filtrado -> conviene quitar el filtro.** Sin bloqueantes: el caché
+  explícito ya corre bien en producción (92.6%) y la factura confirmó el
+  alquiler ($0.60 de $1.59,
+  **el 38% del gasto**, la línea más cara). ⚠️ **`uso_tokens` no registra el
+  almacenamiento, así que toda cifra de esa tabla es una cota inferior.** Costo
+  por alumno defendible: $0.014 en Totonicapán, $0.044 en Quetzaltenango. La
+  métrica que engaña es el % cacheado, que se ve alto aunque no se reuse nada; la
+  que importa es el número de cachés.
+- [experiments/comparacion-modelos.md](experiments/comparacion-modelos.md) —
+  `gemini-3.5-flash-lite` contra el actual: 2/5 top-1 cambiaron y leyeron peor
+  la señal indirecta, cuesta 25-40% más. Se mantiene `gemini-3.1-flash-lite`.
+  `gemini-3.7-flash` no se pudo medir (503 persistente de Google, 2026-08-17).
 - [docs/prompt-next-question-ejemplo.md](docs/prompt-next-question-ejemplo.md) —
   ejemplo real del prompt que recibe Gemini.

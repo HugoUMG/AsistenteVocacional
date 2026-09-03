@@ -168,3 +168,52 @@ y el uso correcto de los perfiles por encima de la riqueza conversacional.
   descrita para reconstruirlos.
 - La versión medida como "con pasos 1+2" no está en el repo: fue revertida. Su
   contenido se describe en la sección 1 y en `docs/motor-ia.md`.
+
+---
+
+## Re-medición con juez de coherencia y control (2026-08-23)
+
+Script: `backend/experimento_microexperiencias.py` · $0.1047 · 4 personas.
+
+### Por qué se volvió a medir
+
+El veredicto de 2026-07 (6/10 contra 10/10) salió con el criterio de `claves`:
+acierta si el top-1 cae en el área fijada de antemano. Ese criterio no
+distingue una recomendación distinta pero igual de sensata de una equivocada, y
+mirando la tabla de §3, **3 de los 4 fallos tenían la carrera esperada en el
+puesto 2** (Ana con Psicología Clínica, Lucía con Periodismo, Roberto con
+Contaduría).
+
+Dos diferencias con la corrida original, dichas de frente:
+
+1. **El prompt es una reconstrucción** desde §1. El original no quedó
+   versionado, así que esto no refuta el 6/10: mide una réplica.
+2. **Solo se probó el paso 1** (estilo de ítem). El paso 2 (devolverle el
+   ranking para que desempate) ya existe hoy en producción como el guard de
+   `MARGEN_DESEMPATE`.
+
+### Resultado
+
+| Medida | Control (A contra A, entrada idéntica) | Tratamiento (A contra B) |
+|---|---:|---:|
+| Top-1 distinto | **3/4** | 3/4 |
+| El juez prefirió una | 4/4 | 3 de 4 |
+| Diferencia de coherencia | **2.00** | 1.00 |
+
+El juez prefirió producción 3 a 0 con un empate, o sea la misma dirección que
+el 6/10 de julio. Pero **el ruido mide el doble que el efecto**: dos corridas
+idénticas se separan 2.00 puntos de coherencia y el tratamiento se separa 1.00.
+Un caso lo ilustra: a Rosa, producción le dio Enfermería y su propia repetición
+con entrada idéntica le dio **Ingeniería Industrial**.
+
+### Veredicto
+
+**Este experimento no puede contestar la pregunta con n=4, y decirlo es el
+resultado.** No hay evidencia nueva para revertir el descarte de julio, y
+tampoco para confirmarlo. La decisión de producción no cambia: las
+microexperiencias siguen fuera.
+
+Lo que sí queda: el diagnóstico de §4 (el sesgo de deseabilidad social en ítems
+como "¿te sentirías cómodo enseñando a otros a cuidar su entorno?") **no
+depende del marcador**, se lee en las transcripciones. Esa parte del documento
+sigue siendo el aporte y no la toca esta re-medición.

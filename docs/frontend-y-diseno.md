@@ -10,14 +10,61 @@ React 19 (Vite) + `react-router`, gráficas con Recharts, PDF con jsPDF.
 | `/acerca` | `Acerca.jsx` | Página informativa |
 | `/catalogo` | `Catalogo.jsx` | Catálogo público con filtros (texto, departamento, universidad), desde `GET /api/carreras` |
 | `/parametros` | `Parametros.jsx` | Explica las 7 dimensiones vocacionales que explora la IA |
-| `/psicometrico` | `Psicometrico.jsx` | Examen de 100 ítems |
-| `/mapa` | `Mapa.jsx` | Mapa SVG de Guatemala: elegir departamento o región antes del chat |
+| `/mapa` | `Mapa.jsx` | Mapa SVG: los departamentos con catálogo, para elegir antes del chat |
 | `/chat` | `Chat.jsx` | El chat + el dashboard al terminar |
+| `/holland` | `Holland.jsx` | Test de intereses RIASEC (O*NET) |
+| `/historial` | `Historial.jsx` | Resultados guardados de la cuenta |
+| `/psicometrico` | `Psicometrico.jsx` | Examen de 100 ítems. **Solo en local** |
+| `/cip` | `Cip.jsx` | CIP, sin autorización de uso. **Solo en local** |
+| `/personalidad` | `Personalidad.jsx` | Perfil corto de 48 ítems. **Solo en local** |
+
+Las rutas donde el alumno **se evalúa** van envueltas en `Protegida.jsx`: sin
+sesión iniciada muestran la pantalla de acceso con el botón de Google en vez del
+test. El backend lo exige igual con 401 (ver [api.md](api.md)); esto solo evita
+que el alumno llene un examen para descubrirlo al final.
+
+### Producción vs. local
+
+`modo.js` exporta `MODO_COMPLETO = import.meta.env.DEV`, y de ahí sale todo lo
+que cambia entre las dos:
+
+| | Local (`npm run dev`) | Producción (`npm run build`) |
+|---|---|---|
+| Instrumentos ofrecidos | los cuatro | chat y Holland |
+| Formas de empezar en el inicio | 4 | 3 (el título cuenta solo las visibles) |
+| Perfiles predeterminados de Holland | sí | no (`import.meta.env.DEV` en `Holland.jsx`) |
+
+En producción quedan solo los dos instrumentos confirmados: el CIP no tiene
+autorización de uso, y del psicométrico y el perfil corto todavía no está medido
+si aportan al ranking. Sus rutas ni siquiera se registran, y un enlace viejo cae
+en el `<Route path="*">` que manda al inicio, no a una pantalla en blanco.
+
+El backend sirve esos endpoints en los dos casos: la separación es **qué se
+ofrece**, no qué existe. Para ver el build tal como lo recibe el alumno:
+`npm run preview` en `frontend/` (o la configuración `produccion` de
+`.claude/launch.json`, puerto 4173).
 
 `Nav.jsx` es la barra superior de las páginas informativas; **el chat y el
-dashboard no la usan**. El mapa marca como "próximamente" todo departamento sin
-catálogo (`ACTIVOS` en `Mapa.jsx`, hoy Quetzaltenango y Totonicapán): agregar uno
-es editar ese set, no el SVG.
+dashboard no la usan**. El mapa dibuja **solo** los departamentos con
+catálogo (`ACTIVOS` en `Mapa.jsx`, hoy Quetzaltenango y Totonicapán), con el
+`viewBox` calculado sobre esos paths: agregar uno es editar ese set, no el SVG,
+y el encuadre se reajusta solo. Antes se pintaba el país entero en gris con los
+demás como "próximamente" y una vista "por región": las dos se quitaron
+(2026-08-22) porque invitaban a tocar departamentos que no llevan a ningún lado
+y porque los dos activos caen en la misma región.
+
+Las rutas de evaluación van envueltas en `Protegida.jsx`, que **antes** del
+login presenta de qué se trata cada instrumento (`PRESENTACION`, con una entrada
+por `test`) y remata con "Evaluate ahora con tu cuenta de Google". Es una
+pantalla de venta, no un muro: el alumno no debería tener que loguearse para
+enterarse de qué mide el test.
+
+Con sesión iniciada, el chat le ofrece al alumno reusar lo que contestó sobre sí
+mismo en su última evaluación (`CLAVES_PERFIL` en `preguntas-fijas.js`): dos
+botones, "Continuar con estos datos" o "Empezar de nuevo". Los datos salen de
+`GET /api/historial`, no de `localStorage`, así que lo sigue a otro dispositivo.
+Las respuestas de intereses (impacto, estilo, entorno, gustos) **no** se reusan:
+son las que se están midiendo.
 
 ⚠️ **`App.jsx` ya no existe** — el chat es `Chat.jsx`. `App.css` sí sigue siendo
 la hoja de estilos compartida.
@@ -37,7 +84,6 @@ Un **dashboard a pantalla completa** (`Dashboard.jsx`) con:
   en esa carrera, con retos incluidos. On-demand: 1 llamada a Gemini.
 - **Comparador** de la carrera principal contra otra del resultado
   (`POST /api/comparar`). On-demand: 1 llamada a Gemini.
-- **Feedback** 👍/👎 sobre la recomendación (`POST /api/feedback`).
 
 Ejemplo: si sale "Derecho" con "Ambos", ve las 4 sedes juntas (CUNTOTO, URG, UMG
 en Totonicapán y CUNOC en Quetzaltenango), cada una con su sello.

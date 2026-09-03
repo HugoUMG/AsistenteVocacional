@@ -19,6 +19,10 @@ class Estudiante(Base):
     email: Mapped[str | None] = mapped_column(
         String(255), unique=True, index=True, default=None
     )
+    # id estable de Google ("sub" del token) para el login opcional (ver
+    # app/auth.py): el email puede cambiar, el sub no. NULL = cuenta anónima
+    # (nunca inició sesión con Google), que sigue siendo el caso normal.
+    google_sub: Mapped[str | None] = mapped_column(String(255), unique=True, index=True, default=None)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
     respuestas: Mapped[list["RespuestaCuestionario"]] = relationship(
@@ -50,14 +54,23 @@ class RespuestaCuestionario(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     estudiante_id: Mapped[int] = mapped_column(ForeignKey("estudiantes.id"))
+    # Para "guardar resultados" después de un chat anónimo (ver app/auth.py):
+    # el session_id ya viaja desde el navegador, esto solo lo persiste. NULL
+    # en filas viejas (antes de esta columna) o si nunca se manda.
+    session_id: Mapped[str | None] = mapped_column(String(64), index=True, default=None)
     # ponytail: respuestas como JSON. El cuestionario aún no está fijo; cuando lo esté,
     # se puede normalizar a columnas/tabla aparte si se necesita consultar por respuesta.
     respuestas: Mapped[dict] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
     # resultado de /api/recommend, guardado para poder evaluar precisión luego.
     recomendacion: Mapped[dict | None] = mapped_column(JSON, default=None)
-    # feedback del alumno: True = le pareció acertada, False = no, None = sin responder.
-    feedback: Mapped[bool | None] = mapped_column(default=None)
+    # Juicio del profesional que aplica el estudio (la psicóloga), desde /admin.
+    # Es la vara EXTERNA de docs/estudio-con-estudiantes.md §4. El alumno NO
+    # califica su propia recomendación: no puede saber si acertó hasta que la
+    # evalúe un profesional (por eso se quitó el 👍/👎 del dashboard).
+    # "acerto" | "parcial" | "no_acerto", None = sin calificar todavía.
+    juicio: Mapped[str | None] = mapped_column(String(12), default=None)
+    juicio_nota: Mapped[str | None] = mapped_column(Text, default=None)
 
     estudiante: Mapped["Estudiante"] = relationship(back_populates="respuestas")
 
@@ -70,10 +83,54 @@ class ResultadoPsicometrico(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     session_id: Mapped[str] = mapped_column(String(64), index=True)
+    # NULL = anónimo (el caso normal). Se llena al calificar si hay sesión, o
+    # después vía /api/historial/reclamar si el login llega tarde.
+    estudiante_id: Mapped[int | None] = mapped_column(ForeignKey("estudiantes.id"), index=True, default=None)
     # {id_item: valor}. Personalidad = 1..5 (escala Likert); resto = índice de opción.
     respuestas: Mapped[dict] = mapped_column(JSON)
     puntajes: Mapped[dict] = mapped_column(JSON)
     resumen: Mapped[dict | None] = mapped_column(JSON, default=None)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class ResultadoHolland(Base):
+    """Test de intereses de Holland (O*NET Interest Profiler).
+
+    Se guarda al calificar, aunque el alumno no siga al chat: es el instrumento
+    avalado del proyecto y sus resultados entran en la investigación. Los
+    puntajes los calcula O*NET, no este backend (ver docs/holland.md)."""
+
+    __tablename__ = "resultados_holland"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    session_id: Mapped[str] = mapped_column(String(64), index=True)
+    estudiante_id: Mapped[int | None] = mapped_column(ForeignKey("estudiantes.id"), index=True, default=None)
+    # Los 60 dígitos 1-5 tal como se mandaron a O*NET, por si hay que recalificar.
+    respuestas: Mapped[str] = mapped_column(String(60))
+    codigo: Mapped[str] = mapped_column(String(3))  # p. ej. "ASC"
+    areas: Mapped[dict] = mapped_column(JSON)  # {"R": 12, "I": 10, ...}
+    # El perfil completo tal como lo consume el chat (codigo, areas con su
+    # nombre y puntaje, y los titulos de las ocupaciones). Se guarda porque
+    # 'areas' solo tiene los numeros y las ocupaciones SI entran al prompt:
+    # sin esto, recuperar el perfil desde la base degrada el prompt en
+    # silencio. NULL en filas anteriores a esta columna.
+    perfil: Mapped[dict | None] = mapped_column(JSON, default=None)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class ResultadoPersonalidad(Base):
+    """Test corto de personalidad/valores/estilo cognitivo (pre-chat, opcional).
+
+    Se guarda al calificar, igual que Holland: no llama a Gemini, el cálculo
+    es por reglas (ver app/personalidad.py)."""
+
+    __tablename__ = "resultados_personalidad"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    session_id: Mapped[str] = mapped_column(String(64), index=True)
+    estudiante_id: Mapped[int | None] = mapped_column(ForeignKey("estudiantes.id"), index=True, default=None)
+    respuestas: Mapped[dict] = mapped_column(JSON)  # {id_item: 1..5}
+    puntajes: Mapped[dict] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
 

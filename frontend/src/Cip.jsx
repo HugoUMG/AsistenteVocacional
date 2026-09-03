@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import Nav from './Nav'
 import './App.css'
+import { authHeader } from './auth'
+import { API } from './api'
 
-const API = 'http://localhost:8000'
 // 150 ítems en páginas de 15 → 10 páginas. Paginar NO altera el instrumento
 // siempre que se respete el orden impreso del cuadernillo: los ítems vienen
 // entrelazados entre escalas a propósito, y agruparlos por escala induciría
@@ -115,7 +116,7 @@ export default function Cip() {
     try {
       const r = await fetch(`${API}/api/cip`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({ respuestas, sexo }),
       })
       if (!r.ok) {
@@ -300,7 +301,7 @@ function Resultados({ datos, sexo, onReiniciar }) {
   const { perfil, patron, baremo } = resultado
   const orden = [...perfil].sort((a, b) => b.percentil - a.percentil)
   // No se usa `dominantes` del backend tal cual: es el top 3 por orden, y en un
-  // perfil plano eso destacaba áreas en percentil 25 — que no es interés bajo
+  // perfil plano eso destacaba áreas en percentil 25, que no es interés bajo
   // sino rechazo. Solo se resalta lo que de verdad está alto; si nada lo está,
   // el manual dice que el consejo orientador no se sostiene, y eso es lo que se
   // muestra en lugar de inventar tres favoritas.

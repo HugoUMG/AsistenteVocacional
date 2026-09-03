@@ -65,9 +65,35 @@
 }
 .nav-cta:hover { background: var(--navy); transform: translateY(-1px); }
 
+.nav-cuenta { display: flex; align-items: center; gap: 10px; position: relative; }
+.nav-nombre { color: var(--navy); font-weight: 600; font-size: 14px; }
+.nav-salir {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.nav-salir:hover { color: var(--accent); }
+.acceso-login { display: flex; justify-content: center; }
+.nav-login-error {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 6px;
+  color: #8a1c1c;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
 @media (max-width: 720px) {
-  .nav { flex-wrap: wrap; gap: 12px; }
-  .nav-links { order: 3; width: 100%; justify-content: center; gap: 16px; }
+  .nav { flex-direction: column; gap: 14px; padding: 16px 6vw; }
+  .nav-logo { margin-right: 0; }
+  .nav-cuenta { justify-content: center; flex-wrap: wrap; gap: 10px 14px; }
+  .nav-cta { align-self: center; }
+  .nav-links { order: 3; width: 100%; flex-wrap: wrap; justify-content: center; gap: 10px 16px; }
 }
 
 /* Hero azul marino con ondas */
@@ -185,6 +211,37 @@
 }
 .paso-card h3 { margin: 4px 0 10px; color: var(--navy); font-size: 18.5px; }
 .paso-card p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+
+/* Selector de los 3 modos del inicio (solo chat / solo Holland / los dos).
+   Reusa .paso-card; lo único propio es el botón abajo y el sello del
+   recomendado. El texto crece distinto en cada tarjeta, así que el botón se
+   empuja al fondo con margin-top:auto para que los tres queden alineados. */
+.modo-card { justify-content: flex-start; }
+.modo-card .hero-btn { margin-top: auto; padding-top: 12px; padding-bottom: 12px; }
+.modo-card p { margin-bottom: 22px; }
+.modo-minutos {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.modo-destacado { border-color: rgba(29, 78, 216, 0.35); }
+.modo-destacado::before { opacity: 1; }
+.modo-sello {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
 
 /* Badge de ícono compartido (pasos, acerca) */
 .card-icono {
@@ -539,34 +596,6 @@
 }
 .mapa-page > p { color: var(--muted); margin: 0 0 18px; font-size: 16px; text-align: center; }
 
-/* Control segmentado (por departamento / por región) */
-.mapa-modos {
-  display: inline-flex;
-  gap: 4px;
-  margin-bottom: 24px;
-  padding: 5px;
-  background: var(--bot-bubble);
-  border-radius: 999px;
-  box-shadow: inset 0 1px 3px rgba(18, 41, 77, 0.08);
-}
-.mapa-modos button {
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 9px 22px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-.mapa-modos button:hover { color: var(--accent); }
-.mapa-modos button.sel {
-  background: #fff;
-  color: var(--accent);
-  box-shadow: 0 4px 12px -4px rgba(18, 41, 77, 0.25);
-}
-
 /* Panel que enmarca el mapa */
 .mapa-panel {
   position: relative;
@@ -598,34 +627,6 @@
   fill: var(--accent-2);
   transform: scale(1.04);
 }
-.depto.inactivo { fill: #d4dbe6; opacity: 0.7; cursor: default; }
-
-/* Leyenda del mapa */
-.mapa-legend {
-  display: flex;
-  gap: 22px;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-top: 4px;
-  border-top: 1px solid rgba(18, 41, 77, 0.07);
-  width: 100%;
-}
-.mapa-legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-}
-.mapa-legend-dot {
-  width: 13px;
-  height: 13px;
-  border-radius: 4px;
-}
-.mapa-legend-dot.activo { background: var(--accent); }
-.mapa-legend-dot.inactivo { background: #d4dbe6; }
-
 .mapa-ambos-btn {
   margin-top: 28px;
   border: none;
@@ -685,7 +686,7 @@
 }
 
 @media (max-width: 720px) {
-  .chat { height: min(94vh, 820px); border-radius: 22px; }
+  .chat { height: min(94svh, 820px); border-radius: 22px; }
 }
 
 /* --- Pantalla inicial: solo la burbuja flotante (toca para empezar) --- */
@@ -716,8 +717,6 @@
 /* --- Botones flotantes: vidrio esmerilado (ice glass) --- */
 .voz-toggle,
 .vel-toggle {
-  position: absolute;
-  top: 14px;
   background: linear-gradient(150deg, rgba(255, 255, 255, 0.55), rgba(219, 234, 254, 0.25));
   backdrop-filter: blur(12px) saturate(160%);
   -webkit-backdrop-filter: blur(12px) saturate(160%);
@@ -729,12 +728,15 @@
   z-index: 2;
 }
 .voz-toggle:hover,
-.vel-toggle:hover {
+.vel-toggle:hover,
+.vel-toggle.abierto {
   transform: translateY(-1px);
   border-color: var(--accent-2);
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 8px 20px -8px rgba(14, 165, 233, 0.45);
 }
 .voz-toggle {
+  position: absolute;
+  top: 14px;
   right: 16px;
   width: 38px;
   height: 38px;
@@ -742,12 +744,56 @@
   place-items: center;
   font-size: 18px;
 }
-.vel-toggle {
+.vel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+.vel-wrap {
+  position: absolute;
+  top: 14px;
   right: 62px;
+  z-index: 51;
+}
+.vel-toggle {
   padding: 8px 13px;
   font-size: 13px;
   font-weight: 700;
   color: var(--accent);
+}
+/* Menú desplegable de velocidades: mismo vidrio esmerilado que los botones.
+   La activa va en azul; el resto en texto normal. */
+.vel-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.94), rgba(219, 234, 254, 0.7));
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 14px;
+  box-shadow: 0 14px 30px -14px rgba(18, 41, 77, 0.4);
+}
+.vel-menu button {
+  border: none;
+  background: transparent;
+  border-radius: 9px;
+  padding: 7px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.vel-menu button:hover { background: rgba(14, 165, 233, 0.12); }
+.vel-menu button.activo {
+  color: var(--accent);
+  font-weight: 700;
+  background: rgba(14, 165, 233, 0.08);
 }
 .siri-conf {
   position: absolute;
@@ -758,6 +804,12 @@
   font-weight: 600;
 }
 .siri-conf strong { color: var(--accent); }
+/* Modo 3: avisa que el chat está usando el perfil del test de Holland. Va
+   debajo del chip de confianza, que ocupa la esquina. */
+.siri-holland { top: 38px; }
+/* Test corto de personalidad: mismo chip, un renglón más abajo por si los dos
+   perfiles conviven (Holland + personalidad) en la misma sesión. */
+.siri-personalidad { top: 60px; }
 
 .siri-stage {
   flex: 1;
@@ -809,6 +861,42 @@
 .chat-footer::-webkit-scrollbar { width: 8px; }
 .chat-footer::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 999px; }
 
+/* Con 25 chips la lista no cabe en pantalla ni a 4 columnas, así que se
+   desplaza ELLA y no el footer entero: si se desplazara el footer, el botón
+   Continuar se iría con la lista y quedaría escondido abajo (que es justo lo
+   que pasaba). El degradado del pie solo se ve cuando queda contenido debajo,
+   como aviso de que hay más. */
+.chat-footer > .options.choices {
+  min-height: 0;
+  overflow-y: auto;
+  /* El chip se levanta 2px al pasarle el mouse y overflow-y lo recortaba por
+     arriba en la primera fila. Este colchón le da el espacio. */
+  padding-top: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+  /* el degradado se pinta pegado al borde inferior y desaparece al llegar al
+     final, usando el truco de dos fondos con background-attachment: local */
+  background:
+    linear-gradient(var(--bg2), rgba(255, 255, 255, 0)) top / 100% 1px no-repeat local,
+    linear-gradient(rgba(255, 255, 255, 0), var(--bg2)) bottom / 100% 26px no-repeat scroll;
+}
+.chat-footer > .options.choices::-webkit-scrollbar { width: 8px; }
+.chat-footer > .options.choices::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 999px;
+}
+.chat-footer > .continuar-btn { flex-shrink: 0; }
+
+/* Con muchas opciones (chips, listas largas) el footer podía comerse hasta el
+   82% y dejar tan poco alto al header que el robot quedaba recortado por el
+   overflow:hidden de .chat. Se le reserva un piso fijo. */
+@media (max-width: 720px) {
+  .chat-footer { max-height: calc(100% - 150px); }
+  .siri-stage { padding: 10px 20px; gap: 8px; }
+  .siri-stage .robot, .siri-stage .robot svg { width: 46px; height: 46px; }
+  .siri-texto { font-size: 17px; }
+}
+
 /* --- Robot: burbuja de vidrio esmerilado (ice glass) --- */
 .robot {
   width: 120px;
@@ -856,7 +944,7 @@
 
 .robot.thinking { animation: bob 1s ease-in-out infinite; }
 
-/* Cargando (la IA está pensando): reemplaza los "..." — el robot rebota y le
+/* Cargando (la IA está pensando): reemplaza los "..." (el robot rebota y le
    da vueltas un anillo, para que se vea que sigue trabajando. */
 .robot.cargando {
   position: relative;
@@ -1039,14 +1127,53 @@
 .options.choices .continuar-btn {
   grid-column: 1 / -1;
 }
-/* El banco de palabras son 15 opciones cortas: caben en 3 columnas */
-.options.choices.chips { grid-template-columns: repeat(3, 1fr); }
+/* El banco de palabras son 25 opciones cortas: 4 columnas en pantalla ancha,
+   3 en pantalla normal, 2 en tablet y 2 en teléfono. Cada chip cubre un tema
+   del catálogo que si no queda sin forma de nombrarse, así que si estorban por
+   cantidad la palanca es la cuadrícula, no recortar el banco. */
+/* Los chips van en flex y no en cuadricula: cuando el ultimo renglon de un
+   bloque queda incompleto, la cuadricula lo dejaba pegado a la izquierda con
+   un hueco a la derecha. Con flex + justify-content ese renglon queda
+   centrado. La base imita las columnas que habia: 3, y 4 en pantalla ancha. */
+.options.choices.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.options.choices.chips .grupo-opciones {
+  flex: 1 0 100%;
+  text-align: center;
+}
+.options.choices.chips .opt-color { flex: 0 1 calc(33.333% - 7px); }
+.options.choices.chips .opt-color.otro { flex: 1 0 100%; }
+@media (min-width: 1100px) {
+  .options.choices.chips .opt-color { flex-basis: calc(25% - 8px); }
+}
 @media (max-width: 860px) {
-  .options.choices.chips { grid-template-columns: 1fr 1fr; }
+  .options.choices.chips .opt-color { flex-basis: calc(50% - 5px); }
 }
 @media (max-width: 560px) {
-  .options.choices,
-  .options.choices.chips { grid-template-columns: 1fr; }
+  .options.choices { grid-template-columns: 1fr; }
+  /* Los chips NO caen a una columna: son 25 y serían 25 filas de scroll en un
+     teléfono. Se quedan en dos y el texto envuelve dentro del chip. */
+  .options.choices.chips .opt-color { flex-basis: calc(50% - 5px); }
+}
+
+/* Título de bloque dentro del banco de chips. Ocupa la fila completa para que
+   los chips de abajo sigan alineados en la cuadrícula. */
+.options.choices .grupo-opciones {
+  grid-column: 1 / -1;
+  margin: 14px 0 2px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.options.choices .grupo-opciones:first-child { margin-top: 0; }
+.options.choices .grupo-opciones.saliendo {
+  opacity: 0;
+  transition: opacity 0.22s ease;
 }
 
 /* Banco de palabras: chips que fluyen en varias filas */
@@ -1144,7 +1271,7 @@
 }
 .opt-color:hover::before { transform: scale(1.12); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); }
 .opt-color:hover::after { border-color: var(--c); }
-/* Seleccionada: SIEMPRE el azul de marca, no el color propio de la opción —
+/* Seleccionada: SIEMPRE el azul de marca, no el color propio de la opción:
    los tonos negro/gris de la paleta casi no se notaban como "elegida". */
 .opt-color.sel {
   border-color: var(--accent);
@@ -1208,6 +1335,16 @@
   padding: 10px 16px;
   border-radius: 999px;
   font-weight: 600;
+}
+
+/* Chips algo más compactos SOLO en escritorio: ahí se apunta con el mouse. En
+   tablet y teléfono se quedan como están, porque a 36px de alto ya incomodan
+   al dedo.
+   OJO con el orden: esta regla tiene la MISMA especificidad que la de arriba,
+   así que tiene que ir DESPUÉS o no se aplica. Estaba junto al media query de
+   las 4 columnas (más arriba en el archivo) y la de arriba la pisaba sin avisar. */
+@media (min-width: 1100px) {
+  .options.chips .opt-color { padding: 8px 14px; }
 }
 .options.chips .opt-color::before {
   width: 9px;
@@ -1484,11 +1621,11 @@
 }
 
 /* Grid, no flex: con flex-wrap la escala se partía en 2+2+1 y el último botón
-   ("Totalmente de acuerdo") quedaba del doble de ancho que los demás — en una
+   ("Totalmente de acuerdo") quedaba del doble de ancho que los demás; en una
    escala ordinal eso sesga la elección hacia el botón grande. */
 /* minmax(0, 1fr) y no 1fr: con 1fr la columna de la etiqueta más larga
    ("Totalmente") crece por su min-content y queda unos píxeles más ancha que
-   las demás — el mismo sesgo de tamaño que se buscaba eliminar. */
+   las demás; el mismo sesgo de tamaño que se buscaba eliminar. */
 .psi-escala { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
 .psi-opciones {
   display: grid;
@@ -1588,6 +1725,11 @@
 .psi-bloque h2 { margin: 0 0 16px; color: var(--navy); font-size: 19px; }
 .psi-bloque h3 { margin: 0 0 8px; color: var(--navy); font-size: 15px; }
 
+/* Grid de 2 columnas para las tarjetas de carreras de Holland: menos scroll
+   que la lista de una columna que usa el dashboard de recomendación. */
+.carrera-lista.holland-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+@media (max-width: 640px) { .carrera-lista.holland-grid { grid-template-columns: 1fr; } }
+
 .psi-rasgo { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .psi-rasgo-nombre { flex: 0 0 190px; color: var(--muted); font-size: 13.5px; }
 .psi-rasgo-valor { flex: 0 0 34px; text-align: right; color: var(--navy); font-weight: 700; font-size: 14px; }
@@ -1615,6 +1757,64 @@
 .psi-metricas strong { color: var(--navy); }
 
 .psi-texto { margin: 14px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+
+/* Banner "guardar resultados" (login con Google post-hoc, ver GuardarResultados.jsx) */
+.psi-guardar-bloque {
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+}
+.psi-guardar-bloque .psi-texto { margin: 0; flex: 1 1 260px; }
+.hist-card { cursor: pointer; transition: box-shadow 0.15s; }
+.hist-card:hover { box-shadow: var(--shadow-sm); }
+
+/* El podio de la tarjeta de chat: un renglon por carrera, el puesto a la
+   izquierda y la afinidad alineada a la derecha para que los tres numeros
+   se lean en columna. */
+.hist-podio { list-style: none; margin: 12px 0 0; padding: 0; }
+.hist-podio li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+.hist-podio li + li { border-top: 1px solid var(--line); }
+.hist-puesto {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* El segundo y el tercero en gris: el podio se lee de un vistazo. */
+.hist-podio li:not(:first-child) .hist-puesto { background: var(--muted); }
+.hist-carrera { flex: 1; color: var(--text); }
+.hist-afinidad { flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.psi-guardado {
+  margin: 18px 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #e6f6ec;
+  color: #1b6b3a;
+  font-size: 14.5px;
+  font-weight: 600;
+}
 .psi-listas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
 .psi-listas ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; line-height: 1.7; }
 .psi-nota { color: var(--muted); font-size: 12.5px; text-align: center; margin: 8px 0 30px; }
@@ -1630,100 +1830,245 @@
   .psi-rasgo-nombre { flex: 0 0 130px; font-size: 12.5px; }
 }
 
-/* --- CIP: cuestionario de intereses profesionales (150 ítems, 15 escalas) --- */
 
-.cip-aviso {
-  margin: 0 0 20px;
-  padding: 12px 16px;
-  border-left: 3px solid var(--accent);
-  background: #eef2f9;
-  color: var(--navy);
-  font-size: 14px;
-  line-height: 1.6;
-  border-radius: 0 8px 8px 0;
+/* Registro de administración (/admin): tabla ancha que se desplaza sola en
+   lugar de romper el ancho de la página. */
+.tabla-scroll {
+  overflow-x: auto;
+  margin-top: 1rem;
 }
 
-.cip-alerta {
-  margin: 0 0 20px;
-  padding: 12px 16px;
-  border-left: 3px solid #b8860b;
-  background: #fdf0dc;
-  color: #8a5a12;
-  font-size: 14px;
-  line-height: 1.6;
-  border-radius: 0 8px 8px 0;
+.tabla-registro {
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
 
-.cip-sexo { display: flex; gap: 12px; margin-top: 20px; }
-.cip-sexo button {
-  flex: 1;
-  padding: 14px 18px;
-  border: 1.5px solid var(--linea);
-  border-radius: 10px;
-  background: #fff;
-  color: var(--navy);
-  font-size: 15px;
+.tabla-registro th,
+.tabla-registro td {
+  border-bottom: 1px solid var(--linea, #d8dee9);
+  padding: 0.45rem 0.7rem;
+  text-align: left;
+}
+
+.tabla-registro th {
+  position: sticky;
+  top: 0;
+  background: var(--fondo, #fff);
   font-weight: 600;
-  cursor: pointer;
-  transition: border-color 0.12s, color 0.12s;
-}
-.cip-sexo button:hover { border-color: var(--accent); color: var(--accent); }
-.cip-sexo button[aria-checked='true'] {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #fff;
 }
 
-/* Tres opciones (D/I/A) en fila; en móvil se apilan. */
-.cip-opciones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.cip-opciones button {
+
+/* Recorrido del historial: diagrama de arriba abajo (perfil -> preguntas ->
+   resultado). Es HTML y CSS, sin librería de grafos. */
+.rec-acciones {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0 1.4rem;
+}
+
+.rec-diagrama {
+  position: relative;
+  padding-left: 1.6rem;
+  max-width: 780px;
+}
+
+/* La línea vertical que une todo el recorrido. */
+.rec-diagrama::before {
+  content: '';
+  position: absolute;
+  left: 0.35rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 2px;
+  background: var(--linea, #d8dee9);
+}
+
+.rec-nodo,
+.rec-rama {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+/* El punto de cada nodo sobre la línea. */
+.rec-nodo::before,
+.rec-rama::before {
+  content: '';
+  position: absolute;
+  left: -1.45rem;
+  top: 0.55rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--acento, #1f3b63);
+}
+
+.rec-perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--linea, #d8dee9);
+  border-radius: 10px;
+}
+
+.rec-fecha {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.rec-rama-titulo {
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+}
+
+.rec-pasos,
+.rec-resultado,
+.rec-diversificados {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rec-pasos li {
+  display: grid;
+  grid-template-columns: minmax(11rem, 38%) 1fr;
+  gap: 0.6rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--linea, #eef1f5);
+}
+
+.rec-pregunta {
+  opacity: 0.75;
+}
+
+.rec-respuesta {
+  font-weight: 500;
+}
+
+.rec-resultado li {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 8px;
-  border: 1.5px solid var(--linea);
-  border-radius: 10px;
-  background: #fff;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color 0.12s, color 0.12s, background 0.12s;
-}
-.cip-letra {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
-  border-radius: 50%;
-  border: 1.5px solid currentColor;
-  font-size: 12px;
-  font-weight: 800;
-}
-.cip-opciones button:hover { border-color: var(--tono); color: var(--tono); }
-.cip-opciones button.sel {
-  border-color: var(--tono);
-  color: var(--tono);
-  background: color-mix(in srgb, var(--tono) 9%, #fff);
+  gap: 0.6rem;
+  padding: 0.3rem 0;
 }
 
-.cip-fila { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-.cip-nombre { flex: 0 0 200px; color: var(--muted); font-size: 13.5px; cursor: help; }
-.cip-nombre.top { color: var(--navy); font-weight: 700; }
-.cip-pc {
-  flex: 0 0 84px;
-  text-align: right;
-  color: var(--navy);
+.rec-diversificados {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.rec-diversificados li::before {
+  content: '→ ';
+}
+
+/* En pantalla angosta la pregunta y la respuesta se apilan. */
+@media (max-width: 620px) {
+  .rec-pasos li {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
+/* Filas del registro: se abren para ver el recorrido de esa evaluación. */
+.fila-abrible {
+  cursor: pointer;
+}
+
+.fila-abrible:hover td {
+  background: var(--hover, rgba(31, 59, 99, 0.06));
+}
+
+/* Acceso al registro, solo visible para las cuentas de ADMIN_EMAILS. */
+.nav-admin {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--linea, #d8dee9);
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Presentación de cada evaluación antes del login (ver Protegida.jsx) */
+.acceso-puntos {
+  margin: 0 auto 22px;
+  max-width: 560px;
+  text-align: left;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.acceso-puntos li { margin-bottom: 8px; }
+.acceso-cta {
+  margin: 0 0 12px;
   font-weight: 700;
+  color: var(--accent);
+}
+
+/* Tarjeta del perfil de la evaluación anterior (pantalla inicial del chat) */
+.perfil-previo {
+  max-width: 420px;
+  margin: 18px auto 0;
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(18, 41, 77, 0.08);
+  border-radius: 22px;
+  box-shadow: 0 22px 48px -28px rgba(18, 41, 77, 0.45);
+  text-align: left;
+}
+.perfil-previo-titulo {
+  margin: 0 0 14px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+}
+.perfil-previo-datos { list-style: none; margin: 0 0 18px; padding: 0; }
+.perfil-previo-datos li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(18, 41, 77, 0.06);
   font-size: 14px;
 }
-.cip-pc small { display: block; color: var(--muted); font-weight: 500; font-size: 11.5px; }
+.perfil-previo-datos span { color: var(--muted); }
+.perfil-previo-datos strong { text-align: right; }
+.perfil-previo-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
-@media (max-width: 640px) {
-  .cip-opciones { grid-template-columns: 1fr; }
-  .cip-nombre { flex: 0 0 120px; font-size: 12.5px; }
-  .cip-pc { flex: 0 0 70px; }
+.depto-grupo { cursor: pointer; }
+.depto-nombre {
+  fill: #fff;
+  font-size: 7px;
+  font-weight: 700;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: rgba(18, 41, 77, 0.55);
+  stroke-width: 1.6px;
+  pointer-events: none;
+}
+
+/* Panel de calificación del profesional (solo /admin, ver Recorrido.jsx). */
+.rec-juicio-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+.rec-juicio-nota {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 0.6rem 0.8rem;
+}
+.rec-juicio-nota:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--ring);
 }

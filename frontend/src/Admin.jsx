@@ -1,0 +1,236 @@
+// Registro para quien aplica la evaluación: qué contestó cada alumno en las
+// preguntas fijas y qué carreras le salieron. El acceso lo decide el BACKEND
+// (ADMIN_EMAILS en backend/.env, ver app/auth.py): esta página solo muestra lo
+// que el endpoint le entregue, y pinta el 403 tal cual si no está autorizado.
+// Por eso no hay enlace en el menú: se entra escribiendo /admin.
+import { useEffect, useState } from 'react'
+import Nav from './Nav'
+import Protegida from './Protegida'
+import Recorrido from './Recorrido'
+import Dashboard from './Dashboard'
+import { Resultados as ResultadosHolland } from './Holland'
+import { authHeader } from './auth'
+import { API } from './api'
+import './App.css'
+
+const COLUMNAS = [
+  ['fecha', 'Fecha'],
+  ['nombre', 'Nombre'],
+  ['edad', 'Edad'],
+  ['nivel', 'Nivel'],
+  ['grado', 'Grado'],
+  ['carrera_cursada', 'Carrera cursada'],
+  ['gusto_grado', '¿Le gustó?'],
+  ['motivo', 'Motivo del test'],
+  ['carrera_descartada', 'Descartada'],
+  ['departamento', 'Departamento'],
+  ['holland', 'Holland'],
+  ['holland_puntajes', 'Puntajes RIASEC'],
+  ['top3', 'Top 3 recomendado'],
+  ['juicio', 'Juicio del profesional'],
+  ['juicio_nota', 'Comentario'],
+  ['cuenta', 'Cuenta'],
+]
+
+const JUICIOS = {
+  acerto: 'Acertó',
+  parcial: 'Acertó en parte',
+  no_acerto: 'No acertó',
+  descartada: 'Fuera del estudio',
+}
+const DESCARTADA = 'descartada'
+
+const fecha = (f) => (f ? new Date(f).toLocaleString('es-GT') : '')
+
+function celda(fila, clave) {
+  const v = fila[clave]
+  if (clave === 'fecha') return fecha(v)
+  if (clave === 'top3') return (v || []).join(' · ') || (fila.termino ? '' : 'No terminó')
+  if (clave === 'juicio') return JUICIOS[v] || 'Sin calificar'
+  // Sin código = no hizo Holland. Con código pero de otro recorrido, se marca:
+  // el psicólogo necesita saber si el chat partió de ese perfil o no.
+  if (clave === 'holland') {
+    if (!v) return 'No lo hizo'
+    const veces = fila.holland_total > 1 ? ` · ${fila.holland_total} tests` : ''
+    return `${v}${fila.holland_previo ? '' : ' (otro test)'}${veces}`
+  }
+  return v ?? ''
+}
+
+// ponytail: el CSV se arma aquí y no en el backend; son unos cientos de filas
+// que la página ya tiene en memoria. Si algún día son miles, que lo genere el
+// endpoint y se descargue en streaming.
+function descargarCsv(filas) {
+  const escapa = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`
+  const lineas = [
+    COLUMNAS.map(([, t]) => escapa(t)).join(','),
+    ...filas.map((f) => COLUMNAS.map(([c]) => escapa(celda(f, c))).join(',')),
+  ]
+  // El BOM es para que Excel en Windows abra los acentos bien.
+  const url = URL.createObjectURL(new Blob(['﻿' + lineas.join('\n')], { type: 'text/csv' }))
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `registro-${new Date().toISOString().slice(0, 10)}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+function Registro() {
+  const [filas, setFilas] = useState(null)
+  const [error, setError] = useState('')
+  // Las pruebas de desarrollo y las de conocidos se hicieron contra producción y
+  // están mezcladas con las de alumnos reales. Se ocultan por defecto para que
+  // quien califica vea solo lo que debe calificar; la casilla las trae de vuelta.
+  const [ocultarDescartadas, setOcultarDescartadas] = useState(true)
+  // La evaluación abierta, con TODO lo que contestó el alumno. La lista solo
+  // trae el resumen, así que el detalle se pide al abrirla.
+  const [abierta, setAbierta] = useState(null)
+  const [verDashboard, setVerDashboard] = useState(false)
+  // El resumen completo del Holland del alumno, el mismo que ve él en su
+  // historial. Se recalcula al abrirlo (ver /api/holland/{id}).
+  const [holland, setHolland] = useState(null)
+
+  async function verHolland(id) {
+    setError('')
+    try {
+      const r = await fetch(`${API}/api/holland/${id}`, { headers: authHeader() })
+      if (!r.ok) throw new Error((await r.json().catch(() => null))?.detail || 'No se pudo abrir el resultado de Holland.')
+      setHolland(await r.json())
+      window.scrollTo({ top: 0 })
+    } catch (e) {
+      setError(String(e.message || e))
+    }
+  }
+
+  async function abrir(id) {
+    setError('')
+    try {
+      const r = await fetch(`${API}/api/admin/respuestas/${id}`, { headers: authHeader() })
+      if (!r.ok) throw new Error((await r.json().catch(() => null))?.detail || 'No se pudo abrir la evaluación.')
+      setAbierta(await r.json())
+      setVerDashboard(false)
+    } catch (e) {
+      setError(String(e.message || e))
+    }
+  }
+
+  // Guarda la calificación y refleja el cambio en la lista sin recargar todo:
+  // la psicóloga va a calificar varias seguidas y volver a la tabla cada vez.
+  async function guardarJuicio(juicio, nota) {
+    const r = await fetch(`${API}/api/admin/juicio`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...authHeader() },
+      body: JSON.stringify({ respuesta_id: abierta.id, juicio, nota }),
+    })
+    if (!r.ok) throw new Error((await r.json().catch(() => null))?.detail || 'No se pudo guardar la calificación.')
+    const limpia = (nota || '').trim() || null
+    setAbierta((a) => ({ ...a, juicio, juicio_nota: limpia }))
+    setFilas((fs) => (fs || []).map((f) => (f.id === abierta.id ? { ...f, juicio, juicio_nota: limpia } : f)))
+  }
+
+  useEffect(() => {
+    fetch(`${API}/api/admin/respuestas`, { headers: authHeader() })
+      .then(async (r) => {
+        if (!r.ok) throw new Error((await r.json().catch(() => null))?.detail || 'No se pudo cargar el registro.')
+        return r.json()
+      })
+      .then(setFilas)
+      .catch((e) => setError(String(e.message || e)))
+  }, [])
+
+  if (holland) {
+    return <ResultadosHolland datos={holland} onVolver={() => setHolland(null)} />
+  }
+
+  if (abierta && !verDashboard) {
+    return (
+      <Recorrido
+        fila={abierta}
+        onVolver={() => setAbierta(null)}
+        onDashboard={() => setVerDashboard(true)}
+        onGuardarJuicio={guardarJuicio}
+        onVerHolland={verHolland}
+      />
+    )
+  }
+
+  if (abierta) {
+    return (
+      <Dashboard
+        nombre={abierta.respuestas?.nombre}
+        carreras={abierta.recomendacion || []}
+        respuestas={abierta.respuestas}
+        diversificados={abierta.diversificados}
+        confianza={null}
+        onReiniciar={() => setVerDashboard(false)}
+        textoReiniciar="← Volver al recorrido"
+      />
+    )
+  }
+
+  return (
+    <div className="pagina">
+      <Nav />
+      <main className="contenido">
+        <span className="pasos-kicker">Administración</span>
+        <h1>Registro de evaluaciones</h1>
+        {error && <p className="nav-login-error">{error}</p>}
+        {!error && !filas && <p className="intro">Cargando…</p>}
+        {filas && (() => {
+        const descartadas = filas.filter((f) => f.juicio === DESCARTADA).length
+        const visibles = ocultarDescartadas
+          ? filas.filter((f) => f.juicio !== DESCARTADA)
+          : filas
+        return (
+          <>
+            <p className="intro">
+              {visibles.length} {visibles.length === 1 ? 'evaluación' : 'evaluaciones'}, de la
+              más reciente a la más antigua. Tocá una fila para ver su recorrido y
+              su dashboard. Son datos de estudiantes: no los compartas fuera de
+              quienes aplican el estudio.
+            </p>
+            {descartadas > 0 && (
+              <label className="intro">
+                <input
+                  type="checkbox"
+                  checked={ocultarDescartadas}
+                  onChange={(e) => setOcultarDescartadas(e.target.checked)}
+                />{' '}
+                Ocultar {descartadas}{' '}
+                {descartadas === 1 ? 'evaluación que está' : 'evaluaciones que están'} fuera
+                del estudio (pruebas y conocidos)
+              </label>
+            )}
+            {/* El CSV exporta lo que se ve, no todo: si están ocultas es porque
+                no entran al análisis, y exportarlas las devuelve al conteo. */}
+            <button className="opt" onClick={() => descargarCsv(visibles)}>Descargar CSV</button>
+            <div className="tabla-scroll">
+              <table className="tabla-registro">
+                <thead>
+                  <tr>{COLUMNAS.map(([c, t]) => <th key={c}>{t}</th>)}</tr>
+                </thead>
+                <tbody>
+                  {visibles.map((f) => (
+                    <tr key={f.id} className="fila-abrible" onClick={() => abrir(f.id)}>
+                      {COLUMNAS.map(([c]) => <td key={c}>{celda(f, c)}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )
+        })()}
+      </main>
+    </div>
+  )
+}
+
+// Protegida pide el login de Google; el backend decide si ese correo es admin.
+export default function Admin() {
+  return (
+    <Protegida>
+      <Registro />
+    </Protegida>
+  )
+}

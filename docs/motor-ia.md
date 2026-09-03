@@ -52,6 +52,14 @@ alumnos y cortes por debajo del mínimo de preguntas).
   mitad de un test (OK para un solo proceso; marcado con comentario `ponytail:`).
 - Self-check sin API: `uv run python -m app.preguntas`.
 
+**Test corto de personalidad (2026-08-17):** el modo opcional `/personalidad`
+mete su resultado como CONTEXTO del prompt (igual que Holland). Se probó
+además sembrar la cobertura de personalidad/valores/estilo_cognitivo para
+saltarse esas preguntas, y midió peor (el chat terminaba en 1 sola adaptativa
+en vez de 4, top-1 distinto en 3/5 perfiles): revertido. Ver
+[docs/personalidad.md](personalidad.md) y
+[experiments/personalidad-en-chat.md](../experiments/personalidad-en-chat.md).
+
 **Evidencia A/B** (detalle completo en
 [experiments/cobertura-dimensiones.md](../experiments/cobertura-dimensiones.md)):
 con 15 perfiles "primer botón", el

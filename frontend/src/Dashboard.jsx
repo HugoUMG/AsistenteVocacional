@@ -1,20 +1,49 @@
 import { useState } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { color } from './colors'
-import { SESSION_ID } from './session'
+import { sessionId } from './session'
+import GuardarResultados from './GuardarResultados'
+import { authHeader } from './auth'
 import './Dashboard.css'
-
-const API = 'http://localhost:8000'
+import { API } from './api'
 
 const postJSON = (ruta, body) =>
   fetch(`${API}${ruta}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeader() },
     body: JSON.stringify(body),
-  }).then((r) => {
-    if (!r.ok) throw new Error('No se pudo generar. Inténtalo de nuevo.')
+  }).then(async (r) => {
+    if (!r.ok) {
+      // El 429 (tope de uso) trae su propio mensaje: se muestra tal cual.
+      const d = await r.json().catch(() => null)
+      throw new Error(typeof d?.detail === 'string' ? d.detail : 'No se pudo generar. Inténtalo de nuevo.')
+    }
     return r.json()
   })
+
+// Para quien va en básicos: el siguiente paso no es la universidad, es el
+// diversificado. Lo calcula el backend sin IA (app/diversificado.py) y llega
+// vacío para todos los demás niveles, así que aquí no se pinta nada.
+function Diversificados({ opciones }) {
+  if (!opciones?.length) return null
+  return (
+    <div className="dash-diversificados">
+      <p className="dash-div-titulo">Antes de la universidad: qué diversificado te conviene llevar</p>
+      <ul>
+        {opciones.map((o) => (
+          <li key={o.nombre}>
+            <strong>{o.nombre}</strong> <span>{o.porque}</span>
+            {/* El departamento, no el colegio: la app orienta, no recomienda
+                establecimientos. */}
+            {!!o.departamentos?.length && (
+              <span className="dash-div-donde">Se ofrece en: {o.departamentos.join(' y ')}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 function ConfianzaBadge({ confianza }) {
   if (!confianza) return null
@@ -43,7 +72,7 @@ function Modal({ titulo, onClose, children }) {
   )
 }
 
-// Botón "Un día siendo..." — genera y muestra una narrativa de la carrera.
+// Botón "Un día siendo...": genera y muestra una narrativa de la carrera.
 function SimuladorDia({ carrera, respuestas }) {
   const [abierto, setAbierto] = useState(false)
   const [cargando, setCargando] = useState(false)
@@ -60,7 +89,7 @@ function SimuladorDia({ carrera, respuestas }) {
         carrera: carrera.carrera,
         descripcion: carrera.descripcion,
         respuestas,
-        session_id: SESSION_ID,
+        session_id: sessionId(),
       })
       setDatos(d)
     } catch (e) {
@@ -97,7 +126,7 @@ function SimuladorDia({ carrera, respuestas }) {
   )
 }
 
-// Botón "Ver catálogo" — lista todas las carreras del catálogo, agrupadas por
+// Botón "Ver catálogo": lista todas las carreras del catálogo, agrupadas por
 // nombre con sus sedes. Útil para ver qué existe más allá de lo recomendado.
 function CatalogoCarreras() {
   const [abierto, setAbierto] = useState(false)
@@ -160,26 +189,15 @@ function CatalogoCarreras() {
   )
 }
 
-export default function Dashboard({ nombre, carreras, respuestaId, confianza, respuestas, onReiniciar }) {
+export default function Dashboard({ nombre, carreras, confianza, respuestas, diversificados, onReiniciar, textoReiniciar = '↺ Hacer otro test' }) {
   const [sel, setSel] = useState(0) // carrera seleccionada en el detalle
   const [inst, setInst] = useState(0) // institución seleccionada
   const [hover, setHover] = useState(null) // sector del pastel sobre el que está el mouse
-  const [feedback, setFeedback] = useState(null) // null | true | false
   const [otraIdx, setOtraIdx] = useState(null) // carrera B elegida para comparar
   const [cmpAbierto, setCmpAbierto] = useState(false)
   const [cmpCargando, setCmpCargando] = useState(false)
   const [cmpDatos, setCmpDatos] = useState(null)
   const [cmpError, setCmpError] = useState(null)
-
-  const enviarFeedback = (acertada) => {
-    if (!respuestaId) return
-    setFeedback(acertada)
-    fetch('http://localhost:8000/api/feedback', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ respuesta_id: respuestaId, acertada }),
-    }).catch(() => {})
-  }
 
   const elegirCarrera = (i) => {
     setSel(i)
@@ -201,7 +219,7 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
         carrera_a: a.carrera, descripcion_a: a.descripcion,
         carrera_b: b.carrera, descripcion_b: b.descripcion,
         respuestas: respuestas || {},
-        session_id: SESSION_ID,
+        session_id: sessionId(),
       })
       setCmpDatos(d)
     } catch (e) {
@@ -235,10 +253,14 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
             ↓ Descargar PDF
           </button>
           {onReiniciar && (
-            <button className="dash-reiniciar" onClick={onReiniciar}>↺ Hacer otro test</button>
+            <button className="dash-reiniciar" onClick={onReiniciar}>{textoReiniciar}</button>
           )}
         </div>
       </header>
+
+      <Diversificados opciones={diversificados} />
+
+      <GuardarResultados />
 
       <section className="dash-charts">
         <div className="chart-card">
@@ -294,18 +316,22 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
 
       <section className="dash-detail">
         <div className="carrera-lista">
-          {carreras.map((c, i) => (
-            <button
-              key={i}
-              className={`carrera-item ${i === sel ? 'activa' : ''}`}
-              onClick={() => elegirCarrera(i)}
-              style={i === sel ? { borderColor: color(i) } : undefined}
-            >
-              <span className="punto" style={{ background: color(i) }} />
-              <span className="carrera-nombre">{c.carrera}</span>
-              <span className="carrera-pct">{c.afinidad}%</span>
-            </button>
-          ))}
+          {carreras.map((c, i) => {
+            const enUMG = c.instituciones?.some((x) => x.universidad === 'Universidad Mariano Gálvez')
+            return (
+              <button
+                key={i}
+                className={`carrera-item ${i === sel ? 'activa' : ''} ${enUMG ? 'carrera-item-umg' : ''}`}
+                onClick={() => elegirCarrera(i)}
+                style={i === sel ? { borderColor: color(i) } : undefined}
+              >
+                <span className="punto" style={{ background: color(i) }} />
+                <span className="carrera-nombre">{c.carrera}</span>
+                {enUMG && <span className="sello-umg">UMG</span>}
+                <span className="carrera-pct">{c.afinidad}%</span>
+              </button>
+            )
+          })}
         </div>
 
         <div className="carrera-panel">
@@ -420,18 +446,6 @@ export default function Dashboard({ nombre, carreras, respuestaId, confianza, re
         </Modal>
       )}
 
-      {respuestaId && (
-        <section className="dash-feedback">
-          {feedback === null ? (
-            <p>¿Esta recomendación te pareció acertada?
-              <button className="opt si" onClick={() => enviarFeedback(true)}>Sí</button>
-              <button className="opt no" onClick={() => enviarFeedback(false)}>No</button>
-            </p>
-          ) : (
-            <p>¡Gracias por tu respuesta!</p>
-          )}
-        </section>
-      )}
     </div>
   )
 }

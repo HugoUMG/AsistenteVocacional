@@ -142,3 +142,31 @@ Son justo el tipo de caso que la revisión humana debe resolver.
 una sola carrera cada una. No es un defecto del catálogo: es información real y
 útil. Un alumno con percentil alto ahí necesita que el sistema se lo diga en vez de
 empujarlo a la carrera menos mala disponible.
+
+
+## Diversificados (puente para los alumnos de básicos)
+
+`backend/data/diversificados.json` es una tabla aparte del catálogo: no son
+carreras universitarias sino carreras de nivel medio (perito contador,
+bachillerato en computación, magisterio, etc.), cada una con las `claves` que la
+conectan con las carreras universitarias que prepara.
+
+Se usa solo cuando el alumno dijo que va en **Básico**: ahí la recomendación
+agrega hasta 3 diversificados sugeridos (ver `app/diversificado.py` y
+`docs/api.md`). Es cruce de texto, sin IA.
+
+La lista sale de una investigación de la oferta REAL de nivel diversificado en
+las zonas céntricas de **Totonicapán y Quetzaltenango**: solo entran modalidades
+corroborables en la oferta publicada de institutos oficiales y colegios privados
+validados por el MINEDUC de esos dos departamentos.
+
+**No se nombran establecimientos a propósito.** Cada opción dice en qué
+departamentos existe y nada más: la app orienta sobre la modalidad, no manda al
+alumno a un colegio concreto. Eso también evita que la recomendación se lea como
+publicidad de un centro educativo.
+
+**Pendientes:**
+- Revisarla con la psicóloga.
+- Al ampliar el catálogo a otros departamentos, repetir la investigación: esta
+  tabla NO cubre la oferta fuera de Totonicapán y Quetzaltenango, y ahí una
+  modalidad puede sencillamente no existir.

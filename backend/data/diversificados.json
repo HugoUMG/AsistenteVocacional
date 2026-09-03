@@ -1,0 +1,85 @@
+{
+  "_nota": "Puente entre las carreras universitarias del catálogo y las carreras de diversificado que preparan para ellas. Solo se usa cuando el alumno dijo que va en BÁSICO: su siguiente decisión no es la universidad, es qué diversificado llevar. 'claves' se compara contra el nombre de la carrera recomendada, en minúsculas y sin tildes.",
+  "_fuente": "Investigación de la oferta real de nivel diversificado en las zonas céntricas de Totonicapán y Quetzaltenango (2026-08). Solo entran modalidades corroboradas en la oferta publicada de institutos oficiales y colegios privados validados por el MINEDUC de esos dos departamentos. NO se nombran establecimientos a propósito: al alumno se le dice la modalidad y en qué departamento existe, no a qué colegio ir.",
+  "_pendiente": "Revisar con la psicóloga. Al ampliar el catálogo a otros departamentos hay que repetir la investigación: esta tabla NO cubre la oferta fuera de Totonicapán y Quetzaltenango.",
+  "opciones": [
+    {
+      "nombre": "Perito Contador",
+      "porque": "Llevás contabilidad, cuentas y sistemas contables desde el diversificado, que es la base de estas carreras.",
+      "departamentos": ["Totonicapán", "Quetzaltenango"],
+      "claves": ["contad", "audit", "econom", "finanz", "banca"]
+    },
+    {
+      "nombre": "Bachillerato con orientación en Computación",
+      "porque": "Vas a programar y a trabajar con sistemas e informática antes de entrar a la universidad.",
+      "departamentos": ["Totonicapán", "Quetzaltenango"],
+      "claves": ["sistemas", "informat", "comput", "software", "telecomunicac", "digital"]
+    },
+    {
+      "nombre": "Bachillerato con orientación en Electrónica",
+      "porque": "Trabajás con circuitos y dispositivos digitales, que es de donde parten estas ingenierías.",
+      "departamentos": ["Totonicapán"],
+      "claves": ["electronic", "electric", "mecatron"]
+    },
+    {
+      "nombre": "Bachillerato Industrial y Perito (dibujo de construcción, mecánica o electrónica)",
+      "porque": "Es el diversificado con taller: dibujo técnico, máquinas y cómo se construyen las cosas.",
+      "departamentos": ["Quetzaltenango"],
+      "claves": ["mecanic", "civil", "industrial", "arquitect", "construc", "quimica"]
+    },
+    {
+      "nombre": "Bachillerato con orientación en Ciencias Biológicas",
+      "porque": "Carga más biología y química, que es lo que piden las carreras de salud y de ciencias naturales.",
+      "departamentos": ["Totonicapán", "Quetzaltenango"],
+      "claves": ["medic", "enfermer", "nutric", "fisioterap", "odontolog", "biolog", "salud", "farmac", "optometr", "imagen", "agronom", "agricol", "forestal", "ambient", "veterinar", "zootec", "agroindustrial"]
+    },
+    {
+      "nombre": "Bachillerato con orientación en Educación",
+      "porque": "Es la formación pedagógica inicial: te prepara para dar clases desde el diversificado.",
+      "departamentos": ["Totonicapán", "Quetzaltenango"],
+      "claves": ["educac", "pedagog", "docent"]
+    },
+    {
+      "nombre": "Magisterio de Educación Infantil Bilingüe Intercultural",
+      "porque": "Formación docente para los primeros años, con K'iche' y español.",
+      "departamentos": ["Totonicapán", "Quetzaltenango"],
+      "claves": ["infantil", "parvul", "primaria", "intercultural", "bilingue"]
+    },
+    {
+      "nombre": "Bachillerato con orientación en Educación Física",
+      "porque": "Docencia deportiva e instrucción física, si lo tuyo es enseñar en movimiento.",
+      "departamentos": ["Totonicapán", "Quetzaltenango"],
+      "claves": ["deport", "fisica y", "educacion fisica", "recreac"]
+    },
+    {
+      "nombre": "Bachillerato con orientación en Gestión Empresarial",
+      "porque": "Administración, finanzas y manejo de un negocio, desde el nivel medio.",
+      "departamentos": ["Quetzaltenango"],
+      "claves": ["administra", "empresa", "mercadot", "market", "comercio", "turism", "hotel", "gastron", "culinar", "chef", "restaurant", "recursos humanos"]
+    },
+    {
+      "nombre": "Bachillerato con orientación en Diseño Gráfico",
+      "porque": "Comunicación visual, fotografía y medios: vas a diseñar y producir desde el diversificado.",
+      "departamentos": ["Quetzaltenango"],
+      "claves": ["diseñ", "disen", "grafic", "arte", "audiovisual", "publicid", "comunicac", "periodis", "cinemat"]
+    },
+    {
+      "nombre": "Bachillerato con orientación en Ciencias Jurídicas",
+      "porque": "Es el propedéutico de esta área: lectura, redacción y argumentación.",
+      "departamentos": ["Quetzaltenango"],
+      "claves": ["juridic", "abogad", "derecho", "notari", "criminal", "forense", "politic"]
+    },
+    {
+      "nombre": "Bachillerato en Ciencias y Letras",
+      "porque": "El general y preuniversitario: sirve de base para casi cualquier carrera si todavía estás dudando.",
+      "departamentos": ["Totonicapán", "Quetzaltenango"],
+      "claves": ["social", "human", "letras", "filosof", "histor", "sociolog", "antropolog", "psicolog"]
+    },
+    {
+      "nombre": "Bachillerato Bilingüe Intercultural",
+      "porque": "Enfoque K'iche' y español, con el patrimonio cultural como eje.",
+      "departamentos": ["Totonicapán", "Quetzaltenango"],
+      "claves": ["linguistic", "idioma", "traduc", "cultural"]
+    }
+  ]
+}
