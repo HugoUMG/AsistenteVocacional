@@ -50,7 +50,7 @@ function Rama({ titulo, pasos }) {
 const LETRAS_RIASEC = { R: 'Realista', I: 'Investigador', A: 'Artístico',
   S: 'Social', E: 'Emprendedor', C: 'Convencional' }
 
-function Holland({ h, historial = [] }) {
+function Holland({ h, historial = [], onVerResumen }) {
   if (!h) return null
   // Un alumno puede repetir el test: los demás intentos van como lista corta
   // debajo, para ver si el perfil se movió entre una evaluación y otra.
@@ -81,6 +81,14 @@ function Holland({ h, historial = [] }) {
             </span>
           </li>
         </ul>
+      )}
+      {/* El resumen completo (las seis areas, las ocupaciones de O*NET y las
+          carreras afines) es parte del analisis: el registro solo mostraba los
+          puntajes sueltos. Se abre igual que en el historial del alumno. */}
+      {onVerResumen && h.id && (
+        <button className="opt ghost" onClick={() => onVerResumen(h.id)}>
+          Ver el resumen del test →
+        </button>
       )}
     </div>
   )
@@ -159,7 +167,7 @@ function Juicio({ valor, nota, onGuardar }) {
 // quién es, qué contestó en las fijas, qué le preguntó Orienta y qué le salió.
 // ponytail: el diagrama es HTML y CSS (una línea vertical y nodos), sin
 // librería de grafos. Si algún día hay que ramificar de verdad, ahí sí.
-export default function Recorrido({ fila, onVolver, onDashboard, onGuardarJuicio }) {
+export default function Recorrido({ fila, onVolver, onDashboard, onGuardarJuicio, onVerHolland }) {
   const r0 = fila.respuestas || {}
   const entradas = Object.entries(r0)
   const esFija = ([c]) => CLAVES_FIJAS.includes(c) || c === 'departamento' || c === 'carrera_descartada'
@@ -191,7 +199,7 @@ export default function Recorrido({ fila, onVolver, onDashboard, onGuardarJuicio
             <span className="rec-fecha">{fecha(fila.fecha)}</span>
           </div>
 
-          <Holland h={fila.holland} historial={fila.holland_historial} />
+          <Holland h={fila.holland} historial={fila.holland_historial} onVerResumen={onVerHolland} />
           <Rama titulo="Preguntas fijas" pasos={fijas} />
           <Rama titulo="Preguntas de Orienta" pasos={adaptativas} />
 

@@ -8,6 +8,7 @@ import Nav from './Nav'
 import Protegida from './Protegida'
 import Recorrido from './Recorrido'
 import Dashboard from './Dashboard'
+import { Resultados as ResultadosHolland } from './Holland'
 import { authHeader } from './auth'
 import { API } from './api'
 import './App.css'
@@ -85,6 +86,21 @@ function Registro() {
   // trae el resumen, así que el detalle se pide al abrirla.
   const [abierta, setAbierta] = useState(null)
   const [verDashboard, setVerDashboard] = useState(false)
+  // El resumen completo del Holland del alumno, el mismo que ve él en su
+  // historial. Se recalcula al abrirlo (ver /api/holland/{id}).
+  const [holland, setHolland] = useState(null)
+
+  async function verHolland(id) {
+    setError('')
+    try {
+      const r = await fetch(`${API}/api/holland/${id}`, { headers: authHeader() })
+      if (!r.ok) throw new Error((await r.json().catch(() => null))?.detail || 'No se pudo abrir el resultado de Holland.')
+      setHolland(await r.json())
+      window.scrollTo({ top: 0 })
+    } catch (e) {
+      setError(String(e.message || e))
+    }
+  }
 
   async function abrir(id) {
     setError('')
@@ -122,6 +138,10 @@ function Registro() {
       .catch((e) => setError(String(e.message || e)))
   }, [])
 
+  if (holland) {
+    return <ResultadosHolland datos={holland} onVolver={() => setHolland(null)} />
+  }
+
   if (abierta && !verDashboard) {
     return (
       <Recorrido
@@ -129,6 +149,7 @@ function Registro() {
         onVolver={() => setAbierta(null)}
         onDashboard={() => setVerDashboard(true)}
         onGuardarJuicio={guardarJuicio}
+        onVerHolland={verHolland}
       />
     )
   }
