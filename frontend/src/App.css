@@ -1296,6 +1296,18 @@
 /* Salida al responder: las no elegidas se desvanecen, la elegida se despide.
    Dura lo mismo que el setTimeout de responder() en Chat.jsx (300ms). */
 .opt-color.saliendo,
+/* Cupo de una pregunta con tope (hoy solo 'gustos'): el contador va al pie,
+   junto a Continuar, y las opciones que ya no caben se apagan sin moverse. */
+.cupo-opciones {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7684;
+}
+.opt-color:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
 .continuar-btn.saliendo {
   animation: opt-salir 0.3s ease forwards;
   pointer-events: none;
