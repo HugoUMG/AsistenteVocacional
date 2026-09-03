@@ -341,7 +341,8 @@ function Opciones({ pregunta, onAnswer }) {
 
   function clickOpcion(label, i) {
     if (multiple) {
-      setSel((s) => (s.includes(i) ? s.filter((x) => x !== i) : [...s, i]))
+      setSel((s) => (s.includes(i) ? s.filter((x) => x !== i)
+        : (lleno ? s : [...s, i])))
     } else {
       responder(label, [label])
     }
@@ -379,6 +380,11 @@ function Opciones({ pregunta, onAnswer }) {
   }
 
   const puedeContinuar = sel.length > 0 || (otroOn && otroText.trim())
+  // Tope de selecciones (hoy solo lo pone 'gustos', ver preguntas-fijas.js).
+  // Al llegar al tope las no elegidas se apagan en vez de desaparecer: el
+  // alumno tiene que ver de qué está eligiendo, y que ya llenó su cupo.
+  const elegidas = sel.length + (otroOn ? 1 : 0)
+  const lleno = !!pregunta.max && elegidas >= pregunta.max
   // Mientras se anima la salida: la elegida se despide, el resto se desvanece.
   const salida = (label) => (saliendo ? (saliendo.includes(label) ? 'elegido' : 'saliendo') : '')
 
@@ -397,6 +403,7 @@ function Opciones({ pregunta, onAnswer }) {
           <button
             className={`opt-color ${sel.includes(i) ? 'sel' : ''} ${salida(o.label)}`}
             style={{ '--c': color(i) }}
+            disabled={lleno && !sel.includes(i)}
             onClick={() => clickOpcion(o.label, i)}
           >
             {o.label}
@@ -429,6 +436,7 @@ function Opciones({ pregunta, onAnswer }) {
         <button
           className={`opt-color otro ${otroOn ? 'sel' : ''} ${salida('')}`}
           style={{ '--c': '#5c6b80' }}
+          disabled={lleno}
           onClick={clickOtro}
         >
           Otro / especificar…
@@ -442,13 +450,22 @@ function Opciones({ pregunta, onAnswer }) {
           botón vivía dentro se iba con ella y quedaba escondido abajo. Ahora la
           que se desplaza es solo la lista y el botón se queda fijo al pie. */}
       {multiple && (
-        <button
-          className={`continuar-btn ${salida('')}`}
-          onClick={confirmarMulti}
-          disabled={!puedeContinuar}
-        >
-          Continuar →
-        </button>
+        <>
+          {!!pregunta.max && (
+            <p className={`cupo-opciones ${salida('')}`}>
+              {lleno
+                ? `Ya elegiste ${pregunta.max}. Quita uno si quieres cambiarlo.`
+                : `${elegidas} de ${pregunta.max}`}
+            </p>
+          )}
+          <button
+            className={`continuar-btn ${salida('')}`}
+            onClick={confirmarMulti}
+            disabled={!puedeContinuar}
+          >
+            Continuar →
+          </button>
+        </>
       )}
     </>
   )
