@@ -1,9 +1,42 @@
+import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { GoogleLogin } from '@react-oauth/google'
+import { authHeader, cerrarSesion, iniciarSesionGoogle, sesionActual } from './auth'
+import { MODO_COMPLETO } from './modo'
+import { API } from './api'
 
 // Barra superior compartida por las páginas informativas (inicio, acerca,
 // catálogo, parámetros). El chat y el dashboard no la usan.
 export default function Nav() {
   const navigate = useNavigate()
+  const [sesion, setSesion] = useState(sesionActual)
+  const [error, setError] = useState('')
+  // Quién es admin lo decide el backend (ADMIN_EMAILS), no el navegador: acá
+  // solo se pregunta para saber si mostrar el acceso al registro.
+  const [admin, setAdmin] = useState(false)
+
+  useEffect(() => {
+    if (!sesion) { setAdmin(false); return }
+    fetch(`${API}/api/admin/soy`, { headers: authHeader() })
+      .then((r) => (r.ok ? r.json() : { admin: false }))
+      .then((d) => setAdmin(!!d.admin))
+      .catch(() => setAdmin(false))
+  }, [sesion])
+
+  async function alIniciarSesion(credentialResponse) {
+    setError('')
+    try {
+      setSesion(await iniciarSesionGoogle(credentialResponse.credential))
+    } catch (e) {
+      setError(String(e.message || e))
+    }
+  }
+
+  function salir() {
+    cerrarSesion()
+    setSesion(null)
+  }
+
   return (
     <header className="nav">
       <NavLink to="/" className="nav-logo">
@@ -20,10 +53,30 @@ export default function Nav() {
       <nav className="nav-links">
         <NavLink to="/acerca">Acerca de</NavLink>
         <NavLink to="/catalogo">Catálogo de carreras</NavLink>
-        <NavLink to="/psicometrico">Exámenes psicométricos</NavLink>
-        <NavLink to="/cip">Intereses profesionales</NavLink>
+        {MODO_COMPLETO && <NavLink to="/psicometrico">Exámenes psicométricos</NavLink>}
+        {/* /cip sale del menú: mide lo mismo que Holland (intereses) pero sin
+            autorización de uso y con baremos españoles de otra época. La ruta
+            sigue viva para poder mostrárselo a quien lo pida. Ver docs/holland.md. */}
+        <NavLink to="/holland">Test de Holland</NavLink>
         <NavLink to="/parametros">Parámetros</NavLink>
+        {sesion && <NavLink to="/historial">Mi historial</NavLink>}
       </nav>
+      <div className="nav-cuenta">
+        {sesion ? (
+          <>
+            <span className="nav-nombre">{sesion.estudiante.nombre}</span>
+            {admin && (
+              <NavLink to="/admin" className="nav-admin">Historial de alumnos</NavLink>
+            )}
+            <button className="nav-salir" onClick={salir}>Cerrar sesión</button>
+          </>
+        ) : (
+          <div className="nav-login">
+            <GoogleLogin onSuccess={alIniciarSesion} onError={() => setError('No se pudo iniciar sesión.')} />
+          </div>
+        )}
+        {error && <span className="nav-login-error">{error}</span>}
+      </div>
       <button className="nav-cta" onClick={() => navigate('/mapa')}>Empezar el chat</button>
     </header>
   )

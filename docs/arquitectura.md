@@ -65,14 +65,14 @@ El estudiante puede apagarla.
 │       ├── main.jsx        rutas: / /acerca /catalogo /parametros /psicometrico /mapa /chat
 │       ├── Inicio.jsx      landing
 │       ├── Nav.jsx         barra superior de las paginas informativas (el chat no la usa)
-│       ├── Mapa.jsx        mapa de Guatemala: elegir departamento o region
+│       ├── Mapa.jsx        mapa: los departamentos con catálogo (Totonicapán y Quetzaltenango)
 │       ├── Chat.jsx        chat (fijas + adaptativas), voz, fases chat/loading/dashboard
-│       ├── Dashboard.jsx   graficas, detalle por institucion, PDF, simulador, comparador, feedback
+│       ├── Dashboard.jsx   graficas, detalle por institucion, PDF, simulador, comparador
 │       ├── Catalogo.jsx    catalogo publico con filtros (GET /api/carreras)
 │       ├── Parametros.jsx  explicacion de las 7 dimensiones vocacionales
 │       ├── Acerca.jsx      pagina informativa
 │       ├── Psicometrico.jsx examen psicometrico (pestaña aparte del chat)
-│       ├── data/           SVG de departamentos y regiones de Guatemala
+│       ├── data/           SVG de los departamentos de Guatemala
 │       ├── reporte.js      PDF con jsPDF
 │       ├── session.js      SESSION_ID (uno por carga de pagina)
 │       └── colors.js       paleta compartida
@@ -89,11 +89,14 @@ desactualizada.
 
 ## ¿Qué información recopila? (base de datos)
 
-Se guarda en PostgreSQL (`backend/app/models.py`), 5 tablas:
+Se guarda en PostgreSQL (`backend/app/models.py`), 6 tablas:
 - **`estudiantes`**: nombre (el email es opcional, hoy no se pide).
 - **`respuestas_cuestionario`**: todas las respuestas del test como JSON, ligadas
-  al estudiante, más la `recomendacion` que devolvió la IA y el `feedback`
-  (👍/👎, `bool | None`) que dio el estudiante en el dashboard.
+  al estudiante, más la `recomendacion` que devolvió la IA y el `juicio` del
+  profesional (`acerto` | `parcial` | `no_acerto`) con su `juicio_nota`. El
+  alumno NO califica su propia recomendación: el 👍/👎 que había en el
+  dashboard se quitó porque no puede saber si acertó hasta que la evalúe un
+  profesional.
 - **`carreras`**: el catálogo (nombre, departamento, centro, universidad,
   `perfil`, `perfil_grupo` y `sello`). `perfil_grupo` apunta a un perfil
   compartido (`data/perfiles_compartidos.json`): la misma carrera en varias sedes
@@ -104,6 +107,16 @@ Se guarda en PostgreSQL (`backend/app/models.py`), 5 tablas:
   [decisions/gemini-costos-y-caching.md](../decisions/gemini-costos-y-caching.md)).
 - **`resultados_psicometricos`**: respuestas crudas + puntajes + resumen del
   examen psicométrico (ver [psicometrico.md](psicometrico.md)).
+- **`resultados_holland`**: hoja de 60 dígitos, código RIASEC y puntajes por área
+  del test de Holland (ver [holland.md](holland.md)).
+
+El **`session_id`** es lo que une todo: identifica un *recorrido* del alumno
+(Holland + chat + dashboard), no una carga de página. Vive en `sessionStorage`
+(`frontend/src/session.js`), así que sobrevive a recargar la página — antes se
+generaba con `crypto.randomUUID()` en cada carga y una recarga a media prueba
+partía los datos en dos sesiones que ya no se podían cruzar en la investigación.
+Empezar otra prueba llama a `nuevaSesion()` explícitamente, porque "Hacer otro
+test" navega sin recargar y reusaba la sesión anterior.
 
 No se recopilan datos sensibles ni credenciales. La `GEMINI_API_KEY` vive solo en
 `backend/.env` (ignorado por git, nunca se sube al repo).

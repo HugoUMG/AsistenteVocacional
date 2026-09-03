@@ -1,0 +1,3916 @@
+{
+  "sesiones": [
+    {
+      "brazo": "A",
+      "perfil": "Byron",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 2.58,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5229,
+          "output_tokens": 352,
+          "total_tokens": 5581,
+          "cached_tokens": 5000
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.38,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 4755,
+          "output_tokens": 396,
+          "total_tokens": 5151,
+          "cached_tokens": 4412
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.57,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6325,
+          "output_tokens": 375,
+          "total_tokens": 6700,
+          "cached_tokens": 5851
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.29,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6179,
+          "output_tokens": 351,
+          "total_tokens": 6530,
+          "cached_tokens": 5584
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.08,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5209,
+          "output_tokens": 184,
+          "total_tokens": 5393,
+          "cached_tokens": 4491
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.68,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24740,
+          "output_tokens": 796,
+          "total_tokens": 25536,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Comunicar, crear, diseñar o investigar la realidad",
+          "dijo": "Comunicar, crear, diseñar o investigar la realidad, porque lo que quiero es entender por qué estamos así de pobres y analizar los datos de nuestra economía, nada de andar viendo cómo hacer negocios."
+        },
+        "estilo": {
+          "elegido": "Analizando datos, ideas y lógica",
+          "dijo": "Analizando datos, ideas y lógica. La neta me cuadra más estar viendo cómo se mueve la plata y por qué estamos tan pisados, eso de andar con gente no es lo mío."
+        },
+        "entorno": {
+          "elegido": "Con la comunidad, ayudando a personas",
+          "dijo": "Con la comunidad, ayudando a personas. La verdad no me veo en una oficina viendo números de empresas, yo lo que quiero es investigar por qué el país no sale de la pobreza para entender qué está fallando realmente."
+        },
+        "gustos": {
+          "elegido": "Historia, sociedad y cultura",
+          "dijo": "Historia, sociedad y cultura, y también Matemáticas porque me cuadra ver por qué este país está tan fregado. La neta no me interesa nada de negocios ni andar viendo cómo hacer dinero, solo quiero entender las estructuras de esta pobreza."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "habilidades",
+          "pregunta": "Hola Byron, me alegra mucho conocerte. Veo que te apasiona la historia, la cultura y que tienes muchas ganas de ayudar a tu comunidad. Pensando en cómo te gusta trabajar, ¿te sientes más cómodo **resolviendo problemas técnicos** con mucha precisión o prefieres **analizar situaciones sociales** para proponer cambios en la forma en que vivimos?",
+          "opciones": [
+            "Prefiero resolver problemas técnicos y prácticos",
+            "Prefiero analizar situaciones sociales y proponer cambios"
+          ],
+          "respuesta": "Prefiero analizar situaciones sociales y proponer cambios. La verdad es que me quema la cabeza ver tanta pobreza aquí y quiero entender por qué el sistema no funciona igual para todos.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Profesorado en Idioma Maya, Ciencias Sociales e Interculturalidad",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Byron, me queda muy claro que te duele ver la desigualdad y que buscas entender las causas profundas de nuestra realidad. Ahora, para conocerte un poco mejor en tu forma de ser, cuéntame: cuando te enfrentas a un problema grande o a una injusticia, ¿te sientes más impulsado a **liderar un grupo** para buscar soluciones juntos o prefieres **investigar por tu cuenta** y proponer ideas desde el análisis profundo?",
+          "opciones": [
+            "Prefiero liderar y organizar a otros para actuar en equipo",
+            "Prefiero investigar y analizar a solas para entender el problema"
+          ],
+          "respuesta": "Prefiero investigar y analizar a solas para entender el problema. Siento que primero hay que descifrar las estructuras del sistema antes de ponerse a organizar gente.",
+          "ranking": [
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Profesorado en Idioma Maya, Ciencias Sociales e Interculturalidad",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Byron, entiendo perfectamente que prefieras investigar a fondo por tu cuenta antes de actuar, ya que te gusta desarmar los problemas pieza por pieza. Ahora, pensando en cómo te gusta trabajar con la información, ¿te sientes más cómodo **creando modelos o teorías** para explicar cómo funciona la sociedad, o prefieres **usar datos reales y concretos** para demostrar qué es lo que está fallando?",
+          "opciones": [
+            "Crear modelos y teorías para explicar la realidad",
+            "Usar datos concretos para demostrar fallas"
+          ],
+          "respuesta": "Usar datos reales y concretos para demostrar fallas. Me gusta más ver los números fríos para entender por qué la economía no levanta y señalar dónde está el error.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Ingeniería en Gestión Ambiental Local",
+              "afinidad": 55
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Byron, me queda muy claro que te gusta ir directo a los números para encontrar dónde fallan las cosas. Ahora, cuéntame algo sobre lo que te mueve por dentro: cuando piensas en tu futuro trabajo, ¿qué es lo más importante para ti: **tener la libertad** de investigar lo que tú consideres necesario sin que nadie te diga cómo, o **sentir que tu trabajo tiene un impacto directo** en las leyes y decisiones que cambian el país?",
+          "opciones": [
+            "Tener libertad total para investigar a mi ritmo",
+            "Tener un impacto directo en las decisiones del país"
+          ],
+          "respuesta": "Tener libertad total para investigar a mi ritmo. Es que si me pongo a seguir órdenes de alguien más, al final solo termino haciendo lo que otros quieren y no lo que de verdad sirve para entender por qué seguimos estancados.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Economía",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Contaduría Pública y Auditoría",
+              "afinidad": 60
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Criminología y Política Criminal",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 15
+        }
+      ],
+      "top1": "Licenciatura en Economía",
+      "acierta": true,
+      "objetivo_en_top3": false,
+      "objetivo": "Economía Empresarial",
+      "roto": true
+    },
+    {
+      "brazo": "B",
+      "perfil": "Byron",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 2.5,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25046,
+          "output_tokens": 337,
+          "total_tokens": 25383,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.72,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25173,
+          "output_tokens": 353,
+          "total_tokens": 25526,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.82,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25296,
+          "output_tokens": 353,
+          "total_tokens": 25649,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.01,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25442,
+          "output_tokens": 382,
+          "total_tokens": 25824,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.48,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25544,
+          "output_tokens": 188,
+          "total_tokens": 25732,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 2.96,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24786,
+          "output_tokens": 734,
+          "total_tokens": 25520,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Comunicar, crear, diseñar o investigar la realidad",
+          "dijo": "Comunicar, crear, diseñar o investigar la realidad. Me cuadra un montón analizar por qué el país está tan trabado y ver qué datos explican esa desigualdad que nos afecta a todos."
+        },
+        "estilo": {
+          "elegido": "Analizando datos, ideas y lógica",
+          "dijo": "Analizando datos, ideas y lógica. Es que me la paso viendo cómo se mueve la economía, me encanta entender la estructura de por qué estamos como estamos."
+        },
+        "entorno": {
+          "elegido": "La verdad no me veo en una oficina de una empresa, eso me da igual. Me imagino más en un centro de investigación analizando datos o con la comunidad viendo cómo vive la gente realmente.",
+          "dijo": "La verdad no me veo en una oficina de una empresa, eso me da igual. Me imagino más en un centro de investigación analizando datos o con la comunidad viendo cómo vive la gente realmente."
+        },
+        "gustos": {
+          "elegido": "Matemáticas y números, Historia, sociedad y cultura",
+          "dijo": "Me apasionan Historia, sociedad y cultura, y también Matemáticas y números. Es que me la paso viendo por qué hay tanta pobreza en el país y analizando datos de inflación para entender cómo funcionan las estructuras sociales."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "valores",
+          "pregunta": "Byron, me queda claro que te gusta mucho el análisis y que prefieres estar en el campo o investigando antes que encerrado en una oficina. Pensando en cómo te gusta trabajar, ¿qué te hace sentir más **satisfecho** al terminar una tarea: descubrir una **verdad oculta** detrás de los datos o lograr un **cambio positivo** en la vida de una comunidad?",
+          "opciones": [
+            "Descubrir verdades ocultas en los datos",
+            "Lograr un cambio positivo en la comunidad"
+          ],
+          "respuesta": "Descubrir verdades ocultas en los datos. Es que si no entiendo primero por qué estamos tan amolados estructuralmente, nunca voy a saber qué cambio realmente va a servir para el país.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería en Gestión Ambiental Local",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Byron, me encanta tu enfoque. Tienes esa chispa de investigador que quiere entender la raíz de los problemas antes de actuar. Ahora, cuéntame sobre cómo te gusta **resolver problemas**: prefieres enfrentarte a un reto donde tienes que **crear un modelo** o una fórmula nueva para explicar algo, o te sientes más cómodo **desarmando y analizando** una situación compleja paso a paso hasta encontrar la falla?",
+          "opciones": [
+            "Prefiero crear modelos o fórmulas nuevas",
+            "Prefiero analizar paso a paso hasta encontrar la falla"
+          ],
+          "respuesta": "Prefiero analizar paso a paso hasta encontrar la falla. Me gusta ir desmenuzando los datos para ver dónde está el clavo de por qué el sistema no funciona.",
+          "ranking": [
+            {
+              "carrera": "Economía",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Sociología/Investigación",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Informática e Inteligencia de Negocios",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Byron, me queda clarísimo que tu mente es como un bisturí: te encanta ir desmenuzando los problemas paso a paso hasta dar con el clavo. Ahora, pensando en tu **personalidad**, cuando trabajas en algo que te apasiona, ¿prefieres hacerlo **completamente solo** para concentrarte al máximo en tus análisis, o te sientes más cómodo **intercambiando ideas** con otras personas para ver si tu lógica coincide con la de ellos?",
+          "opciones": [
+            "Prefiero trabajar solo y a mi ritmo",
+            "Prefiero intercambiar ideas con otros"
+          ],
+          "respuesta": "Sí, me gusta intercambiar ideas. Es que a veces uno se bloquea con sus propios números y hace falta escuchar qué dicen otros para ver si el análisis tiene sentido o si me estoy haciendo bolas solo.",
+          "ranking": [
+            {
+              "carrera": "Economía",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Sociología/Trabajo Social",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Byron, me gusta mucho que seas tan abierto a escuchar a los demás para no perderte en tus propios números. Ya que te encanta desmenuzar problemas, cuéntame sobre lo que mejor sabes hacer: ¿qué te resulta más natural, **manejar herramientas digitales** avanzadas para procesar grandes cantidades de información, o **redactar informes detallados** donde explicas con palabras claras por qué las cosas no están funcionando?",
+          "opciones": [
+            "Manejar herramientas digitales y software para procesar datos",
+            "Redactar informes detallados y explicar hallazgos con palabras"
+          ],
+          "respuesta": "Manejar herramientas digitales, porque con los datos crudos es como de verdad le encuentro sentido a toda la onda de la economía y puedo ver las tendencias reales.",
+          "ranking": [
+            {
+              "carrera": "Economía",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Sociología (Ciencias Sociales)",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Contaduría Pública y Auditoría",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Economía",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Informática e Inteligencia de Negocios",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 60
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "top3": [
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Criminología y Política Criminal",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Licenciatura en Economía",
+      "acierta": true,
+      "objetivo_en_top3": false,
+      "objetivo": "Economía Empresarial",
+      "roto": true
+    },
+    {
+      "brazo": "A",
+      "perfil": "Kimberly",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 2.62,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6107,
+          "output_tokens": 367,
+          "total_tokens": 6474,
+          "cached_tokens": 5803
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.38,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6749,
+          "output_tokens": 353,
+          "total_tokens": 7102,
+          "cached_tokens": 6330
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 3.29,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6092,
+          "output_tokens": 347,
+          "total_tokens": 6439,
+          "cached_tokens": 5532
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 3.06,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 7174,
+          "output_tokens": 347,
+          "total_tokens": 7521,
+          "cached_tokens": 6484
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.07,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6683,
+          "output_tokens": 181,
+          "total_tokens": 6864,
+          "cached_tokens": 5890
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 2.89,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24815,
+          "output_tokens": 720,
+          "total_tokens": 25535,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Construir, diseñar o hacer que las cosas funcionen",
+          "dijo": "Elegiría construir, diseñar o hacer que las cosas funcionen, porque me urge que en mi aldea al fin tengamos buena señal para que todos estemos conectados."
+        },
+        "estilo": {
+          "elegido": "De forma práctica, con las manos, Al aire libre y en movimiento",
+          "dijo": "Me gusta más de forma práctica, con las manos, y también al aire libre y en movimiento. Es que a mí me cuadra andar viendo dónde poner las antenas para que la señal llegue a todos lados y no estar clavada frente a una compu."
+        },
+        "entorno": {
+          "elegido": "Al aire libre, en el campo o la naturaleza, En una obra, con máquinas o herramientas",
+          "dijo": "Al aire libre, en el campo o la naturaleza y en una obra, con máquinas o herramientas. Es que yo quiero estar donde están las torres y los cables para que la señal por fin llegue a todos."
+        },
+        "gustos": {
+          "elegido": "Me gusta la tecnología, pero nada de andar haciendo programas, eso me aburre. Lo mío es ver cómo hacer que la señal llegue a todos lados con antenas y todo ese rollo de infraestructura. También me cuadra un montón la construcción y ver cómo funcionan las máquinas para conectar a la gente.",
+          "dijo": "Me gusta la tecnología, pero nada de andar haciendo programas, eso me aburre. Lo mío es ver cómo hacer que la señal llegue a todos lados con antenas y todo ese rollo de infraestructura. También me cuadra un montón la construcción y ver cómo funcionan las máquinas para conectar a la gente."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Kimberly, me encanta esa chispa que tienes por conectar a la gente y construir cosas reales. Pensando en cómo te gusta trabajar, dime una cosa: cuando tienes que resolver un problema difícil, ¿qué te sale mejor: **seguir instrucciones** paso a paso para que todo quede perfecto, o prefieres **inventar una solución** nueva aunque no sepas bien cómo va a terminar?",
+          "opciones": [
+            "Seguir pasos y protocolos al pie de la letra",
+            "Inventar o buscar soluciones nuevas"
+          ],
+          "respuesta": "La verdad prefiero inventar o buscar soluciones nuevas. Me aburro un montón siguiendo pasos, mejor le busco la vuelta para que la señal agarre aunque sea improvisando.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Administración de Telecomunicaciones",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería Agrícola",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Kimberly, se nota que eres de las que no se queda quieta y prefiere buscar su propio camino en lugar de seguir un manual. Ahora, cuéntame sobre cómo te gusta trabajar con otros: cuando hay un proyecto importante, ¿te sientes más cómoda **liderando al equipo** y tomando las decisiones finales, o prefieres ser quien **aporta las ideas técnicas** y se encarga de que todo funcione bien en la práctica?",
+          "opciones": [
+            "Prefiero liderar y coordinar al grupo",
+            "Prefiero enfocarme en la parte técnica y operativa"
+          ],
+          "respuesta": "Prefiero enfocarme en la parte técnica y operativa. La verdad no me gusta andar mandando a nadie, yo solo quiero que las antenas y los cables queden bien para que el internet funcione de a de veras.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Administración de Telecomunicaciones",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Electrónica",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Kimberly, me queda clarísimo que lo tuyo es meter las manos en la técnica y que las cosas funcionen, sin tanto rollo de mandar gente. Ahora, pensando en el tipo de retos que te gustaría enfrentar, ¿qué te motiva más: **asegurar que una infraestructura** sea súper resistente y segura para que dure años, o te llama más la atención **resolver problemas de conectividad** en lugares difíciles donde la gente realmente necesita comunicarse?",
+          "opciones": [
+            "Construir cosas resistentes y duraderas",
+            "Llevar señal a lugares donde no hay"
+          ],
+          "respuesta": "Llevar señal a lugares donde no hay. Me llega más ese reto porque sé lo que se siente estar ahí sin señal y ver cómo la gente sufre por eso.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Administración de Telecomunicaciones",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Kimberly, me impresiona mucho tu compromiso con llevar conectividad a donde hace falta, eso es un reto genial. Para lograr que esa señal llegue a lugares difíciles, ¿qué te sentirías más cómoda haciendo: **diseñar los planos y cálculos** de dónde poner las antenas y cómo se conectan, o prefieres **instalar y configurar** los equipos directamente en el sitio para asegurar que todo funcione al momento?",
+          "opciones": [
+            "Diseñar los planos y hacer los cálculos técnicos",
+            "Instalar, configurar y poner a punto los equipos"
+          ],
+          "respuesta": "Instalar, configurar y poner a punto los equipos. Me gusta más andar ahí arriba en la torre o en el cerro asegurándome que la señal caiga de una vez.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Administración de Telecomunicaciones",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 55
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Telecomunicaciones",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería Electrónica",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 45
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Licenciatura en Administración de Telecomunicaciones",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Ingeniería en Electrónica",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería Civil",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Licenciatura en Administración de Telecomunicaciones",
+      "acierta": true,
+      "objetivo_en_top3": false,
+      "objetivo": "Ingeniería en Telecomunicaciones",
+      "roto": true
+    },
+    {
+      "brazo": "B",
+      "perfil": "Kimberly",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 1.73,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25027,
+          "output_tokens": 364,
+          "total_tokens": 25391,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.92,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25126,
+          "output_tokens": 361,
+          "total_tokens": 25487,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.75,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25250,
+          "output_tokens": 376,
+          "total_tokens": 25626,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.8,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25369,
+          "output_tokens": 347,
+          "total_tokens": 25716,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.35,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25464,
+          "output_tokens": 191,
+          "total_tokens": 25655,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.09,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24706,
+          "output_tokens": 722,
+          "total_tokens": 25428,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Construir, diseñar o hacer que las cosas funcionen",
+          "dijo": "Elegiría construir, diseñar o hacer que las cosas funcionen, porque me urge que en mi aldea ya no se caiga la señal y que todos estemos bien conectados."
+        },
+        "estilo": {
+          "elegido": "De forma práctica, con las manos, Al aire libre y en movimiento",
+          "dijo": "Al aire libre y en movimiento y de forma práctica, con las manos. Es que estar ahí donde están las antenas y ver cómo se conecta todo es lo mejor."
+        },
+        "entorno": {
+          "elegido": "Al aire libre, en el campo o la naturaleza, En una obra, con máquinas o herramientas",
+          "dijo": "Al aire libre, en el campo o la naturaleza y en una obra, con máquinas o herramientas. Es que yo lo que quiero es arreglar esos cables y antenas para que por fin tengamos buen internet aquí en la aldea."
+        },
+        "gustos": {
+          "elegido": "Tecnología y computación",
+          "dijo": "Me gusta la tecnología y computación pero solo para que la señal llegue a todos, no para andar haciendo programas. También la construcción y cómo funcionan las máquinas porque así es como se logra la conexión en mi aldea."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Kimberly, me encanta que te guste la tecnología y que disfrutes trabajar al aire libre con máquinas o herramientas. Cuéntame, cuando tienes que aprender a usar algo nuevo o resolver un problema técnico, ¿prefieres **seguir un manual** paso a paso para que todo quede perfecto o te gusta más **experimentar y probar** diferentes formas hasta que logras que funcione?",
+          "opciones": [
+            "Prefiero seguir un manual o pasos claros",
+            "Prefiero experimentar y probar por mi cuenta"
+          ],
+          "respuesta": "Prefiero experimentar y probar por mi cuenta, es que así aprendo más rápido cómo funcionan las cosas en realidad.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Kimberly, me encanta que prefieras aprender probando por tu cuenta, eso demuestra mucha iniciativa. Ahora, pensando en el futuro, ¿qué te hace sentir más orgullosa: **ayudar directamente** a personas que lo necesitan o **crear soluciones técnicas** que mejoren la vida de muchos, aunque no los conozcas personalmente?",
+          "opciones": [
+            "Ayudar directamente a personas",
+            "Crear soluciones técnicas para muchos"
+          ],
+          "respuesta": "Sí, porque me cuadra que la gente tenga buena señal y no tenga que andar sufriendo como me pasa a mí en la aldea. Me llena más ver que la infraestructura que armé sí le sirve a un montón de personas aunque ni las conozca.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Agrícola con Énfasis en Gerencia",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Kimberly, es genial que tengas esa visión de llevar conectividad a tu comunidad, se nota que eres alguien con mucha determinación. Ahora cuéntame, cuando trabajas en un proyecto, ¿te sientes más cómoda **tomando el mando** y guiando a otros para que el trabajo salga bien o prefieres **enfocarte en tu parte** técnica y dejar que alguien más se encargue de coordinar al equipo?",
+          "opciones": [
+            "Prefiero tomar el mando y guiar al equipo",
+            "Prefiero enfocarme en mi trabajo técnico"
+          ],
+          "respuesta": "Sí, me gusta tomar el mando porque así me aseguro de que las cosas se hagan bien y no se traben por culpa de alguien más.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Telecomunicaciones",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Kimberly, me queda claro que prefieres llevar el mando para que todo salga bien y que te motiva mucho la parte técnica. Ahora, para entender mejor tus habilidades, cuéntame: cuando te enfrentas a un problema, ¿te sientes más capaz de **resolver fallos mecánicos** o piezas que no encajan, o prefieres **gestionar los sistemas** y redes que hacen que todo el flujo funcione correctamente?",
+          "opciones": [
+            "Resolver fallos mecánicos y piezas físicas",
+            "Gestionar sistemas, redes y flujos de información"
+          ],
+          "respuesta": "Prefiero gestionar sistemas y redes, porque me cuadra ver cómo viaja la señal por el aire para que al fin llegue a donde debe.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Telecomunicaciones",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Electrónica",
+              "afinidad": 78
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Telecomunicaciones",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Industrial",
+              "afinidad": 50
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Licenciatura en Administración de Telecomunicaciones",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Ingeniería en Electrónica",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Licenciatura en Administración de Telecomunicaciones",
+      "acierta": true,
+      "objetivo_en_top3": false,
+      "objetivo": "Ingeniería en Telecomunicaciones",
+      "roto": true
+    },
+    {
+      "brazo": "A",
+      "perfil": "Dilan",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 2.38,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6094,
+          "output_tokens": 386,
+          "total_tokens": 6480,
+          "cached_tokens": 5814
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.45,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5916,
+          "output_tokens": 350,
+          "total_tokens": 6266,
+          "cached_tokens": 5513
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.44,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5609,
+          "output_tokens": 377,
+          "total_tokens": 5986,
+          "cached_tokens": 5081
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.61,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 4788,
+          "output_tokens": 360,
+          "total_tokens": 5148,
+          "cached_tokens": 4133
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.93,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 4851,
+          "output_tokens": 205,
+          "total_tokens": 5056,
+          "cached_tokens": 4100
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 2.68,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24773,
+          "output_tokens": 709,
+          "total_tokens": 25482,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Comunicar, crear, diseñar o investigar la realidad",
+          "dijo": "Comunicar, crear, diseñar o investigar la realidad, porque me cuadra entender por qué la mara se mete en ondas malas para que ya no pase tanto. Pero nada de ser abogado ni andar metido en juzgados, eso cero conmigo."
+        },
+        "estilo": {
+          "elegido": "Analizando datos, ideas y lógica",
+          "dijo": "Analizando datos, ideas y lógica. Me cuadra un montón ver cómo se mueven las cosas y entender por qué pasan, pero nada que ver con estar en juzgados o metido en un laboratorio todo el día."
+        },
+        "entorno": {
+          "elegido": "Me veo trabajando con la comunidad, ayudando a la mara y también en una oficina analizando datos. Nada de laboratorios porque eso me aburre y tampoco quiero andar metido en juzgados ni siendo abogado, solo quiero entender qué onda con la inseguridad.",
+          "dijo": "Me veo trabajando con la comunidad, ayudando a la mara y también en una oficina analizando datos. Nada de laboratorios porque eso me aburre y tampoco quiero andar metido en juzgados ni siendo abogado, solo quiero entender qué onda con la inseguridad."
+        },
+        "gustos": {
+          "elegido": "Psicología y comportamiento, Historia, sociedad y cultura",
+          "dijo": "Me cuadran bastante Historia, sociedad y cultura y también Psicología y comportamiento. Es que me la paso pensando por qué la mara se mete en ondas malas y cómo arreglar ese desorden en la calle."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "personalidad",
+          "pregunta": "Dilan, me queda claro que te mueve mucho entender la sociedad y cómo se comporta la gente, especialmente para buscar soluciones a temas pesados como la inseguridad. Ahora, imagina que tienes un problema difícil de resolver: ¿prefieres **enfrentarlo solo** analizando toda la información a tu ritmo, o prefieres **armar un equipo** y discutir con otros para encontrar la mejor salida?",
+          "opciones": [
+            "Prefiero hacerlo solo, concentrado en mis propios análisis",
+            "Prefiero trabajar con otros, intercambiando ideas y puntos de vista"
+          ],
+          "respuesta": "Prefiero trabajar con otros, intercambiando ideas y puntos de vista. Es que entre varios se sacan mejores conclusiones y uno solo se puede llegar a travar con tanta paja.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Economía Empresarial",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Marketing and Business Analytics",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Profesorado en Idioma Maya, Ciencias Sociales e Interculturalidad",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Me gusta mucho que valores el trabajo en equipo, Dilan, porque al final las mejores ideas salen de compartir puntos de vista. Ya que te interesa entender la inseguridad y la sociedad, cuéntame: cuando tienes que resolver un problema complejo, ¿qué se te da mejor: **organizar y clasificar información** para ver patrones claros o **imaginar nuevas formas** de hacer las cosas para mejorar la situación?",
+          "opciones": [
+            "Organizar y analizar datos para encontrar patrones",
+            "Imaginar soluciones nuevas y creativas"
+          ],
+          "respuesta": "Organizar y analizar datos para encontrar patrones. Me gusta ver dónde está el clavo y qué onda con las causas de por qué la mara se mete en ondas ilícitas.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Marketing and Business Analytics",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Informática y Administración de Empresas",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Dilan, me queda clarísimo que lo tuyo es ir directo a los datos para encontrar el origen de los problemas, como cuando investigas por qué ocurre la inseguridad. Ahora, pensando en tu futuro profesional, ¿qué te parece más importante: sentir que tu trabajo **ayuda directamente a personas** en situaciones difíciles o saber que tu labor **aporta soluciones estratégicas** que mejoran el funcionamiento de toda una sociedad?",
+          "opciones": [
+            "Ayudar directamente a personas",
+            "Aportar soluciones estratégicas para la sociedad"
+          ],
+          "respuesta": "Aportar soluciones estratégicas para la sociedad, porque prefiero ver cambios a nivel grande que ayuden a todos en vez de solo andar resolviendo casos de uno en uno.",
+          "ranking": [
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Administración en Recursos Humanos",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Informática e Inteligencia de Negocios",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Profesorado en Psicopedagogía",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Dilan, me encanta que tengas esa visión de buscar cambios grandes para la sociedad analizando datos. Ya que prefieres ir directo a los patrones, cuéntame: cuando te enfrentas a un problema, ¿te sientes más cómodo **siguiendo un método lógico** paso a paso para asegurar que todo esté bien calculado, o prefieres **explorar ideas nuevas** y diferentes aunque eso signifique salirte de lo que ya está probado?",
+          "opciones": [
+            "Seguir un método lógico y estructurado",
+            "Explorar ideas nuevas y diferentes"
+          ],
+          "respuesta": "Seguir un método lógico y estructurado, porque para entender la inseguridad necesito que todo esté bien ordenado y no hablar por hablar.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 55
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Técnico Universitario en Gerencia de Ventas",
+              "afinidad": 45
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "top3": [
+        {
+          "carrera": "Criminología y Política Criminal",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Criminología y Política Criminal",
+      "acierta": true,
+      "objetivo_en_top3": true,
+      "objetivo": "Criminología y Política Criminal",
+      "roto": true
+    },
+    {
+      "brazo": "B",
+      "perfil": "Dilan",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 1.92,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25073,
+          "output_tokens": 336,
+          "total_tokens": 25409,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.88,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25196,
+          "output_tokens": 337,
+          "total_tokens": 25533,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.9,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25312,
+          "output_tokens": 336,
+          "total_tokens": 25648,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.23,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25429,
+          "output_tokens": 333,
+          "total_tokens": 25762,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.2,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25529,
+          "output_tokens": 183,
+          "total_tokens": 25712,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.01,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24771,
+          "output_tokens": 749,
+          "total_tokens": 25520,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Me late más investigar la realidad porque quiero entender por qué la mara se mete en clavos, pero nada que ver con ser abogado en un juzgado ni estar encerrado en un laboratorio viendo químicos.",
+          "dijo": "Me late más investigar la realidad porque quiero entender por qué la mara se mete en clavos, pero nada que ver con ser abogado en un juzgado ni estar encerrado en un laboratorio viendo químicos."
+        },
+        "estilo": {
+          "elegido": "Analizando datos, ideas y lógica",
+          "dijo": "Analizando datos, ideas y lógica. La verdad me gusta más andar viendo patrones y entender cómo funciona todo el desmadre, pero nada de estar en oficinas de abogados o viendo tubos de ensayo."
+        },
+        "entorno": {
+          "elegido": "Más que todo con la comunidad, ayudando a gente en programas de prevención para que no caigan en malos pasos, o tal vez en una oficina analizando toda esa información.",
+          "dijo": "Más que todo con la comunidad, ayudando a gente en programas de prevención para que no caigan en malos pasos, o tal vez en una oficina analizando toda esa información."
+        },
+        "gustos": {
+          "elegido": "Psicología y comportamiento, Historia, sociedad y cultura",
+          "dijo": "Psicología y comportamiento, y también Historia, sociedad y cultura. Me interesa un montón entender qué pasa en la cabeza de la mara y cómo arreglar el desorden que hay en la sociedad para que no sigan los problemas."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Dilan, me queda súper claro que te mueve mucho el tema de la sociedad y entender por qué la gente toma decisiones difíciles. Ya que te gusta analizar datos y la lógica, cuéntame: cuando tienes que resolver un problema, ¿prefieres **enfocarte en los números y hechos fríos** para sacar conclusiones, o prefieres **escuchar a las personas** y entender sus emociones para encontrar una solución?",
+          "opciones": [
+            "Prefiero los números, hechos y la lógica pura",
+            "Prefiero escuchar a la gente y sus historias"
+          ],
+          "respuesta": "La neta prefiero los números, los hechos y la lógica pura. Siento que analizando datos se entiende mejor qué está pasando en realidad para armar algo que sí funcione.",
+          "ranking": [
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Psicología",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Sociología",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Dilan, me parece genial que tengas esa mente tan enfocada en los datos y la lógica para entender la realidad. Ahora, pensando en cómo te gusta trabajar día a día, ¿te ves más **liderando un proyecto** donde tú tomas las decisiones y organizas todo, o prefieres ser quien **aporta el análisis técnico** y profundo para que otros tomen la mejor decisión?",
+          "opciones": [
+            "Prefiero liderar y tomar las decisiones finales",
+            "Prefiero ser el experto que analiza y propone la solución"
+          ],
+          "respuesta": "Prefiero ser el experto que analiza y propone la solución, la verdad me siento más cómodo así analizando todo por mi cuenta sin tanto alboroto.",
+          "ranking": [
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Economía",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Sociología/Ciencias Sociales",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Industrial",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Dilan, me queda clarísimo que prefieres ser el experto que analiza todo a fondo y propone soluciones desde la lógica. Ahora, pensando en lo que te gustaría aportar al mundo, ¿qué te llena más: **resolver problemas técnicos** complicados donde la precisión es lo más importante, o **promover la justicia y el bienestar** de las personas, aunque eso signifique enfrentar situaciones más difíciles y menos exactas?",
+          "opciones": [
+            "Resolver problemas técnicos con precisión",
+            "Promover la justicia y el bienestar social"
+          ],
+          "respuesta": "Promover la justicia y el bienestar, la neta es que eso es lo que me motiva para entender por qué la gente se pierde.",
+          "ranking": [
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Economía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Informática e Inteligencia de Negocios",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Sociología/Ciencias Sociales",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Dilan, me queda muy claro que tu motor es ayudar a la gente y buscar justicia, pero usando siempre tu capacidad de análisis. Para terminar de entender cómo te gusta trabajar, cuéntame: cuando se trata de usar tus habilidades, ¿qué te sale mejor o te gusta más: **investigar y organizar información** para encontrar patrones escondidos, o **diseñar estrategias y planes** de acción para resolver problemas reales en la comunidad?",
+          "opciones": [
+            "Investigar y organizar información",
+            "Diseñar estrategias y planes de acción"
+          ],
+          "respuesta": "Me late más diseñar estrategias y planes de acción, porque así siento que realmente puedo cambiar algo en la comunidad en lugar de solo quedarme viendo datos.",
+          "ranking": [
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Psicología",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Economía",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Economía",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Sociología (no catálogo)",
+              "afinidad": 55
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "top3": [
+        {
+          "carrera": "Criminología y Política Criminal",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Criminología y Política Criminal",
+      "acierta": true,
+      "objetivo_en_top3": true,
+      "objetivo": "Criminología y Política Criminal",
+      "roto": true
+    },
+    {
+      "brazo": "A",
+      "perfil": "Yesenia",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 2.48,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 7430,
+          "output_tokens": 366,
+          "total_tokens": 7796,
+          "cached_tokens": 7119
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.31,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 7436,
+          "output_tokens": 341,
+          "total_tokens": 7777,
+          "cached_tokens": 6996
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.6,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 7197,
+          "output_tokens": 398,
+          "total_tokens": 7595,
+          "cached_tokens": 6649
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.74,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6184,
+          "output_tokens": 346,
+          "total_tokens": 6530,
+          "cached_tokens": 5500
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.83,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6263,
+          "output_tokens": 205,
+          "total_tokens": 6468,
+          "cached_tokens": 5498
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.09,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24787,
+          "output_tokens": 716,
+          "total_tokens": 25503,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Yo fijo me voy por usar tecnología y números y también por hacer que las cosas funcionen. La verdad es que a mí me cuadra un montón la onda de la salud pero solo con las máquinas, nada de andar cuidando gente todo el día, y quiero algo que dure poquito para salir rápido.",
+          "dijo": "Yo fijo me voy por usar tecnología y números y también por hacer que las cosas funcionen. La verdad es que a mí me cuadra un montón la onda de la salud pero solo con las máquinas, nada de andar cuidando gente todo el día, y quiero algo que dure poquito para salir rápido."
+        },
+        "estilo": {
+          "elegido": "Analizando datos, ideas y lógica, De forma práctica, con las manos",
+          "dijo": "Analizando datos, ideas y lógica y también de forma práctica, con las manos. Es que me gusta meterle mano a los aparatos y usar la lógica para que todo funcione bien sin estar ahí lidiando con la gente."
+        },
+        "entorno": {
+          "elegido": "En un hospital o clínica y en un laboratorio técnico, ahí donde están las máquinas que le digo para no tener que andar lidiando con la gente.",
+          "dijo": "En un hospital o clínica y en un laboratorio técnico, ahí donde están las máquinas que le digo para no tener que andar lidiando con la gente."
+        },
+        "gustos": {
+          "elegido": "Tecnología y computación",
+          "dijo": "Me apasiona la tecnología y computación, y también la construcción y máquinas, porque así entiendo cómo funcionan esos aparatos de los hospitales sin tener que estar cuidando personas."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "personalidad",
+          "pregunta": "Me queda claro que te gusta la tecnología y que los números son lo tuyo, y que prefieres estar entre máquinas que cuidando pacientes. Ahora, cuéntame sobre tu forma de ser: cuando tienes que resolver un problema difícil, ¿qué te sale más natural: **analizar cada detalle** paso a paso para que todo quede perfecto, o prefieres **probar cosas nuevas** y ver qué pasa hasta que encuentres una solución rápida?",
+          "opciones": [
+            "Analizar cada detalle con mucha calma",
+            "Probar cosas rápido hasta que funcione"
+          ],
+          "respuesta": "Analizar cada detalle con mucha calma. Soy bien detallista con esas ondas de las máquinas porque si algo falla ya estuvo, mejor hacer las cosas bien de una vez.",
+          "ranking": [
+            {
+              "carrera": "Tecnico en Radiologia e Imagenes Diagnosticas",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Produccion de Imagenes Diagnosticas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Tecnico Universitario en Desarrollo de Software",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Informatica e Inteligencia de Negocios",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Se nota que eres muy perfeccionista y que te gusta que las cosas salgan bien a la primera. Pensando en lo que sabes hacer con las manos o con herramientas, ¿qué te llama más la atención: **armar y ajustar piezas** pequeñas con mucha precisión o prefieres **configurar y manejar sistemas** digitales complejos en una computadora?",
+          "opciones": [
+            "Armar y ajustar piezas pequeñas con precisión",
+            "Configurar y manejar sistemas digitales"
+          ],
+          "respuesta": "Configurar y manejar sistemas digitales, me cuadra más estar ahí metida en la compu controlando los aparatos porque siento que se me da re bien.",
+          "ranking": [
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Qué buena onda que te sientas tan cómoda controlando sistemas desde la compu, Yesenia. Ya que eres tan detallista y te gusta que todo funcione perfecto, cuéntame: cuando trabajas en un proyecto, ¿qué es lo que más te motiva: **que el resultado sea impecable** y sin errores, aunque te tome más tiempo, o te importa más **que el sistema sea súper eficiente** y que todo fluya rapidísimo?",
+          "opciones": [
+            "Que el resultado sea perfecto y sin errores",
+            "Que el sistema sea rápido y eficiente"
+          ],
+          "respuesta": "Que el resultado sea perfecto y sin errores, fijo. A mí me gusta que todo quede al centavo porque una máquina no puede fallar, mejor tardarse un poquito pero que salga de calidad.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Qué bien que te enfoques tanto en la calidad, Yesenia. Ahora, para entender mejor cómo piensas cuando te enfrentas a un reto, dime: ¿te sientes más cómoda **siguiendo instrucciones claras** y pasos ya probados para no cometer errores, o prefieres **buscar nuevas formas** de resolver las cosas usando tu propia lógica?",
+          "opciones": [
+            "Seguir pasos claros y probados",
+            "Buscar mis propias formas usando lógica"
+          ],
+          "respuesta": "Seguir pasos claros y probados. Como trabajo con máquinas prefiero irme por lo seguro para que todo salga nítido y sin clavos.",
+          "ranking": [
+            {
+              "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+              "afinidad": 45
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        true,
+        false,
+        true,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Técnico Universitario en Laboratorio Clínico",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Técnico Universitario en Desarrollo de Software",
+          "afinidad": 20
+        }
+      ],
+      "top1": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+      "acierta": true,
+      "objetivo_en_top3": true,
+      "objetivo": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+      "roto": true
+    },
+    {
+      "brazo": "B",
+      "perfil": "Yesenia",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 6.06,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25089,
+          "output_tokens": 378,
+          "total_tokens": 25467,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.07,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25212,
+          "output_tokens": 375,
+          "total_tokens": 25587,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.75,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25323,
+          "output_tokens": 389,
+          "total_tokens": 25712,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.8,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25435,
+          "output_tokens": 353,
+          "total_tokens": 25788,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.45,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25526,
+          "output_tokens": 201,
+          "total_tokens": 25727,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.52,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24768,
+          "output_tokens": 903,
+          "total_tokens": 25671,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "La verdad me late más usar tecnología y números, o sino hacer que las cosas funcionen. Quiero estar en el rollo de la salud pero solo con las máquinas, no quiero estar cuidando gente todo el día, y busco algo que sea corto porque ya quiero terminar.",
+          "dijo": "La verdad me late más usar tecnología y números, o sino hacer que las cosas funcionen. Quiero estar en el rollo de la salud pero solo con las máquinas, no quiero estar cuidando gente todo el día, y busco algo que sea corto porque ya quiero terminar."
+        },
+        "estilo": {
+          "elegido": "Analizando datos, ideas y lógica, De forma práctica, con las manos",
+          "dijo": "Analizando datos, ideas y lógica y también de forma práctica, con las manos, porque prefiero mil veces meterme con los aparatos que estar lidiando con gente todo el día."
+        },
+        "entorno": {
+          "elegido": "En un hospital, clínica o consultorio, En un laboratorio o taller técnico",
+          "dijo": "En un hospital, clínica o consultorio y en un laboratorio o taller técnico, porque quiero estar donde están los aparatos de salud."
+        },
+        "gustos": {
+          "elegido": "Matemáticas y números, Tecnología y computación, Química y laboratorio, Construcción, máquinas y cómo funcionan las cosas",
+          "dijo": "Matemáticas y números, Tecnología y computación, Química y laboratorio, Construcción, máquinas y cómo funcionan las cosas. Es que me cuadra mucho cómo funcionan los aparatos de los hospitales pero sin tener que andar viendo pacientes."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "personalidad",
+          "pregunta": "Yesenia, me queda claro que lo tuyo es la tecnología, los números y las máquinas en un entorno de salud o laboratorio. Ahora, cuéntame sobre tu forma de ser: cuando tienes que resolver un problema difícil, ¿prefieres **trabajar tú sola** concentrada hasta encontrar la respuesta, o te sientes mejor **colaborando con otros** para intercambiar ideas y sacar el trabajo adelante?",
+          "opciones": [
+            "Prefiero trabajar sola y concentrada",
+            "Prefiero trabajar en equipo"
+          ],
+          "respuesta": "Prefiero trabajar sola y concentrada, así me enfoco mejor en los aparatos y no me distraigo con tanta gente, que igual me pone nerviosa estar atendiendo.",
+          "ranking": [
+            {
+              "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Técnico Universitario en Laboratorio Clínico",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Técnico Universitario en Hemodiálisis",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Ya veo que prefieres trabajar a tu ritmo y bien concentrada con tus aparatos, lo cual es genial para no distraerte. Ahora, pensando en lo que sabes hacer o te gustaría aprender, ¿qué te llama más la atención: **manejar software** y sistemas digitales para analizar resultados, o **usar herramientas físicas** y equipos de precisión para manipular muestras o componentes?",
+          "opciones": [
+            "Manejar software y sistemas digitales",
+            "Usar herramientas físicas y equipos"
+          ],
+          "respuesta": "Me gusta más usar herramientas físicas y equipos de precisión, me llama la atención estar ahí metida viendo cómo funcionan las máquinas y calibrándolas bien.",
+          "ranking": [
+            {
+              "carrera": "Técnico Universitario en Laboratorio Clínico",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Técnico Universitario en Hemodiálisis",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Laboratorio Dental",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Me encanta ver que tienes claro que lo tuyo es meter mano a los equipos y calibrarlos con precisión. Ahora, cuéntame algo sobre tu forma de pensar: cuando te enfrentas a un reto nuevo, ¿te gusta más **seguir un manual** o protocolo paso a paso para que todo salga perfecto, o prefieres **experimentar y probar** diferentes formas hasta que encuentres cómo arreglarlo por tu cuenta?",
+          "opciones": [
+            "Seguir un manual o protocolo paso a paso",
+            "Experimentar y probar hasta encontrar la solución"
+          ],
+          "respuesta": "Sí, prefiero seguir el manual paso a paso porque así no la riego y los aparatos quedan bien ajustaditos.",
+          "ranking": [
+            {
+              "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Técnico Universitario en Laboratorio Clínico",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Hemodiálisis",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Yesenia, me queda súper claro que te gusta seguir los pasos al pie de la letra para que todo quede perfecto con tus máquinas. Ahora cuéntame, para ti, ¿qué es lo más importante al terminar un trabajo: **que sea exacto** y cumpla con todas las reglas de calidad, o **que sea útil** y ayude a que el hospital o laboratorio funcione mucho mejor?",
+          "opciones": [
+            "Que sea exacto y cumpla las normas",
+            "Que sea útil y ayude a que todo funcione mejor"
+          ],
+          "respuesta": "Que sea exacto y cumpla las normas, porque si las máquinas fallan por un error mínimo, ya no sirve de nada el trabajo.",
+          "ranking": [
+            {
+              "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Técnico Universitario en Laboratorio Clínico",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Técnico Universitario en Hemodiálisis",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico en Laboratorio Dental",
+              "afinidad": 80
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Técnico Universitario en Laboratorio Clínico",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Técnico Universitario en Laboratorio Dental",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Técnico Universitario en Hemodiálisis",
+              "afinidad": 85
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Técnico Universitario en Laboratorio Clínico",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Técnico en Laboratorio Dental",
+          "afinidad": 20
+        }
+      ],
+      "top1": "Técnico Universitario en Laboratorio Clínico",
+      "acierta": false,
+      "objetivo_en_top3": true,
+      "objetivo": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+      "roto": true
+    },
+    {
+      "brazo": "A",
+      "perfil": "Alfredo",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 2.75,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5727,
+          "output_tokens": 382,
+          "total_tokens": 6109,
+          "cached_tokens": 5470
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.41,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6383,
+          "output_tokens": 367,
+          "total_tokens": 6750,
+          "cached_tokens": 6004
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.7,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6576,
+          "output_tokens": 376,
+          "total_tokens": 6952,
+          "cached_tokens": 6073
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.4,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 7081,
+          "output_tokens": 366,
+          "total_tokens": 7447,
+          "cached_tokens": 6447
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.85,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 7191,
+          "output_tokens": 192,
+          "total_tokens": 7383,
+          "cached_tokens": 6447
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.72,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24766,
+          "output_tokens": 948,
+          "total_tokens": 25714,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Ayudar, enseñar o cuidar a las personas",
+          "dijo": "Ayudar, enseñar o cuidar a las personas. Me llena un montón ver que los patojos del barrio por fin le agarran la onda al inglés gracias a lo que les enseño."
+        },
+        "estilo": {
+          "elegido": "Con personas, fijo. Me cuadra un montón estar enseñando y conviviendo con los patojos cuando les explico inglés.",
+          "dijo": "Con personas, fijo. Me cuadra un montón estar enseñando y conviviendo con los patojos cuando les explico inglés."
+        },
+        "entorno": {
+          "elegido": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
+          "dijo": "En un aula o centro educativo y con la comunidad, ayudando a personas. Eso de estar en un estudio o de periodista no me llama nada, mejor prefiero estar enseñando ahí con los patojos."
+        },
+        "gustos": {
+          "elegido": "Enseñar y educar",
+          "dijo": "Enseñar y educar, fijo. También me gusta un cacho el turismo por los extranjeros que vienen a Xela, pero nada que ver con ser periodista, eso sí no me late para nada."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "personalidad",
+          "pregunta": "Alfredo, me encanta ver que ya tienes clarísimo que lo tuyo es enseñar y estar con los patojos. Ahora, cuéntame algo sobre tu forma de ser: cuando tienes que resolver un problema difícil en grupo, ¿prefieres **tomar el liderazgo** y organizar a todos para que las cosas salgan bien o te sientes más cómodo **apoyando desde atrás** para que el equipo avance sin tanto ruido?",
+          "opciones": [
+            "Prefiero tomar el mando y organizar al grupo",
+            "Prefiero apoyar y trabajar en lo que me asignen"
+          ],
+          "respuesta": "Prefiero tomar el mando y organizar al grupo. Me gusta que las cosas salgan bien y guiar a los demás cuando estamos aprendiendo algo nuevo.",
+          "ranking": [
+            {
+              "carrera": "Profesorado en Pedagogía",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 85
+            },
+            {
+              "carrera": "PEM en Pedagogía y Técnico en Administración Educativa",
+              "afinidad": 80
+            },
+            {
+              "carrera": "PEM en Comunicación y Lenguaje",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Qué bueno que te guste tomar el mando y guiar a los demás, Alfredo. Ahora, pensando en esas veces que te toca explicar algo nuevo, ¿qué se te da mejor: **preparar materiales** y organizar todo el contenido para que se entienda perfecto, o prefieres **observar cómo reaccionan** tus compañeros para cambiar tu forma de explicar sobre la marcha?",
+          "opciones": [
+            "Preparar todo con orden y estructura",
+            "Adaptarme según lo que veo en el momento"
+          ],
+          "respuesta": "Me gusta más adaptarme según lo que veo en el momento. Siento que uno agarra mejor la onda cuando ve cómo reaccionan los patojos y ahí mismo uno ajusta la jugada.",
+          "ranking": [
+            {
+              "carrera": "Administración Educativa",
+              "afinidad": 85
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 80
+            },
+            {
+              "carrera": "PEM en Inglés",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Profesorado en Pedagogía con Especialización",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Veo que tienes mucha chispa para ajustar tu forma de explicar según cómo reaccionan los patojos. Ahora, cuéntame, cuando te imaginas trabajando en un futuro, ¿qué te hace sentir más realizado: **ver que tus estudiantes aprenden** y mejoran gracias a tu guía, o **sentir que estás ayudando a resolver** problemas importantes de su vida o de su comunidad?",
+          "opciones": [
+            "Ver que mis estudiantes aprenden y mejoran",
+            "Resolver problemas de su vida o comunidad"
+          ],
+          "respuesta": "Ver que mis estudiantes aprenden y mejoran. Es que no hay nada más de ahuevo que ver cuando un patojo por fin entiende y le agarra el hilo al inglés por lo que yo le enseñé.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 90
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Profesorado en Pedagogía con Especialización",
+              "afinidad": 80
+            },
+            {
+              "carrera": "PEM en Pedagogía y Técnico en Administración Educativa",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Qué genial que te llene tanto ver ese momento en que los patojos por fin entienden gracias a ti. Ya que eres tan bueno ajustando tu forma de explicar, cuéntame: cuando tienes que aprender algo nuevo tú mismo, ¿qué te funciona mejor: **leer y analizar la teoría** hasta entender cómo funciona todo desde la raíz, o prefieres **lanzarte a la práctica** y aprender haciendo las cosas, aunque al principio te equivoques un poco?",
+          "opciones": [
+            "Prefiero entender bien la teoría y los conceptos primero",
+            "Prefiero aprender haciendo y probando en la marcha"
+          ],
+          "respuesta": "Prefiero aprender haciendo y probando en la marcha. Me sale mejor meterme de lleno a practicar y así es como realmente le agarro la onda a las cosas.",
+          "ranking": [
+            {
+              "carrera": "PEM en Inglés",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Profesorado en Pedagogía con Especialización",
+              "afinidad": 85
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "PEM en Inglés",
+              "afinidad": 95
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 72
+            },
+            {
+              "carrera": "Profesorado en Pedagogía con Especialización",
+              "afinidad": 68
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 55
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        false,
+        false,
+        false,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Profesorado de Enseñanza Media en Inglés",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Licenciatura en Administración Educativa",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Profesorado en Pedagogía con Especialización",
+          "afinidad": 20
+        }
+      ],
+      "top1": "Profesorado de Enseñanza Media en Inglés",
+      "acierta": true,
+      "objetivo_en_top3": false,
+      "objetivo": "Profesorado en Inglés como Idioma Extranjero",
+      "roto": true
+    },
+    {
+      "brazo": "B",
+      "perfil": "Alfredo",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 1.68,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25046,
+          "output_tokens": 343,
+          "total_tokens": 25389,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.97,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25168,
+          "output_tokens": 362,
+          "total_tokens": 25530,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.95,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25280,
+          "output_tokens": 373,
+          "total_tokens": 25653,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.02,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25398,
+          "output_tokens": 375,
+          "total_tokens": 25773,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.35,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25499,
+          "output_tokens": 217,
+          "total_tokens": 25716,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.45,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24741,
+          "output_tokens": 740,
+          "total_tokens": 25481,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Pues fijo enseñar a la gente, eso me llena un montón cuando veo que los patojos aprenden inglés conmigo.",
+          "dijo": "Pues fijo enseñar a la gente, eso me llena un montón cuando veo que los patojos aprenden inglés conmigo."
+        },
+        "estilo": {
+          "elegido": "Con personas, fijo. Me gusta ver cómo aprenden los patojos cuando les explico algo en persona, nada de estar encerrado viendo números.",
+          "dijo": "Con personas, fijo. Me gusta ver cómo aprenden los patojos cuando les explico algo en persona, nada de estar encerrado viendo números."
+        },
+        "entorno": {
+          "elegido": "En un aula o centro educativo",
+          "dijo": "En un aula o centro educativo y con la comunidad ayudando a personas, porque me cuadra ver el progreso de los patojos. Nada de medios o estudios, ni loco me meto a periodista."
+        },
+        "gustos": {
+          "elegido": "Enseñar y educar",
+          "dijo": "Enseñar y educar, de plano. Y también me gusta un cacho el turismo por las pláticas que tengo con los gringos en Xela, pero ni loco me meto a periodista o a andar en medios."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Qué buena onda que te guste tanto enseñar y ver cómo los patojos aprenden gracias a ti. Alfredo, cuéntame algo: cuando tienes que **resolver un problema difícil** o algo que no sale como esperabas, ¿prefieres **analizar los datos** y buscar la lógica detrás, o prefieres **confiar en tu intuición** y en cómo se sienten las personas involucradas?",
+          "opciones": [
+            "Prefiero analizar los datos y buscar la lógica",
+            "Prefiero confiar en mi intuición y en las personas"
+          ],
+          "respuesta": "Prefiero confiar en mi intuición y en las personas. Al final, con mis alumnos es pura vibra y ver qué necesitan en el momento para que le agarren el hilo al idioma.",
+          "ranking": [
+            {
+              "carrera": "PEM en Inglés",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Profesorado en Pedagogía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Lic. en Educación",
+              "afinidad": 80
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Me encanta ver que te guías por la vibra y lo que tus alumnos necesitan en el momento, eso es clave para conectar con ellos. Ahora, pensando en el futuro, ¿qué te hace sentir más realizado: **ayudar a alguien a superar una dificultad** personal o académica, o **liderar un equipo** para que un proyecto educativo salga adelante?",
+          "opciones": [
+            "Ayudar a alguien a superar una dificultad",
+            "Liderar un equipo o proyecto"
+          ],
+          "respuesta": "Ayudar a alguien a superar una dificultad. Me cuadra más ver cómo el patojo va aprendiendo y superando sus trabas, eso se siente re bien.",
+          "ranking": [
+            {
+              "carrera": "PEM en Inglés",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Profesorado en Psicopedagogía",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Profesorado en Educación Primaria",
+              "afinidad": 80
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Administración Educativa",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Qué de ahuevo que te llene tanto ver cómo un patojo supera sus trabas gracias a tu apoyo, Alfredo. Ahora cuéntame, cuando estás trabajando con ellos, ¿te sientes más cómodo **tomando el control** y dirigiendo la actividad paso a paso, o prefieres **adaptarte a lo que ellos propongan** y dejar que el ritmo lo marquen ellos?",
+          "opciones": [
+            "Prefiero tomar el control y dirigir la actividad",
+            "Prefiero adaptarme a lo que ellos propongan"
+          ],
+          "respuesta": "Prefiero adaptarme a lo que ellos propongan. Así no se aburren y fluye mejor la clase, uno va viendo qué les sirve más en el momento.",
+          "ranking": [
+            {
+              "carrera": "PEM en Comunicación y Lenguaje",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Profesorado en Educación Primaria",
+              "afinidad": 90
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Psicología Educativa",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Profesorado en Psicopedagogía",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Se nota que tienes un don para conectar con tus alumnos y dejar que la clase fluya a su ritmo. Ahora, cuéntame sobre lo que sabes hacer: cuando te toca preparar una clase, ¿qué se te da mejor? ¿**Diseñar materiales** creativos y visuales para que el tema sea más fácil de entender, o **explicar conceptos** complejos hablando y usando ejemplos de la vida real?",
+          "opciones": [
+            "Crear materiales visuales y recursos didácticos",
+            "Explicar y dar ejemplos hablando frente al grupo"
+          ],
+          "respuesta": "Explicar y dar ejemplos hablando frente al grupo. Me sale más natural hablarles y tirarles ejemplos de la vida real para que me entiendan de una vez.",
+          "ranking": [
+            {
+              "carrera": "PEM en Comunicación y Lenguaje",
+              "afinidad": 95
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Profesorado en Educación Primaria",
+              "afinidad": 75
+            },
+            {
+              "carrera": "PEM en Inglés",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Psicopedagogía",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "PEM en Comunicación y Lenguaje",
+              "afinidad": 95
+            },
+            {
+              "carrera": "PEM en Pedagogía y Psicología",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Profesorado en Educación Primaria",
+              "afinidad": 75
+            },
+            {
+              "carrera": "PEM en Inglés",
+              "afinidad": 70
+            },
+            {
+              "carrera": "PEM en Lenguaje e Historia",
+              "afinidad": 65
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "top3": [
+        {
+          "carrera": "Profesorado de Enseñanza Media en Inglés",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Profesorado en Pedagogía con Especialización",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Profesorado en Psicopedagogía",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Profesorado de Enseñanza Media en Inglés",
+      "acierta": true,
+      "objetivo_en_top3": false,
+      "objetivo": "Profesorado en Inglés como Idioma Extranjero",
+      "roto": true
+    },
+    {
+      "brazo": "A",
+      "perfil": "Josué",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 2.23,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 4895,
+          "output_tokens": 373,
+          "total_tokens": 5268,
+          "cached_tokens": 4606
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.41,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 4973,
+          "output_tokens": 382,
+          "total_tokens": 5355,
+          "cached_tokens": 4576
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.42,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6034,
+          "output_tokens": 376,
+          "total_tokens": 6410,
+          "cached_tokens": 5499
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.49,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5614,
+          "output_tokens": 379,
+          "total_tokens": 5993,
+          "cached_tokens": 4962
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.22,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5160,
+          "output_tokens": 232,
+          "total_tokens": 5392,
+          "cached_tokens": 4414
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 2.79,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24768,
+          "output_tokens": 686,
+          "total_tokens": 25454,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Me late más usar tecnología y números, aparte de construir y hacer que todo funcione bien. Me cuadra un montón ver cómo los sistemas que armo sirven para que los negocios no se hagan bolas.",
+          "dijo": "Me late más usar tecnología y números, aparte de construir y hacer que todo funcione bien. Me cuadra un montón ver cómo los sistemas que armo sirven para que los negocios no se hagan bolas."
+        },
+        "estilo": {
+          "elegido": "Analizando datos, ideas y lógica",
+          "dijo": "Analizando datos, ideas y lógica, y también de forma práctica. Me gusta estar ahí metido en la compu dándole hasta que el código sale como tiene que ser."
+        },
+        "entorno": {
+          "elegido": "En un taller técnico o una oficina donde pueda estar metido en mis sistemas sin que nadie me moleste tanto.",
+          "dijo": "En un taller técnico o una oficina donde pueda estar metido en mis sistemas sin que nadie me moleste tanto."
+        },
+        "gustos": {
+          "elegido": "Matemáticas y números, Tecnología y computación, Construcción, máquinas y cómo funcionan las cosas",
+          "dijo": "Tecnología y computación, Matemáticas y números, y también Construcción, máquinas y cómo funcionan las cosas. Es lo que más me llega, ahí es donde paso todo el día dándole a los códigos."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Josué, me queda claro que te gusta meterte de lleno en tus sistemas y que los números son lo tuyo. Ahora, cuéntame sobre tu **forma de trabajar**: cuando tienes un problema difícil enfrente, ¿prefieres **seguir reglas** claras paso a paso para no fallar, o te gusta más **inventar soluciones** nuevas aunque eso signifique arriesgarte un poco?",
+          "opciones": [
+            "Seguir reglas y procesos probados",
+            "Inventar soluciones nuevas"
+          ],
+          "respuesta": "Prefiero inventar soluciones nuevas, la verdad me gusta probar cosas distintas aunque me lleve más tiempo porque así aprendo más.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería Civil",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Josué, me encanta esa chispa que tienes para inventar soluciones nuevas, se nota que no te da miedo experimentar. Ahora, pensando en lo que te motiva a largo plazo, ¿qué te hace sentir más **orgulloso** al terminar un proyecto: saber que lo hiciste con una **precisión técnica perfecta** que no tiene errores, o ver que tu trabajo realmente **ayudó a mejorar** la vida o el negocio de alguien más?",
+          "opciones": [
+            "La precision tecnica perfecta",
+            "El impacto positivo en los demas"
+          ],
+          "respuesta": "La neta prefiero el impacto positivo en los demás, me llega un montón ver que el sistema que armé de verdad les sirve a los de la tienda para no hacerse bolas con sus clavos.",
+          "ranking": [
+            {
+              "carrera": "Ingenieria en Ciencias y Sistemas",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Ingenieria en Electronica",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Ingenieria Mecanica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Informatica e Inteligencia de Negocios",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingenieria Civil",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Josué, me alegra ver que te motiva tanto ayudar a otros con tus sistemas. Ahora, pensando en cómo te gusta **relacionarte con los demás** mientras trabajas, ¿te sientes más cómodo siendo quien **toma las decisiones** y guía al equipo, o prefieres ser quien **aporta las ideas técnicas** y los detalles para que todo salga bien?",
+          "opciones": [
+            "Prefiero guiar al equipo y tomar las decisiones finales",
+            "Prefiero enfocarme en los detalles técnicos y aportar mis ideas"
+          ],
+          "respuesta": "Prefiero enfocarme en los detalles técnicos y aportar mis ideas, me siento más en mi onda si me dejan concentrarme en el código y que alguien más vea el resto.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 92
+            },
+            {
+              "carrera": "Licenciatura en Informática y Administración de Empresas",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Josué, me queda súper claro que lo tuyo es meterte en los detalles técnicos y soltar toda tu creatividad ahí. Ahora, para entender mejor tus habilidades, cuéntame: cuando te toca aprender algo nuevo, ¿qué se te da mejor: **programar** y escribir código para que una máquina haga lo que tú quieres, o **diseñar** y armar piezas físicas para que una estructura o máquina funcione?",
+          "opciones": [
+            "Programar y escribir código",
+            "Diseñar y armar piezas físicas"
+          ],
+          "respuesta": "Programar y escribir código, es que me cuadra mucho más ver cómo corre lo que escribo y que al fin funcione.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Licenciatura en Informática y Administración de Empresas",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Informática y Administración de Empresas",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 45
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Informática e Inteligencia de Negocios",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Ingeniería en Ciencias y Sistemas",
+      "acierta": true,
+      "objetivo_en_top3": true,
+      "objetivo": "Ingeniería en Ciencias y Sistemas",
+      "roto": false
+    },
+    {
+      "brazo": "B",
+      "perfil": "Josué",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 1.91,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25061,
+          "output_tokens": 382,
+          "total_tokens": 25443,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.9,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25201,
+          "output_tokens": 383,
+          "total_tokens": 25584,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.89,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25340,
+          "output_tokens": 373,
+          "total_tokens": 25713,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.91,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25455,
+          "output_tokens": 391,
+          "total_tokens": 25846,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.44,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25565,
+          "output_tokens": 219,
+          "total_tokens": 25784,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 4.0,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24807,
+          "output_tokens": 909,
+          "total_tokens": 25716,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Me late más usar tecnología y números o construir y hacer que las cosas funcionen, porque siempre ando ahí viendo cómo arreglar sistemas para que no fallen.",
+          "dijo": "Me late más usar tecnología y números o construir y hacer que las cosas funcionen, porque siempre ando ahí viendo cómo arreglar sistemas para que no fallen."
+        },
+        "estilo": {
+          "elegido": "Analizando datos, ideas y lógica",
+          "dijo": "Analizando datos, ideas y lógica y de forma práctica con las manos. Me gusta pasarme el día clavado en la compu viendo cómo hacer que todo funcione bien."
+        },
+        "entorno": {
+          "elegido": "En un taller técnico o en un estudio creativo porque ahí es donde realmente puedo probar cómo quedan mis códigos y dejar las cosas nítidas.",
+          "dijo": "En un taller técnico o en un estudio creativo porque ahí es donde realmente puedo probar cómo quedan mis códigos y dejar las cosas nítidas."
+        },
+        "gustos": {
+          "elegido": "Tecnología y computación, Construcción, máquinas y cómo funcionan las cosas",
+          "dijo": "Me cuadra un montón la tecnología y computación, y también construcción, máquinas y cómo funcionan las cosas. Es que me la paso viendo cómo armar piezas para que todo jale de a toque."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "personalidad",
+          "pregunta": "Josué, me queda clarísimo que te gusta meterle mano a la tecnología y que disfrutas ver cómo funcionan las cosas en un taller. Ahora, cuéntame un poco sobre tu forma de ser: cuando tienes que resolver un problema difícil, ¿prefieres **trabajar solo** para concentrarte al máximo y sacar el proyecto adelante, o te sientes más cómodo **colaborando con otros** para que entre todos encuentren la mejor solución?",
+          "opciones": [
+            "Prefiero trabajar solo, me concentro mejor",
+            "Prefiero trabajar en equipo, me gusta compartir ideas"
+          ],
+          "respuesta": "Prefiero trabajar solo, me concentro mejor. Es que cuando me pongo a programar o a arreglar algún clavo del sistema, me gusta ir a mi ritmo y no que nadie me esté interrumpiendo.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Josué, ya me quedó claro que cuando te concentras en tus códigos o máquinas prefieres estar en tu mundo y a tu propio ritmo. Ahora, pensando en lo que sabes hacer o te gustaría aprender a dominar, ¿qué te emociona más: **diseñar y crear** desde cero algo nuevo, como una app o una pieza mecánica, o prefieres **detectar errores** y optimizar algo que ya existe para que funcione mucho mejor?",
+          "opciones": [
+            "Diseñar y crear cosas nuevas desde cero",
+            "Detectar fallas y mejorar lo que ya existe"
+          ],
+          "respuesta": "Me late más detectar fallas y mejorar lo que ya existe. Me cuadra más agarrar algo que ya está medio patojo y dejarlo nítido, optimizando todo para que no dé clavos.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Ingeniería Mecánica",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Josué, me gusta mucho esa actitud de perfeccionista que tienes para dejar las cosas nítidas. Ahora, cuéntame sobre cómo piensas cuando te enfrentas a un reto: ¿te sientes más cómodo siguiendo **pasos y reglas claras** que ya funcionan para asegurar que todo salga bien, o prefieres **explorar caminos diferentes** y probar ideas nuevas aunque no sepas exactamente cómo van a terminar?",
+          "opciones": [
+            "Prefiero seguir pasos y reglas claras",
+            "Prefiero explorar caminos diferentes"
+          ],
+          "respuesta": "Prefiero explorar caminos diferentes, porque a veces los pasos ya marcados son muy aburridos y me gusta ver qué pasa si cambio algo.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería Industrial",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Josué, me parece genial que te guste explorar caminos nuevos y que no te quedes solo con lo que ya está escrito. Ahora, pensando en el futuro y en el tipo de huella que quieres dejar en el mundo, ¿qué te motiva más: **crear soluciones** que hagan que la vida de las personas sea más fácil y eficiente, o te importa más **descubrir verdades** y entender a fondo cómo funcionan las cosas, aunque eso no tenga un uso práctico inmediato?",
+          "opciones": [
+            "Crear soluciones que faciliten la vida",
+            "Descubrir verdades y entender el fondo de las cosas"
+          ],
+          "respuesta": "Sí, me motiva más crear soluciones que hagan todo más eficiente porque siento que ahí es donde realmente se ve que mis códigos sirven para algo útil.",
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería Industrial",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Ingeniería en Ciencias y Sistemas",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería Industrial",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Ingeniería Mecánica Industrial",
+              "afinidad": 82
+            },
+            {
+              "carrera": "Técnico Universitario en Desarrollo de Software",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería en Electrónica",
+              "afinidad": 70
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Ingeniería en Ciencias y Sistemas",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Ingeniería Industrial",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Ingeniería Mecánica Industrial",
+          "afinidad": 20
+        }
+      ],
+      "top1": "Ingeniería en Ciencias y Sistemas",
+      "acierta": true,
+      "objetivo_en_top3": true,
+      "objetivo": "Ingeniería en Ciencias y Sistemas",
+      "roto": false
+    },
+    {
+      "brazo": "A",
+      "perfil": "Marisol",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 2.62,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 4446,
+          "output_tokens": 388,
+          "total_tokens": 4834,
+          "cached_tokens": 4197
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.49,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5677,
+          "output_tokens": 386,
+          "total_tokens": 6063,
+          "cached_tokens": 5299
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.88,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6329,
+          "output_tokens": 382,
+          "total_tokens": 6711,
+          "cached_tokens": 5821
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.35,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5631,
+          "output_tokens": 384,
+          "total_tokens": 6015,
+          "cached_tokens": 5000
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.85,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6237,
+          "output_tokens": 227,
+          "total_tokens": 6464,
+          "cached_tokens": 5511
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.53,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24748,
+          "output_tokens": 849,
+          "total_tokens": 25597,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Ayudar, enseñar o cuidar a las personas",
+          "dijo": "Ayudar, enseñar o cuidar a las personas. Me gusta mucho ver cómo se alivian cuando uno les da una mano, siento que por ahí va la cosa."
+        },
+        "estilo": {
+          "elegido": "Con personas, en trato directo, De forma práctica, con las manos",
+          "dijo": "Con personas, en trato directo y también de forma práctica, con las manos. Me gusta sentir que estoy haciendo algo real ahí mismo con alguien que lo necesita."
+        },
+        "entorno": {
+          "elegido": "En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+          "dijo": "En un hospital, clínica o consultorio y también con la comunidad, ayudando a personas. Es que ahí es donde siento que de verdad podría hacer algo útil por alguien."
+        },
+        "gustos": {
+          "elegido": "Salud y cuidar personas, Psicología y comportamiento",
+          "dijo": "Definitivamente Salud y cuidar personas, eso me encanta. También me gusta un poco Psicología y comportamiento porque a veces hay que entender qué siente la gente cuando está mal."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "personalidad",
+          "pregunta": "Marisol, me encanta que tengas tan claro que quieres estar en contacto directo con las personas, ya sea en un hospital o ayudando en la comunidad. Ahora, cuéntame algo sobre tu forma de ser: cuando surge un problema inesperado o alguien te pide ayuda en un momento difícil, ¿prefieres **tomar el control** y organizar cómo resolverlo, o te sientes más cómoda **escuchando** y acompañando a la persona mientras ella misma encuentra su camino?",
+          "opciones": [
+            "Prefiero tomar el control y organizar la solución",
+            "Prefiero escuchar y acompañar a la persona"
+          ],
+          "respuesta": "Prefiero tomar el control y organizar la solución. Es que cuando alguien se pone mal, prefiero actuar rápido para que todo salga bien.",
+          "ranking": [
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Psicología (PEM y Licenciatura)",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Licenciatura en Nutrición",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Ciencias de la Educación",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Qué bueno que tengas esa chispa para **tomar el control** y organizar soluciones rápidas, Marisol. Eso dice mucho de ti. Ahora, pensando en cómo te gusta trabajar, ¿qué te hace sentir más satisfecha al final del día: **ver resultados tangibles** y técnicos, como haber curado una herida o ajustado un equipo, o sentir que lograste **cambiar algo profundo** en la vida o en la forma de pensar de alguien?",
+          "opciones": [
+            "Ver resultados tangibles y técnicos",
+            "Sentir que logré un cambio profundo en alguien"
+          ],
+          "respuesta": "Me gusta más ver resultados tangibles y técnicos. Es que me llena un montón ver que hice algo concreto y que el paciente ya está mejor.",
+          "ranking": [
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Nutrición",
+              "afinidad": 78
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Técnico Universitario en Optometría",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Marisol, me encanta esa energía tuya para ver resultados concretos y técnicos. Ya que te gusta tanto la parte práctica y de ver mejoras reales en los pacientes, cuéntame: cuando tienes que aprender algo nuevo, ¿qué se te da mejor: seguir un **procedimiento paso a paso** con herramientas o equipos, o prefieres analizar **cómo funciona** el cuerpo o la mente para entender el origen de un problema?",
+          "opciones": [
+            "Seguir pasos y usar herramientas o equipos técnicos",
+            "Analizar el funcionamiento del cuerpo o la mente"
+          ],
+          "respuesta": "Seguir pasos y usar herramientas o equipos técnicos, porque así siento que de una vez veo que las cosas funcionan y no me pierdo en tanta teoría.",
+          "ranking": [
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico en Optometría",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Producción de Imágenes Diagnósticas",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Nutrición",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Técnico en Laboratorio Clínico",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Marisol, me queda clarísimo que te gusta poner manos a la obra y ver resultados rápidos con equipos. Ahora, cuéntame sobre tu forma de pensar: cuando te enfrentas a un reto, ¿prefieres **seguir una guía** o protocolo que ya está probado para asegurar que todo salga perfecto, o te gusta más **experimentar y ajustar** sobre la marcha hasta que encuentras la mejor forma de resolverlo?",
+          "opciones": [
+            "Seguir una guía o protocolo paso a paso",
+            "Experimentar y ajustar sobre la marcha"
+          ],
+          "respuesta": "Prefiero seguir una guía o protocolo paso a paso, porque así me siento más segura de que no voy a meter la pata cuando estoy con un paciente.",
+          "ranking": [
+            {
+              "carrera": "Técnico en Optometría",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Técnico en Laboratorio Clínico",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Licenciatura en Nutrición",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Técnico Universitario en Optometría",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Técnico Universitario en Laboratorio Clínico",
+              "afinidad": 60
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 55
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Técnico Universitario en Laboratorio Clínico",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+          "afinidad": 20
+        }
+      ],
+      "top1": "Licenciatura en Enfermería",
+      "acierta": true,
+      "objetivo_en_top3": false,
+      "objetivo": "Enfermería",
+      "roto": false
+    },
+    {
+      "brazo": "B",
+      "perfil": "Marisol",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 1.95,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25035,
+          "output_tokens": 376,
+          "total_tokens": 25411,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.85,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25139,
+          "output_tokens": 347,
+          "total_tokens": 25486,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.98,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25266,
+          "output_tokens": 386,
+          "total_tokens": 25652,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.72,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25399,
+          "output_tokens": 337,
+          "total_tokens": 25736,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.25,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25487,
+          "output_tokens": 182,
+          "total_tokens": 25669,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 2.71,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24729,
+          "output_tokens": 702,
+          "total_tokens": 25431,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Ayudar, enseñar o cuidar a las personas",
+          "dijo": "Ayudar, enseñar o cuidar a las personas. Me gusta sentir que de verdad alivio a alguien cuando la está pasando mal, como me pasó con mi abue."
+        },
+        "estilo": {
+          "elegido": "Con personas, en trato directo",
+          "dijo": "Con personas, en trato directo. Me encanta estar ahí ayudando a los enfermos, siento que es lo mío."
+        },
+        "entorno": {
+          "elegido": "Definitivamente en un hospital o clínica y también con la comunidad. Me gusta estar ahí dándole con todo a los pacientes y sentir la adrenalina de los momentos urgentes.",
+          "dijo": "Definitivamente en un hospital o clínica y también con la comunidad. Me gusta estar ahí dándole con todo a los pacientes y sentir la adrenalina de los momentos urgentes."
+        },
+        "gustos": {
+          "elegido": "Salud y cuidar personas",
+          "dijo": "Salud y cuidar personas, de fijo. Me cuadra un montón ver cómo se alivian cuando una les echa la mano en lo que necesitan."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Marisol, me encanta esa energía que tienes para ayudar y estar donde la acción ocurre en un hospital. Pensando en esos momentos de urgencia donde todo pasa rápido, dime: ¿te sientes más cómoda **tomando decisiones rápidas** por tu cuenta para resolver un problema, o prefieres **seguir un procedimiento** paso a paso que ya está probado para asegurar que todo salga bien?",
+          "opciones": [
+            "Tomar decisiones rápidas y resolver sobre la marcha",
+            "Seguir protocolos y pasos probados con precisión"
+          ],
+          "respuesta": "Tomar decisiones rápidas y resolver sobre la marcha, me gusta sentir que yo controlo el rollo cuando hay emergencia.",
+          "ranking": [
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Enfermería",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Nutrición",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Técnico Universitario en Hemodiálisis",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Marisol, se nota que tienes mucha chispa y que te gusta tomar el mando cuando las cosas se ponen intensas. Ahora, cuéntame sobre ti: cuando trabajas en equipo para lograr una meta, ¿prefieres **liderar y organizar** a los demás para que todo salga bien, o te sientes mejor **apoyando desde adentro** con tu trabajo directo, sin tener que estar a cargo de todos?",
+          "opciones": [
+            "Prefiero liderar y organizar al equipo",
+            "Prefiero apoyar con mi trabajo directo sin liderar"
+          ],
+          "respuesta": "Prefiero apoyar con mi trabajo directo sin liderar, siento que así me enfoco mejor en el paciente y no me estreso tanto con el rollo de mandar a otros.",
+          "ranking": [
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Enfermería",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Técnico Universitario en Hemodiálisis",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Marisol, me queda clarísimo que lo tuyo es estar ahí en la primera línea, trabajando codo a codo con el paciente sin complicaciones de jefaturas. Ahora, pensando en lo que sabes hacer o te gustaría aprender, ¿qué te llama más la atención: **usar instrumentos y tecnología** para hacer diagnósticos precisos, o prefieres **el contacto físico y manual** directo, como dar terapia o curaciones, donde usas tus propias manos para ayudar a la recuperación?",
+          "opciones": [
+            "Usar equipos y tecnología para hacer diagnósticos",
+            "Terapia y curaciones con mis propias manos"
+          ],
+          "respuesta": "Terapia y curaciones con mis propias manos, siento que ese toque personal es lo que de verdad ayuda a que la gente se sienta mejor.",
+          "ranking": [
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Enfermería",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Técnico Universitario en Hemodiálisis",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Cirujano Dentista",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Marisol, me encanta esa vocación tan directa que tienes para sanar con tus manos. Pensando en lo que realmente te mueve por dentro, dime: cuando piensas en tu futuro profesional, ¿qué te hace sentir más plena: **sentir que haces justicia** ayudando a los que menos tienen, o **sentir que alcanzas la excelencia** técnica y la calidad en cada cosa que haces?",
+          "opciones": [
+            "Hacer justicia y ayudar a los más vulnerables",
+            "Alcanzar la excelencia y calidad técnica"
+          ],
+          "respuesta": "Siento que hacer justicia ayudando a los que menos tienen, eso es lo que de verdad me llena el corazón.",
+          "ranking": [
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Enfermería",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Cirujano Dentista",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Enfermería",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 72
+            },
+            {
+              "carrera": "Fisioterapia",
+              "afinidad": 68
+            },
+            {
+              "carrera": "Médico y Cirujano",
+              "afinidad": 55
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Licenciatura en Enfermería",
+      "acierta": true,
+      "objetivo_en_top3": false,
+      "objetivo": "Enfermería",
+      "roto": false
+    },
+    {
+      "brazo": "A",
+      "perfil": "Andrea",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 4.28,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5148,
+          "output_tokens": 337,
+          "total_tokens": 5485,
+          "cached_tokens": 4899
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.76,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 5068,
+          "output_tokens": 358,
+          "total_tokens": 5426,
+          "cached_tokens": 4710
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.37,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6063,
+          "output_tokens": 381,
+          "total_tokens": 6444,
+          "cached_tokens": 5576
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 2.1,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6172,
+          "output_tokens": 341,
+          "total_tokens": 6513,
+          "cached_tokens": 5559
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.88,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 6491,
+          "output_tokens": 191,
+          "total_tokens": 6682,
+          "cached_tokens": 5783
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 3.36,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24730,
+          "output_tokens": 849,
+          "total_tokens": 25579,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Defender la justicia y resolver conflictos",
+          "dijo": "Defender la justicia y resolver conflictos, la verdad es que me hierve la sangre cuando veo tanta tranza y quiero meter las manos al fuego por la mara que nadie pela."
+        },
+        "estilo": {
+          "elegido": "Con personas, definitivamente, me encanta debatir y ver cómo puedo ayudar a la mara que de veras lo necesita.",
+          "dijo": "Con personas, definitivamente, me encanta debatir y ver cómo puedo ayudar a la mara que de veras lo necesita."
+        },
+        "entorno": {
+          "elegido": "Con la comunidad, ayudando a personas",
+          "dijo": "Con la comunidad, ayudando a personas, es lo que me llena. No me miro encerrada en una oficina aburrida, prefiero estar donde pasan las cosas."
+        },
+        "gustos": {
+          "elegido": "Leyes, justicia y debate, Historia, sociedad y cultura",
+          "dijo": "Leyes, justicia y debate, fijo. También me mueve un montón todo lo que es historia, sociedad y cultura porque ahí es donde uno entiende por qué nuestra gente sufre tanto, ¿me entendés?"
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Andrea, qué alegre saber que te apasiona el debate y ayudar a tu comunidad. Cuéntame, cuando surge un problema difícil entre personas, ¿prefieres **analizar los hechos con calma** y buscar una solución técnica o legal, o te sientes más cómoda **escuchando las emociones** de todos para encontrar un acuerdo que los deje tranquilos?",
+          "opciones": [
+            "Prefiero analizar los hechos y buscar una solución técnica o legal",
+            "Prefiero escuchar las emociones y buscar un acuerdo entre todos"
+          ],
+          "respuesta": "Prefiero analizar los hechos y buscar una solución técnica o legal, porque para ganar una discusión y que se haga justicia, hay que tener pruebas reales y no solo hablar por hablar.",
+          "ranking": [
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 90
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Administración en Desarrollo de Recursos Humanos",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Andrea, me queda súper claro que para ti lo más importante es tener pruebas sólidas y argumentos bien armados para que se haga justicia. Ahora, pensando en tu forma de ser, cuando te toca trabajar en equipo, ¿te gusta más **tomar el mando** y organizar cómo se van a hacer las cosas o prefieres **colaborar de cerca** con los demás, asegurándote de que todos estén bien y avanzando juntos?",
+          "opciones": [
+            "Prefiero tomar el mando y organizar el trabajo",
+            "Prefiero colaborar de cerca y apoyar al grupo"
+          ],
+          "respuesta": "La neta prefiero tomar el mando y organizar, así me aseguro de que todo salga bien y no se haga un desorden porque a veces la gente se pierde mucho.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería en Administración de Tierras",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Técnico Universitario en Criminología y Criminalística",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Andrea, se nota que tienes un don natural para liderar y que te gusta que las cosas salgan bien organizadas. Ahora, cuéntame: cuando tienes que resolver un problema, ¿qué te da más satisfacción, **defender una causa** y luchar por lo que es justo, o sientes que lo tuyo es más bien **aplicar reglas y leyes** para que todo el mundo sepa qué le corresponde?",
+          "opciones": [
+            "Defender una causa y luchar por lo justo",
+            "Aplicar reglas y leyes con precisión"
+          ],
+          "respuesta": "Defender una causa y luchar por lo justo, porque de nada sirve aplicar leyes frías si al final no estás ayudando a la mara que de verdad le toca sufrir la injusticia.",
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ingeniería en Administración de Tierras",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Técnico Universitario en Criminología y Criminalística",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Administración en Desarrollo de Recursos Humanos",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Andrea, me encanta esa fuerza que tienes para defender lo justo. Ya que tienes ese liderazgo y ese enfoque en resultados, cuéntame: cuando tienes que trabajar en un proyecto, ¿qué se te da mejor: **investigar y redactar documentos** con mucha precisión para que todo quede bien claro, o prefieres **hablar frente a otros** para convencerlos con tus ideas y ganar su apoyo?",
+          "opciones": [
+            "Investigar y redactar documentos con precisión",
+            "Hablar frente a otros para convencerlos"
+          ],
+          "respuesta": "Hablar frente a otros para convencerlos, porque ahí es donde realmente logras que la gente entienda tu punto y se una a la causa.",
+          "ranking": [
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Ciencias de la Comunicación Social",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ingeniería en Administración de Tierras",
+              "afinidad": 65
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Ciencias de la Comunicación Social",
+              "afinidad": 65
+            },
+            {
+              "carrera": "Ingeniería en Administración de Tierras",
+              "afinidad": 50
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Criminología y Política Criminal",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 15
+        }
+      ],
+      "top1": "Licenciatura en Ciencias Jurídicas y Sociales",
+      "acierta": true,
+      "objetivo_en_top3": true,
+      "objetivo": "Licenciatura en Ciencias Jurídicas y Sociales",
+      "roto": false
+    },
+    {
+      "brazo": "B",
+      "perfil": "Andrea",
+      "llamadas": [
+        {
+          "tipo": "next-question",
+          "segundos": 1.83,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25011,
+          "output_tokens": 332,
+          "total_tokens": 25343,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.91,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25116,
+          "output_tokens": 355,
+          "total_tokens": 25471,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.79,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25245,
+          "output_tokens": 328,
+          "total_tokens": 25573,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.82,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25351,
+          "output_tokens": 351,
+          "total_tokens": 25702,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "next-question",
+          "segundos": 1.19,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 25454,
+          "output_tokens": 188,
+          "total_tokens": 25642,
+          "cached_tokens": 24780
+        },
+        {
+          "tipo": "recommend",
+          "segundos": 2.93,
+          "modelo": "gemini-3.1-flash-lite",
+          "prompt_tokens": 24696,
+          "output_tokens": 705,
+          "total_tokens": 25401,
+          "cached_tokens": 24164
+        }
+      ],
+      "fijas": {
+        "impacto": {
+          "elegido": "Defender la justicia y resolver conflictos",
+          "dijo": "Defender la justicia y resolver conflictos, porque no aguanto ver cómo se aprovechan de la gente que no tiene recursos."
+        },
+        "estilo": {
+          "elegido": "Con personas, en trato directo",
+          "dijo": "Con personas, en trato directo, porque me gusta debatir y pelear por lo que es justo para la mara. También me gusta analizar ideas porque siempre ando viendo cómo defender a los demás."
+        },
+        "entorno": {
+          "elegido": "Con la comunidad, ayudando a personas",
+          "dijo": "Con la comunidad, ayudando a personas, porque me llega poder echarle la mano a los que nadie pela y que se haga lo justo."
+        },
+        "gustos": {
+          "elegido": "Leyes, justicia y debate, Historia, sociedad y cultura",
+          "dijo": "Leyes, justicia y debate, obvio. También me encanta todo lo que sea Historia, sociedad y cultura porque así entiendo mejor los clavos que vive nuestra gente."
+        }
+      },
+      "adaptativas": [
+        {
+          "dimension": "estilo_cognitivo",
+          "pregunta": "Andrea, se nota que te mueve mucho la justicia y trabajar directamente con la gente en tu comunidad. Ahora, cuéntame sobre cómo te gusta enfrentar los retos: ¿prefieres **analizar los problemas con calma** y buscar soluciones basadas en reglas y argumentos, o te sientes más cómoda **tomando decisiones rápidas** y actuando sobre la marcha cuando surge un conflicto?",
+          "opciones": [
+            "Prefiero analizar con calma y usar argumentos",
+            "Prefiero actuar rápido y resolver sobre la marcha"
+          ],
+          "respuesta": "Prefiero analizar con calma y usar argumentos, porque me gusta tener bien clara la base legal antes de ponerme a pelear por alguien.",
+          "ranking": [
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Relaciones Internacionales",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "dimension": "personalidad",
+          "pregunta": "Andrea, me encanta ver que eres tan metódica y que te importa tanto la base legal para defender a los demás. Pensando en cómo te sientes cuando trabajas con otros, cuéntame: ¿te ves más como la persona que **lidera y organiza** al grupo para que todos sigan un plan, o prefieres ser quien **apoya y acompaña** de cerca a las personas en sus necesidades individuales?",
+          "opciones": [
+            "Prefiero liderar y organizar al grupo",
+            "Prefiero apoyar y acompañar a las personas"
+          ],
+          "respuesta": "Prefiero apoyar y acompañar a las personas. Me gusta estar ahí para quien lo necesita, escuchando sus problemas y viendo cómo ayudar de cerquita, sin andar mandando a nadie.",
+          "ranking": [
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+              "afinidad": 60
+            }
+          ]
+        },
+        {
+          "dimension": "habilidades",
+          "pregunta": "Andrea, se nota que tienes un corazón muy noble para acompañar a los demás en sus dificultades. Ahora, pensando en lo que sabes hacer o te gustaría aprender a manejar, ¿qué te atrae más: **investigar a fondo** situaciones complejas para encontrar la verdad o **facilitar la comunicación** y el diálogo para que las personas se entiendan mejor?",
+          "opciones": [
+            "Investigar a fondo situaciones complejas",
+            "Facilitar el diálogo y la comunicación"
+          ],
+          "respuesta": "Facilitar el diálogo y la comunicación, porque creo que mucha gente se entiende mejor si alguien ayuda a que se escuchen entre ellos.",
+          "ranking": [
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 88
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 80
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 75
+            }
+          ]
+        },
+        {
+          "dimension": "valores",
+          "pregunta": "Andrea, me parece muy valioso que busques que la gente se entienda mejor, eso ayuda mucho a sanar las relaciones. Pensando en lo que más te importa en la vida, ¿qué te hace sentir más satisfecha al final del día: **sentir que hiciste lo correcto** siguiendo tus principios éticos, aunque sea difícil, o **ver un cambio positivo y tangible** en la vida de las personas a las que ayudaste?",
+          "opciones": [
+            "Sentir que hice lo correcto y seguí mis principios",
+            "Ver un cambio positivo y tangible en la gente"
+          ],
+          "respuesta": "Siento que ambas, pero me quedo con ver un cambio positivo en la vida de la gente porque al final es por lo que uno lucha.",
+          "ranking": [
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+              "afinidad": 85
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Criminología y Política Criminal",
+              "afinidad": 70
+            }
+          ]
+        },
+        {
+          "terminado": true,
+          "ranking": [
+            {
+              "carrera": "Trabajo Social",
+              "afinidad": 95
+            },
+            {
+              "carrera": "Psicología Clínica",
+              "afinidad": 75
+            },
+            {
+              "carrera": "Ciencias Jurídicas y Sociales",
+              "afinidad": 70
+            },
+            {
+              "carrera": "Licenciatura en Educación Primaria",
+              "afinidad": 65
+            }
+          ]
+        }
+      ],
+      "objetivo_en_candidatas": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "top3": [
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Criminología y Política Criminal",
+          "afinidad": 25
+        }
+      ],
+      "top1": "Trabajo Social",
+      "acierta": false,
+      "objetivo_en_top3": true,
+      "objetivo": "Licenciatura en Ciencias Jurídicas y Sociales",
+      "roto": false
+    }
+  ]
+}

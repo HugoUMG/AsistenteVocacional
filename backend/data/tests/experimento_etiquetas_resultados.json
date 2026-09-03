@@ -1,0 +1,452 @@
+{
+  "casos": [
+    {
+      "persona": "Rosa",
+      "control": false,
+      "contexto": "18 anios, bachillerato en ciencias y letras. Su abuela estuvo enferma dos anios y ella fue quien la baniaba, le daba sus pastillas y la llevaba a las citas. Se dio cuenta de que no le da impresion nada y que la gente se calma cuando ella habla. En el hospital le llamaron la atencion las maquinas grandes y le pregunto al tecnico como funcionaban. No le gusta estar sentada todo el dia.",
+      "fijas_cortas": {
+        "nombre": "Rosa",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Construir, diseñar o hacer que las cosas funcionen",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "En un hospital, clínica o consultorio, En un laboratorio o taller técnico, Con la comunidad, ayudando a personas",
+        "gustos": "Salud y cuidar pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación, Construcción, máquinas y cómo funcionan las cosas"
+      },
+      "toco_etiqueta_cambiada": true,
+      "A_top3": [
+        {
+          "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Técnico Universitario en Laboratorio Clínico",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Técnico Universitario en Radiología e Imágenes Diagnósticas",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Técnico Universitario en Laboratorio Clínico",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista prioriza la radiología, conectando directamente con su curiosidad técnica sobre las máquinas hospitalarias. Además, incluye opciones de salud que requieren movimiento constante y contacto directo con pacientes, alineándose con su experiencia previa.",
+        "coherencia_2": 5,
+        "porque_2": "La lista es altamente coherente al enfocarse en carreras de salud que exigen dinamismo físico. Fisioterapia es una excelente elección dado que ella ya demostró capacidad de cuidado y calma con su abuela.",
+        "mejor": "empate",
+        "porque_mejor": "Ambas listas proponen las mismas carreras, las cuales responden perfectamente a su perfil: requieren actividad física, contacto humano y manejo de tecnología médica, validando su experiencia de cuidado y su curiosidad técnica.",
+        "misma_area": false,
+        "area": "salud"
+      },
+      "gano": "empate",
+      "coherencia_A": 5,
+      "coherencia_B": 5
+    },
+    {
+      "persona": "Diego",
+      "control": false,
+      "contexto": "17 anios, quinto bachillerato. Juega futbol en una liga del municipio y se rompio la rodilla el anio pasado; paso seis meses yendo a terapia y le fascino todo lo que le hacian para volver a caminar bien. Le gusta el cuerpo humano y como se recupera. Es sociable, siempre anda con gente, y no se imagina metido en una oficina. Tiene dos perros y los cuida el.",
+      "fijas_cortas": {
+        "nombre": "Diego",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos, Al aire libre y en movimiento",
+        "entorno": "En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+        "gustos": "Salud y cuidar pacientes, Cuerpo, deporte y rehabilitación, Animales y su cuidado"
+      },
+      "toco_etiqueta_cambiada": true,
+      "A_top3": [
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Médico y Cirujano",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Técnico Universitario en Enfermería Veterinaria",
+          "afinidad": 25
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista integra perfectamente su experiencia personal con la rehabilitación física y su interés por el cuidado de animales. Es una propuesta muy coherente con su perfil sociable y su deseo de evitar el trabajo de oficina.",
+        "coherencia_2": 4,
+        "porque_2": "Aunque incluye la fisioterapia, la opción de medicina es menos coherente con su perfil, ya que suele implicar entornos hospitalarios más rígidos y menos dinámicos. Ignora su interés explícito por el cuidado de los animales.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista es superior porque incorpora la enfermería veterinaria, lo cual conecta directamente con su responsabilidad y cuidado hacia sus mascotas, algo que el estudiante mencionó explícitamente.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5
+    },
+    {
+      "persona": "Sandra",
+      "control": false,
+      "contexto": "17 anios, quinto bachillerato. Le fascina el cuerpo humano desde que vio un documental, y se sabe los huesos de memoria. Pasa horas viendo casos raros y explicandoselos a sus companieras. Cuando alguien se lastima en el colegio ella es la primera en llegar y sabe que hacer. No le interesa nada que no sea eso.",
+      "fijas_cortas": {
+        "nombre": "Sandra",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica, De forma práctica, con las manos",
+        "entorno": "En un hospital, clínica o consultorio, En un laboratorio o taller técnico, Con la comunidad, ayudando a personas",
+        "gustos": "Salud y cuidar pacientes, Equipos médicos, laboratorio e imágenes, Cuerpo, deporte y rehabilitación"
+      },
+      "toco_etiqueta_cambiada": true,
+      "A_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Técnico Universitario en Laboratorio Clínico",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Producción de Imágenes Diagnósticas",
+          "afinidad": 25
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Fisioterapia",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Médico y Cirujano",
+          "afinidad": 25
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se centra directamente en el interés clínico y anatómico del estudiante. Incluye medicina y enfermería, que son las áreas donde su vocación de servicio y conocimiento previo encajan perfectamente.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque incluye áreas de salud, se aleja del interés principal del estudiante por la atención directa y el conocimiento profundo del cuerpo humano. Las opciones técnicas son menos dinámicas respecto a su perfil de ayuda inmediata.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista prioriza la atención directa al paciente y el estudio profundo de la anatomía, lo cual es el motor principal del estudiante. La segunda lista se enfoca en áreas de diagnóstico que, aunque relacionadas, limitan su deseo de intervenir activamente en casos médicos.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "B",
+      "coherencia_A": 3,
+      "coherencia_B": 5
+    },
+    {
+      "persona": "Brenda",
+      "control": false,
+      "contexto": "18 anios, termino el diversificado. Trabaja medio tiempo en la farmacia de la esquina y le gusta explicarle a la gente como tomarse las cosas; la buscan a ella. Pero tambien lleva la caja y se dio cuenta de que es buena viendo que producto conviene pedir y cual no se vende. Le gustan las dos partes y no sabe cual pesa mas.",
+      "fijas_cortas": {
+        "nombre": "Brenda",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números",
+        "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica",
+        "entorno": "En una oficina o empresa, En un hospital, clínica o consultorio, Con la comunidad, ayudando a personas",
+        "gustos": "Salud y cuidar pacientes, Matemáticas y números, Negocios, dinero y emprendimiento, Organizar y dirigir equipos o instituciones"
+      },
+      "toco_etiqueta_cambiada": true,
+      "A_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Administración de Hotelería, Turismo y Gastronomía",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Administración Educativa",
+          "afinidad": 18
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Licenciatura en Enfermería",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Licenciatura en Nutrición",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Administración de Empresas",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": false,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista integra perfectamente su vocación de servicio y explicación de medicamentos con su habilidad analítica para la gestión de inventarios. Incluir Administración de Empresas es un acierto directo al considerar su destreza con la caja y la toma de decisiones comerciales.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque Enfermería es coherente, las otras opciones se alejan de su experiencia práctica en farmacia. La administración educativa no guarda relación con su interés por la gestión de productos y ventas que ella misma ha identificado.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista captura mejor el equilibrio entre su rol asistencial y su capacidad de gestión comercial, manteniendo una coherencia lógica con su entorno laboral actual.",
+        "misma_area": true,
+        "area": "salud"
+      },
+      "gano": "B",
+      "coherencia_A": 3,
+      "coherencia_B": 5
+    },
+    {
+      "persona": "Wendy",
+      "control": false,
+      "contexto": "17 anios, quinto bachillerato en un instituto de Quetzaltenango. Toca la marimba en el grupo del colegio desde los 12 y ahora tambien guitarra; se junta los sabados con unos amigos a ensayar. Es la que organiza los ensayos y la que se pelea para que todos lleguen a tiempo. Le va bien en clase sin esforzarse mucho, pero se aburre rapido de lo que es puro memorizar. Le gusta ensenarle a los mas chiquitos del grupo.",
+      "fijas_cortas": {
+        "nombre": "Wendy",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, De forma práctica, con las manos",
+        "entorno": "En un aula o centro educativo, En medios de comunicación o diseñando, Con la comunidad, ayudando a personas",
+        "gustos": "Enseñanza y docencia, Arte, diseño y creatividad, Música, danza y artes escénicas, Organizar y dirigir equipos o instituciones"
+      },
+      "toco_etiqueta_cambiada": true,
+      "A_top3": [
+        {
+          "carrera": "Profesorado en Educación Artística (Música y Danza)",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Licenciatura en Educación de la Comunicación y Lenguaje",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Ciencias de la Educación",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Arquitectura",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Comunicación y Diseño",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Producción Audiovisual y Artes Cinematográficas",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista conecta directamente con su gusto por enseñar a los más pequeños y su experiencia liderando grupos musicales. Valora su capacidad organizativa y su interés por la pedagogía aplicada a las artes.",
+        "coherencia_2": 3,
+        "porque_2": "Aunque la parte creativa y de diseño encaja con su perfil artístico, ignora por completo su vocación docente y su habilidad para la gestión de grupos. Son opciones válidas para alguien creativo, pero menos alineadas con su interés por la enseñanza.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista integra tanto su pasión por la música como su vocación docente, aprovechando su experiencia previa enseñando a los más pequeños, mientras que la segunda se centra solo en la parte técnica y creativa.",
+        "misma_area": false,
+        "area": "educación"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 3
+    },
+    {
+      "persona": "Ixchel",
+      "control": false,
+      "contexto": "20 anios, termino magisterio. Habla k'iche' con su familia y espanol en el pueblo, y aprendio ingles sola con series y hablando con turistas en el parque. Da clases particulares a ninios del barrio y le encanta el momento en que a alguien 'le cae el veinte'. Le duele que sus primos mas chiquitos ya no quieran hablar k'iche'. Es paciente y no se enoja cuando alguien se equivoca.",
+      "fijas_cortas": {
+        "nombre": "Ixchel",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo, Analizando datos, ideas y lógica",
+        "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
+        "gustos": "Enseñanza y docencia, Historia, sociedad y cultura, Idiomas y otras culturas"
+      },
+      "toco_etiqueta_cambiada": true,
+      "A_top3": [
+        {
+          "carrera": "Profesorado en Educación Primaria",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Psicología (PEM y Licenciatura)",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Profesorado en Enseñanza Media en Cultura e Idioma Maya",
+          "afinidad": 35
+        },
+        {
+          "carrera": "PEM en Comunicación y Lenguaje",
+          "afinidad": 25
+        },
+        {
+          "carrera": "PEM en Historia y Ciencias Sociales",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 4,
+        "porque_1": "La lista conecta bien con su vocación docente y su paciencia natural. Incluye áreas como psicología y trabajo social que aprovechan su interés por el desarrollo humano y el impacto comunitario.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista es superior porque integra directamente su identidad cultural y su bilingüismo k'iche'-español. Propone caminos que formalizan su deseo de preservar su lengua materna y su capacidad pedagógica.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista es más coherente con su perfil específico, ya que no solo se enfoca en la docencia, sino que aborda directamente su preocupación por la pérdida del idioma k'iche' entre los jóvenes.",
+        "misma_area": true,
+        "area": "educación"
+      },
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5
+    },
+    {
+      "persona": "Lucia",
+      "control": false,
+      "contexto": "17 anios, quinto bachillerato. Es la que escribe los discursos del colegio y le sale facil convencer a la gente cuando habla en publico. Tambien es la que consuela a sus amigas cuando estan mal y siempre termina escuchando problemas ajenos. No sabe si lo suyo es hablarle a mucha gente o a una sola.",
+      "fijas_cortas": {
+        "nombre": "Lucia",
+        "departamento": "Quetzaltenango",
+        "impacto": "Ayudar, enseñar o dar cuidados a las personas, Defender la justicia y resolver conflictos, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Con personas, en trato directo",
+        "entorno": "En un aula o centro educativo, En medios de comunicación o diseñando, Con la comunidad, ayudando a personas",
+        "gustos": "Enseñanza y docencia, Psicología y conducta, Leyes, justicia y debate, Historia, sociedad y cultura, Comunicación, escritura y medios"
+      },
+      "toco_etiqueta_cambiada": true,
+      "A_top3": [
+        {
+          "carrera": "Psicología (PEM y Licenciatura)",
+          "afinidad": 35
+        },
+        {
+          "carrera": "Licenciatura en Ciencias de la Educación",
+          "afinidad": 30
+        },
+        {
+          "carrera": "Profesorado en Psicopedagogía",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Psicología (PEM y Licenciatura)",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Trabajo Social",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Educación Primaria con Especialización en Gestión Educativa Intercultural",
+          "afinidad": 15
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 4,
+        "porque_1": "La lista se centra en el acompañamiento y la formación, aprovechando su capacidad de escucha y empatía. Sin embargo, ignora su talento destacado para la oratoria y la persuasión pública.",
+        "coherencia_2": 5,
+        "porque_2": "Esta lista integra mejor su perfil al incluir Trabajo Social, que permite tanto la intervención individual como la incidencia comunitaria y pública. Es una propuesta más equilibrada que abarca sus dos facetas: la escucha empática y la capacidad de influencia.",
+        "mejor": "2",
+        "porque_mejor": "La segunda lista es superior porque ofrece un espectro más amplio que permite explotar tanto su habilidad para consolar a individuos como su facilidad para dirigirse a grupos, alineándose mejor con su duda vocacional.",
+        "misma_area": true,
+        "area": "psicología"
+      },
+      "gano": "B",
+      "coherencia_A": 4,
+      "coherencia_B": 5
+    },
+    {
+      "persona": "Kevin",
+      "control": true,
+      "contexto": "18 anios, recien graduado de perito contador. Lo que de verdad le quita el sueino es entender por que su aldea sigue igual de pobre que cuando el era ninio, mientras la cabecera crece. Lee todo lo que encuentra sobre eso y discute con quien sea. Es bueno con los numeros y le gusta hacer cuadros y graficas para explicar sus argumentos. Le aburre soberanamente la idea de llevar la contabilidad de una tienda.",
+      "fijas_cortas": {
+        "nombre": "Kevin",
+        "departamento": "Quetzaltenango",
+        "impacto": "Defender la justicia y resolver conflictos, Liderar, organizar negocios o usar tecnología y números, Comunicar, crear, diseñar o hacer investigación",
+        "estilo": "Analizando datos, ideas y lógica",
+        "entorno": "En un aula o centro educativo, Con la comunidad, ayudando a personas",
+        "gustos": "Matemáticas y números, Leyes, justicia y debate, Historia, sociedad y cultura, Economía, pobreza y desarrollo del país, Comercio, política y otros países"
+      },
+      "toco_etiqueta_cambiada": false,
+      "A_top3": [
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 45
+        },
+        {
+          "carrera": "Criminología y Política Criminal",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+          "afinidad": 20
+        }
+      ],
+      "B_top3": [
+        {
+          "carrera": "Contaduría Pública y Auditoría",
+          "afinidad": 25
+        },
+        {
+          "carrera": "Licenciatura en Ciencias Jurídicas y Sociales",
+          "afinidad": 20
+        },
+        {
+          "carrera": "Licenciatura en Economía",
+          "afinidad": 20
+        }
+      ],
+      "primero_es_a": true,
+      "juicio": {
+        "coherencia_1": 5,
+        "porque_1": "La lista se alinea perfectamente con su interés por el desarrollo económico y la desigualdad social. Aprovecha su habilidad numérica y su capacidad de análisis gráfico para abordar problemas estructurales en lugar de tareas contables rutinarias.",
+        "coherencia_2": 2,
+        "porque_2": "Incluir Contaduría Pública como primera opción ignora explícitamente su aburrimiento por la contabilidad tradicional. Aunque las otras opciones son relevantes, la recomendación principal contradice su motivación central de entender la pobreza y el desarrollo.",
+        "mejor": "1",
+        "porque_mejor": "La primera lista prioriza la Economía, que es la herramienta académica ideal para investigar las causas de la pobreza que tanto le preocupan, evitando encasillarlo en la contabilidad que le resulta tediosa.",
+        "misma_area": false,
+        "area": "economía"
+      },
+      "gano": "A",
+      "coherencia_A": 5,
+      "coherencia_B": 2
+    }
+  ]
+}

@@ -5,6 +5,199 @@ Archivo principal: `backend/app/recomendar.py`.
 
 ---
 
+## ✅ Caching explícito ACTIVO — medido con billing (2026-08-11)
+
+Con billing habilitado en el proyecto primario, `caches.create` ya no falla y el
+`_get_cache` de `recomendar.py` funciona sin tocar una línea de código. Medido con
+**24 conversaciones completas reales** (4 en paralelo, filtro Quetzaltenango,
+144 llamadas a Gemini, 6 por sesión: 5 `next-question` + 1 `recommend`):
+
+| | Total 24 sesiones | Por sesión |
+|---|---|---|
+| Prompt | 1,276,822 tok | 53,201 |
+| **Cacheados** | **1,212,466 tok (95.0%)** | 50,519 |
+| Salida | 63,271 tok | 2,636 |
+| Total | 1,340,093 tok | 55,837 |
+| **Costo real** | **$0.1413** | **$0.0059** |
+| Costo si nada cacheara | $0.4141 | $0.0173 |
+| **Ahorro** | **65.9%** | |
+
+Proyección: **$0.59 / 100 sesiones · $1.18 / 200 sesiones** (contra $1.73 / $3.45
+sin caché). Confirma el estimado del 2026-08-02 (64-65%) casi exacto.
+
+**Contrastado con la factura real de Google:** el crédito prepago bajó de $10.00 a
+**$9.85 = $0.15 cobrados** por las 25 sesiones (la de humo + las 24), contra los
+$0.147 que calculó el script — **~2% de diferencia**. Los ~$0.003 que faltan son el
+almacenamiento del caché ($1/1M tok/hora), que `flujo_gasto.py` no contabiliza.
+A este ritmo ($0.006/sesión), $10 de crédito cubren **~1,650 conversaciones
+completas**.
+
+⚠️ La consola de Pagos tiene **latencia de horas**: media hora después de la corrida
+marcaba $0.12 y el número final fue $0.15. No leer el crédito inmediatamente después
+de medir.
+
+El 5% que no cachea es el historial del alumno (variable por definición) más la
+primera llamada de cada caché nuevo. 1 de las 25 sesiones falló por `ReadTimeout`
+con 4 flujos concurrentes — no es error de cuota (con billing el RPM ya no
+aprieta), es el timeout del cliente de prueba.
+
+⚠️ **La key con billing debe ir en `GEMINI_API_KEY`** (la primaria), no en
+`GEMINI_API_KEY_RESPALDO`: el caché se crea en el proyecto del cliente que
+efectivamente se usa (`key_label` en `_clave_cache`), así que si la de pago es la
+de respaldo, el caché solo se activaría cuando la gratis agote cuota. Y hay que
+**reiniciar el backend** tras cambiar la key: `_caches` memoriza en memoria el
+fallo anterior y no lo reintenta.
+
+Reproducir: `backend/flujo_gasto.py` (N conversaciones completas contra el backend
+local, lee `/api/uso-tokens` y calcula ambos costos).
+
+## Producción: pool de keys gratis + filtro de vuelta (2026-08-24)
+
+Decisión operativa tras el susto del alquiler: **producción no usa caché**. En su
+lugar, un **pool de keys GRATIS con una dedicada por sesión** (round-robin), y el
+**pre-filtro vuelve**. Razonamiento:
+
+- Sin caché, el catálogo completo (~25k tok) solo infla los tokens y presiona la
+  cuota de las keys gratis. El filtro lo recorta a ~5k. El A/B con control ya
+  probó que recortar **no cambia la recomendación** (efecto 4/8 < ruido 5/8,
+  [../experiments/cache-compartido.md](../experiments/cache-compartido.md) §9), así
+  que se recupera el ahorro de tokens sin costo de calidad.
+- Cada sesión toma una key del pool (`GEMINI_API_KEY_1..N`) y la usa entera; las
+  sesiones nuevas rotan a la siguiente (0,1,2,3,0,...). Con 4 keys, una clase de
+  ~20 se reparte en ~5 alumnos por key, muy por debajo de los 15 RPM / 500 RPD de
+  cada proyecto. **Costo real: $0. Sin caché, sin alquiler, sin fuga posible.**
+- Implementación: `key_de_sesion()` y `generar(session_id=...)` en `recomendar.py`
+  (asignación en memoria del proceso, ver el `ponytail:` ahí). Sin pool configurado
+  cae a `GEMINI_API_KEY` con etiqueta 'primaria', así dev/local no cambia.
+
+`CACHE_EXPLICITO` sigue existiendo para el caso concentrado de verdad (si algún
+día se quiere), pero con el pool gratis ya no hace falta encenderlo.
+
+## El caché explícito ahora es opt-in: CACHE_EXPLICITO (2026-08-24)
+
+Susto del 2026-08-24: el crédito bajó ~$3 en horas casi sin tráfico (Neon: 3
+sesiones, $0.026 de generación). Causa: **alquiler de caché**. Cada
+`caches.create` renta almacenamiento ($1/1M tok/hora) hasta su TTL de 1h, y con
+tráfico goteado esas horas de alquiler no se amortizan entre alumnos. Una sesión
+suelta llega a costar ~$0.05 de alquiler contra ~$0.008 de generación: el caché
+explícito **multiplica** el costo en vez de bajarlo. Solo conviene con la clase
+concentrada (muchos alumnos en la misma hora comparten los cachés). Agravado por
+la **latencia de horas** de la consola de Pagos, que hizo ver el gasto de ayer
+como "de la noche".
+
+Arreglo: `caches.create` quedó detrás del flag **`CACHE_EXPLICITO`** (apagado por
+defecto, ver `cache_explicito_activo()` en `recomendar.py`). Apagado usa el caché
+**implícito** de Gemini, automático y sin alquiler. Encenderlo (=1) solo el día
+de la clase, con la key de billing. Así la key de billing se puede dejar de
+principal para tener velocidad sin arriesgar fuga de alquiler.
+
+`experimento_filtro.py` ahora **borra sus cachés al terminar** (`_borrar_caches`):
+antes los dejaba rentando hasta expirar, que fue parte del susto.
+
+Diagnóstico y limpieza rápida: `backend/gasto_24h.py` (gasto por sesión) y listar
+`client.caches.list()` para ver cachés vivos y borrarlos.
+
+## El pre-filtro crea un caché por llamada (2026-08-23)
+
+El caché se indexa por `sha256(system + catálogo)`, y el catálogo de
+`next-question` sale de `filtro.preseleccionar`, que se recalcula tras cada
+respuesta. Resultado: el hash cambia en cada llamada y se crea **un
+CachedContent nuevo cada vez** (9 cachés en 9 llamadas, medido). Como el
+almacenamiento se cobra por hora y por caché, eso es una renta por alumno que
+nunca se amortiza. Mandar el catálogo completo deja **1 caché para todo el
+grupo**. Números, brazos y bloqueantes en
+[../experiments/cache-compartido.md](../experiments/cache-compartido.md).
+
+⚠️ **El % cacheado no sirve para detectar esto.** Un caché recién creado ya
+reporta sus tokens como cacheados, así que ambos brazos dan >94%. La métrica es
+el **número de cachés distintos**.
+
+⚠️ **`uso_tokens` oculta el 38% del gasto real (verificado 2026-08-24).** La
+factura de Google, agrupada por SKU, trae
+`Generate content cached content storage token hours`: 597,510 tokens-hora por
+**$0.60 de un total de $1.59**, la línea individual más cara, por encima de la
+salida y del input. El precio implícito es $1.004/1M tokens-hora, exacto contra
+el de lista. Como esa tabla solo registra tokens, **toda cifra sacada de ella es
+una cota inferior**, incluidas las proyecciones de este archivo. Detalle en
+[../experiments/cache-compartido.md](../experiments/cache-compartido.md) §8.
+
+## La key con billing ya es la primaria en local (2026-08-23)
+
+Verificado probando `caches.create` con cada una: `GEMINI_API_KEY` crea cachés,
+`GEMINI_API_KEY_RESPALDO` falla con 429. En **Render también** está la de
+billing como primaria (corroborado por el autor). **Corrige lo que dice
+`experiments/filtro-catalogo-ab.md`**, que quedó viejo.
+
+Las 7 sesiones de Neon dan 28.5% de cacheado global, dentado entre 0% y 92.6%,
+pero eso es **historia, no estado actual**: el cambio en Render entró entre las
+dos últimas sesiones, la anterior da 0% (key gratis) y la posterior 92.6% (key
+con billing). Ese 92.6% coincide con el 94.6% medido en local, o sea el caché
+explícito ya corre bien en producción. Al leer promedios de esta tabla, filtrar
+por fecha: `backend/gasto_24h.py 48`.
+
+Diagnóstico rápido de cualquier base: `backend/gasto_24h.py`, que imprime el %
+cacheado por sesión y el global.
+
+## Los experimentos no quedaban en `uso_tokens` (2026-08-12)
+
+`uso_tokens` solo se llena desde los endpoints (`_registrar_uso` en `main.py`).
+Los scripts `experimento_*.py` llaman a `recomendar.generar()` **directo, sin pasar
+por FastAPI**, así que su consumo era invisible: se gastaron **$0.86 de crédito**
+(de $9.85 a $8.99) sin una sola fila en la tabla.
+
+Agrava el problema tener la key de pago como respaldo: cuando la gratis agota su
+RPD, `generar()` salta sola a la de pago y **todo lo que sigue se factura en
+silencio**, sin que nadie lo pida explícitamente.
+
+**Solución (`_GASTO` / `resumen_gasto()` en `recomendar.py`):** contador en memoria
+del proceso, por proyecto (primaria/respaldo), que acumula en `generar()` — el único
+punto por donde pasan todas las llamadas. Los experimentos lo imprimen al terminar:
+
+```
+Gasto en Gemini de este proceso:
+  key primaria [gratis: $0 real]: 55 llamadas | 2,750,000 prompt (0 cacheados) | ...  ->  $0.7000
+  key respaldo [billing: SE FACTURA]: 12 llamadas | ...  ->  $0.1500
+  TOTAL si todo fuera de pago: $0.8500
+```
+
+La marca `[billing]` no se configura: sale de `_caches`, porque `caches.create` solo
+funciona con plan de pago. La fila de la key gratis es "lo que habría costado".
+
+No reemplaza a `uso_tokens` (que persiste y es por sesión de alumno): es para los
+scripts, que mueren al terminar.
+
+---
+
+## Prueba de carga con la key GRATIS de primaria (2026-08-12)
+
+Configuración recomendada para desarrollo (gratis primaria, de pago en
+`GEMINI_API_KEY_RESPALDO`), **10 sesiones completas lanzadas en paralelo en el
+mismo segundo** (peor caso), 60 llamadas a Gemini:
+
+| | Resultado |
+|---|---|
+| Llamadas exitosas | **60/60** |
+| Saltos a `GEMINI_API_KEY_RESPALDO` | **0** (ningún 429 agotó los reintentos) |
+| Prompt cacheado | 33.4% (caching **implícito**, la key gratis no crea `CachedContent`) |
+| Costo real | **$0.00** |
+| Latencia por sesión | 135s la más rápida · **267s la más lenta** |
+
+**El techo del tier gratis se paga en tiempo, no en dinero.** Ninguna sesión bajó
+de 135s; con la key de pago de primaria la más rápida fue de 19s. Los 15 RPM se
+saturan, `_con_reintento` espera lo que Google pide y todos hacen fila — pero
+nadie falla. Por eso: gratis para desarrollo, de pago para la demo.
+
+El **caching implícito volvió a aparecer** (33.4%) después de las dos pruebas del
+2026-07-21 que dieron 0%. Confirma que el mecanismo existe en tier gratis y que se
+activa con llamadas simultáneas de prefijo idéntico, pero sigue siendo oportunista:
+no presupuestar con él.
+
+⚠️ `flujo_gasto.py` imprime el costo asumiendo que **todas** las llamadas fueron
+con key de pago (`uso_tokens` no guarda qué key atendió cada una). Con la gratis de
+primaria ese número es una cota superior, no el gasto real.
+
+---
+
 ## Medición vigente (2026-08-02)
 
 Medido con `client.models.count_tokens` contra la BD ya sembrada
@@ -130,7 +323,8 @@ ahorraba: quedó texto libre + fallback de matching insensible a mayúsculas.
   separados, no comparten uno solo.
 - TTL de 1h; si expira (404), el código lo recrea solo, sin intervención.
 
-**Por qué el caching EXPLÍCITO no se ve todavía:** el tier gratis de Google
+**Por qué el caching EXPLÍCITO no se veía antes del 2026-08-11** (hoy ya está
+activo, ver arriba)**:** el tier gratis de Google
 tiene el almacenamiento de caché en 0
 (`TotalCachedContentStorageTokensPerModelFreeTier limit=0`), así que
 `caches.create` siempre falla ahí y todo cae a inline (la app no se rompe,

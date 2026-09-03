@@ -61,9 +61,9 @@ export default function Parametros() {
         <p className="intro">
           Para recomendarte bien, la IA construye tu <strong>perfil vocacional</strong> a
           partir de siete dimensiones. Mientras chateas, cruza lo que descubre de ti con el
-          perfil de <em>todas</em> las carreras de tu departamento —cada una resumida por un
+          perfil de <em>todas</em> las carreras de tu departamento, cada una resumida por un
           "arquetipo" o personaje (el jurista que defiende el orden, el sanador científico, el
-          constructor de infraestructura)— y al final asigna un porcentaje de afinidad a cada
+          constructor de infraestructura) y al final asigna un porcentaje de afinidad a cada
           una. No hay respuestas buenas ni malas: solo qué tanto se parece cada carrera a ti.
         </p>
         <div className="dim-grid">

@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Nav from './Nav'
-import { SESSION_ID } from './session'
+import { sessionId } from './session'
+import { authHeader } from './auth'
+import GuardarResultados from './GuardarResultados'
 import './App.css'
+import { API } from './api'
 
-const API = 'http://localhost:8000'
 const POR_PAGINA = 20
 // El examen son 100 ítems (20-30 min): sin esto, una recarga accidental borra
 // todo el avance. Se limpia al terminar.
@@ -11,7 +13,7 @@ const BORRADOR = 'psicometrico-borrador'
 
 // Formatea segundos como "4 min 12 s".
 function tiempo(seg) {
-  if (!seg && seg !== 0) return '—'
+  if (!seg && seg !== 0) return '-'
   const m = Math.floor(seg / 60)
   return m ? `${m} min ${seg % 60} s` : `${seg} s`
 }
@@ -150,11 +152,11 @@ export default function Psicometrico() {
     try {
       const r = await fetch(`${API}/api/psicometrico`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeader() },
         body: JSON.stringify({
           respuestas,
           tiempos: tiempos.current,
-          session_id: SESSION_ID,
+          session_id: sessionId(),
         }),
       })
       if (!r.ok) {
@@ -340,6 +342,8 @@ function Resultados({ datos, banco }) {
           valor personal, y no diagnostica nada.
         </p>
 
+        <GuardarResultados />
+
         <section className="psi-bloque">
           <h2>Perfil de personalidad</h2>
           {Object.entries(per.rasgos).map(([clave, r]) => (
@@ -386,7 +390,7 @@ function Resultados({ datos, banco }) {
                   <li>
                     {/* precision viene null si no intentó ninguna: un "0%" ahí
                         se leería como "falló todas". */}
-                    Precisión <strong>{c.precision === null ? '—' : `${c.precision}%`}</strong>
+                    Precisión <strong>{c.precision === null ? '-' : `${c.precision}%`}</strong>
                     {' '}({c.intentadas} intentadas)
                   </li>
                   <li>Puntaje <strong>{c.puntaje}</strong>

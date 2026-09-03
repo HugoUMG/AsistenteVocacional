@@ -1,0 +1,240 @@
+// El recorrido de una evaluación: quién es el alumno, qué contestó en las
+// preguntas fijas, qué le preguntó Orienta y qué le salió. Lo usan el historial
+// del propio alumno y el registro de administración, que muestran exactamente lo
+// mismo.
+import { useState } from 'react'
+import Nav from './Nav'
+import { CLAVES_FIJAS } from './preguntas-fijas'
+import './App.css'
+
+const fecha = (iso) =>
+  new Date(iso).toLocaleDateString('es-GT', { day: 'numeric', month: 'short', year: 'numeric' })
+
+// Nombre legible de cada pregunta fija en el recorrido. Las adaptativas no
+// necesitan tabla: su clave ES la pregunta que hizo Orienta.
+const ETIQUETAS = {
+  nombre: 'Nombre',
+  edad: 'Edad',
+  nivel: 'Nivel académico',
+  grado: 'Grado',
+  carrera_cursada: 'Carrera que cursa o cursó',
+  gusto_grado: '¿Le gustó?',
+  motivo: 'Por qué hizo el test',
+  impacto: 'Impacto que quiere tener',
+  estilo: 'Cómo prefiere trabajar',
+  entorno: 'Dónde se imagina trabajando',
+  gustos: 'Temas que le apasionan',
+  departamento: 'Departamento',
+  carrera_descartada: 'Carrera descartada',
+}
+
+function Rama({ titulo, pasos }) {
+  if (!pasos.length) return null
+  return (
+    <div className="rec-rama">
+      <p className="rec-rama-titulo">{titulo}</p>
+      <ul className="rec-pasos">
+        {pasos.map(([clave, valor]) => (
+          <li key={clave}>
+            <span className="rec-pregunta">{(ETIQUETAS[clave] || clave).replaceAll('**', '')}</span>
+            <span className="rec-respuesta">{String(valor)}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+// Qué midió el test de Holland de este alumno, si lo hizo. Va antes de las
+// preguntas fijas porque en el modo 3 el chat parte de este perfil.
+const LETRAS_RIASEC = { R: 'Realista', I: 'Investigador', A: 'Artístico',
+  S: 'Social', E: 'Emprendedor', C: 'Convencional' }
+
+function Holland({ h, historial = [], onVerResumen }) {
+  if (!h) return null
+  // Un alumno puede repetir el test: los demás intentos van como lista corta
+  // debajo, para ver si el perfil se movió entre una evaluación y otra.
+  const otros = historial.filter((o) => o.fecha !== h.fecha)
+  return (
+    <div className="rec-rama">
+      <p className="rec-rama-titulo">
+        Test de Holland {h.mismo_recorrido ? '' : '(de otro recorrido)'}
+      </p>
+      <ul className="rec-pasos">
+        <li>
+          <span className="rec-pregunta">Código RIASEC</span>
+          <span className="rec-respuesta">{h.codigo} · {fecha(h.fecha)}</span>
+        </li>
+        {Object.entries(LETRAS_RIASEC).map(([l, nombre]) => (
+          <li key={l}>
+            <span className="rec-pregunta">{nombre} ({l})</span>
+            <span className="rec-respuesta">{h.areas?.[l] ?? '-'}</span>
+          </li>
+        ))}
+      </ul>
+      {!!otros.length && (
+        <ul className="rec-pasos">
+          <li>
+            <span className="rec-pregunta">Otros intentos ({otros.length})</span>
+            <span className="rec-respuesta">
+              {otros.map((o) => `${o.codigo} (${fecha(o.fecha)})`).join(' · ')}
+            </span>
+          </li>
+        </ul>
+      )}
+      {/* El resumen completo (las seis areas, las ocupaciones de O*NET y las
+          carreras afines) es parte del analisis: el registro solo mostraba los
+          puntajes sueltos. Se abre igual que en el historial del alumno. */}
+      {onVerResumen && h.id && (
+        <button className="opt ghost" onClick={() => onVerResumen(h.id)}>
+          Ver el resumen del test →
+        </button>
+      )}
+    </div>
+  )
+}
+
+// Calificación del profesional que aplica el estudio. Solo aparece en /admin
+// (el historial del alumno no manda onGuardar y el panel no se dibuja): es la
+// vara EXTERNA de docs/estudio-con-estudiantes.md §4, no la opinión del alumno.
+// 'descartada' no es un juicio: la marca quien aplica el estudio para sacar del
+// registro las pruebas de desarrollo y las de conocidos. Por eso va separada de
+// las otras tres en la interfaz, para que no se lea como una cuarta nota.
+const OPCIONES_JUICIO = [
+  ['acerto', 'Acertó'],
+  ['parcial', 'Acertó en parte'],
+  ['no_acerto', 'No acertó'],
+]
+const DESCARTADA = 'descartada'
+
+function Juicio({ valor, nota, onGuardar }) {
+  const [juicio, setJuicio] = useState(valor ?? null)
+  const [texto, setTexto] = useState(nota ?? '')
+  const [estado, setEstado] = useState('')
+
+  async function guardar(nuevoJuicio, nuevoTexto) {
+    setEstado('Guardando…')
+    try {
+      await onGuardar(nuevoJuicio, nuevoTexto)
+      setEstado('Guardado')
+    } catch (e) {
+      setEstado(String(e.message || e))
+    }
+  }
+
+  function elegir(v) {
+    // Segundo clic en la misma opción = deseleccionar, por si se equivocó.
+    const nuevo = juicio === v ? null : v
+    setJuicio(nuevo)
+    guardar(nuevo, texto)
+  }
+
+  return (
+    <div className="rec-rama">
+      <p className="rec-rama-titulo">Calificación del profesional</p>
+      <div className="rec-juicio-opciones">
+        {OPCIONES_JUICIO.map(([v, t]) => (
+          <button
+            key={v}
+            className={juicio === v ? 'opt' : 'opt ghost'}
+            onClick={() => elegir(v)}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+      <button
+        className={juicio === DESCARTADA ? 'opt' : 'opt ghost'}
+        onClick={() => elegir(DESCARTADA)}
+      >
+        {juicio === DESCARTADA ? '✓ Fuera del estudio' : 'No es de un alumno (sacar del registro)'}
+      </button>
+      <textarea
+        className="rec-juicio-nota"
+        rows={4}
+        placeholder="Comentarios: qué matiz tiene este caso, qué habrías recomendado, qué se le escapó al sistema…"
+        value={texto}
+        onChange={(e) => { setTexto(e.target.value); setEstado('') }}
+        onBlur={() => (texto ?? '') !== (nota ?? '') && guardar(juicio, texto)}
+        maxLength={4000}
+      />
+      <p className="psi-texto">{estado || 'Se guarda solo al elegir y al salir del comentario.'}</p>
+    </div>
+  )
+}
+
+// El recorrido completo de una evaluación, como diagrama de arriba abajo:
+// quién es, qué contestó en las fijas, qué le preguntó Orienta y qué le salió.
+// ponytail: el diagrama es HTML y CSS (una línea vertical y nodos), sin
+// librería de grafos. Si algún día hay que ramificar de verdad, ahí sí.
+export default function Recorrido({ fila, onVolver, onDashboard, onGuardarJuicio, onVerHolland }) {
+  const r0 = fila.respuestas || {}
+  const entradas = Object.entries(r0)
+  const esFija = ([c]) => CLAVES_FIJAS.includes(c) || c === 'departamento' || c === 'carrera_descartada'
+  const identidad = ['nombre', 'edad', 'nivel', 'grado']
+  const fijas = entradas
+    .filter((e) => esFija(e) && !identidad.includes(e[0]))
+    .filter(([c, v]) => c !== 'carrera_descartada' || v !== r0.carrera_cursada)
+  const adaptativas = entradas.filter((e) => !esFija(e))
+  const r = r0
+  const podio = (fila.recomendacion || []).slice(0, 5)
+
+  return (
+    <div className="pagina">
+      <Nav />
+      <main className="contenido">
+        <span className="pasos-kicker">Recorrido</span>
+        <h1>Cómo llegó a este resultado</h1>
+        <div className="rec-acciones">
+          <button className="opt ghost" onClick={onVolver}>← Volver al historial</button>
+          <button className="opt" onClick={onDashboard}>Ver el dashboard →</button>
+        </div>
+
+        <div className="rec-diagrama">
+          <div className="rec-nodo rec-perfil">
+            <strong>{r.nombre || 'Sin nombre'}</strong>
+            <span>
+              {[r.edad && `${r.edad} años`, r.nivel, r.grado].filter(Boolean).join(' · ')}
+            </span>
+            <span className="rec-fecha">{fecha(fila.fecha)}</span>
+          </div>
+
+          <Holland h={fila.holland} historial={fila.holland_historial} onVerResumen={onVerHolland} />
+          <Rama titulo="Preguntas fijas" pasos={fijas} />
+          <Rama titulo="Preguntas de Orienta" pasos={adaptativas} />
+
+          <div className="rec-rama">
+            <p className="rec-rama-titulo">Resultado</p>
+            {podio.length ? (
+              <ol className="rec-resultado">
+                {podio.map((c, i) => (
+                  <li key={`${c.carrera}-${i}`}>
+                    <span className="hist-puesto">{i + 1}</span>
+                    <span className="hist-carrera">{c.carrera}</span>
+                    <span className="hist-afinidad">{c.afinidad}%</span>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="psi-texto">No llegó a ver resultados.</p>
+            )}
+            {!!fila.diversificados?.length && (
+              <ul className="rec-diversificados">
+                {fila.diversificados.map((d) => <li key={d.nombre}>{d.nombre}</li>)}
+              </ul>
+            )}
+          </div>
+
+          {onGuardarJuicio && (
+            <Juicio
+              key={fila.id}
+              valor={fila.juicio}
+              nota={fila.juicio_nota}
+              onGuardar={onGuardarJuicio}
+            />
+          )}
+        </div>
+      </main>
+    </div>
+  )
+}

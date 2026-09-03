@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import Nav from './Nav'
+import { MODO_COMPLETO } from './modo'
 import './App.css'
 
 // Ondas decorativas del hero (azules sobre azul marino), inspiradas en el
@@ -61,6 +62,47 @@ const PASOS = [
   },
 ]
 
+// Los caminos que puede tomar el alumno. El tercero es el modo completo:
+// el test avalado mide sus intereses y el chat se dedica a la carrera concreta.
+// Las 4 preguntas fijas del chat se quedan también en ese modo: quitarlas se
+// midió y salió peor (experiments/holland-en-chat.md).
+const MODOS = [
+  {
+    titulo: 'Solo el chat',
+    duracion: 'Rápido',
+    texto: 'Conversas con Orienta y recibes tu recomendación de carreras con universidades reales de tu departamento.',
+    boton: 'Empezar el chat',
+    ruta: '/mapa',
+  },
+  {
+    titulo: 'Solo el test de Holland',
+    duracion: 'Un rato',
+    texto: 'Las 60 actividades del O*NET Interest Profiler. Te da tu código de intereses (RIASEC) y el tipo de trabajo que te encaja.',
+    boton: 'Hacer el test',
+    ruta: '/holland',
+  },
+  {
+    titulo: 'El test y luego el chat',
+    duracion: 'Con calma',
+    texto: 'Lo más completo: primero el test mide tus intereses, y después Orienta parte de ese resultado para buscar la carrera concreta que te encaja.',
+    boton: 'Empezar por el test',
+    ruta: '/holland',
+    destacado: true,
+  },
+  {
+    titulo: 'Perfil corto y luego el chat',
+    duracion: 'Un rato',
+    texto: '48 frases sobre tu personalidad, tus valores y cómo pensás. Orienta arranca el chat ya sabiendo eso, así que necesita menos preguntas.',
+    boton: 'Empezar por el perfil',
+    ruta: '/personalidad',
+    soloLocal: true,
+  },
+]
+
+// En producción se ofrecen solo el chat y Holland (ver modo.js).
+const MODOS_VISIBLES = MODOS.filter((m) => MODO_COMPLETO || !m.soloLocal)
+const CUANTAS = ['', 'Una', 'Dos', 'Tres', 'Cuatro']
+
 export default function Inicio() {
   const navigate = useNavigate()
   return (
@@ -98,15 +140,34 @@ export default function Inicio() {
         </div>
       </section>
 
+      <section className="pasos">
+        <span className="pasos-kicker">Elige cómo empezar</span>
+        <h2>{CUANTAS[MODOS_VISIBLES.length]} formas de hacerlo</h2>
+        <div className="pasos-grid">
+          {MODOS_VISIBLES.map((m) => (
+            <article
+              key={m.titulo}
+              className={`paso-card modo-card${m.destacado ? ' modo-destacado' : ''}`}
+            >
+              {m.destacado && <span className="modo-sello">Recomendado</span>}
+              <h3>{m.titulo}</h3>
+              <span className="modo-minutos">{m.duracion}</span>
+              <p>{m.texto}</p>
+              <button className="hero-btn" onClick={() => navigate(m.ruta)}>
+                {m.boton} →
+              </button>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="cierre">
         <p>
           Este proyecto nació para apoyar a estudiantes de Quetzaltenango y
-          Totonicapán que están por decidir su futuro. No necesitas registrarte
-          ni pagar nada: solo unos minutos y ganas de conocerte mejor.
+          Totonicapán que están por decidir su futuro. No cuesta nada: entrás
+          con tu cuenta de Google, y solo necesitas unos minutos y ganas de
+          conocerte mejor.
         </p>
-        <button className="hero-btn" onClick={() => navigate('/mapa')}>
-          Hacer mi test vocacional →
-        </button>
       </section>
     </div>
   )

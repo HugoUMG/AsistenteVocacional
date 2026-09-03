@@ -1,11 +1,24 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import { color } from './colors'
-import { SESSION_ID } from './session'
+import { nuevaSesion, sessionId } from './session'
+import { leerPerfilHolland } from './holland-perfil'
+import { leerPerfilPersonalidad } from './personalidad-perfil'
+import { authHeader, sesionActual } from './auth'
 import './App.css'
+import { API } from './api'
+import { CLAVES_FIJAS, CLAVES_PERFIL, FIJAS, grado, limpiaNombre } from './preguntas-fijas'
 
-const API = 'http://localhost:8000'
+// Claves de `respuestas` que NO son adaptativas. Además de las fijas van
+// 'departamento' (se siembra al montar el chat, viene del mapa) y
+// 'carrera_descartada' (se agrega sola en los grados que descartan). Restar
+// FIJAS.length y ya contaba esas dos como adaptativas, así que el chat cerraba
+// a las 3 preguntas en vez de las 4 y una dimensión prioritaria se quedaba sin
+// cubrir. Medido con alumnos reales, ver experiments/prueba-alumnos-2026-08-24.md.
+const NO_ADAPTATIVAS = new Set([...CLAVES_FIJAS, 'departamento', 'carrera_descartada'])
+const cuentaAdaptativas = (resp) => Object.keys(resp).filter((k) => !NO_ADAPTATIVAS.has(k)).length
+
 const MIN_ADAPTATIVAS = 4 // mínimo antes de ofrecer el resultado (se siente conversación)
 const MAX_ADAPTATIVAS = 8 // tope: perfiles ambiguos afinan más, sin agotar cuota
 const MOSTRAR_RADAR = false // ponytail: radar de afinidad en vivo desactivado; poner true para reactivarlo
@@ -22,93 +35,32 @@ const MENSAJES_CARGA = [
   'Casi listo…',
 ]
 
-// Preguntas FIJAS (sin llamar a la IA): nombre + 3 vocacionales genéricas.
-// Son catálogo-agnósticas (no mencionan carreras).
-const FIJAS = [
-  {
-    clave: 'nombre',
-    tipo: 'texto',
-    texto: '¡Hola! Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
-    placeholder: 'Escribe tu nombre…',
-  },
-  {
-    clave: 'impacto',
-    tipo: 'opcion',
-    multiple: true, // puede elegir varios
-    texto: '¿Qué tipo de impacto te gustaría tener en el mundo? (puedes elegir varios)',
-    opciones: [
-      { label: 'Ayudar, enseñar o cuidar a las personas' },
-      { label: 'Defender la justicia y resolver conflictos' },
-      { label: 'Liderar, organizar negocios o usar tecnología y números' },
-      { label: 'Trabajar con la naturaleza, el campo o el ambiente' },
-      { label: 'Comunicar, crear, diseñar o investigar la realidad' },
-      { label: 'Construir, diseñar o hacer que las cosas funcionen' },
-    ],
-  },
-  {
-    clave: 'estilo',
-    tipo: 'opcion',
-    multiple: true, // puede combinar formas de trabajo
-    texto: '¿Cómo prefieres trabajar? (puedes elegir varias)',
-    opciones: [
-      { label: 'Con personas, en trato directo' },
-      { label: 'Analizando datos, ideas y lógica' },
-      { label: 'De forma práctica, con las manos' },
-      { label: 'Al aire libre y en movimiento' },
-    ],
-  },
-  {
-    clave: 'entorno',
-    tipo: 'opcion',
-    multiple: true,
-    texto: '¿Dónde te imaginas trabajando? (puedes elegir varios)',
-    opciones: [
-      { label: 'En una oficina o empresa' },
-      { label: 'En un hospital, clínica o consultorio' },
-      { label: 'Al aire libre, en el campo o la naturaleza' },
-      { label: 'En un laboratorio o taller técnico' },
-      { label: 'En un aula o centro educativo' },
-      { label: 'En una obra, con máquinas o herramientas' },
-      { label: 'En medios, un estudio creativo o diseñando' },
-      { label: 'Con la comunidad, ayudando a personas' },
-    ],
-  },
-  {
-    // Banco de palabras: temas de interés alineados a las áreas del catálogo
-    // (sin nombrar carreras). El alumno elige varios y puede agregar el suyo.
-    clave: 'gustos',
-    tipo: 'opcion',
-    multiple: true,
-    chips: true,
-    texto: '¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).',
-    opciones: [
-      { label: 'Matemáticas y números' },
-      { label: 'Tecnología y computación' },
-      { label: 'Salud y cuidar personas' },
-      { label: 'Biología y naturaleza' },
-      { label: 'Química y laboratorio' },
-      { label: 'Leyes, justicia y debate' },
-      { label: 'Negocios, dinero y emprender' },
-      { label: 'Arte, diseño y creatividad' },
-      { label: 'Comunicación, escritura y medios' },
-      { label: 'Enseñar y educar' },
-      { label: 'Psicología y comportamiento' },
-      { label: 'Medio ambiente y agricultura' },
-      { label: 'Construcción, máquinas y cómo funcionan las cosas' },
-      { label: 'Gastronomía, turismo y hotelería' },
-      { label: 'Historia, sociedad y cultura' },
-    ],
-  },
-]
-
 const post = (ruta, body) =>
   fetch(`${API}${ruta}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeader() },
     body: JSON.stringify(body),
   })
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
+// Cuanto dejar una burbuja en pantalla cuando la voz esta apagada: a ~200
+// palabras por minuto de lectura (300 ms por palabra) mas un respiro fijo, y
+// escalado con el mismo control de velocidad que la voz.
+// ponytail: cuenta palabras, no silabas ni signos; alcanza para frases cortas.
+function tiempoLectura(texto) {
+  const palabras = (texto || '').trim().split(/\s+/).filter(Boolean).length
+  const ms = (500 + palabras * 300) / velocidad
+  return Math.min(9000, Math.max(900, ms))
+}
+
+// Los 429 los redacta el backend (enfriamiento entre evaluaciones o tope de uso
+// del día, ver backend/app/cuota.py) y se muestran tal cual: un mensaje genérico
+// dejaría al alumno sin saber por qué se detuvo ni cuándo puede volver.
+async function errorDelBackend(r, generico) {
+  const d = await r.json().catch(() => null)
+  return new Error(typeof d?.detail === 'string' ? d.detail : generico)
+}
 
 // Filtro básico de groserías para el nombre (misma lista que backend/app/main.py).
 // El nombre se muestra en el saludo del dashboard y el PDF, así que se corta aquí
@@ -154,8 +106,8 @@ function enPartes(texto, max = 150) {
 // falla (API no oficial, puede romperse), cae a la voz nativa del navegador.
 let vozHabilitada = true
 let audioActual = null
-let velocidad = 1 // 1, 1.25 o 1.5 — el flujo se siente lento a velocidad normal
-const VELOCIDADES = [1, 1.25, 1.5]
+let velocidad = 1 // 1, 1.1, 1.2, 1.25, 1.3, 1.4 o 1.5; la normal se siente lenta
+const VELOCIDADES = [1, 1.1, 1.2, 1.25, 1.3, 1.4, 1.5]
 
 // Cachea el audio por texto exacto: las preguntas fijas siempre son el mismo
 // texto, así que se piden una sola vez (precargadas en cargarFijas()) y de ahí
@@ -213,6 +165,7 @@ function reproducirUrl(url) {
     audioActual.playbackRate = velocidad
     audioActual.onended = resolve
     audioActual.onerror = resolve
+    audioActual.onpause = resolve // silenciar a media lectura no debe colgar el turno
     audioActual.play().catch(resolve)
   })
 }
@@ -263,15 +216,23 @@ async function obtenerCarreras(respuestas) {
     const reg = await post('/api/register', { nombre: respuestas.nombre || 'Anónimo' })
     if (reg.ok) {
       estudiante_id = (await reg.json()).id
-      await post('/api/submit-survey', { estudiante_id, respuestas })
+      // El session_id acompana el recorrido entero (Holland -> chat): sin el,
+      // esta fila queda huerfana y el tope diario cuenta dos evaluaciones donde
+      // el alumno hizo una sola. Tambien es por donde /historial/reclamar cruza.
+      await post('/api/submit-survey', { estudiante_id, respuestas, session_id: sessionId() })
     }
   } catch {
     /* backend caído para guardar: seguimos al análisis igual */
   }
 
-  const r = await post('/api/recommend', { estudiante_id, respuestas, session_id: SESSION_ID })
-  if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
-  if (!r.ok) throw new Error('No pude generar las recomendaciones. Inténtalo de nuevo.')
+  const r = await post('/api/recommend', {
+    estudiante_id,
+    respuestas,
+    session_id: sessionId(),
+    holland: leerPerfilHolland(),
+    personalidad: leerPerfilPersonalidad(),
+  })
+  if (!r.ok) throw await errorDelBackend(r, 'No pude generar las recomendaciones. Inténtalo de nuevo.')
   return await r.json()
 }
 
@@ -422,16 +383,25 @@ function Opciones({ pregunta, onAnswer }) {
   const salida = (label) => (saliendo ? (saliendo.includes(label) ? 'elegido' : 'saliendo') : '')
 
   return (
-    <div className={`options choices ${pregunta.chips ? 'chips' : ''}`}>
+    <>
+      <div className={`options choices ${pregunta.chips ? 'chips' : ''}`}>
       {pregunta.opciones.map((o, i) => (
-        <button
-          key={i}
-          className={`opt-color ${sel.includes(i) ? 'sel' : ''} ${salida(o.label)}`}
-          style={{ '--c': color(i) }}
-          onClick={() => clickOpcion(o.label, i)}
-        >
-          {o.label}
-        </button>
+        // El título de grupo se dibuja cuando 'grupo' cambia respecto de la
+        // opción anterior, así el banco de 25 chips se lee por bloques en vez
+        // de como una lista plana. Solo lo usan las preguntas que lo definen
+        // (ver preguntas-fijas.js); las demás siguen igual.
+        <Fragment key={i}>
+          {o.grupo && o.grupo !== pregunta.opciones[i - 1]?.grupo && (
+            <h4 className={`grupo-opciones ${saliendo ? 'saliendo' : ''}`}>{o.grupo}</h4>
+          )}
+          <button
+            className={`opt-color ${sel.includes(i) ? 'sel' : ''} ${salida(o.label)}`}
+            style={{ '--c': color(i) }}
+            onClick={() => clickOpcion(o.label, i)}
+          >
+            {o.label}
+          </button>
+        </Fragment>
       ))}
 
       {multiple && otroOn ? (
@@ -455,7 +425,7 @@ function Opciones({ pregunta, onAnswer }) {
             ×
           </button>
         </div>
-      ) : (
+      ) : pregunta.sinOtro ? null : (
         <button
           className={`opt-color otro ${otroOn ? 'sel' : ''} ${salida('')}`}
           style={{ '--c': '#5c6b80' }}
@@ -465,6 +435,12 @@ function Opciones({ pregunta, onAnswer }) {
         </button>
       )}
 
+      </div>
+
+      {/* Continuar va FUERA de la cuadrícula a propósito: con 25 chips la lista
+          no cabe en pantalla ni a 4 columnas, así que hace scroll, y cuando el
+          botón vivía dentro se iba con ella y quedaba escondido abajo. Ahora la
+          que se desplaza es solo la lista y el botón se queda fijo al pie. */}
       {multiple && (
         <button
           className={`continuar-btn ${salida('')}`}
@@ -474,8 +450,30 @@ function Opciones({ pregunta, onAnswer }) {
           Continuar →
         </button>
       )}
-    </div>
+    </>
   )
+}
+
+// Cómo se nombra cada dato en la tarjeta del perfil anterior.
+const ETIQUETAS_PERFIL = {
+  nombre: 'Nombre', edad: 'Edad', nivel: 'Nivel', grado: 'Grado',
+  carrera_cursada: 'Carrera', gusto_grado: '¿Le gustó?', motivo: 'Motivo',
+}
+
+// El perfil que se le ofrece reusar al alumno: lo que contestó sobre sí mismo
+// en su ÚLTIMA evaluación. Sale del historial que ya expone el backend, así no
+// hay nada nuevo que guardar y funciona aunque cambie de dispositivo.
+// Devuelve null si no hay historial o si esa evaluación no llegó ni al nombre.
+// 'carrera_descartada' no se copia: se recalcula en iniciar(), porque depende
+// del grado elegido y no del historial.
+// No se exporta a propósito: un archivo que exporta componentes Y funciones
+// rompe el refresco en caliente de Vite.
+function perfilPrevioDe(historial) {
+  const r = historial?.chat?.[0]?.respuestas
+  if (!r?.nombre) return null
+  const perfil = {}
+  for (const c of CLAVES_PERFIL) if (r[c] !== undefined) perfil[c] = r[c]
+  return perfil
 }
 
 function Chat() {
@@ -489,7 +487,7 @@ function Chat() {
   const [text, setText] = useState('')
   const [phase, setPhase] = useState('chat') // chat | loading | dashboard
   const [carreras, setCarreras] = useState([])
-  const [respuestaId, setRespuestaId] = useState(null)
+  const [diversificados, setDiversificados] = useState([]) // solo si va en básicos
   const [confianza, setConfianza] = useState(null)
   const [error, setError] = useState(null) // fallo de API (muestra "Reintentar")
   const [avisoInput, setAvisoInput] = useState(null) // validación del input (nombre)
@@ -497,13 +495,30 @@ function Chat() {
   const [undoStack, setUndoStack] = useState([]) // para "Regresar"
   const [ranking, setRanking] = useState([]) // radar en tiempo real
   const [confianzaChat, setConfianzaChat] = useState(0) // % de seguridad, monotónico (nunca baja)
+  // Modo 3: el alumno hizo el test de Holland antes. Se lee una vez al montar.
+  const [perfilHolland] = useState(leerPerfilHolland)
+  // Modo "perfil": el alumno hizo el test corto de personalidad antes.
+  const [perfilPersonalidad] = useState(leerPerfilPersonalidad)
   const [oferta, setOferta] = useState(null) // { pendiente, puedeSeguir } cuando ya se puede mostrar resultado
   const [voz, setVoz] = useState(vozHabilitada)
   const [vel, setVel] = useState(velocidad)
+  const [menuVel, setMenuVel] = useState(false) // menú de velocidades abierto
   const [iniciado, setIniciado] = useState(false) // false = solo la burbuja flotante (pantalla tipo Siri)
   const [hablando, setHablando] = useState(false) // true mientras suena el audio de la pregunta actual
   const [elegida, setElegida] = useState(null) // respuesta recién elegida, visible bajo la pregunta mientras carga la siguiente
+  const [perfilPrevio, setPerfilPrevio] = useState(null) // datos de su última evaluación, para ofrecer continuarla
   const logRef = useRef(null)
+
+  // Su última evaluación, para ofrecerle empezar con esos datos en vez de
+  // volver a escribirlos. Si falla, el chat arranca normal: es una comodidad,
+  // no un requisito.
+  useEffect(() => {
+    if (!sesionActual()) return
+    fetch(`${API}/api/historial`, { headers: authHeader() })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => setPerfilPrevio(perfilPrevioDe(d)))
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     logRef.current?.scrollTo(0, logRef.current.scrollHeight)
@@ -523,9 +538,20 @@ function Chat() {
     setHablando(false)
   }
 
-  function iniciar() {
+  // Arranca el chat. Con 'perfil' (el de su evaluación anterior) se dan por
+  // contestadas las preguntas sobre él mismo y avanzar() salta directo a la
+  // primera que falta; sin él, el flujo normal desde el saludo.
+  function iniciar(perfil) {
     setIniciado(true)
-    decir(FIJAS[0].texto) // el saludo no se leyó al montar (falta el gesto del usuario para el audio)
+    if (!perfil) {
+      decir(FIJAS[0].texto) // el saludo no se leyó al montar (falta el gesto del usuario para el audio)
+      return
+    }
+    const next = { ...respuestas, ...perfil }
+    if (grado(next)?.descarta && next.carrera_cursada) next.carrera_descartada = next.carrera_cursada
+    setRespuestas(next)
+    setHistory([{ role: 'bot', text: `¡Qué bueno verte de nuevo, ${perfil.nombre}!` }])
+    avanzar(next)
   }
 
   // Último mensaje del bot/alerta (lo único que se muestra en pantalla; el
@@ -541,7 +567,9 @@ function Chat() {
   // la página (antes de tocar la burbuja) para que al mostrarlas ya salgan del
   // caché y suenen sin el retraso de pedirle el audio a edge-tts.
   useEffect(() => {
-    FIJAS.forEach((f) => cargarAudio(f.texto))
+    // Solo las de texto fijo: las que dependen de respuestas anteriores (el
+    // grado, la carrera, el gusto) todavía no tienen texto que precargar.
+    FIJAS.forEach((f) => { if (typeof f.texto === 'string') cargarAudio(f.texto) })
   }, [])
 
   async function analizar(resp) {
@@ -549,9 +577,9 @@ function Chat() {
     setPhase('loading')
     setError(null)
     try {
-      const { carreras, respuesta_id, confianza, confianza_nota } = await obtenerCarreras(resp)
+      const { carreras, confianza, confianza_nota, diversificados } = await obtenerCarreras(resp)
       setCarreras(carreras)
-      setRespuestaId(respuesta_id ?? null)
+      setDiversificados(diversificados || [])
       setConfianza(confianza != null ? { valor: confianza, nota: confianza_nota } : null)
       setPhase('dashboard')
     } catch (e) {
@@ -567,10 +595,12 @@ function Chat() {
   async function botDice(texto) {
     const partes = enPartes(texto)
     const limpios = partes.map(limpiarParaVoz)
-    const audios = vozHabilitada ? limpios.map(cargarAudio) : []
+    // Si la voz esta apagada no se pide nada; si el alumno la enciende a media
+    // lectura, la parte pendiente pide su audio al vuelo (por eso el ||=).
+    const audios = limpios.map((t) => (vozHabilitada ? cargarAudio(t) : null))
     for (let i = 0; i < partes.length; i++) {
       setCargando(true)
-      const url = vozHabilitada ? await audios[i] : null
+      const url = vozHabilitada ? await (audios[i] ||= cargarAudio(limpios[i])) : null
       setCargando(false)
       setElegida(null) // ya llegó la siguiente pregunta: se retira la respuesta anterior
       setHistory((h) => [...h, { role: 'bot', text: partes[i] }])
@@ -580,7 +610,7 @@ function Chat() {
         else await hablarNativo(limpios[i])
         setHablando(false)
       } else {
-        await sleep(650) // sin voz: mantiene el ritmo de conversación
+        await sleep(tiempoLectura(partes[i])) // sin voz: da tiempo de leer
       }
     }
   }
@@ -591,9 +621,13 @@ function Chat() {
     setError(null)
     setCargando(true)
     try {
-      const r = await post('/api/next-question', { respuestas: resp, session_id: SESSION_ID })
-      if (r.status === 503) throw new Error('El motor de IA aún no está configurado en el servidor.')
-      if (!r.ok) throw new Error('No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
+      const r = await post('/api/next-question', {
+        respuestas: resp,
+        session_id: sessionId(),
+        holland: leerPerfilHolland(),
+        personalidad: leerPerfilPersonalidad(),
+      })
+      if (!r.ok) throw await errorDelBackend(r, 'No pude cargar la siguiente pregunta. Inténtalo de nuevo.')
       const q = await r.json()
       if (q.ranking?.length) setRanking(q.ranking)
       // Confianza = afinidad de la carrera líder, pero monotónica: nunca baja.
@@ -606,7 +640,7 @@ function Chat() {
         multiple: !!q.multiple,
         opciones: q.opciones || [],
       }
-      const nAdapt = Object.keys(resp).length - FIJAS.length // adaptativas ya respondidas
+      const nAdapt = cuentaAdaptativas(resp) // adaptativas ya respondidas
       // Ofrecemos el resultado al llegar al mínimo, o antes si la IA ya se dio por
       // segura (terminado): en ese caso no genera más preguntas, forzarla daría una vacía.
       if (nAdapt >= MIN_ADAPTATIVAS || q.terminado) {
@@ -652,10 +686,17 @@ function Chat() {
 
   // Decide qué sigue: fija (sin IA), adaptativa (IA), o análisis final.
   function avanzar(resp) {
-    const fijasAns = FIJAS.filter((f) => resp[f.clave] !== undefined).length
-    if (fijasAns < FIJAS.length) {
-      const q = { ...FIJAS[fijasAns] }
-      q.texto = q.texto.replace('{nombre}', resp.nombre || '')
+    // Primera fija sin responder que APLIQUE a este alumno: 'si' deja saltar las
+    // que no vienen al caso (ver 'carrera_cursada' en básicos).
+    const fija = FIJAS.find((f) => resp[f.clave] === undefined && (!f.si || f.si(resp)))
+    if (fija) {
+      const q = { ...fija }
+      q.texto = typeof q.texto === 'function'
+        ? q.texto(resp)
+        : q.texto.replace('{nombre}', resp.nombre || '')
+      // Las opciones también pueden depender de lo ya contestado (los grados
+      // salen del nivel que eligió, los motivos también).
+      if (typeof q.opciones === 'function') q.opciones = q.opciones(resp)
       setElegida(null) // las fijas no esperan a la IA: no hace falta mostrar la elegida
       setPaso(q)
       setHistory((h) => [...h, { role: 'bot', text: q.texto }])
@@ -672,6 +713,10 @@ function Chat() {
     setUndoStack((s) => [...s, { respuestas, history, paso }])
     const clave = paso.clave ?? paso.texto
     const next = { ...respuestas, [clave]: respuesta }
+    // La carrera que abandonó se guarda aparte para que el backend la saque del
+    // catálogo (filtro.descartar). Va explícita y no adivinada del texto del
+    // grado, que puede cambiar de redacción.
+    if (clave === 'carrera_cursada' && grado(next)?.descarta) next.carrera_descartada = respuesta
     setRespuestas(next)
     setHistory((h) => [...h, { role: 'user', text: respuesta }])
     setText('')
@@ -704,12 +749,33 @@ function Chat() {
     return null
   }
 
+  // La edad entra al prompt y al historial: se acota aquí a un número creíble.
+  function edadInvalida(v) {
+    if (!/^\d{1,2}$/.test(v) || Number(v) < 10) return 'Escribe tu edad en números (de 10 a 99).'
+    return null
+  }
+
+  // La carrera cursada se muestra dentro de la pregunta siguiente y entra al
+  // prompt, así que se corta aquí lo vacío o lo kilométrico.
+  function carreraInvalida(v) {
+    if (v.length < 2 || v.length > 60) return 'Escribe el nombre de la carrera (entre 2 y 60 letras).'
+    if (!/^[\p{L}\p{N}'’\-.,() ]+$/u.test(v)) return 'Usa solo letras, números y espacios.'
+    return null
+  }
+
   function submitText(e) {
     e.preventDefault()
-    const val = text.trim().replace(/\s+/g, ' ')
-    if (!val) return
-    if (paso?.clave === 'nombre') {
-      const err = nombreInvalido(val)
+    const crudo = text.trim().replace(/\s+/g, ' ')
+    if (!crudo) return
+    // Al nombre se le quita el saludo ANTES de validar: así "Hola soy Yesi"
+    // entra como "Yesi", y quien escribió solo "Hola" cae en nombreInvalido()
+    // y se le vuelve a preguntar.
+    const val = paso?.clave === 'nombre' ? limpiaNombre(crudo) : crudo
+    const valida = paso?.clave === 'nombre' ? nombreInvalido
+      : paso?.clave === 'edad' ? edadInvalida
+      : paso?.clave === 'carrera_cursada' ? carreraInvalida : null
+    if (valida) {
+      const err = valida(val)
       if (err) { setAvisoInput(err); return }
     }
     setAvisoInput(null)
@@ -721,10 +787,16 @@ function Chat() {
       <Dashboard
         nombre={respuestas.nombre}
         carreras={carreras}
-        respuestaId={respuestaId}
+        diversificados={diversificados}
         confianza={confianza}
         respuestas={respuestas}
-        onReiniciar={() => navigate('/')}
+        onReiniciar={() => {
+          // Otra prueba = otra sesión. Se pide explícitamente porque navegar a
+          // '/' NO recarga la página: sin esto, las dos pruebas quedaban en la
+          // base bajo el mismo session_id.
+          nuevaSesion()
+          navigate('/')
+        }}
       />
     )
   }
@@ -756,10 +828,41 @@ function Chat() {
   // Pantalla inicial: solo la burbuja flotante. Se toca para empezar (el click
   // también sirve de gesto del usuario para que el navegador permita el audio).
   if (!iniciado) {
+    // Con evaluación previa, la burbuja no arranca sola: primero elige si sigue
+    // con sus datos o empieza de cero. El clic de cualquiera de las dos sirve
+    // igual de gesto del usuario para que el navegador permita el audio.
+    if (perfilPrevio) {
+      return (
+        <div className="layout">
+          <div className="siri-idle">
+            <Robot thinking />
+            <div className="perfil-previo">
+              <p className="perfil-previo-titulo">Ya te habías evaluado antes, {perfilPrevio.nombre}</p>
+              <ul className="perfil-previo-datos">
+                {CLAVES_PERFIL.filter((c) => perfilPrevio[c]).map((c) => (
+                  <li key={c}>
+                    <span>{ETIQUETAS_PERFIL[c]}</span>
+                    <strong>{perfilPrevio[c]}</strong>
+                  </li>
+                ))}
+              </ul>
+              <div className="perfil-previo-tabs">
+                <button className="opt" onClick={() => iniciar(perfilPrevio)}>
+                  Continuar con estos datos
+                </button>
+                <button className="opt ghost" onClick={() => iniciar(null)}>
+                  Empezar de nuevo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return (
       <div className="layout">
-        <div className="siri-idle" onClick={iniciar} role="button" tabIndex={0}
-          onKeyDown={(e) => e.key === 'Enter' && iniciar()}>
+        <div className="siri-idle" onClick={() => iniciar(null)} role="button" tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && iniciar(null)}>
           <Robot thinking />
           <p className="siri-idle-hint">Toca para hablar con Orienta</p>
         </div>
@@ -781,21 +884,56 @@ function Chat() {
       >
         {voz ? '🔊' : '🔇'}
       </button>
-      <button
-        className="vel-toggle"
-        title="Velocidad de la voz"
-        onClick={() => {
-          const next = VELOCIDADES[(VELOCIDADES.indexOf(velocidad) + 1) % VELOCIDADES.length]
-          velocidad = next
-          setVel(next)
-          if (audioActual) audioActual.playbackRate = next // aplica ya al audio que esté sonando
-        }}
-      >
-        {vel}×
-      </button>
+      {menuVel && <div className="vel-backdrop" onClick={() => setMenuVel(false)} />}
+      <div className="vel-wrap">
+        <button
+          className={`vel-toggle${menuVel ? ' abierto' : ''}`}
+          title="Velocidad de la voz"
+          aria-expanded={menuVel}
+          aria-haspopup="menu"
+          onClick={() => setMenuVel((m) => !m)}
+        >
+          {vel}×
+        </button>
+        {menuVel && (
+          <div className="vel-menu" role="menu">
+            {VELOCIDADES.map((v) => (
+              <button
+                key={v}
+                role="menuitem"
+                className={v === velocidad ? 'activo' : ''}
+                onClick={() => {
+                  velocidad = v
+                  setVel(v)
+                  if (audioActual) audioActual.playbackRate = v // aplica ya al audio que esté sonando
+                  setMenuVel(false)
+                }}
+              >
+                {v}×
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       {confianzaChat > 0 && (
         <div className="siri-conf" title="Qué tan definido va quedando tu perfil">
           Perfil <strong>{confianzaChat}%</strong>
+        </div>
+      )}
+      {perfilHolland && (
+        <div
+          className="siri-conf siri-holland"
+          title="Orienta está usando el resultado de tu test de Holland"
+        >
+          Holland <strong>{perfilHolland.codigo}</strong>
+        </div>
+      )}
+      {perfilPersonalidad && (
+        <div
+          className="siri-conf siri-personalidad"
+          title="Orienta está usando tu perfil de personalidad, valores y estilo cognitivo"
+        >
+          Perfil <strong>✓</strong>
         </div>
       )}
 
@@ -846,6 +984,7 @@ function Chat() {
             <input
               autoFocus
               value={text}
+              inputMode={paso.clave === 'edad' ? 'numeric' : undefined}
               onChange={(e) => setText(e.target.value)}
               placeholder={paso.placeholder || 'Escribe tu respuesta…'}
             />

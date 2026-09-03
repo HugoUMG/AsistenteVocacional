@@ -13,7 +13,6 @@ import os
 import sys
 
 from app.db import SessionLocal
-from app.filtro import preseleccionar
 from app.models import Carrera
 from app.preguntas import (
     COBERTURA_INICIAL,
@@ -25,6 +24,7 @@ from app.preguntas import (
     _historial,
     _texto_cobertura,
 )
+from app.filtro import preseleccionar
 from app.recomendar import MODELO, _catalogo_texto
 
 TEMPERATURA = 0.5  # el valor que usa siguiente_pregunta()
@@ -52,7 +52,6 @@ def main():
     db.close()
 
     candidatas = preseleccionar(RESPUESTAS, carreras)
-
     catalogo = (
         "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
         f"{_catalogo_texto(candidatas)}"
