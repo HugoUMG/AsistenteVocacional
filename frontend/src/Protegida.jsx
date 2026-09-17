@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 import Nav from './Nav'
+import Bienvenida from './Bienvenida'
 import { iniciarSesionGoogle, sesionActual } from './auth'
 import './App.css'
 
@@ -61,6 +62,12 @@ export default function Protegida({ children, test }) {
     () => import.meta.env.DEV && sessionStorage.getItem('dev-sin-login') === '1'
   )
 
+  // Primera vez con esta cuenta: confirma su nombre y acepta los términos antes
+  // de evaluarse. Una sesión guardada de antes de esta pantalla tampoco trae la
+  // fecha, así que las cuentas viejas la ven una vez y listo.
+  if (sesion && !sesion.estudiante.terminos_aceptados) {
+    return <Bienvenida sesion={sesion} onListo={setSesion} />
+  }
   if (sesion || sinLogin) return children
 
   async function entrar(respuesta) {

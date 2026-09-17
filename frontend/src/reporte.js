@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf'
 import { COLORS } from './colors'
+import { MAX_AREA } from './holland-perfil'
 
 const ACCENT = [29, 78, 216] // azul (--accent)
 const VERDE = [18, 41, 77] // azul marino (--navy), usado para los bullets de "por qué encaja"
@@ -12,8 +13,11 @@ const hexToRgb = (hex) => {
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
 }
 
-// Genera y descarga un PDF profesional con el resultado vocacional.
-export function generarPDF(nombre, carreras) {
+// Genera y descarga un PDF profesional con el resultado vocacional. `holland`
+// (opcional, ya normalizado: {codigo, areas ordenadas}) agrega los puntajes
+// RIASEC y qué significan las áreas altas, para que el informe sirva también
+// como toma de datos del psicólogo.
+export function generarPDF(nombre, carreras, holland = null) {
   const doc = new jsPDF({ unit: 'pt', format: 'a4' })
   const W = doc.internal.pageSize.getWidth()
   const H = doc.internal.pageSize.getHeight()
@@ -153,6 +157,57 @@ export function generarPDF(nombre, carreras) {
       doc.text(el, M, y)
       y += el.length * 12 + 12
     })
+  }
+
+  // ---------- Perfil de Holland ----------
+  if (holland) {
+    y = seccion(`Tu perfil de intereses (Holland) · código ${holland.codigo}`, y + 6)
+    doc.setTextColor(...MUTED)
+    doc.setFont('helvetica', 'normal')
+    doc.setFontSize(9.5)
+    const nota = doc.splitTextToSize(
+      `Puntaje por área, de 0 a ${MAX_AREA}. Lo que orienta no es un área sola, sino el contraste entre las seis. Este test mide intereses y no altera la recomendación de arriba.`,
+      cw,
+    )
+    doc.text(nota, M, y)
+    y += nota.length * 12 + 8
+    holland.areas.forEach((a, i) => {
+      y = espacio(y, 30)
+      const col = hexToRgb(COLORS[i % COLORS.length])
+      doc.setTextColor(...TEXT)
+      doc.setFont('helvetica', 'normal')
+      doc.setFontSize(10)
+      doc.text(`${a.letra}. ${a.title}`, M, y)
+      doc.setFont('helvetica', 'bold')
+      doc.setTextColor(...MUTED)
+      doc.text(`${a.score} / ${MAX_AREA}`, W - M, y, { align: 'right' })
+      const by = y + 5
+      doc.setFillColor(...LIGHT)
+      doc.roundedRect(M, by, cw, 9, 4, 4, 'F')
+      doc.setFillColor(...col)
+      doc.roundedRect(M, by, Math.max(6, cw * (a.score / MAX_AREA)), 9, 4, 4, 'F')
+      y = by + 24
+    })
+
+    const altas = holland.areas.slice(0, 3).filter((a) => a.description)
+    if (altas.length) {
+      y = subtitulo('Qué significan tus áreas altas', y + 4)
+      altas.forEach((a) => {
+        doc.setFontSize(9.5)
+        const dl = doc.splitTextToSize(a.description, cw)
+        y = espacio(y, 13 + dl.length * 12)
+        doc.setTextColor(...ACCENT)
+        doc.setFont('helvetica', 'bold')
+        doc.setFontSize(10.5)
+        doc.text(a.title, M, y)
+        y += 13
+        doc.setTextColor(...TEXT)
+        doc.setFont('helvetica', 'normal')
+        doc.setFontSize(9.5)
+        doc.text(dl, M, y)
+        y += dl.length * 12 + 12
+      })
+    }
   }
 
   // ---------- Pie en cada página ----------

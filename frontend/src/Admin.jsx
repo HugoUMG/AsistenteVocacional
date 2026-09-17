@@ -162,6 +162,7 @@ function Registro() {
         respuestas={abierta.respuestas}
         diversificados={abierta.diversificados}
         confianza={null}
+        holland={abierta.holland}
         onReiniciar={() => setVerDashboard(false)}
         textoReiniciar="← Volver al recorrido"
       />

@@ -23,6 +23,9 @@ class Estudiante(Base):
     # app/auth.py): el email puede cambiar, el sub no. NULL = cuenta anónima
     # (nunca inició sesión con Google), que sigue siendo el caso normal.
     google_sub: Mapped[str | None] = mapped_column(String(255), unique=True, index=True, default=None)
+    # Cuándo aceptó los términos de uso (pantalla de bienvenida tras el login).
+    # NULL = todavía no: el frontend le muestra la pantalla antes de evaluarse.
+    terminos_aceptados: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), default=None)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
     respuestas: Mapped[list["RespuestaCuestionario"]] = relationship(

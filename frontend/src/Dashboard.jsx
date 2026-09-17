@@ -4,6 +4,7 @@ import { color } from './colors'
 import { sessionId } from './session'
 import GuardarResultados from './GuardarResultados'
 import { authHeader } from './auth'
+import { MAX_AREA, normalizarHolland } from './holland-perfil'
 import './Dashboard.css'
 import { API } from './api'
 
@@ -42,6 +43,44 @@ function Diversificados({ opciones }) {
         ))}
       </ul>
     </div>
+  )
+}
+
+// Los puntajes del test de Holland, si el alumno lo hizo antes del chat. Va en
+// el dashboard y en el PDF porque el informe también es la toma de datos que
+// revisa la psicóloga: sin esto, el perfil medido quedaba solo en /holland.
+// No mueve la recomendación (ver CLAUDE.md, regla 10): se muestra, nada más.
+function PerfilHolland({ holland }) {
+  if (!holland) return null
+  const altas = holland.areas.slice(0, 3).filter((a) => a.description)
+  return (
+    <section className="chart-card dash-holland">
+      <h2>Tu perfil de intereses (Holland) · código {holland.codigo}</h2>
+      <div className="barras">
+        {holland.areas.map((a, i) => (
+          <div key={a.letra} className="barra-row">
+            <div className="barra-top">
+              <span className="barra-nombre">
+                <span className="punto" style={{ background: color(i) }} />
+                {a.letra}. {a.title}
+              </span>
+              <span className="barra-pct">{a.score} / {MAX_AREA}</span>
+            </div>
+            <div className="barra-track">
+              <div className="barra-fill" style={{ width: `${(a.score / MAX_AREA) * 100}%`, background: color(i) }} />
+            </div>
+          </div>
+        ))}
+      </div>
+      {altas.length > 0 && (
+        <div className="dash-holland-altas">
+          <h3>Qué significan tus áreas altas</h3>
+          {altas.map((a) => (
+            <p key={a.letra}><strong>{a.title}.</strong> {a.description}</p>
+          ))}
+        </div>
+      )}
+    </section>
   )
 }
 
@@ -189,7 +228,8 @@ function CatalogoCarreras() {
   )
 }
 
-export default function Dashboard({ nombre, carreras, confianza, respuestas, diversificados, onReiniciar, textoReiniciar = '↺ Hacer otro test' }) {
+export default function Dashboard({ nombre, carreras, confianza, respuestas, diversificados, holland, onReiniciar, textoReiniciar = '↺ Hacer otro test' }) {
+  const perfilHolland = normalizarHolland(holland)
   const [sel, setSel] = useState(0) // carrera seleccionada en el detalle
   const [inst, setInst] = useState(0) // institución seleccionada
   const [hover, setHover] = useState(null) // sector del pastel sobre el que está el mouse
@@ -248,7 +288,7 @@ export default function Dashboard({ nombre, carreras, confianza, respuestas, div
           <CatalogoCarreras />
           <button
             className="dash-pdf"
-            onClick={() => import('./reporte').then((m) => m.generarPDF(nombre, carreras))}
+            onClick={() => import('./reporte').then((m) => m.generarPDF(nombre, carreras, perfilHolland))}
           >
             ↓ Descargar PDF
           </button>
@@ -313,6 +353,8 @@ export default function Dashboard({ nombre, carreras, confianza, respuestas, div
           </div>
         </div>
       </section>
+
+      <PerfilHolland holland={perfilHolland} />
 
       <section className="dash-detail">
         <div className="carrera-lista">

@@ -9,6 +9,8 @@ http://localhost:8000/docs mientras corre el backend.
 | GET | `/api/departamentos` | no | Departamentos con catálogo cargado (para el filtro) |
 | GET | `/api/carreras` | no | Catálogo completo para la página pública "Catálogo de carreras" |
 | POST | `/api/register` | no | Crea estudiante (rechaza nombres con groserías) |
+| POST | `/api/aceptar-terminos` | no | Bienvenida tras el primer login: confirma el nombre (misma validación que `/api/register`) y guarda `estudiantes.terminos_aceptados`. El frontend (`Protegida.jsx`) muestra la pantalla mientras esa fecha sea `null` |
+| GET | `/api/historial` | no | Todo lo guardado del alumno logueado. Cada fila de `chat` trae `holland` (el del mismo recorrido o el más reciente de la cuenta, o `null`) para que el dashboard del historial lo muestre |
 | POST | `/api/submit-survey` | no | Guarda las respuestas |
 | POST | `/api/next-question` | **sí** | Siguiente pregunta adaptativa (filtra por departamento + pre-filtro de 35) |
 | POST | `/api/recommend` | **sí** | Recomienda carreras agrupadas con % (filtra por departamento, sin pre-filtro) |
