@@ -3,6 +3,7 @@ import re
 import unicodedata
 from collections import Counter
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from typing import Annotated, Literal
 
 import edge_tts
@@ -33,6 +34,7 @@ async def lifespan(app: FastAPI):
         con.execute(text("ALTER TABLE resultados_holland ADD COLUMN IF NOT EXISTS perfil JSONB"))
         con.execute(text("ALTER TABLE respuestas_cuestionario ADD COLUMN IF NOT EXISTS juicio VARCHAR(12)"))
         con.execute(text("ALTER TABLE respuestas_cuestionario ADD COLUMN IF NOT EXISTS juicio_nota TEXT"))
+        con.execute(text("ALTER TABLE estudiantes ADD COLUMN IF NOT EXISTS terminos_aceptados TIMESTAMPTZ"))
     yield
 
 
@@ -145,7 +147,10 @@ class RegisterIn(BaseModel):
 class EstudianteOut(BaseModel):
     id: int
     nombre: str
-    email: EmailStr | None = None
+    # str y no EmailStr: es salida, ya viene validado de Google, y el alumno de
+    # prueba local (dev@local, ver app/auth.py) no pasa la validación.
+    email: str | None = None
+    terminos_aceptados: datetime | None = None
 
     model_config = {"from_attributes": True}
 
@@ -239,6 +244,22 @@ def register(
     evaluarse (ver app/cuota.py), asi que ya no se crean cuentas anonimas: el
     nombre que teclea en el chat se sigue usando para el saludo y el PDF, pero
     la cuenta es siempre la de Google."""
+    return estudiante
+
+
+@app.post("/api/aceptar-terminos", response_model=EstudianteOut)
+def aceptar_terminos(
+    data: RegisterIn, db: Session = Depends(get_db),
+    estudiante: models.Estudiante = Depends(auth.requiere_login),
+):
+    """Pantalla de bienvenida tras el login: el alumno confirma (o corrige) el
+    nombre que trajo Google y acepta los términos de uso. Se guarda la fecha
+    para no volver a pedirlo. El nombre pasa por la misma validación que el del
+    chat (RegisterIn), porque también se muestra en el registro del psicólogo."""
+    estudiante.nombre = data.nombre
+    estudiante.terminos_aceptados = datetime.now(timezone.utc)
+    db.commit()
+    db.refresh(estudiante)
     return estudiante
 
 
@@ -642,14 +663,17 @@ def holland_perfil(
 
 # Los mismos campos que el chat necesita en el prompt (ver holland-perfil.js en
 # el frontend). Se guardan aparte de 'areas' porque ahi solo van los numeros y
-# los titulos de las ocupaciones tambien entran al prompt.
+# los titulos de las ocupaciones tambien entran al prompt. La 'description' de
+# O*NET no entra al prompt (HollandRef la ignora): va para que el dashboard y el
+# PDF del chat puedan explicar las areas altas sin volver a llamar a O*NET.
 _OCUPACIONES_EN_PERFIL = 8
 
 
 def _perfil_para_el_chat(perfil: dict) -> dict:
     return {
         "codigo": perfil["codigo"],
-        "areas": [{"letra": a["letra"], "title": a["title"], "score": a["score"]}
+        "areas": [{"letra": a["letra"], "title": a["title"], "score": a["score"],
+                   "description": a.get("description", "")}
                   for a in perfil["areas"]],
         "ocupaciones": [c["title"] for c in perfil.get("carreras", [])[:_OCUPACIONES_EN_PERFIL]],
     }
@@ -836,6 +860,9 @@ def historial(
         .order_by(models.ResultadoPsicometrico.created_at.desc())
         .all()
     )
+    # El Holland de cada chat (mismo recorrido, o el mas reciente de la cuenta),
+    # para que el dashboard del historial lo muestre igual que el del admin.
+    holland_por_chat = _holland_por_evaluacion(db, chat)
     return {
         # 'diversificados' se recalcula aquí en vez de guardarse: sale de la
         # recomendación y del nivel, que ya están en la fila, y así una mejora
@@ -843,6 +870,7 @@ def historial(
         "chat": [
             {"id": r.id, "fecha": r.created_at, "respuestas": r.respuestas,
              "recomendacion": r.recomendacion,
+             "holland": holland_por_chat.get(r.id),
              "diversificados": (
                  diversificado.sugerir([c.get("carrera", "") for c in r.recomendacion])
                  if (r.respuestas or {}).get("nivel") == "Básico"

@@ -175,6 +175,13 @@
   flex-direction: column;
   gap: 14px;
 }
+
+/* Perfil de Holland dentro del dashboard (ver PerfilHolland en Dashboard.jsx) */
+.dash-holland { margin-bottom: 24px; }
+.dash-holland-altas { margin-top: 22px; }
+.dash-holland-altas h3 { margin: 0 0 8px; font-size: 14px; color: var(--navy); }
+.dash-holland-altas p { margin: 0 0 8px; font-size: 13.5px; line-height: 1.6; color: var(--muted); }
+.dash-holland-altas strong { color: var(--text); }
 .barra-top {
   display: flex;
   justify-content: space-between;
