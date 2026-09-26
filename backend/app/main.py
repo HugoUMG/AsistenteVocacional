@@ -230,7 +230,8 @@ class SurveyOut(BaseModel):
 
 
 # --- Endpoints ---
-@app.get("/health")
+# HEAD tambien: UptimeRobot gratis solo pregunta con HEAD y FastAPI no lo agrega solo.
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health():
     return {"status": "ok"}
 
