@@ -7,8 +7,7 @@ justo lo que el chat venía estimando por su cuenta.
 ponytail: AUTORIZACIÓN PENDIENTE — el manual lo facilitó una estudiante de
 psicología, no la profesional colegiada, y al 2026-08-11 no hay permiso de uso
 ni supervisión formalizada. El módulo califica, pero no se conecta a ningún
-endpoint ni se aplica a estudiantes hasta tener ese permiso por escrito. Ver
-`documento-tesis/formatos-etica.md`.
+endpoint ni se aplica a estudiantes hasta tener ese permiso por escrito.
 
 Cero IA: la calificación es aritmética auditable. Suma por campo → puntuación
 directa (12-60) → percentil según el baremo de edad y sexo. Eso es lo que

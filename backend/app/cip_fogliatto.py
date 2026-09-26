@@ -12,8 +12,7 @@ modelo de lenguaje.
 
 ponytail: AUTORIZACIÓN PENDIENTE — prototipo para revisión y aval del asesor y de la
 profesional colegiada. No aplicar a estudiantes ni desplegar sin permiso escrito del
-titular de los derechos y sin supervisión profesional formalizada. Ver
-`documento-tesis/formatos-etica.md` y `documento-tesis/carta-autores-cip-r.md`.
+titular de los derechos y sin supervisión profesional formalizada.
 
 Self-check sin API: uv run python -m app.cip_fogliatto
 """
