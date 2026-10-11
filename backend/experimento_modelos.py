@@ -17,7 +17,7 @@ Precios oficiales por 1M tokens (input/output), medidos 2026-08-17:
 
 No se compara `3.1 Pro` ni `3.5/3.6 Flash` completos: para una tarea de
 clasificación estructurada contra 35 carreras, cuestan 6-10x sin que haya razón
-para esperar que el ranking mejore (ver README.md regla 3: no tocar los prompts
+para esperar que el ranking mejore (regla del proyecto: no tocar los prompts
 sin medir, y aquí el modelo es la variable, no el prompt).
 
 ## Qué mide y qué NO mide

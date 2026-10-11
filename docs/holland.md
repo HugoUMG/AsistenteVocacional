@@ -226,4 +226,4 @@ el ranking (§ arriba). **Integrado en producción el 2026-08-17**:
    mueve el ranking (§ arriba). La hipótesis sin probar es obligar al modelo a
    reconciliar de forma explícita lo declarado contra lo medido cuando se
    contradicen — el caso de Dulce, que declara salud y mide arte. Aplican las
-   reglas 3 y 4 del README.md: se mide antes de aceptarse.
+   reglas del proyecto: se mide antes de aceptarse.

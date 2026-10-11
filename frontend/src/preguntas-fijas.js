@@ -212,8 +212,8 @@ export const FIJAS = [
     // telecomunicaciones, electrónica, idiomas, música, teología, economía,
     // dirección de centros educativos y comercio exterior, entre otros.
     //
-    // Criterio al agregarlos: nombran el TEMA, nunca la carrera (regla 2 del
-    // README.md), y se redactaron para que el alumno se reconozca, no para
+    // Criterio al agregarlos: nombran el TEMA, nunca la carrera (los prompts
+    // no nombran carreras), y se redactaron para que el alumno se reconozca, no para
     // alimentar al pre-filtro; el A/B midió que el filtro no mueve el resultado
     // final (experiments/filtro-catalogo-ab.md).
     //

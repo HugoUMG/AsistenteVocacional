@@ -36,7 +36,7 @@ que la diferencia entra solo por las preguntas que el modelo elige.
 
 Este sistema devuelve resultados distintos con entrada IDÉNTICA: correr el mismo
 brazo dos veces cambia el top-1 en 2 a 3 de cada 4 casos (piso de ruido medido el
-2026-08-23, ver README.md). **A2 es la misma configuración que A**, así que todo
+2026-08-23, ver experiments/). **A2 es la misma configuración que A**, así que todo
 lo que cambie entre ellos es ruido del sistema y nada más. La regla de lectura es
 una sola: si la tasa de cambio de A vs B no supera la de A vs A2, no hay efecto
 de calidad que reportar.
@@ -140,7 +140,7 @@ TOPE_USD = 0.70
 # Los tres brazos, en el orden en que se intercalan por perfil.
 # A2 corre EXACTAMENTE lo mismo que A: es el control que mide cuánto se mueve el
 # sistema solo, sin que cambie nada. Sin él, cualquier diferencia entre A y B se
-# está sobreinterpretando (ver el piso de ruido de README.md, 2026-08-23).
+# está sobreinterpretando (ver el piso de ruido en experiments/, 2026-08-23).
 BRAZOS = (("A", True), ("A2", True), ("B", False))
 
 # $/1M tokens-hora del SKU `cached content storage token hours`, confirmado en la
@@ -502,7 +502,7 @@ def correr(solo=None):
     # Intercalado A,A2,B por perfil: una racha lenta de Google no le cae entera a
     # un solo brazo. A2 es el BRAZO DE CONTROL: misma configuración que A, corrida
     # aparte. A vs A2 mide el ruido del sistema; A vs B solo significa algo si su
-    # diferencia supera esa. Ver el piso de ruido de README.md.
+    # diferencia supera esa. Ver el piso de ruido en experiments/filtro-catalogo-ab.md.
     for p in perfiles:
         for brazo, con_filtro in BRAZOS:
             if (p["nombre"], brazo) in hechos:
