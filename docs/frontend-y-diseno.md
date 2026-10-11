@@ -41,8 +41,7 @@ en el `<Route path="*">` que manda al inicio, no a una pantalla en blanco.
 
 El backend sirve esos endpoints en los dos casos: la separación es **qué se
 ofrece**, no qué existe. Para ver el build tal como lo recibe el alumno:
-`npm run preview` en `frontend/` (o la configuración `produccion` de
-`launch.json`, puerto 4173).
+`npm run preview` en `frontend/` (puerto 4173).
 
 `Nav.jsx` es la barra superior de las páginas informativas; **el chat y el
 dashboard no la usan**. El mapa dibuja **solo** los departamentos con

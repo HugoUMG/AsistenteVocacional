@@ -1,6 +1,6 @@
 # Arquitectura y flujo
 
-Detalle de `README.md`. Cubre el flujo del test, la estructura de carpetas, qué
+Detalle del `README.md`. Cubre el flujo del test, la estructura de carpetas, qué
 datos se guardan y cómo levantar el proyecto.
 
 ---
@@ -76,7 +76,7 @@ El estudiante puede apagarla.
 │       ├── reporte.js      PDF con jsPDF
 │       ├── session.js      SESSION_ID (uno por carga de pagina)
 │       └── colors.js       paleta compartida
-├── docs/ decisions/ experiments/   documentacion (ver indice en README.md)
+├── docs/ decisions/ experiments/   documentacion (ver README.md)
 ├── start.ps1 / stop.ps1    levantan / detienen todo con un comando
 └── README.md
 ```

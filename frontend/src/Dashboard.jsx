@@ -49,7 +49,7 @@ function Diversificados({ opciones }) {
 // Los puntajes del test de Holland, si el alumno lo hizo antes del chat. Va en
 // el dashboard y en el PDF porque el informe también es la toma de datos que
 // revisa la psicóloga: sin esto, el perfil medido quedaba solo en /holland.
-// No mueve la recomendación (ver README.md, regla 10): se muestra, nada más.
+// No mueve la recomendación (medido, ver experiments/holland-estructura.md): se muestra, nada más.
 function PerfilHolland({ holland }) {
   if (!holland) return null
   const altas = holland.areas.slice(0, 3).filter((a) => a.description)

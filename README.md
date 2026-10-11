@@ -24,7 +24,8 @@ un catálogo real de universidades. Aparte hay un **examen psicométrico** de 10
 └── experiments/  evidencia medida de los cambios de prompt
 ```
 
-Documentación completa: [README.md](README.md) es el índice.
+Documentación completa en `docs/` (arquitectura, API, motor de IA, catálogo,
+diseño), `decisions/` y `experiments/`.
 
 ## Requisitos
 
