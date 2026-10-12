@@ -273,6 +273,14 @@ export default function Dashboard({ nombre, carreras, confianza, respuestas, div
   const maxAfinidad = Math.max(...carreras.map((c) => c.afinidad))
   const activa = carreras[hover ?? sel] // lo que muestra el centro del pastel
   const seleccionada = carreras[sel]
+  const sede = seleccionada.instituciones[inst]
+  // Una sede puede dar dos programas de la misma carrera (licenciatura y
+  // tecnico). Ahi el chip nombra el programa: si no, se ven dos botones iguales.
+  // Las recomendaciones guardadas antes de este cambio no traen 'programa' y se
+  // ven como antes.
+  const centros = seleccionada.instituciones.map((x) => x.centro)
+  const repetida = (c) => centros.indexOf(c) !== centros.lastIndexOf(c)
+  const programaDistinto = sede.programa && sede.programa !== seleccionada.carrera
   const otrasCarreras = carreras.map((_, i) => i).filter((i) => i !== sel)
 
   return (
@@ -417,16 +425,16 @@ export default function Dashboard({ nombre, carreras, confianza, respuestas, div
                 className={`inst-chip ${j === inst ? 'activa' : ''}`}
                 onClick={() => setInst(j)}
               >
-                {x.centro}
+                {x.centro}{repetida(x.centro) && x.programa ? ` · ${x.programa}` : ''}
               </button>
             ))}
           </div>
           <div className="inst-detalle" style={{ borderLeftColor: color(sel) }}>
-            <div className="inst-uni" style={{ color: color(sel) }}>{seleccionada.instituciones[inst].universidad}</div>
+            <div className="inst-uni" style={{ color: color(sel) }}>{sede.universidad}</div>
             <div className="inst-lugar">
-              {seleccionada.instituciones[inst].centro} · {seleccionada.instituciones[inst].departamento}
+              {programaDistinto && `${sede.programa} · `}{sede.centro} · {sede.departamento}
             </div>
-            <p>{seleccionada.instituciones[inst].enfoque}</p>
+            <p>{sede.enfoque}</p>
           </div>
 
           <div className="wow-acciones">

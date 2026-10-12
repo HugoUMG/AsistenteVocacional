@@ -149,8 +149,12 @@ export function generarPDF(nombre, carreras, holland = null) {
       doc.setTextColor(...MUTED)
       doc.setFont('helvetica', 'normal')
       doc.setFontSize(9)
-      doc.text(`${inst.centro} · ${inst.departamento}`, M, y)
-      y += 13
+      // El programa, cuando no es el de la carrera: una misma sede puede dar la
+      // licenciatura y el tecnico, y sin esto salian dos entradas iguales.
+      const programa = inst.programa && inst.programa !== top.carrera ? `${inst.programa} · ` : ''
+      const lugar = doc.splitTextToSize(`${programa}${inst.centro} · ${inst.departamento}`, cw)
+      doc.text(lugar, M, y)
+      y += lugar.length * 11 + 2
       doc.setTextColor(...TEXT)
       doc.setFontSize(9.5)
       const el = doc.splitTextToSize(inst.enfoque, cw)
