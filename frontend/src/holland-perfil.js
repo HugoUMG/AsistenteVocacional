@@ -3,9 +3,10 @@ import { API } from './api'
 // (modo 3, ver docs/holland.md). Vive en localStorage para que sobreviva a
 // recargar la página o a abrir el chat en otra pestaña.
 //
-// Se guardan SOLO los campos que el backend valida y mete al prompt: el código,
-// los 6 puntajes con su nombre de área y los títulos de las ocupaciones. Las
-// descripciones largas y la hoja cruda no viajan.
+// Se guardan los campos que el backend valida y mete al prompt (el código, los
+// 6 puntajes con su nombre de área y los títulos de las ocupaciones) más la
+// descripción de cada área, que NO entra al prompt (el backend la ignora):
+// la usan el dashboard y el PDF del chat para explicar las áreas altas.
 const CLAVE = 'holland-perfil'
 const OCUPACIONES = 8
 
@@ -18,6 +19,7 @@ export function guardarPerfilHolland(resultado) {
         letra: a.letra,
         title: a.title,
         score: a.score,
+        description: a.description || '',
       })),
       ocupaciones: resultado.carreras.slice(0, OCUPACIONES).map((c) => c.title),
       fecha: new Date().toISOString(),
@@ -34,6 +36,22 @@ export function leerPerfilHolland() {
   } catch {
     return null
   }
+}
+
+export const MAX_AREA = 40
+export const NOMBRE_AREA = { R: 'Realista', I: 'Investigador', A: 'Artístico',
+  S: 'Social', E: 'Emprendedor', C: 'Convencional' }
+
+// El dashboard y el PDF reciben el perfil en dos formas: la lista del chat
+// ({letra, title, score, description}) o el diccionario {R: 30, ...} del
+// registro del admin. Devuelve siempre {codigo, areas: [...]} ordenado de
+// mayor a menor, o null si no hay perfil.
+export function normalizarHolland(h) {
+  if (!h?.codigo || !h.areas) return null
+  const areas = Array.isArray(h.areas)
+    ? h.areas
+    : Object.entries(h.areas).map(([letra, score]) => ({ letra, title: NOMBRE_AREA[letra], score }))
+  return { codigo: h.codigo, areas: [...areas].sort((a, b) => b.score - a.score) }
 }
 
 export function olvidarPerfilHolland() {

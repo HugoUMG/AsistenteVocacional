@@ -807,6 +807,7 @@ function Chat() {
         diversificados={diversificados}
         confianza={confianza}
         respuestas={respuestas}
+        holland={perfilHolland}
         onReiniciar={() => {
           // Otra prueba = otra sesión. Se pide explícitamente porque navegar a
           // '/' NO recarga la página: sin esto, las dos pruebas quedaban en la

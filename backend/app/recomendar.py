@@ -146,6 +146,10 @@ class Institucion(BaseModel):
     centro: str
     departamento: str
     enfoque: str
+    # Nombre del programa en ESA sede. Una carrera agrupa sedes por perfil, y una
+    # misma sede puede dar dos programas del grupo (licenciatura y tecnico): sin
+    # esto el tablero mostraba la sede dos veces sin decir cual es cual.
+    programa: str = ""
 
 
 class Factor(BaseModel):
@@ -632,6 +636,7 @@ def recomendar(respuestas: dict, carreras, perfil_cip: list[dict] | None = None,
                     centro=s.centro,
                     departamento=s.departamento,
                     enfoque=s.sello or _enfoque_de_perfil(s.perfil) or "Sin datos adicionales de esta sede.",
+                    programa=s.nombre,
                 )
                 for s in _buscar_grupo(c.carrera, por_nombre)
             ],

@@ -2019,6 +2019,58 @@
   color: var(--accent);
 }
 
+/* Bienvenida tras el primer login: nombre + términos (ver Bienvenida.jsx) */
+.bienvenida-form {
+  max-width: 460px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+.bienvenida-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.bienvenida-form input:not([type='checkbox']) {
+  border: 1.5px solid var(--line-2);
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font: inherit;
+  font-size: 15.5px;
+  color: var(--text);
+  outline: none;
+}
+.bienvenida-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--ring); }
+.bienvenida-form input[readonly] { background: var(--bg); color: var(--muted); }
+.bienvenida-form .hero-btn { align-self: center; }
+.bienvenida-form .hero-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.bienvenida-terminos {
+  max-width: 620px;
+  margin: 0 auto 22px;
+  padding-left: 22px;
+  text-align: left;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.bienvenida-terminos li { margin-bottom: 10px; }
+.bienvenida-terminos strong { color: var(--navy); }
+.bienvenida-check {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px !important;
+  font-size: 15px !important;
+  color: var(--text) !important;
+  cursor: pointer;
+}
+.bienvenida-check input { width: 18px; height: 18px; accent-color: var(--accent); }
+.bienvenida-botones { display: flex; justify-content: center; gap: 12px; align-items: center; }
+
 /* Tarjeta del perfil de la evaluación anterior (pantalla inicial del chat) */
 .perfil-previo {
   max-width: 420px;

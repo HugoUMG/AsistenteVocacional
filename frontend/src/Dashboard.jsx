@@ -4,6 +4,7 @@ import { color } from './colors'
 import { sessionId } from './session'
 import GuardarResultados from './GuardarResultados'
 import { authHeader } from './auth'
+import { MAX_AREA, normalizarHolland } from './holland-perfil'
 import './Dashboard.css'
 import { API } from './api'
 
@@ -42,6 +43,44 @@ function Diversificados({ opciones }) {
         ))}
       </ul>
     </div>
+  )
+}
+
+// Los puntajes del test de Holland, si el alumno lo hizo antes del chat. Va en
+// el dashboard y en el PDF porque el informe también es la toma de datos que
+// revisa la psicóloga: sin esto, el perfil medido quedaba solo en /holland.
+// No mueve la recomendación (medido, ver experiments/holland-estructura.md): se muestra, nada más.
+function PerfilHolland({ holland }) {
+  if (!holland) return null
+  const altas = holland.areas.slice(0, 3).filter((a) => a.description)
+  return (
+    <section className="chart-card dash-holland">
+      <h2>Tu perfil de intereses (Holland) · código {holland.codigo}</h2>
+      <div className="barras">
+        {holland.areas.map((a, i) => (
+          <div key={a.letra} className="barra-row">
+            <div className="barra-top">
+              <span className="barra-nombre">
+                <span className="punto" style={{ background: color(i) }} />
+                {a.letra}. {a.title}
+              </span>
+              <span className="barra-pct">{a.score} / {MAX_AREA}</span>
+            </div>
+            <div className="barra-track">
+              <div className="barra-fill" style={{ width: `${(a.score / MAX_AREA) * 100}%`, background: color(i) }} />
+            </div>
+          </div>
+        ))}
+      </div>
+      {altas.length > 0 && (
+        <div className="dash-holland-altas">
+          <h3>Qué significan tus áreas altas</h3>
+          {altas.map((a) => (
+            <p key={a.letra}><strong>{a.title}.</strong> {a.description}</p>
+          ))}
+        </div>
+      )}
+    </section>
   )
 }
 
@@ -189,7 +228,8 @@ function CatalogoCarreras() {
   )
 }
 
-export default function Dashboard({ nombre, carreras, confianza, respuestas, diversificados, onReiniciar, textoReiniciar = '↺ Hacer otro test' }) {
+export default function Dashboard({ nombre, carreras, confianza, respuestas, diversificados, holland, onReiniciar, textoReiniciar = '↺ Hacer otro test' }) {
+  const perfilHolland = normalizarHolland(holland)
   const [sel, setSel] = useState(0) // carrera seleccionada en el detalle
   const [inst, setInst] = useState(0) // institución seleccionada
   const [hover, setHover] = useState(null) // sector del pastel sobre el que está el mouse
@@ -233,6 +273,14 @@ export default function Dashboard({ nombre, carreras, confianza, respuestas, div
   const maxAfinidad = Math.max(...carreras.map((c) => c.afinidad))
   const activa = carreras[hover ?? sel] // lo que muestra el centro del pastel
   const seleccionada = carreras[sel]
+  const sede = seleccionada.instituciones[inst]
+  // Una sede puede dar dos programas de la misma carrera (licenciatura y
+  // tecnico). Ahi el chip nombra el programa: si no, se ven dos botones iguales.
+  // Las recomendaciones guardadas antes de este cambio no traen 'programa' y se
+  // ven como antes.
+  const centros = seleccionada.instituciones.map((x) => x.centro)
+  const repetida = (c) => centros.indexOf(c) !== centros.lastIndexOf(c)
+  const programaDistinto = sede.programa && sede.programa !== seleccionada.carrera
   const otrasCarreras = carreras.map((_, i) => i).filter((i) => i !== sel)
 
   return (
@@ -248,7 +296,7 @@ export default function Dashboard({ nombre, carreras, confianza, respuestas, div
           <CatalogoCarreras />
           <button
             className="dash-pdf"
-            onClick={() => import('./reporte').then((m) => m.generarPDF(nombre, carreras))}
+            onClick={() => import('./reporte').then((m) => m.generarPDF(nombre, carreras, perfilHolland))}
           >
             ↓ Descargar PDF
           </button>
@@ -314,6 +362,8 @@ export default function Dashboard({ nombre, carreras, confianza, respuestas, div
         </div>
       </section>
 
+      <PerfilHolland holland={perfilHolland} />
+
       <section className="dash-detail">
         <div className="carrera-lista">
           {carreras.map((c, i) => {
@@ -375,16 +425,16 @@ export default function Dashboard({ nombre, carreras, confianza, respuestas, div
                 className={`inst-chip ${j === inst ? 'activa' : ''}`}
                 onClick={() => setInst(j)}
               >
-                {x.centro}
+                {x.centro}{repetida(x.centro) && x.programa ? ` · ${x.programa}` : ''}
               </button>
             ))}
           </div>
           <div className="inst-detalle" style={{ borderLeftColor: color(sel) }}>
-            <div className="inst-uni" style={{ color: color(sel) }}>{seleccionada.instituciones[inst].universidad}</div>
+            <div className="inst-uni" style={{ color: color(sel) }}>{sede.universidad}</div>
             <div className="inst-lugar">
-              {seleccionada.instituciones[inst].centro} · {seleccionada.instituciones[inst].departamento}
+              {programaDistinto && `${sede.programa} · `}{sede.centro} · {sede.departamento}
             </div>
-            <p>{seleccionada.instituciones[inst].enfoque}</p>
+            <p>{sede.enfoque}</p>
           </div>
 
           <div className="wow-acciones">

@@ -145,6 +145,7 @@ export default function Historial() {
         respuestas={chatAbierto.respuestas}
         diversificados={chatAbierto.diversificados}
         confianza={null}
+        holland={chatAbierto.holland}
         onReiniciar={() => setVerDashboard(false)}
         textoReiniciar="← Volver al recorrido"
       />

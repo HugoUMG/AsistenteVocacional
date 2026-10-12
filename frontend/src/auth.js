@@ -20,6 +20,16 @@ export function sesionActual() {
   }
 }
 
+// Reemplaza los datos del alumno en la sesión guardada (mismo token). Lo usa la
+// pantalla de bienvenida cuando confirma su nombre y acepta los términos.
+export function actualizarEstudiante(estudiante) {
+  const s = sesionActual()
+  if (!s) return null
+  const nueva = { ...s, estudiante }
+  localStorage.setItem(CLAVE, JSON.stringify(nueva))
+  return nueva
+}
+
 export function cerrarSesion() {
   localStorage.removeItem(CLAVE)
   // El perfil de Holland es de la CUENTA, no de la máquina: si no se borra, el
