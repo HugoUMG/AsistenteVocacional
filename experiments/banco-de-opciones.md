@@ -327,3 +327,19 @@ La diferencia entre el banco viejo y el nuevo (0.50) es **menos de la mitad del
 ruido** (1.25). Confirma, ahora con vara, lo que ya se decía arriba: **el banco
 nuevo no está probado como mejor**. Sigue en pie por la otra razón, que no
 depende del juez: representa temas que antes no se podían nombrar.
+
+
+## Iconos en las fichas (2026-10-19), sin medir
+
+Las preguntas de intereses (`impacto`, `estilo`, `entorno` y `gustos`) llevan
+ahora un icono por opción (campo `icono` en `frontend/src/preguntas-fijas.js`,
+dibujos en `frontend/src/Iconos.jsx`). Es presentación pura: las etiquetas no
+cambiaron y al modelo le sigue llegando solo el texto que el alumno marcó.
+
+Lo que sí puede mover es **qué marca el alumno**: un icono atrae la mirada, y una
+opción con un dibujo más reconocible puede ganar clics. Ninguna medición de este
+archivo lo puede detectar, porque en el arnés las opciones las elige el perfil
+simulado leyendo texto, no una persona viendo la pantalla. Solo una corrida en
+campo comparando la distribución de chips marcados antes y después lo diría.
+Mientras tanto, cualquier cambio en esa distribución entre la prueba del
+2026-08-24 y una posterior no se puede atribuir al banco sin descontar esto.

@@ -1364,6 +1364,40 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 16%, transparent);
 }
 .options.chips .opt-color::after { display: none; }
+
+/* Icono de la opción (preguntas de intereses, campo 'icono' en preguntas-fijas.js).
+   Ocupa el lugar del punto de color y lleva el mismo color de la opción. */
+.opt-color.con-icono::before { display: none; }
+.opt-icono {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 11%, #fff);
+  transition: background 0.16s, color 0.16s;
+}
+.opt-color.sel .opt-icono { background: var(--accent); color: #fff; }
+/* Con icono, el relleno izquierdo iguala al derecho (el del círculo de
+   selección): así el bloque icono + texto queda centrado en la tarjeta y no
+   corrido hacia la izquierda. Los chips no tienen círculo y conservan el suyo. */
+.opt-color.con-icono { padding-left: 40px; }
+/* En los chips el icono va sin recuadro, para no agrandar la ficha. */
+.options.chips .opt-icono { width: auto; height: auto; background: none; }
+.options.chips .opt-color.sel .opt-icono { background: none; color: var(--accent); }
+@media (max-width: 560px) {
+  /* En celular los chips van a dos columnas y el texto casi siempre se parte
+     en dos líneas: icono arriba y texto abajo, los dos centrados. */
+  .options.chips .opt-color.con-icono:not(.otro) {
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 8px;
+    border-radius: 16px;
+  }
+}
+
 .options.chips .opt-color.otro-activo,
 .options.chips .continuar-btn {
   flex: 1 0 100%;

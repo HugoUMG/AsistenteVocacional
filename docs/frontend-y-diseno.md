@@ -122,7 +122,13 @@ quedan son **semánticos**, a propósito, y no se deben "corregir" a azul:
 - Los iconos son SVG de trazo dibujados a mano en `frontend/src/Iconos.jsx`
   (`<Icono nombre="reloj" />`), sin librería de iconos. Toman `currentColor`,
   así que el color sale de la paleta por CSS. Si hace falta uno nuevo, se
-  agrega ahí.
+  agrega ahí. Las fichas de las preguntas de intereses del chat (impacto,
+  estilo, entorno y temas) los usan con el campo `icono` de
+  `preguntas-fijas.js`: el icono ocupa el lugar del punto de color. En
+  celular, los chips de temas ponen el icono arriba del texto para que quede
+  centrado. Las preguntas de perfil (nivel, grado, motivo) siguen con el punto.
+  El efecto sobre qué marca el alumno no está medido, ver
+  [experiments/banco-de-opciones.md](../experiments/banco-de-opciones.md).
 - Variables base en `frontend/src/index.css` (`--navy`, `--navy-2`,
   `--accent`, `--accent-2`, `--text`, `--muted`, `--bg`).
 - `frontend/src/colors.js` (`COLORS`) es la paleta compartida para las
