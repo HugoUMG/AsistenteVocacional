@@ -461,7 +461,7 @@ def simular_dia(
 ):
     if not recomendar.hay_api_key():
         raise HTTPException(status_code=503, detail="Falta configurar GEMINI_API_KEY en el backend.")
-    sim, uso = extras.simular_dia(data.carrera, data.descripcion, data.respuestas)
+    sim, uso = extras.simular_dia(data.carrera, data.descripcion, data.respuestas, data.session_id)
     _registrar_uso(db, data.session_id, "simular-dia", uso)
     return sim.model_dump()
 
@@ -485,7 +485,7 @@ def comparar(
     cmp, uso = extras.comparar_carreras(
         data.carrera_a, data.descripcion_a,
         data.carrera_b, data.descripcion_b,
-        data.respuestas,
+        data.respuestas, data.session_id,
     )
     _registrar_uso(db, data.session_id, "comparar", uso)
     return cmp.model_dump()
@@ -552,7 +552,7 @@ def psicometrico_calificar(
     resumen = None
     if recomendar.hay_api_key():
         try:
-            res, uso = psicometrico.resumen(puntajes)
+            res, uso = psicometrico.resumen(puntajes, data.session_id)
             resumen = res.model_dump()
             fila.resumen = resumen
             db.commit()

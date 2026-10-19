@@ -96,6 +96,14 @@ declararla. Son 2 ítems de 60, se conserva el área que miden, y el motivo es
 validez de contenido en el contexto guatemalteco. No se ha medido si mueve los
 puntajes.
 
+**Iconos solo después del test (2026-10-19).** Cada área RIASEC tiene su icono
+(`ICONO_AREA` en `frontend/src/holland-perfil.js`), pero se muestra solo en la
+pantalla de resultados y en la tarjeta de Holland del tablero. En las 60
+preguntas **no**, y fue una decisión: un icono por área delataría el área de
+cada ítem, y un dibujo por actividad haría unas más atractivas que otras. Las
+dos cosas serían otra desviación del instrumento que habría que declarar, y la
+escala ya es visual con las caritas.
+
 ## Límites conocidos
 
 - Las ocupaciones son del mercado laboral de EE. UU. Sirven para ver *tipo* de

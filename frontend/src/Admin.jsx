@@ -164,7 +164,8 @@ function Registro() {
         confianza={null}
         holland={abierta.holland}
         onReiniciar={() => setVerDashboard(false)}
-        textoReiniciar="← Volver al recorrido"
+        textoReiniciar="Volver al recorrido"
+        iconoReiniciar="atras"
       />
     )
   }

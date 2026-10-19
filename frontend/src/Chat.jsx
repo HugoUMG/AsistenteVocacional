@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Dashboard from './Dashboard'
+import Icono from './Iconos'
 import { color } from './colors'
 import { nuevaSesion, sessionId } from './session'
 import { leerPerfilHolland } from './holland-perfil'
@@ -387,6 +388,9 @@ function Opciones({ pregunta, onAnswer }) {
   const lleno = !!pregunta.max && elegidas >= pregunta.max
   // Mientras se anima la salida: la elegida se despide, el resto se desvanece.
   const salida = (label) => (saliendo ? (saliendo.includes(label) ? 'elegido' : 'saliendo') : '')
+  // Las preguntas de intereses traen un icono por opción (preguntas-fijas.js):
+  // el icono ocupa el lugar del punto de color, y "Otro" lleva un lápiz.
+  const conIconos = pregunta.opciones.some((o) => o.icono)
 
   return (
     <>
@@ -401,12 +405,13 @@ function Opciones({ pregunta, onAnswer }) {
             <h4 className={`grupo-opciones ${saliendo ? 'saliendo' : ''}`}>{o.grupo}</h4>
           )}
           <button
-            className={`opt-color ${sel.includes(i) ? 'sel' : ''} ${salida(o.label)}`}
+            className={`opt-color ${o.icono ? 'con-icono' : ''} ${sel.includes(i) ? 'sel' : ''} ${salida(o.label)}`}
             style={{ '--c': color(i) }}
             disabled={lleno && !sel.includes(i)}
             onClick={() => clickOpcion(o.label, i)}
           >
-            {o.label}
+            {o.icono && <span className="opt-icono"><Icono nombre={o.icono} tam={18} /></span>}
+            <span>{o.label}</span>
           </button>
         </Fragment>
       ))}
@@ -434,12 +439,13 @@ function Opciones({ pregunta, onAnswer }) {
         </div>
       ) : pregunta.sinOtro ? null : (
         <button
-          className={`opt-color otro ${otroOn ? 'sel' : ''} ${salida('')}`}
+          className={`opt-color otro ${conIconos ? 'con-icono' : ''} ${otroOn ? 'sel' : ''} ${salida('')}`}
           style={{ '--c': '#5c6b80' }}
           disabled={lleno}
           onClick={clickOtro}
         >
-          Otro / especificar…
+          {conIconos && <span className="opt-icono"><Icono nombre="lapiz" tam={18} /></span>}
+          <span>Otro / especificar…</span>
         </button>
       )}
 

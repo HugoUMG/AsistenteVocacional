@@ -147,7 +147,8 @@ export default function Historial() {
         confianza={null}
         holland={chatAbierto.holland}
         onReiniciar={() => setVerDashboard(false)}
-        textoReiniciar="← Volver al recorrido"
+        textoReiniciar="Volver al recorrido"
+        iconoReiniciar="atras"
       />
     )
   }

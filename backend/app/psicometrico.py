@@ -9,14 +9,13 @@ se puede leer la clave desde las devtools del navegador.
 Self-check sin API: uv run python -m app.psicometrico
 """
 
-import os
 import re
 
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
 
-from app.recomendar import ANTI_INYECCION, MODELO_FINAL, TONO, _texto_seguro, uso_tokens
+from app.recomendar import ANTI_INYECCION, MODELO_FINAL, TONO, _texto_seguro, key_de_sesion, uso_tokens
 
 # --- Parte 1: personalidad y comportamiento (ítems 1-40) ---
 # (id, enunciado, rasgo, signo). signo -1 = ítem invertido: estar "totalmente de
@@ -409,10 +408,10 @@ def _puntajes_texto(p: dict) -> str:
     return "\n".join(partes)
 
 
-def resumen(puntajes: dict) -> tuple[ResumenPsicometrico, dict]:
+def resumen(puntajes: dict, session_id: str | None = None) -> tuple[ResumenPsicometrico, dict]:
     # ponytail: el cliente debe quedar en una variable con nombre (no encadenado
     # inline) — si no, el GC lo cierra a mitad de la llamada. Igual que extras.py.
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+    client = genai.Client(api_key=key_de_sesion(session_id)[0])
     resp = client.models.generate_content(
         model=MODELO_FINAL,
         contents=_puntajes_texto(puntajes),

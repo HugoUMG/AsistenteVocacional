@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Nav from './Nav'
 import { nuevaSesion, sessionId } from './session'
-import { guardarPerfilHolland, olvidarPerfilHolland } from './holland-perfil'
+import { ICONO_AREA, guardarPerfilHolland, olvidarPerfilHolland } from './holland-perfil'
+import Icono from './Iconos'
 import { authHeader } from './auth'
 import GuardarResultados from './GuardarResultados'
 import { color } from './colors'
@@ -359,8 +360,8 @@ export function Resultados({ datos, onReiniciar, onVolver }) {
           <h2>Perfil por área</h2>
           {orden.map((a) => (
             <div key={a.letra} className="psi-rasgo">
-              <span className="psi-rasgo-nombre">
-                {a.letra}. {a.title}
+              <span className="psi-rasgo-nombre holland-area">
+                <Icono nombre={ICONO_AREA[a.letra]} tam={16} /> {a.letra}. {a.title}
               </span>
               <Barra valor={Math.round((a.score / MAX_AREA) * 100)} />
               <span className="psi-rasgo-valor">{a.score}</span>
@@ -372,7 +373,7 @@ export function Resultados({ datos, onReiniciar, onVolver }) {
           <h2>Qué significan tus áreas altas</h2>
           {orden.slice(0, 3).map((a) => (
             <div key={a.letra} style={{ marginBottom: 14 }}>
-              <h3>{a.title}</h3>
+              <h3 className="holland-area"><Icono nombre={ICONO_AREA[a.letra]} tam={17} /> {a.title}</h3>
               <p className="psi-texto">{a.description}</p>
             </div>
           ))}

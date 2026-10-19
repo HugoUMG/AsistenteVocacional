@@ -4,13 +4,11 @@ comparador entre dos carreras. Ambas reciben el contexto ya calculado por
 del catálogo ni de nombres exactos en la BD — 1 llamada a Gemini cada una,
 solo cuando el estudiante las pide."""
 
-import os
-
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
 
-from app.recomendar import ANTI_INYECCION, MODELO_FINAL, TONO, _texto_seguro, uso_tokens
+from app.recomendar import ANTI_INYECCION, MODELO_FINAL, TONO, _con_reintento, _texto_seguro, key_de_sesion, uso_tokens
 
 
 # --- Simulador "Un día siendo..." ---
@@ -42,13 +40,16 @@ SYSTEM_SIMULADOR = (
 )
 
 
-def simular_dia(carrera: str, descripcion: str, respuestas: dict) -> tuple[SimulacionDia, dict]:
+def simular_dia(carrera: str, descripcion: str, respuestas: dict,
+                session_id: str | None = None) -> tuple[SimulacionDia, dict]:
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
     # ponytail: el cliente debe quedar en una variable con nombre (no encadenado
     # inline) — si no, el GC lo cierra a mitad de la llamada ("client has been
     # closed"). Mismo patrón que recomendar.py/preguntas.py.
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-    resp = client.models.generate_content(
+    client = genai.Client(api_key=key_de_sesion(session_id)[0])
+    # Mismo reintento con backoff que el chat: las keys gratis dan 503 en los
+    # picos de demanda y sin esto el extra fallaba al primer intento.
+    resp = _con_reintento(lambda: client.models.generate_content(
         model=MODELO_FINAL,
         contents=(
             f"CARRERA: {carrera}\nPor qué le fue recomendada: {descripcion}\n\n"
@@ -60,7 +61,7 @@ def simular_dia(carrera: str, descripcion: str, respuestas: dict) -> tuple[Simul
             response_schema=SimulacionDia,
             temperature=0.6,
         ),
-    )
+    ))
     return SimulacionDia.model_validate_json(_texto_seguro(resp)), uso_tokens(resp, MODELO_FINAL)
 
 
@@ -92,11 +93,11 @@ SYSTEM_COMPARADOR = (
 def comparar_carreras(
     carrera_a: str, descripcion_a: str,
     carrera_b: str, descripcion_b: str,
-    respuestas: dict,
+    respuestas: dict, session_id: str | None = None,
 ) -> tuple[Comparacion, dict]:
     perfil = "\n".join(f"- {k}: {v}" for k, v in respuestas.items())
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-    resp = client.models.generate_content(
+    client = genai.Client(api_key=key_de_sesion(session_id)[0])
+    resp = _con_reintento(lambda: client.models.generate_content(
         model=MODELO_FINAL,
         contents=(
             f"CARRERA A: {carrera_a}\n{descripcion_a}\n\n"
@@ -109,5 +110,5 @@ def comparar_carreras(
             response_schema=Comparacion,
             temperature=0.4,
         ),
-    )
+    ))
     return Comparacion.model_validate_json(_texto_seguro(resp)), uso_tokens(resp, MODELO_FINAL)
