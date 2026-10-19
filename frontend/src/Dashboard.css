@@ -197,6 +197,8 @@
 .dash-holland-altas h3 { margin: 0 0 8px; font-size: 14px; color: var(--navy); }
 .dash-holland-altas p { margin: 0 0 8px; font-size: 13.5px; line-height: 1.6; color: var(--muted); }
 .dash-holland-altas strong { color: var(--text); }
+.dash-holland-altas .icono { vertical-align: -2px; margin-right: 6px; color: var(--accent); }
+.area-icono { display: flex; }
 .barra-top {
   display: flex;
   justify-content: space-between;

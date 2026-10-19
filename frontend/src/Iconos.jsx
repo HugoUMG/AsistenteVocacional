@@ -63,6 +63,12 @@ const ICONOS = {
   organigrama: <><rect x="9" y="2" width="6" height="5" rx="1" /><rect x="2" y="17" width="6" height="5" rx="1" /><rect x="16" y="17" width="6" height="5" rx="1" /><path d="M5 17v-3h14v3" /><path d="M12 7v7" /></>,
   cubiertos: <><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></>,
   lapiz: <><path d="M12 20h9" /><path d="M16.4 3.6a2.1 2.1 0 1 1 3 3L7.4 18.6 3 20l1.4-4.4Z" /></>,
+
+  // Tarjetas del catálogo (ver icono-carrera.js).
+  diente: <path d="M12 5.5C10.5 3.5 5.5 3 4.5 6.5c-.6 2.2.4 4.3 1 6.5.6 2.4.6 7 2.5 7 1.6 0 1.4-4.5 4-4.5s2.4 4.5 4 4.5c1.9 0 1.9-4.6 2.5-7 .6-2.2 1.6-4.3 1-6.5C18.5 3 13.5 3.5 12 5.5Z" />,
+  ojo: <><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /></>,
+  manzana: <><path d="M12 7c-1.5-1-3.2-1.3-4.7-.7C4.8 7.2 3.8 10 4.3 13c.6 3.6 3.1 8 5.6 8 1 0 1.4-.5 2.1-.5s1.1.5 2.1.5c2.5 0 5-4.4 5.6-8 .5-3-.5-5.8-3-6.7-1.5-.6-3.2-.3-4.7.7Z" /><path d="M12 7c0-2 1-3.5 3-4.5" /></>,
+  lupa: <><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></>,
 }
 
 export default function Icono({ nombre, tam = 18, grosor = 2 }) {

@@ -41,6 +41,11 @@ export function leerPerfilHolland() {
 export const MAX_AREA = 40
 export const NOMBRE_AREA = { R: 'Realista', I: 'Investigador', A: 'Artístico',
   S: 'Social', E: 'Emprendedor', C: 'Convencional' }
+// Icono de cada área (Iconos.jsx). Solo en resultados y en el tablero, NUNCA en
+// las 60 preguntas: ahí delataría el área de cada ítem y alteraría la
+// presentación del instrumento estandarizado de O*NET.
+export const ICONO_AREA = { R: 'llave', I: 'matraz', A: 'paleta',
+  S: 'personas', E: 'maletin', C: 'calculadora' }
 
 // El dashboard y el PDF reciben el perfil en dos formas: la lista del chat
 // ({letra, title, score, description}) o el diccionario {R: 30, ...} del

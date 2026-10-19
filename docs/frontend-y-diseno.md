@@ -129,6 +129,12 @@ quedan son **semánticos**, a propósito, y no se deben "corregir" a azul:
   centrado. Las preguntas de perfil (nivel, grado, motivo) siguen con el punto.
   El efecto sobre qué marca el alumno no está medido, ver
   [experiments/banco-de-opciones.md](../experiments/banco-de-opciones.md).
+- El catálogo público (`Catalogo.jsx`) le pone a cada carrera un icono deducido
+  de su nombre (`icono-carrera.js`, reglas en orden con su self-check). Una
+  carrera que no encaje en ninguna regla sale con el birrete, así que agregar
+  carreras no exige tocar código. Las áreas de Holland llevan icono solo en los
+  resultados y en el tablero, nunca en las preguntas (ver
+  [holland.md](holland.md)).
 - Variables base en `frontend/src/index.css` (`--navy`, `--navy-2`,
   `--accent`, `--accent-2`, `--text`, `--muted`, `--bg`).
 - `frontend/src/colors.js` (`COLORS`) es la paleta compartida para las

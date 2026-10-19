@@ -5,7 +5,7 @@ import Icono from './Iconos'
 import { sessionId } from './session'
 import GuardarResultados from './GuardarResultados'
 import { authHeader } from './auth'
-import { MAX_AREA, normalizarHolland } from './holland-perfil'
+import { ICONO_AREA, MAX_AREA, normalizarHolland } from './holland-perfil'
 import './Dashboard.css'
 import { API } from './api'
 
@@ -62,7 +62,10 @@ function PerfilHolland({ holland }) {
           <div key={a.letra} className="barra-row">
             <div className="barra-top">
               <span className="barra-nombre">
-                <span className="punto" style={{ background: color(i) }} />
+                {/* El icono del área en el color de su barra, en lugar del punto. */}
+                <span className="area-icono" style={{ color: color(i) }}>
+                  <Icono nombre={ICONO_AREA[a.letra]} tam={16} />
+                </span>
                 {a.letra}. {a.title}
               </span>
               <span className="barra-pct">{a.score} / {MAX_AREA}</span>
@@ -77,7 +80,7 @@ function PerfilHolland({ holland }) {
         <div className="dash-holland-altas">
           <h3>Qué significan tus áreas altas</h3>
           {altas.map((a) => (
-            <p key={a.letra}><strong>{a.title}.</strong> {a.description}</p>
+            <p key={a.letra}><Icono nombre={ICONO_AREA[a.letra]} tam={15} /><strong>{a.title}.</strong> {a.description}</p>
           ))}
         </div>
       )}

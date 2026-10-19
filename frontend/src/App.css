@@ -1779,6 +1779,10 @@
 .psi-rasgo { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .psi-rasgo-nombre { flex: 0 0 190px; color: var(--muted); font-size: 13.5px; }
 .psi-rasgo-valor { flex: 0 0 34px; text-align: right; color: var(--navy); font-weight: 700; font-size: 14px; }
+/* Áreas de Holland con su icono (ICONO_AREA en holland-perfil.js). Inline-flex
+   y no flex: así el título respeta el centrado del bloque en celular. */
+.holland-area { display: inline-flex; align-items: center; gap: 8px; }
+.holland-area .icono { flex-shrink: 0; color: var(--accent); }
 
 .psi-flags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
 .psi-flags span {
