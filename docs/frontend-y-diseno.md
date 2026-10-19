@@ -79,7 +79,7 @@ Un **dashboard a pantalla completa** (`Dashboard.jsx`) con:
 - Panel de detalle por carrera: **descripción general** + selector de
   **instituciones** (centro · departamento) que revela el enfoque de cada una.
 - **PDF descargable** (`reporte.js`, `jsPDF`, cargado con `import()` dinámico).
-- **"Un día siendo…"** (`POST /api/simular-dia`): narrativa de una jornada real
+- **"Un día en esta carrera"** (`POST /api/simular-dia`): narrativa de una jornada real
   en esa carrera, con retos incluidos. On-demand: 1 llamada a Gemini.
 - **Comparador** de la carrera principal contra otra del resultado
   (`POST /api/comparar`). On-demand: 1 llamada a Gemini.
@@ -119,6 +119,10 @@ quedan son **semánticos**, a propósito, y no se deben "corregir" a azul:
   rellena el botón —va en el trazo de la carita, el borde y un tinte al 12%—
   porque texto blanco sobre amarillo o lima no contrasta.
 
+- Los iconos son SVG de trazo dibujados a mano en `frontend/src/Iconos.jsx`
+  (`<Icono nombre="reloj" />`), sin librería de iconos. Toman `currentColor`,
+  así que el color sale de la paleta por CSS. Si hace falta uno nuevo, se
+  agrega ahí.
 - Variables base en `frontend/src/index.css` (`--navy`, `--navy-2`,
   `--accent`, `--accent-2`, `--text`, `--muted`, `--bg`).
 - `frontend/src/colors.js` (`COLORS`) es la paleta compartida para las
