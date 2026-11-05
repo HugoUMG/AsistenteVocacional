@@ -13,9 +13,18 @@ junta las cuatro.
 repo** (ver [docs/estudio-con-estudiantes.md](../docs/estudio-con-estudiantes.md)).
 Aquí solo van conteos y los comentarios de la psicóloga, sin datos del alumno.
 
+**Segunda fuente:** la constancia firmada por la psicóloga que acompañó la
+aplicación y revisó los resultados: Lcda. Dunia Fabiola Ixpertay Cajas,
+psicóloga clínica, colegiado 7949, Centro Psicológico Integral Trascender.
+Totonicapán, 8 de septiembre de 2026. El original lo tiene el autor; no entra al
+repo porque trae datos de contacto personales.
+
 ---
 
 ## 1. Las cuatro sesiones
+
+**Dónde:** Colegio Evangélico Guatemala, jornada vespertina, departamento de
+Totonicapán, en cuatro secciones de diversificado (según la constancia).
 
 | Fecha | Grupo (mayoría) | Evaluaciones | Cuentas | Ventana (hora local) | Hicieron Holland |
 |---|---|---|---|---|---|
@@ -29,14 +38,22 @@ Aquí solo van conteos y los comentarios de la psicóloga, sin datos del alumno.
 - Departamento elegido en el mapa: "Ambos" 38, Quetzaltenango 17, Totonicapán 10.
 - Motivo del test: "saber qué estudiar" 37, "conocer más opciones" 16,
   "confirmar lo que ya tenía pensado" 12.
-- **Las 65 tienen recomendación guardada.** Ojo con leerlo como "cero
-  abandonos": la fila se guarda cuando el alumno pide su resultado
-  (`obtenerCarreras()` en `frontend/src/Chat.jsx`), así que el registro no ve a
-  quien cerró el chat antes.
+- La constancia llama al grupo del 25/8 "bachillerato con orientación en
+  ciencias jurídicas"; en el registro, varios declaran computación o computación
+  con diplomado en derecho.
+- **Los 65 completaron el proceso y recibieron su resultado, sin abandonos.** Lo
+  dice la constancia, de quien estuvo presente. El registro solo no alcanza para
+  afirmarlo: la fila se guarda cuando el alumno pide su resultado
+  (`obtenerCarreras()` en `frontend/src/Chat.jsx`), así que no ve a quien cierra
+  el chat antes.
 - Las sesiones del 25 al 27 son posteriores al arreglo del conteo de adaptativas
   y de la cobertura por sesión (commit `4ba9dd3`, 24/8 a las 22:30). El CSV no
   trae cuántas adaptativas contestó cada alumno, así que con esta fuente no se
   puede verificar que ya lleguen a 4.
+
+La constancia habla de 65 estudiantes; el registro tiene 65 evaluaciones de 63
+cuentas. Con estas dos fuentes no se puede saber si dos alumnos compartieron
+cuenta o si son dos alumnos que repitieron.
 
 Dos cuentas repitieron. La del 24/8 ya está explicada en
 [prueba-alumnos-2026-08-24.md](prueba-alumnos-2026-08-24.md) §3. La del 25/8
@@ -55,6 +72,9 @@ prueba propia, hay que marcarla en `/admin` y el total baja a 64.
 
 La psicóloga calificó desde `/admin` (Acertó, Acertó en parte, No acertó, más un
 comentario). Ver [docs/api.md](../docs/api.md), `POST /api/admin/juicio`.
+
+**Su criterio, según la constancia:** si la **carrera principal** recomendada (el
+top-1) es pertinente al perfil del estudiante. No califica el top-3 completo.
 
 | Juicio | Evaluaciones |
 |---|---|
@@ -87,33 +107,58 @@ Sus comentarios, tal cual los dejó (los que tienen texto):
 - En el único **No acertó**: "evaluar con mayor precisión las respuestas de la
   estudiante y verificar o contrastar con el test de Holland"
 
-Dos lecturas que salen de los comentarios, no de un conteo:
+**El caso que no acertó** (constancia): la estudiante marcó muchísimos temas de
+interés, y eso impidió que el sistema distinguiera una preferencia real; la
+recomendación salió genérica. La psicóloga recomendó limitar cuántos temas se
+pueden marcar, y se aplicó en el commit `0a02dc6` (2026-09-03): tope de 5 temas
+en los chips de gustos. Las 65 evaluaciones de agosto son anteriores al cambio,
+así que su efecto todavía no se midió con alumnos.
 
-1. **Tres de sus comentarios dicen que el resultado le sirve para su propio
-   informe** o para la comprensión del caso. Lo usa como insumo de su trabajo,
-   no como sustituto.
-2. **Dos atan el acierto a cómo contesta el alumno:** respuestas claras,
-   precisas y cortas dan mejor resultado. El caso que no acertó pide justo lo
-   contrario: contrastar más las respuestas con Holland.
+**Un caso que destaca** (constancia): a un estudiante de bachillerato con
+orientación en medicina el sistema le recomendó un profesorado en educación
+artística, apartándose de lo que estudia, y ella considera acertada esa
+recomendación. Es la evaluación del 27/8 con Holland EAS.
+
+**La utilidad, en palabras de la constancia:** le encuentra valor en dos usos.
+
+1. Como recomendador vocacional por sí solo, "sin necesidad de aplicar varias
+   pruebas psicométricas al estudiante para llegar a una sugerencia de carrera".
+2. Como insumo para el informe de orientación del estudiante, "trabajo que hoy
+   consume una parte considerable del tiempo profesional". Tres de sus
+   comentarios en el registro dicen lo mismo.
+
+Dos de sus comentarios también atan el acierto a cómo contesta el alumno:
+respuestas claras, precisas y cortas dan mejor resultado. Es la otra cara del
+caso que no acertó.
 
 ---
 
 ## 3. Qué se puede afirmar y qué no
 
 **Sí:**
-- En 10 evaluaciones de alumnos reales, una psicóloga coincidió con la
-  recomendación en 9.
-- Para ella, el resultado sirve como apoyo para su informe.
-- En cuatro sesiones con grupos completos (11 a 19 alumnos a la vez), los 65 que
-  pidieron su resultado lo recibieron.
+- En 10 evaluaciones de alumnos reales, una psicóloga clínica colegiada
+  consideró pertinente la carrera principal recomendada en 9, y lo dejó por
+  escrito en una constancia firmada.
+- Para ella, la plataforma sirve como recomendador por sí sola y como insumo
+  para el informe de orientación.
+- En cuatro sesiones con grupos completos (11 a 19 alumnos a la vez), los 65
+  estudiantes terminaron y recibieron su resultado.
+- Su observación del caso fallido ya produjo un cambio en el producto (tope de 5
+  temas).
 
 **No, todavía:**
+- **Lo dice la propia constancia:** es su criterio profesional sobre los casos
+  revisados, se refiere a las tres orientaciones que participaron y "no
+  constituye una validación estadística del sistema ni una certificación de su
+  exactitud". Extenderlo a otras orientaciones pide más aplicaciones.
 - **n = 10, el 15% de las 65.** El intervalo va de 60% a 98%: alcanza para decir
   que el acuerdo es alto, no para dar una cifra fina.
-- **Las 10 son de los dos grupos de medicina.** No hay ningún juicio para
-  computación, ciencias jurídicas ni perito contador, que son justo los grupos
-  donde el top-3 se aleja del área de salud (§4).
-- **El registro no dice cómo se eligieron esas 10 ni si fue a ciegas.** La
+- **Las 10 calificadas en el registro son de los dos grupos de medicina.** La
+  constancia habla de las tres orientaciones, pero no hay ningún juicio
+  registrado para computación, ciencias jurídicas ni perito contador, que son
+  justo los grupos donde el top-3 se aleja del área de salud (§4).
+- **Ni el registro ni la constancia dicen cómo se eligieron esas 10 ni si fue a
+  ciegas.** La
   pantalla de `/admin` muestra el recorrido completo junto con la
   recomendación, y [estudio-con-estudiantes.md](../docs/estudio-con-estudiantes.md)
   §4 advierte que así el juicio no es ciego salvo que el protocolo lo resuelva.
@@ -140,7 +185,9 @@ mucho" (4) o "nada" (1) recibieron un top-3 fuera de esa línea. Ninguno de los
 tres de perito contador recibió Contaduría, el de ciencias jurídicas no recibió
 Derecho y el de computación no recibió Informática. Con n = 5 es descriptivo,
 pero apunta a que el sistema no repite el bachillerato cuando el alumno dice que
-no le gusta.
+no le gusta. El caso que la psicóloga destaca en su constancia (profesorado en
+educación artística para un estudiante de medicina, §2) va en la misma línea, y
+ese sí tiene juicio externo.
 
 ---
 
@@ -153,3 +200,6 @@ no le gusta.
    prueba propia y, si es así, marcarla como descartada.
 4. Si se quiere medir la satisfacción del alumno, agregar una pregunta al final
    del recorrido. Hoy no existe.
+5. En la próxima aplicación, ver si el tope de 5 temas (`0a02dc6`) corrige los
+   casos de recomendación genérica. Todas las evaluaciones de agosto son
+   anteriores al cambio.

@@ -138,9 +138,11 @@ cd backend && uv run python -m app.psicometrico
 - [x] Catálogo cerrado para Quetzaltenango (9 centros) y Totonicapán (3 centros).
 - [x] Examen psicométrico de 100 ítems en pestaña aparte, con resumen de IA.
 - [x] Medición de consumo de tokens y respaldo con una segunda API key.
-- [x] Pruebas de campo con alumnos reales: 4 sesiones del 24 al 27 de agosto de
-  2026, 65 evaluaciones ([experiments/pruebas-de-campo-agosto-2026.md](experiments/pruebas-de-campo-agosto-2026.md)).
-- [x] Validación por una psicóloga: calificó 10 evaluaciones reales, 9 "Acertó"
-  y 1 "No acertó".
+- [x] Pruebas de campo con alumnos reales: 4 secciones de diversificado de un
+  colegio de Totonicapán, del 24 al 27 de agosto de 2026, 65 estudiantes, sin
+  abandonos ([experiments/pruebas-de-campo-agosto-2026.md](experiments/pruebas-de-campo-agosto-2026.md)).
+- [x] Revisión de una psicóloga clínica colegiada: en 9 de 10 evaluaciones
+  revisadas consideró pertinente la carrera principal recomendada (constancia
+  firmada del 8 de septiembre de 2026). No es una validación estadística.
 - [ ] Que la psicóloga califique las 55 evaluaciones restantes.
 - [ ] Extender el catálogo a más departamentos.

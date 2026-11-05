@@ -2,7 +2,9 @@
 
 > **Actualización (2026-11-05):** la psicóloga ya hace de criterio externo.
 > Calificó 10 evaluaciones de alumnos reales desde `/admin`: 9 "Acertó" y 1 "No
-> acertó". Ver [experiments/pruebas-de-campo-agosto-2026.md](../experiments/pruebas-de-campo-agosto-2026.md).
+> acertó", y lo dejó por escrito en una constancia firmada del 8 de septiembre
+> de 2026. De ahí salió el tope de 5 temas de interés (commit `0a02dc6`). Ver
+> [experiments/pruebas-de-campo-agosto-2026.md](../experiments/pruebas-de-campo-agosto-2026.md).
 
 Preguntas organizadas por bloque. El objetivo es validar: (1) el instrumento
 Holland/O*NET tal como se usa, (2) el examen psicométrico propio de 100

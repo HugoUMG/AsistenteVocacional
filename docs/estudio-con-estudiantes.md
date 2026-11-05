@@ -4,7 +4,8 @@
 
 > **Lo que ya se hizo:** entre el 24 y el 27 de agosto de 2026 hubo cuatro
 > sesiones con alumnos reales (65 evaluaciones) y la psicóloga calificó 10 desde
-> `/admin`: 9 "Acertó" y 1 "No acertó". Resultados y límites en
+> `/admin`: 9 "Acertó" y 1 "No acertó". Lo dejó por escrito en una constancia
+> firmada del 8 de septiembre de 2026. Resultados y límites en
 > [experiments/pruebas-de-campo-agosto-2026.md](../experiments/pruebas-de-campo-agosto-2026.md).
 > Falta que califique las 55 restantes, dejar escrito si el juicio fue a ciegas
 > (§4) y la reejecución offline de los brazos (§2). Lo que sigue es el plan
