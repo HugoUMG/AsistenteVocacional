@@ -1,5 +1,9 @@
 # Guía de entrevista con la psicóloga (validación del sistema)
 
+> **Actualización (2026-11-05):** la psicóloga ya hace de criterio externo.
+> Calificó 10 evaluaciones de alumnos reales desde `/admin`: 9 "Acertó" y 1 "No
+> acertó". Ver [experiments/pruebas-de-campo-agosto-2026.md](../experiments/pruebas-de-campo-agosto-2026.md).
+
 Preguntas organizadas por bloque. El objetivo es validar: (1) el instrumento
 Holland/O*NET tal como se usa, (2) el examen psicométrico propio de 100
 ítems, (3) las 4 preguntas fijas y el chat adaptativo, (4) el dashboard y la

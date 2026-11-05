@@ -5,6 +5,9 @@ con una clase de quinto bachillerato. No hay brazo de control, así que aquí no
 se afirma que ningún cambio mejore o empeore nada: lo que se reporta es lo que
 pasó, y dos defectos que la corrida dejó al descubierto.
 
+> Esta fue la primera de cuatro sesiones (24 al 27 de agosto). El conjunto y el
+> juicio de la psicóloga están en [pruebas-de-campo-agosto-2026.md](pruebas-de-campo-agosto-2026.md).
+
 **Fuente:** export de `/api/admin/respuestas` (lista + detalle de cada
 evaluación) y `/api/uso-tokens` de producción. El archivo con nombres y correos
 NO entra al repo: son menores de edad (ver `docs/estudio-con-estudiantes.md`).
@@ -168,6 +171,10 @@ recibió el instrumento completo. Hay que arreglarlo y volver a medir.
 **Ninguna de las 18 tiene juicio de la psicóloga todavía.** Sin ese criterio
 externo esto describe el comportamiento del sistema, no su acierto.
 
+> **Actualización (2026-11-05):** la psicóloga calificó después 4 de estas 18,
+> las 4 como "Acertó". El resumen de las cuatro sesiones de agosto y de sus
+> calificaciones está en [pruebas-de-campo-agosto-2026.md](pruebas-de-campo-agosto-2026.md).
+
 ---
 
 ## 5. Costo
@@ -197,8 +204,11 @@ factura, así que por el otro lado sobra. La cifra defendible sigue siendo la de
 
 ## 6. Pendientes
 
-1. Arreglar el conteo de adaptativas y la cobertura por sesión (secciones 2 y 3).
+1. ~~Arreglar el conteo de adaptativas y la cobertura por sesión (secciones 2 y 3).~~
+   **RESUELTO** en el commit `4ba9dd3` (2026-08-24).
 2. Que la psicóloga califique las 18 desde `/admin`. Sin eso no hay acierto medido.
+   **En parte:** calificó 4 de 18, las 4 como "Acertó" (ver
+   [pruebas-de-campo-agosto-2026.md](pruebas-de-campo-agosto-2026.md)).
 3. Con el instrumento completo, repetir la corrida y ahí sí atacar
    [adaptativas-desempate.md](adaptativas-desempate.md).
 4. Decidir si `carrera_cursada` debe seguir entrando al historial que ve el modelo.
