@@ -138,5 +138,5 @@ cd backend && uv run python -m app.psicometrico
 - [x] Catálogo cerrado para Quetzaltenango (9 centros) y Totonicapán (3 centros).
 - [x] Examen psicométrico de 100 ítems en pestaña aparte, con resumen de IA.
 - [x] Medición de consumo de tokens y respaldo con una segunda API key.
+- [x] Validación de las recomendaciones por una psicóloga.
 - [ ] Extender el catálogo a más departamentos.
-- [ ] Validación del test con orientadores humanos (hoy la evidencia es simulada).
